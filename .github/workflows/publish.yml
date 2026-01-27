@@ -31,4 +31,6 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
       - name: Deploy documentation
-        run: uv run mike deploy --push --update-aliases main latest
+        run: |
+          uv run mike deploy --push --update-aliases main latest
+          uv run mike set-default --push latest
