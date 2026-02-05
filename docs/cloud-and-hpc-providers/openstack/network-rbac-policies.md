@@ -65,15 +65,15 @@ Get a list of network RBAC policies.
 
     | Name | Type | Description |
     |---|---|---|
-    | `network` | string |  |
-    | `network_uuid` | string (uuid) |  |
+    | `network` | string | Network URL |
+    | `network_uuid` | string (uuid) | Network UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `policy_type` | string | Type of access granted - either shared access or external network access<br><br><br>_Enum: `access_as_external`, `access_as_shared`_ |
-    | `target_tenant` | string |  |
-    | `target_tenant_uuid` | string (uuid) |  |
-    | `tenant` | string |  |
-    | `tenant_uuid` | string (uuid) |  |
+    | `target_tenant` | string | Target tenant URL |
+    | `target_tenant_uuid` | string (uuid) | Target tenant UUID |
+    | `tenant` | string | Tenant URL |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
 
 
 === "Responses"

@@ -8,6 +8,9 @@
 | <span class="http-badge http-get">GET</span> | `/api/user-invitations/` | [List user invitations](#list-user-invitations) |
 | <span class="http-badge http-get">GET</span> | `/api/user-invitations/{uuid}/` | [Retrieve user invitation](#retrieve-user-invitation) |
 | <span class="http-badge http-post">POST</span> | `/api/user-invitations/` | [Create user invitation](#create-user-invitation) |
+| <span class="http-badge http-put">PUT</span> | `/api/user-invitations/{uuid}/` | [Update user invitation](#update-user-invitation) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/user-invitations/{uuid}/` | [Partially update user invitation](#partially-update-user-invitation) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/user-invitations/{uuid}/` | [Delete user invitation](#delete-user-invitation) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/user-invitations/{uuid}/details/` | [Get public invitation details](#get-public-invitation-details) |
 | <span class="http-badge http-post">POST</span> | `/api/user-invitations/{uuid}/accept/` | [Accept an invitation](#accept-an-invitation) |
@@ -97,22 +100,22 @@ Retrieve a list of user invitations visible to the current user.
     
     | Field | Type | Description |
     |---|---|---|
-    | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string |  |
-    | `scope_description` | string | Get the description field from the scope if it exists. Returns empty string if scope doesn't have a description field. |
-    | `scope_type` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `role_name` | string |  |
-    | `role_description` | string |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `created_by_image` | string (uri) |  |
+    | `scope_uuid` | string (uuid) | UUID of the invitation scope (Customer or Project) |
+    | `scope_name` | string | Name of the invitation scope |
+    | `scope_description` | string | Description of the invitation scope |
+    | `scope_type` | string | Type of the invitation scope (e.g., 'customer', 'project') |
+    | `customer_uuid` | string (uuid) | UUID of the customer organization |
+    | `customer_name` | string | Name of the customer organization |
+    | `role_name` | string | Name of the role being granted (e.g., 'PROJECT.ADMIN') |
+    | `role_description` | string | Description of the role being granted |
+    | `created_by_full_name` | string | Full name of the user who created this invitation |
+    | `created_by_username` | string | Username of the user who created this invitation |
+    | `created_by_image` | string (uri) | Profile image of the user who created this invitation |
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `role` | string (uuid) |  |
+    | `role` | string (uuid) | UUID of the role to grant to the invited user |
     | `created` | string (date-time) |  |
-    | `expires` | string (date-time) |  |
+    | `expires` | string (date-time) | Expiration date and time of the invitation |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `phone_number` | string |  |
@@ -193,22 +196,22 @@ Retrieve details of a specific user invitation.
     
     | Field | Type | Description |
     |---|---|---|
-    | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string |  |
-    | `scope_description` | string | Get the description field from the scope if it exists. Returns empty string if scope doesn't have a description field. |
-    | `scope_type` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `role_name` | string |  |
-    | `role_description` | string |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `created_by_image` | string (uri) |  |
+    | `scope_uuid` | string (uuid) | UUID of the invitation scope (Customer or Project) |
+    | `scope_name` | string | Name of the invitation scope |
+    | `scope_description` | string | Description of the invitation scope |
+    | `scope_type` | string | Type of the invitation scope (e.g., 'customer', 'project') |
+    | `customer_uuid` | string (uuid) | UUID of the customer organization |
+    | `customer_name` | string | Name of the customer organization |
+    | `role_name` | string | Name of the role being granted (e.g., 'PROJECT.ADMIN') |
+    | `role_description` | string | Description of the role being granted |
+    | `created_by_full_name` | string | Full name of the user who created this invitation |
+    | `created_by_username` | string | Username of the user who created this invitation |
+    | `created_by_image` | string (uri) | Profile image of the user who created this invitation |
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `role` | string (uuid) |  |
+    | `role` | string (uuid) | UUID of the role to grant to the invited user |
     | `created` | string (date-time) |  |
-    | `expires` | string (date-time) |  |
+    | `expires` | string (date-time) | Expiration date and time of the invitation |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `phone_number` | string |  |
@@ -293,8 +296,8 @@ Create a new user invitation to grant a role in a specific scope (e.g., organiza
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `role` | string (uuid) | ✓ |  |
-    | `scope` | string | ✓ | <br>_Constraints: write-only_ |
+    | `role` | string (uuid) | ✓ | UUID of the role to grant to the invited user |
+    | `scope` | string | ✓ | URL of the scope (Customer or Project) for this invitation<br>_Constraints: write-only_ |
     | `full_name` | string |  |  |
     | `native_name` | string |  |  |
     | `phone_number` | string |  |  |
@@ -311,22 +314,22 @@ Create a new user invitation to grant a role in a specific scope (e.g., organiza
     
     | Field | Type | Description |
     |---|---|---|
-    | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string |  |
-    | `scope_description` | string | Get the description field from the scope if it exists. Returns empty string if scope doesn't have a description field. |
-    | `scope_type` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `role_name` | string |  |
-    | `role_description` | string |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `created_by_image` | string (uri) |  |
+    | `scope_uuid` | string (uuid) | UUID of the invitation scope (Customer or Project) |
+    | `scope_name` | string | Name of the invitation scope |
+    | `scope_description` | string | Description of the invitation scope |
+    | `scope_type` | string | Type of the invitation scope (e.g., 'customer', 'project') |
+    | `customer_uuid` | string (uuid) | UUID of the customer organization |
+    | `customer_name` | string | Name of the customer organization |
+    | `role_name` | string | Name of the role being granted (e.g., 'PROJECT.ADMIN') |
+    | `role_description` | string | Description of the role being granted |
+    | `created_by_full_name` | string | Full name of the user who created this invitation |
+    | `created_by_username` | string | Username of the user who created this invitation |
+    | `created_by_image` | string (uri) | Profile image of the user who created this invitation |
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `role` | string (uuid) |  |
+    | `role` | string (uuid) | UUID of the role to grant to the invited user |
     | `created` | string (date-time) |  |
-    | `expires` | string (date-time) |  |
+    | `expires` | string (date-time) | Expiration date and time of the invitation |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `phone_number` | string |  |
@@ -338,6 +341,247 @@ Create a new user invitation to grant a role in a specific scope (e.g., organiza
     | `error_message` | string |  |
     | `extra_invitation_text` | string |  |
     | `execution_state` | any |  |
+
+---
+
+### Update user invitation
+
+Update an existing user invitation. Only pending invitations can be edited. Allows changing email and role within the same scope.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/user-invitations/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      email="alice@example.com"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.invitation_update_request import InvitationUpdateRequest # (1)
+    from waldur_api_client.api.user_invitations import user_invitations_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = InvitationUpdateRequest(
+        email="alice@example.com"
+    )
+    response = user_invitations_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`InvitationUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invitation_update_request.py)
+    2.  **API Source:** [`user_invitations_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_invitations/user_invitations_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { userInvitationsUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await userInvitationsUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "email": "alice@example.com"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `email` | string (email) | ✓ | Invitation link will be sent to this email. Note that user can accept invitation with different email. |
+    | `role` | string (uuid) |  | UUID of the new role to assign. Must be compatible with the invitation scope. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `email` | string (email) | Invitation link will be sent to this email. Note that user can accept invitation with different email. |
+    | `role` | string (uuid) | UUID of the new role to assign. Must be compatible with the invitation scope. |
+
+---
+
+### Partially update user invitation
+
+Partially update an existing user invitation. Only pending invitations can be edited. Allows changing email and role within the same scope.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/user-invitations/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_invitation_update_request import PatchedInvitationUpdateRequest # (1)
+    from waldur_api_client.api.user_invitations import user_invitations_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedInvitationUpdateRequest()
+    response = user_invitations_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedInvitationUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_invitation_update_request.py)
+    2.  **API Source:** [`user_invitations_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_invitations/user_invitations_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { userInvitationsPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await userInvitationsPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `email` | string (email) |  | Invitation link will be sent to this email. Note that user can accept invitation with different email. |
+    | `role` | string (uuid) |  | UUID of the new role to assign. Must be compatible with the invitation scope. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `email` | string (email) | Invitation link will be sent to this email. Note that user can accept invitation with different email. |
+    | `role` | string (uuid) | UUID of the new role to assign. Must be compatible with the invitation scope. |
+
+---
+
+### Delete user invitation
+
+Delete a user invitation. Only users with invitation management permissions can delete invitations.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/user-invitations/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.user_invitations import user_invitations_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = user_invitations_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`user_invitations_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_invitations/user_invitations_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { userInvitationsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await userInvitationsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
 
 ---
 
@@ -410,21 +654,21 @@ Retrieves public-facing details of an invitation. This is used to show informati
     
     | Field | Type | Description |
     |---|---|---|
-    | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string |  |
-    | `scope_description` | string | Get the description field from the scope if it exists. Returns empty string if scope doesn't have a description field. |
-    | `scope_type` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `role_name` | string |  |
-    | `role_description` | string |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `created_by_image` | string (uri) |  |
+    | `scope_uuid` | string (uuid) | UUID of the invitation scope (Customer or Project) |
+    | `scope_name` | string | Name of the invitation scope |
+    | `scope_description` | string | Description of the invitation scope |
+    | `scope_type` | string | Type of the invitation scope (e.g., 'customer', 'project') |
+    | `customer_uuid` | string (uuid) | UUID of the customer organization |
+    | `customer_name` | string | Name of the customer organization |
+    | `role_name` | string | Name of the role being granted (e.g., 'PROJECT.ADMIN') |
+    | `role_description` | string | Description of the role being granted |
+    | `created_by_full_name` | string | Full name of the user who created this invitation |
+    | `created_by_username` | string | Username of the user who created this invitation |
+    | `created_by_image` | string (uri) | Profile image of the user who created this invitation |
     | `email` | string (email) | Invitation link will be sent to this email. Note that user can accept invitation with different email. |
     | `error_message` | string |  |
     | `execution_state` | any |  |
-    | `state` | any |  |
+    | `state` | any | Current state of the invitation (e.g., 'pending', 'accepted', 'rejected') |
 
 ---
 
@@ -560,9 +804,9 @@ Accepts an invitation for the currently authenticated user. This grants the user
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `token` | string | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `token` | string | ✓ | Authentication token for invitation acceptance |
 
 
 === "Responses"
@@ -703,10 +947,10 @@ Checks if an invitation is pending and returns its email and whether a civil num
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `email` | string (email) |
-    | `civil_number_required` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `email` | string (email) | Email address to check for existing invitations |
+    | `civil_number_required` | boolean | Whether civil number verification is required |
 
 ---
 
@@ -842,9 +1086,9 @@ Deletes an invitation. This action is restricted to staff users.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `token` | string | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `token` | string | ✓ | Authentication token for invitation acceptance |
 
 
 === "Responses"

@@ -71,9 +71,9 @@ Execute a given SQL query against a read-only database replica. This is a powerf
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `query` | string | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `query` | string | ✓ | Search query string |
 
 
 === "Responses"

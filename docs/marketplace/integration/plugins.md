@@ -70,14 +70,14 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `offering_type` | string |
-    | `components` | array of objects |
-    | `components.type` | string |
-    | `components.name` | string |
-    | `components.measured_unit` | string |
-    | `components.billing_type` | string |
-    | `available_limits` | array of strings |
+    | Field | Type | Description |
+    |---|---|---|
+    | `offering_type` | string |  |
+    | `components` | array of objects |  |
+    | `components.type` | string | Type identifier of the component |
+    | `components.name` | string | Display name of the component |
+    | `components.measured_unit` | string | Unit of measurement for the component |
+    | `components.billing_type` | any | Billing type for the component |
+    | `available_limits` | array of strings |  |
 
 ---

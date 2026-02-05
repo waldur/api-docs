@@ -64,17 +64,17 @@ Returns a paginated list of course accounts accessible to the current user.
 
     | Name | Type | Description |
     |---|---|---|
-    | `email` | string |  |
+    | `email` | string | Email contains |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project_end_date_after` | string (date) |  |
-    | `project_end_date_before` | string (date) |  |
-    | `project_start_date_after` | string (date) |  |
-    | `project_start_date_before` | string (date) |  |
-    | `project_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `username` | string |  |
+    | `project_end_date_after` | string (date) | Project end date range |
+    | `project_end_date_before` | string (date) | Project end date range |
+    | `project_start_date_after` | string (date) | Project start date range |
+    | `project_start_date_before` | string (date) | Project start date range |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `state` | array | Course account state<br><br> |
+    | `username` | string | Username |
 
 
 === "Responses"
@@ -360,17 +360,17 @@ Creates multiple course accounts within a specified course project in a single r
 
     | Name | Type | Description |
     |---|---|---|
-    | `email` | string |  |
+    | `email` | string | Email contains |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project_end_date_after` | string (date) |  |
-    | `project_end_date_before` | string (date) |  |
-    | `project_start_date_after` | string (date) |  |
-    | `project_start_date_before` | string (date) |  |
-    | `project_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `username` | string |  |
+    | `project_end_date_after` | string (date) | Project end date range |
+    | `project_end_date_before` | string (date) | Project end date range |
+    | `project_start_date_after` | string (date) | Project start date range |
+    | `project_start_date_before` | string (date) | Project start date range |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `state` | array | Course account state<br><br> |
+    | `username` | string | Username |
 
 
 === "Request Body (required)"

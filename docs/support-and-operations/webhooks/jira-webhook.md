@@ -18,7 +18,7 @@
       POST \
       https://api.example.com/api/support-jira-webhook/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      webhookEvent="jira:issue_updated" \
+      webhookEvent="string-value" \
       issue:='{}'
     ```
 
@@ -34,7 +34,7 @@
     )
     
     body_data = WebHookReceiverRequest(
-        webhookEvent="jira:issue_updated",
+        webhookEvent="string-value",
         issue={}
     )
     response = support_jira_webhook.sync(
@@ -58,7 +58,7 @@
       const response = await supportJiraWebhook({
       auth: "Token YOUR_API_TOKEN",
       body: {
-        "webhookEvent": "jira:issue_updated",
+        "webhookEvent": "string-value",
         "issue": {}
       }
     });
@@ -71,43 +71,43 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `webhookEvent` | string | ✓ |
-    | `issue` | object | ✓ |
-    | `issue.key` | string | ✓ |
-    | `issue.fields` | object | ✓ |
-    | `issue.fields.project` | object | ✓ |
-    | `issue.fields.project.id` | string | ✓ |
-    | `issue.fields.project.name` | string | ✓ |
-    | `issue.fields.project.key` | string | ✓ |
-    | `issue.fields.comment` | object (free-form) |  |
-    | `comment` | object |  |
-    | `comment.id` | string | ✓ |
-    | `changelog` | object |  |
-    | `changelog.items` | array of anys | ✓ |
-    | `issue_event_type_name` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `webhookEvent` | string | ✓ |  |
+    | `issue` | object | ✓ |  |
+    | `issue.key` | string | ✓ | Jira issue key |
+    | `issue.fields` | object | ✓ |  |
+    | `issue.fields.project` | object | ✓ |  |
+    | `issue.fields.project.id` | string | ✓ | Jira field ID |
+    | `issue.fields.project.name` | string | ✓ | Jira field name |
+    | `issue.fields.project.key` | string | ✓ | Jira project key |
+    | `issue.fields.comment` | object (free-form) |  |  |
+    | `comment` | object |  |  |
+    | `comment.id` | string | ✓ | Jira comment ID |
+    | `changelog` | object |  |  |
+    | `changelog.items` | array of anys | ✓ | List of changelog items |
+    | `issue_event_type_name` | string |  |  |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `webhookEvent` | string |
-    | `issue` | object |
-    | `issue.key` | string |
-    | `issue.fields` | object |
-    | `issue.fields.project` | object |
-    | `issue.fields.project.id` | string |
-    | `issue.fields.project.name` | string |
-    | `issue.fields.project.key` | string |
-    | `issue.fields.comment` | object (free-form) |
-    | `comment` | object |
-    | `comment.id` | string |
-    | `changelog` | object |
-    | `changelog.items` | array of anys |
-    | `issue_event_type_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `webhookEvent` | string |  |
+    | `issue` | object |  |
+    | `issue.key` | string | Jira issue key |
+    | `issue.fields` | object |  |
+    | `issue.fields.project` | object |  |
+    | `issue.fields.project.id` | string | Jira field ID |
+    | `issue.fields.project.name` | string | Jira field name |
+    | `issue.fields.project.key` | string | Jira project key |
+    | `issue.fields.comment` | object (free-form) |  |
+    | `comment` | object |  |
+    | `comment.id` | string | Jira comment ID |
+    | `changelog` | object |  |
+    | `changelog.items` | array of anys | List of changelog items |
+    | `issue_event_type_name` | string |  |
 
 ---

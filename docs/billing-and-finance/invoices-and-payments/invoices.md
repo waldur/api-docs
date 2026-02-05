@@ -9,8 +9,11 @@
 | <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/` | [Retrieve](#retrieve) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/invoices/growth/` | [Growth](#growth) |
+| <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
+| <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/items/` | [Get invoice items](#get-invoice-items) |
 | <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/stats/` | [Spendings grouped by offerings and filtered by provider](#spendings-grouped-by-offerings-and-filtered-by-provider) |
+| <span class="http-badge http-post">POST</span> | `/api/invoices/import_usage/` | [Import usage data](#import-usage-data) |
 | <span class="http-badge http-post">POST</span> | `/api/invoices/{uuid}/paid/` | [Mark invoice as paid and optionally create payment record with proof of payment](#mark-invoice-as-paid-and-optionally-create-payment-record-with-proof-of-payment) |
 | <span class="http-badge http-post">POST</span> | `/api/invoices/{uuid}/send_notification/` | [Send invoice notification](#send-invoice-notification) |
 | <span class="http-badge http-post">POST</span> | `/api/invoices/{uuid}/set_backend_id/` | [Set backend ID for invoice](#set-backend-id-for-invoice) |
@@ -135,24 +138,24 @@
     | `items.project_uuid` | string (uuid) |  |
     | `items.quantity` | string (decimal) |  |
     | `items.details` | object |  |
-    | `items.details.resource_name` | string |  |
-    | `items.details.resource_uuid` | string (uuid) |  |
-    | `items.details.plan_name` | string |  |
-    | `items.details.plan_uuid` | string (uuid) |  |
-    | `items.details.offering_type` | string |  |
-    | `items.details.offering_name` | string |  |
-    | `items.details.offering_uuid` | string (uuid) |  |
-    | `items.details.service_provider_name` | string |  |
-    | `items.details.service_provider_uuid` | string (uuid) |  |
-    | `items.details.plan_component_id` | integer |  |
-    | `items.details.offering_component_type` | string |  |
-    | `items.details.offering_component_name` | string |  |
-    | `items.details.resource_limit_periods` | array of objects |  |
-    | `items.details.resource_limit_periods.start` | string |  |
-    | `items.details.resource_limit_periods.end` | string |  |
-    | `items.details.resource_limit_periods.quantity` | integer |  |
-    | `items.details.resource_limit_periods.billing_periods` | integer |  |
-    | `items.details.resource_limit_periods.total` | string |  |
+    | `items.details.resource_name` | string | Name of the marketplace resource |
+    | `items.details.resource_uuid` | string (uuid) | UUID of the marketplace resource |
+    | `items.details.plan_name` | string | Name of the pricing plan |
+    | `items.details.plan_uuid` | string (uuid) | UUID of the pricing plan |
+    | `items.details.offering_type` | string | Type of the offering |
+    | `items.details.offering_name` | string | Name of the offering |
+    | `items.details.offering_uuid` | string (uuid) | UUID of the offering |
+    | `items.details.service_provider_name` | string | Name of the service provider |
+    | `items.details.service_provider_uuid` | string (uuid) | UUID of the service provider |
+    | `items.details.plan_component_id` | integer | ID of the plan component |
+    | `items.details.offering_component_type` | string | Type of the offering component |
+    | `items.details.offering_component_name` | string | Name of the offering component |
+    | `items.details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
+    | `items.details.resource_limit_periods.start` | string | Start date of the resource limit period |
+    | `items.details.resource_limit_periods.end` | string | End date of the resource limit period |
+    | `items.details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
+    | `items.details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
+    | `items.details.resource_limit_periods.total` | string | Total amount for this period |
     | `items.resource` | string (uri) |  |
     | `items.resource_uuid` | string (uuid) |  |
     | `items.resource_name` | string |  |
@@ -280,24 +283,24 @@
     | `items.project_uuid` | string (uuid) |  |
     | `items.quantity` | string (decimal) |  |
     | `items.details` | object |  |
-    | `items.details.resource_name` | string |  |
-    | `items.details.resource_uuid` | string (uuid) |  |
-    | `items.details.plan_name` | string |  |
-    | `items.details.plan_uuid` | string (uuid) |  |
-    | `items.details.offering_type` | string |  |
-    | `items.details.offering_name` | string |  |
-    | `items.details.offering_uuid` | string (uuid) |  |
-    | `items.details.service_provider_name` | string |  |
-    | `items.details.service_provider_uuid` | string (uuid) |  |
-    | `items.details.plan_component_id` | integer |  |
-    | `items.details.offering_component_type` | string |  |
-    | `items.details.offering_component_name` | string |  |
-    | `items.details.resource_limit_periods` | array of objects |  |
-    | `items.details.resource_limit_periods.start` | string |  |
-    | `items.details.resource_limit_periods.end` | string |  |
-    | `items.details.resource_limit_periods.quantity` | integer |  |
-    | `items.details.resource_limit_periods.billing_periods` | integer |  |
-    | `items.details.resource_limit_periods.total` | string |  |
+    | `items.details.resource_name` | string | Name of the marketplace resource |
+    | `items.details.resource_uuid` | string (uuid) | UUID of the marketplace resource |
+    | `items.details.plan_name` | string | Name of the pricing plan |
+    | `items.details.plan_uuid` | string (uuid) | UUID of the pricing plan |
+    | `items.details.offering_type` | string | Type of the offering |
+    | `items.details.offering_name` | string | Name of the offering |
+    | `items.details.offering_uuid` | string (uuid) | UUID of the offering |
+    | `items.details.service_provider_name` | string | Name of the service provider |
+    | `items.details.service_provider_uuid` | string (uuid) | UUID of the service provider |
+    | `items.details.plan_component_id` | integer | ID of the plan component |
+    | `items.details.offering_component_type` | string | Type of the offering component |
+    | `items.details.offering_component_name` | string | Name of the offering component |
+    | `items.details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
+    | `items.details.resource_limit_periods.start` | string | Start date of the resource limit period |
+    | `items.details.resource_limit_periods.end` | string | End date of the resource limit period |
+    | `items.details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
+    | `items.details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
+    | `items.details.resource_limit_periods.total` | string | Total amount for this period |
     | `items.resource` | string (uri) |  |
     | `items.resource_uuid` | string (uuid) |  |
     | `items.resource_name` | string |  |
@@ -383,6 +386,198 @@ Analyze invoice trends over time by comparing monthly totals for major customers
     | `customer_periods` | array of objects |
     | `customer_periods.name` | string |
     | `customer_periods.periods` | array of number (double)s |
+
+---
+
+### Get object state at a specific timestamp
+
+Returns the state of the object as it was at the specified timestamp. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/invoices/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/at/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      timestamp=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.invoices import invoices_history_at_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = invoices_history_at_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        timestamp="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`invoices_history_at_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_history_at_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { invoicesHistoryAtRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await invoicesHistoryAtRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "timestamp": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `timestamp` | string | ✓ | ISO 8601 timestamp to query the object state at |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+    
+    ---
+    
+    **`400`** - 
+    
+    
+    ---
+    
+    **`404`** - 
+    
+
+---
+
+### Get version history
+
+Returns the version history for this object. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/invoices/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.invoices import invoices_history_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = invoices_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`invoices_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { invoicesHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await invoicesHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `created` | string (date) |  |
+    | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
+    | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
+    | `customer` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `end_date` | string (date) |  |
+    | `month` | integer |  |
+    | `o` | array | Ordering<br><br> |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `start_date` | string (date) |  |
+    | `state` | array |  |
+    | `year` | integer |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
 
 ---
 
@@ -481,24 +676,24 @@ Retrieve a list of invoice items for the specified invoice.
     | `project_uuid` | string (uuid) |  |
     | `quantity` | string (decimal) |  |
     | `details` | object |  |
-    | `details.resource_name` | string |  |
-    | `details.resource_uuid` | string (uuid) |  |
-    | `details.plan_name` | string |  |
-    | `details.plan_uuid` | string (uuid) |  |
-    | `details.offering_type` | string |  |
-    | `details.offering_name` | string |  |
-    | `details.offering_uuid` | string (uuid) |  |
-    | `details.service_provider_name` | string |  |
-    | `details.service_provider_uuid` | string (uuid) |  |
-    | `details.plan_component_id` | integer |  |
-    | `details.offering_component_type` | string |  |
-    | `details.offering_component_name` | string |  |
-    | `details.resource_limit_periods` | array of objects |  |
-    | `details.resource_limit_periods.start` | string |  |
-    | `details.resource_limit_periods.end` | string |  |
-    | `details.resource_limit_periods.quantity` | integer |  |
-    | `details.resource_limit_periods.billing_periods` | integer |  |
-    | `details.resource_limit_periods.total` | string |  |
+    | `details.resource_name` | string | Name of the marketplace resource |
+    | `details.resource_uuid` | string (uuid) | UUID of the marketplace resource |
+    | `details.plan_name` | string | Name of the pricing plan |
+    | `details.plan_uuid` | string (uuid) | UUID of the pricing plan |
+    | `details.offering_type` | string | Type of the offering |
+    | `details.offering_name` | string | Name of the offering |
+    | `details.offering_uuid` | string (uuid) | UUID of the offering |
+    | `details.service_provider_name` | string | Name of the service provider |
+    | `details.service_provider_uuid` | string (uuid) | UUID of the service provider |
+    | `details.plan_component_id` | integer | ID of the plan component |
+    | `details.offering_component_type` | string | Type of the offering component |
+    | `details.offering_component_name` | string | Name of the offering component |
+    | `details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
+    | `details.resource_limit_periods.start` | string | Start date of the resource limit period |
+    | `details.resource_limit_periods.end` | string | End date of the resource limit period |
+    | `details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
+    | `details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
+    | `details.resource_limit_periods.total` | string | Total amount for this period |
     | `resource` | string (uri) |  |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
@@ -602,6 +797,101 @@ Spendings grouped by offerings and filtered by provider.
     | `service_category_title` | string |
     | `service_provider_name` | string |
     | `service_provider_uuid` | string (uuid) |
+
+---
+
+### Import usage data
+
+Import component usage items as JSON data for multiple customers. Creates invoice items for the specified billing period. Items are deduplicated by name, customer, and billing period to prevent duplicates.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/invoices/import_usage/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      year=123 \
+      month=123 \
+      items:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.import_usage_request import ImportUsageRequest # (1)
+    from waldur_api_client.api.invoices import invoices_import_usage # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ImportUsageRequest(
+        year=123,
+        month=123,
+        items=[]
+    )
+    response = invoices_import_usage.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ImportUsageRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/import_usage_request.py)
+    2.  **API Source:** [`invoices_import_usage`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_import_usage.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { invoicesImportUsage } from 'waldur-js-client';
+    
+    try {
+      const response = await invoicesImportUsage({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "year": 123,
+        "month": 123,
+        "items": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `year` | integer | ✓ |
+    | `month` | integer | ✓ |
+    | `items` | array of objects | ✓ |
+    | `items.customer_name` | string |  |
+    | `items.customer_uuid` | string (uuid) |  |
+    | `items.name` | string | ✓ |
+    | `items.unit_price` | string (decimal) | ✓ |
+    | `items.article_code` | string |  |
+    | `items.service_provider_name` | string |  |
+    | `items.offering_name` | string |  |
+    | `items.plan_name` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `created` | integer |
+    | `skipped` | integer |
+    | `errors` | array of objects |
 
 ---
 
@@ -732,24 +1022,24 @@ Mark invoice as paid and optionally create payment record with proof of payment.
     | `items.project_uuid` | string (uuid) |  |
     | `items.quantity` | string (decimal) |  |
     | `items.details` | object |  |
-    | `items.details.resource_name` | string |  |
-    | `items.details.resource_uuid` | string (uuid) |  |
-    | `items.details.plan_name` | string |  |
-    | `items.details.plan_uuid` | string (uuid) |  |
-    | `items.details.offering_type` | string |  |
-    | `items.details.offering_name` | string |  |
-    | `items.details.offering_uuid` | string (uuid) |  |
-    | `items.details.service_provider_name` | string |  |
-    | `items.details.service_provider_uuid` | string (uuid) |  |
-    | `items.details.plan_component_id` | integer |  |
-    | `items.details.offering_component_type` | string |  |
-    | `items.details.offering_component_name` | string |  |
-    | `items.details.resource_limit_periods` | array of objects |  |
-    | `items.details.resource_limit_periods.start` | string |  |
-    | `items.details.resource_limit_periods.end` | string |  |
-    | `items.details.resource_limit_periods.quantity` | integer |  |
-    | `items.details.resource_limit_periods.billing_periods` | integer |  |
-    | `items.details.resource_limit_periods.total` | string |  |
+    | `items.details.resource_name` | string | Name of the marketplace resource |
+    | `items.details.resource_uuid` | string (uuid) | UUID of the marketplace resource |
+    | `items.details.plan_name` | string | Name of the pricing plan |
+    | `items.details.plan_uuid` | string (uuid) | UUID of the pricing plan |
+    | `items.details.offering_type` | string | Type of the offering |
+    | `items.details.offering_name` | string | Name of the offering |
+    | `items.details.offering_uuid` | string (uuid) | UUID of the offering |
+    | `items.details.service_provider_name` | string | Name of the service provider |
+    | `items.details.service_provider_uuid` | string (uuid) | UUID of the service provider |
+    | `items.details.plan_component_id` | integer | ID of the plan component |
+    | `items.details.offering_component_type` | string | Type of the offering component |
+    | `items.details.offering_component_name` | string | Name of the offering component |
+    | `items.details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
+    | `items.details.resource_limit_periods.start` | string | Start date of the resource limit period |
+    | `items.details.resource_limit_periods.end` | string | End date of the resource limit period |
+    | `items.details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
+    | `items.details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
+    | `items.details.resource_limit_periods.total` | string | Total amount for this period |
     | `items.resource` | string (uri) |  |
     | `items.resource_uuid` | string (uuid) |  |
     | `items.resource_name` | string |  |

@@ -12,6 +12,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/maintenance-announcements/{uuid}/` | [Partially update a maintenance announcement](#partially-update-a-maintenance-announcement) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/maintenance-announcements/{uuid}/` | [Delete a maintenance announcement](#delete-a-maintenance-announcement) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/maintenance-announcements/maintenance_stats/` | [Get maintenance announcement statistics](#get-maintenance-announcement-statistics) |
 | <span class="http-badge http-post">POST</span> | `/api/maintenance-announcements/{uuid}/cancel_maintenance/` | [Cancel the maintenance announcement](#cancel-the-maintenance-announcement) |
 | <span class="http-badge http-post">POST</span> | `/api/maintenance-announcements/{uuid}/complete_maintenance/` | [Complete the maintenance announcement](#complete-the-maintenance-announcement) |
 | <span class="http-badge http-post">POST</span> | `/api/maintenance-announcements/{uuid}/schedule/` | [Schedule/publish the maintenance announcement](#schedulepublish-the-maintenance-announcement) |
@@ -74,16 +75,16 @@ Returns a paginated list of maintenance announcements.
 
     | Name | Type | Description |
     |---|---|---|
-    | `maintenance_type` | integer |  |
+    | `maintenance_type` | integer | Maintenance type |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `scheduled_end_after` | string (date-time) |  |
-    | `scheduled_end_before` | string (date-time) |  |
-    | `scheduled_start_after` | string (date-time) |  |
-    | `scheduled_start_before` | string (date-time) |  |
-    | `service_provider_uuid` | string (uuid) |  |
-    | `state` | array |  |
+    | `scheduled_end_after` | string (date-time) | Scheduled end after |
+    | `scheduled_end_before` | string (date-time) | Scheduled end before |
+    | `scheduled_start_after` | string (date-time) | Scheduled start after |
+    | `scheduled_start_before` | string (date-time) | Scheduled start before |
+    | `service_provider_uuid` | string (uuid) | Service provider UUID |
+    | `state` | array | Maintenance state<br><br> |
 
 
 === "Responses"
@@ -98,6 +99,7 @@ Returns a paginated list of maintenance announcements.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `message` | string |  |
+    | `internal_notes` | string |  |
     | `maintenance_type` | any | Type of maintenance being performed |
     | `external_reference_url` | string (uri) | Optional reference to an external maintenance tracker |
     | `state` | any |  |
@@ -191,6 +193,7 @@ Returns the details of a specific maintenance announcement.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `message` | string |  |
+    | `internal_notes` | string |  |
     | `maintenance_type` | any | Type of maintenance being performed |
     | `external_reference_url` | string (uri) | Optional reference to an external maintenance tracker |
     | `state` | any |  |
@@ -289,6 +292,7 @@ Creates a new maintenance announcement in the 'Draft' state.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `message` | string |  |  |
+    | `internal_notes` | string |  |  |
     | `maintenance_type` | any |  | Type of maintenance being performed |
     | `external_reference_url` | string (uri) |  | Optional reference to an external maintenance tracker |
     | `scheduled_start` | string (date-time) | ✓ | When the maintenance is scheduled to begin |
@@ -306,6 +310,7 @@ Creates a new maintenance announcement in the 'Draft' state.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `message` | string |  |
+    | `internal_notes` | string |  |
     | `maintenance_type` | any | Type of maintenance being performed |
     | `external_reference_url` | string (uri) | Optional reference to an external maintenance tracker |
     | `state` | any |  |
@@ -415,6 +420,7 @@ Updates an existing maintenance announcement.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `message` | string |  |  |
+    | `internal_notes` | string |  |  |
     | `maintenance_type` | any |  | Type of maintenance being performed |
     | `external_reference_url` | string (uri) |  | Optional reference to an external maintenance tracker |
     | `scheduled_start` | string (date-time) | ✓ | When the maintenance is scheduled to begin |
@@ -432,6 +438,7 @@ Updates an existing maintenance announcement.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `message` | string |  |
+    | `internal_notes` | string |  |
     | `maintenance_type` | any | Type of maintenance being performed |
     | `external_reference_url` | string (uri) | Optional reference to an external maintenance tracker |
     | `state` | any |  |
@@ -526,6 +533,7 @@ Partially updates an existing maintenance announcement.
     |---|---|---|---|
     | `name` | string |  |  |
     | `message` | string |  |  |
+    | `internal_notes` | string |  |  |
     | `maintenance_type` | any |  | Type of maintenance being performed |
     | `external_reference_url` | string (uri) |  | Optional reference to an external maintenance tracker |
     | `scheduled_start` | string (date-time) |  | When the maintenance is scheduled to begin |
@@ -543,6 +551,7 @@ Partially updates an existing maintenance announcement.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `message` | string |  |
+    | `internal_notes` | string |  |
     | `maintenance_type` | any | Type of maintenance being performed |
     | `external_reference_url` | string (uri) | Optional reference to an external maintenance tracker |
     | `state` | any |  |
@@ -635,6 +644,86 @@ Deletes a maintenance announcement.
 
 ## Other Actions
 
+
+### Get maintenance announcement statistics
+
+Returns comprehensive statistics for maintenance announcements including counts by state, type, impact level, and daily breakdown.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/maintenance-announcements/maintenance_stats/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.maintenance_announcements import maintenance_announcements_maintenance_stats_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = maintenance_announcements_maintenance_stats_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`maintenance_announcements_maintenance_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/maintenance_announcements/maintenance_announcements_maintenance_stats_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { maintenanceAnnouncementsMaintenanceStatsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await maintenanceAnnouncementsMaintenanceStatsRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `end` | string | End date in YYYY-MM-DD format. Defaults to 30 days in the future. |
+    | `provider_uuid` | string | Filter by service provider UUID. |
+    | `start` | string | Start date in YYYY-MM-DD format. Defaults to 90 days ago. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `summary` | any | Summary statistics |
+    | `by_state` | object (free-form) | Total counts grouped by state |
+    | `by_type` | object (free-form) | Total counts grouped by maintenance type |
+    | `by_impact_level` | object (free-form) | Total counts grouped by max impact level |
+    | `daily` | array of objects | Daily breakdown |
+    | `daily.date` | string (date) | Date |
+    | `daily.count` | integer | Number of maintenances on this day |
+    | `daily.by_state` | object (free-form) | Maintenance counts grouped by state |
+    | `providers` | array of objects | Statistics per provider |
+    | `providers.uuid` | string | Service provider UUID |
+    | `providers.name` | string | Service provider name |
+    | `providers.total` | integer | Total maintenances |
+    | `providers.active` | integer | Active maintenances |
+    | `providers.scheduled` | integer | Scheduled maintenances |
+    | `providers.completed` | integer | Completed maintenances |
+
+---
 
 ### Cancel the maintenance announcement
 

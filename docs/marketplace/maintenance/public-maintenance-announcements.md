@@ -61,16 +61,16 @@ Returns a paginated list of public maintenance announcements. Only announcements
 
     | Name | Type | Description |
     |---|---|---|
-    | `maintenance_type` | integer |  |
+    | `maintenance_type` | integer | Maintenance type |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `scheduled_end_after` | string (date-time) |  |
-    | `scheduled_end_before` | string (date-time) |  |
-    | `scheduled_start_after` | string (date-time) |  |
-    | `scheduled_start_before` | string (date-time) |  |
-    | `service_provider_uuid` | string (uuid) |  |
-    | `state` | array |  |
+    | `scheduled_end_after` | string (date-time) | Scheduled end after |
+    | `scheduled_end_before` | string (date-time) | Scheduled end before |
+    | `scheduled_start_after` | string (date-time) | Scheduled start after |
+    | `scheduled_start_before` | string (date-time) | Scheduled start before |
+    | `service_provider_uuid` | string (uuid) | Service provider UUID |
+    | `state` | array | Maintenance state<br><br> |
 
 
 === "Responses"

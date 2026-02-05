@@ -71,6 +71,8 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `cpu_family` | string | Filter packages available for specific CPU family (e.g., x86_64, aarch64) |
     | `cpu_microarchitecture` | string | Filter packages available for specific CPU microarchitecture (e.g., generic, zen2, haswell) |
     | `description` | string | Filter packages by description (case-insensitive partial match) |
+    | `extension_name` | string | Filter packages having extensions with a specific name |
+    | `extension_type` | string | Filter packages having extensions of a specific type (e.g., 'python') |
     | `has_version` | string | Filter packages that have a specific version |
     | `name` | string | Filter packages by name (case-insensitive partial match) |
     | `o` | array | Ordering<br><br> |
@@ -86,28 +88,43 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `catalog` | string (uri) |
-    | `name` | string |
-    | `description` | string |
-    | `homepage` | string (uri) |
-    | `catalog_name` | string |
-    | `catalog_version` | string |
-    | `version_count` | integer |
-    | `versions` | array of objects |
-    | `versions.uuid` | string (uuid) |
-    | `versions.version` | string |
-    | `versions.release_date` | string (date) |
-    | `versions.targets` | array of objects |
-    | `versions.targets.uuid` | string (uuid) |
-    | `versions.targets.cpu_family` | string |
-    | `versions.targets.cpu_microarchitecture` | string |
-    | `versions.targets.path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `catalog` | string (uri) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `homepage` | string (uri) |  |
+    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | any | Package maintainers |
+    | `is_extension` | boolean | Whether this package is an extension of another package |
+    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `catalog_name` | string |  |
+    | `catalog_version` | string |  |
+    | `catalog_type` | string |  |
+    | `catalog_type_display` | string |  |
+    | `version_count` | integer |  |
+    | `extension_count` | integer |  |
+    | `versions` | array of objects |  |
+    | `versions.uuid` | string (uuid) |  |
+    | `versions.version` | string |  |
+    | `versions.release_date` | string (date) |  |
+    | `versions.targets` | array of objects |  |
+    | `versions.targets.uuid` | string (uuid) |  |
+    | `versions.targets.target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.module` | object (free-form) |  |
+    | `versions.required_modules` | array of anys |  |
+    | `versions.extensions` | array of anys |  |
+    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
 
@@ -175,28 +192,43 @@ Returns the details of a specific software package, including its description, h
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `catalog` | string (uri) |
-    | `name` | string |
-    | `description` | string |
-    | `homepage` | string (uri) |
-    | `catalog_name` | string |
-    | `catalog_version` | string |
-    | `version_count` | integer |
-    | `versions` | array of objects |
-    | `versions.uuid` | string (uuid) |
-    | `versions.version` | string |
-    | `versions.release_date` | string (date) |
-    | `versions.targets` | array of objects |
-    | `versions.targets.uuid` | string (uuid) |
-    | `versions.targets.cpu_family` | string |
-    | `versions.targets.cpu_microarchitecture` | string |
-    | `versions.targets.path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `catalog` | string (uri) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `homepage` | string (uri) |  |
+    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | any | Package maintainers |
+    | `is_extension` | boolean | Whether this package is an extension of another package |
+    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `catalog_name` | string |  |
+    | `catalog_version` | string |  |
+    | `catalog_type` | string |  |
+    | `catalog_type_display` | string |  |
+    | `version_count` | integer |  |
+    | `extension_count` | integer |  |
+    | `versions` | array of objects |  |
+    | `versions.uuid` | string (uuid) |  |
+    | `versions.version` | string |  |
+    | `versions.release_date` | string (date) |  |
+    | `versions.targets` | array of objects |  |
+    | `versions.targets.uuid` | string (uuid) |  |
+    | `versions.targets.target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.module` | object (free-form) |  |
+    | `versions.required_modules` | array of anys |  |
+    | `versions.extensions` | array of anys |  |
+    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
 
@@ -265,40 +297,60 @@ Creates a new software package within a catalog. Requires staff permissions.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `catalog` | string (uri) | ✓ |
-    | `name` | string | ✓ |
-    | `description` | string |  |
-    | `homepage` | string (uri) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `catalog` | string (uri) | ✓ |  |
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `homepage` | string (uri) |  |  |
+    | `categories` | any |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | any |  | Package maintainers |
+    | `is_extension` | boolean |  | Whether this package is an extension of another package |
+    | `parent_software` | string (uri) |  | Parent package for extensions (e.g., Python package within Python) |
 
 
 === "Responses"
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `catalog` | string (uri) |
-    | `name` | string |
-    | `description` | string |
-    | `homepage` | string (uri) |
-    | `catalog_name` | string |
-    | `catalog_version` | string |
-    | `version_count` | integer |
-    | `versions` | array of objects |
-    | `versions.uuid` | string (uuid) |
-    | `versions.version` | string |
-    | `versions.release_date` | string (date) |
-    | `versions.targets` | array of objects |
-    | `versions.targets.uuid` | string (uuid) |
-    | `versions.targets.cpu_family` | string |
-    | `versions.targets.cpu_microarchitecture` | string |
-    | `versions.targets.path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `catalog` | string (uri) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `homepage` | string (uri) |  |
+    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | any | Package maintainers |
+    | `is_extension` | boolean | Whether this package is an extension of another package |
+    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `catalog_name` | string |  |
+    | `catalog_version` | string |  |
+    | `catalog_type` | string |  |
+    | `catalog_type_display` | string |  |
+    | `version_count` | integer |  |
+    | `extension_count` | integer |  |
+    | `versions` | array of objects |  |
+    | `versions.uuid` | string (uuid) |  |
+    | `versions.version` | string |  |
+    | `versions.release_date` | string (date) |  |
+    | `versions.targets` | array of objects |  |
+    | `versions.targets.uuid` | string (uuid) |  |
+    | `versions.targets.target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.module` | object (free-form) |  |
+    | `versions.required_modules` | array of anys |  |
+    | `versions.extensions` | array of anys |  |
+    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
 
@@ -378,40 +430,60 @@ Updates an existing software package. Requires staff permissions.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `catalog` | string (uri) | ✓ |
-    | `name` | string | ✓ |
-    | `description` | string |  |
-    | `homepage` | string (uri) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `catalog` | string (uri) | ✓ |  |
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `homepage` | string (uri) |  |  |
+    | `categories` | any |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | any |  | Package maintainers |
+    | `is_extension` | boolean |  | Whether this package is an extension of another package |
+    | `parent_software` | string (uri) |  | Parent package for extensions (e.g., Python package within Python) |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `catalog` | string (uri) |
-    | `name` | string |
-    | `description` | string |
-    | `homepage` | string (uri) |
-    | `catalog_name` | string |
-    | `catalog_version` | string |
-    | `version_count` | integer |
-    | `versions` | array of objects |
-    | `versions.uuid` | string (uuid) |
-    | `versions.version` | string |
-    | `versions.release_date` | string (date) |
-    | `versions.targets` | array of objects |
-    | `versions.targets.uuid` | string (uuid) |
-    | `versions.targets.cpu_family` | string |
-    | `versions.targets.cpu_microarchitecture` | string |
-    | `versions.targets.path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `catalog` | string (uri) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `homepage` | string (uri) |  |
+    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | any | Package maintainers |
+    | `is_extension` | boolean | Whether this package is an extension of another package |
+    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `catalog_name` | string |  |
+    | `catalog_version` | string |  |
+    | `catalog_type` | string |  |
+    | `catalog_type_display` | string |  |
+    | `version_count` | integer |  |
+    | `extension_count` | integer |  |
+    | `versions` | array of objects |  |
+    | `versions.uuid` | string (uuid) |  |
+    | `versions.version` | string |  |
+    | `versions.release_date` | string (date) |  |
+    | `versions.targets` | array of objects |  |
+    | `versions.targets.uuid` | string (uuid) |  |
+    | `versions.targets.target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.module` | object (free-form) |  |
+    | `versions.required_modules` | array of anys |  |
+    | `versions.extensions` | array of anys |  |
+    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
 
@@ -482,40 +554,60 @@ Partially updates an existing software package. Requires staff permissions.
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `catalog` | string (uri) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `homepage` | string (uri) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `catalog` | string (uri) |  |  |
+    | `name` | string |  |  |
+    | `description` | string |  |  |
+    | `homepage` | string (uri) |  |  |
+    | `categories` | any |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | any |  | Package maintainers |
+    | `is_extension` | boolean |  | Whether this package is an extension of another package |
+    | `parent_software` | string (uri) |  | Parent package for extensions (e.g., Python package within Python) |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `catalog` | string (uri) |
-    | `name` | string |
-    | `description` | string |
-    | `homepage` | string (uri) |
-    | `catalog_name` | string |
-    | `catalog_version` | string |
-    | `version_count` | integer |
-    | `versions` | array of objects |
-    | `versions.uuid` | string (uuid) |
-    | `versions.version` | string |
-    | `versions.release_date` | string (date) |
-    | `versions.targets` | array of objects |
-    | `versions.targets.uuid` | string (uuid) |
-    | `versions.targets.cpu_family` | string |
-    | `versions.targets.cpu_microarchitecture` | string |
-    | `versions.targets.path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `catalog` | string (uri) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `homepage` | string (uri) |  |
+    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | any | Package maintainers |
+    | `is_extension` | boolean | Whether this package is an extension of another package |
+    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `catalog_name` | string |  |
+    | `catalog_version` | string |  |
+    | `catalog_type` | string |  |
+    | `catalog_type_display` | string |  |
+    | `version_count` | integer |  |
+    | `extension_count` | integer |  |
+    | `versions` | array of objects |  |
+    | `versions.uuid` | string (uuid) |  |
+    | `versions.version` | string |  |
+    | `versions.release_date` | string (date) |  |
+    | `versions.targets` | array of objects |  |
+    | `versions.targets.uuid` | string (uuid) |  |
+    | `versions.targets.target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.module` | object (free-form) |  |
+    | `versions.required_modules` | array of anys |  |
+    | `versions.extensions` | array of anys |  |
+    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
 

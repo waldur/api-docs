@@ -76,6 +76,7 @@
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string |  |
 
 
 === "Responses"
@@ -642,6 +643,7 @@ Get credit consumption history grouped by month.
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string |  |
 
 
 === "Responses"

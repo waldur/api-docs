@@ -339,9 +339,9 @@ This view attaches documents to template.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `attachments` | array of string (binary)s | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `attachments` | array of string (binary)s | ✓ | List of files to attach |
 
 
 === "Responses"

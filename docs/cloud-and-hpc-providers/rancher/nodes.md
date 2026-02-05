@@ -16,6 +16,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/rancher-nodes/{uuid}/console_log/` | [Returns console log for the node](#returns-console-log-for-the-node) |
 | <span class="http-badge http-get">GET</span> | `/api/rancher-nodes/{uuid}/console/` | [Returns console URL for the node](#returns-console-url-for-the-node) |
 | <span class="http-badge http-post">POST</span> | `/api/rancher-nodes/{uuid}/link_openstack/` | [Links node to OpenStack instance](#links-node-to-openstack-instance) |
+| <span class="http-badge http-post">POST</span> | `/api/rancher-nodes/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
+| <span class="http-badge http-post">POST</span> | `/api/rancher-nodes/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 
 ---
 ## Core CRUD
@@ -373,13 +375,19 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
 
 === "Responses"
 
-    **`202`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
     
     ---
     
-    **`409`** - No response body
+    **`409`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 
@@ -818,5 +826,158 @@ Links node to OpenStack instance.
 
     **`200`** - No response body
     
+
+---
+
+### Mark resource as ERRED
+
+Manually transition the resource to ERRED state. This is useful for resources stuck in transitional states (CREATING, UPDATING, DELETING) that cannot be synced via pull. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/rancher-nodes/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_erred/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_erred_request import SetErredRequest # (1)
+    from waldur_api_client.api.rancher_nodes import rancher_nodes_set_erred # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetErredRequest()
+    response = rancher_nodes_set_erred.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetErredRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_erred_request.py)
+    2.  **API Source:** [`rancher_nodes_set_erred`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_nodes/rancher_nodes_set_erred.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { rancherNodesSetErred } from 'waldur-js-client';
+    
+    try {
+      const response = await rancherNodesSetErred({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
+
+### Mark resource as OK
+
+Manually transition the resource to OK state and clear error fields. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/rancher-nodes/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_ok/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.rancher_nodes import rancher_nodes_set_ok # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = rancher_nodes_set_ok.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`rancher_nodes_set_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_nodes/rancher_nodes_set_ok.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { rancherNodesSetOk } from 'waldur-js-client';
+    
+    try {
+      const response = await rancherNodesSetOk({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---

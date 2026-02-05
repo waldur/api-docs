@@ -71,6 +71,7 @@
     | `page_size` | integer | Number of results to return per page. |
     | `project_name` | string |  |
     | `project_uuid` | string (uuid) |  |
+    | `query` | string |  |
 
 
 === "Responses"

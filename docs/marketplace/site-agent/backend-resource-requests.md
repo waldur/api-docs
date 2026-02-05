@@ -73,11 +73,11 @@ Returns a paginated list of requests for backend resources.
     | `finished` | string (date-time) | Modified after |
     | `modified` | string (date-time) | Modified after |
     | `o` | array | Ordering<br><br> |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `started` | string (date-time) | Created after |
-    | `state` | array |  |
+    | `state` | array | Backend resource request state<br><br> |
 
 
 === "Responses"

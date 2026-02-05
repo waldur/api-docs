@@ -105,7 +105,15 @@
     | `name` | string |  |
     | `start` | string (date-time) | Date and time when item usage has started. |
     | `end` | string (date-time) | Date and time when item usage has ended. |
+    | `price` | number (double) |  |
     | `details` | any | Stores data about scope |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `offering_component_type` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
 
 ---
 
@@ -184,7 +192,15 @@
     | `name` | string |  |
     | `start` | string (date-time) | Date and time when item usage has started. |
     | `end` | string (date-time) | Date and time when item usage has ended. |
+    | `price` | number (double) |  |
     | `details` | any | Stores data about scope |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `offering_component_type` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
 
 ---
 
@@ -261,18 +277,18 @@ Create compensation invoice item for selected invoice item.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `offering_component_name` | string | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `offering_component_name` | string | ✓ | Name of the offering component for compensation |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `offering_component_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `offering_component_name` | string | Name of the offering component for compensation |
 
 ---
 
@@ -595,7 +611,15 @@ Create compensation invoice item for selected invoice item.
     | `name` | string |  |
     | `start` | string (date-time) | Date and time when item usage has started. |
     | `end` | string (date-time) | Date and time when item usage has ended. |
+    | `price` | number (double) |  |
     | `details` | any | Stores data about scope |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `offering_component_type` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
 
 ---
 
@@ -868,9 +892,9 @@ Calculate total price for filtered invoice items.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `total_price` | string (decimal) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `total_price` | string (decimal) | Total price for the invoice item |
 
 ---
 

@@ -4,11 +4,22 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
-| <span class="http-badge http-get">GET</span> | `/api/rabbitmq-user-stats/` | [List Rabbitmq User Stats](#list-rabbitmq-user-stats) |
+| <span class="http-badge http-get">GET</span> | `/api/rabbitmq-user-stats/` | [Get RabbitMQ user connection statistics](#get-rabbitmq-user-connection-statistics) |
 
 ---
 
-### List Rabbitmq User Stats
+### Get RabbitMQ user connection statistics
+
+Returns enriched connection data for all RabbitMQ users.
+
+For each user (which corresponds to an EventSubscription), provides:
+- Connection state (running, blocked, blocking)
+- Traffic statistics (bytes sent/received)
+- Connection timestamp
+- Client properties (product, version, platform)
+- Channel count and heartbeat timeout
+
+Requires support user permissions.
 
 
 === "HTTPie"
@@ -70,9 +81,16 @@
     
     | Field | Type | Description |
     |---|---|---|
-    | `username` | string |  |
-    | `connections` | array of objects |  |
-    | `connections.source_ip` | any | An IPv4 or IPv6 address. |
-    | `connections.vhost` | string |  |
+    | `username` | string | RabbitMQ username (corresponds to EventSubscription UUID) |
+    | `connections` | array of objects | List of active connections with detailed statistics |
+    | `connections.source_ip` | string | Client IP address |
+    | `connections.vhost` | string | Virtual host name |
+    | `connections.connected_at` | string (date-time) | Connection establishment timestamp |
+    | `connections.state` | string | Connection state: 'running', 'blocked', 'blocking' |
+    | `connections.recv_oct` | integer | Bytes received on this connection |
+    | `connections.send_oct` | integer | Bytes sent on this connection |
+    | `connections.channels` | integer | Number of channels on this connection |
+    | `connections.timeout` | integer | Heartbeat timeout in seconds |
+    | `connections.client_properties` | any | Client identification properties |
 
 ---

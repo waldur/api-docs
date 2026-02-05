@@ -12,7 +12,6 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-reviews/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-reviews/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-post">POST</span> | `/api/proposal-reviews/{uuid}/accept/` | [Accept a review, changing its state to IN_REVIEW](#accept-a-review-changing-its-state-to-inreview) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-reviews/{uuid}/reject/` | [Reject a review, changing its state to REJECTED](#reject-a-review-changing-its-state-to-rejected) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-reviews/{uuid}/submit/` | [Submit a review, changing its state to SUBMITTED](#submit-a-review-changing-its-state-to-submitted) |
 
@@ -79,6 +78,7 @@
     | `proposal_name` | string |  |
     | `proposal_uuid` | string (uuid) |  |
     | `reviewer_uuid` | string (uuid) |  |
+    | `round_uuid` | string (uuid) |  |
     | `state` | array |  |
 
 
@@ -677,73 +677,6 @@
 
 ## Other Actions
 
-
-### Accept a review, changing its state to IN_REVIEW
-
-Accept a review, changing its state to IN_REVIEW.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/proposal-reviews/a1b2c3d4-e5f6-7890-abcd-ef1234567890/accept/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_reviews import proposal_reviews_accept # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = proposal_reviews_accept.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`proposal_reviews_accept`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_reviews/proposal_reviews_accept.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalReviewsAccept } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalReviewsAccept({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
 
 ### Reject a review, changing its state to REJECTED
 

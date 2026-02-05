@@ -10,7 +10,20 @@
 
 ### Get Celery worker statistics
 
-Provides a snapshot of the Celery workers' status, including active, scheduled, reserved, and revoked tasks, as well as worker-specific statistics. Requires support user permissions.
+Provides a comprehensive snapshot of all Celery workers' status.
+
+This endpoint returns detailed information about:
+- **active**: Tasks currently being executed by workers
+- **scheduled**: Tasks scheduled for future execution (with ETA)
+- **reserved**: Tasks received by workers but not yet started
+- **revoked**: Task IDs that have been cancelled/revoked
+- **query_task**: Results of task queries (if any)
+- **stats**: Detailed worker statistics including uptime, pool info, and broker connection
+
+Each field is a dictionary where keys are worker names (e.g., 'celery@hostname').
+If no workers are available, fields will be `null`.
+
+Requires support user permissions.
 
 
 === "HTTPie"
@@ -59,5 +72,13 @@ Provides a snapshot of the Celery workers' status, including active, scheduled, 
 
     **`200`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `active` | object (free-form) | Currently executing tasks per worker. Keys are worker names, values are lists of active tasks. |
+    | `scheduled` | object (free-form) | Tasks scheduled for future execution per worker. Keys are worker names, values are lists of scheduled tasks with ETA. |
+    | `reserved` | object (free-form) | Tasks that have been received but not yet started per worker. Keys are worker names, values are lists of reserved tasks. |
+    | `revoked` | object (free-form) | IDs of revoked (cancelled) tasks per worker. Keys are worker names, values are lists of task IDs. |
+    | `query_task` | object (free-form) | Query results for specific tasks. May be null if no query was performed. |
+    | `stats` | object (free-form) | Detailed statistics per worker including uptime, pool info, and resource usage. Keys are worker names. |
 
 ---

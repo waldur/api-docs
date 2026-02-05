@@ -15,6 +15,8 @@
 | <span class="http-badge http-delete">DELETE</span> | `/api/rancher-hpas/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/rancher-hpas/{uuid}/yaml/` | [Yaml](#yaml) |
+| <span class="http-badge http-post">POST</span> | `/api/rancher-hpas/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
+| <span class="http-badge http-post">POST</span> | `/api/rancher-hpas/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 | <span class="http-badge http-put">PUT</span> | `/api/rancher-hpas/{uuid}/yaml/` | [Yaml](#yaml) |
 
 ---
@@ -72,14 +74,14 @@
     | Name | Type | Description |
     |---|---|---|
     | `cluster_uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `namespace_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `project_uuid` | string (uuid) |  |
-    | `settings` | string |  |
-    | `settings_uuid` | string (uuid) |  |
+    | `settings` | string | Settings URL |
+    | `settings_uuid` | string (uuid) | Settings UUID |
     | `workload_uuid` | string (uuid) |  |
 
 
@@ -377,13 +379,19 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
 
 === "Responses"
 
-    **`202`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
     
     ---
     
-    **`409`** - No response body
+    **`409`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 
@@ -837,6 +845,159 @@ Delete resource from the database without scheduling operations on backend
     | `current_replicas` | integer |
     | `desired_replicas` | integer |
     | `metrics` | any |
+
+---
+
+### Mark resource as ERRED
+
+Manually transition the resource to ERRED state. This is useful for resources stuck in transitional states (CREATING, UPDATING, DELETING) that cannot be synced via pull. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/rancher-hpas/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_erred/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_erred_request import SetErredRequest # (1)
+    from waldur_api_client.api.rancher_hpas import rancher_hpas_set_erred # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetErredRequest()
+    response = rancher_hpas_set_erred.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetErredRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_erred_request.py)
+    2.  **API Source:** [`rancher_hpas_set_erred`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_hpas/rancher_hpas_set_erred.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { rancherHpasSetErred } from 'waldur-js-client';
+    
+    try {
+      const response = await rancherHpasSetErred({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
+
+### Mark resource as OK
+
+Manually transition the resource to OK state and clear error fields. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/rancher-hpas/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_ok/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.rancher_hpas import rancher_hpas_set_ok # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = rancher_hpas_set_ok.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`rancher_hpas_set_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_hpas/rancher_hpas_set_ok.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { rancherHpasSetOk } from 'waldur-js-client';
+    
+    try {
+      const response = await rancherHpasSetOk({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 

@@ -68,13 +68,13 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `email` | string |  |
+    | `customer` | string | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `email` | string | Email contains |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `state` | array |  |
-    | `username` | string |  |
+    | `state` | array | Service account state<br><br> |
+    | `username` | string | Username |
 
 
 === "Responses"

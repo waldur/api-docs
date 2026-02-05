@@ -77,6 +77,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `THUMBNAIL_SIZE` | string |
     | `ANONYMOUS_USER_CAN_VIEW_OFFERINGS` | boolean |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |
+    | `RESTRICTED_OFFERING_VISIBILITY_MODE` | string |
     | `NOTIFY_STAFF_ABOUT_APPROVALS` | boolean |
     | `NOTIFY_ABOUT_RESOURCE_CHANGE` | boolean |
     | `DISABLE_SENDING_NOTIFICATIONS_ABOUT_RESOURCE_UPDATE` | boolean |
@@ -120,6 +121,12 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SIDEBAR_STYLE` | string |
     | `SITE_LOGO` | string (uri) |
     | `LOGIN_LOGO` | string (uri) |
+    | `LOGIN_LOGO_MULTILINGUAL` | object (free-form) |
+    | `LOGIN_PAGE_LAYOUT` | string |
+    | `LOGIN_PAGE_VIDEO_URL` | string (uri) |
+    | `LOGIN_PAGE_STATS` | array of anys |
+    | `LOGIN_PAGE_CAROUSEL_SLIDES` | array of anys |
+    | `LOGIN_PAGE_NEWS` | array of anys |
     | `FAVICON` | string (uri) |
     | `OFFERING_LOGO_PLACEHOLDER` | string (uri) |
     | `WALDUR_SUPPORT_ENABLED` | boolean |
@@ -142,8 +149,6 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ATLASSIAN_CUSTOM_ISSUE_FIELD_MAPPING_ENABLED` | boolean |
     | `ATLASSIAN_DEFAULT_OFFERING_ISSUE_TYPE` | string |
     | `ATLASSIAN_EXCLUDED_ATTACHMENT_TYPES` | string |
-    | `ATLASSIAN_ISSUE_TYPES` | string |
-    | `ATLASSIAN_SUPPORT_TYPE_MAPPING` | string |
     | `ATLASSIAN_DESCRIPTION_TEMPLATE` | string |
     | `ATLASSIAN_SUMMARY_TEMPLATE` | string |
     | `ATLASSIAN_AFFECTED_RESOURCE_FIELD` | string |
@@ -181,6 +186,21 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND` | boolean |
     | `ENABLE_MOCK_COURSE_ACCOUNT_BACKEND` | boolean |
     | `PROPOSAL_REVIEW_DURATION` | integer |
+    | `ORCID_CLIENT_ID` | string |
+    | `ORCID_CLIENT_SECRET` | string |
+    | `ORCID_REDIRECT_URI` | string (uri) |
+    | `ORCID_API_URL` | string (uri) |
+    | `ORCID_AUTH_URL` | string (uri) |
+    | `ORCID_SANDBOX_MODE` | boolean |
+    | `SEMANTIC_SCHOLAR_API_KEY` | string |
+    | `CROSSREF_MAILTO` | string (email) |
+    | `REVIEWER_PROFILES_ENABLED` | boolean |
+    | `COI_DETECTION_ENABLED` | boolean |
+    | `COI_DISCLOSURE_REQUIRED` | boolean |
+    | `AUTOMATED_MATCHING_ENABLED` | boolean |
+    | `COI_COAUTHORSHIP_LOOKBACK_YEARS` | integer |
+    | `COI_COAUTHORSHIP_THRESHOLD_PAPERS` | integer |
+    | `COI_INSTITUTIONAL_LOOKBACK_YEARS` | integer |
     | `USER_TABLE_COLUMNS` | string |
     | `AUTO_APPROVE_USER_TOS` | boolean |
     | `FREEIPA_ENABLED` | boolean |
@@ -192,6 +212,10 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `FREEIPA_GROUPNAME_PREFIX` | string |
     | `FREEIPA_BLACKLISTED_USERNAMES` | array of strings |
     | `FREEIPA_GROUP_SYNCHRONIZATION_ENABLED` | boolean |
+    | `SCIM_MEMBERSHIP_SYNC_ENABLED` | boolean |
+    | `SCIM_API_URL` | string |
+    | `SCIM_API_KEY` | string |
+    | `SCIM_URN_NAMESPACE` | string |
     | `KEYCLOAK_ICON` | string (uri) |
     | `COUNTRIES` | array of strings |
     | `OIDC_AUTH_URL` | string |
@@ -203,11 +227,17 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `OIDC_ACCESS_TOKEN_ENABLED` | boolean |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |
+    | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |
+    | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of strings |
+    | `INVITATION_ALLOWED_FIELDS` | array of strings |
+    | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of strings |
+    | `MANDATORY_USER_ATTRIBUTES` | array of strings |
+    | `ENFORCE_MANDATORY_USER_ATTRIBUTES` | boolean |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_BEFORE_MINUTES` | integer |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of strings |
     | `ENFORCE_USER_CONSENT_FOR_OFFERINGS` | boolean |
     | `DISABLED_OFFERING_TYPES` | array of strings |
-    | `ONBOARDING_COUNTRY` | string |
+    | `ONBOARDING_VALIDATION_METHODS` | array of strings |
     | `ONBOARDING_VERIFICATION_EXPIRY_HOURS` | integer |
     | `ONBOARDING_ARIREGISTER_BASE_URL` | string (uri) |
     | `ONBOARDING_ARIREGISTER_USERNAME` | string |
@@ -219,6 +249,45 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ONBOARDING_BOLAGSVERKET_TOKEN_API_URL` | string (uri) |
     | `ONBOARDING_BOLAGSVERKET_CLIENT_ID` | string |
     | `ONBOARDING_BOLAGSVERKET_CLIENT_SECRET` | string |
+    | `ONBOARDING_BREG_API_URL` | string (uri) |
+    | `LLM_CHAT_ENABLED` | boolean |
+    | `LLM_INFERENCES_BACKEND_TYPE` | string |
+    | `LLM_INFERENCES_API_URL` | string (uri) |
+    | `LLM_INFERENCES_API_TOKEN` | string |
+    | `LLM_INFERENCES_MODEL` | string |
+    | `LLM_TOKEN_LIMIT_DAILY` | integer |
+    | `LLM_TOKEN_LIMIT_WEEKLY` | integer |
+    | `LLM_TOKEN_LIMIT_MONTHLY` | integer |
+    | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |
+    | `SOFTWARE_CATALOG_EESSI_VERSION` | string |
+    | `SOFTWARE_CATALOG_EESSI_API_URL` | string |
+    | `SOFTWARE_CATALOG_EESSI_INCLUDE_EXTENSIONS` | boolean |
+    | `SOFTWARE_CATALOG_SPACK_UPDATE_ENABLED` | boolean |
+    | `SOFTWARE_CATALOG_SPACK_VERSION` | string |
+    | `SOFTWARE_CATALOG_SPACK_DATA_URL` | string |
+    | `SOFTWARE_CATALOG_UPDATE_EXISTING_PACKAGES` | boolean |
+    | `SOFTWARE_CATALOG_CLEANUP_ENABLED` | boolean |
+    | `SOFTWARE_CATALOG_RETENTION_DAYS` | integer |
+    | `TABLE_GROWTH_MONITORING_ENABLED` | boolean |
+    | `TABLE_GROWTH_WEEKLY_THRESHOLD_PERCENT` | integer |
+    | `TABLE_GROWTH_MONTHLY_THRESHOLD_PERCENT` | integer |
+    | `TABLE_GROWTH_RETENTION_DAYS` | integer |
+    | `TABLE_GROWTH_MIN_SIZE_BYTES` | integer |
+    | `USER_ACTIONS_ENABLED` | boolean |
+    | `USER_ACTIONS_PENDING_ORDER_HOURS` | integer |
+    | `USER_ACTIONS_HIGH_URGENCY_NOTIFICATION` | boolean |
+    | `USER_ACTIONS_NOTIFICATION_THRESHOLD` | integer |
+    | `USER_ACTIONS_EXECUTION_RETENTION_DAYS` | integer |
+    | `USER_ACTIONS_DEFAULT_EXPIRATION_REMINDERS` | array of strings |
+    | `USER_DATA_ACCESS_LOGGING_ENABLED` | boolean |
+    | `USER_DATA_ACCESS_LOG_RETENTION_DAYS` | integer |
+    | `USER_DATA_ACCESS_LOG_SELF_ACCESS` | boolean |
+    | `ARROW_AUTO_RECONCILIATION` | boolean |
+    | `ARROW_SYNC_INTERVAL_HOURS` | integer |
+    | `ARROW_CONSUMPTION_SYNC_ENABLED` | boolean |
+    | `ARROW_CONSUMPTION_SYNC_INTERVAL_HOURS` | integer |
+    | `ARROW_BILLING_CHECK_INTERVAL_HOURS` | integer |
+    | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |
 
 ---
 
@@ -294,6 +363,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `THUMBNAIL_SIZE` | string |  |
     | `ANONYMOUS_USER_CAN_VIEW_OFFERINGS` | boolean |  |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |  |
+    | `RESTRICTED_OFFERING_VISIBILITY_MODE` | string |  |
     | `NOTIFY_STAFF_ABOUT_APPROVALS` | boolean |  |
     | `NOTIFY_ABOUT_RESOURCE_CHANGE` | boolean |  |
     | `DISABLE_SENDING_NOTIFICATIONS_ABOUT_RESOURCE_UPDATE` | boolean |  |
@@ -337,6 +407,12 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SIDEBAR_STYLE` | string |  |
     | `SITE_LOGO` | string (binary) |  |
     | `LOGIN_LOGO` | string (binary) |  |
+    | `LOGIN_LOGO_MULTILINGUAL` | object (free-form) |  |
+    | `LOGIN_PAGE_LAYOUT` | string |  |
+    | `LOGIN_PAGE_VIDEO_URL` | string (uri) |  |
+    | `LOGIN_PAGE_STATS` | array of anys |  |
+    | `LOGIN_PAGE_CAROUSEL_SLIDES` | array of anys |  |
+    | `LOGIN_PAGE_NEWS` | array of anys |  |
     | `FAVICON` | string (binary) |  |
     | `OFFERING_LOGO_PLACEHOLDER` | string (binary) |  |
     | `WALDUR_SUPPORT_ENABLED` | boolean |  |
@@ -359,8 +435,6 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ATLASSIAN_CUSTOM_ISSUE_FIELD_MAPPING_ENABLED` | boolean |  |
     | `ATLASSIAN_DEFAULT_OFFERING_ISSUE_TYPE` | string |  |
     | `ATLASSIAN_EXCLUDED_ATTACHMENT_TYPES` | string |  |
-    | `ATLASSIAN_ISSUE_TYPES` | string |  |
-    | `ATLASSIAN_SUPPORT_TYPE_MAPPING` | string |  |
     | `ATLASSIAN_DESCRIPTION_TEMPLATE` | string |  |
     | `ATLASSIAN_SUMMARY_TEMPLATE` | string |  |
     | `ATLASSIAN_AFFECTED_RESOURCE_FIELD` | string |  |
@@ -398,6 +472,21 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND` | boolean |  |
     | `ENABLE_MOCK_COURSE_ACCOUNT_BACKEND` | boolean |  |
     | `PROPOSAL_REVIEW_DURATION` | integer |  |
+    | `ORCID_CLIENT_ID` | string |  |
+    | `ORCID_CLIENT_SECRET` | string |  |
+    | `ORCID_REDIRECT_URI` | string (uri) |  |
+    | `ORCID_API_URL` | string (uri) |  |
+    | `ORCID_AUTH_URL` | string (uri) |  |
+    | `ORCID_SANDBOX_MODE` | boolean |  |
+    | `SEMANTIC_SCHOLAR_API_KEY` | string |  |
+    | `CROSSREF_MAILTO` | string (email) |  |
+    | `REVIEWER_PROFILES_ENABLED` | boolean |  |
+    | `COI_DETECTION_ENABLED` | boolean |  |
+    | `COI_DISCLOSURE_REQUIRED` | boolean |  |
+    | `AUTOMATED_MATCHING_ENABLED` | boolean |  |
+    | `COI_COAUTHORSHIP_LOOKBACK_YEARS` | integer |  |
+    | `COI_COAUTHORSHIP_THRESHOLD_PAPERS` | integer |  |
+    | `COI_INSTITUTIONAL_LOOKBACK_YEARS` | integer |  |
     | `USER_TABLE_COLUMNS` | string |  |
     | `AUTO_APPROVE_USER_TOS` | boolean |  |
     | `FREEIPA_ENABLED` | boolean |  |
@@ -409,6 +498,10 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `FREEIPA_GROUPNAME_PREFIX` | string |  |
     | `FREEIPA_BLACKLISTED_USERNAMES` | array of strings |  |
     | `FREEIPA_GROUP_SYNCHRONIZATION_ENABLED` | boolean |  |
+    | `SCIM_MEMBERSHIP_SYNC_ENABLED` | boolean |  |
+    | `SCIM_API_URL` | string |  |
+    | `SCIM_API_KEY` | string |  |
+    | `SCIM_URN_NAMESPACE` | string |  |
     | `KEYCLOAK_ICON` | string (binary) |  |
     | `COUNTRIES` | array of strings |  |
     | `OIDC_AUTH_URL` | string |  |
@@ -420,11 +513,17 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `OIDC_ACCESS_TOKEN_ENABLED` | boolean |  |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |  |
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |  |
+    | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |  |
+    | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of strings |  |
+    | `INVITATION_ALLOWED_FIELDS` | array of strings |  |
+    | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of strings |  |
+    | `MANDATORY_USER_ATTRIBUTES` | array of strings |  |
+    | `ENFORCE_MANDATORY_USER_ATTRIBUTES` | boolean |  |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_BEFORE_MINUTES` | integer |  |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of strings |  |
     | `ENFORCE_USER_CONSENT_FOR_OFFERINGS` | boolean |  |
     | `DISABLED_OFFERING_TYPES` | array of strings |  |
-    | `ONBOARDING_COUNTRY` | string |  |
+    | `ONBOARDING_VALIDATION_METHODS` | array of strings |  |
     | `ONBOARDING_VERIFICATION_EXPIRY_HOURS` | integer |  |
     | `ONBOARDING_ARIREGISTER_BASE_URL` | string (uri) |  |
     | `ONBOARDING_ARIREGISTER_USERNAME` | string |  |
@@ -436,6 +535,45 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ONBOARDING_BOLAGSVERKET_TOKEN_API_URL` | string (uri) |  |
     | `ONBOARDING_BOLAGSVERKET_CLIENT_ID` | string |  |
     | `ONBOARDING_BOLAGSVERKET_CLIENT_SECRET` | string |  |
+    | `ONBOARDING_BREG_API_URL` | string (uri) |  |
+    | `LLM_CHAT_ENABLED` | boolean |  |
+    | `LLM_INFERENCES_BACKEND_TYPE` | string |  |
+    | `LLM_INFERENCES_API_URL` | string (uri) |  |
+    | `LLM_INFERENCES_API_TOKEN` | string |  |
+    | `LLM_INFERENCES_MODEL` | string |  |
+    | `LLM_TOKEN_LIMIT_DAILY` | integer |  |
+    | `LLM_TOKEN_LIMIT_WEEKLY` | integer |  |
+    | `LLM_TOKEN_LIMIT_MONTHLY` | integer |  |
+    | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |  |
+    | `SOFTWARE_CATALOG_EESSI_VERSION` | string |  |
+    | `SOFTWARE_CATALOG_EESSI_API_URL` | string |  |
+    | `SOFTWARE_CATALOG_EESSI_INCLUDE_EXTENSIONS` | boolean |  |
+    | `SOFTWARE_CATALOG_SPACK_UPDATE_ENABLED` | boolean |  |
+    | `SOFTWARE_CATALOG_SPACK_VERSION` | string |  |
+    | `SOFTWARE_CATALOG_SPACK_DATA_URL` | string |  |
+    | `SOFTWARE_CATALOG_UPDATE_EXISTING_PACKAGES` | boolean |  |
+    | `SOFTWARE_CATALOG_CLEANUP_ENABLED` | boolean |  |
+    | `SOFTWARE_CATALOG_RETENTION_DAYS` | integer |  |
+    | `TABLE_GROWTH_MONITORING_ENABLED` | boolean |  |
+    | `TABLE_GROWTH_WEEKLY_THRESHOLD_PERCENT` | integer |  |
+    | `TABLE_GROWTH_MONTHLY_THRESHOLD_PERCENT` | integer |  |
+    | `TABLE_GROWTH_RETENTION_DAYS` | integer |  |
+    | `TABLE_GROWTH_MIN_SIZE_BYTES` | integer |  |
+    | `USER_ACTIONS_ENABLED` | boolean |  |
+    | `USER_ACTIONS_PENDING_ORDER_HOURS` | integer |  |
+    | `USER_ACTIONS_HIGH_URGENCY_NOTIFICATION` | boolean |  |
+    | `USER_ACTIONS_NOTIFICATION_THRESHOLD` | integer |  |
+    | `USER_ACTIONS_EXECUTION_RETENTION_DAYS` | integer |  |
+    | `USER_ACTIONS_DEFAULT_EXPIRATION_REMINDERS` | array of strings |  |
+    | `USER_DATA_ACCESS_LOGGING_ENABLED` | boolean |  |
+    | `USER_DATA_ACCESS_LOG_RETENTION_DAYS` | integer |  |
+    | `USER_DATA_ACCESS_LOG_SELF_ACCESS` | boolean |  |
+    | `ARROW_AUTO_RECONCILIATION` | boolean |  |
+    | `ARROW_SYNC_INTERVAL_HOURS` | integer |  |
+    | `ARROW_CONSUMPTION_SYNC_ENABLED` | boolean |  |
+    | `ARROW_CONSUMPTION_SYNC_INTERVAL_HOURS` | integer |  |
+    | `ARROW_BILLING_CHECK_INTERVAL_HOURS` | integer |  |
+    | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |  |
 
 
 === "Responses"

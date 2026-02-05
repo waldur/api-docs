@@ -60,8 +60,8 @@
     | Name | Type | Description |
     |---|---|---|
     | `distribution` | string |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |

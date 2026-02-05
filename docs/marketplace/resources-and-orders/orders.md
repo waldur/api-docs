@@ -25,6 +25,9 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-orders/{uuid}/update_attachment/` | [Update order attachment](#update-order-attachment) |
 | **Data & Reporting** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-orders/{uuid}/offering/` | [Get offering details](#get-offering-details) |
+| **Other Actions** | | |
+| <span class="http-badge http-put">PUT</span> | `/api/marketplace-orders/{uuid}/` | [Update](#update) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-orders/{uuid}/` | [Partial Update](#partial-update) |
 
 ---
 ## Core CRUD
@@ -82,29 +85,30 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
 
     | Name | Type | Description |
     |---|---|---|
-    | `can_approve_as_consumer` | boolean |  |
-    | `can_approve_as_provider` | boolean |  |
-    | `category_uuid` | string (uuid) |  |
+    | `can_approve_as_consumer` | boolean | Can approve as consumer |
+    | `can_approve_as_provider` | boolean | Can approve as provider |
+    | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer_uuid` | string (uuid) |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
     | `field` | array |  |
     | `modified` | string (date-time) | Modified after |
     | `o` | array | Ordering<br><br> |
     | `offering` | string |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
-    | `offering_type` | array |  |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | array | Offering type |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_offering_uuid` | string (uuid) |  |
-    | `project_uuid` | string (uuid) |  |
-    | `provider_uuid` | string (uuid) |  |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by order UUID, slug, project name or resource name |
-    | `resource` | string |  |
-    | `resource_uuid` | string (uuid) |  |
-    | `service_manager_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `type` | array |  |
+    | `resource` | string | Resource URL |
+    | `resource_name` | string | Resource name |
+    | `resource_uuid` | string (uuid) | Resource UUID |
+    | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `state` | array | Order state<br><br> |
+    | `type` | array | Order type<br><br> |
 
 
 === "Responses"
@@ -156,6 +160,7 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `attachment` | string (uri) |  |
     | `type` | any |  |
     | `start_date` | string (date) | Enables delayed processing of resource provisioning order. |
+    | `slug` | string |  |
     | `url` | string (uri) |  |
     | `consumer_reviewed_by` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `consumer_reviewed_by_full_name` | string |  |
@@ -179,13 +184,14 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | string (decimal) |  |
+    | `old_cost_estimate` | number (double) |  |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
     | `activation_price` | number (double) |  |
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
+    | `order_subtype` | string |  |
     | `issue` | any |  |
 
 ---
@@ -304,6 +310,7 @@ Returns the details of a specific order.
     | `attachment` | string (uri) |  |
     | `type` | any |  |
     | `start_date` | string (date) | Enables delayed processing of resource provisioning order. |
+    | `slug` | string |  |
     | `url` | string (uri) |  |
     | `consumer_reviewed_by` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `consumer_reviewed_by_full_name` | string |  |
@@ -327,13 +334,14 @@ Returns the details of a specific order.
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | string (decimal) |  |
+    | `old_cost_estimate` | number (double) |  |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
     | `activation_price` | number (double) |  |
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
+    | `order_subtype` | string |  |
     | `issue` | any |  |
 
 ---
@@ -414,6 +422,7 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `request_comment` | string |  |  |
     | `type` | any |  | <br>_Constraints: default: `Create`_ |
     | `start_date` | string (date) |  | Enables delayed processing of resource provisioning order. |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `project` | string (uri) | ✓ |  |
 
 
@@ -464,6 +473,7 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `attachment` | string (uri) |  |
     | `type` | any |  |
     | `start_date` | string (date) | Enables delayed processing of resource provisioning order. |
+    | `slug` | string |  |
     | `url` | string (uri) |  |
     | `consumer_reviewed_by` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `consumer_reviewed_by_full_name` | string |  |
@@ -487,13 +497,14 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | string (decimal) |  |
+    | `old_cost_estimate` | number (double) |  |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
     | `activation_price` | number (double) |  |
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
+    | `order_subtype` | string |  |
     | `issue` | any |  |
 
 ---
@@ -859,21 +870,26 @@ Rejects a pending order from the consumer's side. This moves the order to the 'r
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_orders import marketplace_orders_reject_by_consumer # (1)
+    from waldur_api_client.models.order_error_details_request import OrderErrorDetailsRequest # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_reject_by_consumer # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
+    
+    body_data = OrderErrorDetailsRequest()
     response = marketplace_orders_reject_by_consumer.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
+        client=client,
+        body=body_data
     )
     
     print(response)
     ```
     
     
-    1.  **API Source:** [`marketplace_orders_reject_by_consumer`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_reject_by_consumer.py)
+    1.  **Model Source:** [`OrderErrorDetailsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_error_details_request.py)
+    2.  **API Source:** [`marketplace_orders_reject_by_consumer`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_reject_by_consumer.py)
 
 === "TypeScript"
 
@@ -899,6 +915,14 @@ Rejects a pending order from the consumer's side. This moves the order to the 'r
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
 
 
 === "Responses"
@@ -1060,14 +1084,14 @@ Used by external agents to report a failure during order processing. An error me
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.order_set_state_erred_request import OrderSetStateErredRequest # (1)
+    from waldur_api_client.models.order_error_details_request import OrderErrorDetailsRequest # (1)
     from waldur_api_client.api.marketplace_orders import marketplace_orders_set_state_erred # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = OrderSetStateErredRequest()
+    body_data = OrderErrorDetailsRequest()
     response = marketplace_orders_set_state_erred.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -1078,7 +1102,7 @@ Used by external agents to report a failure during order processing. An error me
     ```
     
     
-    1.  **Model Source:** [`OrderSetStateErredRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_set_state_erred_request.py)
+    1.  **Model Source:** [`OrderErrorDetailsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_error_details_request.py)
     2.  **API Source:** [`marketplace_orders_set_state_erred`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_set_state_erred.py)
 
 === "TypeScript"
@@ -1502,7 +1526,7 @@ Returns details of the offering connected to the requested object.
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
@@ -1510,7 +1534,7 @@ Returns details of the offering connected to the requested object.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | object |  |
@@ -1611,10 +1635,10 @@ Returns details of the offering connected to the requested object.
     | `plans.organization_groups.uuid` | string (uuid) |  |
     | `plans.organization_groups.url` | string (uri) |  |
     | `plans.organization_groups.name` | string |  |
-    | `plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `plans.organization_groups.parent_name` | string |  |
+    | `plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `plans.organization_groups.parent` | string (uri) |  |
-    | `plans.organization_groups.customers_count` | integer |  |
+    | `plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1658,16 +1682,19 @@ Returns details of the offering connected to the requested object.
     | `citation_count` | integer | Number of citations of a DOI |
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `tags` | array of objects |  |
+    | `tags.uuid` | string (uuid) |  |
+    | `tags.name` | string |  |
     | `image` | string (uri) |  |
     | `total_customers` | integer |  |
     | `total_cost` | integer |  |
@@ -1677,8 +1704,10 @@ Returns details of the offering connected to the requested object.
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
+    | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
+    | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
     | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
@@ -1692,5 +1721,176 @@ Returns details of the offering connected to the requested object.
     | `promotion_campaigns.description` | string |  |
     | `promotion_campaigns.months` | integer | How many months in a row should the related service (when activated) get special deal (0 for indefinitely until active) |
     | `promotion_campaigns.service_provider` | string (uri) |  |
+
+---
+
+## Other Actions
+
+
+### Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/marketplace-orders/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.order_update_request import OrderUpdateRequest # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OrderUpdateRequest()
+    response = marketplace_orders_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OrderUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_update_request.py)
+    2.  **API Source:** [`marketplace_orders_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceOrdersUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceOrdersUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `limits` | object (free-form) |  |  |
+    | `attributes` | any |  |  |
+    | `start_date` | string (date) |  | Enables delayed processing of resource provisioning order. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `limits` | object (free-form) |  |
+    | `attributes` | any |  |
+    | `start_date` | string (date) | Enables delayed processing of resource provisioning order. |
+
+---
+
+### Partial Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/marketplace-orders/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_order_update_request import PatchedOrderUpdateRequest # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedOrderUpdateRequest()
+    response = marketplace_orders_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedOrderUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_order_update_request.py)
+    2.  **API Source:** [`marketplace_orders_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceOrdersPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceOrdersPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `limits` | object (free-form) |  |  |
+    | `attributes` | any |  |  |
+    | `start_date` | string (date) |  | Enables delayed processing of resource provisioning order. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `limits` | object (free-form) |  |
+    | `attributes` | any |  |
+    | `start_date` | string (date) | Enables delayed processing of resource provisioning order. |
 
 ---

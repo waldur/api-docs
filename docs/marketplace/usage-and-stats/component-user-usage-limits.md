@@ -65,13 +65,13 @@ Returns a paginated list of usage limits set for specific users on resource comp
 
     | Name | Type | Description |
     |---|---|---|
-    | `component_type` | string |  |
-    | `offering_uuid` | string (uuid) |  |
+    | `component_type` | string | Component type |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `resource` | string | Resource URL |
-    | `resource_uuid` | string (uuid) |  |
-    | `username` | string |  |
+    | `resource_uuid` | string (uuid) | Resource UUID |
+    | `username` | string | Username |
 
 
 === "Responses"

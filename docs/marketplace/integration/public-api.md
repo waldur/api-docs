@@ -80,11 +80,11 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `customer` | string (uuid) | ✓ |
-    | `data` | string | ✓ |
-    | `dry_run` | boolean |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `customer` | string (uuid) | ✓ | Service provider customer UUID |
+    | `data` | string | ✓ | JWT-encoded data signed with the service provider's API secret code |
+    | `dry_run` | boolean |  | If true, validates the signature without executing the operation<br>_Constraints: default: `False`_ |
 
 
 === "Responses"
@@ -165,11 +165,11 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `customer` | string (uuid) | ✓ |
-    | `data` | string | ✓ |
-    | `dry_run` | boolean |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `customer` | string (uuid) | ✓ | Service provider customer UUID |
+    | `data` | string | ✓ | JWT-encoded data signed with the service provider's API secret code |
+    | `dry_run` | boolean |  | If true, validates the signature without executing the operation<br>_Constraints: default: `False`_ |
 
 
 === "Responses"

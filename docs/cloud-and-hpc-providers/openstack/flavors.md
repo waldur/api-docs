@@ -73,20 +73,20 @@ Get a list of available VM instance flavors.
     | `disk__gte` | integer |  |
     | `disk__lte` | integer |  |
     | `field` | array |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
-    | `name_iregex` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `name_iregex` | string | Name (regex) |
     | `o` | array | Ordering<br><br> |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `ram` | integer |  |
     | `ram__gte` | integer |  |
     | `ram__lte` | integer |  |
-    | `settings` | string |  |
-    | `settings_uuid` | string (uuid) |  |
-    | `tenant` | string |  |
-    | `tenant_uuid` | string (uuid) |  |
+    | `settings` | string | Settings URL |
+    | `settings_uuid` | string (uuid) | Settings UUID |
+    | `tenant` | string | Tenant URL |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
 
 
 === "Responses"

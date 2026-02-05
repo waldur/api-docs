@@ -75,16 +75,16 @@ Returns a paginated list of robot accounts accessible to the current user.
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
-    | `customer_uuid` | string (uuid) |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
     | `field` | array |  |
     | `modified` | string (date-time) | Modified after |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project_uuid` | string (uuid) |  |
-    | `provider_uuid` | string (uuid) |  |
-    | `resource` | string |  |
-    | `resource_uuid` | string (uuid) |  |
-    | `state` | integer | _Enum: `1`, `2`, `3`, `4`, `5`, `6`_ |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `provider_uuid` | string (uuid) | Provider UUID |
+    | `resource` | string | Resource URL |
+    | `resource_uuid` | string (uuid) | Resource UUID |
+    | `state` | integer | Robot account state<br><br><br>_Enum: `1`, `2`, `3`, `4`, `5`, `6`_ |
     | `type` | string |  |
 
 
@@ -118,9 +118,9 @@ Returns a paginated list of robot accounts accessible to the current user.
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | any |  |
     | `user_keys` | array of objects |  |
     | `user_keys.url` | string (uri) |  |
@@ -240,9 +240,9 @@ Returns the details of a specific robot account.
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | any |  |
     | `user_keys` | array of objects |  |
     | `user_keys.url` | string (uri) |  |
@@ -364,9 +364,9 @@ Creates a new robot account for a specific resource. This is typically used for 
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | string (uri) |  |
 
 ---
@@ -479,9 +479,9 @@ Updates the properties of a robot account, such as its username or associated us
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | string (uri) |  |
 
 ---
@@ -585,9 +585,9 @@ Partially updates the properties of a robot account. Not allowed for synchronize
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | string (uri) |  |
 
 ---
@@ -750,9 +750,9 @@ Transitions the robot account state from 'Requested' to 'Creating'. This is typi
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | any |  |
     | `user_keys` | array of objects |  |
     | `user_keys.url` | string (uri) |  |
@@ -873,9 +873,9 @@ Transitions the robot account state from 'Requested deletion' to 'Deleted', mark
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | any |  |
     | `user_keys` | array of objects |  |
     | `user_keys.url` | string (uri) |  |
@@ -1008,9 +1008,9 @@ Manually moves the robot account into the 'Error' state. An optional error messa
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | any |  |
     | `user_keys` | array of objects |  |
     | `user_keys.url` | string (uri) |  |
@@ -1131,9 +1131,9 @@ Manually sets the robot account state to 'OK', indicating that it is fully opera
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | any |  |
     | `user_keys` | array of objects |  |
     | `user_keys.url` | string (uri) |  |
@@ -1254,9 +1254,9 @@ Transitions the robot account state from 'OK' to 'Requested deletion', initiatin
     | `keys` | any |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
-    | `fingerprints.md5` | string |  |
-    | `fingerprints.sha256` | string |  |
-    | `fingerprints.sha512` | string |  |
+    | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
+    | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
+    | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | any |  |
     | `user_keys` | array of objects |  |
     | `user_keys.url` | string (uri) |  |

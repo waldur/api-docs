@@ -28,6 +28,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/add_user/` | [Grant a role to a user](#grant-a-role-to-a-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/` | [Create a service provider](#create-a-service-provider) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/delete_user/` | [Revoke a role from a user](#revoke-a-role-from-a-user) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/generate_site_agent_config/` | [Generate site agent configuration](#generate-site-agent-configuration) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/set_offerings_username/` | [Set offering username for a user](#set-offering-username-for-a-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/update_user/` | [Update a user's role expiration](#update-a-users-role-expiration) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/api_secret_code/` | [Generate new service provider API secret code](#generate-new-service-provider-api-secret-code) |
@@ -107,17 +108,17 @@ Returns a paginated list of course project accounts that have access to resource
 
     | Name | Type | Description |
     |---|---|---|
-    | `email` | string |  |
+    | `email` | string | Email contains |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project_end_date_after` | string (date) |  |
-    | `project_end_date_before` | string (date) |  |
-    | `project_start_date_after` | string (date) |  |
-    | `project_start_date_before` | string (date) |  |
-    | `project_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `username` | string |  |
+    | `project_end_date_after` | string (date) | Project end date range |
+    | `project_end_date_before` | string (date) | Project end date range |
+    | `project_start_date_after` | string (date) | Project start date range |
+    | `project_start_date_before` | string (date) | Project start date range |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `state` | array | Course account state<br><br> |
+    | `username` | string | Username |
 
 
 === "Responses"
@@ -226,21 +227,21 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `conceal_finished_projects` | boolean |  | Conceal finished projects |
     | `created` | string (date-time) |  | Created after |
     | `customer` | array |  | Multiple values may be separated by commas. |
-    | `customer_abbreviation` | string |  |  |
-    | `customer_name` | string |  |  |
-    | `customer_native_name` | string |  |  |
-    | `description` | string |  |  |
+    | `customer_abbreviation` | string |  | Customer abbreviation |
+    | `customer_name` | string |  | Customer name |
+    | `customer_native_name` | string |  | Customer native name |
+    | `description` | string |  | Description |
     | `field` | array |  |  |
-    | `is_removed` | boolean |  |  |
+    | `is_removed` | boolean |  | Is removed |
     | `modified` | string (date-time) |  | Modified after |
-    | `name` | string |  |  |
-    | `name_exact` | string |  |  |
+    | `name` | string |  | Name |
+    | `name_exact` | string |  | Name (exact) |
     | `o` | array |  | Ordering<br><br> |
     | `page` | integer |  | A page number within the paginated result set. |
     | `page_size` | integer |  | Number of results to return per page. |
     | `project_customer_uuid` | string (uuid) | ✓ | UUID of the customer to filter projects by. |
     | `query` | string |  | Filter by name, slug, UUID, backend ID or resource effective ID |
-    | `slug` | string |  |  |
+    | `slug` | string |  | Slug |
 
 
 === "Responses"
@@ -326,17 +327,18 @@ Returns a paginated list of customers who have consumed resources from the speci
 
     | Name | Type | Description |
     |---|---|---|
-    | `abbreviation` | string |  |
+    | `abbreviation` | string | Abbreviation |
     | `agreement_number` | string |  |
     | `archived` | boolean |  |
     | `backend_id` | string |  |
-    | `contact_details` | string |  |
+    | `contact_details` | string | Contact details |
+    | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
     | `field` | array |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
-    | `native_name` | string |  |
-    | `organization_group_name` | string |  |
-    | `organization_group_uuid` | array | organization_group_uuid |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `native_name` | string | Native name |
+    | `organization_group_name` | string | Organization group name |
+    | `organization_group_uuid` | array | Organization group UUID |
     | `owned_by_current_user` | boolean | Return a list of customers where current user is owner. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -458,13 +460,13 @@ Returns a paginated list of SSH public keys for all users who have consumed reso
     | `fingerprint_sha512` | string |  |
     | `is_shared` | boolean |  |
     | `modified` | string (date-time) | Modified after |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `user_uuid` | string (uuid) |  |
-    | `uuid` | string (uuid) |  |
+    | `user_uuid` | string (uuid) | User UUID |
+    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"
@@ -540,9 +542,9 @@ Returns a paginated list of service providers.
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
-    | `customer_keyword` | string |  |
-    | `customer_uuid` | string (uuid) |  |
+    | `customer` | string | Customer URL |
+    | `customer_keyword` | string | Customer keyword (name, abbreviation or native name) |
+    | `customer_uuid` | string (uuid) | Customer UUID |
     | `field` | array |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
@@ -555,31 +557,31 @@ Returns a paginated list of service providers.
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `enable_notifications` | boolean |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_image` | string (uri) |
-    | `customer_abbreviation` | string |
-    | `customer_slug` | string |
-    | `customer_native_name` | string |
-    | `customer_country` | string |
-    | `image` | string (uri) |
-    | `organization_groups` | array of objects |
-    | `organization_groups.uuid` | string (uuid) |
-    | `organization_groups.url` | string (uri) |
-    | `organization_groups.name` | string |
-    | `organization_groups.parent_uuid` | string (uuid) |
-    | `organization_groups.parent_name` | string |
-    | `organization_groups.parent` | string (uri) |
-    | `organization_groups.customers_count` | integer |
-    | `offering_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
 
 ---
 
@@ -752,36 +754,40 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     |---|---|---|
     | `accessible_via_calls` | boolean | Accessible via calls |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
-    | `attributes` | string |  |
-    | `billable` | boolean |  |
+    | `attributes` | string | Offering attributes (JSON) |
+    | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
-    | `category_group_uuid` | string (uuid) |  |
-    | `category_uuid` | string (uuid) |  |
+    | `category_group_uuid` | string (uuid) | Category group UUID |
+    | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
+    | `customer` | string | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description contains |
     | `field` | array |  |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array |  |
+    | `organization_group_uuid` | array | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `parent_uuid` | string (uuid) |  |
+    | `parent_uuid` | string (uuid) | Parent offering UUID |
     | `project_uuid` | string (uuid) | Project UUID |
     | `query` | string | Search by offering name, slug or description |
     | `resource_customer_uuid` | string (uuid) | Resource customer UUID |
     | `resource_project_uuid` | string (uuid) | Resource project UUID |
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
-    | `shared` | boolean |  |
-    | `state` | array |  |
-    | `type` | array |  |
+    | `shared` | boolean | Shared |
+    | `state` | array | Offering state<br><br> |
+    | `tag` | array | Tag UUID (OR logic) |
+    | `tag_name` | array | Tag name (OR logic) |
+    | `tag_names_and` | string | Tag names with AND logic (comma-separated) |
+    | `tags_and` | string | Tag UUIDs with AND logic (comma-separated) |
+    | `type` | array | Offering type |
     | `user_has_consent` | boolean | User Has Consent |
     | `user_has_offering_user` | boolean | User Has Offering User |
     | `uuid_list` | string | Comma-separated offering UUIDs |
@@ -798,7 +804,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `category_title` | string |  |
     | `type` | string |  |
     | `state` | any |  |
@@ -844,10 +850,10 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `plans.organization_groups.uuid` | string (uuid) |  |
     | `plans.organization_groups.url` | string (uri) |  |
     | `plans.organization_groups.name` | string |  |
-    | `plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `plans.organization_groups.parent_name` | string |  |
+    | `plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `plans.organization_groups.parent` | string (uri) |  |
-    | `plans.organization_groups.customers_count` | integer |  |
+    | `plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1056,13 +1062,13 @@ Returns a paginated list of project service accounts that have access to resourc
 
     | Name | Type | Description |
     |---|---|---|
-    | `email` | string |  |
+    | `email` | string | Email contains |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `username` | string |  |
+    | `project` | string | Project URL |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `state` | array | Service account state<br><br> |
+    | `username` | string | Username |
 
 
 === "Responses"
@@ -1166,20 +1172,20 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
     | `customer` | array | Multiple values may be separated by commas. |
-    | `customer_abbreviation` | string |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `description` | string |  |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `description` | string | Description |
     | `field` | array |  |
-    | `is_removed` | boolean |  |
+    | `is_removed` | boolean | Is removed |
     | `modified` | string (date-time) | Modified after |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, slug, UUID, backend ID or resource effective ID |
-    | `slug` | string |  |
+    | `slug` | string | Slug |
 
 
 === "Responses"
@@ -1193,34 +1199,37 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `customer_slug` | string |  |
     | `customer_native_name` | string |  |
     | `customer_abbreviation` | string |  |
-    | `description` | string |  |
+    | `description` | string | Project description (HTML content will be sanitized) |
     | `customer_display_billing_info_in_projects` | boolean |  |
     | `created` | string (date-time) |  |
     | `type` | string (uri) |  |
     | `type_name` | string |  |
     | `type_uuid` | string (uuid) |  |
     | `backend_id` | string |  |
-    | `start_date` | string (date) |  |
-    | `end_date` | string (date) |  |
+    | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
     | `oecd_fos_2007_code` | any |  |
-    | `oecd_fos_2007_label` | string |  |
+    | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
-    | `resources_count` | integer |  |
+    | `resources_count` | integer | Number of active resources in this project |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any |  |
-    | `staff_notes` | string |  |
+    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -1298,31 +1307,31 @@ Returns details of a specific service provider.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `enable_notifications` | boolean |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_image` | string (uri) |
-    | `customer_abbreviation` | string |
-    | `customer_slug` | string |
-    | `customer_native_name` | string |
-    | `customer_country` | string |
-    | `image` | string (uri) |
-    | `organization_groups` | array of objects |
-    | `organization_groups.uuid` | string (uuid) |
-    | `organization_groups.url` | string (uri) |
-    | `organization_groups.name` | string |
-    | `organization_groups.parent_uuid` | string (uuid) |
-    | `organization_groups.parent_name` | string |
-    | `organization_groups.parent` | string (uri) |
-    | `organization_groups.customers_count` | integer |
-    | `offering_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
 
 ---
 
@@ -1401,11 +1410,11 @@ Returns monthly revenue data for the last year for the service provider.
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `total` | integer |
-    | `year` | integer |
-    | `month` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `total` | integer | Total revenue amount |
+    | `year` | integer | Invoice year |
+    | `month` | integer | Invoice month |
 
 ---
 
@@ -1485,10 +1494,10 @@ Returns a paginated list of customers who have robot accounts for resources mana
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string | Name of the entity |
+    | `uuid` | string (uuid) | UUID of the entity |
 
 ---
 
@@ -1568,10 +1577,10 @@ Returns a paginated list of projects which have robot accounts for resources man
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string | Name of the entity |
+    | `uuid` | string (uuid) | UUID of the entity |
 
 ---
 
@@ -1639,17 +1648,17 @@ Returns various statistics for the service provider, such as number of active ca
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `active_campaigns` | integer |
-    | `current_customers` | integer |
-    | `customers_number_change` | integer |
-    | `active_resources` | integer |
-    | `resources_number_change` | integer |
-    | `active_and_paused_offerings` | integer |
-    | `unresolved_tickets` | integer |
-    | `pending_orders` | integer |
-    | `erred_resources` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `active_campaigns` | integer | Number of active campaigns |
+    | `current_customers` | integer | Number of current customers |
+    | `customers_number_change` | integer | Change in number of customers |
+    | `active_resources` | integer | Number of active resources |
+    | `resources_number_change` | integer | Change in number of resources |
+    | `active_and_paused_offerings` | integer | Number of active and paused offerings |
+    | `unresolved_tickets` | integer | Number of unresolved support tickets |
+    | `pending_orders` | integer | Number of pending orders |
+    | `erred_resources` | integer | Number of resources in error state |
 
 ---
 
@@ -1729,17 +1738,18 @@ Returns a paginated list of customers that a specified user has access to within
 
     | Name | Type | Required | Description |
     |---|---|---|---|
-    | `abbreviation` | string |  |  |
+    | `abbreviation` | string |  | Abbreviation |
     | `agreement_number` | string |  |  |
     | `archived` | boolean |  |  |
     | `backend_id` | string |  |  |
-    | `contact_details` | string |  |  |
+    | `contact_details` | string |  | Contact details |
+    | `current_user_has_project_create_permission` | boolean |  | Return a list of customers where current user has project create permission. |
     | `field` | array |  |  |
-    | `name` | string |  |  |
-    | `name_exact` | string |  |  |
-    | `native_name` | string |  |  |
-    | `organization_group_name` | string |  |  |
-    | `organization_group_uuid` | array |  | organization_group_uuid |
+    | `name` | string |  | Name |
+    | `name_exact` | string |  | Name (exact) |
+    | `native_name` | string |  | Native name |
+    | `organization_group_name` | string |  | Organization group name |
+    | `organization_group_uuid` | array |  | Organization group UUID |
     | `owned_by_current_user` | boolean |  | Return a list of customers where current user is owner. |
     | `page` | integer |  | A page number within the paginated result set. |
     | `page_size` | integer |  | Number of results to return per page. |
@@ -1857,30 +1867,30 @@ Returns a paginated list of all users who have consumed resources from the speci
     |---|---|---|
     | `agreement_date` | string (date-time) | Agreement date after |
     | `civil_number` | string |  |
-    | `customer_uuid` | string (uuid) |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
     | `date_joined` | string (date-time) | Date joined after |
     | `description` | string |  |
-    | `email` | string |  |
+    | `email` | string | Email |
     | `field` | array |  |
     | `full_name` | string | Full name |
-    | `is_active` | boolean |  |
-    | `is_staff` | boolean |  |
-    | `is_support` | boolean |  |
-    | `job_title` | string |  |
+    | `is_active` | boolean | Is active |
+    | `is_staff` | boolean | Is staff |
+    | `is_support` | boolean | Is support |
+    | `job_title` | string | Job title |
     | `modified` | string (date-time) | Date modified after |
-    | `native_name` | string |  |
+    | `native_name` | string | Native name |
     | `o` | array | Ordering<br><br> |
-    | `organization` | string |  |
+    | `organization` | string | Organization |
     | `organization_roles` | string | Organization roles |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `phone_number` | string |  |
     | `project_roles` | string | Project roles |
-    | `project_uuid` | string (uuid) |  |
+    | `project_uuid` | string (uuid) | Project UUID |
     | `query` | string | Filter by first name, last name, civil number, username or email |
     | `registration_method` | string |  |
     | `user_keyword` | string | User keyword |
-    | `username` | string |  |
+    | `username` | string | Username (exact) |
     | `username_list` | string | Comma-separated usernames |
 
 
@@ -1971,9 +1981,9 @@ Returns the API secret code for a service provider. Requires service provider ow
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `api_secret_code` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `api_secret_code` | string | API secret code for authenticating service provider requests |
 
 ---
 
@@ -2058,7 +2068,6 @@ Returns a summary of all compliance checklists used by this service provider wit
     | `checklist_name` | string |
     | `questions_count` | integer |
     | `offerings_count` | integer |
-    | `category_name` | string |
 
 ---
 
@@ -2415,31 +2424,31 @@ Creates a new service provider profile for a customer.
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `enable_notifications` | boolean |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_image` | string (uri) |
-    | `customer_abbreviation` | string |
-    | `customer_slug` | string |
-    | `customer_native_name` | string |
-    | `customer_country` | string |
-    | `image` | string (uri) |
-    | `organization_groups` | array of objects |
-    | `organization_groups.uuid` | string (uuid) |
-    | `organization_groups.url` | string (uri) |
-    | `organization_groups.name` | string |
-    | `organization_groups.parent_uuid` | string (uuid) |
-    | `organization_groups.parent_name` | string |
-    | `organization_groups.parent` | string (uri) |
-    | `organization_groups.customers_count` | integer |
-    | `offering_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
 
 ---
 
@@ -2533,6 +2542,94 @@ Removes a specific role from a user within the current scope. This effectively r
 
 ---
 
+### Generate site agent configuration
+
+Generates a YAML configuration file for waldur-site-agent based on selected SLURM offerings. The configuration includes offering details, components, backend settings, and optionally SLURM periodic usage policy settings. Secrets are shown as placeholders that need to be filled in.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-service-providers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/generate_site_agent_config/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      offering_uuids:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.site_agent_config_generation_request import SiteAgentConfigGenerationRequest # (1)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_generate_site_agent_config # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SiteAgentConfigGenerationRequest(
+        offering_uuids=[]
+    )
+    response = marketplace_service_providers_generate_site_agent_config.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SiteAgentConfigGenerationRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/site_agent_config_generation_request.py)
+    2.  **API Source:** [`marketplace_service_providers_generate_site_agent_config`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_generate_site_agent_config.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceServiceProvidersGenerateSiteAgentConfig } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceServiceProvidersGenerateSiteAgentConfig({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "offering_uuids": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `offering_uuids` | array of string (uuid)s | ✓ | List of SLURM offering UUIDs to include in configuration |
+    | `include_policy_settings` | boolean |  | Include SLURM periodic usage policy settings in configuration<br>_Constraints: default: `True`_ |
+    | `waldur_api_url` | string (uri) |  | Waldur API URL (defaults to current server URL) |
+    | `timezone` | string |  | Timezone for the site agent<br>_Constraints: default: `UTC`_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+
+---
+
 ### Set offering username for a user
 
 Sets or updates the offering-specific username for a user across all offerings managed by the service provider that the user has access to.
@@ -2609,10 +2706,10 @@ Sets or updates the offering-specific username for a user across all offerings m
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `user_uuid` | string (uuid) | ✓ |
-    | `username` | string | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `user_uuid` | string (uuid) | ✓ | UUID of the user |
+    | `username` | string | ✓ | Username for offering access |
 
 
 === "Responses"
@@ -2779,9 +2876,9 @@ Generates a new API secret code for a service provider, invalidating the old one
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `api_secret_code` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `api_secret_code` | string | API secret code for authenticating service provider requests |
 
 ---
 
@@ -2870,31 +2967,31 @@ Updates an existing service provider profile.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `enable_notifications` | boolean |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_image` | string (uri) |
-    | `customer_abbreviation` | string |
-    | `customer_slug` | string |
-    | `customer_native_name` | string |
-    | `customer_country` | string |
-    | `image` | string (uri) |
-    | `organization_groups` | array of objects |
-    | `organization_groups.uuid` | string (uuid) |
-    | `organization_groups.url` | string (uri) |
-    | `organization_groups.name` | string |
-    | `organization_groups.parent_uuid` | string (uuid) |
-    | `organization_groups.parent_name` | string |
-    | `organization_groups.parent` | string (uri) |
-    | `organization_groups.customers_count` | integer |
-    | `offering_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
 
 ---
 
@@ -2976,31 +3073,31 @@ Partially updates an existing service provider profile.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `enable_notifications` | boolean |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_image` | string (uri) |
-    | `customer_abbreviation` | string |
-    | `customer_slug` | string |
-    | `customer_native_name` | string |
-    | `customer_country` | string |
-    | `image` | string (uri) |
-    | `organization_groups` | array of objects |
-    | `organization_groups.uuid` | string (uuid) |
-    | `organization_groups.url` | string (uri) |
-    | `organization_groups.name` | string |
-    | `organization_groups.parent_uuid` | string (uuid) |
-    | `organization_groups.parent_name` | string |
-    | `organization_groups.parent` | string (uri) |
-    | `organization_groups.customers_count` | integer |
-    | `offering_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
 
 ---
 

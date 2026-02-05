@@ -270,9 +270,9 @@ Approve project update request
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `comment` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `comment` | string |  | Optional comment for review |
 
 
 === "Responses"
@@ -349,9 +349,9 @@ Reject project update request
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `comment` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `comment` | string |  | Optional comment for review |
 
 
 === "Responses"

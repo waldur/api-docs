@@ -65,12 +65,12 @@
     | Name | Type | Description |
     |---|---|---|
     | `cluster_uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `settings` | string |  |
-    | `settings_uuid` | string (uuid) |  |
+    | `settings` | string | Settings URL |
+    | `settings_uuid` | string (uuid) | Settings UUID |
 
 
 === "Responses"

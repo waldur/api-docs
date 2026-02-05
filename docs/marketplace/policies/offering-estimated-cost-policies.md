@@ -98,6 +98,7 @@
     | `period` | any |  |
     | `period_name` | string |  |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 ---
 
@@ -181,6 +182,7 @@
     | `period` | any |  |
     | `period_name` | string |  |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 ---
 
@@ -196,8 +198,7 @@
       Authorization:"Token YOUR_API_TOKEN" \
       scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       actions="string-value" \
-      limit_cost=123 \
-      organization_groups:='[]'
+      limit_cost=123
     ```
 
 === "Python"
@@ -214,8 +215,7 @@
     body_data = OfferingEstimatedCostPolicyRequest(
         scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         actions="string-value",
-        limit_cost=123,
-        organization_groups=[]
+        limit_cost=123
     )
     response = marketplace_offering_estimated_cost_policies_create.sync(
         client=client,
@@ -240,8 +240,7 @@
       body: {
         "scope": "https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "actions": "string-value",
-        "limit_cost": 123,
-        "organization_groups": []
+        "limit_cost": 123
       }
     });
       console.log('Success:', response);
@@ -260,7 +259,8 @@
     | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
     | `limit_cost` | integer | ✓ |  |
     | `period` | any |  |  |
-    | `organization_groups` | array of string (uri)s | ✓ |  |
+    | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 
 === "Responses"
@@ -285,6 +285,7 @@
     | `period` | any |  |
     | `period_name` | string |  |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 ---
 
@@ -300,8 +301,7 @@
       Authorization:"Token YOUR_API_TOKEN" \
       scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       actions="string-value" \
-      limit_cost=123 \
-      organization_groups:='[]'
+      limit_cost=123
     ```
 
 === "Python"
@@ -318,8 +318,7 @@
     body_data = OfferingEstimatedCostPolicyRequest(
         scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         actions="string-value",
-        limit_cost=123,
-        organization_groups=[]
+        limit_cost=123
     )
     response = marketplace_offering_estimated_cost_policies_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -348,8 +347,7 @@
       body: {
         "scope": "https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "actions": "string-value",
-        "limit_cost": 123,
-        "organization_groups": []
+        "limit_cost": 123
       }
     });
       console.log('Success:', response);
@@ -375,7 +373,8 @@
     | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
     | `limit_cost` | integer | ✓ |  |
     | `period` | any |  |  |
-    | `organization_groups` | array of string (uri)s | ✓ |  |
+    | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 
 === "Responses"
@@ -400,6 +399,7 @@
     | `period` | any |  |
     | `period_name` | string |  |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 ---
 
@@ -476,6 +476,7 @@
     | `limit_cost` | integer |  |  |
     | `period` | any |  |  |
     | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 
 === "Responses"
@@ -500,6 +501,7 @@
     | `period` | any |  |
     | `period_name` | string |  |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 ---
 
@@ -640,5 +642,6 @@ List available actions for OfferingEstimatedCostPolicy
     | `period` | any |  |
     | `period_name` | string |  |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
 
 ---

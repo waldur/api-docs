@@ -4,10 +4,15 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-public-calls/` | [List Proposal Public Calls](#list-proposal-public-calls) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-public-calls/{uuid}/` | [Retrieve](#retrieve) |
+| **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-public-calls/{uuid}/check_eligibility/` | [Check if the current user is eligible to submit proposals to this call](#check-if-the-current-user-is-eligible-to-submit-proposals-to-this-call) |
 
 ---
+## Core CRUD
+
 
 ### List Proposal Public Calls
 
@@ -86,7 +91,7 @@
     | `created` | string (date-time) |  |
     | `start_date` | string (date-time) |  |
     | `end_date` | string (date-time) |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `name` | string |  |
     | `description` | string |  |
     | `state` | any |  |
@@ -170,8 +175,9 @@
     | `fixed_duration_in_days` | integer | Fixed duration in days that applies to all proposals in this call |
     | `backend_id` | string |  |
     | `external_url` | string (uri) |  |
-    | `reviewer_identity_visible_to_submitters` | boolean | Whether proposal submitters can see reviewer identities. If False, reviewers appear as 'Reviewer 1', 'Reviewer 2', etc. |
-    | `reviews_visible_to_submitters` | boolean | Whether proposal submitters can see review comments and scores. If False, submitters only see final approval/rejection status. |
+    | `reviewer_identity_visible_to_submitters` | boolean | Whether proposal applicants can see reviewer identities. If False, reviewers appear as 'Reviewer 1', 'Reviewer 2', etc. |
+    | `reviews_visible_to_submitters` | boolean | Whether proposal applicants can see review comments and scores. If False, applicants only see final approval/rejection status. |
+    | `has_eligibility_restrictions` | boolean | Check if call has any eligibility restrictions configured. |
 
 ---
 
@@ -251,7 +257,7 @@
     | `created` | string (date-time) |  |
     | `start_date` | string (date-time) |  |
     | `end_date` | string (date-time) |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `name` | string |  |
     | `description` | string |  |
     | `state` | any |  |
@@ -335,7 +341,82 @@
     | `fixed_duration_in_days` | integer | Fixed duration in days that applies to all proposals in this call |
     | `backend_id` | string |  |
     | `external_url` | string (uri) |  |
-    | `reviewer_identity_visible_to_submitters` | boolean | Whether proposal submitters can see reviewer identities. If False, reviewers appear as 'Reviewer 1', 'Reviewer 2', etc. |
-    | `reviews_visible_to_submitters` | boolean | Whether proposal submitters can see review comments and scores. If False, submitters only see final approval/rejection status. |
+    | `reviewer_identity_visible_to_submitters` | boolean | Whether proposal applicants can see reviewer identities. If False, reviewers appear as 'Reviewer 1', 'Reviewer 2', etc. |
+    | `reviews_visible_to_submitters` | boolean | Whether proposal applicants can see review comments and scores. If False, applicants only see final approval/rejection status. |
+    | `has_eligibility_restrictions` | boolean | Check if call has any eligibility restrictions configured. |
+
+---
+
+## Other Actions
+
+
+### Check if the current user is eligible to submit proposals to this call
+
+Check if the current user is eligible to submit proposals to this call.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-public-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/check_eligibility/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_public_calls import proposal_public_calls_check_eligibility_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_public_calls_check_eligibility_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_public_calls_check_eligibility_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_public_calls/proposal_public_calls_check_eligibility_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalPublicCallsCheckEligibilityRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalPublicCallsCheckEligibilityRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `is_eligible` | boolean |
+    | `restrictions` | array of strings |
 
 ---

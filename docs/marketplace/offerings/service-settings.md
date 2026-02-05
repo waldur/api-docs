@@ -59,18 +59,18 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string (uuid) |  |
-    | `customer_uuid` | string (uuid) |  |
+    | `customer` | string (uuid) | Customer UUID |
+    | `customer_uuid` | string (uuid) | Customer UUID |
     | `field` | array |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | string | Which field to use when ordering the results. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `scope_uuid` | string | Scope UUID |
     | `shared` | boolean |  |
-    | `state` | array |  |
-    | `type` | string |  |
+    | `state` | array | State<br><br> |
+    | `type` | string | Type |
 
 
 === "Responses"

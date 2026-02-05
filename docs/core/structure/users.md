@@ -22,13 +22,22 @@ A User object on its own has limited capabilities beyond logging in and managing
 | <span class="http-badge http-patch">PATCH</span> | `/api/users/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/users/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/data_access_history/` | [Get user data access history](#get-user-data-access-history) |
+| <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/data_access/` | [Get user data access visibility](#get-user-data-access-visibility) |
+| <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
+| <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/users/me/` | [Get current user details](#get-current-user-details) |
+| <span class="http-badge http-get">GET</span> | `/api/users/profile_completeness/` | [Check profile completeness](#check-profile-completeness) |
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/token/` | [Get user auth token](#get-user-auth-token) |
+| <span class="http-badge http-get">GET</span> | `/api/users/user_active_status_count/` | [Get user counts by active status](#get-user-counts-by-active-status) |
+| <span class="http-badge http-get">GET</span> | `/api/users/user_language_count/` | [Get user counts by preferred language](#get-user-counts-by-preferred-language) |
+| <span class="http-badge http-get">GET</span> | `/api/users/user_registration_trend/` | [Get user registration trends by month](#get-user-registration-trends-by-month) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/cancel_change_email/` | [Cancel email change request](#cancel-email-change-request) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/change_email/` | [Request email change](#request-email-change) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/change_password/` | [Change user password](#change-user-password) |
 | <span class="http-badge http-post">POST</span> | `/api/users/confirm_email/` | [Confirm email change](#confirm-email-change) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/refresh_token/` | [Refresh user auth token](#refresh-user-auth-token) |
+| <span class="http-badge http-post">POST</span> | `/api/users/scim_sync_all/` | [Trigger SCIM synchronization for all users](#trigger-scim-synchronization-for-all-users) |
 
 ---
 ## Core CRUD
@@ -86,30 +95,30 @@ A User object on its own has limited capabilities beyond logging in and managing
     |---|---|---|
     | `agreement_date` | string (date-time) | Agreement date after |
     | `civil_number` | string |  |
-    | `customer_uuid` | string (uuid) |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
     | `date_joined` | string (date-time) | Date joined after |
     | `description` | string |  |
-    | `email` | string |  |
+    | `email` | string | Email |
     | `field` | array |  |
     | `full_name` | string | Full name |
-    | `is_active` | boolean |  |
-    | `is_staff` | boolean |  |
-    | `is_support` | boolean |  |
-    | `job_title` | string |  |
+    | `is_active` | boolean | Is active |
+    | `is_staff` | boolean | Is staff |
+    | `is_support` | boolean | Is support |
+    | `job_title` | string | Job title |
     | `modified` | string (date-time) | Date modified after |
-    | `native_name` | string |  |
+    | `native_name` | string | Native name |
     | `o` | array | Ordering<br><br> |
-    | `organization` | string |  |
+    | `organization` | string | Organization |
     | `organization_roles` | string | Organization roles |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `phone_number` | string |  |
     | `project_roles` | string | Project roles |
-    | `project_uuid` | string (uuid) |  |
+    | `project_uuid` | string (uuid) | Project UUID |
     | `query` | string | Filter by first name, last name, civil number, username or email |
     | `registration_method` | string |  |
     | `user_keyword` | string | User keyword |
-    | `username` | string |  |
+    | `username` | string | Username (exact) |
     | `username_list` | string | Comma-separated usernames |
 
 
@@ -124,7 +133,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `job_title` | string |  |
@@ -173,6 +182,15 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
     | `ip_address` | string |  |
+    | `gender` | any | ISO 5218 gender code |
+    | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |
+    | `country_of_residence` | string |  |
+    | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |
+    | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
 
 ---
 
@@ -250,7 +268,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `job_title` | string |  |
@@ -299,6 +317,15 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
     | `ip_address` | string |  |
+    | `gender` | any | ISO 5218 gender code |
+    | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |
+    | `country_of_residence` | string |  |
+    | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |
+    | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
 
 ---
 
@@ -368,7 +395,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `username` | string | ✓ | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
     | `job_title` | string |  |  |
     | `email` | string (email) | ✓ |  |
@@ -386,6 +413,15 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `last_name` | string |  |  |
     | `birth_date` | string (date) |  |  |
     | `image` | string (binary) |  |  |
+    | `gender` | any |  | ISO 5218 gender code |
+    | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |  |
+    | `country_of_residence` | string |  |  |
+    | `nationality` | string |  | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any |  | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |  |
+    | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
 
 
 === "Responses"
@@ -397,7 +433,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `job_title` | string |  |
@@ -446,6 +482,15 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
     | `ip_address` | string |  |
+    | `gender` | any | ISO 5218 gender code |
+    | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |
+    | `country_of_residence` | string |  |
+    | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |
+    | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
 
 ---
 
@@ -591,7 +636,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `username` | string | ✓ | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
     | `job_title` | string |  |  |
     | `email` | string (email) | ✓ |  |
@@ -609,6 +654,15 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `last_name` | string |  |  |
     | `birth_date` | string (date) |  |  |
     | `image` | string (binary) |  |  |
+    | `gender` | any |  | ISO 5218 gender code |
+    | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |  |
+    | `country_of_residence` | string |  |  |
+    | `nationality` | string |  | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any |  | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |  |
+    | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
 
 
 === "Responses"
@@ -620,7 +674,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `job_title` | string |  |
@@ -669,6 +723,15 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
     | `ip_address` | string |  |
+    | `gender` | any | ISO 5218 gender code |
+    | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |
+    | `country_of_residence` | string |  |
+    | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |
+    | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
 
 ---
 
@@ -740,7 +803,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `username` | string |  | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
     | `job_title` | string |  |  |
     | `phone_number` | string |  |  |
@@ -757,6 +820,15 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `last_name` | string |  |  |
     | `birth_date` | string (date) |  |  |
     | `image` | string (binary) |  |  |
+    | `gender` | any |  | ISO 5218 gender code |
+    | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |  |
+    | `country_of_residence` | string |  |  |
+    | `nationality` | string |  | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any |  | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |  |
+    | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
 
 
 === "Responses"
@@ -768,7 +840,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `job_title` | string |  |
@@ -817,6 +889,15 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
     | `ip_address` | string |  |
+    | `gender` | any | ISO 5218 gender code |
+    | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |
+    | `country_of_residence` | string |  |
+    | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |
+    | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
 
 ---
 
@@ -888,9 +969,438 @@ A User object on its own has limited capabilities beyond logging in and managing
 ## Other Actions
 
 
+### Get user data access history
+
+Shows historical log of who has accessed the user's profile data. Regular users see anonymized accessor categories. Staff/support see full details including accessor identity, IP, and context.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/data_access_history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_data_access_history_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_data_access_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`users_data_access_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_data_access_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersDataAccessHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await usersDataAccessHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `accessor_type` | string | Filter by accessor type (staff, support, organization_member, self) |
+    | `agreement_date` | string (date-time) | Agreement date after |
+    | `civil_number` | string |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `date_joined` | string (date-time) | Date joined after |
+    | `description` | string |  |
+    | `email` | string | Email |
+    | `end_date` | string (date) | Filter logs until this date (inclusive) |
+    | `full_name` | string | Full name |
+    | `is_active` | boolean | Is active |
+    | `is_staff` | boolean | Is staff |
+    | `is_support` | boolean | Is support |
+    | `job_title` | string | Job title |
+    | `modified` | string (date-time) | Date modified after |
+    | `native_name` | string | Native name |
+    | `o` | array | Ordering<br><br> |
+    | `organization` | string | Organization |
+    | `organization_roles` | string | Organization roles |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `phone_number` | string |  |
+    | `project_roles` | string | Project roles |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `query` | string | Filter by first name, last name, civil number, username or email |
+    | `registration_method` | string |  |
+    | `start_date` | string (date) | Filter logs from this date (inclusive) |
+    | `user_keyword` | string | User keyword |
+    | `username` | string | Username (exact) |
+    | `username_list` | string | Comma-separated usernames |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `timestamp` | string (date-time) |  |
+    | `accessor_type` | string | <br>_Enum: `staff`, `support`, `organization_member`, `service_provider`, `self`_ |
+    | `accessed_fields` | array of strings |  |
+    | `accessor_category` | string |  |
+    | `accessor` | object |  |
+    | `accessor.uuid` | string (uuid) |  |
+    | `accessor.username` | string |  |
+    | `accessor.full_name` | string |  |
+    | `ip_address` | any | An IPv4 or IPv6 address. |
+    | `context` | object (free-form) |  |
+
+---
+
+### Get user data access visibility
+
+Shows who has access to the user's profile data. Includes administrative access (staff/support), organizational access (same customer/project), and service provider access (via consent). Regular users see counts for admin access; staff/support see individual records.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/data_access/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_data_access_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_data_access_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_data_access_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_data_access_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersDataAccessRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await usersDataAccessRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `administrative_access` | object |
+    | `administrative_access.description` | string |
+    | `administrative_access.staff_count` | integer |
+    | `administrative_access.support_count` | integer |
+    | `administrative_access.users` | array of objects |
+    | `administrative_access.users.user_uuid` | string (uuid) |
+    | `administrative_access.users.username` | string |
+    | `administrative_access.users.full_name` | string |
+    | `administrative_access.users.access_type` | string |
+    | `organizational_access` | array of objects |
+    | `organizational_access.scope_type` | string |
+    | `organizational_access.scope_uuid` | string (uuid) |
+    | `organizational_access.scope_name` | string |
+    | `organizational_access.users` | array of objects |
+    | `organizational_access.users.user_uuid` | string (uuid) |
+    | `organizational_access.users.username` | string |
+    | `organizational_access.users.full_name` | string |
+    | `organizational_access.users.role` | string |
+    | `service_provider_access` | array of objects |
+    | `service_provider_access.offering_uuid` | string (uuid) |
+    | `service_provider_access.offering_name` | string |
+    | `service_provider_access.provider_name` | string |
+    | `service_provider_access.provider_uuid` | string (uuid) |
+    | `service_provider_access.exposed_fields` | array of strings |
+    | `service_provider_access.consent_date` | string |
+    | `service_provider_access.consent_version` | string |
+    | `service_provider_access.provider_team` | array of objects |
+    | `service_provider_access.provider_team.user_uuid` | string (uuid) |
+    | `service_provider_access.provider_team.username` | string |
+    | `service_provider_access.provider_team.full_name` | string |
+    | `service_provider_access.provider_team.role` | string |
+    | `summary` | object |
+    | `summary.total_administrative_access` | integer |
+    | `summary.total_organizational_access` | integer |
+    | `summary.total_provider_access` | integer |
+
+---
+
+### Get object state at a specific timestamp
+
+Returns the state of the object as it was at the specified timestamp. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/at/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      timestamp=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_history_at_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_history_at_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        timestamp="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_history_at_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_history_at_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersHistoryAtRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await usersHistoryAtRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "timestamp": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `timestamp` | string | ✓ | ISO 8601 timestamp to query the object state at |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+    
+    ---
+    
+    **`400`** - 
+    
+    
+    ---
+    
+    **`404`** - 
+    
+
+---
+
+### Get version history
+
+Returns the version history for this object. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_history_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`users_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await usersHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `agreement_date` | string (date-time) | Agreement date after |
+    | `civil_number` | string |  |
+    | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
+    | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `date_joined` | string (date-time) | Date joined after |
+    | `description` | string |  |
+    | `email` | string | Email |
+    | `full_name` | string | Full name |
+    | `is_active` | boolean | Is active |
+    | `is_staff` | boolean | Is staff |
+    | `is_support` | boolean | Is support |
+    | `job_title` | string | Job title |
+    | `modified` | string (date-time) | Date modified after |
+    | `native_name` | string | Native name |
+    | `o` | array | Ordering<br><br> |
+    | `organization` | string | Organization |
+    | `organization_roles` | string | Organization roles |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `phone_number` | string |  |
+    | `project_roles` | string | Project roles |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `query` | string | Filter by first name, last name, civil number, username or email |
+    | `registration_method` | string |  |
+    | `user_keyword` | string | User keyword |
+    | `username` | string | Username (exact) |
+    | `username_list` | string | Comma-separated usernames |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+---
+
 ### Get current user details
 
-Get current user details, including authentication token.
+Get current user details, including authentication token and profile completeness status.
 
 
 === "HTTPie"
@@ -951,7 +1461,7 @@ Get current user details, including authentication token.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `full_name` | string |  |
     | `native_name` | string |  |
     | `job_title` | string |  |
@@ -1000,6 +1510,75 @@ Get current user details, including authentication token.
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
     | `ip_address` | string |  |
+    | `gender` | any | ISO 5218 gender code |
+    | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |
+    | `country_of_residence` | string |  |
+    | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |
+    | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+
+---
+
+### Check profile completeness
+
+Check if user profile is complete with all mandatory attributes.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/profile_completeness/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_profile_completeness_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_profile_completeness_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_profile_completeness_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_profile_completeness_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersProfileCompletenessRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await usersProfileCompletenessRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `is_complete` | boolean | Whether all mandatory profile fields are filled. |
+    | `missing_fields` | array of strings | List of mandatory fields that are missing. |
+    | `mandatory_fields` | array of strings | List of all mandatory fields. |
+    | `enforcement_enabled` | boolean | Whether enforcement of mandatory attributes is enabled. |
 
 ---
 
@@ -1074,6 +1653,285 @@ Get current user details, including authentication token.
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
     | `token` | string |  |
+
+---
+
+### Get user counts by active status
+
+Returns aggregated counts of users by active/inactive status. Staff or support only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/user_active_status_count/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_user_active_status_count_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_user_active_status_count_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`users_user_active_status_count_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_active_status_count_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersUserActiveStatusCountList } from 'waldur-js-client';
+    
+    try {
+      const response = await usersUserActiveStatusCountList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `agreement_date` | string (date-time) | Agreement date after |
+    | `civil_number` | string |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `date_joined` | string (date-time) | Date joined after |
+    | `description` | string |  |
+    | `email` | string | Email |
+    | `full_name` | string | Full name |
+    | `is_active` | boolean | Is active |
+    | `is_staff` | boolean | Is staff |
+    | `is_support` | boolean | Is support |
+    | `job_title` | string | Job title |
+    | `modified` | string (date-time) | Date modified after |
+    | `native_name` | string | Native name |
+    | `o` | array | Ordering<br><br> |
+    | `organization` | string | Organization |
+    | `organization_roles` | string | Organization roles |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `phone_number` | string |  |
+    | `project_roles` | string | Project roles |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `query` | string | Filter by first name, last name, civil number, username or email |
+    | `registration_method` | string |  |
+    | `user_keyword` | string | User keyword |
+    | `username` | string | Username (exact) |
+    | `username_list` | string | Comma-separated usernames |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `status` | string |
+    | `count` | integer |
+
+---
+
+### Get user counts by preferred language
+
+Returns aggregated counts of users by preferred language. Staff or support only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/user_language_count/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_user_language_count_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_user_language_count_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`users_user_language_count_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_language_count_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersUserLanguageCountList } from 'waldur-js-client';
+    
+    try {
+      const response = await usersUserLanguageCountList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `agreement_date` | string (date-time) | Agreement date after |
+    | `civil_number` | string |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `date_joined` | string (date-time) | Date joined after |
+    | `description` | string |  |
+    | `email` | string | Email |
+    | `full_name` | string | Full name |
+    | `is_active` | boolean | Is active |
+    | `is_staff` | boolean | Is staff |
+    | `is_support` | boolean | Is support |
+    | `job_title` | string | Job title |
+    | `modified` | string (date-time) | Date modified after |
+    | `native_name` | string | Native name |
+    | `o` | array | Ordering<br><br> |
+    | `organization` | string | Organization |
+    | `organization_roles` | string | Organization roles |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `phone_number` | string |  |
+    | `project_roles` | string | Project roles |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `query` | string | Filter by first name, last name, civil number, username or email |
+    | `registration_method` | string |  |
+    | `user_keyword` | string | User keyword |
+    | `username` | string | Username (exact) |
+    | `username_list` | string | Comma-separated usernames |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `language` | string |
+    | `count` | integer |
+
+---
+
+### Get user registration trends by month
+
+Returns user registration counts aggregated by month. Staff or support only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/user_registration_trend/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_user_registration_trend_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_user_registration_trend_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`users_user_registration_trend_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_registration_trend_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersUserRegistrationTrendList } from 'waldur-js-client';
+    
+    try {
+      const response = await usersUserRegistrationTrendList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `agreement_date` | string (date-time) | Agreement date after |
+    | `civil_number` | string |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `date_joined` | string (date-time) | Date joined after |
+    | `description` | string |  |
+    | `email` | string | Email |
+    | `full_name` | string | Full name |
+    | `is_active` | boolean | Is active |
+    | `is_staff` | boolean | Is staff |
+    | `is_support` | boolean | Is support |
+    | `job_title` | string | Job title |
+    | `modified` | string (date-time) | Date modified after |
+    | `native_name` | string | Native name |
+    | `o` | array | Ordering<br><br> |
+    | `organization` | string | Organization |
+    | `organization_roles` | string | Organization roles |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `phone_number` | string |  |
+    | `project_roles` | string | Project roles |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `query` | string | Filter by first name, last name, civil number, username or email |
+    | `registration_method` | string |  |
+    | `user_keyword` | string | User keyword |
+    | `username` | string | Username (exact) |
+    | `username_list` | string | Comma-separated usernames |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `month` | string |
+    | `count` | integer |
 
 ---
 
@@ -1459,5 +2317,62 @@ Confirm email update using code
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
     | `token` | string |  |
+
+---
+
+### Trigger SCIM synchronization for all users
+
+Staff-only action to queue SCIM synchronization for all users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/users/scim_sync_all/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_scim_sync_all # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_scim_sync_all.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_scim_sync_all`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_scim_sync_all.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersScimSyncAll } from 'waldur-js-client';
+    
+    try {
+      const response = await usersScimSyncAll({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---

@@ -20,6 +20,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/vmware-virtual-machine/{uuid}/web_console/` | [This endpoint provides access to HTML Console aka WMKS](#this-endpoint-provides-access-to-html-console-aka-wmks) |
 | <span class="http-badge http-post">POST</span> | `/api/vmware-virtual-machine/{uuid}/reboot_guest/` | [Reboot guest](#reboot-guest) |
 | <span class="http-badge http-post">POST</span> | `/api/vmware-virtual-machine/{uuid}/reset/` | [Reset](#reset) |
+| <span class="http-badge http-post">POST</span> | `/api/vmware-virtual-machine/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
+| <span class="http-badge http-post">POST</span> | `/api/vmware-virtual-machine/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 | <span class="http-badge http-post">POST</span> | `/api/vmware-virtual-machine/{uuid}/shutdown_guest/` | [Shutdown guest](#shutdown-guest) |
 | <span class="http-badge http-post">POST</span> | `/api/vmware-virtual-machine/{uuid}/start/` | [Start](#start) |
 | <span class="http-badge http-post">POST</span> | `/api/vmware-virtual-machine/{uuid}/stop/` | [Stop](#stop) |
@@ -79,28 +81,28 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `backend_id` | string |  |
+    | `backend_id` | string | Backend ID |
     | `can_manage` | boolean | Can manage |
-    | `customer` | string (uuid) |  |
-    | `customer_abbreviation` | string |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
-    | `external_ip` | string |  |
+    | `customer` | string (uuid) | Customer UUID |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description |
+    | `external_ip` | string | External IP |
     | `field` | array |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
+    | `project` | string (uuid) | Project UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
     | `runtime_state` | string |  |
-    | `service_settings_name` | string |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `uuid` | string (uuid) |  |
+    | `service_settings_name` | string | Service settings name |
+    | `service_settings_uuid` | string (uuid) | Service settings UUID |
+    | `state` | array | State<br><br> |
+    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"
@@ -781,13 +783,19 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
 
 === "Responses"
 
-    **`202`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
     
     ---
     
-    **`409`** - No response body
+    **`409`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 
@@ -1505,6 +1513,159 @@ This endpoint provides access to HTML Console aka WMKS.
 
     **`200`** - No response body
     
+
+---
+
+### Mark resource as ERRED
+
+Manually transition the resource to ERRED state. This is useful for resources stuck in transitional states (CREATING, UPDATING, DELETING) that cannot be synced via pull. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/vmware-virtual-machine/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_erred/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_erred_request import SetErredRequest # (1)
+    from waldur_api_client.api.vmware_virtual_machine import vmware_virtual_machine_set_erred # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetErredRequest()
+    response = vmware_virtual_machine_set_erred.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetErredRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_erred_request.py)
+    2.  **API Source:** [`vmware_virtual_machine_set_erred`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/vmware_virtual_machine/vmware_virtual_machine_set_erred.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { vmwareVirtualMachineSetErred } from 'waldur-js-client';
+    
+    try {
+      const response = await vmwareVirtualMachineSetErred({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
+
+### Mark resource as OK
+
+Manually transition the resource to OK state and clear error fields. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/vmware-virtual-machine/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_ok/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.vmware_virtual_machine import vmware_virtual_machine_set_ok # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = vmware_virtual_machine_set_ok.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`vmware_virtual_machine_set_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/vmware_virtual_machine/vmware_virtual_machine_set_ok.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { vmwareVirtualMachineSetOk } from 'waldur-js-client';
+    
+    try {
+      const response = await vmwareVirtualMachineSetOk({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 

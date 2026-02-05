@@ -20,6 +20,8 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/disable_port_security/` | [Disable port security](#disable-port-security) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/enable_port/` | [Enable port](#enable-port) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/enable_port_security/` | [Enable port security](#enable-port-security) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 
 ---
 ## Core CRUD
@@ -86,8 +88,8 @@ Get a list of network ports.
     | `fixed_ips` | string | Search by fixed IP |
     | `has_device_owner` | boolean | Has device owner |
     | `mac_address` | string |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `network_name` | string | Search by network name |
     | `network_uuid` | string (uuid) | Search by network UUID |
     | `o` | array | Ordering<br><br> |
@@ -95,8 +97,8 @@ Get a list of network ports.
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Search by name, MAC address or backend ID |
     | `status` | string |  |
-    | `tenant` | string |  |
-    | `tenant_uuid` | string (uuid) |  |
+    | `tenant` | string | Tenant URL |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
 
 
 === "Responses"
@@ -508,13 +510,19 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
 
 === "Responses"
 
-    **`202`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
     
     ---
     
-    **`409`** - No response body
+    **`409`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 
@@ -1399,5 +1407,158 @@ Enable port security for the port
 
     **`200`** - No response body
     
+
+---
+
+### Mark resource as ERRED
+
+Manually transition the resource to ERRED state. This is useful for resources stuck in transitional states (CREATING, UPDATING, DELETING) that cannot be synced via pull. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-ports/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_erred/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_erred_request import SetErredRequest # (1)
+    from waldur_api_client.api.openstack_ports import openstack_ports_set_erred # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetErredRequest()
+    response = openstack_ports_set_erred.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetErredRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_erred_request.py)
+    2.  **API Source:** [`openstack_ports_set_erred`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_ports/openstack_ports_set_erred.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPortsSetErred } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPortsSetErred({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
+
+### Mark resource as OK
+
+Manually transition the resource to OK state and clear error fields. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-ports/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_ok/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_ports import openstack_ports_set_ok # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_ports_set_ok.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_ports_set_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_ports/openstack_ports_set_ok.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPortsSetOk } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPortsSetOk({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---

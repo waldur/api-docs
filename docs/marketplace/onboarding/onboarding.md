@@ -4,7 +4,80 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| <span class="http-badge http-get">GET</span> | `/api/onboarding/person-identifier-fields/` | [Person identifier fields](#person-identifier-fields) |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding/supported-countries/` | [Return list of supported countries for validation](#return-list-of-supported-countries-for-validation) |
+
+---
+
+### Person identifier fields
+
+Return person identifier field specification for a specific validation method. The validation_method parameter should match one of the available methods (e.g., 'ariregister', 'wirtschaftscompass', 'bolagsverket', 'breg').
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/onboarding/person-identifier-fields/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      validation_method=="ariregister"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.onboarding import onboarding_person_identifier_fields_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = onboarding_person_identifier_fields_retrieve.sync(
+        client=client,
+        validation_method="ariregister"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`onboarding_person_identifier_fields_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding/onboarding_person_identifier_fields_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { onboardingPersonIdentifierFieldsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await onboardingPersonIdentifierFieldsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "validation_method": "ariregister"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `validation_method` | string | ✓ | Validation method identifier<br>_Enum: `ariregister`, `bolagsverket`, `breg`, `wirtschaftscompass`_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `validation_method` | string | The validation method identifier |
+    | `person_identifier_fields` | object (free-form) | Field specification for person identification. For simple identifiers: {type: 'string', field: 'civil_number', ...}. For composite identifiers: {type: 'object', fields: {...}} |
 
 ---
 

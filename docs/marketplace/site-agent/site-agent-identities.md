@@ -11,6 +11,7 @@
 | <span class="http-badge http-put">PUT</span> | `/api/marketplace-site-agent-identities/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-site-agent-identities/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-site-agent-identities/cleanup_orphaned/` | [Remove agent identities that have no active services. Staff only](#remove-agent-identities-that-have-no-active-services-staff-only) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-site-agent-identities/{uuid}/register_event_subscription/` | [Register event subscription](#register-event-subscription) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-site-agent-identities/{uuid}/register_service/` | [Register a new processor or get the existing one for the agent service](#register-a-new-processor-or-get-the-existing-one-for-the-agent-service) |
 
@@ -71,6 +72,7 @@
     | `last_restarted` | string (date-time) | Last restarted after |
     | `name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `orphaned` | boolean | Has no services |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `version` | string |  |
@@ -86,7 +88,7 @@
     |---|---|---|
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
-    | `offering` | string (uuid) |  |
+    | `offering` | string (uuid) | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -173,7 +175,7 @@
     |---|---|---|
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
-    | `offering` | string (uuid) |  |
+    | `offering` | string (uuid) | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -259,7 +261,7 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `offering` | string (uuid) | ✓ |  |
+    | `offering` | string (uuid) | ✓ | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
     | `name` | string | ✓ |  |
     | `version` | string |  |  |
     | `dependencies` | any |  |  |
@@ -276,7 +278,7 @@
     |---|---|---|
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
-    | `offering` | string (uuid) |  |
+    | `offering` | string (uuid) | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -373,7 +375,7 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `offering` | string (uuid) | ✓ |  |
+    | `offering` | string (uuid) | ✓ | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
     | `name` | string | ✓ |  |
     | `version` | string |  |  |
     | `dependencies` | any |  |  |
@@ -390,7 +392,7 @@
     |---|---|---|
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
-    | `offering` | string (uuid) |  |
+    | `offering` | string (uuid) | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -478,6 +480,80 @@
 
 ## Other Actions
 
+
+### Remove agent identities that have no active services. Staff only
+
+Remove agent identities that have no active services. Staff only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-site-agent-identities/cleanup_orphaned/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.cleanup_request_request import CleanupRequestRequest # (1)
+    from waldur_api_client.api.marketplace_site_agent_identities import marketplace_site_agent_identities_cleanup_orphaned # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CleanupRequestRequest()
+    response = marketplace_site_agent_identities_cleanup_orphaned.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CleanupRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/cleanup_request_request.py)
+    2.  **API Source:** [`marketplace_site_agent_identities_cleanup_orphaned`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_site_agent_identities/marketplace_site_agent_identities_cleanup_orphaned.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSiteAgentIdentitiesCleanupOrphaned } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSiteAgentIdentitiesCleanupOrphaned({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `dry_run` | boolean |  | If true, only return what would be deleted without actually deleting<br>_Constraints: default: `True`_ |
+    | `older_than_hours` | integer |  | Delete entries older than this many hours<br>_Constraints: default: `24`_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `deleted_count` | integer | Number of items deleted (or would be deleted in dry run) |
+    | `dry_run` | boolean | Whether this was a dry run |
+    | `items` | array of objects | List of deleted (or to-be-deleted) items |
+
+---
 
 ### Register event subscription
 
@@ -571,7 +647,7 @@ Register an event subscription for the specified agent identity and observable o
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
-    | `observable_objects` | any |  |
+    | `observable_objects` | any | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `source_ip` | any | An IPv4 or IPv6 address. |
@@ -589,7 +665,7 @@ Register an event subscription for the specified agent identity and observable o
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
-    | `observable_objects` | any |  |
+    | `observable_objects` | any | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `source_ip` | any | An IPv4 or IPv6 address. |

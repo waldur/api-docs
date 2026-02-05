@@ -20,7 +20,9 @@ All projects, resources, and costs are ultimately tied to a Customer. Users are 
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/` | [Retrieve customer details](#retrieve-customer-details) |
 | <span class="http-badge http-post">POST</span> | `/api/customers/` | [Create a new customer](#create-a-new-customer) |
 | <span class="http-badge http-put">PUT</span> | `/api/customers/{uuid}/` | [Update a customer](#update-a-customer) |
+| <span class="http-badge http-put">PUT</span> | `/api/customers/{uuid}/update-project-digest-config/` | [Update project digest configuration](#update-project-digest-configuration) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/customers/{uuid}/` | [Partially update a customer](#partially-update-a-customer) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/customers/{uuid}/update-project-digest-config/` | [Update project digest configuration](#update-project-digest-configuration) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/customers/{uuid}/` | [Delete a customer](#delete-a-customer) |
 | **User Management** | | |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/list_users/` | [List users and their roles in a scope](#list-users-and-their-roles-in-a-scope) |
@@ -38,6 +40,12 @@ All projects, resources, and costs are ultimately tied to a Customer. Users are 
 | **Data & Reporting** | | |
 | <span class="http-badge http-get">GET</span> | `/api/customers/countries/` | [Get list of available countries](#get-list-of-available-countries) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/stats/` | [Get customer resource usage statistics](#get-customer-resource-usage-statistics) |
+| **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
+| <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/history/` | [Get version history](#get-version-history) |
+| <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/project-digest-config/` | [Get project digest configuration](#get-project-digest-configuration) |
+| <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/project-digest-config/preview/` | [Preview digest for a project](#preview-digest-for-a-project) |
+| <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/project-digest-config/send-test/` | [Send a test digest email](#send-a-test-digest-email) |
 
 ---
 ## Core CRUD
@@ -95,18 +103,19 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
 
     | Name | Type | Description |
     |---|---|---|
-    | `abbreviation` | string |  |
+    | `abbreviation` | string | Abbreviation |
     | `agreement_number` | string |  |
     | `archived` | boolean |  |
     | `backend_id` | string |  |
-    | `contact_details` | string |  |
+    | `contact_details` | string | Contact details |
+    | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
     | `field` | array |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
-    | `native_name` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `native_name` | string | Native name |
     | `o` | string | Which field to use when ordering the results. |
-    | `organization_group_name` | string |  |
-    | `organization_group_uuid` | array | organization_group_uuid |
+    | `organization_group_name` | string | Organization group name |
+    | `organization_group_uuid` | array | Organization group UUID |
     | `owned_by_current_user` | boolean | Return a list of customers where current user is owner. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -125,22 +134,15 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
-    | `organization_groups` | array of objects |  |
+    | `organization_groups` | array of objects | Organization groups this customer belongs to |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
-    | `display_name` | string |  |
-    | `projects` | array of objects |  |
-    | `projects.url` | string (uri) |  |
-    | `projects.uuid` | string (uuid) |  |
-    | `projects.name` | string |  |
-    | `projects.image` | string (uri) |  |
-    | `projects.resource_count` | integer |  |
-    | `projects.end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `display_name` | string | Display name of the organization (includes native name if available) |
     | `backend_id` | string | Organization identifier in another application. |
     | `image` | string (uri) |  |
     | `blocked` | boolean |  |
@@ -148,15 +150,18 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
     | `accounting_start_date` | string (date-time) |  |
-    | `projects_count` | integer |  |
-    | `users_count` | integer |  |
+    | `projects_count` | integer | Number of projects in this organization |
+    | `users_count` | integer | Number of users with access to this organization |
     | `sponsor_number` | integer | External ID of the sponsor covering the costs |
-    | `country_name` | string |  |
+    | `country_name` | string | Human-readable country name |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |
+    | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
     | `abbreviation` | string |  |
     | `description` | string |  |
@@ -175,7 +180,7 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
     | `bank_account` | string |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
@@ -276,22 +281,15 @@ Fetch the details of a specific customer by its UUID.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
-    | `organization_groups` | array of objects |  |
+    | `organization_groups` | array of objects | Organization groups this customer belongs to |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
-    | `display_name` | string |  |
-    | `projects` | array of objects |  |
-    | `projects.url` | string (uri) |  |
-    | `projects.uuid` | string (uuid) |  |
-    | `projects.name` | string |  |
-    | `projects.image` | string (uri) |  |
-    | `projects.resource_count` | integer |  |
-    | `projects.end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `display_name` | string | Display name of the organization (includes native name if available) |
     | `backend_id` | string | Organization identifier in another application. |
     | `image` | string (uri) |  |
     | `blocked` | boolean |  |
@@ -299,15 +297,18 @@ Fetch the details of a specific customer by its UUID.
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
     | `accounting_start_date` | string (date-time) |  |
-    | `projects_count` | integer |  |
-    | `users_count` | integer |  |
+    | `projects_count` | integer | Number of projects in this organization |
+    | `users_count` | integer | Number of users with access to this organization |
     | `sponsor_number` | integer | External ID of the sponsor covering the costs |
-    | `country_name` | string |  |
+    | `country_name` | string | Human-readable country name |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |
+    | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
     | `abbreviation` | string |  |
     | `description` | string |  |
@@ -326,7 +327,7 @@ Fetch the details of a specific customer by its UUID.
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
     | `bank_account` | string |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
@@ -424,10 +425,13 @@ A new customer can only be created by users with staff privilege.
     | `accounting_start_date` | string (date-time) |  |  |
     | `sponsor_number` | integer |  | External ID of the sponsor covering the costs |
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |  |
+    | `project_metadata_checklist` | string (uuid) |  | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |  |
+    | `user_affiliations` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
     | `name` | string | ✓ |  |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
     | `abbreviation` | string |  |  |
     | `description` | string |  |  |
@@ -446,7 +450,7 @@ A new customer can only be created by users with staff privilege.
     | `latitude` | number (double) |  |  |
     | `longitude` | number (double) |  |  |
     | `bank_account` | string |  |  |
-    | `country` | any |  |  |
+    | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
 
 
@@ -459,22 +463,15 @@ A new customer can only be created by users with staff privilege.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
-    | `organization_groups` | array of objects |  |
+    | `organization_groups` | array of objects | Organization groups this customer belongs to |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
-    | `display_name` | string |  |
-    | `projects` | array of objects |  |
-    | `projects.url` | string (uri) |  |
-    | `projects.uuid` | string (uuid) |  |
-    | `projects.name` | string |  |
-    | `projects.image` | string (uri) |  |
-    | `projects.resource_count` | integer |  |
-    | `projects.end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `display_name` | string | Display name of the organization (includes native name if available) |
     | `backend_id` | string | Organization identifier in another application. |
     | `image` | string (uri) |  |
     | `blocked` | boolean |  |
@@ -482,15 +479,18 @@ A new customer can only be created by users with staff privilege.
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
     | `accounting_start_date` | string (date-time) |  |
-    | `projects_count` | integer |  |
-    | `users_count` | integer |  |
+    | `projects_count` | integer | Number of projects in this organization |
+    | `users_count` | integer | Number of users with access to this organization |
     | `sponsor_number` | integer | External ID of the sponsor covering the costs |
-    | `country_name` | string |  |
+    | `country_name` | string | Human-readable country name |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |
+    | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
     | `abbreviation` | string |  |
     | `description` | string |  |
@@ -509,7 +509,7 @@ A new customer can only be created by users with staff privilege.
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
     | `bank_account` | string |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
@@ -618,10 +618,13 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `accounting_start_date` | string (date-time) |  |  |
     | `sponsor_number` | integer |  | External ID of the sponsor covering the costs |
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |  |
+    | `project_metadata_checklist` | string (uuid) |  | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |  |
+    | `user_affiliations` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
     | `name` | string | ✓ |  |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
     | `abbreviation` | string |  |  |
     | `description` | string |  |  |
@@ -640,7 +643,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `latitude` | number (double) |  |  |
     | `longitude` | number (double) |  |  |
     | `bank_account` | string |  |  |
-    | `country` | any |  |  |
+    | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
 
 
@@ -653,22 +656,15 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
-    | `organization_groups` | array of objects |  |
+    | `organization_groups` | array of objects | Organization groups this customer belongs to |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
-    | `display_name` | string |  |
-    | `projects` | array of objects |  |
-    | `projects.url` | string (uri) |  |
-    | `projects.uuid` | string (uuid) |  |
-    | `projects.name` | string |  |
-    | `projects.image` | string (uri) |  |
-    | `projects.resource_count` | integer |  |
-    | `projects.end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `display_name` | string | Display name of the organization (includes native name if available) |
     | `backend_id` | string | Organization identifier in another application. |
     | `image` | string (uri) |  |
     | `blocked` | boolean |  |
@@ -676,15 +672,18 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
     | `accounting_start_date` | string (date-time) |  |
-    | `projects_count` | integer |  |
-    | `users_count` | integer |  |
+    | `projects_count` | integer | Number of projects in this organization |
+    | `users_count` | integer | Number of users with access to this organization |
     | `sponsor_number` | integer | External ID of the sponsor covering the costs |
-    | `country_name` | string |  |
+    | `country_name` | string | Human-readable country name |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |
+    | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
     | `abbreviation` | string |  |
     | `description` | string |  |
@@ -703,7 +702,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
     | `bank_account` | string |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
@@ -725,6 +724,99 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `service_provider_uuid` | string (uuid) |  |
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
+
+---
+
+### Update project digest configuration
+
+Update the project digest email configuration for this organization.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update-project-digest-config/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.project_digest_config_request import ProjectDigestConfigRequest # (1)
+    from waldur_api_client.api.customers import customers_update_project_digest_config_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ProjectDigestConfigRequest()
+    response = customers_update_project_digest_config_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ProjectDigestConfigRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_digest_config_request.py)
+    2.  **API Source:** [`customers_update_project_digest_config_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_update_project_digest_config_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersUpdateProjectDigestConfigUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await customersUpdateProjectDigestConfigUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `is_enabled` | boolean |  |  |
+    | `frequency` | string |  | <br>_Enum: `weekly`, `biweekly`, `monthly`_ |
+    | `enabled_sections` | array of strings |  |  |
+    | `day_of_week` | integer |  | For weekly/biweekly: 0=Sunday..6=Saturday |
+    | `day_of_month` | integer |  | For monthly: day of month (1-28) |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `is_enabled` | boolean |  |
+    | `frequency` | string | <br>_Enum: `weekly`, `biweekly`, `monthly`_ |
+    | `enabled_sections` | array of strings |  |
+    | `day_of_week` | integer | For weekly/biweekly: 0=Sunday..6=Saturday |
+    | `day_of_month` | integer | For monthly: day of month (1-28) |
+    | `last_sent_at` | string (date-time) |  |
+    | `available_sections` | array of objects |  |
 
 ---
 
@@ -806,10 +898,13 @@ Partially update the details of an existing customer. Requires customer owner or
     | `accounting_start_date` | string (date-time) |  |  |
     | `sponsor_number` | integer |  | External ID of the sponsor covering the costs |
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |  |
+    | `project_metadata_checklist` | string (uuid) |  | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |  |
+    | `user_affiliations` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
     | `name` | string |  |  |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
     | `abbreviation` | string |  |  |
     | `description` | string |  |  |
@@ -828,7 +923,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `latitude` | number (double) |  |  |
     | `longitude` | number (double) |  |  |
     | `bank_account` | string |  |  |
-    | `country` | any |  |  |
+    | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
 
 
@@ -841,22 +936,15 @@ Partially update the details of an existing customer. Requires customer owner or
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
-    | `organization_groups` | array of objects |  |
+    | `organization_groups` | array of objects | Organization groups this customer belongs to |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
-    | `display_name` | string |  |
-    | `projects` | array of objects |  |
-    | `projects.url` | string (uri) |  |
-    | `projects.uuid` | string (uuid) |  |
-    | `projects.name` | string |  |
-    | `projects.image` | string (uri) |  |
-    | `projects.resource_count` | integer |  |
-    | `projects.end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `display_name` | string | Display name of the organization (includes native name if available) |
     | `backend_id` | string | Organization identifier in another application. |
     | `image` | string (uri) |  |
     | `blocked` | boolean |  |
@@ -864,15 +952,18 @@ Partially update the details of an existing customer. Requires customer owner or
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
     | `accounting_start_date` | string (date-time) |  |
-    | `projects_count` | integer |  |
-    | `users_count` | integer |  |
+    | `projects_count` | integer | Number of projects in this organization |
+    | `users_count` | integer | Number of users with access to this organization |
     | `sponsor_number` | integer | External ID of the sponsor covering the costs |
-    | `country_name` | string |  |
+    | `country_name` | string | Human-readable country name |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |
+    | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
     | `abbreviation` | string |  |
     | `description` | string |  |
@@ -891,7 +982,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
     | `bank_account` | string |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
@@ -913,6 +1004,99 @@ Partially update the details of an existing customer. Requires customer owner or
     | `service_provider_uuid` | string (uuid) |  |
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
+
+---
+
+### Update project digest configuration
+
+Update the project digest email configuration for this organization.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update-project-digest-config/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_project_digest_config_request import PatchedProjectDigestConfigRequest # (1)
+    from waldur_api_client.api.customers import customers_update_project_digest_config_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedProjectDigestConfigRequest()
+    response = customers_update_project_digest_config_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedProjectDigestConfigRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_project_digest_config_request.py)
+    2.  **API Source:** [`customers_update_project_digest_config_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_update_project_digest_config_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersUpdateProjectDigestConfigPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await customersUpdateProjectDigestConfigPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `is_enabled` | boolean |  |  |
+    | `frequency` | string |  | <br>_Enum: `weekly`, `biweekly`, `monthly`_ |
+    | `enabled_sections` | array of strings |  |  |
+    | `day_of_week` | integer |  | For weekly/biweekly: 0=Sunday..6=Saturday |
+    | `day_of_month` | integer |  | For monthly: day of month (1-28) |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `is_enabled` | boolean |  |
+    | `frequency` | string | <br>_Enum: `weekly`, `biweekly`, `monthly`_ |
+    | `enabled_sections` | array of strings |  |
+    | `day_of_week` | integer | For weekly/biweekly: 0=Sunday..6=Saturday |
+    | `day_of_month` | integer | For monthly: day of month (1-28) |
+    | `last_sent_at` | string (date-time) |  |
+    | `available_sections` | array of objects |  |
 
 ---
 
@@ -1157,15 +1341,15 @@ Lists all users who have a role in the specified customer or any of its projects
     | `civil_number` | string |  |
     | `date_joined` | string (date-time) | Date joined after |
     | `description` | string |  |
-    | `email` | string |  |
+    | `email` | string | Email |
     | `field` | array |  |
     | `full_name` | string | Full name |
-    | `is_active` | boolean |  |
-    | `job_title` | string |  |
+    | `is_active` | boolean | Is active |
+    | `job_title` | string | Job title |
     | `modified` | string (date-time) | Date modified after |
-    | `native_name` | string |  |
+    | `native_name` | string | Native name |
     | `o` | string | Ordering. Sort by a combination of first name, last name, and username.<br>_Enum: `concatenated_name`, `-concatenated_name`_ |
-    | `organization` | string |  |
+    | `organization` | string | Organization |
     | `organization_role` | array | Filter by one or more organization roles. Select a standard role or provide a custom role string. Can be specified multiple times. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -1173,7 +1357,7 @@ Lists all users who have a role in the specified customer or any of its projects
     | `project_role` | array | Filter by one or more project roles. Select a standard role or provide a custom role string. Can be specified multiple times. |
     | `registration_method` | string |  |
     | `user_keyword` | string | User keyword |
-    | `username` | string |  |
+    | `username` | string | Username |
 
 
 === "Responses"
@@ -1980,17 +2164,18 @@ Returns a list of countries that can be used when creating or updating a custome
 
     | Name | Type | Description |
     |---|---|---|
-    | `abbreviation` | string |  |
+    | `abbreviation` | string | Abbreviation |
     | `agreement_number` | string |  |
     | `archived` | boolean |  |
     | `backend_id` | string |  |
-    | `contact_details` | string |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
-    | `native_name` | string |  |
+    | `contact_details` | string | Contact details |
+    | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `native_name` | string | Native name |
     | `o` | string | Which field to use when ordering the results. |
-    | `organization_group_name` | string |  |
-    | `organization_group_uuid` | array | organization_group_uuid |
+    | `organization_group_name` | string | Organization group name |
+    | `organization_group_uuid` | array | Organization group UUID |
     | `owned_by_current_user` | boolean | Return a list of customers where current user is owner. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -2095,5 +2280,440 @@ Provides statistics about the resource usage (e.g., CPU, RAM, storage) for all p
     | `components.limit` | integer |
     | `components.offering_name` | string |
     | `components.offering_uuid` | string (uuid) |
+
+---
+
+## Other Actions
+
+
+### Get object state at a specific timestamp
+
+Returns the state of the object as it was at the specified timestamp. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/at/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      timestamp=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.customers import customers_history_at_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = customers_history_at_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        timestamp="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`customers_history_at_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_history_at_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersHistoryAtRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await customersHistoryAtRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "timestamp": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `timestamp` | string | ✓ | ISO 8601 timestamp to query the object state at |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+    
+    ---
+    
+    **`400`** - 
+    
+    
+    ---
+    
+    **`404`** - 
+    
+
+---
+
+### Get version history
+
+Returns the version history for this object. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.customers import customers_history_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = customers_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`customers_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await customersHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `abbreviation` | string | Abbreviation |
+    | `agreement_number` | string |  |
+    | `archived` | boolean |  |
+    | `backend_id` | string |  |
+    | `contact_details` | string | Contact details |
+    | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
+    | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
+    | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `native_name` | string | Native name |
+    | `o` | string | Which field to use when ordering the results. |
+    | `organization_group_name` | string | Organization group name |
+    | `organization_group_uuid` | array | Organization group UUID |
+    | `owned_by_current_user` | boolean | Return a list of customers where current user is owner. |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
+    | `registration_code` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+---
+
+### Get project digest configuration
+
+Retrieve the project digest email configuration for this organization.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/project-digest-config/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.customers import customers_project_digest_config_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = customers_project_digest_config_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`customers_project_digest_config_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_project_digest_config_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersProjectDigestConfigRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await customersProjectDigestConfigRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `is_enabled` | boolean |  |
+    | `frequency` | string | <br>_Enum: `weekly`, `biweekly`, `monthly`_ |
+    | `enabled_sections` | array of strings |  |
+    | `day_of_week` | integer | For weekly/biweekly: 0=Sunday..6=Saturday |
+    | `day_of_month` | integer | For monthly: day of month (1-28) |
+    | `last_sent_at` | string (date-time) |  |
+    | `available_sections` | array of objects |  |
+
+---
+
+### Preview digest for a project
+
+Returns rendered HTML preview of the digest for a specific project.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/project-digest-config/preview/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      project_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.project_digest_preview_request import ProjectDigestPreviewRequest # (1)
+    from waldur_api_client.api.customers import customers_project_digest_config_preview # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ProjectDigestPreviewRequest(
+        project_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = customers_project_digest_config_preview.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ProjectDigestPreviewRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_digest_preview_request.py)
+    2.  **API Source:** [`customers_project_digest_config_preview`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_project_digest_config_preview.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersProjectDigestConfigPreview } from 'waldur-js-client';
+    
+    try {
+      const response = await customersProjectDigestConfigPreview({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "project_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `project_uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `subject` | string |
+    | `html_body` | string |
+    | `text_body` | string |
+
+---
+
+### Send a test digest email
+
+Send a test digest email to the requesting user.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/project-digest-config/send-test/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.customers import customers_project_digest_config_send_test # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = customers_project_digest_config_send_test.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`customers_project_digest_config_send_test`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_project_digest_config_send_test.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersProjectDigestConfigSendTest } from 'waldur-js-client';
+    
+    try {
+      const response = await customersProjectDigestConfigSendTest({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---

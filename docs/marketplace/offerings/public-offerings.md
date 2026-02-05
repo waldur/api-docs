@@ -69,36 +69,40 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     |---|---|---|
     | `accessible_via_calls` | boolean | Accessible via calls |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
-    | `attributes` | string |  |
-    | `billable` | boolean |  |
+    | `attributes` | string | Offering attributes (JSON) |
+    | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
-    | `category_group_uuid` | string (uuid) |  |
-    | `category_uuid` | string (uuid) |  |
+    | `category_group_uuid` | string (uuid) | Category group UUID |
+    | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
+    | `customer` | string | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description contains |
     | `field` | array |  |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array |  |
+    | `organization_group_uuid` | array | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `parent_uuid` | string (uuid) |  |
+    | `parent_uuid` | string (uuid) | Parent offering UUID |
     | `project_uuid` | string (uuid) | Project UUID |
     | `query` | string | Search by offering name, slug or description |
     | `resource_customer_uuid` | string (uuid) | Resource customer UUID |
     | `resource_project_uuid` | string (uuid) | Resource project UUID |
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
-    | `shared` | boolean |  |
-    | `state` | array |  |
-    | `type` | array |  |
+    | `shared` | boolean | Shared |
+    | `state` | array | Offering state<br><br> |
+    | `tag` | array | Tag UUID (OR logic) |
+    | `tag_name` | array | Tag name (OR logic) |
+    | `tag_names_and` | string | Tag names with AND logic (comma-separated) |
+    | `tags_and` | string | Tag UUIDs with AND logic (comma-separated) |
+    | `type` | array | Offering type |
     | `user_has_consent` | boolean | User Has Consent |
     | `user_has_offering_user` | boolean | User Has Offering User |
     | `uuid_list` | string | Comma-separated offering UUIDs |
@@ -116,7 +120,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
@@ -124,7 +128,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | object |  |
@@ -225,10 +229,10 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `plans.organization_groups.uuid` | string (uuid) |  |
     | `plans.organization_groups.url` | string (uri) |  |
     | `plans.organization_groups.name` | string |  |
-    | `plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `plans.organization_groups.parent_name` | string |  |
+    | `plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `plans.organization_groups.parent` | string (uri) |  |
-    | `plans.organization_groups.customers_count` | integer |  |
+    | `plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -272,16 +276,19 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `citation_count` | integer | Number of citations of a DOI |
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `tags` | array of objects |  |
+    | `tags.uuid` | string (uuid) |  |
+    | `tags.name` | string |  |
     | `image` | string (uri) |  |
     | `total_customers` | integer |  |
     | `total_cost` | integer |  |
@@ -291,8 +298,10 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
+    | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
+    | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
     | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
@@ -386,7 +395,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
@@ -394,7 +403,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | object |  |
@@ -495,10 +504,10 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `plans.organization_groups.uuid` | string (uuid) |  |
     | `plans.organization_groups.url` | string (uri) |  |
     | `plans.organization_groups.name` | string |  |
-    | `plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `plans.organization_groups.parent_name` | string |  |
+    | `plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `plans.organization_groups.parent` | string (uri) |  |
-    | `plans.organization_groups.customers_count` | integer |  |
+    | `plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -542,16 +551,19 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `citation_count` | integer | Number of citations of a DOI |
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `tags` | array of objects |  |
+    | `tags.uuid` | string (uuid) |  |
+    | `tags.name` | string |  |
     | `image` | string (uri) |  |
     | `total_customers` | integer |  |
     | `total_cost` | integer |  |
@@ -561,8 +573,10 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
+    | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
+    | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
     | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
@@ -668,10 +682,10 @@ Returns a list of plans available for a specific offering. The plans are filtere
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -776,10 +790,10 @@ Returns the details of a specific plan if it is available to the current user fo
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |

@@ -68,13 +68,13 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `email` | string |  |
+    | `email` | string | Email contains |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `username` | string |  |
+    | `project` | string | Project URL |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `state` | array | Service account state<br><br> |
+    | `username` | string | Username |
 
 
 === "Responses"

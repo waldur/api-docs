@@ -90,7 +90,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `created` | string (date-time) | Created after |
     | `field` | array |  |
     | `has_consent` | boolean | User Has Consent |
-    | `is_restricted` | boolean |  |
+    | `is_restricted` | boolean | Is restricted |
     | `modified` | string (date-time) | Modified after |
     | `o` | array | Ordering<br><br> |
     | `offering` | string |  |
@@ -99,11 +99,11 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_offering_uuid` | string (uuid) |  |
-    | `provider_uuid` | string (uuid) |  |
+    | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by offering name, username or user name |
-    | `state` | array |  |
-    | `user_username` | string |  |
-    | `user_uuid` | string (uuid) |  |
+    | `state` | array | Offering user state<br><br> |
+    | `user_username` | string | User username |
+    | `user_uuid` | string (uuid) | User UUID |
 
 
 === "Responses"
@@ -125,6 +125,22 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
+    | `user_phone_number` | string |  |
+    | `user_organization` | string |  |
+    | `user_job_title` | string |  |
+    | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_gender` | any | ISO 5218 gender code |
+    | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `user_place_of_birth` | string |  |
+    | `user_country_of_residence` | string |  |
+    | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_organization_country` | string |  |
+    | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `user_civil_number` | string |  |
+    | `user_birth_date` | string (date) |  |
+    | `user_identity_source` | string | Indicates what identity provider was used. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -136,6 +152,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
+    | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
 
 ---
 
@@ -223,6 +240,22 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
+    | `user_phone_number` | string |  |
+    | `user_organization` | string |  |
+    | `user_job_title` | string |  |
+    | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_gender` | any | ISO 5218 gender code |
+    | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `user_place_of_birth` | string |  |
+    | `user_country_of_residence` | string |  |
+    | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_organization_country` | string |  |
+    | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `user_civil_number` | string |  |
+    | `user_birth_date` | string (date) |  |
+    | `user_identity_source` | string | Indicates what identity provider was used. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -234,6 +267,7 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
+    | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
 
 ---
 
@@ -319,6 +353,22 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
+    | `user_phone_number` | string |  |
+    | `user_organization` | string |  |
+    | `user_job_title` | string |  |
+    | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_gender` | any | ISO 5218 gender code |
+    | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `user_place_of_birth` | string |  |
+    | `user_country_of_residence` | string |  |
+    | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_organization_country` | string |  |
+    | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `user_civil_number` | string |  |
+    | `user_birth_date` | string (date) |  |
+    | `user_identity_source` | string | Indicates what identity provider was used. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -330,6 +380,7 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
+    | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
 
 ---
 
@@ -406,9 +457,9 @@ Allows a service provider to mark an offering user as restricted or unrestricted
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `is_restricted` | boolean | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `is_restricted` | boolean | ✓ | Whether the offering user should be restricted from accessing resources |
 
 
 === "Responses"
@@ -509,6 +560,22 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
+    | `user_phone_number` | string |  |
+    | `user_organization` | string |  |
+    | `user_job_title` | string |  |
+    | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_gender` | any | ISO 5218 gender code |
+    | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `user_place_of_birth` | string |  |
+    | `user_country_of_residence` | string |  |
+    | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_organization_country` | string |  |
+    | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `user_civil_number` | string |  |
+    | `user_birth_date` | string (date) |  |
+    | `user_identity_source` | string | Indicates what identity provider was used. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -520,6 +587,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
+    | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
 
 ---
 
@@ -614,6 +682,22 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
+    | `user_phone_number` | string |  |
+    | `user_organization` | string |  |
+    | `user_job_title` | string |  |
+    | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_gender` | any | ISO 5218 gender code |
+    | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `user_place_of_birth` | string |  |
+    | `user_country_of_residence` | string |  |
+    | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_organization_country` | string |  |
+    | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `user_civil_number` | string |  |
+    | `user_birth_date` | string (date) |  |
+    | `user_identity_source` | string | Indicates what identity provider was used. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -625,6 +709,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
+    | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
 
 ---
 
@@ -842,6 +927,13 @@ Get checklist with questions and existing answers.
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `include_all` | boolean | If true, returns all questions including hidden ones (for dynamic form visibility). Default: false. |
+
+
 === "Responses"
 
     **`200`** - 
@@ -867,12 +959,13 @@ Get checklist with questions and existing answers.
     | `questions.order` | integer |  |
     | `questions.existing_answer` | object (free-form) |  |
     | `questions.question_options` | array of anys |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
+    | `questions.dependencies_info` | object (free-form) |  |
     
     ---
     
@@ -977,12 +1070,13 @@ Get checklist with questions and existing answers including review logic (review
     | `questions.order` | integer |  |
     | `questions.existing_answer` | object (free-form) |  |
     | `questions.question_options` | array of anys |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
+    | `questions.dependencies_info` | object (free-form) |  |
     | `questions.operator` | any |  |
     | `questions.review_answer_value` | any | Answer value that trigger review. |
     | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
@@ -1078,8 +1172,8 @@ Get checklist template for creating new objects.
     | `questions.question_options.order` | integer |  |
     | `questions.question_type` | any | Type of question and expected answer format |
     | `questions.order` | integer |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -1102,8 +1196,8 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.question_options.order` | integer |  |
     | `initial_visible_questions.question_type` | any | Type of question and expected answer format |
     | `initial_visible_questions.order` | integer |  |
-    | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `initial_visible_questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `initial_visible_questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -1844,10 +1938,10 @@ Transitions the state to 'Pending Account Linking' and allows a service provider
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `comment` | string |  |
-    | `comment_url` | string (uri) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `comment` | string |  | Comment explaining the state transition |
+    | `comment_url` | string (uri) |  | URL reference related to the state transition comment |
 
 
 === "Responses"
@@ -1924,10 +2018,10 @@ Transitions the state to 'Pending Additional Validation' and allows a service pr
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `comment` | string |  |
-    | `comment_url` | string (uri) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `comment` | string |  | Comment explaining the state transition |
+    | `comment_url` | string (uri) |  | URL reference related to the state transition comment |
 
 
 === "Responses"

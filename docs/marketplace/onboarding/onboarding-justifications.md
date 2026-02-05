@@ -73,6 +73,8 @@
     |---|---|---|
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `user_uuid` | string (uuid) | User UUID |
+    | `verification_uuid` | string (uuid) | Verification UUID |
 
 
 === "Responses"
@@ -88,6 +90,7 @@
     | `verification_uuid` | string (uuid) |  |
     | `country` | string |  |
     | `user` | string (uri) |  |
+    | `user_full_name` | string |  |
     | `legal_person_identifier` | string |  |
     | `legal_name` | string |  |
     | `error_message` | string |  |
@@ -103,6 +106,8 @@
     | `supporting_documentation.file_name` | string |  |
     | `supporting_documentation.file_size` | integer |  |
     | `supporting_documentation.created` | string (date-time) |  |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -177,6 +182,7 @@
     | `verification_uuid` | string (uuid) |  |
     | `country` | string |  |
     | `user` | string (uri) |  |
+    | `user_full_name` | string |  |
     | `legal_person_identifier` | string |  |
     | `legal_name` | string |  |
     | `error_message` | string |  |
@@ -192,6 +198,8 @@
     | `supporting_documentation.file_name` | string |  |
     | `supporting_documentation.file_size` | integer |  |
     | `supporting_documentation.created` | string (date-time) |  |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -274,6 +282,7 @@
     | `verification_uuid` | string (uuid) |  |
     | `country` | string |  |
     | `user` | string (uri) |  |
+    | `user_full_name` | string |  |
     | `legal_person_identifier` | string |  |
     | `legal_name` | string |  |
     | `error_message` | string |  |
@@ -289,6 +298,8 @@
     | `supporting_documentation.file_name` | string |  |
     | `supporting_documentation.file_size` | integer |  |
     | `supporting_documentation.created` | string (date-time) |  |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -373,6 +384,7 @@ Create justification for failed verification.
     | `verification_uuid` | string (uuid) |  |
     | `country` | string |  |
     | `user` | string (uri) |  |
+    | `user_full_name` | string |  |
     | `legal_person_identifier` | string |  |
     | `legal_name` | string |  |
     | `error_message` | string |  |
@@ -388,6 +400,8 @@ Create justification for failed verification.
     | `supporting_documentation.file_name` | string |  |
     | `supporting_documentation.file_size` | integer |  |
     | `supporting_documentation.created` | string (date-time) |  |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -481,6 +495,7 @@ Create justification for failed verification.
     | `verification_uuid` | string (uuid) |  |
     | `country` | string |  |
     | `user` | string (uri) |  |
+    | `user_full_name` | string |  |
     | `legal_person_identifier` | string |  |
     | `legal_name` | string |  |
     | `error_message` | string |  |
@@ -496,6 +511,8 @@ Create justification for failed verification.
     | `supporting_documentation.file_name` | string |  |
     | `supporting_documentation.file_size` | integer |  |
     | `supporting_documentation.created` | string (date-time) |  |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -583,6 +600,7 @@ Create justification for failed verification.
     | `verification_uuid` | string (uuid) |  |
     | `country` | string |  |
     | `user` | string (uri) |  |
+    | `user_full_name` | string |  |
     | `legal_person_identifier` | string |  |
     | `legal_name` | string |  |
     | `error_message` | string |  |
@@ -598,6 +616,8 @@ Create justification for failed verification.
     | `supporting_documentation.file_name` | string |  |
     | `supporting_documentation.file_size` | integer |  |
     | `supporting_documentation.created` | string (date-time) |  |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -754,6 +774,7 @@ Approve justification and mark verification as VERIFIED.
     | `verification_uuid` | string (uuid) |  |
     | `country` | string |  |
     | `user` | string (uri) |  |
+    | `user_full_name` | string |  |
     | `legal_person_identifier` | string |  |
     | `legal_name` | string |  |
     | `error_message` | string |  |
@@ -769,6 +790,8 @@ Approve justification and mark verification as VERIFIED.
     | `supporting_documentation.file_name` | string |  |
     | `supporting_documentation.file_size` | integer |  |
     | `supporting_documentation.created` | string (date-time) |  |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -943,6 +966,7 @@ Reject justification and mark verification as FAILED.
     | `verification_uuid` | string (uuid) |  |
     | `country` | string |  |
     | `user` | string (uri) |  |
+    | `user_full_name` | string |  |
     | `legal_person_identifier` | string |  |
     | `legal_name` | string |  |
     | `error_message` | string |  |
@@ -958,6 +982,8 @@ Reject justification and mark verification as FAILED.
     | `supporting_documentation.file_name` | string |  |
     | `supporting_documentation.file_size` | integer |  |
     | `supporting_documentation.created` | string (date-time) |  |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 

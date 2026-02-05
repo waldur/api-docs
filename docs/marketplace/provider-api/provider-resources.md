@@ -16,12 +16,15 @@
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/details/` | [Get resource details](#get-resource-details) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/glauth_users_config/` | [Get GLauth user configuration for a resource](#get-glauth-user-configuration-for-a-resource) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/offering_for_subresources/` | [List offerings for sub-resources](#list-offerings-for-sub-resources) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/offering/` | [Get offering details](#get-offering-details) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/plan_periods/` | [List resource plan periods](#list-resource-plan-periods) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/team/` | [Get resource team](#get-resource-team) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/move_resource/` | [Move a resource to another project](#move-a-resource-to-another-project) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/refresh_last_sync/` | [Refresh last sync time](#refresh-last-sync-time) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/restore/` | [Restore](#restore) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_as_erred/` | [Set resource state to erred](#set-resource-state-to-erred) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_as_ok/` | [Set resource state to OK](#set-resource-state-to-ok) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_backend_id/` | [Set resource backend ID](#set-resource-backend-id) |
@@ -93,43 +96,46 @@ Returns a paginated list of resources for offerings managed by the current user 
     | Name | Type | Description |
     |---|---|---|
     | `backend_id` | string | Backend ID |
-    | `category_uuid` | string (uuid) |  |
+    | `category_uuid` | string (uuid) | Category UUID |
     | `component_count` | number | Filter by exact number of components |
     | `created` | string (date-time) | Created after |
-    | `customer` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `downscaled` | boolean |  |
+    | `customer` | string | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `downscaled` | boolean | Downscaled |
     | `field` | array |  |
     | `has_terminate_date` | boolean | Has termination date |
+    | `is_attached` | boolean | Filter by attached state |
     | `lexis_links_supported` | boolean | LEXIS links supported |
     | `limit_based` | boolean | Filter by limit-based offerings |
     | `limit_component_count` | number | Filter by exact number of limit-based components |
     | `modified` | string (date-time) | Modified after |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering` | string |  |
-    | `offering_billable` | boolean |  |
+    | `offering_billable` | boolean | Offering billable |
     | `offering_shared` | boolean | Offering shared |
     | `offering_slug` | array | Multiple values may be separated by commas. |
-    | `offering_type` | string |  |
+    | `offering_type` | string | Offering type |
     | `offering_uuid` | array | Multiple values may be separated by commas. |
     | `only_limit_based` | boolean | Filter resources with only limit-based components |
     | `only_usage_based` | boolean | Filter resources with only usage-based components |
+    | `order_state` | array | Order state<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_offering_uuid` | string (uuid) |  |
-    | `paused` | boolean |  |
-    | `plan_uuid` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `provider_uuid` | string (uuid) |  |
+    | `paused` | boolean | Paused |
+    | `plan_uuid` | string (uuid) | Plan UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
-    | `restrict_member_access` | boolean |  |
+    | `restrict_member_access` | boolean | Restrict member access |
     | `runtime_state` | string | Runtime state |
-    | `service_manager_uuid` | string (uuid) | Service Manager UUID |
-    | `state` | array |  |
+    | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `state` | array | Resource state<br><br> |
     | `usage_based` | boolean | Filter by usage-based offerings |
+    | `visible_to_providers` | boolean | Include only resources visible to service providers |
     | `visible_to_username` | string | Visible to username |
 
 
@@ -187,18 +193,19 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `parent_offering_uuid` | string (uuid) |  |
     | `parent_offering_name` | string |  |
     | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) |  |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
-    | `report.header` | string |  |
-    | `report.body` | string |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
@@ -209,7 +216,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | any |  |
@@ -222,6 +229,29 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `customer_slug` | string |  |
     | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
     | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
 
 ---
 
@@ -344,18 +374,19 @@ Returns details of a specific resource from a provider's perspective.
     | `parent_offering_uuid` | string (uuid) |  |
     | `parent_offering_name` | string |  |
     | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) |  |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
-    | `report.header` | string |  |
-    | `report.body` | string |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
@@ -366,7 +397,7 @@ Returns details of a specific resource from a provider's perspective.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | any |  |
@@ -379,6 +410,29 @@ Returns details of a specific resource from a provider's perspective.
     | `customer_slug` | string |  |
     | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
     | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
 
 ---
 
@@ -600,17 +654,17 @@ Updates the options of a resource. If the offering is configured to create order
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `status` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
     
     ---
     
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `order_uuid` | string (uuid) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `order_uuid` | string (uuid) | UUID of the created or updated order |
 
 ---
 
@@ -690,9 +744,9 @@ Allows a service provider to directly update the options of a resource without c
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `status` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
@@ -1024,6 +1078,228 @@ Returns the detailed representation of the backend resource associated with the 
 
 ---
 
+### Get object state at a specific timestamp
+
+Returns the state of the object as it was at the specified timestamp. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/at/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      timestamp=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_history_at_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_resources_history_at_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        timestamp="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_resources_history_at_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_history_at_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesHistoryAtRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesHistoryAtRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "timestamp": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `timestamp` | string | ✓ | ISO 8601 timestamp to query the object state at |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+    
+    ---
+    
+    **`400`** - 
+    
+    
+    ---
+    
+    **`404`** - 
+    
+
+---
+
+### Get version history
+
+Returns the version history for this object. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_history_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_resources_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_resources_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `backend_id` | string | Backend ID |
+    | `category_uuid` | string (uuid) | Category UUID |
+    | `component_count` | number | Filter by exact number of components |
+    | `created` | string (date-time) | Created after |
+    | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
+    | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
+    | `customer` | string | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `downscaled` | boolean | Downscaled |
+    | `has_terminate_date` | boolean | Has termination date |
+    | `is_attached` | boolean | Filter by attached state |
+    | `lexis_links_supported` | boolean | LEXIS links supported |
+    | `limit_based` | boolean | Filter by limit-based offerings |
+    | `limit_component_count` | number | Filter by exact number of limit-based components |
+    | `modified` | string (date-time) | Modified after |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `o` | array | Ordering<br><br> |
+    | `offering` | string |  |
+    | `offering_billable` | boolean | Offering billable |
+    | `offering_shared` | boolean | Offering shared |
+    | `offering_slug` | array | Multiple values may be separated by commas. |
+    | `offering_type` | string | Offering type |
+    | `offering_uuid` | array | Multiple values may be separated by commas. |
+    | `only_limit_based` | boolean | Filter resources with only limit-based components |
+    | `only_usage_based` | boolean | Filter resources with only usage-based components |
+    | `order_state` | array | Order state<br><br> |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `parent_offering_uuid` | string (uuid) |  |
+    | `paused` | boolean | Paused |
+    | `plan_uuid` | string (uuid) | Plan UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `provider_uuid` | string (uuid) | Provider UUID |
+    | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
+    | `restrict_member_access` | boolean | Restrict member access |
+    | `runtime_state` | string | Runtime state |
+    | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `state` | array | Resource state<br><br> |
+    | `usage_based` | boolean | Filter by usage-based offerings |
+    | `visible_to_providers` | boolean | Include only resources visible to service providers |
+    | `visible_to_username` | string | Visible to username |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+---
+
 ### List offerings for sub-resources
 
 Returns a list of offerings that can be provisioned as sub-resources of the current resource.
@@ -1091,10 +1367,10 @@ Returns a list of offerings that can be provisioned as sub-resources of the curr
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `type` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) | UUID of the offering |
+    | `type` | string | Type of the offering |
 
 ---
 
@@ -1168,7 +1444,7 @@ Returns details of the offering connected to the requested object.
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
@@ -1176,7 +1452,7 @@ Returns details of the offering connected to the requested object.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | object |  |
@@ -1277,10 +1553,10 @@ Returns details of the offering connected to the requested object.
     | `plans.organization_groups.uuid` | string (uuid) |  |
     | `plans.organization_groups.url` | string (uri) |  |
     | `plans.organization_groups.name` | string |  |
-    | `plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `plans.organization_groups.parent_name` | string |  |
+    | `plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `plans.organization_groups.parent` | string (uri) |  |
-    | `plans.organization_groups.customers_count` | integer |  |
+    | `plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1324,16 +1600,19 @@ Returns details of the offering connected to the requested object.
     | `citation_count` | integer | Number of citations of a DOI |
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `tags` | array of objects |  |
+    | `tags.uuid` | string (uuid) |  |
+    | `tags.name` | string |  |
     | `image` | string (uri) |  |
     | `total_customers` | integer |  |
     | `total_cost` | integer |  |
@@ -1343,8 +1622,10 @@ Returns details of the offering connected to the requested object.
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
+    | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
+    | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
     | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
@@ -1602,9 +1883,9 @@ Moves a resource and its associated data to a different project. Requires staff 
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `project` | any | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `project` | any | ✓ | Target project URL where the resource should be moved<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -1659,18 +1940,19 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `parent_offering_uuid` | string (uuid) |  |
     | `parent_offering_name` | string |  |
     | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) |  |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
-    | `report.header` | string |  |
-    | `report.body` | string |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
@@ -1681,7 +1963,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | any |  |
@@ -1694,6 +1976,29 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `customer_slug` | string |  |
     | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
     | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
 
 ---
 
@@ -1761,6 +2066,205 @@ Updates the 'last_sync' timestamp for a resource to the current time. This is us
 
     **`200`** - No response body
     
+
+---
+
+### Restore
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/restore/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      offering="https://api.example.com/api/offering/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      name="my-awesome-marketplace-provider-resource"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.resource_request import ResourceRequest # (1)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_restore # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ResourceRequest(
+        offering="https://api.example.com/api/offering/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        name="my-awesome-marketplace-provider-resource"
+    )
+    response = marketplace_provider_resources_restore.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ResourceRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_request.py)
+    2.  **API Source:** [`marketplace_provider_resources_restore`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_restore.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesRestore } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesRestore({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "offering": "https://api.example.com/api/offering/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "name": "my-awesome-marketplace-provider-resource"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `offering` | string (uri) | ✓ |  |
+    | `plan` | string (uri) |  |  |
+    | `name` | string | ✓ |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
+    | `end_date` | string (date) |  | The date is inclusive. Once reached, a resource will be scheduled for termination. |
+    | `downscaled` | boolean |  |  |
+    | `paused` | boolean |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `offering` | string (uri) |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_description` | string |  |
+    | `offering_image` | string (uri) |  |
+    | `offering_thumbnail` | string (uri) |  |
+    | `offering_type` | string |  |
+    | `offering_shared` | boolean | Accessible to all customers. |
+    | `offering_billable` | boolean | Purchase and usage is invoiced. |
+    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `provider_name` | string |  |
+    | `provider_uuid` | string (uuid) |  |
+    | `provider_slug` | string |  |
+    | `category_title` | string |  |
+    | `category_uuid` | string (uuid) |  |
+    | `category_icon` | string (uri) |  |
+    | `plan` | string (uri) |  |
+    | `plan_unit` | any |  |
+    | `plan_name` | string |  |
+    | `plan_uuid` | string (uuid) |  |
+    | `plan_description` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `url` | string (uri) |  |
+    | `scope` | string |  |
+    | `description` | string |  |
+    | `state` | any |  |
+    | `resource_uuid` | string (uuid) |  |
+    | `backend_id` | string |  |
+    | `effective_id` | string |  |
+    | `resource_type` | string |  |
+    | `project` | string (uri) |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_name` | string |  |
+    | `project_description` | string |  |
+    | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `project_end_date_requested_by` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `offering_slug` | string |  |
+    | `parent_offering_uuid` | string (uuid) |  |
+    | `parent_offering_name` | string |  |
+    | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
+    | `parent_uuid` | string (uuid) |  |
+    | `parent_name` | string |  |
+    | `backend_metadata` | any |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+    | `name` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `current_usages` | object (free-form) |  |
+    | `can_terminate` | boolean |  |
+    | `report` | array of objects |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
+    | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
+    | `end_date_requested_by` | string (uri) |  |
+    | `username` | string |  |
+    | `limit_usage` | object (free-form) |  |
+    | `downscaled` | boolean |  |
+    | `restrict_member_access` | boolean |  |
+    | `paused` | boolean |  |
+    | `endpoints` | array of objects |  |
+    | `endpoints.uuid` | string (uuid) |  |
+    | `endpoints.name` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `options` | any |  |
+    | `available_actions` | array of strings |  |
+    | `last_sync` | string (date-time) |  |
+    | `order_in_progress` | any |  |
+    | `creation_order` | any |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `project_slug` | string |  |
+    | `customer_slug` | string |  |
+    | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
+    | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
 
 ---
 
@@ -1987,9 +2491,9 @@ Allows a service provider to set or update the backend ID for a resource, linkin
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `status` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
@@ -2075,9 +2579,9 @@ Allows a service provider to set or update the backend-specific metadata for a r
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `status` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
@@ -2394,18 +2898,18 @@ Allows a service provider to directly set the limits for a resource. This is typ
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `limits` | any | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `limits` | any | ✓ | Dictionary mapping component types to their new limit values |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `status` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
@@ -2734,20 +3238,20 @@ Allows a service provider to submit a report (e.g., usage or status report) for 
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `report` | array of objects | ✓ |
-    | `report.header` | string | ✓ |
-    | `report.body` | string | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `report` | array of objects | ✓ |  |
+    | `report.header` | string | ✓ | Section header text |
+    | `report.body` | string | ✓ | Section body content |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `status` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
@@ -2818,17 +3322,17 @@ Creates a marketplace order to terminate the resource. This action is asynchrono
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `attributes` | any |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `attributes` | any |  | Optional attributes/parameters to pass to the termination operation |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `order_uuid` | string (uuid) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `order_uuid` | string (uuid) | UUID of the created or updated order |
 
 ---

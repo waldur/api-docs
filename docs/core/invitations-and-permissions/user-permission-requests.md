@@ -265,9 +265,9 @@ Approves a pending permission request, granting the requesting user the permissi
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `comment` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `comment` | string |  | Optional comment for review |
 
 
 === "Responses"
@@ -416,9 +416,9 @@ Rejects a pending permission request.
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `comment` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `comment` | string |  | Optional comment for review |
 
 
 === "Responses"

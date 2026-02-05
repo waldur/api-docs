@@ -265,9 +265,9 @@ Approve managed project request
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `comment` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `comment` | string |  | Optional comment for review |
 
 
 === "Responses"
@@ -505,9 +505,9 @@ Reject managed project request
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `comment` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `comment` | string |  | Optional comment for review |
 
 
 === "Responses"

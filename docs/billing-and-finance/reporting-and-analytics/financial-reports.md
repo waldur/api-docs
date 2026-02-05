@@ -59,17 +59,18 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `abbreviation` | string |  |
+    | `abbreviation` | string | Abbreviation |
     | `agreement_number` | string |  |
     | `archived` | boolean |  |
     | `backend_id` | string |  |
-    | `contact_details` | string |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
-    | `native_name` | string |  |
+    | `contact_details` | string | Contact details |
+    | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `native_name` | string | Native name |
     | `o` | string | Which field to use when ordering the results. |
-    | `organization_group_name` | string |  |
-    | `organization_group_uuid` | array | organization_group_uuid |
+    | `organization_group_name` | string | Organization group name |
+    | `organization_group_uuid` | array | Organization group UUID |
     | `owned_by_current_user` | boolean | Return a list of customers where current user is owner. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |

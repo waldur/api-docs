@@ -65,22 +65,22 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `billing_period_month` | number |  |
-    | `billing_period_year` | number |  |
+    | `billing_period_month` | number | Billing period month |
+    | `billing_period_year` | number | Billing period year |
     | `component_usage__billing_period` | string (date) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `date_after` | string (date) |  |
-    | `date_before` | string (date) |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `date_after` | string (date) | Date after or equal to |
+    | `date_before` | string (date) | Date before or equal .google/docsto |
     | `field` | array |  |
     | `o` | array | Ordering<br><br> |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project_uuid` | string (uuid) |  |
+    | `project_uuid` | string (uuid) | Project UUID |
     | `resource` | string | Resource URL |
-    | `resource_uuid` | string (uuid) |  |
-    | `type` | string |  |
-    | `username` | string |  |
+    | `resource_uuid` | string (uuid) | Resource UUID |
+    | `type` | string | Component type |
+    | `username` | string | Username contains |
 
 
 === "Responses"

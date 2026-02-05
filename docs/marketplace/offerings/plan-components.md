@@ -61,12 +61,12 @@ Returns a paginated list of all plan components. A plan component defines the pr
 
     | Name | Type | Description |
     |---|---|---|
-    | `archived` | boolean |  |
+    | `archived` | boolean | Archived |
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `plan_uuid` | string (uuid) | Plan UUID |
-    | `shared` | boolean |  |
+    | `shared` | boolean | Shared |
 
 
 === "Responses"
@@ -77,7 +77,9 @@ Returns a paginated list of all plan components. A plan component defines the pr
     
     | Field | Type | Description |
     |---|---|---|
+    | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
+    | `plan_uuid` | string (uuid) |  |
     | `plan_name` | string |  |
     | `plan_unit` | any |  |
     | `component_name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -157,7 +159,9 @@ Returns the details of a specific plan component, including its pricing, quotas,
     
     | Field | Type | Description |
     |---|---|---|
+    | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
+    | `plan_uuid` | string (uuid) |  |
     | `plan_name` | string |  |
     | `plan_unit` | any |  |
     | `component_name` | string | Display name for the measured unit, for example, Floating IP. |

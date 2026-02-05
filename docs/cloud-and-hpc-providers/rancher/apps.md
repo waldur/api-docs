@@ -4,6 +4,7 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/rancher-apps/` | [List Rancher Apps](#list-rancher-apps) |
 | <span class="http-badge http-get">GET</span> | `/api/rancher-apps/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/rancher-apps/` | [Create](#create) |
@@ -12,8 +13,13 @@
 | <span class="http-badge http-put">PUT</span> | `/api/rancher-apps/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/rancher-apps/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/rancher-apps/{uuid}/` | [Delete](#delete) |
+| **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/rancher-apps/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
+| <span class="http-badge http-post">POST</span> | `/api/rancher-apps/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 
 ---
+## Core CRUD
+
 
 ### List Rancher Apps
 
@@ -65,30 +71,30 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `backend_id` | string |  |
+    | `backend_id` | string | Backend ID |
     | `can_manage` | boolean | Can manage |
     | `cluster_uuid` | string (uuid) |  |
-    | `customer` | string (uuid) |  |
-    | `customer_abbreviation` | string |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
-    | `external_ip` | string |  |
+    | `customer` | string (uuid) | Customer UUID |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description |
+    | `external_ip` | string | External IP |
     | `field` | array |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `namespace_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string (uuid) |  |
-    | `project_name` | string |  |
+    | `project` | string (uuid) | Project UUID |
+    | `project_name` | string | Project name |
     | `project_uuid` | string (uuid) |  |
-    | `service_settings_name` | string |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `state` | array |  |
+    | `service_settings_name` | string | Service settings name |
+    | `service_settings_uuid` | string (uuid) | Service settings UUID |
+    | `state` | array | State<br><br> |
     | `template_uuid` | string (uuid) |  |
-    | `uuid` | string (uuid) |  |
+    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"
@@ -475,13 +481,19 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
 
 === "Responses"
 
-    **`202`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
     
     ---
     
-    **`409`** - No response body
+    **`409`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 
@@ -911,5 +923,161 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+---
+
+## Other Actions
+
+
+### Mark resource as ERRED
+
+Manually transition the resource to ERRED state. This is useful for resources stuck in transitional states (CREATING, UPDATING, DELETING) that cannot be synced via pull. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/rancher-apps/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_erred/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_erred_request import SetErredRequest # (1)
+    from waldur_api_client.api.rancher_apps import rancher_apps_set_erred # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetErredRequest()
+    response = rancher_apps_set_erred.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetErredRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_erred_request.py)
+    2.  **API Source:** [`rancher_apps_set_erred`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_apps/rancher_apps_set_erred.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { rancherAppsSetErred } from 'waldur-js-client';
+    
+    try {
+      const response = await rancherAppsSetErred({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
+
+### Mark resource as OK
+
+Manually transition the resource to OK state and clear error fields. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/rancher-apps/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_ok/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.rancher_apps import rancher_apps_set_ok # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = rancher_apps_set_ok.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`rancher_apps_set_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_apps/rancher_apps_set_ok.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { rancherAppsSetOk } from 'waldur-js-client';
+    
+    try {
+      const response = await rancherAppsSetOk({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---

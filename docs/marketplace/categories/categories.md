@@ -68,14 +68,14 @@ Returns a paginated list of marketplace categories.
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `customers_offerings_state` | array | Customers offerings state<br><br> |
     | `field` | array |  |
-    | `group_uuid` | string (uuid) |  |
+    | `group_uuid` | string (uuid) | Category group UUID |
     | `has_shared` | boolean | Has shared |
-    | `offering_name` | string |  |
+    | `offering_name` | string | Offering name contains |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `resource_customer_uuid` | string (uuid) |  |
-    | `resource_project_uuid` | string (uuid) |  |
-    | `title` | string |  |
+    | `resource_customer_uuid` | string (uuid) | Resource customer UUID |
+    | `resource_project_uuid` | string (uuid) | Resource project UUID |
+    | `title` | string | Title contains |
 
 
 === "Responses"

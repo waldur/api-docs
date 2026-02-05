@@ -639,6 +639,7 @@ Return a list of orders for which the campaign is applied.
     | `attachment` | string (uri) |  |
     | `type` | any |  |
     | `start_date` | string (date) | Enables delayed processing of resource provisioning order. |
+    | `slug` | string |  |
     | `url` | string (uri) |  |
     | `consumer_reviewed_by` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `consumer_reviewed_by_full_name` | string |  |
@@ -662,13 +663,14 @@ Return a list of orders for which the campaign is applied.
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | string (decimal) |  |
+    | `old_cost_estimate` | number (double) |  |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
     | `activation_price` | number (double) |  |
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
+    | `order_subtype` | string |  |
     | `issue` | any |  |
 
 ---
@@ -797,18 +799,19 @@ Return a list of resources for which the campaign is applied.
     | `parent_offering_uuid` | string (uuid) |  |
     | `parent_offering_name` | string |  |
     | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) |  |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
-    | `report.header` | string |  |
-    | `report.body` | string |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
@@ -819,7 +822,7 @@ Return a list of resources for which the campaign is applied.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | any |  |
@@ -832,6 +835,29 @@ Return a list of resources for which the campaign is applied.
     | `customer_slug` | string |  |
     | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
     | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
 
 ---
 

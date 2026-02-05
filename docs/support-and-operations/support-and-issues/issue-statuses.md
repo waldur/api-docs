@@ -172,14 +172,14 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.issue_status_request import IssueStatusRequest # (1)
+    from waldur_api_client.models.issue_status_create_request import IssueStatusCreateRequest # (1)
     from waldur_api_client.api.support_issue_statuses import support_issue_statuses_create # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = IssueStatusRequest(
+    body_data = IssueStatusCreateRequest(
         name="my-awesome-support-issue-status"
     )
     response = support_issue_statuses_create.sync(
@@ -191,7 +191,7 @@
     ```
     
     
-    1.  **Model Source:** [`IssueStatusRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/issue_status_request.py)
+    1.  **Model Source:** [`IssueStatusCreateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/issue_status_create_request.py)
     2.  **API Source:** [`support_issue_statuses_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_issue_statuses/support_issue_statuses_create.py)
 
 === "TypeScript"
@@ -227,11 +227,8 @@
     
     | Field | Type | Description |
     |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
     | `name` | string | Status name in Jira. |
     | `type` | any |  |
-    | `type_display` | string |  |
 
 ---
 
@@ -252,14 +249,14 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.issue_status_request import IssueStatusRequest # (1)
+    from waldur_api_client.models.issue_status_create_request import IssueStatusCreateRequest # (1)
     from waldur_api_client.api.support_issue_statuses import support_issue_statuses_update # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = IssueStatusRequest(
+    body_data = IssueStatusCreateRequest(
         name="my-awesome-support-issue-status"
     )
     response = support_issue_statuses_update.sync(
@@ -272,7 +269,7 @@
     ```
     
     
-    1.  **Model Source:** [`IssueStatusRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/issue_status_request.py)
+    1.  **Model Source:** [`IssueStatusCreateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/issue_status_create_request.py)
     2.  **API Source:** [`support_issue_statuses_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_issue_statuses/support_issue_statuses_update.py)
 
 === "TypeScript"
@@ -318,11 +315,8 @@
     
     | Field | Type | Description |
     |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
     | `name` | string | Status name in Jira. |
     | `type` | any |  |
-    | `type_display` | string |  |
 
 ---
 

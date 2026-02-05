@@ -4,8 +4,8 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
-| <span class="http-badge http-get">GET</span> | `/api/user-agreements/` | [List User Agreements](#list-user-agreements) |
-| <span class="http-badge http-get">GET</span> | `/api/user-agreements/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/user-agreements/` | [List user agreements](#list-user-agreements) |
+| <span class="http-badge http-get">GET</span> | `/api/user-agreements/{uuid}/` | [Retrieve user agreement](#retrieve-user-agreement) |
 | <span class="http-badge http-post">POST</span> | `/api/user-agreements/` | [Create](#create) |
 | <span class="http-badge http-put">PUT</span> | `/api/user-agreements/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/user-agreements/{uuid}/` | [Partial Update](#partial-update) |
@@ -13,7 +13,9 @@
 
 ---
 
-### List User Agreements
+### List user agreements
+
+Retrieve a list of user agreements (Terms of Service and Privacy Policy). Supports filtering by agreement type and language with fallback behavior.
 
 
 === "HTTPie"
@@ -64,6 +66,7 @@
     | Name | Type | Description |
     |---|---|---|
     | `agreement_type` | string | _Enum: `PP`, `TOS`_ |
+    | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Returns requested language or falls back to default version if unavailable. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
 
@@ -74,18 +77,21 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `content` | string |
-    | `agreement_type` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `content` | string |  |
+    | `agreement_type` | string | <br>_Enum: `TOS`, `PP`_ |
+    | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 
-### Retrieve
+### Retrieve user agreement
+
+Fetch the details of a specific user agreement by its UUID.
 
 
 === "HTTPie"
@@ -147,14 +153,15 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `content` | string |
-    | `agreement_type` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `content` | string |  |
+    | `agreement_type` | string | <br>_Enum: `TOS`, `PP`_ |
+    | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 
@@ -169,7 +176,8 @@
       https://api.example.com/api/user-agreements/ \
       Authorization:"Token YOUR_API_TOKEN" \
       content="string-value" \
-      agreement_type="TOS"
+      agreement_type="TOS" \
+      language="string-value"
     ```
 
 === "Python"
@@ -185,7 +193,8 @@
     
     body_data = UserAgreementRequest(
         content="string-value",
-        agreement_type="TOS"
+        agreement_type="TOS",
+        language="string-value"
     )
     response = user_agreements_create.sync(
         client=client,
@@ -209,7 +218,8 @@
       auth: "Token YOUR_API_TOKEN",
       body: {
         "content": "string-value",
-        "agreement_type": "TOS"
+        "agreement_type": "TOS",
+        "language": "string-value"
       }
     });
       console.log('Success:', response);
@@ -221,24 +231,26 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `content` | string | ✓ |
-    | `agreement_type` | string | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `content` | string | ✓ |  |
+    | `agreement_type` | string | ✓ | <br>_Enum: `TOS`, `PP`_ |
+    | `language` | string | ✓ | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
 
 
 === "Responses"
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `content` | string |
-    | `agreement_type` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `content` | string |  |
+    | `agreement_type` | string | <br>_Enum: `TOS`, `PP`_ |
+    | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 
@@ -253,7 +265,8 @@
       https://api.example.com/api/user-agreements/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
       content="string-value" \
-      agreement_type="TOS"
+      agreement_type="TOS" \
+      language="string-value"
     ```
 
 === "Python"
@@ -269,7 +282,8 @@
     
     body_data = UserAgreementRequest(
         content="string-value",
-        agreement_type="TOS"
+        agreement_type="TOS",
+        language="string-value"
     )
     response = user_agreements_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -297,7 +311,8 @@
       },
       body: {
         "content": "string-value",
-        "agreement_type": "TOS"
+        "agreement_type": "TOS",
+        "language": "string-value"
       }
     });
       console.log('Success:', response);
@@ -316,24 +331,26 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `content` | string | ✓ |
-    | `agreement_type` | string | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `content` | string | ✓ |  |
+    | `agreement_type` | string | ✓ | <br>_Enum: `TOS`, `PP`_ |
+    | `language` | string | ✓ | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `content` | string |
-    | `agreement_type` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `content` | string |  |
+    | `agreement_type` | string | <br>_Enum: `TOS`, `PP`_ |
+    | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 
@@ -402,24 +419,26 @@
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `content` | string |  |
-    | `agreement_type` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `content` | string |  |  |
+    | `agreement_type` | string |  | <br>_Enum: `TOS`, `PP`_ |
+    | `language` | string |  | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `content` | string |
-    | `agreement_type` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `content` | string |  |
+    | `agreement_type` | string | <br>_Enum: `TOS`, `PP`_ |
+    | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 

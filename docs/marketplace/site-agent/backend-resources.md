@@ -71,13 +71,13 @@ Returns a paginated list of backend resources that are available for import. Thi
     | `backend_id` | string | Backend ID |
     | `created` | string (date-time) | Created after |
     | `modified` | string (date-time) | Modified after |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project_uuid` | string (uuid) |  |
+    | `project_uuid` | string (uuid) | Project UUID |
 
 
 === "Responses"
@@ -483,18 +483,19 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `parent_offering_uuid` | string (uuid) |  |
     | `parent_offering_name` | string |  |
     | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) |  |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
-    | `report.header` | string |  |
-    | `report.body` | string |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
@@ -505,7 +506,7 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | any |  |
@@ -518,5 +519,28 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `customer_slug` | string |  |
     | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
     | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
 
 ---

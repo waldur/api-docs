@@ -66,44 +66,47 @@
     | Name | Type | Description |
     |---|---|---|
     | `backend_id` | string | Backend ID |
-    | `category_uuid` | string (uuid) |  |
+    | `category_uuid` | string (uuid) | Category UUID |
     | `component_count` | number | Filter by exact number of components |
     | `connected_customer_uuid` | string (uuid) |  |
     | `created` | string (date-time) | Created after |
-    | `customer` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `downscaled` | boolean |  |
+    | `customer` | string | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `downscaled` | boolean | Downscaled |
     | `field` | array |  |
     | `has_terminate_date` | boolean | Has termination date |
+    | `is_attached` | boolean | Filter by attached state |
     | `lexis_links_supported` | boolean | LEXIS links supported |
     | `limit_based` | boolean | Filter by limit-based offerings |
     | `limit_component_count` | number | Filter by exact number of limit-based components |
     | `modified` | string (date-time) | Modified after |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering` | string |  |
-    | `offering_billable` | boolean |  |
+    | `offering_billable` | boolean | Offering billable |
     | `offering_shared` | boolean | Offering shared |
     | `offering_slug` | array | Multiple values may be separated by commas. |
-    | `offering_type` | string |  |
+    | `offering_type` | string | Offering type |
     | `offering_uuid` | array | Multiple values may be separated by commas. |
     | `only_limit_based` | boolean | Filter resources with only limit-based components |
     | `only_usage_based` | boolean | Filter resources with only usage-based components |
+    | `order_state` | array | Order state<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_offering_uuid` | string (uuid) |  |
-    | `paused` | boolean |  |
-    | `plan_uuid` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `provider_uuid` | string (uuid) |  |
+    | `paused` | boolean | Paused |
+    | `plan_uuid` | string (uuid) | Plan UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
-    | `restrict_member_access` | boolean |  |
+    | `restrict_member_access` | boolean | Restrict member access |
     | `runtime_state` | string | Runtime state |
-    | `service_manager_uuid` | string (uuid) | Service Manager UUID |
-    | `state` | array |  |
+    | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `state` | array | Resource state<br><br> |
     | `usage_based` | boolean | Filter by usage-based offerings |
+    | `visible_to_providers` | boolean | Include only resources visible to service providers |
     | `visible_to_username` | string | Visible to username |
 
 
@@ -161,18 +164,19 @@
     | `parent_offering_uuid` | string (uuid) |  |
     | `parent_offering_name` | string |  |
     | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) |  |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
-    | `report.header` | string |  |
-    | `report.body` | string |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
@@ -183,7 +187,7 @@
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | any |  |
@@ -196,6 +200,29 @@
     | `customer_slug` | string |  |
     | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
     | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
     | `created_by` | string (uri) |  |
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
@@ -326,18 +353,19 @@
     | `parent_offering_uuid` | string (uuid) |  |
     | `parent_offering_name` | string |  |
     | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) |  |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
-    | `report.header` | string |  |
-    | `report.body` | string |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
@@ -348,7 +376,7 @@
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | any |  |
@@ -361,6 +389,29 @@
     | `customer_slug` | string |  |
     | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
     | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
     | `created_by` | string (uri) |  |
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |

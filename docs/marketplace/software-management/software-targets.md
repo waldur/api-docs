@@ -83,15 +83,17 @@ Returns a paginated list of software targets, which represent specific builds of
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `cpu_family` | string |
-    | `cpu_microarchitecture` | string |
-    | `path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
 
 ---
 
@@ -159,15 +161,17 @@ Returns the details of a specific software target, including its CPU family, mic
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `cpu_family` | string |
-    | `cpu_microarchitecture` | string |
-    | `path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
 
 ---
 
@@ -222,15 +226,17 @@ Creates a new target for a software version. Requires staff permissions.
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `cpu_family` | string |
-    | `cpu_microarchitecture` | string |
-    | `path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
 
 ---
 
@@ -298,15 +304,17 @@ Updates an existing software target. Requires staff permissions.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `cpu_family` | string |
-    | `cpu_microarchitecture` | string |
-    | `path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
 
 ---
 
@@ -374,15 +382,17 @@ Partially updates an existing software target. Requires staff permissions.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `cpu_family` | string |
-    | `cpu_microarchitecture` | string |
-    | `path` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `target_type` | string | Type of target (architecture, platform, variant, etc.) |
+    | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
+    | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
+    | `location` | string | Target location (CVMFS path, download URL, etc.) |
+    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
 
 ---
 

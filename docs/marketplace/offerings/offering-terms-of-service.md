@@ -65,14 +65,14 @@ Returns a paginated list of Terms of Service configurations for offerings. Visib
 
     | Name | Type | Description |
     |---|---|---|
-    | `is_active` | boolean |  |
+    | `is_active` | boolean | Is active |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering` | string | Offering URL |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `requires_reconsent` | boolean |  |
-    | `version` | string |  |
+    | `requires_reconsent` | boolean | Requires reconsent |
+    | `version` | string | Version |
 
 
 === "Responses"

@@ -61,8 +61,8 @@ Returns a paginated list of integration statuses for offerings. This is used to 
 
     | Name | Type | Description |
     |---|---|---|
-    | `agent_type` | string |  |
-    | `customer_uuid` | string |  |
+    | `agent_type` | string | Agent type |
+    | `customer_uuid` | string | Customer UUID |
     | `o` | array | Ordering<br><br> |
     | `offering` | string |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
@@ -70,7 +70,7 @@ Returns a paginated list of integration statuses for offerings. This is used to 
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_offering_uuid` | string (uuid) |  |
-    | `status` | array |  |
+    | `status` | array | Integration status<br><br> |
 
 
 === "Responses"

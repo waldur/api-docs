@@ -66,15 +66,16 @@ Get a list of available VM instance images.
 
     | Name | Type | Description |
     |---|---|---|
-    | `name` | string |  |
-    | `name_exact` | string |  |
-    | `offering_uuid` | string (uuid) |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `settings` | string |  |
-    | `settings_uuid` | string (uuid) |  |
-    | `tenant` | string |  |
-    | `tenant_uuid` | string (uuid) |  |
+    | `settings` | string | Settings URL |
+    | `settings_uuid` | string (uuid) | Settings UUID |
+    | `show_duplicate_names` | boolean | Show duplicate image names |
+    | `tenant` | string | Tenant URL |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
 
 
 === "Responses"
@@ -92,6 +93,7 @@ Get a list of available VM instance images.
     | `min_ram` | integer | Minimum memory size in MiB |
     | `settings` | string (uri) |  |
     | `backend_id` | string |  |
+    | `backend_created_at` | string (date-time) |  |
 
 ---
 
@@ -168,6 +170,7 @@ Retrieve details of a specific VM instance image.
     | `min_ram` | integer | Minimum memory size in MiB |
     | `settings` | string (uri) |  |
     | `backend_id` | string |  |
+    | `backend_created_at` | string (date-time) |  |
 
 ---
 
@@ -234,5 +237,6 @@ Retrieve usage statistics for VM instance images, showing running and created in
     | `min_ram` | integer | Minimum memory size in MiB |
     | `settings` | string (uri) |  |
     | `backend_id` | string |  |
+    | `backend_created_at` | string (date-time) |  |
 
 ---

@@ -8,6 +8,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/user-group-invitations/` | [List group invitations](#list-group-invitations) |
 | <span class="http-badge http-get">GET</span> | `/api/user-group-invitations/{uuid}/` | [Retrieve group invitation](#retrieve-group-invitation) |
 | <span class="http-badge http-post">POST</span> | `/api/user-group-invitations/` | [Create group invitation](#create-group-invitation) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/user-group-invitations/{uuid}/` | [Delete a group invitation](#delete-a-group-invitation) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/user-group-invitations/{uuid}/projects/` | [List projects for a customer-scoped group invitation](#list-projects-for-a-customer-scoped-group-invitation) |
 | <span class="http-badge http-post">POST</span> | `/api/user-group-invitations/{uuid}/cancel/` | [Cancel a group invitation](#cancel-a-group-invitation) |
@@ -88,30 +89,31 @@ Retrieve a list of group invitations. Unauthenticated users can only see public 
     
     | Field | Type | Description |
     |---|---|---|
-    | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string |  |
-    | `scope_description` | string | Get the description field from the scope if it exists. Returns empty string if scope doesn't have a description field. |
-    | `scope_type` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `role_name` | string |  |
-    | `role_description` | string |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `created_by_image` | string (uri) |  |
+    | `scope_uuid` | string (uuid) | UUID of the invitation scope (Customer or Project) |
+    | `scope_name` | string | Name of the invitation scope |
+    | `scope_description` | string | Description of the invitation scope |
+    | `scope_type` | string | Type of the invitation scope (e.g., 'customer', 'project') |
+    | `customer_uuid` | string (uuid) | UUID of the customer organization |
+    | `customer_name` | string | Name of the customer organization |
+    | `role_name` | string | Name of the role being granted (e.g., 'PROJECT.ADMIN') |
+    | `role_description` | string | Description of the role being granted |
+    | `created_by_full_name` | string | Full name of the user who created this invitation |
+    | `created_by_username` | string | Username of the user who created this invitation |
+    | `created_by_image` | string (uri) | Profile image of the user who created this invitation |
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `role` | string (uuid) |  |
+    | `role` | string (uuid) | UUID of the role to grant to the invited user |
     | `created` | string (date-time) |  |
-    | `expires` | string (date-time) |  |
     | `is_active` | boolean |  |
     | `is_public` | boolean | Allow non-authenticated users to see and accept this invitation. Only staff can create public invitations. |
     | `auto_create_project` | boolean | Create project and grant project permissions instead of customer permissions |
+    | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
-    | `project_role` | string (uuid) |  |
+    | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
     | `user_affiliations` | any |  |
     | `user_email_patterns` | any |  |
-    | `scope_image` | string (uri) |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
 
 ---
 
@@ -181,30 +183,31 @@ Retrieve details of a specific group invitation. Unauthenticated users can only 
     
     | Field | Type | Description |
     |---|---|---|
-    | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string |  |
-    | `scope_description` | string | Get the description field from the scope if it exists. Returns empty string if scope doesn't have a description field. |
-    | `scope_type` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `role_name` | string |  |
-    | `role_description` | string |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `created_by_image` | string (uri) |  |
+    | `scope_uuid` | string (uuid) | UUID of the invitation scope (Customer or Project) |
+    | `scope_name` | string | Name of the invitation scope |
+    | `scope_description` | string | Description of the invitation scope |
+    | `scope_type` | string | Type of the invitation scope (e.g., 'customer', 'project') |
+    | `customer_uuid` | string (uuid) | UUID of the customer organization |
+    | `customer_name` | string | Name of the customer organization |
+    | `role_name` | string | Name of the role being granted (e.g., 'PROJECT.ADMIN') |
+    | `role_description` | string | Description of the role being granted |
+    | `created_by_full_name` | string | Full name of the user who created this invitation |
+    | `created_by_username` | string | Username of the user who created this invitation |
+    | `created_by_image` | string (uri) | Profile image of the user who created this invitation |
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `role` | string (uuid) |  |
+    | `role` | string (uuid) | UUID of the role to grant to the invited user |
     | `created` | string (date-time) |  |
-    | `expires` | string (date-time) |  |
     | `is_active` | boolean |  |
     | `is_public` | boolean | Allow non-authenticated users to see and accept this invitation. Only staff can create public invitations. |
     | `auto_create_project` | boolean | Create project and grant project permissions instead of customer permissions |
+    | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
-    | `project_role` | string (uuid) |  |
+    | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
     | `user_affiliations` | any |  |
     | `user_email_patterns` | any |  |
-    | `scope_image` | string (uri) |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
 
 ---
 
@@ -275,14 +278,16 @@ Create a new group invitation, which acts as a template for users to request per
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `role` | string (uuid) | ✓ |  |
-    | `scope` | string | ✓ | <br>_Constraints: write-only_ |
+    | `role` | string (uuid) | ✓ | UUID of the role to grant to the invited user |
+    | `scope` | string | ✓ | URL of the scope (Customer or Project) for this invitation<br>_Constraints: write-only_ |
     | `is_public` | boolean |  | Allow non-authenticated users to see and accept this invitation. Only staff can create public invitations. |
     | `auto_create_project` | boolean |  | Create project and grant project permissions instead of customer permissions |
+    | `auto_approve` | boolean |  | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
-    | `project_role` | string (uuid) |  |  |
+    | `project_role` | string (uuid) |  | UUID of the project role to grant if auto_create_project is enabled |
     | `user_affiliations` | any |  |  |
     | `user_email_patterns` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
 
 
 === "Responses"
@@ -291,30 +296,98 @@ Create a new group invitation, which acts as a template for users to request per
     
     | Field | Type | Description |
     |---|---|---|
-    | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string |  |
-    | `scope_description` | string | Get the description field from the scope if it exists. Returns empty string if scope doesn't have a description field. |
-    | `scope_type` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `role_name` | string |  |
-    | `role_description` | string |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `created_by_image` | string (uri) |  |
+    | `scope_uuid` | string (uuid) | UUID of the invitation scope (Customer or Project) |
+    | `scope_name` | string | Name of the invitation scope |
+    | `scope_description` | string | Description of the invitation scope |
+    | `scope_type` | string | Type of the invitation scope (e.g., 'customer', 'project') |
+    | `customer_uuid` | string (uuid) | UUID of the customer organization |
+    | `customer_name` | string | Name of the customer organization |
+    | `role_name` | string | Name of the role being granted (e.g., 'PROJECT.ADMIN') |
+    | `role_description` | string | Description of the role being granted |
+    | `created_by_full_name` | string | Full name of the user who created this invitation |
+    | `created_by_username` | string | Username of the user who created this invitation |
+    | `created_by_image` | string (uri) | Profile image of the user who created this invitation |
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `role` | string (uuid) |  |
+    | `role` | string (uuid) | UUID of the role to grant to the invited user |
     | `created` | string (date-time) |  |
-    | `expires` | string (date-time) |  |
     | `is_active` | boolean |  |
     | `is_public` | boolean | Allow non-authenticated users to see and accept this invitation. Only staff can create public invitations. |
     | `auto_create_project` | boolean | Create project and grant project permissions instead of customer permissions |
+    | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
-    | `project_role` | string (uuid) |  |
+    | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
     | `user_affiliations` | any |  |
     | `user_email_patterns` | any |  |
-    | `scope_image` | string (uri) |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
+
+---
+
+### Delete a group invitation
+
+Deletes an inactive group invitation. Only invitations that have been canceled (is_active=False) can be deleted.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/user-group-invitations/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.user_group_invitations import user_group_invitations_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = user_group_invitations_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`user_group_invitations_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_group_invitations/user_group_invitations_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { userGroupInvitationsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await userGroupInvitationsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
 
 ---
 
@@ -472,7 +545,7 @@ Cancels an active group invitation, preventing new permission requests from bein
 
 ### Submit a permission request
 
-Creates a permission request based on a group invitation for the currently authenticated user.
+Creates a permission request based on a group invitation for the currently authenticated user. If the invitation has auto_approve enabled and the user matches the required patterns, the request is automatically approved.
 
 
 === "HTTPie"
@@ -539,5 +612,6 @@ Creates a permission request based on a group invitation for the currently authe
     | `uuid` | string | UUID of the created permission request |
     | `scope_name` | string | Name of the invitation scope |
     | `scope_uuid` | string | UUID of the invitation scope |
+    | `auto_approved` | boolean | Whether the request was automatically approved |
 
 ---

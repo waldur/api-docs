@@ -66,15 +66,15 @@ Get a list of available volume types.
 
     | Name | Type | Description |
     |---|---|---|
-    | `name` | string |  |
-    | `name_exact` | string |  |
-    | `offering_uuid` | string (uuid) |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `settings` | string |  |
-    | `settings_uuid` | string (uuid) |  |
-    | `tenant` | string |  |
-    | `tenant_uuid` | string (uuid) |  |
+    | `settings` | string | Settings URL |
+    | `settings_uuid` | string (uuid) | Settings UUID |
+    | `tenant` | string | Tenant URL |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
 
 
 === "Responses"

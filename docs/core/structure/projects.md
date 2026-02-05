@@ -105,21 +105,21 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
     | `customer` | array | Multiple values may be separated by commas. |
-    | `customer_abbreviation` | string |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `description` | string |  |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `description` | string | Description |
     | `field` | array |  |
     | `include_terminated` | boolean | Include soft-deleted (terminated) projects. Only available to staff and support users, or users with organizational roles who can see their terminated projects. |
-    | `is_removed` | boolean |  |
+    | `is_removed` | boolean | Is removed |
     | `modified` | string (date-time) | Modified after |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, slug, UUID, backend ID or resource effective ID |
-    | `slug` | string |  |
+    | `slug` | string | Slug |
 
 
 === "Responses"
@@ -133,34 +133,37 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `customer_slug` | string |  |
     | `customer_native_name` | string |  |
     | `customer_abbreviation` | string |  |
-    | `description` | string |  |
+    | `description` | string | Project description (HTML content will be sanitized) |
     | `customer_display_billing_info_in_projects` | boolean |  |
     | `created` | string (date-time) |  |
     | `type` | string (uri) |  |
     | `type_name` | string |  |
     | `type_uuid` | string (uuid) |  |
     | `backend_id` | string |  |
-    | `start_date` | string (date) |  |
-    | `end_date` | string (date) |  |
+    | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
     | `oecd_fos_2007_code` | any |  |
-    | `oecd_fos_2007_label` | string |  |
+    | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
-    | `resources_count` | integer |  |
+    | `resources_count` | integer | Number of active resources in this project |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any |  |
-    | `staff_notes` | string |  |
+    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -243,34 +246,37 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `customer_slug` | string |  |
     | `customer_native_name` | string |  |
     | `customer_abbreviation` | string |  |
-    | `description` | string |  |
+    | `description` | string | Project description (HTML content will be sanitized) |
     | `customer_display_billing_info_in_projects` | boolean |  |
     | `created` | string (date-time) |  |
     | `type` | string (uri) |  |
     | `type_name` | string |  |
     | `type_uuid` | string (uuid) |  |
     | `backend_id` | string |  |
-    | `start_date` | string (date) |  |
-    | `end_date` | string (date) |  |
+    | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
     | `oecd_fos_2007_code` | any |  |
-    | `oecd_fos_2007_label` | string |  |
+    | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
-    | `resources_count` | integer |  |
+    | `resources_count` | integer | Number of active resources in this project |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any |  |
-    | `staff_notes` | string |  |
+    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -345,19 +351,22 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) | ✓ |  |
-    | `description` | string |  |  |
+    | `description` | string |  | Project description (HTML content will be sanitized) |
     | `type` | string (uri) |  |  |
     | `backend_id` | string |  |  |
-    | `start_date` | string (date) |  |  |
-    | `end_date` | string (date) |  |  |
+    | `start_date` | string (date) |  | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) |  | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `oecd_fos_2007_code` | any |  |  |
     | `is_industry` | boolean |  |  |
     | `image` | string (binary) |  |  |
     | `kind` | any |  |  |
-    | `staff_notes` | string |  |  |
+    | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |  |
+    | `user_affiliations` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
 
 
 === "Responses"
@@ -369,34 +378,37 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `customer_slug` | string |  |
     | `customer_native_name` | string |  |
     | `customer_abbreviation` | string |  |
-    | `description` | string |  |
+    | `description` | string | Project description (HTML content will be sanitized) |
     | `customer_display_billing_info_in_projects` | boolean |  |
     | `created` | string (date-time) |  |
     | `type` | string (uri) |  |
     | `type_name` | string |  |
     | `type_uuid` | string (uuid) |  |
     | `backend_id` | string |  |
-    | `start_date` | string (date) |  |
-    | `end_date` | string (date) |  |
+    | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
     | `oecd_fos_2007_code` | any |  |
-    | `oecd_fos_2007_label` | string |  |
+    | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
-    | `resources_count` | integer |  |
+    | `resources_count` | integer | Number of active resources in this project |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any |  |
-    | `staff_notes` | string |  |
+    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -482,19 +494,22 @@ Update the details of a project. Requires project administrator or customer owne
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) | ✓ |  |
-    | `description` | string |  |  |
+    | `description` | string |  | Project description (HTML content will be sanitized) |
     | `type` | string (uri) |  |  |
     | `backend_id` | string |  |  |
-    | `start_date` | string (date) |  |  |
-    | `end_date` | string (date) |  |  |
+    | `start_date` | string (date) |  | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) |  | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `oecd_fos_2007_code` | any |  |  |
     | `is_industry` | boolean |  |  |
     | `image` | string (binary) |  |  |
     | `kind` | any |  |  |
-    | `staff_notes` | string |  |  |
+    | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |  |
+    | `user_affiliations` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
 
 
 === "Responses"
@@ -506,34 +521,37 @@ Update the details of a project. Requires project administrator or customer owne
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `customer_slug` | string |  |
     | `customer_native_name` | string |  |
     | `customer_abbreviation` | string |  |
-    | `description` | string |  |
+    | `description` | string | Project description (HTML content will be sanitized) |
     | `customer_display_billing_info_in_projects` | boolean |  |
     | `created` | string (date-time) |  |
     | `type` | string (uri) |  |
     | `type_name` | string |  |
     | `type_uuid` | string (uuid) |  |
     | `backend_id` | string |  |
-    | `start_date` | string (date) |  |
-    | `end_date` | string (date) |  |
+    | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
     | `oecd_fos_2007_code` | any |  |
-    | `oecd_fos_2007_label` | string |  |
+    | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
-    | `resources_count` | integer |  |
+    | `resources_count` | integer | Number of active resources in this project |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any |  |
-    | `staff_notes` | string |  |
+    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -610,19 +628,22 @@ Partially update the details of a project. Requires project administrator or cus
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string |  |  |
-    | `slug` | string |  |  |
+    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |  |
-    | `description` | string |  |  |
+    | `description` | string |  | Project description (HTML content will be sanitized) |
     | `type` | string (uri) |  |  |
     | `backend_id` | string |  |  |
-    | `start_date` | string (date) |  |  |
-    | `end_date` | string (date) |  |  |
+    | `start_date` | string (date) |  | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) |  | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `oecd_fos_2007_code` | any |  |  |
     | `is_industry` | boolean |  |  |
     | `image` | string (binary) |  |  |
     | `kind` | any |  |  |
-    | `staff_notes` | string |  |  |
+    | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |  |
+    | `user_affiliations` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
 
 
 === "Responses"
@@ -634,34 +655,37 @@ Partially update the details of a project. Requires project administrator or cus
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `customer_slug` | string |  |
     | `customer_native_name` | string |  |
     | `customer_abbreviation` | string |  |
-    | `description` | string |  |
+    | `description` | string | Project description (HTML content will be sanitized) |
     | `customer_display_billing_info_in_projects` | boolean |  |
     | `created` | string (date-time) |  |
     | `type` | string (uri) |  |
     | `type_name` | string |  |
     | `type_uuid` | string (uuid) |  |
     | `backend_id` | string |  |
-    | `start_date` | string (date) |  |
-    | `end_date` | string (date) |  |
+    | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
     | `oecd_fos_2007_code` | any |  |
-    | `oecd_fos_2007_label` | string |  |
+    | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
-    | `resources_count` | integer |  |
+    | `resources_count` | integer | Number of active resources in this project |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any |  |
-    | `staff_notes` | string |  |
+    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -821,34 +845,37 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `customer_slug` | string |  |
     | `customer_native_name` | string |  |
     | `customer_abbreviation` | string |  |
-    | `description` | string |  |
+    | `description` | string | Project description (HTML content will be sanitized) |
     | `customer_display_billing_info_in_projects` | boolean |  |
     | `created` | string (date-time) |  |
     | `type` | string (uri) |  |
     | `type_name` | string |  |
     | `type_uuid` | string (uuid) |  |
     | `backend_id` | string |  |
-    | `start_date` | string (date) |  |
-    | `end_date` | string (date) |  |
+    | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
     | `oecd_fos_2007_code` | any |  |
-    | `oecd_fos_2007_label` | string |  |
+    | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
-    | `resources_count` | integer |  |
+    | `resources_count` | integer | Number of active resources in this project |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any |  |
-    | `staff_notes` | string |  |
+    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -1029,20 +1056,20 @@ A list of users which can be added to the current project from other projects of
     | `civil_number` | string |  |
     | `date_joined` | string (date-time) | Date joined after |
     | `description` | string |  |
-    | `email` | string |  |
+    | `email` | string | Email |
     | `full_name` | string | Full name |
-    | `is_active` | boolean |  |
-    | `job_title` | string |  |
+    | `is_active` | boolean | Is active |
+    | `job_title` | string | Job title |
     | `modified` | string (date-time) | Date modified after |
-    | `native_name` | string |  |
+    | `native_name` | string | Native name |
     | `o` | string | Ordering. Sort by a combination of first name, last name, and username.<br>_Enum: `concatenated_name`, `-concatenated_name`_ |
-    | `organization` | string |  |
+    | `organization` | string | Organization |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `phone_number` | string |  |
     | `registration_method` | string |  |
     | `user_keyword` | string | User keyword |
-    | `username` | string |  |
+    | `username` | string | Username |
 
 
 === "Responses"
@@ -1349,7 +1376,7 @@ Updates the expiration time for a user's existing role in the current scope. Thi
 
 ### Move project to another customer
 
-Moves a project and its associated resources to a different customer. This is a staff-only action. You can choose whether to preserve existing project permissions for users.
+Moves a project and its associated resources to a different customer. You can choose whether to preserve existing project permissions for users. Terminated projects can also be moved.
 
 
 === "HTTPie"
@@ -1438,45 +1465,40 @@ Moves a project and its associated resources to a different customer. This is a 
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `customer_slug` | string |  |
     | `customer_native_name` | string |  |
     | `customer_abbreviation` | string |  |
-    | `description` | string |  |
+    | `description` | string | Project description (HTML content will be sanitized) |
     | `customer_display_billing_info_in_projects` | boolean |  |
     | `created` | string (date-time) |  |
     | `type` | string (uri) |  |
     | `type_name` | string |  |
     | `type_uuid` | string (uuid) |  |
     | `backend_id` | string |  |
-    | `start_date` | string (date) |  |
-    | `end_date` | string (date) |  |
+    | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
+    | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
     | `oecd_fos_2007_code` | any |  |
-    | `oecd_fos_2007_label` | string |  |
+    | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
-    | `resources_count` | integer |  |
+    | `resources_count` | integer | Number of active resources in this project |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any |  |
-    | `staff_notes` | string |  |
+    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
-    
-    ---
-    
-    **`400`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `non_field_errors` | array of strings |  |
 
 ---
 
@@ -1633,6 +1655,13 @@ Get checklist with questions and existing answers.
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `include_all` | boolean | If true, returns all questions including hidden ones (for dynamic form visibility). Default: false. |
+
+
 === "Responses"
 
     **`200`** - 
@@ -1658,12 +1687,13 @@ Get checklist with questions and existing answers.
     | `questions.order` | integer |  |
     | `questions.existing_answer` | object (free-form) |  |
     | `questions.question_options` | array of anys |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
+    | `questions.dependencies_info` | object (free-form) |  |
     
     ---
     
@@ -1756,8 +1786,8 @@ Get checklist template for creating new objects.
     | `questions.question_options.order` | integer |  |
     | `questions.question_type` | any | Type of question and expected answer format |
     | `questions.order` | integer |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -1780,8 +1810,8 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.question_options.order` | integer |  |
     | `initial_visible_questions.question_type` | any | Type of question and expected answer format |
     | `initial_visible_questions.order` | integer |  |
-    | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `initial_visible_questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `initial_visible_questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |

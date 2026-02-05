@@ -13,12 +13,13 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/onboarding-verifications/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/onboarding-verifications/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/{uuid}/checklist/` | [Get checklist with questions and existing answers](#get-checklist-with-questions-and-existing-answers) |
+| <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/available_checklists/` | [Available checklists](#available-checklists) |
+| <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/{uuid}/checklist/` | [Checklist](#checklist) |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/checklist-template/` | [Get checklist template for creating new objects](#get-checklist-template-for-creating-new-objects) |
-| <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
+| <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/{uuid}/completion_status/` | [Completion status](#completion-status) |
 | <span class="http-badge http-post">POST</span> | `/api/onboarding-verifications/{uuid}/run_validation/` | [Run validation](#run-validation) |
 | <span class="http-badge http-post">POST</span> | `/api/onboarding-verifications/start_verification/` | [Start verification](#start-verification) |
-| <span class="http-badge http-post">POST</span> | `/api/onboarding-verifications/{uuid}/submit_answers/` | [Submit checklist answers](#submit-checklist-answers) |
+| <span class="http-badge http-post">POST</span> | `/api/onboarding-verifications/{uuid}/submit_answers/` | [Submit answers](#submit-answers) |
 
 ---
 ## Core CRUD
@@ -74,8 +75,13 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `country` | string |  |
+    | `legal_name` | string |  |
+    | `legal_person_identifier` | string |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `status` | string |  |
+    | `user_uuid` | string (uuid) | User UUID |
 
 
 === "Responses"
@@ -87,11 +93,38 @@
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) |  |
-    | `user` | integer | User requesting company onboarding |
-    | `country` | string | ISO country code (e.g., 'EE' for Estonia) |
+    | `user` | string (uri) | User requesting company onboarding |
+    | `user_full_name` | string |  |
+    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
     | `legal_name` | string | Company name(optional, for reference) |
     | `status` | any |  |
+    | `justifications` | array of objects |  |
+    | `justifications.uuid` | string (uuid) |  |
+    | `justifications.verification` | string (uri) |  |
+    | `justifications.verification_uuid` | string (uuid) |  |
+    | `justifications.country` | string |  |
+    | `justifications.user` | string (uri) |  |
+    | `justifications.user_full_name` | string |  |
+    | `justifications.legal_person_identifier` | string |  |
+    | `justifications.legal_name` | string |  |
+    | `justifications.error_message` | string |  |
+    | `justifications.error_traceback` | string |  |
+    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
+    | `justifications.validated_by` | string (uri) |  |
+    | `justifications.validated_at` | string (date-time) |  |
+    | `justifications.validation_decision` | any |  |
+    | `justifications.staff_notes` | string | Administrator notes on the review decision |
+    | `justifications.supporting_documentation` | array of objects |  |
+    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
+    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
+    | `justifications.supporting_documentation.file_name` | string |  |
+    | `justifications.supporting_documentation.file_size` | integer |  |
+    | `justifications.supporting_documentation.created` | string (date-time) |  |
+    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
+    | `justifications.created` | string (date-time) |  |
+    | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
     | `verified_user_roles` | any | Roles the user has in the company |
     | `verified_company_data` | any | Company information retrieved during validation |
@@ -100,9 +133,11 @@
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
     | `expires_at` | string (date-time) | When this verification expires |
-    | `customer` | integer | Customer created after successful validation |
+    | `customer` | string (uri) | Customer created after successful validation |
     | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
     | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
+    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
+    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -173,11 +208,38 @@
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) |  |
-    | `user` | integer | User requesting company onboarding |
-    | `country` | string | ISO country code (e.g., 'EE' for Estonia) |
+    | `user` | string (uri) | User requesting company onboarding |
+    | `user_full_name` | string |  |
+    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
     | `legal_name` | string | Company name(optional, for reference) |
     | `status` | any |  |
+    | `justifications` | array of objects |  |
+    | `justifications.uuid` | string (uuid) |  |
+    | `justifications.verification` | string (uri) |  |
+    | `justifications.verification_uuid` | string (uuid) |  |
+    | `justifications.country` | string |  |
+    | `justifications.user` | string (uri) |  |
+    | `justifications.user_full_name` | string |  |
+    | `justifications.legal_person_identifier` | string |  |
+    | `justifications.legal_name` | string |  |
+    | `justifications.error_message` | string |  |
+    | `justifications.error_traceback` | string |  |
+    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
+    | `justifications.validated_by` | string (uri) |  |
+    | `justifications.validated_at` | string (date-time) |  |
+    | `justifications.validation_decision` | any |  |
+    | `justifications.staff_notes` | string | Administrator notes on the review decision |
+    | `justifications.supporting_documentation` | array of objects |  |
+    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
+    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
+    | `justifications.supporting_documentation.file_name` | string |  |
+    | `justifications.supporting_documentation.file_size` | integer |  |
+    | `justifications.supporting_documentation.created` | string (date-time) |  |
+    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
+    | `justifications.created` | string (date-time) |  |
+    | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
     | `verified_user_roles` | any | Roles the user has in the company |
     | `verified_company_data` | any | Company information retrieved during validation |
@@ -186,9 +248,11 @@
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
     | `expires_at` | string (date-time) | When this verification expires |
-    | `customer` | integer | Customer created after successful validation |
+    | `customer` | string (uri) | Customer created after successful validation |
     | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
     | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
+    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
+    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -203,9 +267,7 @@
     http \
       POST \
       https://api.example.com/api/onboarding-verifications/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      user=123 \
-      country="string-value"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
@@ -219,10 +281,7 @@
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = OnboardingVerificationRequest(
-        user=123,
-        country="string-value"
-    )
+    body_data = OnboardingVerificationRequest()
     response = onboarding_verifications_create.sync(
         client=client,
         body=body_data
@@ -242,11 +301,7 @@
     
     try {
       const response = await onboardingVerificationsCreate({
-      auth: "Token YOUR_API_TOKEN",
-      body: {
-        "user": 123,
-        "country": "string-value"
-      }
+      auth: "Token YOUR_API_TOKEN"
     });
       console.log('Success:', response);
     } catch (error) {
@@ -255,12 +310,11 @@
     ```
 
 
-=== "Request Body (required)"
+=== "Request Body"
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `user` | integer | ✓ | User requesting company onboarding |
-    | `country` | string | ✓ | ISO country code (e.g., 'EE' for Estonia) |
+    | `country` | string |  | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string |  | Official company registration code (required for automatic validation) |
     | `legal_name` | string |  | Company name(optional, for reference) |
     | `expires_at` | string (date-time) |  | When this verification expires |
@@ -273,11 +327,38 @@
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) |  |
-    | `user` | integer | User requesting company onboarding |
-    | `country` | string | ISO country code (e.g., 'EE' for Estonia) |
+    | `user` | string (uri) | User requesting company onboarding |
+    | `user_full_name` | string |  |
+    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
     | `legal_name` | string | Company name(optional, for reference) |
     | `status` | any |  |
+    | `justifications` | array of objects |  |
+    | `justifications.uuid` | string (uuid) |  |
+    | `justifications.verification` | string (uri) |  |
+    | `justifications.verification_uuid` | string (uuid) |  |
+    | `justifications.country` | string |  |
+    | `justifications.user` | string (uri) |  |
+    | `justifications.user_full_name` | string |  |
+    | `justifications.legal_person_identifier` | string |  |
+    | `justifications.legal_name` | string |  |
+    | `justifications.error_message` | string |  |
+    | `justifications.error_traceback` | string |  |
+    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
+    | `justifications.validated_by` | string (uri) |  |
+    | `justifications.validated_at` | string (date-time) |  |
+    | `justifications.validation_decision` | any |  |
+    | `justifications.staff_notes` | string | Administrator notes on the review decision |
+    | `justifications.supporting_documentation` | array of objects |  |
+    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
+    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
+    | `justifications.supporting_documentation.file_name` | string |  |
+    | `justifications.supporting_documentation.file_size` | integer |  |
+    | `justifications.supporting_documentation.created` | string (date-time) |  |
+    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
+    | `justifications.created` | string (date-time) |  |
+    | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
     | `verified_user_roles` | any | Roles the user has in the company |
     | `verified_company_data` | any | Company information retrieved during validation |
@@ -286,9 +367,11 @@
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
     | `expires_at` | string (date-time) | When this verification expires |
-    | `customer` | integer | Customer created after successful validation |
+    | `customer` | string (uri) | Customer created after successful validation |
     | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
     | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
+    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
+    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -363,22 +446,15 @@ Create customer from successful verification.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
-    | `organization_groups` | array of objects |  |
+    | `organization_groups` | array of objects | Organization groups this customer belongs to |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
-    | `display_name` | string |  |
-    | `projects` | array of objects |  |
-    | `projects.url` | string (uri) |  |
-    | `projects.uuid` | string (uuid) |  |
-    | `projects.name` | string |  |
-    | `projects.image` | string (uri) |  |
-    | `projects.resource_count` | integer |  |
-    | `projects.end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `display_name` | string | Display name of the organization (includes native name if available) |
     | `backend_id` | string | Organization identifier in another application. |
     | `image` | string (uri) |  |
     | `blocked` | boolean |  |
@@ -386,15 +462,18 @@ Create customer from successful verification.
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
     | `accounting_start_date` | string (date-time) |  |
-    | `projects_count` | integer |  |
-    | `users_count` | integer |  |
+    | `projects_count` | integer | Number of projects in this organization |
+    | `users_count` | integer | Number of users with access to this organization |
     | `sponsor_number` | integer | External ID of the sponsor covering the costs |
-    | `country_name` | string |  |
+    | `country_name` | string | Human-readable country name |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
-    | `project_metadata_checklist` | string (uuid) |  |
+    | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
+    | `user_email_patterns` | any |  |
+    | `user_affiliations` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
     | `abbreviation` | string |  |
     | `description` | string |  |
@@ -413,7 +492,7 @@ Create customer from successful verification.
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
     | `bank_account` | string |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
@@ -447,9 +526,7 @@ Create customer from successful verification.
     http \
       PUT \
       https://api.example.com/api/onboarding-verifications/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      user=123 \
-      country="string-value"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
@@ -463,10 +540,7 @@ Create customer from successful verification.
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = OnboardingVerificationRequest(
-        user=123,
-        country="string-value"
-    )
+    body_data = OnboardingVerificationRequest()
     response = onboarding_verifications_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -490,10 +564,6 @@ Create customer from successful verification.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "user": 123,
-        "country": "string-value"
       }
     });
       console.log('Success:', response);
@@ -510,12 +580,11 @@ Create customer from successful verification.
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body (required)"
+=== "Request Body"
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `user` | integer | ✓ | User requesting company onboarding |
-    | `country` | string | ✓ | ISO country code (e.g., 'EE' for Estonia) |
+    | `country` | string |  | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string |  | Official company registration code (required for automatic validation) |
     | `legal_name` | string |  | Company name(optional, for reference) |
     | `expires_at` | string (date-time) |  | When this verification expires |
@@ -528,11 +597,38 @@ Create customer from successful verification.
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) |  |
-    | `user` | integer | User requesting company onboarding |
-    | `country` | string | ISO country code (e.g., 'EE' for Estonia) |
+    | `user` | string (uri) | User requesting company onboarding |
+    | `user_full_name` | string |  |
+    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
     | `legal_name` | string | Company name(optional, for reference) |
     | `status` | any |  |
+    | `justifications` | array of objects |  |
+    | `justifications.uuid` | string (uuid) |  |
+    | `justifications.verification` | string (uri) |  |
+    | `justifications.verification_uuid` | string (uuid) |  |
+    | `justifications.country` | string |  |
+    | `justifications.user` | string (uri) |  |
+    | `justifications.user_full_name` | string |  |
+    | `justifications.legal_person_identifier` | string |  |
+    | `justifications.legal_name` | string |  |
+    | `justifications.error_message` | string |  |
+    | `justifications.error_traceback` | string |  |
+    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
+    | `justifications.validated_by` | string (uri) |  |
+    | `justifications.validated_at` | string (date-time) |  |
+    | `justifications.validation_decision` | any |  |
+    | `justifications.staff_notes` | string | Administrator notes on the review decision |
+    | `justifications.supporting_documentation` | array of objects |  |
+    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
+    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
+    | `justifications.supporting_documentation.file_name` | string |  |
+    | `justifications.supporting_documentation.file_size` | integer |  |
+    | `justifications.supporting_documentation.created` | string (date-time) |  |
+    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
+    | `justifications.created` | string (date-time) |  |
+    | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
     | `verified_user_roles` | any | Roles the user has in the company |
     | `verified_company_data` | any | Company information retrieved during validation |
@@ -541,9 +637,11 @@ Create customer from successful verification.
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
     | `expires_at` | string (date-time) | When this verification expires |
-    | `customer` | integer | Customer created after successful validation |
+    | `customer` | string (uri) | Customer created after successful validation |
     | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
     | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
+    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
+    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -616,8 +714,7 @@ Create customer from successful verification.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `user` | integer |  | User requesting company onboarding |
-    | `country` | string |  | ISO country code (e.g., 'EE' for Estonia) |
+    | `country` | string |  | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string |  | Official company registration code (required for automatic validation) |
     | `legal_name` | string |  | Company name(optional, for reference) |
     | `expires_at` | string (date-time) |  | When this verification expires |
@@ -630,11 +727,38 @@ Create customer from successful verification.
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) |  |
-    | `user` | integer | User requesting company onboarding |
-    | `country` | string | ISO country code (e.g., 'EE' for Estonia) |
+    | `user` | string (uri) | User requesting company onboarding |
+    | `user_full_name` | string |  |
+    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
     | `legal_name` | string | Company name(optional, for reference) |
     | `status` | any |  |
+    | `justifications` | array of objects |  |
+    | `justifications.uuid` | string (uuid) |  |
+    | `justifications.verification` | string (uri) |  |
+    | `justifications.verification_uuid` | string (uuid) |  |
+    | `justifications.country` | string |  |
+    | `justifications.user` | string (uri) |  |
+    | `justifications.user_full_name` | string |  |
+    | `justifications.legal_person_identifier` | string |  |
+    | `justifications.legal_name` | string |  |
+    | `justifications.error_message` | string |  |
+    | `justifications.error_traceback` | string |  |
+    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
+    | `justifications.validated_by` | string (uri) |  |
+    | `justifications.validated_at` | string (date-time) |  |
+    | `justifications.validation_decision` | any |  |
+    | `justifications.staff_notes` | string | Administrator notes on the review decision |
+    | `justifications.supporting_documentation` | array of objects |  |
+    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
+    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
+    | `justifications.supporting_documentation.file_name` | string |  |
+    | `justifications.supporting_documentation.file_size` | integer |  |
+    | `justifications.supporting_documentation.created` | string (date-time) |  |
+    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
+    | `justifications.created` | string (date-time) |  |
+    | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
     | `verified_user_roles` | any | Roles the user has in the company |
     | `verified_company_data` | any | Company information retrieved during validation |
@@ -643,9 +767,11 @@ Create customer from successful verification.
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
     | `expires_at` | string (date-time) | When this verification expires |
-    | `customer` | integer | Customer created after successful validation |
+    | `customer` | string (uri) | Customer created after successful validation |
     | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
     | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
+    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
+    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -719,9 +845,74 @@ Create customer from successful verification.
 ## Other Actions
 
 
-### Get checklist with questions and existing answers
+### Available checklists
 
-Get checklist with questions and existing answers.
+Get available onboarding checklists (customer and intent) for preview. This endpoint allows users to see checklist questions before creating a verification. Supports checklist_type parameter to filter by customer or intent checklists. Includes questions with onboarding metadata (field mappings).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/onboarding-verifications/available_checklists/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_available_checklists_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = onboarding_verifications_available_checklists_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`onboarding_verifications_available_checklists_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_available_checklists_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { onboardingVerificationsAvailableChecklistsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await onboardingVerificationsAvailableChecklistsRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `checklist_type` | string | Type of checklist to retrieve (customer, intent, or all). Defaults to all.<br>_Default: `all`_<br>_Enum: `customer`, `intent`, `all`_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `customer_checklist` | object (free-form) |
+    | `intent_checklist` | object (free-form) |
+
+---
+
+### Checklist
+
+Get checklist with questions and existing answers. Supports both customer and intent checklists via checklist_type parameter.
 
 
 === "HTTPie"
@@ -779,6 +970,14 @@ Get checklist with questions and existing answers.
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `checklist_type` | string | Type of checklist to retrieve (customer or intent). Defaults to intent.<br>_Default: `intent`_<br>_Enum: `customer`, `intent`_ |
+    | `include_all` | boolean | If true, returns all questions including hidden ones.<br>_Default: `False`_ |
+
+
 === "Responses"
 
     **`200`** - 
@@ -804,22 +1003,13 @@ Get checklist with questions and existing answers.
     | `questions.order` | integer |  |
     | `questions.existing_answer` | object (free-form) |  |
     | `questions.question_options` | array of anys |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
-    
-    ---
-    
-    **`400`** - 
-    
-    
-    ---
-    
-    **`404`** - 
-    
+    | `questions.dependencies_info` | object (free-form) |  |
 
 ---
 
@@ -902,8 +1092,8 @@ Get checklist template for creating new objects.
     | `questions.question_options.order` | integer |  |
     | `questions.question_type` | any | Type of question and expected answer format |
     | `questions.order` | integer |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -926,8 +1116,8 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.question_options.order` | integer |  |
     | `initial_visible_questions.question_type` | any | Type of question and expected answer format |
     | `initial_visible_questions.order` | integer |  |
-    | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `initial_visible_questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `initial_visible_questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -952,9 +1142,9 @@ Get checklist template for creating new objects.
 
 ---
 
-### Get checklist completion status
+### Completion status
 
-Get checklist completion status.
+Get checklist completion status. Supports both customer and intent checklists via checklist_type parameter.
 
 
 === "HTTPie"
@@ -1012,6 +1202,13 @@ Get checklist completion status.
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `checklist_type` | string | Type of checklist to retrieve (customer or intent). Defaults to intent.<br>_Default: `intent`_<br>_Enum: `customer`, `intent`_ |
+
+
 === "Responses"
 
     **`200`** - 
@@ -1026,16 +1223,6 @@ Get checklist completion status.
     | `checklist_description` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    
-    ---
-    
-    **`400`** - 
-    
-    
-    ---
-    
-    **`404`** - 
-    
 
 ---
 
@@ -1057,21 +1244,26 @@ Run automatic validation using the required fields provided during verification 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_run_validation # (1)
+    from waldur_api_client.models.onboarding_run_validation_request_request import OnboardingRunValidationRequestRequest # (1)
+    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_run_validation # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
+    
+    body_data = OnboardingRunValidationRequestRequest()
     response = onboarding_verifications_run_validation.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
+        client=client,
+        body=body_data
     )
     
     print(response)
     ```
     
     
-    1.  **API Source:** [`onboarding_verifications_run_validation`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_run_validation.py)
+    1.  **Model Source:** [`OnboardingRunValidationRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_run_validation_request_request.py)
+    2.  **API Source:** [`onboarding_verifications_run_validation`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_run_validation.py)
 
 === "TypeScript"
 
@@ -1099,6 +1291,16 @@ Run automatic validation using the required fields provided during verification 
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `civil_number` | string |  | Personal identifier (temporary workaround for Estonian civil_number) |
+    | `first_name` | string |  | User's first name (temporary workaround for Austrian validation) |
+    | `last_name` | string |  | User's last name (temporary workaround for Austrian validation) |
+    | `birth_date` | string (date) |  | User's birth date (temporary workaround for Austrian validation) |
+
+
 === "Responses"
 
     **`200`** - 
@@ -1106,11 +1308,38 @@ Run automatic validation using the required fields provided during verification 
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) |  |
-    | `user` | integer | User requesting company onboarding |
-    | `country` | string | ISO country code (e.g., 'EE' for Estonia) |
+    | `user` | string (uri) | User requesting company onboarding |
+    | `user_full_name` | string |  |
+    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
     | `legal_name` | string | Company name(optional, for reference) |
     | `status` | any |  |
+    | `justifications` | array of objects |  |
+    | `justifications.uuid` | string (uuid) |  |
+    | `justifications.verification` | string (uri) |  |
+    | `justifications.verification_uuid` | string (uuid) |  |
+    | `justifications.country` | string |  |
+    | `justifications.user` | string (uri) |  |
+    | `justifications.user_full_name` | string |  |
+    | `justifications.legal_person_identifier` | string |  |
+    | `justifications.legal_name` | string |  |
+    | `justifications.error_message` | string |  |
+    | `justifications.error_traceback` | string |  |
+    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
+    | `justifications.validated_by` | string (uri) |  |
+    | `justifications.validated_at` | string (date-time) |  |
+    | `justifications.validation_decision` | any |  |
+    | `justifications.staff_notes` | string | Administrator notes on the review decision |
+    | `justifications.supporting_documentation` | array of objects |  |
+    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
+    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
+    | `justifications.supporting_documentation.file_name` | string |  |
+    | `justifications.supporting_documentation.file_size` | integer |  |
+    | `justifications.supporting_documentation.created` | string (date-time) |  |
+    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
+    | `justifications.created` | string (date-time) |  |
+    | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
     | `verified_user_roles` | any | Roles the user has in the company |
     | `verified_company_data` | any | Company information retrieved during validation |
@@ -1119,9 +1348,11 @@ Run automatic validation using the required fields provided during verification 
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
     | `expires_at` | string (date-time) | When this verification expires |
-    | `customer` | integer | Customer created after successful validation |
+    | `customer` | string (uri) | Customer created after successful validation |
     | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
     | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
+    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
+    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -1129,7 +1360,7 @@ Run automatic validation using the required fields provided during verification 
 
 ### Start verification
 
-Start company validation process by creating a verification record. If a checklist is configured for the country, use checklist endpoints to submit additional answers. Then call run_validation to perform automatic validation.
+Start company validation process by creating a verification record. User selects validation_method (e.g., 'ariregister', 'wirtschaftscompass'). Checklists are used for intent and customer data collection. Then call run_validation to perform automatic validation or create manual justification.
 
 
 === "HTTPie"
@@ -1138,8 +1369,7 @@ Start company validation process by creating a verification record. If a checkli
     http \
       POST \
       https://api.example.com/api/onboarding-verifications/start_verification/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      country="string-value"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
@@ -1153,9 +1383,7 @@ Start company validation process by creating a verification record. If a checkli
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = OnboardingCompanyValidationRequestRequest(
-        country="string-value"
-    )
+    body_data = OnboardingCompanyValidationRequestRequest()
     response = onboarding_verifications_start_verification.sync(
         client=client,
         body=body_data
@@ -1175,10 +1403,7 @@ Start company validation process by creating a verification record. If a checkli
     
     try {
       const response = await onboardingVerificationsStartVerification({
-      auth: "Token YOUR_API_TOKEN",
-      body: {
-        "country": "string-value"
-      }
+      auth: "Token YOUR_API_TOKEN"
     });
       console.log('Success:', response);
     } catch (error) {
@@ -1187,18 +1412,14 @@ Start company validation process by creating a verification record. If a checkli
     ```
 
 
-=== "Request Body (required)"
+=== "Request Body"
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `country` | string | ✓ | ISO country code (e.g., 'EE' for Estonia) |
+    | `validation_method` | any |  | Automatic validation method (e.g., 'ariregister', 'wirtschaftscompass', 'bolagsverket'). Leave empty for manual validation. |
+    | `country` | string |  | ISO country code (e.g., 'EE', 'AT') - optional, for display context |
     | `legal_person_identifier` | string |  | Official company registration code |
     | `legal_name` | string |  | Company name (optional) |
-    | `is_manual_validation` | boolean |  | Indicates if the validation is to be performed manually<br>_Constraints: default: `False`_ |
-    | `person_identifier` | string |  | Personal identifier (temporary workaround for Estonian civil_number) |
-    | `first_name` | string |  | User's first name (temporary workaround for Austrian validation) |
-    | `last_name` | string |  | User's last name (temporary workaround for Austrian validation) |
-    | `birth_date` | string (date) |  | User's birth date (temporary workaround for Austrian validation) |
 
 
 === "Responses"
@@ -1208,11 +1429,38 @@ Start company validation process by creating a verification record. If a checkli
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) |  |
-    | `user` | integer | User requesting company onboarding |
-    | `country` | string | ISO country code (e.g., 'EE' for Estonia) |
+    | `user` | string (uri) | User requesting company onboarding |
+    | `user_full_name` | string |  |
+    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
     | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
     | `legal_name` | string | Company name(optional, for reference) |
     | `status` | any |  |
+    | `justifications` | array of objects |  |
+    | `justifications.uuid` | string (uuid) |  |
+    | `justifications.verification` | string (uri) |  |
+    | `justifications.verification_uuid` | string (uuid) |  |
+    | `justifications.country` | string |  |
+    | `justifications.user` | string (uri) |  |
+    | `justifications.user_full_name` | string |  |
+    | `justifications.legal_person_identifier` | string |  |
+    | `justifications.legal_name` | string |  |
+    | `justifications.error_message` | string |  |
+    | `justifications.error_traceback` | string |  |
+    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
+    | `justifications.validated_by` | string (uri) |  |
+    | `justifications.validated_at` | string (date-time) |  |
+    | `justifications.validation_decision` | any |  |
+    | `justifications.staff_notes` | string | Administrator notes on the review decision |
+    | `justifications.supporting_documentation` | array of objects |  |
+    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
+    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
+    | `justifications.supporting_documentation.file_name` | string |  |
+    | `justifications.supporting_documentation.file_size` | integer |  |
+    | `justifications.supporting_documentation.created` | string (date-time) |  |
+    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
+    | `justifications.created` | string (date-time) |  |
+    | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
     | `verified_user_roles` | any | Roles the user has in the company |
     | `verified_company_data` | any | Company information retrieved during validation |
@@ -1221,17 +1469,19 @@ Start company validation process by creating a verification record. If a checkli
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
     | `expires_at` | string (date-time) | When this verification expires |
-    | `customer` | integer | Customer created after successful validation |
+    | `customer` | string (uri) | Customer created after successful validation |
     | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
     | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
+    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
+    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
 ---
 
-### Submit checklist answers
+### Submit answers
 
-Submit checklist answers.
+Submit answers to checklist questions. Automatically detects which checklist (customer or intent) each question belongs to.
 
 
 === "HTTPie"
@@ -1306,25 +1556,53 @@ Submit checklist answers.
     
     | Field | Type | Description |
     |---|---|---|
-    | `detail` | string |  |
-    | `completion` | object |  |
-    | `completion.uuid` | string (uuid) |  |
-    | `completion.is_completed` | boolean | Whether all required questions have been answered |
-    | `completion.completion_percentage` | number (double) |  |
-    | `completion.unanswered_required_questions` | array of anys |  |
-    | `completion.checklist_name` | string |  |
-    | `completion.checklist_description` | string |  |
-    | `completion.created` | string (date-time) |  |
-    | `completion.modified` | string (date-time) |  |
-    
-    ---
-    
-    **`400`** - 
-    
-    
-    ---
-    
-    **`404`** - 
-    
+    | `uuid` | string (uuid) |  |
+    | `user` | string (uri) | User requesting company onboarding |
+    | `user_full_name` | string |  |
+    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
+    | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
+    | `legal_name` | string | Company name(optional, for reference) |
+    | `status` | any |  |
+    | `justifications` | array of objects |  |
+    | `justifications.uuid` | string (uuid) |  |
+    | `justifications.verification` | string (uri) |  |
+    | `justifications.verification_uuid` | string (uuid) |  |
+    | `justifications.country` | string |  |
+    | `justifications.user` | string (uri) |  |
+    | `justifications.user_full_name` | string |  |
+    | `justifications.legal_person_identifier` | string |  |
+    | `justifications.legal_name` | string |  |
+    | `justifications.error_message` | string |  |
+    | `justifications.error_traceback` | string |  |
+    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
+    | `justifications.validated_by` | string (uri) |  |
+    | `justifications.validated_at` | string (date-time) |  |
+    | `justifications.validation_decision` | any |  |
+    | `justifications.staff_notes` | string | Administrator notes on the review decision |
+    | `justifications.supporting_documentation` | array of objects |  |
+    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
+    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
+    | `justifications.supporting_documentation.file_name` | string |  |
+    | `justifications.supporting_documentation.file_size` | integer |  |
+    | `justifications.supporting_documentation.created` | string (date-time) |  |
+    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
+    | `justifications.created` | string (date-time) |  |
+    | `justifications.modified` | string (date-time) |  |
+    | `validation_method` | any | Method used for validation |
+    | `verified_user_roles` | any | Roles the user has in the company |
+    | `verified_company_data` | any | Company information retrieved during validation |
+    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `error_traceback` | string |  |
+    | `error_message` | string |  |
+    | `validated_at` | string (date-time) | When validation was completed |
+    | `expires_at` | string (date-time) | When this verification expires |
+    | `customer` | string (uri) | Customer created after successful validation |
+    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
+    | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
+    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
+    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---

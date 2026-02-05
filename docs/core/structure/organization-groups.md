@@ -87,12 +87,12 @@ In practice, Organization Groups are a powerful tool for managing access control
 
     | Name | Type | Description |
     |---|---|---|
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `o` | string | Which field to use when ordering the results. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `parent` | string (uuid) |  |
+    | `parent` | string (uuid) | Parent UUID |
 
 
 === "Responses"
@@ -101,15 +101,15 @@ In practice, Organization Groups are a powerful tool for managing access control
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `name` | string |
-    | `parent_uuid` | string (uuid) |
-    | `parent_name` | string |
-    | `parent` | string (uri) |
-    | `customers_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `name` | string |  |
+    | `parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `parent_name` | string | Name of the parent organization group |
+    | `parent` | string (uri) |  |
+    | `customers_count` | integer | Number of customers in this organization group |
 
 ---
 
@@ -175,15 +175,15 @@ In practice, Organization Groups are a powerful tool for managing access control
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `name` | string |
-    | `parent_uuid` | string (uuid) |
-    | `parent_name` | string |
-    | `parent` | string (uri) |
-    | `customers_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `name` | string |  |
+    | `parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `parent_name` | string | Name of the parent organization group |
+    | `parent` | string (uri) |  |
+    | `customers_count` | integer | Number of customers in this organization group |
 
 ---
 
@@ -257,15 +257,15 @@ In practice, Organization Groups are a powerful tool for managing access control
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `name` | string |
-    | `parent_uuid` | string (uuid) |
-    | `parent_name` | string |
-    | `parent` | string (uri) |
-    | `customers_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `name` | string |  |
+    | `parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `parent_name` | string | Name of the parent organization group |
+    | `parent` | string (uri) |  |
+    | `customers_count` | integer | Number of customers in this organization group |
 
 ---
 
@@ -350,15 +350,15 @@ In practice, Organization Groups are a powerful tool for managing access control
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `name` | string |
-    | `parent_uuid` | string (uuid) |
-    | `parent_name` | string |
-    | `parent` | string (uri) |
-    | `customers_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `name` | string |  |
+    | `parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `parent_name` | string | Name of the parent organization group |
+    | `parent` | string (uri) |  |
+    | `customers_count` | integer | Number of customers in this organization group |
 
 ---
 
@@ -437,15 +437,15 @@ In practice, Organization Groups are a powerful tool for managing access control
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `name` | string |
-    | `parent_uuid` | string (uuid) |
-    | `parent_name` | string |
-    | `parent` | string (uri) |
-    | `customers_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `name` | string |  |
+    | `parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `parent_name` | string | Name of the parent organization group |
+    | `parent` | string (uri) |  |
+    | `customers_count` | integer | Number of customers in this organization group |
 
 ---
 

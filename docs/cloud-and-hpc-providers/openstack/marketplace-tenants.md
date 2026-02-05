@@ -65,26 +65,26 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `backend_id` | string |  |
+    | `backend_id` | string | Backend ID |
     | `can_manage` | boolean | Can manage |
-    | `customer` | string (uuid) |  |
-    | `customer_abbreviation` | string |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
-    | `external_ip` | string |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `customer` | string (uuid) | Customer UUID |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description |
+    | `external_ip` | string | External IP |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `service_settings_name` | string |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `uuid` | string (uuid) |  |
+    | `project` | string (uuid) | Project UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `service_settings_name` | string | Service settings name |
+    | `service_settings_uuid` | string (uuid) | Service settings UUID |
+    | `state` | array | State<br><br> |
+    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"

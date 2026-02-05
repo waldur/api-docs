@@ -13,6 +13,12 @@
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-slurm-periodic-usage-policies/actions/` | [Actions](#actions) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/command-history/` | [List command history for this policy](#list-command-history-for-this-policy) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/evaluation-logs/` | [List evaluation logs for this policy](#list-evaluation-logs-for-this-policy) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/dry-run/` | [Dry run](#dry-run) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/evaluate/` | [Evaluate](#evaluate) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/preview_impact/` | [Preview impact](#preview-impact) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/report-command-result/` | [Report command execution result from site agent](#report-command-execution-result-from-site-agent) |
 
 ---
 ## Core CRUD
@@ -95,6 +101,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -103,11 +110,12 @@
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
     | `qos_strategy` | any | QoS management strategy |
+    | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
 ---
 
@@ -188,6 +196,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -196,11 +205,12 @@
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
     | `qos_strategy` | any | QoS management strategy |
+    | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
 ---
 
@@ -216,7 +226,6 @@
       Authorization:"Token YOUR_API_TOKEN" \
       scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       actions="string-value" \
-      organization_groups:='[]' \
       component_limits_set:='[]'
     ```
 
@@ -234,7 +243,6 @@
     body_data = SlurmPeriodicUsagePolicyRequest(
         scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         actions="string-value",
-        organization_groups=[],
         component_limits_set=[]
     )
     response = marketplace_slurm_periodic_usage_policies_create.sync(
@@ -260,7 +268,6 @@
       body: {
         "scope": "https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "actions": "string-value",
-        "organization_groups": [],
         "component_limits_set": []
       }
     });
@@ -278,7 +285,8 @@
     | `scope` | string (uri) | ✓ |  |
     | `actions` | string | ✓ |  |
     | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
-    | `organization_groups` | array of string (uri)s | ✓ |  |
+    | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects | ✓ |  |
     | `component_limits_set.type` | string | ✓ |  |
     | `component_limits_set.limit` | integer | ✓ |  |
@@ -286,7 +294,7 @@
     | `limit_type` | any |  | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean |  | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer |  | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer |  | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) |  | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean |  | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean |  | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
@@ -312,6 +320,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -320,11 +329,12 @@
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
     | `qos_strategy` | any | QoS management strategy |
+    | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
 ---
 
@@ -340,7 +350,6 @@
       Authorization:"Token YOUR_API_TOKEN" \
       scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       actions="string-value" \
-      organization_groups:='[]' \
       component_limits_set:='[]'
     ```
 
@@ -358,7 +367,6 @@
     body_data = SlurmPeriodicUsagePolicyRequest(
         scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         actions="string-value",
-        organization_groups=[],
         component_limits_set=[]
     )
     response = marketplace_slurm_periodic_usage_policies_update.sync(
@@ -388,7 +396,6 @@
       body: {
         "scope": "https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "actions": "string-value",
-        "organization_groups": [],
         "component_limits_set": []
       }
     });
@@ -413,7 +420,8 @@
     | `scope` | string (uri) | ✓ |  |
     | `actions` | string | ✓ |  |
     | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
-    | `organization_groups` | array of string (uri)s | ✓ |  |
+    | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects | ✓ |  |
     | `component_limits_set.type` | string | ✓ |  |
     | `component_limits_set.limit` | integer | ✓ |  |
@@ -421,7 +429,7 @@
     | `limit_type` | any |  | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean |  | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer |  | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer |  | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) |  | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean |  | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean |  | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
@@ -447,6 +455,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -455,11 +464,12 @@
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
     | `qos_strategy` | any | QoS management strategy |
+    | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
 ---
 
@@ -534,6 +544,7 @@
     | `actions` | string |  |  |
     | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |  |
     | `component_limits_set.type` | string | ✓ |  |
     | `component_limits_set.limit` | integer | ✓ |  |
@@ -541,7 +552,7 @@
     | `limit_type` | any |  | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean |  | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer |  | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer |  | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) |  | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean |  | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean |  | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
@@ -567,6 +578,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -575,11 +587,12 @@
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
     | `qos_strategy` | any | QoS management strategy |
+    | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
 ---
 
@@ -715,6 +728,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -723,10 +737,594 @@
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
     | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `fairshare_decay_half_life` | integer | Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife) |
+    | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
     | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
     | `qos_strategy` | any | QoS management strategy |
+    | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
+
+---
+
+### List command history for this policy
+
+List command history for this policy.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-slurm-periodic-usage-policies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/command-history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_slurm_periodic_usage_policies import marketplace_slurm_periodic_usage_policies_command_history_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_slurm_periodic_usage_policies_command_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_slurm_periodic_usage_policies_command_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_slurm_periodic_usage_policies/marketplace_slurm_periodic_usage_policies_command_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSlurmPeriodicUsagePoliciesCommandHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSlurmPeriodicUsagePoliciesCommandHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `scope` | string |  |
+    | `scope_uuid` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `command_type` | string | Type of command: fairshare, limits, qos, reset_usage |
+    | `description` | string | Human-readable description of what the command does |
+    | `shell_command` | string | Actual shell command that was/would be executed |
+    | `parameters` | any | Command parameters as key-value pairs |
+    | `executed_at` | string (date-time) |  |
+    | `execution_mode` | any | Whether command was executed in production or emulator mode |
+    | `success` | boolean | Whether the command execution was successful |
+    | `error_message` | string | Error message if command execution failed |
+
+---
+
+### List evaluation logs for this policy
+
+List evaluation logs for this policy.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-slurm-periodic-usage-policies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/evaluation-logs/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_slurm_periodic_usage_policies import marketplace_slurm_periodic_usage_policies_evaluation_logs_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_slurm_periodic_usage_policies_evaluation_logs_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_slurm_periodic_usage_policies_evaluation_logs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_slurm_periodic_usage_policies/marketplace_slurm_periodic_usage_policies_evaluation_logs_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSlurmPeriodicUsagePoliciesEvaluationLogsList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSlurmPeriodicUsagePoliciesEvaluationLogsList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `scope` | string |  |
+    | `scope_uuid` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `resource_uuid` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `billing_period` | string | Billing period identifier, e.g. '2026-Q1' |
+    | `usage_percentage` | number (double) | Resource usage percentage at the time of evaluation |
+    | `grace_limit_percentage` | number (double) | Grace limit percentage threshold (e.g. 120 for 20% grace) |
+    | `actions_taken` | any | List of actions taken during this evaluation (e.g. ['pause', 'notify']) |
+    | `previous_state` | any | Resource state before evaluation: {paused: bool, downscaled: bool} |
+    | `new_state` | any | Resource state after evaluation: {paused: bool, downscaled: bool} |
+    | `stomp_message_sent` | boolean | Whether a STOMP message was sent to the site agent |
+    | `site_agent_confirmed` | boolean | Whether the site agent confirmed command execution (null = no response yet) |
+    | `site_agent_response` | any | Response payload from the site agent |
+    | `evaluated_at` | string (date-time) | When this evaluation was performed |
+
+---
+
+### Dry run
+
+Staff-only. Dry-run evaluation: calculates usage percentages and shows what actions would be triggered, without applying any changes.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-slurm-periodic-usage-policies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/dry-run/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.slurm_policy_evaluate_request_request import SlurmPolicyEvaluateRequestRequest # (1)
+    from waldur_api_client.api.marketplace_slurm_periodic_usage_policies import marketplace_slurm_periodic_usage_policies_dry_run # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SlurmPolicyEvaluateRequestRequest()
+    response = marketplace_slurm_periodic_usage_policies_dry_run.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SlurmPolicyEvaluateRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/slurm_policy_evaluate_request_request.py)
+    2.  **API Source:** [`marketplace_slurm_periodic_usage_policies_dry_run`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_slurm_periodic_usage_policies/marketplace_slurm_periodic_usage_policies_dry_run.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSlurmPeriodicUsagePoliciesDryRun } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSlurmPeriodicUsagePoliciesDryRun({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `resource_uuid` | string (uuid) |  | Evaluate a specific resource. If omitted, evaluates all offering resources. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `policy_uuid` | string (uuid) |
+    | `billing_period` | string |
+    | `grace_limit_percentage` | number (double) |
+    | `resources` | array of objects |
+    | `resources.resource_uuid` | string (uuid) |
+    | `resources.resource_name` | string |
+    | `resources.usage_percentage` | number (double) |
+    | `resources.paused` | boolean |
+    | `resources.downscaled` | boolean |
+    | `resources.would_trigger` | array of strings |
+
+---
+
+### Evaluate
+
+Staff-only. Run synchronous policy evaluation: calculates usage, applies actions (pause/downscale/notify), and creates evaluation logs.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-slurm-periodic-usage-policies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/evaluate/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.slurm_policy_evaluate_request_request import SlurmPolicyEvaluateRequestRequest # (1)
+    from waldur_api_client.api.marketplace_slurm_periodic_usage_policies import marketplace_slurm_periodic_usage_policies_evaluate # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SlurmPolicyEvaluateRequestRequest()
+    response = marketplace_slurm_periodic_usage_policies_evaluate.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SlurmPolicyEvaluateRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/slurm_policy_evaluate_request_request.py)
+    2.  **API Source:** [`marketplace_slurm_periodic_usage_policies_evaluate`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_slurm_periodic_usage_policies/marketplace_slurm_periodic_usage_policies_evaluate.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSlurmPeriodicUsagePoliciesEvaluate } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSlurmPeriodicUsagePoliciesEvaluate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `resource_uuid` | string (uuid) |  | Evaluate a specific resource. If omitted, evaluates all offering resources. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `policy_uuid` | string (uuid) |
+    | `billing_period` | string |
+    | `resources` | array of objects |
+    | `resources.resource_uuid` | string (uuid) |
+    | `resources.resource_name` | string |
+    | `resources.usage_percentage` | number (double) |
+    | `resources.actions_taken` | array of strings |
+    | `resources.previous_state` | object (free-form) |
+    | `resources.new_state` | object (free-form) |
+
+---
+
+### Preview impact
+
+Preview policy impact without saving. Returns threshold calculations, carryover projections, and QoS trigger points.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-slurm-periodic-usage-policies/preview_impact/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.slurm_policy_preview_request_request import SlurmPolicyPreviewRequestRequest # (1)
+    from waldur_api_client.api.marketplace_slurm_periodic_usage_policies import marketplace_slurm_periodic_usage_policies_preview_impact # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SlurmPolicyPreviewRequestRequest()
+    response = marketplace_slurm_periodic_usage_policies_preview_impact.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SlurmPolicyPreviewRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/slurm_policy_preview_request_request.py)
+    2.  **API Source:** [`marketplace_slurm_periodic_usage_policies_preview_impact`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_slurm_periodic_usage_policies/marketplace_slurm_periodic_usage_policies_preview_impact.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSlurmPeriodicUsagePoliciesPreviewImpact } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSlurmPeriodicUsagePoliciesPreviewImpact({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `allocation` | number (double) |  | Base allocation for the period (in node-hours or billing units)<br>_Constraints: default: `1000.0`_ |
+    | `grace_ratio` | number (double) |  | Grace ratio for overconsumption allowance (0.2 = 20%)<br>_Constraints: default: `0.2`_ |
+    | `previous_usage` | number (double) |  | Usage from the previous period<br>_Constraints: default: `0.0`_ |
+    | `carryover_factor` | integer |  | Maximum percentage of base allocation that can carry over (0-100)<br>_Constraints: default: `50`_ |
+    | `carryover_enabled` | boolean |  | Whether unused allocation carries over to next period<br>_Constraints: default: `True`_ |
+    | `resource_uuid` | string (uuid) |  | Optional resource UUID to use for current usage data |
+    | `current_usage` | number (double) |  | Current usage in this period (manual input or from resource)<br>_Constraints: default: `0.0`_ |
+    | `daily_usage_rate` | number (double) |  | Average daily usage rate for projections<br>_Constraints: default: `0.0`_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `base_allocation` | number (double) |  |
+    | `effective_allocation` | number (double) |  |
+    | `carryover_enabled` | boolean |  |
+    | `carryover` | any |  |
+    | `thresholds` | object |  |
+    | `thresholds.allocation` | number (double) |  |
+    | `thresholds.grace_ratio` | number (double) |  |
+    | `thresholds.notification_ratio` | number (double) |  |
+    | `thresholds.notification_threshold` | number (double) |  |
+    | `thresholds.slowdown_threshold` | number (double) |  |
+    | `thresholds.blocked_threshold` | number (double) |  |
+    | `grace_ratio` | number (double) |  |
+    | `carryover_factor` | integer |  |
+    | `current_usage` | number (double) |  |
+    | `daily_usage_rate` | number (double) |  |
+    | `usage_percentage` | number (double) |  |
+    | `current_qos_status` | string | <br>_Enum: `normal`, `notification`, `slowdown`, `blocked`_ |
+    | `date_projections` | object |  |
+    | `date_projections.notification` | object |  |
+    | `date_projections.notification.days` | integer |  |
+    | `date_projections.notification.date` | string (date) |  |
+    | `date_projections.notification.status` | string | <br>_Enum: `never`, `exceeded`, `projected`_ |
+    | `date_projections.slowdown` | object |  |
+    | `date_projections.slowdown.days` | integer |  |
+    | `date_projections.slowdown.date` | string (date) |  |
+    | `date_projections.slowdown.status` | string | <br>_Enum: `never`, `exceeded`, `projected`_ |
+    | `date_projections.blocked` | object |  |
+    | `date_projections.blocked.days` | integer |  |
+    | `date_projections.blocked.date` | string (date) |  |
+    | `date_projections.blocked.status` | string | <br>_Enum: `never`, `exceeded`, `projected`_ |
+    | `preview_commands` | array of objects |  |
+    | `preview_commands.type` | string | Command type: fairshare, limits, qos, reset_usage |
+    | `preview_commands.description` | string | Human-readable description |
+    | `preview_commands.command` | string | Actual shell command |
+    | `preview_commands.parameters` | object (free-form) | Command parameters |
+    | `command_history` | array of objects |  |
+    | `command_history.uuid` | string (uuid) |  |
+    | `command_history.command_type` | string | Type of command: fairshare, limits, qos, reset_usage |
+    | `command_history.description` | string | Human-readable description of what the command does |
+    | `command_history.shell_command` | string | Actual shell command that was/would be executed |
+    | `command_history.parameters` | any | Command parameters as key-value pairs |
+    | `command_history.executed_at` | string (date-time) |  |
+    | `command_history.execution_mode` | any | Whether command was executed in production or emulator mode |
+    | `command_history.success` | boolean | Whether the command execution was successful |
+    | `command_history.error_message` | string | Error message if command execution failed |
+    | `billing_period_start` | string (date) |  |
+    | `billing_period_end` | string (date) |  |
+
+---
+
+### Report command execution result from site agent
+
+Report command execution result from site agent.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-slurm-periodic-usage-policies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/report-command-result/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      resource_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
+      success=true
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.slurm_command_result_request import SlurmCommandResultRequest # (1)
+    from waldur_api_client.api.marketplace_slurm_periodic_usage_policies import marketplace_slurm_periodic_usage_policies_report_command_result # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SlurmCommandResultRequest(
+        resource_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        success=true
+    )
+    response = marketplace_slurm_periodic_usage_policies_report_command_result.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SlurmCommandResultRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/slurm_command_result_request.py)
+    2.  **API Source:** [`marketplace_slurm_periodic_usage_policies_report_command_result`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_slurm_periodic_usage_policies/marketplace_slurm_periodic_usage_policies_report_command_result.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSlurmPeriodicUsagePoliciesReportCommandResult } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSlurmPeriodicUsagePoliciesReportCommandResult({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "resource_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "success": true
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `resource_uuid` | string (uuid) | ✓ | UUID of the resource the command was applied to |
+    | `success` | boolean | ✓ | Whether the command was applied successfully |
+    | `error_message` | string |  | Error message if the command failed<br>_Constraints: default: ``_ |
+    | `mode` | any |  | Execution mode of the command<br>_Constraints: default: `production`_ |
+    | `commands_executed` | array of strings |  | List of shell commands actually executed by the site agent |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---

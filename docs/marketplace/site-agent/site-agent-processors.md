@@ -6,6 +6,7 @@
 |:--- |:--- |:--- |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-site-agent-processors/` | [List Marketplace Site Agent Processors](#list-marketplace-site-agent-processors) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-site-agent-processors/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-site-agent-processors/{uuid}/` | [Delete](#delete) |
 
 ---
 
@@ -62,9 +63,11 @@
     | `backend_type` | string |  |
     | `backend_version` | string |  |
     | `last_run` | string (date-time) | Last run after |
+    | `last_run_before` | string (date-time) | Last run before |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `service_uuid` | string (uuid) |  |
+    | `stale` | boolean | Last run more than 1 hour ago |
 
 
 === "Responses"
@@ -162,5 +165,70 @@
     | `backend_version` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+---
+
+### Delete
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/marketplace-site-agent-processors/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_site_agent_processors import marketplace_site_agent_processors_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_site_agent_processors_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_site_agent_processors_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_site_agent_processors/marketplace_site_agent_processors_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSiteAgentProcessorsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSiteAgentProcessorsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
 
 ---

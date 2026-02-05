@@ -63,8 +63,9 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `customer_onboarding`, `offering_compliance`, `project_compliance`, `project_metadata`, `proposal_compliance`_ |
+    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `offering_compliance`, `onboarding_customer`, `onboarding_intent`, `project_compliance`, `project_metadata`, `proposal_compliance`_ |
     | `checklist_uuid` | string (uuid) |  |
+    | `has_onboarding_mapping` | boolean | Filter questions that have onboarding metadata mapping |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
 
@@ -90,8 +91,8 @@
     | `question_options.question_uuid` | string (uuid) |  |
     | `question_type` | any | Type of question and expected answer format |
     | `order` | integer |  |
-    | `min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -106,6 +107,7 @@
     | `url` | string (uri) |  |
     | `checklist_name` | string |  |
     | `checklist_uuid` | string (uuid) |  |
+    | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
 
 ---
@@ -187,8 +189,8 @@
     | `question_options.question_uuid` | string (uuid) |  |
     | `question_type` | any | Type of question and expected answer format |
     | `order` | integer |  |
-    | `min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -203,6 +205,7 @@
     | `url` | string (uri) |  |
     | `checklist_name` | string |  |
     | `checklist_uuid` | string (uuid) |  |
+    | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
 
 ---
@@ -274,8 +277,8 @@
     | `user_guidance` | string |  | Additional guidance text visible to users when answering and reviewing |
     | `question_type` | any |  | Type of question and expected answer format |
     | `order` | integer |  |  |
-    | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER type questions |
-    | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER type questions |
+    | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `allowed_file_types` | any |  | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `allowed_mime_types` | any |  | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `max_file_size_mb` | integer |  | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -309,8 +312,8 @@
     | `question_options.question_uuid` | string (uuid) |  |
     | `question_type` | any | Type of question and expected answer format |
     | `order` | integer |  |
-    | `min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -325,6 +328,7 @@
     | `url` | string (uri) |  |
     | `checklist_name` | string |  |
     | `checklist_uuid` | string (uuid) |  |
+    | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
 
 ---
@@ -407,8 +411,8 @@
     | `user_guidance` | string |  | Additional guidance text visible to users when answering and reviewing |
     | `question_type` | any |  | Type of question and expected answer format |
     | `order` | integer |  |  |
-    | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER type questions |
-    | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER type questions |
+    | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `allowed_file_types` | any |  | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `allowed_mime_types` | any |  | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `max_file_size_mb` | integer |  | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -442,8 +446,8 @@
     | `question_options.question_uuid` | string (uuid) |  |
     | `question_type` | any | Type of question and expected answer format |
     | `order` | integer |  |
-    | `min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -458,6 +462,7 @@
     | `url` | string (uri) |  |
     | `checklist_name` | string |  |
     | `checklist_uuid` | string (uuid) |  |
+    | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
 
 ---
@@ -534,8 +539,8 @@
     | `user_guidance` | string |  | Additional guidance text visible to users when answering and reviewing |
     | `question_type` | any |  | Type of question and expected answer format |
     | `order` | integer |  |  |
-    | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER type questions |
-    | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER type questions |
+    | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `allowed_file_types` | any |  | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `allowed_mime_types` | any |  | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `max_file_size_mb` | integer |  | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -569,8 +574,8 @@
     | `question_options.question_uuid` | string (uuid) |  |
     | `question_type` | any | Type of question and expected answer format |
     | `order` | integer |  |
-    | `min_value` | string (decimal) | Minimum value allowed for NUMBER type questions |
-    | `max_value` | string (decimal) | Maximum value allowed for NUMBER type questions |
+    | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
     | `allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
     | `allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
@@ -585,6 +590,7 @@
     | `url` | string (uri) |  |
     | `checklist_name` | string |  |
     | `checklist_uuid` | string (uuid) |  |
+    | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
 
 ---

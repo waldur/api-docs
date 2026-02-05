@@ -77,34 +77,34 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `enable_notifications` | boolean |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_image` | string (uri) |
-    | `customer_abbreviation` | string |
-    | `customer_slug` | string |
-    | `customer_native_name` | string |
-    | `customer_country` | string |
-    | `image` | string (uri) |
-    | `organization_groups` | array of objects |
-    | `organization_groups.uuid` | string (uuid) |
-    | `organization_groups.url` | string (uri) |
-    | `organization_groups.name` | string |
-    | `organization_groups.parent_uuid` | string (uuid) |
-    | `organization_groups.parent_name` | string |
-    | `organization_groups.parent` | string (uri) |
-    | `organization_groups.customers_count` | integer |
-    | `offering_count` | integer |
-    | `calendar_token` | string |
-    | `calendar_refresh_token` | string |
-    | `google_auth_url` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
+    | `calendar_token` | string |  |
+    | `calendar_refresh_token` | string |  |
+    | `google_auth_url` | string |  |
 
 ---
 
@@ -177,34 +177,34 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `enable_notifications` | boolean |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_image` | string (uri) |
-    | `customer_abbreviation` | string |
-    | `customer_slug` | string |
-    | `customer_native_name` | string |
-    | `customer_country` | string |
-    | `image` | string (uri) |
-    | `organization_groups` | array of objects |
-    | `organization_groups.uuid` | string (uuid) |
-    | `organization_groups.url` | string (uri) |
-    | `organization_groups.name` | string |
-    | `organization_groups.parent_uuid` | string (uuid) |
-    | `organization_groups.parent_name` | string |
-    | `organization_groups.parent` | string (uri) |
-    | `organization_groups.customers_count` | integer |
-    | `offering_count` | integer |
-    | `calendar_token` | string |
-    | `calendar_refresh_token` | string |
-    | `google_auth_url` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
+    | `calendar_token` | string |  |
+    | `calendar_refresh_token` | string |  |
+    | `google_auth_url` | string |  |
 
 ---
 
@@ -280,34 +280,34 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `enable_notifications` | boolean |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_image` | string (uri) |
-    | `customer_abbreviation` | string |
-    | `customer_slug` | string |
-    | `customer_native_name` | string |
-    | `customer_country` | string |
-    | `image` | string (uri) |
-    | `organization_groups` | array of objects |
-    | `organization_groups.uuid` | string (uuid) |
-    | `organization_groups.url` | string (uri) |
-    | `organization_groups.name` | string |
-    | `organization_groups.parent_uuid` | string (uuid) |
-    | `organization_groups.parent_name` | string |
-    | `organization_groups.parent` | string (uri) |
-    | `organization_groups.customers_count` | integer |
-    | `offering_count` | integer |
-    | `calendar_token` | string |
-    | `calendar_refresh_token` | string |
-    | `google_auth_url` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
+    | `calendar_token` | string |  |
+    | `calendar_refresh_token` | string |  |
+    | `google_auth_url` | string |  |
 
 ---
 

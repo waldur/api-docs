@@ -65,11 +65,11 @@ Returns a paginated list of reusable templates for maintenance announcements.
 
     | Name | Type | Description |
     |---|---|---|
-    | `maintenance_type` | integer |  |
+    | `maintenance_type` | integer | Maintenance type |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `service_provider_uuid` | string (uuid) |  |
+    | `service_provider_uuid` | string (uuid) | Service provider UUID |
 
 
 === "Responses"

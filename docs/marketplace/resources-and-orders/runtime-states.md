@@ -75,9 +75,9 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `value` | string |
-    | `label` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `value` | string | Value of the runtime state |
+    | `label` | string | Human-readable label for the runtime state |
 
 ---

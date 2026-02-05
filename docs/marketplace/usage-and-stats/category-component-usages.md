@@ -68,8 +68,8 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `date_after` | string (date) |  |
-    | `date_before` | string (date) |  |
+    | `date_after` | string (date) | Date after or equal to |
+    | `date_before` | string (date) | Date before or equal to |
     | `field` | array |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |

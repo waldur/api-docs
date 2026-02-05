@@ -70,16 +70,16 @@ Returns a paginated list of Terms of Service consents for the current user. Staf
 
     | Name | Type | Description |
     |---|---|---|
-    | `has_consent` | boolean |  |
+    | `has_consent` | boolean | Has consent |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering` | string | Offering URL |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `requires_reconsent` | boolean |  |
-    | `user` | string |  |
-    | `user_uuid` | string (uuid) |  |
-    | `version` | string |  |
+    | `requires_reconsent` | boolean | Requires reconsent |
+    | `user` | string | User URL |
+    | `user_uuid` | string (uuid) | User UUID |
+    | `version` | string | Version |
 
 
 === "Responses"
@@ -106,6 +106,7 @@ Returns a paginated list of Terms of Service consents for the current user. Staf
     | `modified` | string (date-time) |  |
     | `has_consent` | boolean |  |
     | `requires_reconsent` | boolean |  |
+    | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
 
 ---
 
@@ -191,6 +192,7 @@ Returns the details of a specific consent record.
     | `modified` | string (date-time) |  |
     | `has_consent` | boolean |  |
     | `requires_reconsent` | boolean |  |
+    | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
 
 ---
 
@@ -363,6 +365,7 @@ Creates a consent record for the current user and a specific offering. This indi
     | `modified` | string (date-time) |  |
     | `has_consent` | boolean |  |
     | `requires_reconsent` | boolean |  |
+    | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
 
 ---
 
@@ -458,6 +461,7 @@ Creates a consent record for the current user and a specific offering. This indi
     | `modified` | string (date-time) |  |
     | `has_consent` | boolean |  |
     | `requires_reconsent` | boolean |  |
+    | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
 
 ---
 
@@ -611,5 +615,6 @@ Revokes a user's consent to the Terms of Service for an offering. The consent re
     | `modified` | string (date-time) |  |
     | `has_consent` | boolean |  |
     | `requires_reconsent` | boolean |  |
+    | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
 
 ---

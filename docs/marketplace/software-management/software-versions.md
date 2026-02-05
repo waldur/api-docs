@@ -83,16 +83,24 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `version` | string |
-    | `release_date` | string (date) |
-    | `package_name` | string |
-    | `target_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `version` | string |  |
+    | `release_date` | string (date) |  |
+    | `dependencies` | any | Package dependencies (format varies by catalog type) |
+    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `package_name` | string |  |
+    | `catalog_type` | string |  |
+    | `target_count` | integer |  |
+    | `module` | object (free-form) |  |
+    | `required_modules` | array of anys |  |
+    | `extensions` | array of anys |  |
+    | `toolchain` | object (free-form) |  |
+    | `toolchain_families_compatibility` | array of anys |  |
 
 ---
 
@@ -160,16 +168,24 @@ Returns the details of a specific software version, including its release date a
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `version` | string |
-    | `release_date` | string (date) |
-    | `package_name` | string |
-    | `target_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `version` | string |  |
+    | `release_date` | string (date) |  |
+    | `dependencies` | any | Package dependencies (format varies by catalog type) |
+    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `package_name` | string |  |
+    | `catalog_type` | string |  |
+    | `target_count` | integer |  |
+    | `module` | object (free-form) |  |
+    | `required_modules` | array of anys |  |
+    | `extensions` | array of anys |  |
+    | `toolchain` | object (free-form) |  |
+    | `toolchain_families_compatibility` | array of anys |  |
 
 ---
 
@@ -224,16 +240,24 @@ Creates a new version for a software package. Requires staff permissions.
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `version` | string |
-    | `release_date` | string (date) |
-    | `package_name` | string |
-    | `target_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `version` | string |  |
+    | `release_date` | string (date) |  |
+    | `dependencies` | any | Package dependencies (format varies by catalog type) |
+    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `package_name` | string |  |
+    | `catalog_type` | string |  |
+    | `target_count` | integer |  |
+    | `module` | object (free-form) |  |
+    | `required_modules` | array of anys |  |
+    | `extensions` | array of anys |  |
+    | `toolchain` | object (free-form) |  |
+    | `toolchain_families_compatibility` | array of anys |  |
 
 ---
 
@@ -301,16 +325,24 @@ Updates an existing software version. Requires staff permissions.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `version` | string |
-    | `release_date` | string (date) |
-    | `package_name` | string |
-    | `target_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `version` | string |  |
+    | `release_date` | string (date) |  |
+    | `dependencies` | any | Package dependencies (format varies by catalog type) |
+    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `package_name` | string |  |
+    | `catalog_type` | string |  |
+    | `target_count` | integer |  |
+    | `module` | object (free-form) |  |
+    | `required_modules` | array of anys |  |
+    | `extensions` | array of anys |  |
+    | `toolchain` | object (free-form) |  |
+    | `toolchain_families_compatibility` | array of anys |  |
 
 ---
 
@@ -378,16 +410,24 @@ Partially updates an existing software version. Requires staff permissions.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `version` | string |
-    | `release_date` | string (date) |
-    | `package_name` | string |
-    | `target_count` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `version` | string |  |
+    | `release_date` | string (date) |  |
+    | `dependencies` | any | Package dependencies (format varies by catalog type) |
+    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `package_name` | string |  |
+    | `catalog_type` | string |  |
+    | `target_count` | integer |  |
+    | `module` | object (free-form) |  |
+    | `required_modules` | array of anys |  |
+    | `extensions` | array of anys |  |
+    | `toolchain` | object (free-form) |  |
+    | `toolchain_families_compatibility` | array of anys |  |
 
 ---
 

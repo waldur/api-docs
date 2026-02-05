@@ -65,10 +65,10 @@ Retrieve a list of access subnets. Staff and support users can see all subnets, 
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
-    | `inet` | string |  |
+    | `customer` | string | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description |
+    | `inet` | string | Inet |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
 

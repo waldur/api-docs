@@ -95,6 +95,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -180,6 +181,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -200,7 +202,6 @@
       Authorization:"Token YOUR_API_TOKEN" \
       scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       actions="string-value" \
-      organization_groups:='[]' \
       component_limits_set:='[]'
     ```
 
@@ -218,7 +219,6 @@
     body_data = OfferingUsagePolicyRequest(
         scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         actions="string-value",
-        organization_groups=[],
         component_limits_set=[]
     )
     response = marketplace_offering_usage_policies_create.sync(
@@ -244,7 +244,6 @@
       body: {
         "scope": "https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "actions": "string-value",
-        "organization_groups": [],
         "component_limits_set": []
       }
     });
@@ -262,7 +261,8 @@
     | `scope` | string (uri) | ✓ |  |
     | `actions` | string | ✓ |  |
     | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
-    | `organization_groups` | array of string (uri)s | ✓ |  |
+    | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects | ✓ |  |
     | `component_limits_set.type` | string | ✓ |  |
     | `component_limits_set.limit` | integer | ✓ |  |
@@ -288,6 +288,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -308,7 +309,6 @@
       Authorization:"Token YOUR_API_TOKEN" \
       scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       actions="string-value" \
-      organization_groups:='[]' \
       component_limits_set:='[]'
     ```
 
@@ -326,7 +326,6 @@
     body_data = OfferingUsagePolicyRequest(
         scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         actions="string-value",
-        organization_groups=[],
         component_limits_set=[]
     )
     response = marketplace_offering_usage_policies_update.sync(
@@ -356,7 +355,6 @@
       body: {
         "scope": "https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "actions": "string-value",
-        "organization_groups": [],
         "component_limits_set": []
       }
     });
@@ -381,7 +379,8 @@
     | `scope` | string (uri) | ✓ |  |
     | `actions` | string | ✓ |  |
     | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
-    | `organization_groups` | array of string (uri)s | ✓ |  |
+    | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects | ✓ |  |
     | `component_limits_set.type` | string | ✓ |  |
     | `component_limits_set.limit` | integer | ✓ |  |
@@ -407,6 +406,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -486,6 +486,7 @@
     | `actions` | string |  |  |
     | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |  |
+    | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |  |
     | `component_limits_set.type` | string | ✓ |  |
     | `component_limits_set.limit` | integer | ✓ |  |
@@ -511,6 +512,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -651,6 +653,7 @@
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |
+    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |

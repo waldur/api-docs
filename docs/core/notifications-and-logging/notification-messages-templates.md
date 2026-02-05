@@ -68,13 +68,13 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `is_overridden` | boolean |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `is_overridden` | boolean | Is overridden |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `path` | string |  |
-    | `path_exact` | string |  |
+    | `path` | string | Path |
+    | `path_exact` | string | Path (exact) |
 
 
 === "Responses"

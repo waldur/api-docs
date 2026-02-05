@@ -83,7 +83,7 @@
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
@@ -91,7 +91,7 @@
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | object |  |
@@ -192,10 +192,10 @@
     | `plans.organization_groups.uuid` | string (uuid) |  |
     | `plans.organization_groups.url` | string (uri) |  |
     | `plans.organization_groups.name` | string |  |
-    | `plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `plans.organization_groups.parent_name` | string |  |
+    | `plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `plans.organization_groups.parent` | string (uri) |  |
-    | `plans.organization_groups.customers_count` | integer |  |
+    | `plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -239,16 +239,19 @@
     | `citation_count` | integer | Number of citations of a DOI |
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `tags` | array of objects |  |
+    | `tags.uuid` | string (uuid) |  |
+    | `tags.name` | string |  |
     | `image` | string (uri) |  |
     | `total_customers` | integer |  |
     | `total_cost` | integer |  |
@@ -258,8 +261,10 @@
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
+    | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
+    | `is_accessible` | boolean |  |
     | `googlecalendar` | object |  |
     | `googlecalendar.backend_id` | string |  |
     | `googlecalendar.public` | boolean |  |
@@ -342,7 +347,7 @@
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `name` | string |  |
-    | `slug` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
@@ -350,7 +355,7 @@
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | object |  |
@@ -451,10 +456,10 @@
     | `plans.organization_groups.uuid` | string (uuid) |  |
     | `plans.organization_groups.url` | string (uri) |  |
     | `plans.organization_groups.name` | string |  |
-    | `plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `plans.organization_groups.parent_name` | string |  |
+    | `plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `plans.organization_groups.parent` | string (uri) |  |
-    | `plans.organization_groups.customers_count` | integer |  |
+    | `plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -498,16 +503,19 @@
     | `citation_count` | integer | Number of citations of a DOI |
     | `latitude` | number (double) |  |
     | `longitude` | number (double) |  |
-    | `country` | any |  |
+    | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `tags` | array of objects |  |
+    | `tags.uuid` | string (uuid) |  |
+    | `tags.name` | string |  |
     | `image` | string (uri) |  |
     | `total_customers` | integer |  |
     | `total_cost` | integer |  |
@@ -517,8 +525,10 @@
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
+    | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
+    | `is_accessible` | boolean |  |
     | `googlecalendar` | object |  |
     | `googlecalendar.backend_id` | string |  |
     | `googlecalendar.public` | boolean |  |

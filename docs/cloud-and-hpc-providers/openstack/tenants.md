@@ -7,12 +7,10 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-tenants/` | [List tenants](#list-tenants) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-tenants/{uuid}/` | [Get tenant details](#get-tenant-details) |
-| <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/` | [Create tenant](#create-tenant) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/pull/` | [Synchronize resource state](#synchronize-resource-state) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/unlink/` | [Unlink resource](#unlink-resource) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack-tenants/{uuid}/` | [Update tenant](#update-tenant) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/openstack-tenants/{uuid}/` | [Partially update tenant](#partially-update-tenant) |
-| <span class="http-badge http-delete">DELETE</span> | `/api/openstack-tenants/{uuid}/` | [Delete tenant](#delete-tenant) |
 | **Configuration & Updates** | | |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/change_password/` | [Change tenant user password](#change-tenant-user-password) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/set_quotas/` | [Set tenant quotas](#set-tenant-quotas) |
@@ -29,6 +27,10 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/pull_quotas/` | [Pull tenant quotas](#pull-tenant-quotas) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/pull_security_groups/` | [Pull security groups](#pull-security-groups) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/pull_server_groups/` | [Pull server groups](#pull-server-groups) |
+| **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/push_security_groups/` | [Batch update security groups for a tenant.](#batch-update-security-groups-for-a-tenant) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 
 ---
 ## Core CRUD
@@ -86,27 +88,27 @@ Get a list of OpenStack tenants.
 
     | Name | Type | Description |
     |---|---|---|
-    | `backend_id` | string |  |
+    | `backend_id` | string | Backend ID |
     | `can_manage` | boolean | Can manage |
-    | `customer` | string (uuid) |  |
-    | `customer_abbreviation` | string |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
-    | `external_ip` | string |  |
+    | `customer` | string (uuid) | Customer UUID |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description |
+    | `external_ip` | string | External IP |
     | `field` | array |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `service_settings_name` | string |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `uuid` | string (uuid) |  |
+    | `project` | string (uuid) | Project UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `service_settings_name` | string | Service settings name |
+    | `service_settings_uuid` | string (uuid) | Service settings UUID |
+    | `state` | array | State<br><br> |
+    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"
@@ -145,6 +147,8 @@ Get a list of OpenStack tenants.
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
+    | `external_network_ref_uuid` | string (uuid) |  |
+    | `external_network_ref_name` | string |  |
     | `user_username` | string | Username of the tenant user |
     | `user_password` | string | Password of the tenant user |
     | `quotas` | array of objects |  |
@@ -152,6 +156,7 @@ Get a list of OpenStack tenants.
     | `quotas.usage` | integer |  |
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
+    | `skip_creation_of_default_router` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
@@ -266,6 +271,8 @@ Retrieve details of a specific OpenStack tenant.
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
+    | `external_network_ref_uuid` | string (uuid) |  |
+    | `external_network_ref_name` | string |  |
     | `user_username` | string | Username of the tenant user |
     | `user_password` | string | Password of the tenant user |
     | `quotas` | array of objects |  |
@@ -273,141 +280,7 @@ Retrieve details of a specific OpenStack tenant.
     | `quotas.usage` | integer |  |
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
-
----
-
-### Create tenant
-
-Create a new OpenStack tenant.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/openstack-tenants/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-openstack-tenant" \
-      service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.open_stack_tenant_request import OpenStackTenantRequest # (1)
-    from waldur_api_client.api.openstack_tenants import openstack_tenants_create # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = OpenStackTenantRequest(
-        name="my-awesome-openstack-tenant",
-        service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    )
-    response = openstack_tenants_create.sync(
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`OpenStackTenantRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_tenant_request.py)
-    2.  **API Source:** [`openstack_tenants_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackTenantsCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackTenantsCreate({
-      auth: "Token YOUR_API_TOKEN",
-      body: {
-        "name": "my-awesome-openstack-tenant",
-        "service_settings": "https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) | ✓ |  |
-    | `project` | string (uri) | ✓ |  |
-    | `availability_zone` | string |  | Optional availability group. Will be used for all instances provisioned in this tenant |
-    | `user_username` | string |  | Username of the tenant user |
-    | `user_password` | string |  | Password of the tenant user |
-    | `subnet_cidr` | string |  | <br>_Constraints: write-only, default: `192.168.42.0/24`_ |
-    | `default_volume_type_name` | string |  | Volume type name to use when creating volumes. |
-
-
-=== "Responses"
-
-    **`201`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | string |  |
-    | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
-    | `internal_network_id` | string | ID of internal network in OpenStack tenant |
-    | `external_network_id` | string | ID of external network connected to OpenStack tenant |
-    | `user_username` | string | Username of the tenant user |
-    | `user_password` | string | Password of the tenant user |
-    | `quotas` | array of objects |  |
-    | `quotas.name` | string |  |
-    | `quotas.usage` | integer |  |
-    | `quotas.limit` | integer |  |
-    | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
+    | `skip_creation_of_default_router` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
@@ -483,13 +356,19 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
 
 === "Responses"
 
-    **`202`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
     
     ---
     
-    **`409`** - No response body
+    **`409`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 
@@ -574,9 +453,7 @@ Update an existing OpenStack tenant.
       PUT \
       https://api.example.com/api/openstack-tenants/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-openstack-tenant" \
-      service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      name="my-awesome-openstack-tenant"
     ```
 
 === "Python"
@@ -591,9 +468,7 @@ Update an existing OpenStack tenant.
     )
     
     body_data = OpenStackTenantRequest(
-        name="my-awesome-openstack-tenant",
-        service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+        name="my-awesome-openstack-tenant"
     )
     response = openstack_tenants_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -620,9 +495,7 @@ Update an existing OpenStack tenant.
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
       body: {
-        "name": "my-awesome-openstack-tenant",
-        "service_settings": "https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+        "name": "my-awesome-openstack-tenant"
       }
     });
       console.log('Success:', response);
@@ -645,13 +518,22 @@ Update an existing OpenStack tenant.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `service_settings` | string (uri) | ✓ |  |
-    | `project` | string (uri) | ✓ |  |
     | `availability_zone` | string |  | Optional availability group. Will be used for all instances provisioned in this tenant |
-    | `user_username` | string |  | Username of the tenant user |
-    | `user_password` | string |  | Password of the tenant user |
-    | `subnet_cidr` | string |  | <br>_Constraints: write-only, default: `192.168.42.0/24`_ |
     | `default_volume_type_name` | string |  | Volume type name to use when creating volumes. |
+    | `security_groups` | array of objects |  | <br>_Constraints: write-only_ |
+    | `security_groups.name` | string | ✓ |  |
+    | `security_groups.description` | string |  |  |
+    | `security_groups.rules` | array of objects |  |  |
+    | `security_groups.rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
+    | `security_groups.rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
+    | `security_groups.rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.from_port` | integer |  | Starting port number in the range (1-65535) |
+    | `security_groups.rules.to_port` | integer |  | Ending port number in the range (1-65535) |
+    | `security_groups.rules.cidr` | string |  | CIDR notation for the source/destination network address range |
+    | `security_groups.rules.description` | string |  |  |
+    | `security_groups.rules.remote_group` | string (uri) |  | Remote security group that this rule references, if any |
+    | `skip_creation_of_default_subnet` | boolean |  | <br>_Constraints: write-only, default: `False`_ |
+    | `skip_creation_of_default_router` | boolean |  | <br>_Constraints: default: `False`_ |
 
 
 === "Responses"
@@ -688,6 +570,8 @@ Update an existing OpenStack tenant.
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
+    | `external_network_ref_uuid` | string (uuid) |  |
+    | `external_network_ref_name` | string |  |
     | `user_username` | string | Username of the tenant user |
     | `user_password` | string | Password of the tenant user |
     | `quotas` | array of objects |  |
@@ -695,6 +579,7 @@ Update an existing OpenStack tenant.
     | `quotas.usage` | integer |  |
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
+    | `skip_creation_of_default_router` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
@@ -781,6 +666,20 @@ Update specific fields of an OpenStack tenant.
     | `description` | string |  |  |
     | `availability_zone` | string |  | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `default_volume_type_name` | string |  | Volume type name to use when creating volumes. |
+    | `security_groups` | array of objects |  | <br>_Constraints: write-only_ |
+    | `security_groups.name` | string | ✓ |  |
+    | `security_groups.description` | string |  |  |
+    | `security_groups.rules` | array of objects |  |  |
+    | `security_groups.rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
+    | `security_groups.rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
+    | `security_groups.rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.from_port` | integer |  | Starting port number in the range (1-65535) |
+    | `security_groups.rules.to_port` | integer |  | Ending port number in the range (1-65535) |
+    | `security_groups.rules.cidr` | string |  | CIDR notation for the source/destination network address range |
+    | `security_groups.rules.description` | string |  |  |
+    | `security_groups.rules.remote_group` | string (uri) |  | Remote security group that this rule references, if any |
+    | `skip_creation_of_default_subnet` | boolean |  | <br>_Constraints: write-only, default: `False`_ |
+    | `skip_creation_of_default_router` | boolean |  | <br>_Constraints: default: `False`_ |
 
 
 === "Responses"
@@ -817,6 +716,8 @@ Update specific fields of an OpenStack tenant.
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
+    | `external_network_ref_uuid` | string (uuid) |  |
+    | `external_network_ref_name` | string |  |
     | `user_username` | string | Username of the tenant user |
     | `user_password` | string | Password of the tenant user |
     | `quotas` | array of objects |  |
@@ -824,6 +725,7 @@ Update specific fields of an OpenStack tenant.
     | `quotas.usage` | integer |  |
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
+    | `skip_creation_of_default_router` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
@@ -834,73 +736,6 @@ Update specific fields of an OpenStack tenant.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
-
----
-
-### Delete tenant
-
-Delete an OpenStack tenant and all its resources.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      DELETE \
-      https://api.example.com/api/openstack-tenants/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_tenants import openstack_tenants_destroy # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_tenants_destroy.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_tenants_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_destroy.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackTenantsDestroy } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackTenantsDestroy({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`204`** - No response body
-    
 
 ---
 
@@ -994,7 +829,7 @@ Change password for tenant user
 
 ### Set tenant quotas
 
-A quota can be set for a particular tenant. Only staff users can do that.
+A quota can be set for a particular tenant. Only staff users and service provider owners/managers can do that.
 In order to set quota submit POST request to /api/openstack-tenants/<uuid>/set_quotas/.
 The quota values are propagated to the backend.
 
@@ -1135,21 +970,26 @@ Create floating IP for tenant
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_tenants import openstack_tenants_create_floating_ip # (1)
+    from waldur_api_client.models.open_stack_floating_ip_request import OpenStackFloatingIPRequest # (1)
+    from waldur_api_client.api.openstack_tenants import openstack_tenants_create_floating_ip # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
+    
+    body_data = OpenStackFloatingIPRequest()
     response = openstack_tenants_create_floating_ip.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
+        client=client,
+        body=body_data
     )
     
     print(response)
     ```
     
     
-    1.  **API Source:** [`openstack_tenants_create_floating_ip`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_create_floating_ip.py)
+    1.  **Model Source:** [`OpenStackFloatingIPRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_floating_ip_request.py)
+    2.  **API Source:** [`openstack_tenants_create_floating_ip`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_create_floating_ip.py)
 
 === "TypeScript"
 
@@ -1175,6 +1015,13 @@ Create floating IP for tenant
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `router` | string (uri) |  | Optional router to use for external network detection<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -1737,26 +1584,26 @@ Return a list of volumes from backend
 
     | Name | Type | Description |
     |---|---|---|
-    | `backend_id` | string |  |
+    | `backend_id` | string | Backend ID |
     | `can_manage` | boolean | Can manage |
-    | `customer` | string (uuid) |  |
-    | `customer_abbreviation` | string |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
-    | `external_ip` | string |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `customer` | string (uuid) | Customer UUID |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description |
+    | `external_ip` | string | External IP |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `service_settings_name` | string |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `uuid` | string (uuid) |  |
+    | `project` | string (uuid) | Project UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `service_settings_name` | string | Service settings name |
+    | `service_settings_uuid` | string (uuid) | Service settings UUID |
+    | `state` | array | State<br><br> |
+    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"
@@ -1844,26 +1691,26 @@ Return a list of volumes from backend
 
     | Name | Type | Description |
     |---|---|---|
-    | `backend_id` | string |  |
+    | `backend_id` | string | Backend ID |
     | `can_manage` | boolean | Can manage |
-    | `customer` | string (uuid) |  |
-    | `customer_abbreviation` | string |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `description` | string |  |
-    | `external_ip` | string |  |
-    | `name` | string |  |
-    | `name_exact` | string |  |
+    | `customer` | string (uuid) | Customer UUID |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description |
+    | `external_ip` | string | External IP |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `service_settings_name` | string |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `state` | array |  |
-    | `uuid` | string (uuid) |  |
+    | `project` | string (uuid) | Project UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `service_settings_name` | string | Service settings name |
+    | `service_settings_uuid` | string (uuid) | Service settings UUID |
+    | `state` | array | State<br><br> |
+    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"
@@ -2118,6 +1965,8 @@ Trigger job to pull security groups from remote VPC
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
+    | `external_network_ref_uuid` | string (uuid) |  |
+    | `external_network_ref_name` | string |  |
     | `user_username` | string | Username of the tenant user |
     | `user_password` | string | Password of the tenant user |
     | `quotas` | array of objects |  |
@@ -2125,6 +1974,7 @@ Trigger job to pull security groups from remote VPC
     | `quotas.usage` | integer |  |
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
+    | `skip_creation_of_default_router` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
@@ -2232,6 +2082,8 @@ Trigger job to pull server groups from remote VPC
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
+    | `external_network_ref_uuid` | string (uuid) |  |
+    | `external_network_ref_name` | string |  |
     | `user_username` | string | Username of the tenant user |
     | `user_password` | string | Password of the tenant user |
     | `quotas` | array of objects |  |
@@ -2239,6 +2091,7 @@ Trigger job to pull server groups from remote VPC
     | `quotas.usage` | integer |  |
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
+    | `skip_creation_of_default_router` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
@@ -2249,5 +2102,256 @@ Trigger job to pull server groups from remote VPC
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+---
+
+## Other Actions
+
+
+### Batch update security groups for a tenant.
+
+
+        * Security groups with UUIDs are updated.
+        * Security groups without UUIDs are created.
+        * Security groups existing in the tenant but not present in the request are deleted.
+        * Rules for created/updated security groups are replaced.
+
+        To reference a remote group within a rule, use 'remote_group_name' field.
+
+
+=== "HTTPie"
+
+    ```bash
+    echo '[{"uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "my-awesome-openstack-tenant", "description": "A sample description.", "rules": []}]' | http \
+      POST \
+      https://api.example.com/api/openstack-tenants/a1b2c3d4-e5f6-7890-abcd-ef1234567890/push_security_groups/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_tenants import openstack_tenants_push_security_groups # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_tenants_push_security_groups.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_tenants_push_security_groups`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_push_security_groups.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackTenantsPushSecurityGroups } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackTenantsPushSecurityGroups({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: [{"uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "name": "my-awesome-openstack-tenant", "description": "A sample description.", "rules": []}]
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    The request body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `uuid` | string (uuid) |  |  |
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `rules` | array of objects |  |  |
+    | `rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
+    | `rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
+    | `rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.from_port` | integer |  | Starting port number in the range (1-65535) |
+    | `rules.to_port` | integer |  | Ending port number in the range (1-65535) |
+    | `rules.cidr` | string |  | CIDR notation for the source/destination network address range |
+    | `rules.description` | string |  |  |
+    | `rules.remote_group_name` | string |  | <br>_Constraints: write-only_ |
+    | `rules.remote_group` | string (uri) |  |  |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
+### Mark resource as ERRED
+
+Manually transition the resource to ERRED state. This is useful for resources stuck in transitional states (CREATING, UPDATING, DELETING) that cannot be synced via pull. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-tenants/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_erred/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_erred_request import SetErredRequest # (1)
+    from waldur_api_client.api.openstack_tenants import openstack_tenants_set_erred # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetErredRequest()
+    response = openstack_tenants_set_erred.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetErredRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_erred_request.py)
+    2.  **API Source:** [`openstack_tenants_set_erred`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_set_erred.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackTenantsSetErred } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackTenantsSetErred({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
+
+### Mark resource as OK
+
+Manually transition the resource to OK state and clear error fields. Staff-only operation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-tenants/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_ok/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_tenants import openstack_tenants_set_ok # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_tenants_set_ok.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_tenants_set_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_set_ok.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackTenantsSetOk } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackTenantsSetOk({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---

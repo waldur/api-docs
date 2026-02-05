@@ -99,7 +99,7 @@
     | `offerings_data.uuid` | string (uuid) |  |
     | `offerings_data.created` | string (date-time) |  |
     | `offerings_data.name` | string |  |
-    | `offerings_data.slug` | string |  |
+    | `offerings_data.slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
@@ -107,7 +107,7 @@
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
     | `offerings_data.endpoints.name` | string |  |
-    | `offerings_data.endpoints.url` | string |  |
+    | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
     | `offerings_data.software_catalogs.catalog` | object |  |
@@ -210,10 +210,10 @@
     | `offerings_data.plans.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.plans.organization_groups.url` | string (uri) |  |
     | `offerings_data.plans.organization_groups.name` | string |  |
-    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.plans.organization_groups.parent_name` | string |  |
+    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.plans.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.plans.organization_groups.customers_count` | integer |  |
+    | `offerings_data.plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offerings_data.plans.components` | array of objects |  |
     | `offerings_data.plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings_data.plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -257,16 +257,19 @@
     | `offerings_data.citation_count` | integer | Number of citations of a DOI |
     | `offerings_data.latitude` | number (double) |  |
     | `offerings_data.longitude` | number (double) |  |
-    | `offerings_data.country` | any |  |
+    | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
     | `offerings_data.organization_groups.name` | string |  |
-    | `offerings_data.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.organization_groups.parent_name` | string |  |
+    | `offerings_data.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.organization_groups.customers_count` | integer |  |
+    | `offerings_data.organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offerings_data.tags` | array of objects |  |
+    | `offerings_data.tags.uuid` | string (uuid) |  |
+    | `offerings_data.tags.name` | string |  |
     | `offerings_data.image` | string (uri) |  |
     | `offerings_data.total_customers` | integer |  |
     | `offerings_data.total_cost` | integer |  |
@@ -276,6 +279,7 @@
     | `offerings_data.parent_name` | string |  |
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
+    | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |
@@ -372,7 +376,7 @@
     | `offerings_data.uuid` | string (uuid) |  |
     | `offerings_data.created` | string (date-time) |  |
     | `offerings_data.name` | string |  |
-    | `offerings_data.slug` | string |  |
+    | `offerings_data.slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
@@ -380,7 +384,7 @@
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
     | `offerings_data.endpoints.name` | string |  |
-    | `offerings_data.endpoints.url` | string |  |
+    | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
     | `offerings_data.software_catalogs.catalog` | object |  |
@@ -483,10 +487,10 @@
     | `offerings_data.plans.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.plans.organization_groups.url` | string (uri) |  |
     | `offerings_data.plans.organization_groups.name` | string |  |
-    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.plans.organization_groups.parent_name` | string |  |
+    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.plans.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.plans.organization_groups.customers_count` | integer |  |
+    | `offerings_data.plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offerings_data.plans.components` | array of objects |  |
     | `offerings_data.plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings_data.plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -530,16 +534,19 @@
     | `offerings_data.citation_count` | integer | Number of citations of a DOI |
     | `offerings_data.latitude` | number (double) |  |
     | `offerings_data.longitude` | number (double) |  |
-    | `offerings_data.country` | any |  |
+    | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
     | `offerings_data.organization_groups.name` | string |  |
-    | `offerings_data.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.organization_groups.parent_name` | string |  |
+    | `offerings_data.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.organization_groups.customers_count` | integer |  |
+    | `offerings_data.organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offerings_data.tags` | array of objects |  |
+    | `offerings_data.tags.uuid` | string (uuid) |  |
+    | `offerings_data.tags.name` | string |  |
     | `offerings_data.image` | string (uri) |  |
     | `offerings_data.total_customers` | integer |  |
     | `offerings_data.total_cost` | integer |  |
@@ -549,6 +556,7 @@
     | `offerings_data.parent_name` | string |  |
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
+    | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |
@@ -680,7 +688,7 @@ Create ProjectTemplate object
     | `offerings_data.uuid` | string (uuid) |  |
     | `offerings_data.created` | string (date-time) |  |
     | `offerings_data.name` | string |  |
-    | `offerings_data.slug` | string |  |
+    | `offerings_data.slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
@@ -688,7 +696,7 @@ Create ProjectTemplate object
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
     | `offerings_data.endpoints.name` | string |  |
-    | `offerings_data.endpoints.url` | string |  |
+    | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
     | `offerings_data.software_catalogs.catalog` | object |  |
@@ -791,10 +799,10 @@ Create ProjectTemplate object
     | `offerings_data.plans.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.plans.organization_groups.url` | string (uri) |  |
     | `offerings_data.plans.organization_groups.name` | string |  |
-    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.plans.organization_groups.parent_name` | string |  |
+    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.plans.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.plans.organization_groups.customers_count` | integer |  |
+    | `offerings_data.plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offerings_data.plans.components` | array of objects |  |
     | `offerings_data.plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings_data.plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -838,16 +846,19 @@ Create ProjectTemplate object
     | `offerings_data.citation_count` | integer | Number of citations of a DOI |
     | `offerings_data.latitude` | number (double) |  |
     | `offerings_data.longitude` | number (double) |  |
-    | `offerings_data.country` | any |  |
+    | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
     | `offerings_data.organization_groups.name` | string |  |
-    | `offerings_data.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.organization_groups.parent_name` | string |  |
+    | `offerings_data.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.organization_groups.customers_count` | integer |  |
+    | `offerings_data.organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offerings_data.tags` | array of objects |  |
+    | `offerings_data.tags.uuid` | string (uuid) |  |
+    | `offerings_data.tags.name` | string |  |
     | `offerings_data.image` | string (uri) |  |
     | `offerings_data.total_customers` | integer |  |
     | `offerings_data.total_cost` | integer |  |
@@ -857,6 +868,7 @@ Create ProjectTemplate object
     | `offerings_data.parent_name` | string |  |
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
+    | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |
@@ -999,7 +1011,7 @@ Update ProjectTemplate object (full update)
     | `offerings_data.uuid` | string (uuid) |  |
     | `offerings_data.created` | string (date-time) |  |
     | `offerings_data.name` | string |  |
-    | `offerings_data.slug` | string |  |
+    | `offerings_data.slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
@@ -1007,7 +1019,7 @@ Update ProjectTemplate object (full update)
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
     | `offerings_data.endpoints.name` | string |  |
-    | `offerings_data.endpoints.url` | string |  |
+    | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
     | `offerings_data.software_catalogs.catalog` | object |  |
@@ -1110,10 +1122,10 @@ Update ProjectTemplate object (full update)
     | `offerings_data.plans.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.plans.organization_groups.url` | string (uri) |  |
     | `offerings_data.plans.organization_groups.name` | string |  |
-    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.plans.organization_groups.parent_name` | string |  |
+    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.plans.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.plans.organization_groups.customers_count` | integer |  |
+    | `offerings_data.plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offerings_data.plans.components` | array of objects |  |
     | `offerings_data.plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings_data.plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1157,16 +1169,19 @@ Update ProjectTemplate object (full update)
     | `offerings_data.citation_count` | integer | Number of citations of a DOI |
     | `offerings_data.latitude` | number (double) |  |
     | `offerings_data.longitude` | number (double) |  |
-    | `offerings_data.country` | any |  |
+    | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
     | `offerings_data.organization_groups.name` | string |  |
-    | `offerings_data.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.organization_groups.parent_name` | string |  |
+    | `offerings_data.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.organization_groups.customers_count` | integer |  |
+    | `offerings_data.organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offerings_data.tags` | array of objects |  |
+    | `offerings_data.tags.uuid` | string (uuid) |  |
+    | `offerings_data.tags.name` | string |  |
     | `offerings_data.image` | string (uri) |  |
     | `offerings_data.total_customers` | integer |  |
     | `offerings_data.total_cost` | integer |  |
@@ -1176,6 +1191,7 @@ Update ProjectTemplate object (full update)
     | `offerings_data.parent_name` | string |  |
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
+    | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |
@@ -1297,7 +1313,7 @@ Partially update ProjectTemplate object
     | `offerings_data.uuid` | string (uuid) |  |
     | `offerings_data.created` | string (date-time) |  |
     | `offerings_data.name` | string |  |
-    | `offerings_data.slug` | string |  |
+    | `offerings_data.slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
@@ -1305,7 +1321,7 @@ Partially update ProjectTemplate object
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
     | `offerings_data.endpoints.name` | string |  |
-    | `offerings_data.endpoints.url` | string |  |
+    | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
     | `offerings_data.software_catalogs.catalog` | object |  |
@@ -1408,10 +1424,10 @@ Partially update ProjectTemplate object
     | `offerings_data.plans.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.plans.organization_groups.url` | string (uri) |  |
     | `offerings_data.plans.organization_groups.name` | string |  |
-    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.plans.organization_groups.parent_name` | string |  |
+    | `offerings_data.plans.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.plans.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.plans.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.plans.organization_groups.customers_count` | integer |  |
+    | `offerings_data.plans.organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offerings_data.plans.components` | array of objects |  |
     | `offerings_data.plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings_data.plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1455,16 +1471,19 @@ Partially update ProjectTemplate object
     | `offerings_data.citation_count` | integer | Number of citations of a DOI |
     | `offerings_data.latitude` | number (double) |  |
     | `offerings_data.longitude` | number (double) |  |
-    | `offerings_data.country` | any |  |
+    | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
     | `offerings_data.organization_groups.name` | string |  |
-    | `offerings_data.organization_groups.parent_uuid` | string (uuid) |  |
-    | `offerings_data.organization_groups.parent_name` | string |  |
+    | `offerings_data.organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `offerings_data.organization_groups.parent_name` | string | Name of the parent organization group |
     | `offerings_data.organization_groups.parent` | string (uri) |  |
-    | `offerings_data.organization_groups.customers_count` | integer |  |
+    | `offerings_data.organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offerings_data.tags` | array of objects |  |
+    | `offerings_data.tags.uuid` | string (uuid) |  |
+    | `offerings_data.tags.name` | string |  |
     | `offerings_data.image` | string (uri) |  |
     | `offerings_data.total_customers` | integer |  |
     | `offerings_data.total_cost` | integer |  |
@@ -1474,6 +1493,7 @@ Partially update ProjectTemplate object
     | `offerings_data.parent_name` | string |  |
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
+    | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |

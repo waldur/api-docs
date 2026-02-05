@@ -16,6 +16,8 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-plans/{uuid}/` | [Partially update a provider plan](#partially-update-a-provider-plan) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-plans/{uuid}/` | [Delete a provider plan](#delete-a-provider-plan) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-plans/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-plans/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-plans/usage_stats/` | [Get plan usage statistics](#get-plan-usage-statistics) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-plans/{uuid}/archive/` | [Archive a plan](#archive-a-plan) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-plans/{uuid}/delete_organization_groups/` | [Remove all organization groups from a plan](#remove-all-organization-groups-from-a-plan) |
@@ -78,7 +80,7 @@ Returns a paginated list of plans managed by the provider. The list is filtered 
     |---|---|---|
     | `offering` | string |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_offering_uuid` | string (uuid) |  |
@@ -109,10 +111,10 @@ Returns a paginated list of plans managed by the provider. The list is filtered 
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -215,10 +217,10 @@ Returns details of a specific plan.
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -339,10 +341,10 @@ Creates a new billing plan for an offering.
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -694,9 +696,9 @@ Updates the quotas (fixed amounts) for one or more components of a specific plan
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `quotas` | object (free-form) | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `quotas` | object (free-form) | ✓ | Dictionary of quotas to update |
 
 
 === "Responses"
@@ -818,10 +820,10 @@ Updates an existing plan. Note: A plan cannot be updated if it is already used b
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -943,10 +945,10 @@ Partially updates an existing plan. Note: A plan cannot be updated if it is alre
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
     | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) |  |
-    | `organization_groups.parent_name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
     | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1036,6 +1038,193 @@ Deletes a plan. This is a hard delete and should be used with caution.
 ## Other Actions
 
 
+### Get object state at a specific timestamp
+
+Returns the state of the object as it was at the specified timestamp. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-plans/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/at/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      timestamp=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_plans import marketplace_plans_history_at_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_plans_history_at_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        timestamp="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_plans_history_at_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_plans/marketplace_plans_history_at_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplacePlansHistoryAtRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplacePlansHistoryAtRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "timestamp": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `timestamp` | string | ✓ | ISO 8601 timestamp to query the object state at |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+    
+    ---
+    
+    **`400`** - 
+    
+    
+    ---
+    
+    **`404`** - 
+    
+
+---
+
+### Get version history
+
+Returns the version history for this object. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-plans/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_plans import marketplace_plans_history_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_plans_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_plans_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_plans/marketplace_plans_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplacePlansHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplacePlansHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
+    | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
+    | `offering` | string |  |
+    | `offering_slug` | array | Multiple values may be separated by commas. |
+    | `offering_uuid` | string (uuid) | Offering UUID |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `parent_offering_uuid` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+---
+
 ### Get plan usage statistics
 
 Returns aggregated statistics on how many resources are currently using each plan. Can be filtered by offering or service provider.
@@ -1104,17 +1293,17 @@ Returns aggregated statistics on how many resources are currently using each pla
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `plan_uuid` | string (uuid) |
-    | `plan_name` | string |
-    | `limit` | integer |
-    | `usage` | integer |
-    | `remaining` | integer |
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
-    | `customer_provider_uuid` | string (uuid) |
-    | `customer_provider_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `plan_uuid` | string (uuid) | UUID of the plan |
+    | `plan_name` | string | Name of the plan |
+    | `limit` | integer | Usage limit |
+    | `usage` | integer | Current usage count |
+    | `remaining` | integer | Remaining usage |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `customer_provider_uuid` | string (uuid) |  |
+    | `customer_provider_name` | string |  |
 
 ---
 

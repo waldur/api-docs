@@ -65,10 +65,10 @@ Returns a paginated list of category columns used for resource table rendering.
 
     | Name | Type | Description |
     |---|---|---|
-    | `category_uuid` | string (uuid) |  |
+    | `category_uuid` | string (uuid) | Category UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `title` | string |  |
+    | `title` | string | Title contains |
 
 
 === "Responses"

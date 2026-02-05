@@ -59,14 +59,14 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer_uuid` | string (uuid) |  |
-    | `invoice_month` | integer |  |
-    | `invoice_year` | integer |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `invoice_month` | integer | Invoice month |
+    | `invoice_year` | integer | Invoice year |
     | `o` | array | Ordering<br><br> |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project_uuid` | string (uuid) |  |
+    | `project_uuid` | string (uuid) | Project UUID |
 
 
 === "Responses"
@@ -94,24 +94,24 @@
     | `project_uuid` | string (uuid) |  |
     | `quantity` | string (decimal) |  |
     | `details` | object |  |
-    | `details.resource_name` | string |  |
-    | `details.resource_uuid` | string (uuid) |  |
-    | `details.plan_name` | string |  |
-    | `details.plan_uuid` | string (uuid) |  |
-    | `details.offering_type` | string |  |
-    | `details.offering_name` | string |  |
-    | `details.offering_uuid` | string (uuid) |  |
-    | `details.service_provider_name` | string |  |
-    | `details.service_provider_uuid` | string (uuid) |  |
-    | `details.plan_component_id` | integer |  |
-    | `details.offering_component_type` | string |  |
-    | `details.offering_component_name` | string |  |
-    | `details.resource_limit_periods` | array of objects |  |
-    | `details.resource_limit_periods.start` | string |  |
-    | `details.resource_limit_periods.end` | string |  |
-    | `details.resource_limit_periods.quantity` | integer |  |
-    | `details.resource_limit_periods.billing_periods` | integer |  |
-    | `details.resource_limit_periods.total` | string |  |
+    | `details.resource_name` | string | Name of the marketplace resource |
+    | `details.resource_uuid` | string (uuid) | UUID of the marketplace resource |
+    | `details.plan_name` | string | Name of the pricing plan |
+    | `details.plan_uuid` | string (uuid) | UUID of the pricing plan |
+    | `details.offering_type` | string | Type of the offering |
+    | `details.offering_name` | string | Name of the offering |
+    | `details.offering_uuid` | string (uuid) | UUID of the offering |
+    | `details.service_provider_name` | string | Name of the service provider |
+    | `details.service_provider_uuid` | string (uuid) | UUID of the service provider |
+    | `details.plan_component_id` | integer | ID of the plan component |
+    | `details.offering_component_type` | string | Type of the offering component |
+    | `details.offering_component_name` | string | Name of the offering component |
+    | `details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
+    | `details.resource_limit_periods.start` | string | Start date of the resource limit period |
+    | `details.resource_limit_periods.end` | string | End date of the resource limit period |
+    | `details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
+    | `details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
+    | `details.resource_limit_periods.total` | string | Total amount for this period |
     | `resource` | string (uri) |  |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
@@ -202,24 +202,24 @@
     | `project_uuid` | string (uuid) |  |
     | `quantity` | string (decimal) |  |
     | `details` | object |  |
-    | `details.resource_name` | string |  |
-    | `details.resource_uuid` | string (uuid) |  |
-    | `details.plan_name` | string |  |
-    | `details.plan_uuid` | string (uuid) |  |
-    | `details.offering_type` | string |  |
-    | `details.offering_name` | string |  |
-    | `details.offering_uuid` | string (uuid) |  |
-    | `details.service_provider_name` | string |  |
-    | `details.service_provider_uuid` | string (uuid) |  |
-    | `details.plan_component_id` | integer |  |
-    | `details.offering_component_type` | string |  |
-    | `details.offering_component_name` | string |  |
-    | `details.resource_limit_periods` | array of objects |  |
-    | `details.resource_limit_periods.start` | string |  |
-    | `details.resource_limit_periods.end` | string |  |
-    | `details.resource_limit_periods.quantity` | integer |  |
-    | `details.resource_limit_periods.billing_periods` | integer |  |
-    | `details.resource_limit_periods.total` | string |  |
+    | `details.resource_name` | string | Name of the marketplace resource |
+    | `details.resource_uuid` | string (uuid) | UUID of the marketplace resource |
+    | `details.plan_name` | string | Name of the pricing plan |
+    | `details.plan_uuid` | string (uuid) | UUID of the pricing plan |
+    | `details.offering_type` | string | Type of the offering |
+    | `details.offering_name` | string | Name of the offering |
+    | `details.offering_uuid` | string (uuid) | UUID of the offering |
+    | `details.service_provider_name` | string | Name of the service provider |
+    | `details.service_provider_uuid` | string (uuid) | UUID of the service provider |
+    | `details.plan_component_id` | integer | ID of the plan component |
+    | `details.offering_component_type` | string | Type of the offering component |
+    | `details.offering_component_name` | string | Name of the offering component |
+    | `details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
+    | `details.resource_limit_periods.start` | string | Start date of the resource limit period |
+    | `details.resource_limit_periods.end` | string | End date of the resource limit period |
+    | `details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
+    | `details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
+    | `details.resource_limit_periods.total` | string | Total amount for this period |
     | `resource` | string (uri) |  |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |

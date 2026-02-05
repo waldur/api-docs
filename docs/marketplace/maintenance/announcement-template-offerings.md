@@ -65,13 +65,13 @@ Returns a paginated list of associations between maintenance announcement templa
 
     | Name | Type | Description |
     |---|---|---|
-    | `impact_level` | integer |  |
-    | `maintenance_template_uuid` | string (uuid) |  |
+    | `impact_level` | integer | Impact level |
+    | `maintenance_template_uuid` | string (uuid) | Maintenance template UUID |
     | `o` | array | Ordering<br><br> |
-    | `offering_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `service_provider_uuid` | string (uuid) |  |
+    | `service_provider_uuid` | string (uuid) | Service provider UUID |
 
 
 === "Responses"
