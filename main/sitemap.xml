@@ -541,10 +541,6 @@
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://docs.waldur.com/latest/core/system-configuration/admin/</loc>
-         <lastmod>2026-02-05</lastmod>
-    </url>
-    <url>
          <loc>https://docs.waldur.com/latest/core/system-configuration/celery-stats/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
@@ -626,6 +622,30 @@
     </url>
     <url>
          <loc>https://docs.waldur.com/latest/marketplace/accounts/user-offering-consents/</loc>
+         <lastmod>2026-02-05</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.waldur.com/latest/marketplace/arrow/billing-sync-items/</loc>
+         <lastmod>2026-02-05</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.waldur.com/latest/marketplace/arrow/billing-syncs/</loc>
+         <lastmod>2026-02-05</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.waldur.com/latest/marketplace/arrow/consumption-records/</loc>
+         <lastmod>2026-02-05</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.waldur.com/latest/marketplace/arrow/customer-mappings/</loc>
+         <lastmod>2026-02-05</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.waldur.com/latest/marketplace/arrow/settings/</loc>
+         <lastmod>2026-02-05</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.waldur.com/latest/marketplace/arrow/vendor-offering-mappings/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
