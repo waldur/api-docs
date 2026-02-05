@@ -209,19 +209,11 @@ Returns a paginated list of offerings for the provider.
     | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
-    | `software_catalogs.catalog` | object |  |
-    | `software_catalogs.catalog.uuid` | string |  |
-    | `software_catalogs.catalog.name` | string |  |
-    | `software_catalogs.catalog.version` | string |  |
-    | `software_catalogs.catalog.description` | string |  |
+    | `software_catalogs.catalog` | any |  |
     | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
-    | `software_catalogs.partition` | object |  |
-    | `software_catalogs.partition.uuid` | string |  |
-    | `software_catalogs.partition.partition_name` | string |  |
-    | `software_catalogs.partition.priority_tier` | integer |  |
-    | `software_catalogs.partition.qos` | string |  |
+    | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
@@ -478,19 +470,11 @@ Returns details of a specific provider offering.
     | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
-    | `software_catalogs.catalog` | object |  |
-    | `software_catalogs.catalog.uuid` | string |  |
-    | `software_catalogs.catalog.name` | string |  |
-    | `software_catalogs.catalog.version` | string |  |
-    | `software_catalogs.catalog.description` | string |  |
+    | `software_catalogs.catalog` | any |  |
     | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
-    | `software_catalogs.partition` | object |  |
-    | `software_catalogs.partition.uuid` | string |  |
-    | `software_catalogs.partition.partition_name` | string |  |
-    | `software_catalogs.partition.priority_tier` | integer |  |
-    | `software_catalogs.partition.qos` | string |  |
+    | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
@@ -770,7 +754,7 @@ Creates a new provider offering.
     | `plugin_options.max_resource_termination_offset_in_days` | integer |  | Maximum resource termination offset in days |
     | `plugin_options.default_resource_termination_offset_in_days` | integer |  | If set, it will be used as a default resource termination offset in days |
     | `plugin_options.is_resource_termination_date_required` | boolean |  | If set to True, resource termination date is required |
-    | `plugin_options.latest_date_for_resource_termination` | string (date) |  | If set, it will be used as a latest date for resource termination |
+    | `plugin_options.latest_date_for_resource_termination` | string |  | If set, it will be used as a latest date for resource termination. Format: YYYY-MM-DD |
     | `plugin_options.auto_approve_in_service_provider_projects` | boolean |  | Skip approval of public offering belonging to the same organization under which the request is done |
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
@@ -876,19 +860,11 @@ Creates a new provider offering.
     | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
-    | `software_catalogs.catalog` | object |  |
-    | `software_catalogs.catalog.uuid` | string |  |
-    | `software_catalogs.catalog.name` | string |  |
-    | `software_catalogs.catalog.version` | string |  |
-    | `software_catalogs.catalog.description` | string |  |
+    | `software_catalogs.catalog` | any |  |
     | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
-    | `software_catalogs.partition` | object |  |
-    | `software_catalogs.partition.uuid` | string |  |
-    | `software_catalogs.partition.partition_name` | string |  |
-    | `software_catalogs.partition.priority_tier` | integer |  |
-    | `software_catalogs.partition.qos` | string |  |
+    | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
@@ -2320,19 +2296,11 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
-    | `software_catalogs.catalog` | object |  |
-    | `software_catalogs.catalog.uuid` | string |  |
-    | `software_catalogs.catalog.name` | string |  |
-    | `software_catalogs.catalog.version` | string |  |
-    | `software_catalogs.catalog.description` | string |  |
+    | `software_catalogs.catalog` | any |  |
     | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
-    | `software_catalogs.partition` | object |  |
-    | `software_catalogs.partition.uuid` | string |  |
-    | `software_catalogs.partition.partition_name` | string |  |
-    | `software_catalogs.partition.priority_tier` | integer |  |
-    | `software_catalogs.partition.qos` | string |  |
+    | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
@@ -4891,19 +4859,11 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
-    | `software_catalogs.catalog` | object |  |
-    | `software_catalogs.catalog.uuid` | string |  |
-    | `software_catalogs.catalog.name` | string |  |
-    | `software_catalogs.catalog.version` | string |  |
-    | `software_catalogs.catalog.description` | string |  |
+    | `software_catalogs.catalog` | any |  |
     | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
-    | `software_catalogs.partition` | object |  |
-    | `software_catalogs.partition.uuid` | string |  |
-    | `software_catalogs.partition.partition_name` | string |  |
-    | `software_catalogs.partition.priority_tier` | integer |  |
-    | `software_catalogs.partition.qos` | string |  |
+    | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
@@ -5507,7 +5467,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.max_resource_termination_offset_in_days` | integer |  | Maximum resource termination offset in days |
     | `plugin_options.default_resource_termination_offset_in_days` | integer |  | If set, it will be used as a default resource termination offset in days |
     | `plugin_options.is_resource_termination_date_required` | boolean |  | If set to True, resource termination date is required |
-    | `plugin_options.latest_date_for_resource_termination` | string (date) |  | If set, it will be used as a latest date for resource termination |
+    | `plugin_options.latest_date_for_resource_termination` | string |  | If set, it will be used as a latest date for resource termination. Format: YYYY-MM-DD |
     | `plugin_options.auto_approve_in_service_provider_projects` | boolean |  | Skip approval of public offering belonging to the same organization under which the request is done |
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |

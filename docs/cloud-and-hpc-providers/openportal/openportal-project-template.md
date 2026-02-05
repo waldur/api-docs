@@ -110,19 +110,11 @@
     | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
-    | `offerings_data.software_catalogs.catalog` | object |  |
-    | `offerings_data.software_catalogs.catalog.uuid` | string |  |
-    | `offerings_data.software_catalogs.catalog.name` | string |  |
-    | `offerings_data.software_catalogs.catalog.version` | string |  |
-    | `offerings_data.software_catalogs.catalog.description` | string |  |
+    | `offerings_data.software_catalogs.catalog` | any |  |
     | `offerings_data.software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `offerings_data.software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `offerings_data.software_catalogs.package_count` | integer |  |
-    | `offerings_data.software_catalogs.partition` | object |  |
-    | `offerings_data.software_catalogs.partition.uuid` | string |  |
-    | `offerings_data.software_catalogs.partition.partition_name` | string |  |
-    | `offerings_data.software_catalogs.partition.priority_tier` | integer |  |
-    | `offerings_data.software_catalogs.partition.qos` | string |  |
+    | `offerings_data.software_catalogs.partition` | any |  |
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
@@ -387,19 +379,11 @@
     | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
-    | `offerings_data.software_catalogs.catalog` | object |  |
-    | `offerings_data.software_catalogs.catalog.uuid` | string |  |
-    | `offerings_data.software_catalogs.catalog.name` | string |  |
-    | `offerings_data.software_catalogs.catalog.version` | string |  |
-    | `offerings_data.software_catalogs.catalog.description` | string |  |
+    | `offerings_data.software_catalogs.catalog` | any |  |
     | `offerings_data.software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `offerings_data.software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `offerings_data.software_catalogs.package_count` | integer |  |
-    | `offerings_data.software_catalogs.partition` | object |  |
-    | `offerings_data.software_catalogs.partition.uuid` | string |  |
-    | `offerings_data.software_catalogs.partition.partition_name` | string |  |
-    | `offerings_data.software_catalogs.partition.priority_tier` | integer |  |
-    | `offerings_data.software_catalogs.partition.qos` | string |  |
+    | `offerings_data.software_catalogs.partition` | any |  |
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
@@ -699,19 +683,11 @@ Create ProjectTemplate object
     | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
-    | `offerings_data.software_catalogs.catalog` | object |  |
-    | `offerings_data.software_catalogs.catalog.uuid` | string |  |
-    | `offerings_data.software_catalogs.catalog.name` | string |  |
-    | `offerings_data.software_catalogs.catalog.version` | string |  |
-    | `offerings_data.software_catalogs.catalog.description` | string |  |
+    | `offerings_data.software_catalogs.catalog` | any |  |
     | `offerings_data.software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `offerings_data.software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `offerings_data.software_catalogs.package_count` | integer |  |
-    | `offerings_data.software_catalogs.partition` | object |  |
-    | `offerings_data.software_catalogs.partition.uuid` | string |  |
-    | `offerings_data.software_catalogs.partition.partition_name` | string |  |
-    | `offerings_data.software_catalogs.partition.priority_tier` | integer |  |
-    | `offerings_data.software_catalogs.partition.qos` | string |  |
+    | `offerings_data.software_catalogs.partition` | any |  |
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
@@ -1022,19 +998,11 @@ Update ProjectTemplate object (full update)
     | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
-    | `offerings_data.software_catalogs.catalog` | object |  |
-    | `offerings_data.software_catalogs.catalog.uuid` | string |  |
-    | `offerings_data.software_catalogs.catalog.name` | string |  |
-    | `offerings_data.software_catalogs.catalog.version` | string |  |
-    | `offerings_data.software_catalogs.catalog.description` | string |  |
+    | `offerings_data.software_catalogs.catalog` | any |  |
     | `offerings_data.software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `offerings_data.software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `offerings_data.software_catalogs.package_count` | integer |  |
-    | `offerings_data.software_catalogs.partition` | object |  |
-    | `offerings_data.software_catalogs.partition.uuid` | string |  |
-    | `offerings_data.software_catalogs.partition.partition_name` | string |  |
-    | `offerings_data.software_catalogs.partition.priority_tier` | integer |  |
-    | `offerings_data.software_catalogs.partition.qos` | string |  |
+    | `offerings_data.software_catalogs.partition` | any |  |
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
@@ -1324,19 +1292,11 @@ Partially update ProjectTemplate object
     | `offerings_data.endpoints.url` | string | URL of the access endpoint |
     | `offerings_data.software_catalogs` | array of objects |  |
     | `offerings_data.software_catalogs.uuid` | string (uuid) |  |
-    | `offerings_data.software_catalogs.catalog` | object |  |
-    | `offerings_data.software_catalogs.catalog.uuid` | string |  |
-    | `offerings_data.software_catalogs.catalog.name` | string |  |
-    | `offerings_data.software_catalogs.catalog.version` | string |  |
-    | `offerings_data.software_catalogs.catalog.description` | string |  |
+    | `offerings_data.software_catalogs.catalog` | any |  |
     | `offerings_data.software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `offerings_data.software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `offerings_data.software_catalogs.package_count` | integer |  |
-    | `offerings_data.software_catalogs.partition` | object |  |
-    | `offerings_data.software_catalogs.partition.uuid` | string |  |
-    | `offerings_data.software_catalogs.partition.partition_name` | string |  |
-    | `offerings_data.software_catalogs.partition.priority_tier` | integer |  |
-    | `offerings_data.software_catalogs.partition.qos` | string |  |
+    | `offerings_data.software_catalogs.partition` | any |  |
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |

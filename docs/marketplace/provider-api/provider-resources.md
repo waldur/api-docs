@@ -1455,19 +1455,11 @@ Returns details of the offering connected to the requested object.
     | `endpoints.url` | string | URL of the access endpoint |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
-    | `software_catalogs.catalog` | object |  |
-    | `software_catalogs.catalog.uuid` | string |  |
-    | `software_catalogs.catalog.name` | string |  |
-    | `software_catalogs.catalog.version` | string |  |
-    | `software_catalogs.catalog.description` | string |  |
+    | `software_catalogs.catalog` | any |  |
     | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
     | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
-    | `software_catalogs.partition` | object |  |
-    | `software_catalogs.partition.uuid` | string |  |
-    | `software_catalogs.partition.partition_name` | string |  |
-    | `software_catalogs.partition.priority_tier` | integer |  |
-    | `software_catalogs.partition.qos` | string |  |
+    | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |

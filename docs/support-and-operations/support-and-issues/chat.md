@@ -4,7 +4,800 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| <span class="http-badge http-get">GET</span> | `/api/chat-messages/{uuid}/history/` | [Get message edit history](#get-message-edit-history) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-messages/` | [List Chat Messages](#list-chat-messages) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-messages/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-sessions/current/` | [Get or create current user's chat session](#get-or-create-current-users-chat-session) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-sessions/` | [List Chat Sessions](#list-chat-sessions) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-sessions/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-threads/` | [List Chat Threads](#list-chat-threads) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-threads/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-messages/` | [Create](#create) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-messages/{uuid}/edit/` | [Edit message](#edit-message) |
 | <span class="http-badge http-post">POST</span> | `/api/chat/stream/` | [Stream](#stream) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/archive/` | [Archive thread](#archive-thread) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-threads/` | [Create](#create) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/unarchive/` | [Unarchive thread](#unarchive-thread) |
+| <span class="http-badge http-put">PUT</span> | `/api/chat-threads/{uuid}/` | [Update](#update) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/chat-threads/{uuid}/` | [Partial Update](#partial-update) |
+
+---
+
+### Get message edit history
+
+Get all versions of a message (edit history).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-messages/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_messages import chat_messages_history_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_messages_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`chat_messages_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_messages/chat_messages_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatMessagesHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await chatMessagesHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `thread` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `thread` | string (uuid) |
+    | `role` | string |
+    | `content` | string |
+    | `sequence_index` | integer |
+    | `replaces` | string (uuid) |
+    | `created` | string (date-time) |
+
+---
+
+### List Chat Messages
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-messages/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_messages import chat_messages_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_messages_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`chat_messages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_messages/chat_messages_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatMessagesList } from 'waldur-js-client';
+    
+    try {
+      const response = await chatMessagesList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `thread` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `thread` | string (uuid) |
+    | `role` | string |
+    | `content` | string |
+    | `sequence_index` | integer |
+    | `replaces` | string (uuid) |
+    | `created` | string (date-time) |
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-messages/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_messages import chat_messages_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_messages_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`chat_messages_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_messages/chat_messages_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatMessagesRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await chatMessagesRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `thread` | string (uuid) |
+    | `role` | string |
+    | `content` | string |
+    | `sequence_index` | integer |
+    | `replaces` | string (uuid) |
+    | `created` | string (date-time) |
+
+---
+
+### Get or create current user's chat session
+
+Returns the current user's chat session, creating it if it doesn't exist.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-sessions/current/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_sessions import chat_sessions_current_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_sessions_current_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`chat_sessions_current_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_current_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSessionsCurrentRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSessionsCurrentRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `user` | string (uuid) |
+    | `user_username` | string |
+    | `user_full_name` | string |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+
+---
+
+### List Chat Sessions
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-sessions/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_sessions import chat_sessions_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_sessions_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`chat_sessions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSessionsList } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSessionsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `field` | array |  |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `user` | string (uuid) |
+    | `user_username` | string |
+    | `user_full_name` | string |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-sessions/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_sessions import chat_sessions_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_sessions_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`chat_sessions_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSessionsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSessionsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `user` | string (uuid) |
+    | `user_username` | string |
+    | `user_full_name` | string |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+
+---
+
+### List Chat Threads
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-threads/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_threads import chat_threads_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_threads_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`chat_threads_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsList } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `field` | array |  |
+    | `is_archived` | boolean |  |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `user` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `chat_session` | string (uuid) |
+    | `flags` | any |
+    | `is_archived` | boolean |
+    | `message_count` | integer |
+    | `created` | string (date-time) |
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-threads/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_threads import chat_threads_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_threads_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`chat_threads_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `chat_session` | string (uuid) |
+    | `flags` | any |
+    | `is_archived` | boolean |
+    | `message_count` | integer |
+    | `created` | string (date-time) |
+
+---
+
+### Create
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-messages/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      thread="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
+      role="user" \
+      content="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.message_request import MessageRequest # (1)
+    from waldur_api_client.api.chat_messages import chat_messages_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = MessageRequest(
+        thread="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        role="user",
+        content="string-value"
+    )
+    response = chat_messages_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`MessageRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/message_request.py)
+    2.  **API Source:** [`chat_messages_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_messages/chat_messages_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatMessagesCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatMessagesCreate({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "thread": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "role": "user",
+        "content": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `thread` | string (uuid) | ✓ |
+    | `role` | string | ✓ |
+    | `content` | string | ✓ |
+    | `replaces` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `thread` | string (uuid) |
+    | `role` | string |
+    | `content` | string |
+    | `sequence_index` | integer |
+    | `replaces` | string (uuid) |
+    | `created` | string (date-time) |
+
+---
+
+### Edit message
+
+Edit a message (creates a new message with replaces reference). Only allows editing the last user message in a thread.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-messages/a1b2c3d4-e5f6-7890-abcd-ef1234567890/edit/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_messages import chat_messages_edit # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_messages_edit.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`chat_messages_edit`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_messages/chat_messages_edit.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatMessagesEdit } from 'waldur-js-client';
+    
+    try {
+      const response = await chatMessagesEdit({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `content` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `thread` | string (uuid) |
+    | `role` | string |
+    | `content` | string |
+    | `sequence_index` | integer |
+    | `replaces` | string (uuid) |
+    | `created` | string (date-time) |
 
 ---
 
@@ -71,11 +864,423 @@
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `input` | string | ✓ | User input text for the chat model. |
+    | `thread_uuid` | string (uuid) |  | Existing thread UUID. If omitted, a new thread is created when storage is enabled. |
+    | `update_thread_name` | string (uuid) |  | Thread UUID whose name should be set to the assistant's response. Skips message persistence for this call. |
 
 
 === "Responses"
 
     **`200`** - 
     
+
+---
+
+### Archive thread
+
+Archive a thread (soft delete).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-threads/a1b2c3d4-e5f6-7890-abcd-ef1234567890/archive/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.thread_session_request import ThreadSessionRequest # (1)
+    from waldur_api_client.api.chat_threads import chat_threads_archive # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ThreadSessionRequest()
+    response = chat_threads_archive.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ThreadSessionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_request.py)
+    2.  **API Source:** [`chat_threads_archive`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_archive.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsArchive } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsArchive({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `is_archived` | boolean |  |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Create
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-threads/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.thread_session_request import ThreadSessionRequest # (1)
+    from waldur_api_client.api.chat_threads import chat_threads_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ThreadSessionRequest()
+    response = chat_threads_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ThreadSessionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_request.py)
+    2.  **API Source:** [`chat_threads_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsCreate({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `is_archived` | boolean |  |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `chat_session` | string (uuid) |
+    | `flags` | any |
+    | `is_archived` | boolean |
+    | `message_count` | integer |
+    | `created` | string (date-time) |
+
+---
+
+### Unarchive thread
+
+Restore an archived thread.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-threads/a1b2c3d4-e5f6-7890-abcd-ef1234567890/unarchive/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.thread_session_request import ThreadSessionRequest # (1)
+    from waldur_api_client.api.chat_threads import chat_threads_unarchive # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ThreadSessionRequest()
+    response = chat_threads_unarchive.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ThreadSessionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_request.py)
+    2.  **API Source:** [`chat_threads_unarchive`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_unarchive.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsUnarchive } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsUnarchive({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `is_archived` | boolean |  |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/chat-threads/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.thread_session_request import ThreadSessionRequest # (1)
+    from waldur_api_client.api.chat_threads import chat_threads_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ThreadSessionRequest()
+    response = chat_threads_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ThreadSessionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_request.py)
+    2.  **API Source:** [`chat_threads_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `is_archived` | boolean |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `chat_session` | string (uuid) |
+    | `flags` | any |
+    | `is_archived` | boolean |
+    | `message_count` | integer |
+    | `created` | string (date-time) |
+
+---
+
+### Partial Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/chat-threads/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_thread_session_request import PatchedThreadSessionRequest # (1)
+    from waldur_api_client.api.chat_threads import chat_threads_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedThreadSessionRequest()
+    response = chat_threads_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedThreadSessionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_thread_session_request.py)
+    2.  **API Source:** [`chat_threads_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `is_archived` | boolean |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `chat_session` | string (uuid) |
+    | `flags` | any |
+    | `is_archived` | boolean |
+    | `message_count` | integer |
+    | `created` | string (date-time) |
 
 ---
