@@ -1804,6 +1804,11 @@ Updates the options of a resource. If the offering is configured to create order
     | Field | Type | Description |
     |---|---|---|
     | `order_uuid` | string (uuid) | UUID of the created or updated order |
+    
+    ---
+    
+    **`409`** - No response body
+    
 
 ---
 

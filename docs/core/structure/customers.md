@@ -44,6 +44,7 @@ All projects, resources, and costs are ultimately tied to a Customer. Users are 
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/project-digest-config/` | [Get project digest configuration](#get-project-digest-configuration) |
+| <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/contact/` | [Update customer contact details](#update-customer-contact-details) |
 | <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/project-digest-config/preview/` | [Preview digest for a project](#preview-digest-for-a-project) |
 | <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/project-digest-config/send-test/` | [Send a test digest email](#send-a-test-digest-email) |
 
@@ -2558,6 +2559,100 @@ Retrieve the project digest email configuration for this organization.
     | `day_of_month` | integer | For monthly: day of month (1-28) |
     | `last_sent_at` | string (date-time) |  |
     | `available_sections` | array of objects |  |
+
+---
+
+### Update customer contact details
+
+Update organization contact information. Requires CUSTOMER_CONTACT_UPDATE or CUSTOMER.UPDATE permission.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/contact/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.customer_contact_update_request import CustomerContactUpdateRequest # (1)
+    from waldur_api_client.api.customers import customers_contact # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CustomerContactUpdateRequest()
+    response = customers_contact.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CustomerContactUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/customer_contact_update_request.py)
+    2.  **API Source:** [`customers_contact`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_contact.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersContact } from 'waldur-js-client';
+    
+    try {
+      const response = await customersContact({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `contact_details` | string |  |  |
+    | `email` | string (email) |  |  |
+    | `phone_number` | string |  |  |
+    | `address` | string |  |  |
+    | `postal` | string |  |  |
+    | `country` | string |  |  |
+    | `notification_emails` | string |  | Comma-separated list of notification email addresses |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `contact_details` | string |  |
+    | `email` | string (email) |  |
+    | `phone_number` | string |  |
+    | `address` | string |  |
+    | `postal` | string |  |
+    | `country` | string |  |
+    | `notification_emails` | string | Comma-separated list of notification email addresses |
 
 ---
 
