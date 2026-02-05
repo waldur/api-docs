@@ -4,11 +4,12 @@ This section provides a detailed reference for all available API endpoints.
 
 ## Core
 
+- [Automation](./core/automation/autoprovisioning-rules.md)
 - [Identity management & access policy](./core/identity-management-and-access-policy/access-subnets.md)
 - [Invitations & permissions](./core/invitations-and-permissions/customer-permissions-reviews.md)
 - [Notifications & Logging](./core/notifications-and-logging/admin-announcements.md)
 - [Structure](./core/structure/customers.md)
-- [System configuration](./core/system-configuration/celery-stats.md)
+- [System configuration](./core/system-configuration/admin.md)
 
 ## Marketplace
 
@@ -19,7 +20,7 @@ This section provides a detailed reference for all available API endpoints.
 - [Checklists](./marketplace/checklists/admin.md)
 - [Integration](./marketplace/integration/integration-statuses.md)
 - [Maintenance](./marketplace/maintenance/announcement-offerings.md)
-- [Offerings](./marketplace/offerings/offering-files.md)
+- [Offerings](./marketplace/offerings/demo-presets.md)
 - [Onboarding](./marketplace/onboarding/onboarding.md)
 - [Policies](./marketplace/policies/customer-component-usage-policies.md)
 - [Promotions](./marketplace/promotions/promotions-campaigns.md)
@@ -36,9 +37,9 @@ This section provides a detailed reference for all available API endpoints.
 
 ## Proposals & Calls
 
-- [Calls for Proposals](./proposals-and-calls/calls-for-proposals/managing-organisations.md)
-- [Proposals](./proposals-and-calls/proposals/proposals.md)
-- [Reviews](./proposals-and-calls/reviews/reviews.md)
+- [Calls for Proposals](./proposals-and-calls/calls-for-proposals/assignment-configurations.md)
+- [Proposals](./proposals-and-calls/proposals/assignment-batches.md)
+- [Reviews](./proposals-and-calls/reviews/coi-detection-jobs.md)
 
 ## Cloud & HPC Providers
 
@@ -46,7 +47,7 @@ This section provides a detailed reference for all available API endpoints.
 - [Azure](./cloud-and-hpc-providers/azure/images.md)
 - [DigitalOcean](./cloud-and-hpc-providers/digitalocean/droplets.md)
 - [OpenPortal](./cloud-and-hpc-providers/openportal/openportal-allocation-user-usage.md)
-- [OpenStack](./cloud-and-hpc-providers/openstack/backups.md)
+- [OpenStack](./cloud-and-hpc-providers/openstack/openstack.md)
 - [Rancher](./cloud-and-hpc-providers/rancher/keycloak-groups.md)
 - [SLURM](./cloud-and-hpc-providers/slurm/marketplace-slurm-periodic-usage-policies.md)
 - [VMware](./cloud-and-hpc-providers/vmware/clusters.md)
@@ -54,6 +55,6 @@ This section provides a detailed reference for all available API endpoints.
 ## Support & Operations
 
 - [Feedback & Statistics](./support-and-operations/feedback-and-statistics/feedback-average-report.md)
-- [Support & Issues](./support-and-operations/support-and-issues/attachments.md)
+- [Support & Issues](./support-and-operations/support-and-issues/chat.md)
 - [Webhooks](./support-and-operations/webhooks/jira-webhook.md)
 
