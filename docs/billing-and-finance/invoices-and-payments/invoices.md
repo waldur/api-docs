@@ -103,7 +103,7 @@
     | `price` | string (decimal) |  |
     | `tax` | string (decimal) |  |
     | `total` | string (decimal) |  |
-    | `state` | string | <br>_Enum: `pending`, `created`, `paid`, `canceled`_ |
+    | `state` | string | <br>_Enum: `pending`, `pending_finalization`, `created`, `paid`, `canceled`_ |
     | `year` | integer |  |
     | `month` | integer |  |
     | `issuer_details` | any |  |
@@ -248,7 +248,7 @@
     | `price` | string (decimal) |  |
     | `tax` | string (decimal) |  |
     | `total` | string (decimal) |  |
-    | `state` | string | <br>_Enum: `pending`, `created`, `paid`, `canceled`_ |
+    | `state` | string | <br>_Enum: `pending`, `pending_finalization`, `created`, `paid`, `canceled`_ |
     | `year` | integer |  |
     | `month` | integer |  |
     | `issuer_details` | any |  |
@@ -987,7 +987,7 @@ Mark invoice as paid and optionally create payment record with proof of payment.
     | `price` | string (decimal) |  |
     | `tax` | string (decimal) |  |
     | `total` | string (decimal) |  |
-    | `state` | string | <br>_Enum: `pending`, `created`, `paid`, `canceled`_ |
+    | `state` | string | <br>_Enum: `pending`, `pending_finalization`, `created`, `paid`, `canceled`_ |
     | `year` | integer |  |
     | `month` | integer |  |
     | `issuer_details` | any |  |
