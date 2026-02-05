@@ -5,9 +5,9 @@
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
 | **Core CRUD** | | |
-| <span class="http-badge http-get">GET</span> | `/api/support/settings/atlassian/` | [Atlassian](#atlassian) |
+| <span class="http-badge http-get">GET</span> | `/api/support/settings/atlassian/` | [List Support Settings Atlassian](#list-support-settings-atlassian) |
 | <span class="http-badge http-get">GET</span> | `/api/support/settings/atlassian/{id}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/support/settings/atlassian/` | [Atlassian](#atlassian) |
+| <span class="http-badge http-post">POST</span> | `/api/support/settings/atlassian/` | [Create](#create) |
 | <span class="http-badge http-put">PUT</span> | `/api/support/settings/atlassian/{id}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/support/settings/atlassian/{id}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/support/settings/atlassian/{id}/` | [Delete](#delete) |
@@ -25,7 +25,7 @@
 ## Core CRUD
 
 
-### Atlassian
+### List Support Settings Atlassian
 
 
 === "HTTPie"
@@ -150,7 +150,7 @@
 
 ---
 
-### Atlassian
+### Create
 
 
 === "HTTPie"

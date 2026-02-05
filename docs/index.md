@@ -9,11 +9,12 @@ This section provides a detailed reference for all available API endpoints.
 - [Invitations & permissions](./core/invitations-and-permissions/customer-permissions-reviews.md)
 - [Notifications & Logging](./core/notifications-and-logging/admin-announcements.md)
 - [Structure](./core/structure/customers.md)
-- [System configuration](./core/system-configuration/admin.md)
+- [System configuration](./core/system-configuration/celery-stats.md)
 
 ## Marketplace
 
 - [Accounts](./marketplace/accounts/course-accounts.md)
+- [Arrow](./marketplace/arrow/billing-sync-items.md)
 - [Automation](./marketplace/automation/autoprovisioning-rules.md)
 - [Booking](./marketplace/booking/offerings.md)
 - [Categories](./marketplace/categories/categories.md)

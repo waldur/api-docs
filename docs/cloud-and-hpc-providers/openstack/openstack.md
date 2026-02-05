@@ -5,9 +5,9 @@
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
 | **Core CRUD** | | |
-| <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/` | [Discovery](#discovery) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/` | [List Openstack Discovery](#list-openstack-discovery) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/{id}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/` | [Discovery](#discovery) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/` | [Create](#create) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack/discovery/{id}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/openstack/discovery/{id}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack/discovery/{id}/` | [Delete](#delete) |
@@ -24,7 +24,7 @@
 ## Core CRUD
 
 
-### Discovery
+### List Openstack Discovery
 
 
 === "HTTPie"
@@ -149,7 +149,7 @@
 
 ---
 
-### Discovery
+### Create
 
 
 === "HTTPie"

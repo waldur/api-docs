@@ -12,7 +12,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/broadcast-messages/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/broadcast-messages/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/broadcast-messages/recipients/` | [Recipients](#recipients) |
+| <span class="http-badge http-get">GET</span> | `/api/broadcast-messages/recipients/` | [List Broadcast Messages Recipients](#list-broadcast-messages-recipients) |
 | <span class="http-badge http-post">POST</span> | `/api/broadcast-messages/{uuid}/schedule/` | [Schedule](#schedule) |
 | <span class="http-badge http-post">POST</span> | `/api/broadcast-messages/{uuid}/send/` | [Send](#send) |
 
@@ -535,7 +535,7 @@
 ## Other Actions
 
 
-### Recipients
+### List Broadcast Messages Recipients
 
 
 === "HTTPie"

@@ -4,12 +4,12 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
-| <span class="http-badge http-get">GET</span> | `/api/chat-quota/usage/` | [Usage](#usage) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-quota/usage/` | [List Chat Quota Usage](#list-chat-quota-usage) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-quota/set_quota/` | [Set token quota for user](#set-token-quota-for-user) |
 
 ---
 
-### Usage
+### List Chat Quota Usage
 
 
         Get current token quota and usage for the requesting user.

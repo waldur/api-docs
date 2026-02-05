@@ -12,7 +12,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/openportal-userinfo/{user}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openportal-userinfo/{user}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/openportal-userinfo/me/` | [Me](#me) |
+| <span class="http-badge http-get">GET</span> | `/api/openportal-userinfo/me/` | [List Openportal Userinfo Me](#list-openportal-userinfo-me) |
 | <span class="http-badge http-put">PUT</span> | `/api/openportal-userinfo/{user}/set_shortname/` | [Set shortname](#set-shortname) |
 
 ---
@@ -472,7 +472,7 @@
 ## Other Actions
 
 
-### Me
+### List Openportal Userinfo Me
 
 
 === "HTTPie"

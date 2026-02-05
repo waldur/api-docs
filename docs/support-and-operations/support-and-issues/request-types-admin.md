@@ -736,7 +736,7 @@ Bulk update order for multiple request types.
       POST \
       https://api.example.com/api/support-request-types-admin/reorder/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-support-request-types-admin" \
+      name="my-awesome-support-request-types-admin-reorder" \
       issue_type_name="string-value"
     ```
 
@@ -752,7 +752,7 @@ Bulk update order for multiple request types.
     )
     
     body_data = RequestTypeAdminRequest(
-        name="my-awesome-support-request-types-admin",
+        name="my-awesome-support-request-types-admin-reorder",
         issue_type_name="string-value"
     )
     response = support_request_types_admin_reorder.sync(
@@ -776,7 +776,7 @@ Bulk update order for multiple request types.
       const response = await supportRequestTypesAdminReorder({
       auth: "Token YOUR_API_TOKEN",
       body: {
-        "name": "my-awesome-support-request-types-admin",
+        "name": "my-awesome-support-request-types-admin-reorder",
         "issue_type_name": "string-value"
       }
     });

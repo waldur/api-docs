@@ -8,7 +8,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/invoices/` | [List Invoices](#list-invoices) |
 | <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/` | [Retrieve](#retrieve) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/invoices/growth/` | [Growth](#growth) |
+| <span class="http-badge http-get">GET</span> | `/api/invoices/growth/` | [List Invoices Growth](#list-invoices-growth) |
 | <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/invoices/{uuid}/items/` | [Get invoice items](#get-invoice-items) |
@@ -318,7 +318,7 @@
 ## Other Actions
 
 
-### Growth
+### List Invoices Growth
 
 Analyze invoice trends over time by comparing monthly totals for major customers versus others over the past year.
 

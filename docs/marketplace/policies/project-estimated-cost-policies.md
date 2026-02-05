@@ -12,7 +12,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-project-estimated-cost-policies/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-project-estimated-cost-policies/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-project-estimated-cost-policies/actions/` | [Actions](#actions) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-project-estimated-cost-policies/actions/` | [List Marketplace Project Estimated Cost Policies Actions](#list-marketplace-project-estimated-cost-policies-actions) |
 
 ---
 ## Core CRUD
@@ -576,7 +576,7 @@
 ## Other Actions
 
 
-### Actions
+### List Marketplace Project Estimated Cost Policies Actions
 
 
 === "HTTPie"

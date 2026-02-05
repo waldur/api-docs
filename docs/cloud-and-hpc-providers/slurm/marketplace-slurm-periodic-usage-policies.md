@@ -12,7 +12,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-slurm-periodic-usage-policies/actions/` | [Actions](#actions) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-slurm-periodic-usage-policies/actions/` | [List Marketplace Slurm Periodic Usage Policies Actions](#list-marketplace-slurm-periodic-usage-policies-actions) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/command-history/` | [List command history for this policy](#list-command-history-for-this-policy) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/evaluation-logs/` | [List evaluation logs for this policy](#list-evaluation-logs-for-this-policy) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/dry-run/` | [Dry run](#dry-run) |
@@ -664,7 +664,7 @@
 ## Other Actions
 
 
-### Actions
+### List Marketplace Slurm Periodic Usage Policies Actions
 
 
 === "HTTPie"

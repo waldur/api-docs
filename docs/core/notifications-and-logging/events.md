@@ -8,7 +8,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/events/` | [List Events](#list-events) |
 | <span class="http-badge http-get">GET</span> | `/api/events/{id}/` | [Retrieve](#retrieve) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/events/count/` | [Count](#count) |
+| <span class="http-badge http-get">GET</span> | `/api/events/count/` | [List Events Count](#list-events-count) |
 | <span class="http-badge http-get">GET</span> | `/api/events/event_groups/` | [Returns a list of groups with event types](#returns-a-list-of-groups-with-event-types) |
 | <span class="http-badge http-get">GET</span> | `/api/events/scope_types/` | [Returns a list of scope types acceptable by events filter](#returns-a-list-of-scope-types-acceptable-by-events-filter) |
 
@@ -176,7 +176,7 @@
 ## Other Actions
 
 
-### Count
+### List Events Count
 
 
 === "HTTPie"

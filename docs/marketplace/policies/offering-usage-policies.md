@@ -12,7 +12,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-offering-usage-policies/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-offering-usage-policies/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-usage-policies/actions/` | [Actions](#actions) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-usage-policies/actions/` | [List Marketplace Offering Usage Policies Actions](#list-marketplace-offering-usage-policies-actions) |
 
 ---
 ## Core CRUD
@@ -589,7 +589,7 @@
 ## Other Actions
 
 
-### Actions
+### List Marketplace Offering Usage Policies Actions
 
 
 === "HTTPie"
