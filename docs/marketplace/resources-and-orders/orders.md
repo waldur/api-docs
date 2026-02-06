@@ -736,21 +736,26 @@ Approves a pending order from the provider's side. This typically transitions th
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_orders import marketplace_orders_approve_by_provider # (1)
+    from waldur_api_client.models.order_approve_by_provider_request import OrderApproveByProviderRequest # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_approve_by_provider # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
+    
+    body_data = OrderApproveByProviderRequest()
     response = marketplace_orders_approve_by_provider.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
+        client=client,
+        body=body_data
     )
     
     print(response)
     ```
     
     
-    1.  **API Source:** [`marketplace_orders_approve_by_provider`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_approve_by_provider.py)
+    1.  **Model Source:** [`OrderApproveByProviderRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_approve_by_provider_request.py)
+    2.  **API Source:** [`marketplace_orders_approve_by_provider`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_approve_by_provider.py)
 
 === "TypeScript"
 
@@ -776,6 +781,13 @@ Approves a pending order from the provider's side. This typically transitions th
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `attributes` | any |  |
 
 
 === "Responses"
