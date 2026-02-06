@@ -17,6 +17,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/user-invitations/approve/` | [Approve a requested invitation](#approve-a-requested-invitation) |
 | <span class="http-badge http-post">POST</span> | `/api/user-invitations/{uuid}/cancel/` | [Cancel an invitation](#cancel-an-invitation) |
 | <span class="http-badge http-post">POST</span> | `/api/user-invitations/{uuid}/check/` | [Check invitation validity](#check-invitation-validity) |
+| <span class="http-badge http-post">POST</span> | `/api/user-invitations/check-duplicates/` | [Check for duplicate invitations](#check-for-duplicate-invitations) |
 | <span class="http-badge http-post">POST</span> | `/api/user-invitations/{uuid}/delete/` | [Delete an invitation (staff only)](#delete-an-invitation-staff-only) |
 | <span class="http-badge http-post">POST</span> | `/api/user-invitations/reject/` | [Reject a requested invitation](#reject-a-requested-invitation) |
 | <span class="http-badge http-post">POST</span> | `/api/user-invitations/{uuid}/send/` | [Resend an invitation](#resend-an-invitation) |
@@ -951,6 +952,92 @@ Checks if an invitation is pending and returns its email and whether a civil num
     |---|---|---|
     | `email` | string (email) | Email address to check for existing invitations |
     | `civil_number_required` | boolean | Whether civil number verification is required |
+
+---
+
+### Check for duplicate invitations
+
+Returns pending invitations that already exist for the same email and role within the given scope.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/user-invitations/check-duplicates/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      scope="string-value" \
+      invitations:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.invitation_duplicate_check_request import InvitationDuplicateCheckRequest # (1)
+    from waldur_api_client.api.user_invitations import user_invitations_check_duplicates # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = InvitationDuplicateCheckRequest(
+        scope="string-value",
+        invitations=[]
+    )
+    response = user_invitations_check_duplicates.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`InvitationDuplicateCheckRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invitation_duplicate_check_request.py)
+    2.  **API Source:** [`user_invitations_check_duplicates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_invitations/user_invitations_check_duplicates.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { userInvitationsCheckDuplicates } from 'waldur-js-client';
+    
+    try {
+      const response = await userInvitationsCheckDuplicates({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "scope": "string-value",
+        "invitations": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `scope` | string | ✓ | URL of the scope (Customer or Project) for this invitation list |
+    | `invitations` | array of objects | ✓ |  |
+    | `invitations.email` | string (email) | ✓ |  |
+    | `invitations.role` | string (uuid) | ✓ | UUID of the role to grant to the invited user |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `duplicates` | array of objects |
+    | `duplicates.email` | string (email) |
+    | `duplicates.role` | string (uuid) |
+    | `duplicates.existing_invitation_uuid` | string (uuid) |
 
 ---
 

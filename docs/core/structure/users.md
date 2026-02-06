@@ -18,6 +18,7 @@ A User object on its own has limited capabilities beyond logging in and managing
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/users/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/pull_remote_user/` | [Synchronize user details from eduTEAMS](#synchronize-user-details-from-eduteams) |
+| <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/update_actions/` | [Recalculate user actions for a specific user](#recalculate-user-actions-for-a-specific-user) |
 | <span class="http-badge http-put">PUT</span> | `/api/users/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/users/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/users/{uuid}/` | [Delete](#delete) |
@@ -38,6 +39,7 @@ A User object on its own has limited capabilities beyond logging in and managing
 | <span class="http-badge http-post">POST</span> | `/api/users/confirm_email/` | [Confirm email change](#confirm-email-change) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/refresh_token/` | [Refresh user auth token](#refresh-user-auth-token) |
 | <span class="http-badge http-post">POST</span> | `/api/users/scim_sync_all/` | [Trigger SCIM synchronization for all users](#trigger-scim-synchronization-for-all-users) |
+| <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/send_notification/` | [Send action notification to a specific user](#send-action-notification-to-a-specific-user) |
 
 ---
 ## Core CRUD
@@ -556,6 +558,90 @@ A User object on its own has limited capabilities beyond logging in and managing
 
     **`200`** - No response body
     
+
+---
+
+### Recalculate user actions for a specific user
+
+Staff-only action to trigger recalculation of user actions for a specific user.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_actions/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.update_actions_request import UpdateActionsRequest # (1)
+    from waldur_api_client.api.users import users_update_actions # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = UpdateActionsRequest()
+    response = users_update_actions.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`UpdateActionsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_actions_request.py)
+    2.  **API Source:** [`users_update_actions`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_update_actions.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersUpdateActions } from 'waldur-js-client';
+    
+    try {
+      const response = await usersUpdateActions({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `provider_action_type` | string |  | Optional provider action type to update. If not provided, updates all providers. |
+
+
+=== "Responses"
+
+    **`202`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `status` | string |
+    | `message` | string |
+    | `provider_action_type` | string |
 
 ---
 
@@ -2374,5 +2460,76 @@ Staff-only action to queue SCIM synchronization for all users.
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+---
+
+### Send action notification to a specific user
+
+Staff-only action to send a pending actions digest notification to a specific user.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/send_notification/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_send_notification # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_send_notification.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_send_notification`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_send_notification.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersSendNotification } from 'waldur-js-client';
+    
+    try {
+      const response = await usersSendNotification({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `status` | string |
+    | `message` | string |
 
 ---

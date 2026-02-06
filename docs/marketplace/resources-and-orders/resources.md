@@ -36,6 +36,7 @@
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/history/` | [Get version history](#get-version-history) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/estimate_renewal/` | [Estimate renewal cost breakdown](#estimate-renewal-cost-breakdown) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/reallocate_limits/` | [Reallocate resource limits](#reallocate-resource-limits) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/restore/` | [Restore](#restore) |
 
@@ -2770,6 +2771,108 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_user` | object (free-form) | User who created this revision |
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+---
+
+### Estimate renewal cost breakdown
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/estimate_renewal/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      extension_months=123
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.renewal_estimate_request_request import RenewalEstimateRequestRequest # (1)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_estimate_renewal # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = RenewalEstimateRequestRequest(
+        extension_months=123
+    )
+    response = marketplace_resources_estimate_renewal.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`RenewalEstimateRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/renewal_estimate_request_request.py)
+    2.  **API Source:** [`marketplace_resources_estimate_renewal`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_estimate_renewal.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourcesEstimateRenewal } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourcesEstimateRenewal({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "extension_months": 123
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `extension_months` | integer | ✓ |
+    | `limits` | object (free-form) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `components` | array of objects |
+    | `components.component_type` | string |
+    | `components.component_name` | string |
+    | `components.billing_type` | string |
+    | `components.billing_period` | string |
+    | `components.current_limit` | integer |
+    | `components.new_limit` | integer |
+    | `components.unit_price` | string (decimal) |
+    | `components.measured_unit` | string |
+    | `components.period_description` | string |
+    | `components.total` | string (decimal) |
+    | `subscription_total` | string (decimal) |
+    | `limit_change_total` | string (decimal) |
+    | `total` | string (decimal) |
+    | `remaining_days` | integer |
+    | `new_end_date` | string (date) |
 
 ---
 

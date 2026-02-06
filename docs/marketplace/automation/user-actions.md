@@ -80,6 +80,7 @@
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `urgency` | string | _Enum: `high`, `low`, `medium`_ |
+    | `user_uuid` | string (uuid) | Filter by user UUID (staff only). |
 
 
 === "Responses"
