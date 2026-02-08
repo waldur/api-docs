@@ -228,6 +228,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |
     | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |
+    | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |
     | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of strings |
     | `INVITATION_ALLOWED_FIELDS` | array of strings |
     | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of strings |
@@ -516,6 +517,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |  |
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |  |
     | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |  |
+    | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |  |
     | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of strings |  |
     | `INVITATION_ALLOWED_FIELDS` | array of strings |  |
     | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of strings |  |
