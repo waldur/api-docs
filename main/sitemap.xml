@@ -1140,4 +1140,8 @@
          <loc>https://docs.waldur.com/latest/support-and-operations/webhooks/zammad-webhook/</loc>
          <lastmod>2026-02-08</lastmod>
     </url>
+    <url>
+         <loc>https://docs.waldur.com/latest/uncategorized/identity-bridge/identity-bridge/</loc>
+         <lastmod>2026-02-08</lastmod>
+    </url>
 </urlset>

@@ -415,6 +415,36 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../uncategorized/identity-bridge/identity-bridge/" class="md-tabs__link">
+          
+  
+  
+  Uncategorized
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -5405,6 +5435,17 @@
     <span class="md-ellipsis">
       
         Get version history
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-identity-bridge-status-for-a-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get identity bridge status for a user
       
     </span>
   </a>
@@ -11346,6 +11387,149 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Uncategorized
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Uncategorized
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity bridge
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Identity bridge
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../uncategorized/identity-bridge/identity-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -11538,6 +11722,17 @@
     <span class="md-ellipsis">
       
         Get version history
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-identity-bridge-status-for-a-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get identity bridge status for a user
       
     </span>
   </a>
@@ -11795,6 +11990,11 @@
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/users/{uuid}/history/</code></td>
 <td style="text-align: left;"><a href="#get-version-history">Get version history</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/users/{uuid}/identity_bridge_status/</code></td>
+<td style="text-align: left;"><a href="#get-identity-bridge-status-for-a-user">Get identity bridge status for a user</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
@@ -12395,6 +12595,26 @@
 <td>any</td>
 <td>REFEDS assurance profile URIs from identity provider</td>
 </tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>attribute_sources</code></td>
+<td>any</td>
+<td>Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>any</td>
+<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -12826,6 +13046,26 @@
 <td>any</td>
 <td>REFEDS assurance profile URIs from identity provider</td>
 </tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>attribute_sources</code></td>
+<td>any</td>
+<td>Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>any</td>
+<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -13105,6 +13345,18 @@
 <td>any</td>
 <td></td>
 <td>REFEDS assurance profile URIs from identity provider</td>
+</tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td></td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td></td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
 </tr>
 </tbody>
 </table>
@@ -13429,6 +13681,26 @@
 <td><code>eduperson_assurance</code></td>
 <td>any</td>
 <td>REFEDS assurance profile URIs from identity provider</td>
+</tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>attribute_sources</code></td>
+<td>any</td>
+<td>Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>any</td>
+<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
 </tr>
 </tbody>
 </table>
@@ -13976,6 +14248,18 @@
 <td></td>
 <td>REFEDS assurance profile URIs from identity provider</td>
 </tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td></td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td></td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -14299,6 +14583,26 @@
 <td><code>eduperson_assurance</code></td>
 <td>any</td>
 <td>REFEDS assurance profile URIs from identity provider</td>
+</tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>attribute_sources</code></td>
+<td>any</td>
+<td>Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>any</td>
+<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
 </tr>
 </tbody>
 </table>
@@ -14582,6 +14886,18 @@
 <td></td>
 <td>REFEDS assurance profile URIs from identity provider</td>
 </tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td></td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td></td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -14905,6 +15221,26 @@
 <td><code>eduperson_assurance</code></td>
 <td>any</td>
 <td>REFEDS assurance profile URIs from identity provider</td>
+</tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>attribute_sources</code></td>
+<td>any</td>
+<td>Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>any</td>
+<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
 </tr>
 </tbody>
 </table>
@@ -16026,9 +16362,138 @@
 </div>
 </div>
 <hr />
+<h3 id="get-identity-bridge-status-for-a-user">Get identity bridge status for a user</h3>
+<p>Returns diagnostic information about a user's identity bridge state: active ISDs, per-attribute source tracking with staleness detection, and effective bridge-writable fields. Staff only.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:5"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><input id="__tabbed_13_3" name="__tabbed_13" type="radio" /><input id="__tabbed_13_4" name="__tabbed_13" type="radio" /><input id="__tabbed_13_5" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">HTTPie</label><label for="__tabbed_13_2">Python</label><label for="__tabbed_13_3">TypeScript</label><label for="__tabbed_13_4">Path Parameters</label><label for="__tabbed_13_5">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/identity_bridge_status/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.users</span><span class="w"> </span><span class="kn">import</span> <span class="n">users_identity_bridge_status_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">users_identity_bridge_status_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_identity_bridge_status_retrieve.py"><code>users_identity_bridge_status_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">usersIdentityBridgeStatusRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">usersIdentityBridgeStatusRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>active_isds</code></td>
+<td>array of strings</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>array of strings</td>
+</tr>
+<tr>
+<td><code>attribute_sources</code></td>
+<td>object (free-form)</td>
+</tr>
+<tr>
+<td><code>stale_attributes</code></td>
+<td>array of strings</td>
+</tr>
+<tr>
+<td><code>effective_bridge_fields</code></td>
+<td>array of strings</td>
+</tr>
+<tr>
+<td><code>is_federated</code></td>
+<td>boolean</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="get-current-user-details">Get current user details</h3>
 <p>Get current user details, including authentication token and profile completeness status.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:5"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><input id="__tabbed_13_3" name="__tabbed_13" type="radio" /><input id="__tabbed_13_4" name="__tabbed_13" type="radio" /><input id="__tabbed_13_5" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">HTTPie</label><label for="__tabbed_13_2">Python</label><label for="__tabbed_13_3">TypeScript</label><label for="__tabbed_13_4">Query Parameters</label><label for="__tabbed_13_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:5"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><input id="__tabbed_14_3" name="__tabbed_14" type="radio" /><input id="__tabbed_14_4" name="__tabbed_14" type="radio" /><input id="__tabbed_14_5" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">HTTPie</label><label for="__tabbed_14_2">Python</label><label for="__tabbed_14_3">TypeScript</label><label for="__tabbed_14_4">Query Parameters</label><label for="__tabbed_14_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -16422,6 +16887,26 @@
 <td>any</td>
 <td>REFEDS assurance profile URIs from identity provider</td>
 </tr>
+<tr>
+<td><code>is_identity_manager</code></td>
+<td>boolean</td>
+<td>Designates whether the user is allowed to manage remote user identities.</td>
+</tr>
+<tr>
+<td><code>attribute_sources</code></td>
+<td>any</td>
+<td>Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}.</td>
+</tr>
+<tr>
+<td><code>managed_isds</code></td>
+<td>any</td>
+<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>any</td>
+<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -16430,7 +16915,7 @@
 <hr />
 <h3 id="check-profile-completeness">Check profile completeness</h3>
 <p>Check if user profile is complete with all mandatory attributes.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:4"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><input id="__tabbed_14_3" name="__tabbed_14" type="radio" /><input id="__tabbed_14_4" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">HTTPie</label><label for="__tabbed_14_2">Python</label><label for="__tabbed_14_3">TypeScript</label><label for="__tabbed_14_4">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:4"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><input id="__tabbed_15_4" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">HTTPie</label><label for="__tabbed_15_2">Python</label><label for="__tabbed_15_3">TypeScript</label><label for="__tabbed_15_4">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -16525,7 +17010,7 @@
 </div>
 <hr />
 <h3 id="get-user-auth-token">Get user auth token</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:5"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><input id="__tabbed_15_4" name="__tabbed_15" type="radio" /><input id="__tabbed_15_5" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">HTTPie</label><label for="__tabbed_15_2">Python</label><label for="__tabbed_15_3">TypeScript</label><label for="__tabbed_15_4">Path Parameters</label><label for="__tabbed_15_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:5"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><input id="__tabbed_16_3" name="__tabbed_16" type="radio" /><input id="__tabbed_16_4" name="__tabbed_16" type="radio" /><input id="__tabbed_16_5" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">HTTPie</label><label for="__tabbed_16_2">Python</label><label for="__tabbed_16_3">TypeScript</label><label for="__tabbed_16_4">Path Parameters</label><label for="__tabbed_16_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -16666,7 +17151,7 @@
 <hr />
 <h3 id="get-user-counts-by-active-status">Get user counts by active status</h3>
 <p>Returns aggregated counts of users by active/inactive status. Staff or support only.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:5"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><input id="__tabbed_16_3" name="__tabbed_16" type="radio" /><input id="__tabbed_16_4" name="__tabbed_16" type="radio" /><input id="__tabbed_16_5" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">HTTPie</label><label for="__tabbed_16_2">Python</label><label for="__tabbed_16_3">TypeScript</label><label for="__tabbed_16_4">Query Parameters</label><label for="__tabbed_16_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:5"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><input id="__tabbed_17_4" name="__tabbed_17" type="radio" /><input id="__tabbed_17_5" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HTTPie</label><label for="__tabbed_17_2">Python</label><label for="__tabbed_17_3">TypeScript</label><label for="__tabbed_17_4">Query Parameters</label><label for="__tabbed_17_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -16895,7 +17380,7 @@
 <hr />
 <h3 id="get-user-counts-by-preferred-language">Get user counts by preferred language</h3>
 <p>Returns aggregated counts of users by preferred language. Staff or support only.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:5"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><input id="__tabbed_17_4" name="__tabbed_17" type="radio" /><input id="__tabbed_17_5" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HTTPie</label><label for="__tabbed_17_2">Python</label><label for="__tabbed_17_3">TypeScript</label><label for="__tabbed_17_4">Query Parameters</label><label for="__tabbed_17_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:5"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><input id="__tabbed_18_4" name="__tabbed_18" type="radio" /><input id="__tabbed_18_5" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HTTPie</label><label for="__tabbed_18_2">Python</label><label for="__tabbed_18_3">TypeScript</label><label for="__tabbed_18_4">Query Parameters</label><label for="__tabbed_18_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17124,7 +17609,7 @@
 <hr />
 <h3 id="get-user-registration-trends-by-month">Get user registration trends by month</h3>
 <p>Returns user registration counts aggregated by month. Staff or support only.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:5"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><input id="__tabbed_18_4" name="__tabbed_18" type="radio" /><input id="__tabbed_18_5" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HTTPie</label><label for="__tabbed_18_2">Python</label><label for="__tabbed_18_3">TypeScript</label><label for="__tabbed_18_4">Query Parameters</label><label for="__tabbed_18_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:5"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Query Parameters</label><label for="__tabbed_19_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17353,7 +17838,7 @@
 <hr />
 <h3 id="cancel-email-change-request">Cancel email change request</h3>
 <p>Cancel email update request</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:5"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Path Parameters</label><label for="__tabbed_19_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:5"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Path Parameters</label><label for="__tabbed_20_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17448,7 +17933,7 @@
 <hr />
 <h3 id="request-email-change">Request email change</h3>
 <p>Allows to change email for user.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:6"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><input id="__tabbed_20_6" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Path Parameters</label><label for="__tabbed_20_5">Request Body (required)</label><label for="__tabbed_20_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:6"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Request Body (required)</label><label for="__tabbed_21_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17582,7 +18067,7 @@
 <hr />
 <h3 id="change-user-password">Change user password</h3>
 <p>Allows staff user to change password for any user.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:6"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Request Body (required)</label><label for="__tabbed_21_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:6"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><input id="__tabbed_22_6" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Path Parameters</label><label for="__tabbed_22_5">Request Body (required)</label><label for="__tabbed_22_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17716,7 +18201,7 @@
 <hr />
 <h3 id="confirm-email-change">Confirm email change</h3>
 <p>Confirm email update using code</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:5"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Request Body (required)</label><label for="__tabbed_22_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:5"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Request Body (required)</label><label for="__tabbed_23_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17823,7 +18308,7 @@
 </div>
 <hr />
 <h3 id="refresh-user-auth-token">Refresh user auth token</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="23:5"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Path Parameters</label><label for="__tabbed_23_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:5"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Path Parameters</label><label for="__tabbed_24_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17964,7 +18449,7 @@
 <hr />
 <h3 id="trigger-scim-synchronization-for-all-users">Trigger SCIM synchronization for all users</h3>
 <p>Staff-only action to queue SCIM synchronization for all users.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="24:4"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:4"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -18043,7 +18528,7 @@
 <hr />
 <h3 id="send-action-notification-to-a-specific-user">Send action notification to a specific user</h3>
 <p>Staff-only action to send a pending actions digest notification to a specific user.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="25:5"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:5"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
