@@ -27,6 +27,7 @@ A User object on its own has limited capabilities beyond logging in and managing
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/data_access/` | [Get user data access visibility](#get-user-data-access-visibility) |
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/history/` | [Get version history](#get-version-history) |
+| <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/identity_bridge_status/` | [Get identity bridge status for a user](#get-identity-bridge-status-for-a-user) |
 | <span class="http-badge http-get">GET</span> | `/api/users/me/` | [Get current user details](#get-current-user-details) |
 | <span class="http-badge http-get">GET</span> | `/api/users/profile_completeness/` | [Check profile completeness](#check-profile-completeness) |
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/token/` | [Get user auth token](#get-user-auth-token) |
@@ -194,6 +195,10 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
+    | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
+    | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 
@@ -330,6 +335,10 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
+    | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
+    | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 
@@ -427,6 +436,8 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
+    | `managed_isds` | any |  | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
 
 
 === "Responses"
@@ -497,6 +508,10 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
+    | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
+    | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 
@@ -754,6 +769,8 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
+    | `managed_isds` | any |  | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
 
 
 === "Responses"
@@ -824,6 +841,10 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
+    | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
+    | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 
@@ -922,6 +943,8 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
+    | `managed_isds` | any |  | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
 
 
 === "Responses"
@@ -992,6 +1015,10 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
+    | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
+    | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 
@@ -1492,6 +1519,81 @@ Returns the version history for this object. Only accessible by staff and suppor
 
 ---
 
+### Get identity bridge status for a user
+
+Returns diagnostic information about a user's identity bridge state: active ISDs, per-attribute source tracking with staleness detection, and effective bridge-writable fields. Staff only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/identity_bridge_status/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_identity_bridge_status_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_identity_bridge_status_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_identity_bridge_status_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_identity_bridge_status_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersIdentityBridgeStatusRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await usersIdentityBridgeStatusRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `active_isds` | array of strings |
+    | `managed_isds` | array of strings |
+    | `attribute_sources` | object (free-form) |
+    | `stale_attributes` | array of strings |
+    | `effective_bridge_fields` | array of strings |
+    | `is_federated` | boolean |
+
+---
+
 ### Get current user details
 
 Get current user details, including authentication token and profile completeness status.
@@ -1614,6 +1716,10 @@ Get current user details, including authentication token and profile completenes
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
+    | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
+    | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 

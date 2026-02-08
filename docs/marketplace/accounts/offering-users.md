@@ -141,6 +141,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
+    | `user_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -256,6 +257,7 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
+    | `user_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -369,6 +371,7 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
+    | `user_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -576,6 +579,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
+    | `user_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -698,6 +702,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
+    | `user_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |

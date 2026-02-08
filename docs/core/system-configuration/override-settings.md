@@ -291,6 +291,9 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ARROW_CONSUMPTION_SYNC_INTERVAL_HOURS` | integer |
     | `ARROW_BILLING_CHECK_INTERVAL_HOURS` | integer |
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |
+    | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |
+    | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of strings |
+    | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |
 
 ---
 
@@ -580,6 +583,9 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ARROW_CONSUMPTION_SYNC_INTERVAL_HOURS` | integer |  |
     | `ARROW_BILLING_CHECK_INTERVAL_HOURS` | integer |  |
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |  |
+    | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |  |
+    | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of strings |  |
+    | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |  |
 
 
 === "Responses"
