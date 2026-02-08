@@ -1961,6 +1961,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
 
 ---

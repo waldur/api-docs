@@ -8,6 +8,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/user-group-invitations/` | [List group invitations](#list-group-invitations) |
 | <span class="http-badge http-get">GET</span> | `/api/user-group-invitations/{uuid}/` | [Retrieve group invitation](#retrieve-group-invitation) |
 | <span class="http-badge http-post">POST</span> | `/api/user-group-invitations/` | [Create group invitation](#create-group-invitation) |
+| <span class="http-badge http-put">PUT</span> | `/api/user-group-invitations/{uuid}/` | [Update a group invitation](#update-a-group-invitation) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/user-group-invitations/{uuid}/` | [Partially update a group invitation](#partially-update-a-group-invitation) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/user-group-invitations/{uuid}/` | [Delete a group invitation](#delete-a-group-invitation) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/user-group-invitations/{uuid}/projects/` | [List projects for a customer-scoped group invitation](#list-projects-for-a-customer-scoped-group-invitation) |
@@ -114,6 +116,7 @@ Retrieve a list of group invitations. Unauthenticated users can only see public 
     | `user_email_patterns` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
+    | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
 
 ---
 
@@ -208,6 +211,7 @@ Retrieve details of a specific group invitation. Unauthenticated users can only 
     | `user_email_patterns` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
+    | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
 
 ---
 
@@ -288,6 +292,7 @@ Create a new group invitation, which acts as a template for users to request per
     | `user_affiliations` | any |  |  |
     | `user_email_patterns` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
 
 
 === "Responses"
@@ -321,6 +326,211 @@ Create a new group invitation, which acts as a template for users to request per
     | `user_email_patterns` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
+    | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
+
+---
+
+### Update a group invitation
+
+Update an active group invitation. Only active invitations can be edited.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/user-group-invitations/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.group_invitation_update_request import GroupInvitationUpdateRequest # (1)
+    from waldur_api_client.api.user_group_invitations import user_group_invitations_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = GroupInvitationUpdateRequest()
+    response = user_group_invitations_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`GroupInvitationUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/group_invitation_update_request.py)
+    2.  **API Source:** [`user_group_invitations_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_group_invitations/user_group_invitations_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { userGroupInvitationsUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await userGroupInvitationsUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `is_public` | boolean |  | Allow non-authenticated users to see and accept this invitation. Only staff can create public invitations. |
+    | `role` | string (uuid) |  | UUID of the role to grant. |
+    | `scope` | string |  | URL of the scope (Customer or Project) for this invitation |
+    | `auto_create_project` | boolean |  | Create project and grant project permissions instead of customer permissions |
+    | `auto_approve` | boolean |  | Automatically approve permission requests from users matching email patterns or affiliations |
+    | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `project_role` | string (uuid) |  | UUID of the project role to grant if auto_create_project is enabled |
+    | `user_affiliations` | any |  |  |
+    | `user_email_patterns` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `is_public` | boolean | Allow non-authenticated users to see and accept this invitation. Only staff can create public invitations. |
+    | `role` | string (uuid) | UUID of the role to grant. |
+    | `scope` | string | URL of the scope (Customer or Project) for this invitation |
+    | `auto_create_project` | boolean | Create project and grant project permissions instead of customer permissions |
+    | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
+    | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
+    | `user_affiliations` | any |  |
+    | `user_email_patterns` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
+
+---
+
+### Partially update a group invitation
+
+Partially update an active group invitation. Only active invitations can be edited.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/user-group-invitations/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_group_invitation_update_request import PatchedGroupInvitationUpdateRequest # (1)
+    from waldur_api_client.api.user_group_invitations import user_group_invitations_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedGroupInvitationUpdateRequest()
+    response = user_group_invitations_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedGroupInvitationUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_group_invitation_update_request.py)
+    2.  **API Source:** [`user_group_invitations_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_group_invitations/user_group_invitations_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { userGroupInvitationsPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await userGroupInvitationsPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `is_public` | boolean |  | Allow non-authenticated users to see and accept this invitation. Only staff can create public invitations. |
+    | `role` | string (uuid) |  | UUID of the role to grant. |
+    | `scope` | string |  | URL of the scope (Customer or Project) for this invitation |
+    | `auto_create_project` | boolean |  | Create project and grant project permissions instead of customer permissions |
+    | `auto_approve` | boolean |  | Automatically approve permission requests from users matching email patterns or affiliations |
+    | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `project_role` | string (uuid) |  | UUID of the project role to grant if auto_create_project is enabled |
+    | `user_affiliations` | any |  |  |
+    | `user_email_patterns` | any |  |  |
+    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `is_public` | boolean | Allow non-authenticated users to see and accept this invitation. Only staff can create public invitations. |
+    | `role` | string (uuid) | UUID of the role to grant. |
+    | `scope` | string | URL of the scope (Customer or Project) for this invitation |
+    | `auto_create_project` | boolean | Create project and grant project permissions instead of customer permissions |
+    | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
+    | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
+    | `user_affiliations` | any |  |
+    | `user_email_patterns` | any |  |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
 
 ---
 
