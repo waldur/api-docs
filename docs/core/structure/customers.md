@@ -2634,9 +2634,7 @@ Update organization contact information. Requires CUSTOMER_CONTACT_UPDATE or CUS
     | `contact_details` | string |  |  |
     | `email` | string (email) |  |  |
     | `phone_number` | string |  |  |
-    | `address` | string |  |  |
-    | `postal` | string |  |  |
-    | `country` | string |  |  |
+    | `homepage` | string (uri) |  |  |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
 
 
@@ -2649,9 +2647,7 @@ Update organization contact information. Requires CUSTOMER_CONTACT_UPDATE or CUS
     | `contact_details` | string |  |
     | `email` | string (email) |  |
     | `phone_number` | string |  |
-    | `address` | string |  |
-    | `postal` | string |  |
-    | `country` | string |  |
+    | `homepage` | string (uri) |  |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
 
 ---
