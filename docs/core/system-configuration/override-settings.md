@@ -294,6 +294,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |
     | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of strings |
     | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |
+    | `ENABLE_PROJECT_DIGEST` | boolean |
 
 ---
 
@@ -586,6 +587,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |  |
     | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of strings |  |
     | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |  |
+    | `ENABLE_PROJECT_DIGEST` | boolean |  |
 
 
 === "Responses"
