@@ -78,10 +78,13 @@
     | `country` | string |  |
     | `legal_name` | string |  |
     | `legal_person_identifier` | string |  |
+    | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `status` | string |  |
+    | `query` | string | Filter by legal name, legal person identifier |
+    | `status` | array | Verification status<br><br> |
     | `user_uuid` | string (uuid) | User UUID |
+    | `validation_method` | array | Validation method<br><br> |
 
 
 === "Responses"

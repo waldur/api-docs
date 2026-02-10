@@ -26,6 +26,8 @@
 | **Data & Reporting** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-orders/{uuid}/offering/` | [Get offering details](#get-offering-details) |
 | **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-orders/{uuid}/set_consumer_info/` | [Set consumer info on order](#set-consumer-info-on-order) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-orders/{uuid}/set_provider_info/` | [Set provider info on order](#set-provider-info-on-order) |
 | <span class="http-badge http-put">PUT</span> | `/api/marketplace-orders/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-orders/{uuid}/` | [Partial Update](#partial-update) |
 
@@ -192,6 +194,11 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
     | `order_subtype` | string |  |
+    | `provider_message` | string |  |
+    | `provider_message_url` | string (uri) |  |
+    | `provider_message_attachment` | string (uri) |  |
+    | `consumer_message` | string |  |
+    | `consumer_message_attachment` | string (uri) |  |
     | `issue` | any |  |
 
 ---
@@ -342,6 +349,11 @@ Returns the details of a specific order.
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
     | `order_subtype` | string |  |
+    | `provider_message` | string |  |
+    | `provider_message_url` | string (uri) |  |
+    | `provider_message_attachment` | string (uri) |  |
+    | `consumer_message` | string |  |
+    | `consumer_message_attachment` | string (uri) |  |
     | `issue` | any |  |
 
 ---
@@ -505,6 +517,11 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
     | `order_subtype` | string |  |
+    | `provider_message` | string |  |
+    | `provider_message_url` | string (uri) |  |
+    | `provider_message_attachment` | string (uri) |  |
+    | `consumer_message` | string |  |
+    | `consumer_message_attachment` | string (uri) |  |
     | `issue` | any |  |
 
 ---
@@ -715,6 +732,9 @@ Approves a pending order from the consumer's side (e.g., project manager, custom
 
     **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 
@@ -794,6 +814,9 @@ Approves a pending order from the provider's side. This typically transitions th
 
     **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 
@@ -1730,6 +1753,173 @@ Returns details of the offering connected to the requested object.
 
 ## Other Actions
 
+
+### Set consumer info on order
+
+Allows a consumer to respond to a provider's message with an optional message and file attachment on a pending order.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-orders/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_consumer_info/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.order_consumer_info_request import OrderConsumerInfoRequest # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_set_consumer_info # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OrderConsumerInfoRequest()
+    response = marketplace_orders_set_consumer_info.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OrderConsumerInfoRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_consumer_info_request.py)
+    2.  **API Source:** [`marketplace_orders_set_consumer_info`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_set_consumer_info.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceOrdersSetConsumerInfo } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceOrdersSetConsumerInfo({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `consumer_message` | string |  |
+    | `consumer_message_attachment` | string (binary) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
+
+### Set provider info on order
+
+Allows a service provider to send a message with an optional URL and file attachment to the consumer on a pending order.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-orders/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_provider_info/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.order_provider_info_request import OrderProviderInfoRequest # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_set_provider_info # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OrderProviderInfoRequest()
+    response = marketplace_orders_set_provider_info.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OrderProviderInfoRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_provider_info_request.py)
+    2.  **API Source:** [`marketplace_orders_set_provider_info`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_set_provider_info.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceOrdersSetProviderInfo } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceOrdersSetProviderInfo({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `provider_message` | string |  |
+    | `provider_message_url` | string (uri) |  |
+    | `provider_message_attachment` | string (binary) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
 
 ### Update
 

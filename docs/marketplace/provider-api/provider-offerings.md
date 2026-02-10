@@ -768,6 +768,8 @@ Creates a new provider offering.
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
     | `plugin_options.can_restore_resource` | boolean |  | If set to True, resource can be restored. |
+    | `plugin_options.enable_provider_consumer_messaging` | boolean |  | If set to True, service providers can send messages with attachments to consumers on pending orders, and consumers can respond. |
+    | `plugin_options.notify_about_provider_consumer_messages` | boolean |  | If set to True, send email notifications when providers or consumers exchange messages on pending orders. |
     | `plugin_options.default_internal_network_mtu` | integer |  | If set, it will be used as a default MTU for the first network in a tenant |
     | `plugin_options.max_instances` | integer |  | Default limit for number of instances in OpenStack tenant |
     | `plugin_options.max_volumes` | integer |  | Default limit for number of volumes in OpenStack tenant |
@@ -5486,6 +5488,8 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
     | `plugin_options.can_restore_resource` | boolean |  | If set to True, resource can be restored. |
+    | `plugin_options.enable_provider_consumer_messaging` | boolean |  | If set to True, service providers can send messages with attachments to consumers on pending orders, and consumers can respond. |
+    | `plugin_options.notify_about_provider_consumer_messages` | boolean |  | If set to True, send email notifications when providers or consumers exchange messages on pending orders. |
     | `plugin_options.default_internal_network_mtu` | integer |  | If set, it will be used as a default MTU for the first network in a tenant |
     | `plugin_options.max_instances` | integer |  | Default limit for number of instances in OpenStack tenant |
     | `plugin_options.max_volumes` | integer |  | Default limit for number of volumes in OpenStack tenant |
@@ -6727,6 +6731,11 @@ Returns a paginated list of orders associated with a specific offering.
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
     | `order_subtype` | string |  |
+    | `provider_message` | string |  |
+    | `provider_message_url` | string (uri) |  |
+    | `provider_message_attachment` | string (uri) |  |
+    | `consumer_message` | string |  |
+    | `consumer_message_attachment` | string (uri) |  |
     | `issue` | any |  |
 
 ---
@@ -6873,6 +6882,11 @@ Returns details of a specific order associated with an offering.
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
     | `order_subtype` | string |  |
+    | `provider_message` | string |  |
+    | `provider_message_url` | string (uri) |  |
+    | `provider_message_attachment` | string (uri) |  |
+    | `consumer_message` | string |  |
+    | `consumer_message_attachment` | string (uri) |  |
     | `issue` | any |  |
 
 ---

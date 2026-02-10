@@ -671,6 +671,11 @@ Return a list of orders for which the campaign is applied.
     | `termination_comment` | string |  |
     | `backend_id` | string |  |
     | `order_subtype` | string |  |
+    | `provider_message` | string |  |
+    | `provider_message_url` | string (uri) |  |
+    | `provider_message_attachment` | string (uri) |  |
+    | `consumer_message` | string |  |
+    | `consumer_message_attachment` | string (uri) |  |
     | `issue` | any |  |
 
 ---

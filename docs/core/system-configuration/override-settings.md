@@ -70,6 +70,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SITE_DESCRIPTION` | string |
     | `HOMEPORT_URL` | string |
     | `RANCHER_USERNAME_INPUT_LABEL` | string |
+    | `DISCLAIMER_AREA_TEXT` | string |
     | `SITE_ADDRESS` | string |
     | `SITE_EMAIL` | string |
     | `SITE_PHONE` | string |
@@ -129,6 +130,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `LOGIN_PAGE_NEWS` | array of anys |
     | `FAVICON` | string (uri) |
     | `OFFERING_LOGO_PLACEHOLDER` | string (uri) |
+    | `DISCLAIMER_AREA_LOGO` | string (uri) |
     | `WALDUR_SUPPORT_ENABLED` | boolean |
     | `WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE` | string |
     | `WALDUR_SUPPORT_DISPLAY_REQUEST_TYPE` | boolean |
@@ -363,6 +365,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SITE_DESCRIPTION` | string |  |
     | `HOMEPORT_URL` | string |  |
     | `RANCHER_USERNAME_INPUT_LABEL` | string |  |
+    | `DISCLAIMER_AREA_TEXT` | string |  |
     | `SITE_ADDRESS` | string |  |
     | `SITE_EMAIL` | string |  |
     | `SITE_PHONE` | string |  |
@@ -422,6 +425,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `LOGIN_PAGE_NEWS` | array of anys |  |
     | `FAVICON` | string (binary) |  |
     | `OFFERING_LOGO_PLACEHOLDER` | string (binary) |  |
+    | `DISCLAIMER_AREA_LOGO` | string (binary) |  |
     | `WALDUR_SUPPORT_ENABLED` | boolean |  |
     | `WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE` | string |  |
     | `WALDUR_SUPPORT_DISPLAY_REQUEST_TYPE` | boolean |  |

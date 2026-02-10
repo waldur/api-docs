@@ -71,9 +71,12 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string | Filter by legal name, legal person identifier |
     | `user_uuid` | string (uuid) | User UUID |
+    | `validation_decision` | array | Review decision<br><br> |
     | `verification_uuid` | string (uuid) | Verification UUID |
 
 
