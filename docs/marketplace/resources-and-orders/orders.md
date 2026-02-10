@@ -175,6 +175,9 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
     | `created_by_civil_number` | string |  |
+    | `created_by_email` | string (email) |  |
+    | `created_by_organization` | string |  |
+    | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -330,6 +333,9 @@ Returns the details of a specific order.
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
     | `created_by_civil_number` | string |  |
+    | `created_by_email` | string (email) |  |
+    | `created_by_organization` | string |  |
+    | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -498,6 +504,9 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
     | `created_by_civil_number` | string |  |
+    | `created_by_email` | string (email) |  |
+    | `created_by_organization` | string |  |
+    | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |

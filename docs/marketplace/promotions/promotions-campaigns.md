@@ -652,6 +652,9 @@ Return a list of orders for which the campaign is applied.
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
     | `created_by_civil_number` | string |  |
+    | `created_by_email` | string (email) |  |
+    | `created_by_organization` | string |  |
+    | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
