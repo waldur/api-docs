@@ -9504,6 +9504,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#update-offering-backend_id-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update offering backend_id rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update-tags-for-offering" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -13212,6 +13223,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#update-offering-backend_id-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update offering backend_id rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update-tags-for-offering" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -13669,6 +13691,11 @@
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/marketplace-provider-offerings/{uuid}/make_unavailable/</code></td>
 <td style="text-align: left;"><a href="#mark-an-offering-as-unavailable">Mark an offering as unavailable</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/</code></td>
+<td style="text-align: left;"><a href="#update-offering-backend_id-rules">Update offering backend_id rules</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -14741,6 +14768,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>backend_id_rules</code></td>
+<td>any</td>
+<td>Validation rules for resource backend_id: format regex and uniqueness scope.</td>
+</tr>
+<tr>
 <td><code>organization_groups</code></td>
 <td>array of objects</td>
 <td></td>
@@ -15788,6 +15820,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>backend_id_rules</code></td>
+<td>any</td>
+<td>Validation rules for resource backend_id: format regex and uniqueness scope.</td>
+</tr>
+<tr>
 <td><code>organization_groups</code></td>
 <td>array of objects</td>
 <td></td>
@@ -16778,6 +16815,12 @@
 <td></td>
 </tr>
 <tr>
+<td><code>backend_id_rules</code></td>
+<td>any</td>
+<td></td>
+<td>Validation rules for resource backend_id: format regex and uniqueness scope.</td>
+</tr>
+<tr>
 <td><code>image</code></td>
 <td>string (binary)</td>
 <td></td>
@@ -17594,6 +17637,11 @@
 <td><code>backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>backend_id_rules</code></td>
+<td>any</td>
+<td>Validation rules for resource backend_id: format regex and uniqueness scope.</td>
 </tr>
 <tr>
 <td><code>organization_groups</code></td>
@@ -21332,6 +21380,11 @@
 <td><code>backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>backend_id_rules</code></td>
+<td>any</td>
+<td>Validation rules for resource backend_id: format regex and uniqueness scope.</td>
 </tr>
 <tr>
 <td><code>organization_groups</code></td>
@@ -34186,6 +34239,12 @@
 <td></td>
 <td>Check across all offerings<br><em>Constraints: default: <code>False</code></em></td>
 </tr>
+<tr>
+<td><code>use_offering_rules</code></td>
+<td>boolean</td>
+<td></td>
+<td>Apply the offering's backend_id_rules for format and uniqueness validation<br><em>Constraints: default: <code>False</code></em></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -34204,6 +34263,16 @@
 <td><code>is_unique</code></td>
 <td>boolean</td>
 <td>Whether the backend ID is unique</td>
+</tr>
+<tr>
+<td><code>is_valid_format</code></td>
+<td>boolean</td>
+<td>Whether the backend ID matches the offering's format regex (null if no rules configured)</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>array of strings</td>
+<td>List of validation error messages</td>
 </tr>
 </tbody>
 </table>
@@ -34982,9 +35051,133 @@
 </div>
 </div>
 <hr />
+<h3 id="update-offering-backend_id-rules">Update offering backend_id rules</h3>
+<p>Configure validation rules for resource backend_id: format regex and uniqueness scope.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="73:6"><input checked="checked" id="__tabbed_73_1" name="__tabbed_73" type="radio" /><input id="__tabbed_73_2" name="__tabbed_73" type="radio" /><input id="__tabbed_73_3" name="__tabbed_73" type="radio" /><input id="__tabbed_73_4" name="__tabbed_73" type="radio" /><input id="__tabbed_73_5" name="__tabbed_73" type="radio" /><input id="__tabbed_73_6" name="__tabbed_73" type="radio" /><div class="tabbed-labels"><label for="__tabbed_73_1">HTTPie</label><label for="__tabbed_73_2">Python</label><label for="__tabbed_73_3">TypeScript</label><label for="__tabbed_73_4">Path Parameters</label><label for="__tabbed_73_5">Request Body</label><label for="__tabbed_73_6">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_backend_id_rules/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.offering_backend_id_rules_update_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OfferingBackendIdRulesUpdateRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_provider_offerings</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_provider_offerings_update_backend_id_rules</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">OfferingBackendIdRulesUpdateRequest</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_provider_offerings_update_backend_id_rules</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_backend_id_rules_update_request.py"><code>OfferingBackendIdRulesUpdateRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_update_backend_id_rules.py"><code>marketplace_provider_offerings_update_backend_id_rules</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceProviderOfferingsUpdateBackendIdRules</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceProviderOfferingsUpdateBackendIdRules</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>backend_id_rules</code></td>
+<td>any</td>
+<td></td>
+<td>Validation rules for resource backend_id: format regex and uniqueness scope.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - No response body</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="update-tags-for-offering">Update tags for offering</h3>
 <p>Sets the list of tags for this offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="73:6"><input checked="checked" id="__tabbed_73_1" name="__tabbed_73" type="radio" /><input id="__tabbed_73_2" name="__tabbed_73" type="radio" /><input id="__tabbed_73_3" name="__tabbed_73" type="radio" /><input id="__tabbed_73_4" name="__tabbed_73" type="radio" /><input id="__tabbed_73_5" name="__tabbed_73" type="radio" /><input id="__tabbed_73_6" name="__tabbed_73" type="radio" /><div class="tabbed-labels"><label for="__tabbed_73_1">HTTPie</label><label for="__tabbed_73_2">Python</label><label for="__tabbed_73_3">TypeScript</label><label for="__tabbed_73_4">Path Parameters</label><label for="__tabbed_73_5">Request Body</label><label for="__tabbed_73_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="74:6"><input checked="checked" id="__tabbed_74_1" name="__tabbed_74" type="radio" /><input id="__tabbed_74_2" name="__tabbed_74" type="radio" /><input id="__tabbed_74_3" name="__tabbed_74" type="radio" /><input id="__tabbed_74_4" name="__tabbed_74" type="radio" /><input id="__tabbed_74_5" name="__tabbed_74" type="radio" /><input id="__tabbed_74_6" name="__tabbed_74" type="radio" /><div class="tabbed-labels"><label for="__tabbed_74_1">HTTPie</label><label for="__tabbed_74_2">Python</label><label for="__tabbed_74_3">TypeScript</label><label for="__tabbed_74_4">Path Parameters</label><label for="__tabbed_74_5">Request Body</label><label for="__tabbed_74_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -35124,7 +35317,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-02-10
+    2026-02-12
   </span>
 
     
