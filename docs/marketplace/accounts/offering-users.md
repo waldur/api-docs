@@ -124,6 +124,8 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
+    | `user_first_name` | string |  |
+    | `user_last_name` | string |  |
     | `user_email` | string (email) |  |
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
@@ -240,6 +242,8 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
+    | `user_first_name` | string |  |
+    | `user_last_name` | string |  |
     | `user_email` | string (email) |  |
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
@@ -354,6 +358,8 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
+    | `user_first_name` | string |  |
+    | `user_last_name` | string |  |
     | `user_email` | string (email) |  |
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
@@ -562,6 +568,8 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
+    | `user_first_name` | string |  |
+    | `user_last_name` | string |  |
     | `user_email` | string (email) |  |
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
@@ -685,6 +693,8 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
+    | `user_first_name` | string |  |
+    | `user_last_name` | string |  |
     | `user_email` | string (email) |  |
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |

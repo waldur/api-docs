@@ -87,6 +87,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/import_offering/` | [Import offering data](#import-offering-data) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_available/` | [Mark an offering as available](#mark-an-offering-as-available) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_unavailable/` | [Mark an offering as unavailable](#mark-an-offering-as-unavailable) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/` | [Update offering backend_id rules](#update-offering-backend_id-rules) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_tags/` | [Update tags for offering](#update-tags-for-offering) |
 
 ---
@@ -350,6 +351,7 @@ Returns a paginated list of offerings for the provider.
     | `longitude` | number (double) |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
+    | `backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
@@ -611,6 +613,7 @@ Returns details of a specific provider offering.
     | `longitude` | number (double) |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
+    | `backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
@@ -835,6 +838,7 @@ Creates a new provider offering.
     | `longitude` | number (double) |  |  |
     | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |  |
+    | `backend_id_rules` | any |  | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `image` | string (binary) |  |  |
     | `backend_metadata` | any |  |  |
     | `compliance_checklist` | string (uri) |  |  |
@@ -1003,6 +1007,7 @@ Creates a new provider offering.
     | `longitude` | number (double) |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
+    | `backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
@@ -2444,6 +2449,7 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `longitude` | number (double) |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
+    | `backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
@@ -7801,6 +7807,7 @@ Checks if the provided backend_id has been used in resources of this offering or
     |---|---|---|---|
     | `backend_id` | string | ✓ | Backend identifier to check |
     | `check_all_offerings` | boolean |  | Check across all offerings<br>_Constraints: default: `False`_ |
+    | `use_offering_rules` | boolean |  | Apply the offering's backend_id_rules for format and uniqueness validation<br>_Constraints: default: `False`_ |
 
 
 === "Responses"
@@ -7810,6 +7817,8 @@ Checks if the provided backend_id has been used in resources of this offering or
     | Field | Type | Description |
     |---|---|---|
     | `is_unique` | boolean | Whether the backend ID is unique |
+    | `is_valid_format` | boolean | Whether the backend ID matches the offering's format regex (null if no rules configured) |
+    | `errors` | array of strings | List of validation error messages |
 
 ---
 
@@ -8210,6 +8219,85 @@ Marks an active offering as unavailable, blocking all operations on its resource
     |---|---|
     | `detail` | string |
     | `state` | string |
+
+---
+
+### Update offering backend_id rules
+
+Configure validation rules for resource backend_id: format regex and uniqueness scope.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_backend_id_rules/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.offering_backend_id_rules_update_request import OfferingBackendIdRulesUpdateRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_update_backend_id_rules # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OfferingBackendIdRulesUpdateRequest()
+    response = marketplace_provider_offerings_update_backend_id_rules.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OfferingBackendIdRulesUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_backend_id_rules_update_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_update_backend_id_rules`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_update_backend_id_rules.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsUpdateBackendIdRules } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsUpdateBackendIdRules({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `backend_id_rules` | any |  | Validation rules for resource backend_id: format regex and uniqueness scope. |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---
 

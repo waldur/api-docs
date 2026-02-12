@@ -251,6 +251,7 @@
     | `offerings_data.longitude` | number (double) |  |
     | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
+    | `offerings_data.backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
@@ -520,6 +521,7 @@
     | `offerings_data.longitude` | number (double) |  |
     | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
+    | `offerings_data.backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
@@ -824,6 +826,7 @@ Create ProjectTemplate object
     | `offerings_data.longitude` | number (double) |  |
     | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
+    | `offerings_data.backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
@@ -1139,6 +1142,7 @@ Update ProjectTemplate object (full update)
     | `offerings_data.longitude` | number (double) |  |
     | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
+    | `offerings_data.backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |
@@ -1433,6 +1437,7 @@ Partially update ProjectTemplate object
     | `offerings_data.longitude` | number (double) |  |
     | `offerings_data.country` | any | Country code (ISO 3166-1 alpha-2) |
     | `offerings_data.backend_id` | string |  |
+    | `offerings_data.backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `offerings_data.organization_groups` | array of objects |  |
     | `offerings_data.organization_groups.uuid` | string (uuid) |  |
     | `offerings_data.organization_groups.url` | string (uri) |  |

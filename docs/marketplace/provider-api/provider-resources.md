@@ -36,6 +36,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_paused/` | [Set paused flag for resource](#set-paused-flag-for-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_restrict_member_access/` | [Set restrict member access flag](#set-restrict-member-access-flag) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_slug/` | [Set resource slug](#set-resource-slug) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_state_ok/` | [Set resource state to OK](#set-resource-state-to-ok) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/submit_report/` | [Submit a report for a resource](#submit-a-report-for-a-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/terminate/` | [Terminate a resource](#terminate-a-resource) |
 
@@ -3159,6 +3160,76 @@ Updates the slug for a resource. Requires staff permissions.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+---
+
+### Set resource state to OK
+
+Allows a service provider to manually set the resource state to OK. This is useful for recovering from Erred state.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_state_ok/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_set_state_ok # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_resources_set_state_ok.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_resources_set_state_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_set_state_ok.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesSetStateOk } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesSetStateOk({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
