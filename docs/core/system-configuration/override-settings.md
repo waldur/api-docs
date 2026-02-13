@@ -79,7 +79,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ANONYMOUS_USER_CAN_VIEW_OFFERINGS` | boolean |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |
     | `RESTRICTED_OFFERING_VISIBILITY_MODE` | string |
-    | `ALLOW_SERVICE_PROVIDER_OFFERING_ACTIVATION` | boolean |
+    | `ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT` | boolean |
     | `NOTIFY_STAFF_ABOUT_APPROVALS` | boolean |
     | `NOTIFY_ABOUT_RESOURCE_CHANGE` | boolean |
     | `DISABLE_SENDING_NOTIFICATIONS_ABOUT_RESOURCE_UPDATE` | boolean |
@@ -375,7 +375,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ANONYMOUS_USER_CAN_VIEW_OFFERINGS` | boolean |  |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |  |
     | `RESTRICTED_OFFERING_VISIBILITY_MODE` | string |  |
-    | `ALLOW_SERVICE_PROVIDER_OFFERING_ACTIVATION` | boolean |  |
+    | `ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT` | boolean |  |
     | `NOTIFY_STAFF_ABOUT_APPROVALS` | boolean |  |
     | `NOTIFY_ABOUT_RESOURCE_CHANGE` | boolean |  |
     | `DISABLE_SENDING_NOTIFICATIONS_ABOUT_RESOURCE_UPDATE` | boolean |  |
