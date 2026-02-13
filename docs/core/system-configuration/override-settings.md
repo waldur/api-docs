@@ -229,6 +229,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `OIDC_CACHE_TIMEOUT` | integer |
     | `OIDC_ACCESS_TOKEN_ENABLED` | boolean |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |
+    | `OIDC_MATCHMAKING_BY_EMAIL` | boolean |
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |
     | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |
     | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |
@@ -525,6 +526,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `OIDC_CACHE_TIMEOUT` | integer |  |
     | `OIDC_ACCESS_TOKEN_ENABLED` | boolean |  |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |  |
+    | `OIDC_MATCHMAKING_BY_EMAIL` | boolean |  |
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |  |
     | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |  |
     | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |  |

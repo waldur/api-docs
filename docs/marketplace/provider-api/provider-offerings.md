@@ -6745,6 +6745,8 @@ Returns a paginated list of orders associated with a specific offering.
     | `provider_message_attachment` | string (uri) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_rejection_comment` | string |  |
+    | `provider_rejection_comment` | string |  |
     | `issue` | any |  |
 
 ---
@@ -6899,6 +6901,8 @@ Returns details of a specific order associated with an offering.
     | `provider_message_attachment` | string (uri) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_rejection_comment` | string |  |
+    | `provider_rejection_comment` | string |  |
     | `issue` | any |  |
 
 ---

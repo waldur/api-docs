@@ -679,6 +679,8 @@ Return a list of orders for which the campaign is applied.
     | `provider_message_attachment` | string (uri) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_rejection_comment` | string |  |
+    | `provider_rejection_comment` | string |  |
     | `issue` | any |  |
 
 ---

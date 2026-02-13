@@ -202,6 +202,8 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `provider_message_attachment` | string (uri) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_rejection_comment` | string |  |
+    | `provider_rejection_comment` | string |  |
     | `issue` | any |  |
 
 ---
@@ -360,6 +362,8 @@ Returns the details of a specific order.
     | `provider_message_attachment` | string (uri) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_rejection_comment` | string |  |
+    | `provider_rejection_comment` | string |  |
     | `issue` | any |  |
 
 ---
@@ -531,6 +535,8 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `provider_message_attachment` | string (uri) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_rejection_comment` | string |  |
+    | `provider_rejection_comment` | string |  |
     | `issue` | any |  |
 
 ---
@@ -967,6 +973,7 @@ Rejects a pending order from the consumer's side. This moves the order to the 'r
     |---|---|---|
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+    | `consumer_rejection_comment` | string |  |
 
 
 === "Responses"
@@ -994,21 +1001,26 @@ Rejects a pending order from the provider's side. This moves the order to the 'r
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_orders import marketplace_orders_reject_by_provider # (1)
+    from waldur_api_client.models.order_provider_rejection_request import OrderProviderRejectionRequest # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_reject_by_provider # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
+    
+    body_data = OrderProviderRejectionRequest()
     response = marketplace_orders_reject_by_provider.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
+        client=client,
+        body=body_data
     )
     
     print(response)
     ```
     
     
-    1.  **API Source:** [`marketplace_orders_reject_by_provider`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_reject_by_provider.py)
+    1.  **Model Source:** [`OrderProviderRejectionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_provider_rejection_request.py)
+    2.  **API Source:** [`marketplace_orders_reject_by_provider`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_reject_by_provider.py)
 
 === "TypeScript"
 
@@ -1034,6 +1046,13 @@ Rejects a pending order from the provider's side. This moves the order to the 'r
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `provider_rejection_comment` | string |  |
 
 
 === "Responses"
@@ -1181,6 +1200,7 @@ Used by external agents to report a failure during order processing. An error me
     |---|---|---|
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+    | `consumer_rejection_comment` | string |  |
 
 
 === "Responses"
