@@ -691,11 +691,12 @@ Trigger billing sync for a specific period.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `year` | integer | ✓ |
-    | `month` | integer | ✓ |
-    | `settings_uuid` | string (uuid) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `year` | integer | ✓ |  |
+    | `month` | integer | ✓ |  |
+    | `settings_uuid` | string (uuid) |  |  |
+    | `resource_uuid` | string (uuid) |  | If set, only sync billing lines for this resource. |
 
 
 === "Responses"
@@ -1233,6 +1234,8 @@ Sync historical consumption for a specific resource from Arrow.
     | `resource_uuid` | string (uuid) | ✓ | UUID of the resource to sync |
     | `period_from` | string |  | Start period in YYYY-MM format. Defaults to 12 months ago. |
     | `period_to` | string |  | End period in YYYY-MM format. Defaults to current month. |
+    | `force` | boolean |  | If True, sync even for finalized periods.<br>_Constraints: default: `False`_ |
+    | `dry_run` | boolean |  | If True, preview consumption data without saving.<br>_Constraints: default: `False`_ |
 
 
 === "Responses"
@@ -1245,7 +1248,10 @@ Sync historical consumption for a specific resource from Arrow.
     | `resource_name` | string |
     | `periods_synced` | integer |
     | `periods_skipped` | integer |
+    | `periods_no_data` | integer |
     | `errors` | array of objects |
+    | `dry_run` | boolean |
+    | `preview_periods` | array of objects |
 
 ---
 

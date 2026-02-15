@@ -97,6 +97,7 @@
     | `partner_reference` | string | Arrow partner reference (discovered from API) |
     | `partner_name` | string | Arrow partner name (discovered from API) |
     | `invoice_price_source` | any | Which price to use for invoice items: sell or buy |
+    | `invoice_item_prefix` | string | Prefix for invoice item names (e.g. 'Arrow consumption') |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -177,6 +178,7 @@
     | `partner_reference` | string | Arrow partner reference (discovered from API) |
     | `partner_name` | string | Arrow partner name (discovered from API) |
     | `invoice_price_source` | any | Which price to use for invoice items: sell or buy |
+    | `invoice_item_prefix` | string | Prefix for invoice item names (e.g. 'Arrow consumption') |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -285,6 +287,17 @@ Discover Arrow customers and suggest mappings to Waldur customers.
     | `suggestions.suggested_waldur_customer.abbreviation` | string |
     | `suggestions.confidence` | number (double) |
     | `suggestions.existing_mapping` | boolean |
+    | `export_types` | array of objects |
+    | `export_types.reference` | string |
+    | `export_types.name` | string |
+    | `export_types.required_fields_total` | integer |
+    | `export_types.required_fields_found` | integer |
+    | `export_types.important_fields_total` | integer |
+    | `export_types.important_fields_found` | integer |
+    | `export_types.missing_required_fields` | array of strings |
+    | `export_types.missing_important_fields` | array of strings |
+    | `export_types.compatible` | boolean |
+    | `export_types.recommended` | boolean |
 
 ---
 
@@ -625,6 +638,7 @@ Validate Arrow API credentials without saving them.
     | `is_active` | boolean |  | Whether this settings record is active |
     | `sync_enabled` | boolean |  | Whether automatic billing sync is enabled |
     | `invoice_price_source` | any |  | Which price to use for invoice items: sell or buy |
+    | `invoice_item_prefix` | string |  | Prefix for invoice item names (e.g. 'Arrow consumption') |
 
 
 === "Responses"
@@ -643,6 +657,7 @@ Validate Arrow API credentials without saving them.
     | `partner_reference` | string | Arrow partner reference (discovered from API) |
     | `partner_name` | string | Arrow partner name (discovered from API) |
     | `invoice_price_source` | any | Which price to use for invoice items: sell or buy |
+    | `invoice_item_prefix` | string | Prefix for invoice item names (e.g. 'Arrow consumption') |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -728,6 +743,7 @@ Validate Arrow API credentials without saving them.
     | `is_active` | boolean |  | Whether this settings record is active |
     | `sync_enabled` | boolean |  | Whether automatic billing sync is enabled |
     | `invoice_price_source` | any |  | Which price to use for invoice items: sell or buy |
+    | `invoice_item_prefix` | string |  | Prefix for invoice item names (e.g. 'Arrow consumption') |
 
 
 === "Responses"
@@ -747,6 +763,7 @@ Validate Arrow API credentials without saving them.
     | `partner_reference` | string | Arrow partner reference (discovered from API) |
     | `partner_name` | string | Arrow partner name (discovered from API) |
     | `invoice_price_source` | any | Which price to use for invoice items: sell or buy |
+    | `invoice_item_prefix` | string | Prefix for invoice item names (e.g. 'Arrow consumption') |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -826,6 +843,7 @@ Validate Arrow API credentials without saving them.
     | `is_active` | boolean |  | Whether this settings record is active |
     | `sync_enabled` | boolean |  | Whether automatic billing sync is enabled |
     | `invoice_price_source` | any |  | Which price to use for invoice items: sell or buy |
+    | `invoice_item_prefix` | string |  | Prefix for invoice item names (e.g. 'Arrow consumption') |
 
 
 === "Responses"
@@ -845,6 +863,7 @@ Validate Arrow API credentials without saving them.
     | `partner_reference` | string | Arrow partner reference (discovered from API) |
     | `partner_name` | string | Arrow partner name (discovered from API) |
     | `invoice_price_source` | any | Which price to use for invoice items: sell or buy |
+    | `invoice_item_prefix` | string | Prefix for invoice item names (e.g. 'Arrow consumption') |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 

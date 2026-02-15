@@ -92,10 +92,13 @@
     | `settings` | string (uri) |  |
     | `settings_uuid` | string (uuid) |  |
     | `arrow_vendor_name` | string | Arrow vendor name (e.g., 'Microsoft', 'Amazon Web Services') |
-    | `offering` | string (uri) | Waldur marketplace offering for this vendor |
+    | `offering` | string (uuid) |  |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
     | `offering_type` | string |  |
+    | `plan` | string (uuid) |  |
+    | `plan_uuid` | string (uuid) |  |
+    | `plan_name` | string |  |
     | `is_active` | boolean | Whether this mapping is active |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -171,10 +174,13 @@
     | `settings` | string (uri) |  |
     | `settings_uuid` | string (uuid) |  |
     | `arrow_vendor_name` | string | Arrow vendor name (e.g., 'Microsoft', 'Amazon Web Services') |
-    | `offering` | string (uri) | Waldur marketplace offering for this vendor |
+    | `offering` | string (uuid) |  |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
     | `offering_type` | string |  |
+    | `plan` | string (uuid) |  |
+    | `plan_uuid` | string (uuid) |  |
+    | `plan_name` | string |  |
     | `is_active` | boolean | Whether this mapping is active |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -333,6 +339,7 @@ Get vendor names from Arrow catalog API (IAAS category).
     | `settings` | string (uuid) | ✓ |  |
     | `arrow_vendor_name` | string | ✓ | Arrow vendor name (e.g., 'Microsoft', 'Amazon Web Services') |
     | `offering` | string (uuid) | ✓ |  |
+    | `plan` | string (uuid) |  |  |
     | `is_active` | boolean |  | Whether this mapping is active |
 
 
@@ -351,6 +358,9 @@ Get vendor names from Arrow catalog API (IAAS category).
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
     | `offering_type` | string |  |
+    | `plan` | string (uuid) |  |
+    | `plan_uuid` | string (uuid) |  |
+    | `plan_name` | string |  |
     | `is_active` | boolean | Whether this mapping is active |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -369,7 +379,7 @@ Get vendor names from Arrow catalog API (IAAS category).
       Authorization:"Token YOUR_API_TOKEN" \
       settings="https://api.example.com/api/settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       arrow_vendor_name="string-value" \
-      offering="https://api.example.com/api/offering/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      offering="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     ```
 
 === "Python"
@@ -386,7 +396,7 @@ Get vendor names from Arrow catalog API (IAAS category).
     body_data = ArrowVendorOfferingMappingRequest(
         settings="https://api.example.com/api/settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         arrow_vendor_name="string-value",
-        offering="https://api.example.com/api/offering/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+        offering="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     )
     response = admin_arrow_vendor_offering_mappings_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -415,7 +425,7 @@ Get vendor names from Arrow catalog API (IAAS category).
       body: {
         "settings": "https://api.example.com/api/settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "arrow_vendor_name": "string-value",
-        "offering": "https://api.example.com/api/offering/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+        "offering": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       }
     });
       console.log('Success:', response);
@@ -438,7 +448,8 @@ Get vendor names from Arrow catalog API (IAAS category).
     |---|---|---|---|
     | `settings` | string (uri) | ✓ |  |
     | `arrow_vendor_name` | string | ✓ | Arrow vendor name (e.g., 'Microsoft', 'Amazon Web Services') |
-    | `offering` | string (uri) | ✓ | Waldur marketplace offering for this vendor |
+    | `offering` | string (uuid) | ✓ |  |
+    | `plan` | string (uuid) |  |  |
     | `is_active` | boolean |  | Whether this mapping is active |
 
 
@@ -453,10 +464,13 @@ Get vendor names from Arrow catalog API (IAAS category).
     | `settings` | string (uri) |  |
     | `settings_uuid` | string (uuid) |  |
     | `arrow_vendor_name` | string | Arrow vendor name (e.g., 'Microsoft', 'Amazon Web Services') |
-    | `offering` | string (uri) | Waldur marketplace offering for this vendor |
+    | `offering` | string (uuid) |  |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
     | `offering_type` | string |  |
+    | `plan` | string (uuid) |  |
+    | `plan_uuid` | string (uuid) |  |
+    | `plan_name` | string |  |
     | `is_active` | boolean | Whether this mapping is active |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -532,7 +546,8 @@ Get vendor names from Arrow catalog API (IAAS category).
     |---|---|---|---|
     | `settings` | string (uri) |  |  |
     | `arrow_vendor_name` | string |  | Arrow vendor name (e.g., 'Microsoft', 'Amazon Web Services') |
-    | `offering` | string (uri) |  | Waldur marketplace offering for this vendor |
+    | `offering` | string (uuid) |  |  |
+    | `plan` | string (uuid) |  |  |
     | `is_active` | boolean |  | Whether this mapping is active |
 
 
@@ -547,10 +562,13 @@ Get vendor names from Arrow catalog API (IAAS category).
     | `settings` | string (uri) |  |
     | `settings_uuid` | string (uuid) |  |
     | `arrow_vendor_name` | string | Arrow vendor name (e.g., 'Microsoft', 'Amazon Web Services') |
-    | `offering` | string (uri) | Waldur marketplace offering for this vendor |
+    | `offering` | string (uuid) |  |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
     | `offering_type` | string |  |
+    | `plan` | string (uuid) |  |
+    | `plan_uuid` | string (uuid) |  |
+    | `plan_name` | string |  |
     | `is_active` | boolean | Whether this mapping is active |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
