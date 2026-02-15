@@ -275,6 +275,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SOFTWARE_CATALOG_UPDATE_EXISTING_PACKAGES` | boolean |
     | `SOFTWARE_CATALOG_CLEANUP_ENABLED` | boolean |
     | `SOFTWARE_CATALOG_RETENTION_DAYS` | integer |
+    | `SYSTEM_LOG_ENABLED` | boolean |
+    | `SYSTEM_LOG_MAX_ROWS_PER_SOURCE` | integer |
     | `TABLE_GROWTH_MONITORING_ENABLED` | boolean |
     | `TABLE_GROWTH_WEEKLY_THRESHOLD_PERCENT` | integer |
     | `TABLE_GROWTH_MONTHLY_THRESHOLD_PERCENT` | integer |
@@ -572,6 +574,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SOFTWARE_CATALOG_UPDATE_EXISTING_PACKAGES` | boolean |  |
     | `SOFTWARE_CATALOG_CLEANUP_ENABLED` | boolean |  |
     | `SOFTWARE_CATALOG_RETENTION_DAYS` | integer |  |
+    | `SYSTEM_LOG_ENABLED` | boolean |  |
+    | `SYSTEM_LOG_MAX_ROWS_PER_SOURCE` | integer |  |
     | `TABLE_GROWTH_MONITORING_ENABLED` | boolean |  |
     | `TABLE_GROWTH_WEEKLY_THRESHOLD_PERCENT` | integer |  |
     | `TABLE_GROWTH_MONTHLY_THRESHOLD_PERCENT` | integer |  |
