@@ -89,6 +89,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     |---|---|---|
     | `created` | string (date-time) | Created after |
     | `field` | array |  |
+    | `has_complete_profile` | boolean | User has complete profile for the offering |
     | `has_consent` | boolean | User Has Consent |
     | `is_restricted` | boolean | Is restricted |
     | `modified` | string (date-time) | Modified after |
@@ -156,6 +157,8 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
+    | `is_profile_complete` | boolean |  |
+    | `missing_profile_attributes` | array of strings |  |
 
 ---
 
@@ -274,6 +277,8 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
+    | `is_profile_complete` | boolean |  |
+    | `missing_profile_attributes` | array of strings |  |
 
 ---
 
@@ -390,6 +395,8 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
+    | `is_profile_complete` | boolean |  |
+    | `missing_profile_attributes` | array of strings |  |
 
 ---
 
@@ -600,6 +607,8 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
+    | `is_profile_complete` | boolean |  |
+    | `missing_profile_attributes` | array of strings |  |
 
 ---
 
@@ -725,6 +734,8 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
+    | `is_profile_complete` | boolean |  |
+    | `missing_profile_attributes` | array of strings |  |
 
 ---
 

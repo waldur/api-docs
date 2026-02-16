@@ -241,6 +241,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_BEFORE_MINUTES` | integer |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of strings |
     | `ENFORCE_USER_CONSENT_FOR_OFFERINGS` | boolean |
+    | `ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS` | boolean |
     | `DISABLED_OFFERING_TYPES` | array of strings |
     | `ONBOARDING_VALIDATION_METHODS` | array of strings |
     | `ONBOARDING_VERIFICATION_EXPIRY_HOURS` | integer |
@@ -540,6 +541,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_BEFORE_MINUTES` | integer |  |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of strings |  |
     | `ENFORCE_USER_CONSENT_FOR_OFFERINGS` | boolean |  |
+    | `ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS` | boolean |  |
     | `DISABLED_OFFERING_TYPES` | array of strings |  |
     | `ONBOARDING_VALIDATION_METHODS` | array of strings |  |
     | `ONBOARDING_VERIFICATION_EXPIRY_HOURS` | integer |  |
