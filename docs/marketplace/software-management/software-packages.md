@@ -74,6 +74,7 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `extension_name` | string | Filter packages having extensions with a specific name |
     | `extension_type` | string | Filter packages having extensions of a specific type (e.g., 'python') |
     | `has_version` | string | Filter packages that have a specific version |
+    | `is_extension` | boolean | Filter packages that are extensions of other packages |
     | `name` | string | Filter packages by name (case-insensitive partial match) |
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) | Filter packages available for a specific offering |
