@@ -1277,7 +1277,7 @@ Returns aggregated statistics on how many resources are currently using each pla
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer_provider_uuid` | string (uuid) | Filter by service provider's customer UUID. |
+    | `customer_provider_uuid` | string (uuid) | Filter by offering customer provider UUID. |
     | `o` | string | Ordering field. Available options: `usage`, `limit`, `remaining`, and their descending counterparts (e.g., `-usage`). |
     | `offering` | string |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |

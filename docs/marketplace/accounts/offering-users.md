@@ -19,6 +19,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/checklist-template/` | [Get checklist template for creating new objects](#get-checklist-template-for-creating-new-objects) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/completion_review_status/` | [Get checklist completion status with review triggers (reviewers only)](#get-checklist-completion-status-with-review-triggers-reviewers-only) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/profile_field_warnings/` | [Get profile field warnings](#get-profile-field-warnings) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/begin_creating/` | [Begin creation process](#begin-creation-process) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/request_deletion/` | [Request deletion of an offering user](#request-deletion-of-an-offering-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/set_deleted/` | [Set state to Deleted](#set-state-to-deleted) |
@@ -1424,6 +1425,60 @@ Get checklist completion status.
     ---
     
     **`404`** - 
+    
+
+---
+
+### Get profile field warnings
+
+Returns a mapping of user profile field names to offerings that expose those fields. When ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS is enabled, clearing a field listed here would make the user invisible to the service provider for the associated offerings.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-offering-users/profile_field_warnings/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_profile_field_warnings_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_offering_users_profile_field_warnings_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_offering_users_profile_field_warnings_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_profile_field_warnings_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceOfferingUsersProfileFieldWarningsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceOfferingUsersProfileFieldWarningsRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - No response body
     
 
 ---

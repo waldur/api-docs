@@ -29,7 +29,8 @@
     http \
       GET \
       https://api.example.com/api/chat-quota/usage/ \
-      Authorization:"Token YOUR_API_TOKEN"
+      Authorization:"Token YOUR_API_TOKEN" \
+      user_uuid=="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     ```
 
 === "Python"
@@ -41,7 +42,10 @@
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    response = chat_quota_usage_retrieve.sync(client=client)
+    response = chat_quota_usage_retrieve.sync(
+        client=client,
+        user_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
     
     print(response)
     ```
@@ -56,7 +60,10 @@
     
     try {
       const response = await chatQuotaUsageRetrieve({
-      auth: "Token YOUR_API_TOKEN"
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "user_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
     });
       console.log('Success:', response);
     } catch (error) {
@@ -67,9 +74,9 @@
 
 === "Query Parameters"
 
-    | Name | Type | Description |
-    |---|---|---|
-    | `user_uuid` | string (uuid) | UUID of user to view quota for (staff/support only). Omit to view your own quota. |
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `user_uuid` | string (uuid) | ✓ | UUID of user to view quota for (staff/support only). Omit to view your own quota. |
 
 
 === "Responses"

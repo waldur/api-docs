@@ -86,7 +86,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |

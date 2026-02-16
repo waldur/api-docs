@@ -165,7 +165,7 @@ Returns a paginated list of offerings for the provider.
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
@@ -1647,7 +1647,7 @@ Returns a paginated list of course accounts for projects that have resources of 
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
@@ -1782,7 +1782,7 @@ Returns a paginated list of customer-level service accounts for customers who ha
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
@@ -2061,7 +2061,7 @@ Returns a paginated list of project-level service accounts for projects that hav
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
@@ -6074,7 +6074,7 @@ Returns monthly usage statistics for the components of an offering within a spec
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
@@ -6201,7 +6201,7 @@ Returns monthly cost data for an offering within a specified date range.
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
@@ -6323,7 +6323,7 @@ Returns a paginated list of customers who have resources for this offering.
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
@@ -6432,7 +6432,7 @@ Returns a paginated list of active, shared offerings grouped by their service pr
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
@@ -7603,7 +7603,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `organization_group_uuid` | array | Organization group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `parent_uuid` | string (uuid) | Parent offering UUID |
