@@ -71,10 +71,10 @@ Get a list of available VM instance images.
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `settings` | string | Settings URL |
+    | `settings` | string (uri) | Settings URL |
     | `settings_uuid` | string (uuid) | Settings UUID |
     | `show_duplicate_names` | boolean | Show duplicate image names |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
 
 

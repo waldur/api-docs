@@ -100,7 +100,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `category_uuid` | string (uuid) | Category UUID |
     | `component_count` | number | Filter by exact number of components |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `downscaled` | boolean | Downscaled |
     | `field` | array |  |
@@ -113,7 +113,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_billable` | boolean | Offering billable |
     | `offering_shared` | boolean | Offering shared |
     | `offering_slug` | array | Multiple values may be separated by commas. |
@@ -133,6 +133,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
     | `restrict_member_access` | boolean | Restrict member access |
     | `runtime_state` | string | Runtime state |
+    | `scope` | string (uri) | Filter by scope URL. |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `state` | array | Resource state<br><br> |
     | `usage_based` | boolean | Filter by usage-based offerings |
@@ -1251,7 +1252,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `created` | string (date-time) | Created after |
     | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
     | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `downscaled` | boolean | Downscaled |
     | `has_terminate_date` | boolean | Has termination date |
@@ -1263,7 +1264,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_billable` | boolean | Offering billable |
     | `offering_shared` | boolean | Offering shared |
     | `offering_slug` | array | Multiple values may be separated by commas. |
@@ -1283,6 +1284,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
     | `restrict_member_access` | boolean | Restrict member access |
     | `runtime_state` | string | Runtime state |
+    | `scope` | string (uri) | Filter by scope URL. |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `state` | array | Resource state<br><br> |
     | `usage_based` | boolean | Filter by usage-based offerings |

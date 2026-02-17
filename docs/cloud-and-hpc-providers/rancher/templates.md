@@ -67,7 +67,7 @@
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `project_uuid` | string (uuid) |  |
-    | `settings` | string | Settings URL |
+    | `settings` | string (uri) | Settings URL |
     | `settings_uuid` | string (uuid) | Settings UUID |
 
 

@@ -75,7 +75,7 @@ Get a list of snapshots.
     | Name | Type | Description |
     |---|---|---|
     | `backend_id` | string | Backend ID |
-    | `backup` | string | Backup URL |
+    | `backup` | string (uri) | Backup URL |
     | `backup_uuid` | string (uuid) | Backup UUID |
     | `can_manage` | boolean | Can manage |
     | `customer` | string (uuid) | Customer UUID |
@@ -96,10 +96,10 @@ Get a list of snapshots.
     | `runtime_state` | string |  |
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
-    | `source_volume` | string | Source volume URL |
+    | `source_volume` | string (uri) | Source volume URL |
     | `source_volume_uuid` | string (uuid) | Source volume UUID |
     | `state` | array | State<br><br> |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
     | `uuid` | string (uuid) | UUID |
 

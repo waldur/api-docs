@@ -74,8 +74,8 @@ List all managed projects
     | `local_identifier` | string |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string |  |
-    | `project_template` | string |  |
+    | `project` | string (uri) |  |
+    | `project_template` | string (uri) |  |
     | `project_template_uuid` | string (uuid) |  |
     | `project_uuid` | string (uuid) |  |
     | `state` | array |  |

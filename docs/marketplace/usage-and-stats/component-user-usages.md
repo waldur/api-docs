@@ -77,7 +77,7 @@
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `project_uuid` | string (uuid) | Project UUID |
-    | `resource` | string | Resource URL |
+    | `resource` | string (uri) | Resource URL |
     | `resource_uuid` | string (uuid) | Resource UUID |
     | `type` | string | Component type |
     | `username` | string | Username contains |

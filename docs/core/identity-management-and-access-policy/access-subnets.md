@@ -65,7 +65,7 @@ Retrieve a list of access subnets. Staff and support users can see all subnets, 
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description |
     | `inet` | string | Inet |

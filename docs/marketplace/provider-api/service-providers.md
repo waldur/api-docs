@@ -542,7 +542,7 @@ Returns a paginated list of service providers.
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_keyword` | string | Customer keyword (name, abbreviation or native name) |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `field` | array |  |
@@ -760,7 +760,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `field` | array |  |
@@ -957,7 +957,7 @@ Returns a paginated list of project permissions for all projects that have consu
     | `scope_uuid` | string | Scope UUID |
     | `user` | string (uuid) |  |
     | `user_slug` | string | User slug contains |
-    | `user_url` | string |  |
+    | `user_url` | string (uri) |  |
     | `username` | string |  |
 
 
@@ -1065,7 +1065,7 @@ Returns a paginated list of project service accounts that have access to resourc
     | `email` | string | Email contains |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string | Project URL |
+    | `project` | string (uri) | Project URL |
     | `project_uuid` | string (uuid) | Project UUID |
     | `state` | array | Service account state<br><br> |
     | `username` | string | Username |

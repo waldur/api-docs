@@ -83,7 +83,7 @@ Get a list of instance backups.
     | `description` | string | Description |
     | `external_ip` | string | External IP |
     | `field` | array |  |
-    | `instance` | string | Instance URL |
+    | `instance` | string (uri) | Instance URL |
     | `instance_uuid` | string (uuid) | Instance UUID |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
@@ -95,7 +95,7 @@ Get a list of instance backups.
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
     | `state` | array | State<br><br> |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
     | `uuid` | string (uuid) | UUID |
 

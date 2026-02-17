@@ -63,7 +63,7 @@
     |---|---|---|
     | `field` | array |  |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
     | `offering_uuid` | array | Multiple values may be separated by commas. |
     | `page` | integer | A page number within the paginated result set. |

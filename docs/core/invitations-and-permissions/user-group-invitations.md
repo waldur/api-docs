@@ -80,6 +80,7 @@ Retrieve a list of group invitations. Unauthenticated users can only see public 
     | `page_size` | integer | Number of results to return per page. |
     | `role_name` | string |  |
     | `role_uuid` | string (uuid) |  |
+    | `scope` | string (uri) | Filter by scope URL. |
     | `scope_type` | string |  |
 
 

@@ -69,23 +69,24 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `assignee` | string |  |
+    | `assignee` | string (uri) |  |
     | `assignee_name` | string |  |
-    | `caller` | string |  |
+    | `caller` | string (uri) |  |
     | `caller_full_name` | string | Caller full name contains |
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `key` | string |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string |  |
+    | `project` | string (uri) |  |
     | `project_uuid` | string (uuid) |  |
     | `query` | string | Summary or key contains |
     | `remote_id` | string |  |
-    | `reporter` | string |  |
+    | `reporter` | string (uri) |  |
     | `reporter_name` | string |  |
     | `resolution_year_month` | string |  |
+    | `resource` | string (uri) | Filter by resource URL. |
     | `resource_external_ip` | string | Resource external IP |
     | `resource_internal_ip` | string | Resource internal IP |
     | `resource_uuid` | string (uuid) | Resource UUID |

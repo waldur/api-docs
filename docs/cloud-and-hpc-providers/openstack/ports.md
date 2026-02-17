@@ -97,7 +97,7 @@ Get a list of network ports.
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Search by name, MAC address or backend ID |
     | `status` | string |  |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
 
 

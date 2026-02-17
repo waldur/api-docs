@@ -96,7 +96,7 @@ Get a list of floating IP addresses. Status *DOWN* means that floating IP is not
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
     | `state` | array | State<br><br> |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
     | `uuid` | string (uuid) | UUID |
 

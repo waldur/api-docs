@@ -64,6 +64,7 @@ Returns a paginated list of Datacite referrals associated with marketplace offer
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `scope` | string (uri) | Filter by scope URL. |
 
 
 === "Responses"

@@ -63,15 +63,16 @@
     | Name | Type | Description |
     |---|---|---|
     | `author_name` | string |  |
-    | `author_user` | string |  |
+    | `author_user` | string (uri) |  |
     | `description` | string |  |
     | `is_public` | boolean |  |
-    | `issue` | string |  |
+    | `issue` | string (uri) |  |
     | `issue_uuid` | string (uuid) |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `remote_id_is_set` | boolean | Remote ID is set. |
+    | `resource` | string (uri) | Filter by resource URL. |
 
 
 === "Responses"

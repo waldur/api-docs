@@ -65,7 +65,7 @@ Returns a paginated list of users associated with resources, including their rol
     |---|---|---|
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `resource` | string | Resource URL |
+    | `resource` | string (uri) | Resource URL |
     | `resource_uuid` | string (uuid) | Resource UUID |
     | `role_name` | string | Role name |
     | `role_uuid` | string (uuid) | Role UUID |

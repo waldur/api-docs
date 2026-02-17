@@ -95,7 +95,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `is_restricted` | boolean | Is restricted |
     | `modified` | string (date-time) | Modified after |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
     | `offering_uuid` | array | Multiple values may be separated by commas. |
     | `page` | integer | A page number within the paginated result set. |

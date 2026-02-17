@@ -70,7 +70,7 @@
     |---|---|---|
     | `is_active` | boolean |  |
     | `o` | array | Ordering<br><br> |
-    | `organization` | string |  |
+    | `organization` | string (uri) |  |
     | `organization_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |

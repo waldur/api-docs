@@ -62,7 +62,7 @@
     | Name | Type | Description |
     |---|---|---|
     | `field` | array |  |
-    | `issue` | string |  |
+    | `issue` | string (uri) |  |
     | `issue_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |

@@ -78,7 +78,7 @@ Returns a paginated list of plans managed by the provider. The list is filtered 
 
     | Name | Type | Description |
     |---|---|---|
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
@@ -1201,7 +1201,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     |---|---|---|
     | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
     | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
@@ -1279,7 +1279,7 @@ Returns aggregated statistics on how many resources are currently using each pla
     |---|---|---|
     | `customer_provider_uuid` | string (uuid) | Filter by offering customer provider UUID. |
     | `o` | string | Ordering field. Available options: `usage`, `limit`, `remaining`, and their descending counterparts (e.g., `-usage`). |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
     | `offering_uuid` | string (uuid) | Filter by offering UUID. |
     | `page` | integer | A page number within the paginated result set. |

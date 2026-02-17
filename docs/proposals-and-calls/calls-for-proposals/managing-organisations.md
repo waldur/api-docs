@@ -73,7 +73,7 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_keyword` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `o` | array | Ordering<br><br> |

@@ -59,12 +59,12 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `allocation` | string |  |
+    | `allocation` | string (uri) |  |
     | `allocation_uuid` | string (uuid) |  |
     | `month` | integer |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `user` | string |  |
+    | `user` | string (uri) |  |
     | `user_uuid` | string (uuid) |  |
     | `year` | integer |  |
 

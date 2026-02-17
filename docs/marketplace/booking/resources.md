@@ -70,7 +70,7 @@
     | `component_count` | number | Filter by exact number of components |
     | `connected_customer_uuid` | string (uuid) |  |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `downscaled` | boolean | Downscaled |
     | `field` | array |  |
@@ -83,7 +83,7 @@
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_billable` | boolean | Offering billable |
     | `offering_shared` | boolean | Offering shared |
     | `offering_slug` | array | Multiple values may be separated by commas. |

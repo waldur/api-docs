@@ -88,7 +88,7 @@ Get a list of volumes.
     | `description` | string | Description |
     | `external_ip` | string | External IP |
     | `field` | array |  |
-    | `instance` | string | Instance URL |
+    | `instance` | string (uri) | Instance URL |
     | `instance_uuid` | string (uuid) | Instance UUID |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
@@ -100,10 +100,10 @@ Get a list of volumes.
     | `runtime_state` | string |  |
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
-    | `snapshot` | string | Snapshot URL |
+    | `snapshot` | string (uri) | Snapshot URL |
     | `snapshot_uuid` | string (uuid) | Snapshot UUID |
     | `state` | array | State<br><br> |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
     | `uuid` | string (uuid) | UUID |
 

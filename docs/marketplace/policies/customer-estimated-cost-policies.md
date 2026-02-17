@@ -68,11 +68,11 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `scope` | string |  |
+    | `scope` | string (uri) |  |
     | `scope_uuid` | string (uuid) |  |
 
 

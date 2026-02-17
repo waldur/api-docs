@@ -60,7 +60,7 @@
     | Name | Type | Description |
     |---|---|---|
     | `arrow_line_reference` | string |  |
-    | `billing_sync` | string |  |
+    | `billing_sync` | string (uri) |  |
     | `billing_sync_uuid` | string (uuid) |  |
     | `classification` | string |  |
     | `has_compensation` | boolean |  |

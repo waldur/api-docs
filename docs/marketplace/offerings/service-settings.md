@@ -67,6 +67,7 @@
     | `o` | string | Which field to use when ordering the results. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `scope` | string (uri) | Filter by scope URL. |
     | `scope_uuid` | string | Scope UUID |
     | `shared` | boolean |  |
     | `state` | array | State<br><br> |

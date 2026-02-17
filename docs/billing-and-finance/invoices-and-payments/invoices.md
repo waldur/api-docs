@@ -74,8 +74,9 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
     | `created` | string (date) |  |
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `end_date` | string (date) |  |
     | `field` | array |  |
@@ -550,10 +551,11 @@ Returns the version history for this object. Only accessible by staff and suppor
 
     | Name | Type | Description |
     |---|---|---|
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
     | `created` | string (date) |  |
     | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
     | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `end_date` | string (date) |  |
     | `month` | integer |  |
@@ -647,9 +649,9 @@ Retrieve a list of invoice items for the specified invoice.
     |---|---|---|
     | `conceal_compensation_items` | boolean | Conceal compensation items |
     | `o` | string | Order results by field<br>_Enum: `project_name`, `-project_name`, `resource_name`, `-resource_name`, `provider_name`, `-provider_name`, `name`, `-name`_ |
-    | `offering_uuid` | string |  |
-    | `project_uuid` | string |  |
-    | `provider_uuid` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `project_uuid` | string (uuid) |  |
+    | `provider_uuid` | string (uuid) |  |
     | `query` | string |  |
 
 
@@ -768,15 +770,16 @@ Spendings grouped by offerings and filtered by provider.
 
     | Name | Type | Description |
     |---|---|---|
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
     | `created` | string (date) |  |
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `end_date` | string (date) |  |
     | `month` | integer |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `provider_uuid` | string |  |
+    | `provider_uuid` | string (uuid) |  |
     | `start_date` | string (date) |  |
     | `state` | array |  |
     | `year` | integer |  |

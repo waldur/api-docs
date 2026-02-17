@@ -61,13 +61,13 @@
     |---|---|---|
     | `created` | string (date-time) |  |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string | Offering |
+    | `offering` | string (uri) | Offering |
     | `offering_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `proposal` | string | Proposal |
+    | `proposal` | string (uri) | Proposal |
     | `proposal_uuid` | string (uuid) |  |
-    | `resource` | string | Resource |
+    | `resource` | string (uri) | Resource |
     | `resource_uuid` | string (uuid) |  |
 
 

@@ -76,7 +76,7 @@
     |---|---|---|
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `scope` | string |  |
+    | `scope` | string (uri) |  |
     | `scope_uuid` | string (uuid) |  |
 
 
@@ -813,7 +813,7 @@ List command history for this policy.
     |---|---|---|
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `scope` | string |  |
+    | `scope` | string (uri) |  |
     | `scope_uuid` | string (uuid) |  |
 
 
@@ -904,7 +904,7 @@ List evaluation logs for this policy.
     |---|---|---|
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `scope` | string |  |
+    | `scope` | string (uri) |  |
     | `scope_uuid` | string (uuid) |  |
 
 

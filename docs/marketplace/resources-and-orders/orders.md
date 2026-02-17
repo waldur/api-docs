@@ -95,7 +95,7 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `field` | array |  |
     | `modified` | string (date-time) | Modified after |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
     | `offering_type` | array | Offering type |
     | `offering_uuid` | string (uuid) | Offering UUID |
@@ -105,7 +105,7 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `project_uuid` | string (uuid) | Project UUID |
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by order UUID, slug, project name or resource name |
-    | `resource` | string | Resource URL |
+    | `resource` | string (uri) | Resource URL |
     | `resource_name` | string | Resource name |
     | `resource_uuid` | string (uuid) | Resource UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |

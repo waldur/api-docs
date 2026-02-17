@@ -71,7 +71,7 @@
     |---|---|---|
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string |  |
+    | `project` | string (uri) |  |
     | `project_uuid` | string (uuid) |  |
 
 
@@ -144,7 +144,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `project` | integer | ✓ |
+    | `project` | integer (uri) | ✓ |
 
 
 === "Responses"
@@ -304,7 +304,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `project` | integer | ✓ |
+    | `project` | integer (uri) | ✓ |
 
 
 === "Request Body (required)"
@@ -388,7 +388,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `project` | integer | ✓ |
+    | `project` | integer (uri) | ✓ |
 
 
 === "Request Body"
@@ -467,7 +467,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `project` | integer | ✓ |
+    | `project` | integer (uri) | ✓ |
 
 
 === "Responses"
@@ -546,7 +546,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `project` | integer | ✓ |
+    | `project` | integer (uri) | ✓ |
 
 
 === "Request Body (required)"
@@ -636,7 +636,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `project` | integer | ✓ |
+    | `project` | integer (uri) | ✓ |
 
 
 === "Request Body (required)"

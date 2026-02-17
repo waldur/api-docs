@@ -60,11 +60,13 @@
     | Name | Type | Description |
     |---|---|---|
     | `abbreviation` | string | Abbreviation |
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
     | `agreement_number` | string |  |
     | `archived` | boolean |  |
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `month` | integer | Filter by month. |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `native_name` | string | Native name |
@@ -76,6 +78,7 @@
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
+    | `year` | integer | Filter by year. |
 
 
 === "Responses"

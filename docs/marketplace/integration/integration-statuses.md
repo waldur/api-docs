@@ -64,7 +64,7 @@ Returns a paginated list of integration statuses for offerings. This is used to 
     | `agent_type` | string | Agent type |
     | `customer_uuid` | string | Customer UUID |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |
     | `offering_uuid` | array | Multiple values may be separated by commas. |
     | `page` | integer | A page number within the paginated result set. |

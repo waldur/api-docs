@@ -89,7 +89,7 @@ Get a list of subnets.
     | `ip_version` | integer |  |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
-    | `network` | string | Network URL |
+    | `network` | string (uri) | Network URL |
     | `network_uuid` | string (uuid) | Network UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -100,7 +100,7 @@ Get a list of subnets.
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
     | `state` | array | State<br><br> |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
     | `uuid` | string (uuid) | UUID |
 

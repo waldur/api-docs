@@ -71,7 +71,7 @@
     | `email` | string | Email contains |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `project` | string | Project URL |
+    | `project` | string (uri) | Project URL |
     | `project_uuid` | string (uuid) | Project UUID |
     | `state` | array | Service account state<br><br> |
     | `username` | string | Username |

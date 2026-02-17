@@ -75,7 +75,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `field` | array |  |

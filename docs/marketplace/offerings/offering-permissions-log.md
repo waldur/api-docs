@@ -75,7 +75,7 @@
     | `scope_uuid` | string | Scope UUID |
     | `user` | string (uuid) |  |
     | `user_slug` | string | User slug contains |
-    | `user_url` | string |  |
+    | `user_url` | string (uri) |  |
     | `username` | string |  |
 
 

@@ -81,9 +81,9 @@
     | `is_active` | boolean |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `settings` | string |  |
+    | `settings` | string (uri) |  |
     | `settings_uuid` | string (uuid) |  |
-    | `waldur_customer` | string |  |
+    | `waldur_customer` | string (uri) |  |
     | `waldur_customer_uuid` | string (uuid) |  |
 
 

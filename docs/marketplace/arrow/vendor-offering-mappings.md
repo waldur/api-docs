@@ -71,11 +71,11 @@
     |---|---|---|
     | `arrow_vendor_name` | string |  |
     | `is_active` | boolean |  |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `settings` | string |  |
+    | `settings` | string (uri) |  |
     | `settings_uuid` | string (uuid) |  |
 
 
@@ -244,11 +244,11 @@ Get vendor names from Arrow catalog API (IAAS category).
     |---|---|---|
     | `arrow_vendor_name` | string |  |
     | `is_active` | boolean |  |
-    | `offering` | string |  |
+    | `offering` | string (uri) |  |
     | `offering_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `settings` | string |  |
+    | `settings` | string (uri) |  |
     | `settings_uuid` | string (uuid) |  |
 
 

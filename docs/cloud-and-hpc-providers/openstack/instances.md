@@ -100,6 +100,7 @@ Get a list of VM instances.
     | `field` | array |  |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
+    | `o` | string | Ordering. Sort by start time.<br>_Enum: `start_time`, `-start_time`_ |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `project` | string (uuid) | Project UUID |
@@ -110,7 +111,7 @@ Get a list of VM instances.
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
     | `state` | array | State<br><br> |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
     | `uuid` | string (uuid) | UUID |
 

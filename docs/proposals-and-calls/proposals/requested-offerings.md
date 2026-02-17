@@ -65,10 +65,10 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `call` | string | Call |
+    | `call` | string (uri) | Call |
     | `call_uuid` | string (uuid) |  |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string | Offering |
+    | `offering` | string (uri) | Offering |
     | `offering_uuid` | string (uuid) |  |
     | `organization_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |

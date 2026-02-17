@@ -122,7 +122,7 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_keyword` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `field` | array |  |
@@ -2039,7 +2039,7 @@ Get available compliance checklists for call creation/editing.
     | Name | Type | Required | Description |
     |---|---|---|---|
     | `checklist_type` | string |  | Filter by checklist type (default: proposal_compliance) |
-    | `customer` | string |  |  |
+    | `customer` | string (uri) |  |  |
     | `customer_keyword` | string |  |  |
     | `customer_uuid` | string | ✓ | Customer UUID to check permissions for. Required to verify user has CREATE_CALL permission on that customer's call managing organization. |
     | `has_active_round` | boolean |  |  |
@@ -2366,7 +2366,7 @@ List all conflicts of interest detected for this call.
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_keyword` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `has_active_round` | boolean |  |
@@ -2811,7 +2811,7 @@ Get detailed compliance answers for a specific proposal (call managers only).
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_keyword` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `has_active_round` | boolean |  |
@@ -2910,7 +2910,7 @@ Get proposed reviewer-proposal assignments.
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_keyword` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `has_active_round` | boolean |  |
@@ -3500,7 +3500,7 @@ List all reviewer suggestions for this call with affinity scores.
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_keyword` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `has_active_round` | boolean |  |
@@ -4435,7 +4435,7 @@ Invite reviewers to join the call's reviewer pool.
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string |  |
+    | `customer` | string (uri) |  |
     | `customer_keyword` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `has_active_round` | boolean |  |

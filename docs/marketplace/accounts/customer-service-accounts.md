@@ -68,7 +68,7 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `email` | string | Email contains |
     | `page` | integer | A page number within the paginated result set. |

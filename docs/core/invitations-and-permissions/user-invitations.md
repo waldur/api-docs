@@ -87,6 +87,7 @@ Retrieve a list of user invitations visible to the current user.
     | `page_size` | integer | Number of results to return per page. |
     | `role_name` | string |  |
     | `role_uuid` | string (uuid) |  |
+    | `scope` | string (uri) | Filter by scope URL. |
     | `scope_description` | string |  |
     | `scope_name` | string |  |
     | `scope_type` | string |  |

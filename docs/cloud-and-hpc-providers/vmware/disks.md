@@ -90,7 +90,7 @@
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
     | `state` | array | State<br><br> |
     | `uuid` | string (uuid) | UUID |
-    | `vm` | string |  |
+    | `vm` | string (uri) |  |
     | `vm_uuid` | string (uuid) |  |
 
 

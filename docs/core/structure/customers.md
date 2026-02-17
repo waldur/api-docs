@@ -105,12 +105,16 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | Name | Type | Description |
     |---|---|---|
     | `abbreviation` | string | Abbreviation |
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
     | `agreement_number` | string |  |
     | `archived` | boolean |  |
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
     | `field` | array |  |
+    | `has_resources` | string | Filter by customers with resources. |
+    | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
+    | `is_service_provider` | boolean | Filter by customers that are service providers. |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `native_name` | string | Native name |
@@ -122,6 +126,8 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
+    | `service_provider_uuid` | string (uuid) | Filter by service provider UUID. |
+    | `user_uuid` | string (uuid) | Filter by user UUID. |
 
 
 === "Responses"
@@ -2166,11 +2172,15 @@ Returns a list of countries that can be used when creating or updating a custome
     | Name | Type | Description |
     |---|---|---|
     | `abbreviation` | string | Abbreviation |
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
     | `agreement_number` | string |  |
     | `archived` | boolean |  |
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `has_resources` | string | Filter by customers with resources. |
+    | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
+    | `is_service_provider` | boolean | Filter by customers that are service providers. |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `native_name` | string | Native name |
@@ -2182,6 +2192,8 @@ Returns a list of countries that can be used when creating or updating a custome
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
+    | `service_provider_uuid` | string (uuid) | Filter by service provider UUID. |
+    | `user_uuid` | string (uuid) | Filter by user UUID. |
 
 
 === "Responses"
@@ -2449,6 +2461,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | Name | Type | Description |
     |---|---|---|
     | `abbreviation` | string | Abbreviation |
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
     | `agreement_number` | string |  |
     | `archived` | boolean |  |
     | `backend_id` | string |  |
@@ -2456,6 +2469,9 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
     | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `has_resources` | string | Filter by customers with resources. |
+    | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
+    | `is_service_provider` | boolean | Filter by customers that are service providers. |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `native_name` | string | Native name |
@@ -2467,6 +2483,8 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
+    | `service_provider_uuid` | string (uuid) | Filter by service provider UUID. |
+    | `user_uuid` | string (uuid) | Filter by user UUID. |
 
 
 === "Responses"

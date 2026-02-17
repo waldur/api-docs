@@ -59,13 +59,13 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `location` | string |  |
+    | `location` | string (uri) |  |
     | `location_uuid` | string (uuid) |  |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `settings` | string | Settings URL |
+    | `settings` | string (uri) | Settings URL |
     | `settings_uuid` | string (uuid) | Settings UUID |
     | `zone` | integer |  |
 

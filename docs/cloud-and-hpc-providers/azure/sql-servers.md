@@ -89,7 +89,7 @@
     | `project` | string (uuid) | Project UUID |
     | `project_name` | string | Project name |
     | `project_uuid` | string (uuid) | Project UUID |
-    | `resource_group` | string |  |
+    | `resource_group` | string (uri) |  |
     | `resource_group_uuid` | string (uuid) |  |
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |

@@ -71,7 +71,7 @@
     |---|---|---|
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `user` | string |  |
+    | `user` | string (uri) |  |
     | `user_uuid` | string (uuid) |  |
 
 
@@ -143,7 +143,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `user` | integer | ✓ |
+    | `user` | integer (uri) | ✓ |
 
 
 === "Responses"
@@ -300,7 +300,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `user` | integer | ✓ |
+    | `user` | integer (uri) | ✓ |
 
 
 === "Request Body (required)"
@@ -382,7 +382,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `user` | integer | ✓ |
+    | `user` | integer (uri) | ✓ |
 
 
 === "Request Body"
@@ -459,7 +459,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `user` | integer | ✓ |
+    | `user` | integer (uri) | ✓ |
 
 
 === "Responses"
@@ -594,7 +594,7 @@
 
     | Name | Type | Required |
     |---|---|---|
-    | `user` | integer | ✓ |
+    | `user` | integer (uri) | ✓ |
 
 
 === "Request Body (required)"

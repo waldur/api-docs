@@ -154,12 +154,13 @@ Returns a paginated list of offerings for the provider.
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `field` | array |  |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
     | `name` | string | Name |
@@ -1637,11 +1638,12 @@ Returns a paginated list of course accounts for projects that have resources of 
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
     | `name` | string | Name |
@@ -1772,11 +1774,12 @@ Returns a paginated list of customer-level service accounts for customers who ha
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
     | `name` | string | Name |
@@ -2051,11 +2054,12 @@ Returns a paginated list of project-level service accounts for projects that hav
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
     | `name` | string | Name |
@@ -6063,12 +6067,13 @@ Returns monthly usage statistics for the components of an offering within a spec
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `end` | string | End date in format YYYY-MM. |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
     | `name` | string | Name |
@@ -6190,12 +6195,13 @@ Returns monthly cost data for an offering within a specified date range.
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `end` | string | End date in format YYYY-MM. |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
     | `name` | string | Name |
@@ -6312,12 +6318,13 @@ Returns a paginated list of customers who have resources for this offering.
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `field` | array |  |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
     | `name` | string | Name |
@@ -6422,7 +6429,7 @@ Returns a paginated list of active, shared offerings grouped by their service pr
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
@@ -7593,11 +7600,12 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `created` | string (date-time) | Created after |
     | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
     | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
-    | `customer` | string | Customer URL |
+    | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
     | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
     | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
     | `name` | string | Name |

@@ -72,12 +72,12 @@ Returns a paginated list of Terms of Service consents for the current user. Staf
     |---|---|---|
     | `has_consent` | boolean | Has consent |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string | Offering URL |
+    | `offering` | string (uri) | Offering URL |
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `requires_reconsent` | boolean | Requires reconsent |
-    | `user` | string | User URL |
+    | `user` | string (uri) | User URL |
     | `user_uuid` | string (uuid) | User UUID |
     | `version` | string | Version |
 

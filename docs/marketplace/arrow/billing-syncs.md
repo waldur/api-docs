@@ -81,7 +81,7 @@
     | Name | Type | Description |
     |---|---|---|
     | `arrow_state` | string |  |
-    | `customer_mapping` | string |  |
+    | `customer_mapping` | string (uri) |  |
     | `customer_mapping_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -890,7 +890,7 @@ List pending consumption records (not yet finalized).
     | Name | Type | Description |
     |---|---|---|
     | `arrow_state` | string |  |
-    | `customer_mapping` | string |  |
+    | `customer_mapping` | string (uri) |  |
     | `customer_mapping_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |

@@ -80,7 +80,7 @@
     | `field` | array |  |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
-    | `network` | string |  |
+    | `network` | string (uri) |  |
     | `network_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -91,7 +91,7 @@
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
     | `state` | array | State<br><br> |
     | `uuid` | string (uuid) | UUID |
-    | `vm` | string |  |
+    | `vm` | string (uri) |  |
     | `vm_uuid` | string (uuid) |  |
 
 

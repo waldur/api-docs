@@ -74,7 +74,7 @@
     | `organization_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `proposal` | string |  |
+    | `proposal` | string (uri) |  |
     | `proposal_name` | string |  |
     | `proposal_uuid` | string (uuid) |  |
     | `reviewer_uuid` | string (uuid) |  |

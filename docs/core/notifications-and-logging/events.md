@@ -69,12 +69,15 @@
     | `created_from` | number |  |
     | `created_to` | number |  |
     | `customer_uuid` | string (uuid) | Customer UUID |
+    | `event_type` | array | Filter by event type. Can be specified multiple times. |
+    | `feature` | array | Filter by feature (event group). Can be specified multiple times. |
     | `field` | array |  |
     | `message` | string |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `project_uuid` | string (uuid) | Project UUID |
+    | `scope` | string (uri) | Filter by scope URL. |
     | `user_uuid` | string (uuid) | User UUID |
 
 

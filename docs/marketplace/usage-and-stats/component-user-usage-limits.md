@@ -69,7 +69,7 @@ Returns a paginated list of usage limits set for specific users on resource comp
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `resource` | string | Resource URL |
+    | `resource` | string (uri) | Resource URL |
     | `resource_uuid` | string (uuid) | Resource UUID |
     | `username` | string | Username |
 

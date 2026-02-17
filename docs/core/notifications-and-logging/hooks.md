@@ -57,6 +57,8 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `author_uuid` | string (uuid) | Filter by author UUID. |
+    | `is_active` | boolean | Filter by active status. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
 

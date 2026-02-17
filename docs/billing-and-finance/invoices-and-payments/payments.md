@@ -72,7 +72,7 @@
     | `date_of_payment` | string (date) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `profile` | string |  |
+    | `profile` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
 
 

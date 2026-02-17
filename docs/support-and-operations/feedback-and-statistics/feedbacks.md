@@ -63,12 +63,12 @@
     | `created_after` | string (date-time) |  |
     | `created_before` | string (date-time) |  |
     | `evaluation` | integer |  |
-    | `issue` | string |  |
+    | `issue` | string (uri) |  |
     | `issue_key` | string |  |
     | `issue_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `user` | string |  |
+    | `user` | string (uri) |  |
     | `user_full_name` | string | User full name contains |
     | `user_uuid` | string (uuid) |  |
 

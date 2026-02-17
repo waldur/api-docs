@@ -83,9 +83,9 @@ Get a list of available VM instance flavors.
     | `ram` | integer |  |
     | `ram__gte` | integer |  |
     | `ram__lte` | integer |  |
-    | `settings` | string | Settings URL |
+    | `settings` | string (uri) | Settings URL |
     | `settings_uuid` | string (uuid) | Settings UUID |
-    | `tenant` | string | Tenant URL |
+    | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
 
 

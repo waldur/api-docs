@@ -73,7 +73,7 @@
     | `discount_type` | string |  |
     | `end_date` | string (date) |  |
     | `o` | array | Ordering<br><br> |
-    | `offering` | string | Offering |
+    | `offering` | string (uri) | Offering |
     | `offering_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
