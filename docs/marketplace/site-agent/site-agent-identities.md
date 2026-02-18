@@ -88,7 +88,7 @@
     |---|---|---|
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
-    | `offering` | string (uuid) | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
+    | `offering` | string (uuid) | UUID of an offering with a site-agent compatible type. |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -175,7 +175,7 @@
     |---|---|---|
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
-    | `offering` | string (uuid) | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
+    | `offering` | string (uuid) | UUID of an offering with a site-agent compatible type. |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -261,7 +261,7 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `offering` | string (uuid) | ✓ | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
+    | `offering` | string (uuid) | ✓ | UUID of an offering with a site-agent compatible type. |
     | `name` | string | ✓ |  |
     | `version` | string |  |  |
     | `dependencies` | any |  |  |
@@ -278,7 +278,7 @@
     |---|---|---|
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
-    | `offering` | string (uuid) | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
+    | `offering` | string (uuid) | UUID of an offering with a site-agent compatible type. |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -375,7 +375,7 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `offering` | string (uuid) | ✓ | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
+    | `offering` | string (uuid) | ✓ | UUID of an offering with a site-agent compatible type. |
     | `name` | string | ✓ |  |
     | `version` | string |  |  |
     | `dependencies` | any |  |  |
@@ -392,7 +392,7 @@
     |---|---|---|
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
-    | `offering` | string (uuid) | UUID of an offering with type 'Marketplace.Slurm'. Only site-agent offerings are accepted. |
+    | `offering` | string (uuid) | UUID of an offering with a site-agent compatible type. |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |

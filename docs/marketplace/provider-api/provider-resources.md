@@ -32,6 +32,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_downscaled/` | [Set downscaled flag for resource](#set-downscaled-flag-for-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_provider/` | [Set end date by provider](#set-end-date-by-provider) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_staff/` | [Set end date of the resource by staff](#set-end-date-of-the-resource-by-staff) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_keycloak_scopes/` | [Set Keycloak scope options for a resource](#set-keycloak-scope-options-for-a-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_limits/` | [Set resource limits](#set-resource-limits) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_paused/` | [Set paused flag for resource](#set-paused-flag-for-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_restrict_member_access/` | [Set restrict member access flag](#set-restrict-member-access-flag) |
@@ -2822,6 +2823,97 @@ Allows a staff user to set or update the end date for a resource, which will sch
 
     **`200`** - No response body
     
+
+---
+
+### Set Keycloak scope options for a resource
+
+Allows a service provider to configure available scope options for Keycloak memberships on a resource. Requires Keycloak integration to be enabled on the offering.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_keycloak_scopes/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      keycloak_available_scopes:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.resource_keycloak_scopes_request import ResourceKeycloakScopesRequest # (1)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_set_keycloak_scopes # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ResourceKeycloakScopesRequest(
+        keycloak_available_scopes=[]
+    )
+    response = marketplace_provider_resources_set_keycloak_scopes.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ResourceKeycloakScopesRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_keycloak_scopes_request.py)
+    2.  **API Source:** [`marketplace_provider_resources_set_keycloak_scopes`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_set_keycloak_scopes.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesSetKeycloakScopes } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesSetKeycloakScopes({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "keycloak_available_scopes": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `keycloak_available_scopes` | array of objects | ✓ | Pre-configured scope options for this resource. |
+    | `keycloak_available_scopes.scope_type` | string | ✓ | Scope type, e.g. 'project', 'cluster'. |
+    | `keycloak_available_scopes.scope_id` | string | ✓ | Identifier of the scope (UUID or external ID). |
+    | `keycloak_available_scopes.label` | string | ✓ | Human-readable label shown to end users. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 

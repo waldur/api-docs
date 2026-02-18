@@ -121,7 +121,6 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SIDEBAR_LOGO_DARK` | string (uri) |
     | `SIDEBAR_LOGO_MOBILE` | string (uri) |
     | `SIDEBAR_STYLE` | string |
-    | `SITE_LOGO` | string (uri) |
     | `LOGIN_LOGO` | string (uri) |
     | `LOGIN_LOGO_MULTILINGUAL` | object (free-form) |
     | `LOGIN_PAGE_LAYOUT` | string |
@@ -421,7 +420,6 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SIDEBAR_LOGO_DARK` | string (binary) |  |
     | `SIDEBAR_LOGO_MOBILE` | string (binary) |  |
     | `SIDEBAR_STYLE` | string |  |
-    | `SITE_LOGO` | string (binary) |  |
     | `LOGIN_LOGO` | string (binary) |  |
     | `LOGIN_LOGO_MULTILINGUAL` | object (free-form) |  |
     | `LOGIN_PAGE_LAYOUT` | string |  |

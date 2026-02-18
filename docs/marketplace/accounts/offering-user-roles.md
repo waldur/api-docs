@@ -77,13 +77,15 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `offering` | string (uri) |
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `offering` | string (uri) |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
+    | `scope_type_label` | string | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
 
 ---
 
@@ -149,13 +151,15 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `offering` | string (uri) |
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `offering` | string (uri) |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
+    | `scope_type_label` | string | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
 
 ---
 
@@ -222,23 +226,27 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string | ✓ |
-    | `offering` | string (uri) | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `offering` | string (uri) | ✓ |  |
+    | `scope_type` | string |  | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
+    | `scope_type_label` | string |  | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
 
 
 === "Responses"
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `offering` | string (uri) |
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `offering` | string (uri) |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
+    | `scope_type_label` | string | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
 
 ---
 
@@ -316,23 +324,27 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string | ✓ |
-    | `offering` | string (uri) | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `offering` | string (uri) | ✓ |  |
+    | `scope_type` | string |  | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
+    | `scope_type_label` | string |  | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `offering` | string (uri) |
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `offering` | string (uri) |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
+    | `scope_type_label` | string | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
 
 ---
 
@@ -401,23 +413,27 @@
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string |  |
-    | `offering` | string (uri) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string |  |  |
+    | `offering` | string (uri) |  |  |
+    | `scope_type` | string |  | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
+    | `scope_type_label` | string |  | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `offering` | string (uri) |
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `offering` | string (uri) |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
+    | `scope_type_label` | string | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
 
 ---
 
