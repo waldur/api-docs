@@ -1460,7 +1460,7 @@ Create a new server group for the tenant.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `policy` | any |  | Server group policy determining the rules for scheduling servers in this group |
+    | `policy` | any |  | affinity — all instances are placed on the same hypervisor. anti-affinity — all instances are placed on different hypervisors. soft-affinity — instances are placed on the same hypervisor if possible, but not enforced. soft-anti-affinity — instances are placed on different hypervisors if possible, but not enforced. |
 
 
 === "Responses"
@@ -1497,7 +1497,7 @@ Create a new server group for the tenant.
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
-    | `policy` | any | Server group policy determining the rules for scheduling servers in this group |
+    | `policy` | any | affinity — all instances are placed on the same hypervisor. anti-affinity — all instances are placed on different hypervisors. soft-affinity — instances are placed on the same hypervisor if possible, but not enforced. soft-anti-affinity — instances are placed on different hypervisors if possible, but not enforced. |
     | `display_name` | string |  |
     | `instances` | array of objects |  |
     | `instances.backend_id` | string | Instance ID in the OpenStack backend |
