@@ -66,6 +66,7 @@
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `customer_uuid` | string (uuid) | Filter by customer UUID. |
     | `month` | integer | Filter by month. |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
