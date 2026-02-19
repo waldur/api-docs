@@ -2928,10 +2928,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_nationalities` | boolean |  |
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_identity_source` | boolean |  |
+    | `expose_active_isds` | boolean |  |
 
 
 === "Responses"
@@ -2960,10 +2962,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_nationalities` | boolean |  |
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_identity_source` | boolean |  |
+    | `expose_active_isds` | boolean |  |
     | `exposed_fields` | array of strings | Return list of field names currently configured for exposure. |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
 
@@ -3054,10 +3058,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_nationalities` | boolean |  |
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_identity_source` | boolean |  |
+    | `expose_active_isds` | boolean |  |
 
 
 === "Responses"
@@ -3086,10 +3092,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_nationalities` | boolean |  |
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_identity_source` | boolean |  |
+    | `expose_active_isds` | boolean |  |
     | `exposed_fields` | array of strings | Return list of field names currently configured for exposure. |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
 
@@ -3180,10 +3188,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_nationalities` | boolean |  |
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_identity_source` | boolean |  |
+    | `expose_active_isds` | boolean |  |
 
 
 === "Responses"
@@ -3212,10 +3222,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_nationalities` | boolean |  |
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_identity_source` | boolean |  |
+    | `expose_active_isds` | boolean |  |
     | `exposed_fields` | array of strings | Return list of field names currently configured for exposure. |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
 
@@ -7745,10 +7757,12 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_nationalities` | boolean |  |
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_identity_source` | boolean |  |
+    | `expose_active_isds` | boolean |  |
     | `exposed_fields` | array of strings | Return list of field names currently configured for exposure. |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
 

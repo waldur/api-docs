@@ -141,6 +141,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
@@ -261,6 +262,7 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
@@ -379,6 +381,7 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
@@ -591,6 +594,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
@@ -718,6 +722,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `user_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |

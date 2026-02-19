@@ -1914,6 +1914,21 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `registration_method` | string | Indicates what registration method was used. |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
+    | `job_title` | string |  |
+    | `gender` | any | ISO 5218 gender code |
+    | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `place_of_birth` | string |  |
+    | `country_of_residence` | string |  |
+    | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `organization_country` | string |  |
+    | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `civil_number` | string |  |
+    | `birth_date` | string (date) |  |
+    | `identity_source` | string | Indicates what identity provider was used. |
+    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 
