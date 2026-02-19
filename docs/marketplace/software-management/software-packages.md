@@ -76,6 +76,7 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `has_version` | string | Filter packages that have a specific version |
     | `is_extension` | boolean | Filter packages that are extensions of other packages |
     | `name` | string | Filter packages by name (case-insensitive partial match) |
+    | `name_exact` | string | Filter packages by exact name (case-insensitive) |
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) | Filter packages available for a specific offering |
     | `page` | integer | A page number within the paginated result set. |
