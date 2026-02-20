@@ -691,6 +691,13 @@ Get costs breakdown for a project by year and month.
     | `price` | number (double) |
     | `year` | integer |
     | `month` | integer |
+    | `items` | array of objects |
+    | `items.name` | string |
+    | `items.unit_price` | string (decimal) |
+    | `items.unit` | string |
+    | `items.quantity` | string (decimal) |
+    | `items.measured_unit` | string |
+    | `items.price` | number (double) |
 
 ---
 
