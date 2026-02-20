@@ -200,11 +200,11 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
+    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
-    | `current_usages` | object (free-form) |  |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
     | `report.header` | string | Section header text |
@@ -212,7 +212,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) |  |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
@@ -381,11 +381,11 @@ Returns details of a specific resource from a provider's perspective.
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
+    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
-    | `current_usages` | object (free-form) |  |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
     | `report.header` | string | Section header text |
@@ -393,7 +393,7 @@ Returns details of a specific resource from a provider's perspective.
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) |  |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
@@ -1945,11 +1945,11 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
+    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
-    | `current_usages` | object (free-form) |  |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
     | `report.header` | string | Section header text |
@@ -1957,7 +1957,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) |  |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
@@ -2211,11 +2211,11 @@ Updates the 'last_sync' timestamp for a resource to the current time. This is us
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
+    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
-    | `current_usages` | object (free-form) |  |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
     | `can_terminate` | boolean |  |
     | `report` | array of objects |  |
     | `report.header` | string | Section header text |
@@ -2223,7 +2223,7 @@ Updates the 'last_sync' timestamp for a resource to the current time. This is us
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) |  |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
