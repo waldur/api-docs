@@ -265,7 +265,6 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `LLM_TOKEN_LIMIT_WEEKLY` | integer |
     | `LLM_TOKEN_LIMIT_MONTHLY` | integer |
     | `LLM_CHAT_SESSION_RETENTION_DAYS` | integer |
-    | `LLM_CHAT_STORAGE_ENABLED` | boolean |
     | `LLM_CHAT_HISTORY_LIMIT` | integer |
     | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |
     | `SOFTWARE_CATALOG_EESSI_VERSION` | string |
@@ -566,7 +565,6 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `LLM_TOKEN_LIMIT_WEEKLY` | integer |  |
     | `LLM_TOKEN_LIMIT_MONTHLY` | integer |  |
     | `LLM_CHAT_SESSION_RETENTION_DAYS` | integer |  |
-    | `LLM_CHAT_STORAGE_ENABLED` | boolean |  |
     | `LLM_CHAT_HISTORY_LIMIT` | integer |  |
     | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |  |
     | `SOFTWARE_CATALOG_EESSI_VERSION` | string |  |

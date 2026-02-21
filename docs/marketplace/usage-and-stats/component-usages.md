@@ -10,6 +10,7 @@
 | **Other Actions** | | |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-component-usages/set_usage/` | [Set component usage for a resource](#set-component-usage-for-a-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-component-usages/{uuid}/set_user_usage/` | [Set user-specific component usage](#set-user-specific-component-usage) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-component-usages/{uuid}/set_user_usages/` | [Bulk set user-specific component usages](#bulk-set-user-specific-component-usages) |
 
 ---
 ## Core CRUD
@@ -385,6 +386,102 @@ Returns the details of a specific component usage record.
     | `username` | string | ✓ |  |
     | `user` | string (uri) |  |  |
     | `date` | string (date-time) |  | Date for usage reporting (staff and service providers for limit-based components). If not provided, current date is used. |
+
+
+=== "Responses"
+
+    **`201`** - No response body
+    
+
+---
+
+### Bulk set user-specific component usages
+
+
+        Allows a service provider to report usage for multiple users associated with a resource's component
+        in a single request. This avoids the need for one API call per user.
+
+        - All usages are processed atomically: if any item fails validation, none are persisted.
+        - If a user-specific usage record already exists for the given component usage, it will be updated.
+        - Otherwise, a new record is created.
+        
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-component-usages/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_user_usages/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      usages:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.component_user_usage_bulk_create_request import ComponentUserUsageBulkCreateRequest # (1)
+    from waldur_api_client.api.marketplace_component_usages import marketplace_component_usages_set_user_usages # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ComponentUserUsageBulkCreateRequest(
+        usages=[]
+    )
+    response = marketplace_component_usages_set_user_usages.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ComponentUserUsageBulkCreateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/component_user_usage_bulk_create_request.py)
+    2.  **API Source:** [`marketplace_component_usages_set_user_usages`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_component_usages/marketplace_component_usages_set_user_usages.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceComponentUsagesSetUserUsages } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceComponentUsagesSetUserUsages({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "usages": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `usages` | array of objects | ✓ |  |
+    | `usages.usage` | string (decimal) |  |  |
+    | `usages.username` | string | ✓ |  |
+    | `usages.user` | string (uri) |  |  |
+    | `usages.date` | string (date-time) |  | Date for usage reporting (staff and service providers for limit-based components). If not provided, current date is used. |
 
 
 === "Responses"

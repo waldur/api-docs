@@ -617,7 +617,7 @@ Edit a message (creates a new message with replaces reference). Only allows edit
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `input` | string | ✓ | User input text for the chat model. |
-    | `thread_uuid` | string (uuid) |  | Existing thread UUID. If omitted, a new thread is created when storage is enabled. |
+    | `thread_uuid` | string (uuid) |  | Existing thread UUID. If omitted, a new thread is created. |
     | `update_thread_name` | string (uuid) |  | Thread UUID whose name should be set to the assistant's response. Skips message persistence for this call. |
     | `mode` | any |  | 'reload': replace the last assistant response. Omit for normal new-message behavior. |
 
