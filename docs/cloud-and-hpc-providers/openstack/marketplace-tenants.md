@@ -31,7 +31,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_marketplace_tenants import openstack_marketplace_tenants_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.api.openstack_marketplace_tenants import openstack_marketplace_tenants_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@
     ```
     
     
-    1.  **API Source:** [`openstack_marketplace_tenants_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_marketplace_tenants/openstack_marketplace_tenants_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **API Source:** [`openstack_marketplace_tenants_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_marketplace_tenants/openstack_marketplace_tenants_list.py)
 
 === "TypeScript"
 

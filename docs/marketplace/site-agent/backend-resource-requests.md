@@ -35,7 +35,9 @@ Returns a paginated list of requests for backend resources.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.backend_resource_requests import backend_resource_requests_list # (1)
+    from waldur_api_client.models.backend_resource_req_o_enum import BackendResourceReqOEnum # (1)
+    from waldur_api_client.models.backend_resource_req_state_enum import BackendResourceReqStateEnum # (2)
+    from waldur_api_client.api.backend_resource_requests import backend_resource_requests_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -47,7 +49,9 @@ Returns a paginated list of requests for backend resources.
     ```
     
     
-    1.  **API Source:** [`backend_resource_requests_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/backend_resource_requests/backend_resource_requests_list.py)
+    1.  **Model Source:** [`BackendResourceReqOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_o_enum.py)
+    2.  **Model Source:** [`BackendResourceReqStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_state_enum.py)
+    3.  **API Source:** [`backend_resource_requests_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/backend_resource_requests/backend_resource_requests_list.py)
 
 === "TypeScript"
 

@@ -31,7 +31,8 @@ Retrieve a list of user agreements (Terms of Service and Privacy Policy). Suppor
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.user_agreements import user_agreements_list # (1)
+    from waldur_api_client.models.agreement_type_enum import AgreementTypeEnum # (1)
+    from waldur_api_client.api.user_agreements import user_agreements_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@ Retrieve a list of user agreements (Terms of Service and Privacy Policy). Suppor
     ```
     
     
-    1.  **API Source:** [`user_agreements_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_agreements/user_agreements_list.py)
+    1.  **Model Source:** [`AgreementTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/agreement_type_enum.py)
+    2.  **API Source:** [`user_agreements_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_agreements/user_agreements_list.py)
 
 === "TypeScript"
 
@@ -65,7 +67,7 @@ Retrieve a list of user agreements (Terms of Service and Privacy Policy). Suppor
 
     | Name | Type | Description |
     |---|---|---|
-    | `agreement_type` | string | _Enum: `PP`, `TOS`_ |
+    | `agreement_type` | string | _Enum: `TOS`, `PP`_ |
     | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Returns requested language or falls back to default version if unavailable. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |

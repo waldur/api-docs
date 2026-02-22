@@ -31,7 +31,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_requested_offerings import proposal_requested_offerings_list # (1)
+    from waldur_api_client.models.provider_requested_offering_o_enum import ProviderRequestedOfferingOEnum # (1)
+    from waldur_api_client.models.requested_offering_states import RequestedOfferingStates # (2)
+    from waldur_api_client.api.proposal_requested_offerings import proposal_requested_offerings_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +45,9 @@
     ```
     
     
-    1.  **API Source:** [`proposal_requested_offerings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_requested_offerings/proposal_requested_offerings_list.py)
+    1.  **Model Source:** [`ProviderRequestedOfferingOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_requested_offering_o_enum.py)
+    2.  **Model Source:** [`RequestedOfferingStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/requested_offering_states.py)
+    3.  **API Source:** [`proposal_requested_offerings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_requested_offerings/proposal_requested_offerings_list.py)
 
 === "TypeScript"
 

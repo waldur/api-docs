@@ -35,7 +35,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.user_actions import user_actions_list # (1)
+    from waldur_api_client.models.urgency_enum import UrgencyEnum # (1)
+    from waldur_api_client.api.user_actions import user_actions_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -47,7 +48,8 @@
     ```
     
     
-    1.  **API Source:** [`user_actions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_actions/user_actions_list.py)
+    1.  **Model Source:** [`UrgencyEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/urgency_enum.py)
+    2.  **API Source:** [`user_actions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_actions/user_actions_list.py)
 
 === "TypeScript"
 
@@ -79,7 +81,7 @@
     | `overdue` | boolean |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `urgency` | string | _Enum: `high`, `low`, `medium`_ |
+    | `urgency` | string | _Enum: `low`, `medium`, `high`_ |
     | `user_uuid` | string (uuid) | Filter by user UUID (staff only). |
 
 

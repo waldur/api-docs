@@ -34,7 +34,8 @@ Returns a paginated list of backend resources that are available for import. Thi
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.backend_resources import backend_resources_list # (1)
+    from waldur_api_client.models.backend_resource_req_o_enum import BackendResourceReqOEnum # (1)
+    from waldur_api_client.api.backend_resources import backend_resources_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -46,7 +47,8 @@ Returns a paginated list of backend resources that are available for import. Thi
     ```
     
     
-    1.  **API Source:** [`backend_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/backend_resources/backend_resources_list.py)
+    1.  **Model Source:** [`BackendResourceReqOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_o_enum.py)
+    2.  **API Source:** [`backend_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/backend_resources/backend_resources_list.py)
 
 === "TypeScript"
 

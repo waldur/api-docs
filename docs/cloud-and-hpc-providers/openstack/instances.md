@@ -52,7 +52,10 @@ Get a list of VM instances.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_instances import openstack_instances_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_instance_field_enum import OpenStackInstanceFieldEnum # (2)
+    from waldur_api_client.models.open_stack_instance_o_enum import OpenStackInstanceOEnum # (3)
+    from waldur_api_client.api.openstack_instances import openstack_instances_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -64,7 +67,10 @@ Get a list of VM instances.
     ```
     
     
-    1.  **API Source:** [`openstack_instances_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_instances/openstack_instances_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackInstanceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_instance_field_enum.py)
+    3.  **Model Source:** [`OpenStackInstanceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_instance_o_enum.py)
+    4.  **API Source:** [`openstack_instances_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_instances/openstack_instances_list.py)
 
 === "TypeScript"
 
@@ -320,7 +326,8 @@ Retrieve details of a specific VM instance.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_instances import openstack_instances_retrieve # (1)
+    from waldur_api_client.models.open_stack_instance_field_enum import OpenStackInstanceFieldEnum # (1)
+    from waldur_api_client.api.openstack_instances import openstack_instances_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -334,7 +341,8 @@ Retrieve details of a specific VM instance.
     ```
     
     
-    1.  **API Source:** [`openstack_instances_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_instances/openstack_instances_retrieve.py)
+    1.  **Model Source:** [`OpenStackInstanceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_instance_field_enum.py)
+    2.  **API Source:** [`openstack_instances_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_instances/openstack_instances_retrieve.py)
 
 === "TypeScript"
 

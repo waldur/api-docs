@@ -29,7 +29,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.admin_announcements import admin_announcements_list # (1)
+    from waldur_api_client.models.admin_announcement_field_enum import AdminAnnouncementFieldEnum # (1)
+    from waldur_api_client.models.admin_announcement_o_enum import AdminAnnouncementOEnum # (2)
+    from waldur_api_client.models.admin_announcement_type_enum import AdminAnnouncementTypeEnum # (3)
+    from waldur_api_client.api.admin_announcements import admin_announcements_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -41,7 +44,10 @@
     ```
     
     
-    1.  **API Source:** [`admin_announcements_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/admin_announcements/admin_announcements_list.py)
+    1.  **Model Source:** [`AdminAnnouncementFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/admin_announcement_field_enum.py)
+    2.  **Model Source:** [`AdminAnnouncementOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/admin_announcement_o_enum.py)
+    3.  **Model Source:** [`AdminAnnouncementTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/admin_announcement_type_enum.py)
+    4.  **API Source:** [`admin_announcements_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/admin_announcements/admin_announcements_list.py)
 
 === "TypeScript"
 
@@ -120,7 +126,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.admin_announcements import admin_announcements_retrieve # (1)
+    from waldur_api_client.models.admin_announcement_field_enum import AdminAnnouncementFieldEnum # (1)
+    from waldur_api_client.api.admin_announcements import admin_announcements_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -134,7 +141,8 @@
     ```
     
     
-    1.  **API Source:** [`admin_announcements_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/admin_announcements/admin_announcements_retrieve.py)
+    1.  **Model Source:** [`AdminAnnouncementFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/admin_announcement_field_enum.py)
+    2.  **API Source:** [`admin_announcements_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/admin_announcements/admin_announcements_retrieve.py)
 
 === "TypeScript"
 

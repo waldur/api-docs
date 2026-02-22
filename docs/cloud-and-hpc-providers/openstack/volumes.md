@@ -42,7 +42,9 @@ Get a list of volumes.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_volumes import openstack_volumes_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_volume_field_enum import OpenStackVolumeFieldEnum # (2)
+    from waldur_api_client.api.openstack_volumes import openstack_volumes_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -54,7 +56,9 @@ Get a list of volumes.
     ```
     
     
-    1.  **API Source:** [`openstack_volumes_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_volumes/openstack_volumes_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackVolumeFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_volume_field_enum.py)
+    3.  **API Source:** [`openstack_volumes_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_volumes/openstack_volumes_list.py)
 
 === "TypeScript"
 
@@ -193,7 +197,8 @@ Retrieve details of a specific volume.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_volumes import openstack_volumes_retrieve # (1)
+    from waldur_api_client.models.open_stack_volume_field_enum import OpenStackVolumeFieldEnum # (1)
+    from waldur_api_client.api.openstack_volumes import openstack_volumes_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -207,7 +212,8 @@ Retrieve details of a specific volume.
     ```
     
     
-    1.  **API Source:** [`openstack_volumes_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_volumes/openstack_volumes_retrieve.py)
+    1.  **Model Source:** [`OpenStackVolumeFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_volume_field_enum.py)
+    2.  **API Source:** [`openstack_volumes_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_volumes/openstack_volumes_retrieve.py)
 
 === "TypeScript"
 

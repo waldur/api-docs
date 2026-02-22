@@ -31,7 +31,8 @@ Returns a paginated list of associations between maintenance announcement templa
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.maintenance_announcement_template_offerings import maintenance_announcement_template_offerings_list # (1)
+    from waldur_api_client.models.backend_resource_req_o_enum import BackendResourceReqOEnum # (1)
+    from waldur_api_client.api.maintenance_announcement_template_offerings import maintenance_announcement_template_offerings_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@ Returns a paginated list of associations between maintenance announcement templa
     ```
     
     
-    1.  **API Source:** [`maintenance_announcement_template_offerings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/maintenance_announcement_template_offerings/maintenance_announcement_template_offerings_list.py)
+    1.  **Model Source:** [`BackendResourceReqOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_o_enum.py)
+    2.  **API Source:** [`maintenance_announcement_template_offerings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/maintenance_announcement_template_offerings/maintenance_announcement_template_offerings_list.py)
 
 === "TypeScript"
 

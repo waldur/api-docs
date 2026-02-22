@@ -41,7 +41,9 @@ Returns a paginated list of maintenance announcements.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.maintenance_announcements import maintenance_announcements_list # (1)
+    from waldur_api_client.models.maintenance_announcement_o_enum import MaintenanceAnnouncementOEnum # (1)
+    from waldur_api_client.models.maintenance_announcement_state_enum import MaintenanceAnnouncementStateEnum # (2)
+    from waldur_api_client.api.maintenance_announcements import maintenance_announcements_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -53,7 +55,9 @@ Returns a paginated list of maintenance announcements.
     ```
     
     
-    1.  **API Source:** [`maintenance_announcements_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/maintenance_announcements/maintenance_announcements_list.py)
+    1.  **Model Source:** [`MaintenanceAnnouncementOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/maintenance_announcement_o_enum.py)
+    2.  **Model Source:** [`MaintenanceAnnouncementStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/maintenance_announcement_state_enum.py)
+    3.  **API Source:** [`maintenance_announcements_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/maintenance_announcements/maintenance_announcements_list.py)
 
 === "TypeScript"
 

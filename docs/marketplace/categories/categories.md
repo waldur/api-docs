@@ -31,7 +31,9 @@ Returns a paginated list of marketplace categories.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_categories import marketplace_categories_list # (1)
+    from waldur_api_client.models.maintenance_type_enum import MaintenanceTypeEnum # (1)
+    from waldur_api_client.models.marketplace_category_field_enum import MarketplaceCategoryFieldEnum # (2)
+    from waldur_api_client.api.marketplace_categories import marketplace_categories_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +45,9 @@ Returns a paginated list of marketplace categories.
     ```
     
     
-    1.  **API Source:** [`marketplace_categories_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_categories/marketplace_categories_list.py)
+    1.  **Model Source:** [`MaintenanceTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/maintenance_type_enum.py)
+    2.  **Model Source:** [`MarketplaceCategoryFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_category_field_enum.py)
+    3.  **API Source:** [`marketplace_categories_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_categories/marketplace_categories_list.py)
 
 === "TypeScript"
 
@@ -145,7 +149,8 @@ Returns details of a specific marketplace category.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_categories import marketplace_categories_retrieve # (1)
+    from waldur_api_client.models.marketplace_category_field_enum import MarketplaceCategoryFieldEnum # (1)
+    from waldur_api_client.api.marketplace_categories import marketplace_categories_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -159,7 +164,8 @@ Returns details of a specific marketplace category.
     ```
     
     
-    1.  **API Source:** [`marketplace_categories_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_categories/marketplace_categories_retrieve.py)
+    1.  **Model Source:** [`MarketplaceCategoryFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_category_field_enum.py)
+    2.  **API Source:** [`marketplace_categories_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_categories/marketplace_categories_retrieve.py)
 
 === "TypeScript"
 

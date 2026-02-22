@@ -31,7 +31,8 @@ Returns a paginated list of category groups.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_category_groups import marketplace_category_groups_list # (1)
+    from waldur_api_client.models.category_group_field_enum import CategoryGroupFieldEnum # (1)
+    from waldur_api_client.api.marketplace_category_groups import marketplace_category_groups_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@ Returns a paginated list of category groups.
     ```
     
     
-    1.  **API Source:** [`marketplace_category_groups_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_category_groups/marketplace_category_groups_list.py)
+    1.  **Model Source:** [`CategoryGroupFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/category_group_field_enum.py)
+    2.  **API Source:** [`marketplace_category_groups_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_category_groups/marketplace_category_groups_list.py)
 
 === "TypeScript"
 
@@ -105,7 +107,8 @@ Returns details of a specific category group.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_category_groups import marketplace_category_groups_retrieve # (1)
+    from waldur_api_client.models.category_group_field_enum import CategoryGroupFieldEnum # (1)
+    from waldur_api_client.api.marketplace_category_groups import marketplace_category_groups_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -119,7 +122,8 @@ Returns details of a specific category group.
     ```
     
     
-    1.  **API Source:** [`marketplace_category_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_category_groups/marketplace_category_groups_retrieve.py)
+    1.  **Model Source:** [`CategoryGroupFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/category_group_field_enum.py)
+    2.  **API Source:** [`marketplace_category_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_category_groups/marketplace_category_groups_retrieve.py)
 
 === "TypeScript"
 

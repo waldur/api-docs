@@ -62,7 +62,9 @@ A User object on its own has limited capabilities beyond logging in and managing
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.users import users_list # (1)
+    from waldur_api_client.models.marketplace_service_provider_user_o_enum import MarketplaceServiceProviderUserOEnum # (1)
+    from waldur_api_client.models.user_field_enum import UserFieldEnum # (2)
+    from waldur_api_client.api.users import users_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -74,7 +76,9 @@ A User object on its own has limited capabilities beyond logging in and managing
     ```
     
     
-    1.  **API Source:** [`users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_list.py)
+    1.  **Model Source:** [`MarketplaceServiceProviderUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_o_enum.py)
+    2.  **Model Source:** [`UserFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_field_enum.py)
+    3.  **API Source:** [`users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_list.py)
 
 === "TypeScript"
 
@@ -218,7 +222,8 @@ A User object on its own has limited capabilities beyond logging in and managing
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.users import users_retrieve # (1)
+    from waldur_api_client.models.user_field_enum import UserFieldEnum # (1)
+    from waldur_api_client.api.users import users_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -232,7 +237,8 @@ A User object on its own has limited capabilities beyond logging in and managing
     ```
     
     
-    1.  **API Source:** [`users_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_retrieve.py)
+    1.  **Model Source:** [`UserFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_field_enum.py)
+    2.  **API Source:** [`users_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_retrieve.py)
 
 === "TypeScript"
 
@@ -1108,7 +1114,8 @@ Shows historical log of who has accessed the user's profile data. Regular users 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.users import users_data_access_history_list # (1)
+    from waldur_api_client.models.marketplace_service_provider_user_o_enum import MarketplaceServiceProviderUserOEnum # (1)
+    from waldur_api_client.api.users import users_data_access_history_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1123,7 +1130,8 @@ Shows historical log of who has accessed the user's profile data. Regular users 
     ```
     
     
-    1.  **API Source:** [`users_data_access_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_data_access_history_list.py)
+    1.  **Model Source:** [`MarketplaceServiceProviderUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_o_enum.py)
+    2.  **API Source:** [`users_data_access_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_data_access_history_list.py)
 
 === "TypeScript"
 
@@ -1426,7 +1434,8 @@ Returns the version history for this object. Only accessible by staff and suppor
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.users import users_history_list # (1)
+    from waldur_api_client.models.marketplace_service_provider_user_o_enum import MarketplaceServiceProviderUserOEnum # (1)
+    from waldur_api_client.api.users import users_history_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1441,7 +1450,8 @@ Returns the version history for this object. Only accessible by staff and suppor
     ```
     
     
-    1.  **API Source:** [`users_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_history_list.py)
+    1.  **Model Source:** [`MarketplaceServiceProviderUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_o_enum.py)
+    2.  **API Source:** [`users_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_history_list.py)
 
 === "TypeScript"
 
@@ -1612,7 +1622,8 @@ Get current user details, including authentication token and profile completenes
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.users import users_me_retrieve # (1)
+    from waldur_api_client.models.user_field_enum import UserFieldEnum # (1)
+    from waldur_api_client.api.users import users_me_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1623,7 +1634,8 @@ Get current user details, including authentication token and profile completenes
     ```
     
     
-    1.  **API Source:** [`users_me_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_me_retrieve.py)
+    1.  **Model Source:** [`UserFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_field_enum.py)
+    2.  **API Source:** [`users_me_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_me_retrieve.py)
 
 === "TypeScript"
 
@@ -1875,7 +1887,8 @@ Returns aggregated counts of users by active/inactive status. Staff or support o
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.users import users_user_active_status_count_list # (1)
+    from waldur_api_client.models.marketplace_service_provider_user_o_enum import MarketplaceServiceProviderUserOEnum # (1)
+    from waldur_api_client.api.users import users_user_active_status_count_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1887,7 +1900,8 @@ Returns aggregated counts of users by active/inactive status. Staff or support o
     ```
     
     
-    1.  **API Source:** [`users_user_active_status_count_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_active_status_count_list.py)
+    1.  **Model Source:** [`MarketplaceServiceProviderUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_o_enum.py)
+    2.  **API Source:** [`users_user_active_status_count_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_active_status_count_list.py)
 
 === "TypeScript"
 
@@ -1968,7 +1982,8 @@ Returns aggregated counts of users by preferred language. Staff or support only.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.users import users_user_language_count_list # (1)
+    from waldur_api_client.models.marketplace_service_provider_user_o_enum import MarketplaceServiceProviderUserOEnum # (1)
+    from waldur_api_client.api.users import users_user_language_count_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1980,7 +1995,8 @@ Returns aggregated counts of users by preferred language. Staff or support only.
     ```
     
     
-    1.  **API Source:** [`users_user_language_count_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_language_count_list.py)
+    1.  **Model Source:** [`MarketplaceServiceProviderUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_o_enum.py)
+    2.  **API Source:** [`users_user_language_count_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_language_count_list.py)
 
 === "TypeScript"
 
@@ -2061,7 +2077,8 @@ Returns user registration counts aggregated by month. Staff or support only.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.users import users_user_registration_trend_list # (1)
+    from waldur_api_client.models.marketplace_service_provider_user_o_enum import MarketplaceServiceProviderUserOEnum # (1)
+    from waldur_api_client.api.users import users_user_registration_trend_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2073,7 +2090,8 @@ Returns user registration counts aggregated by month. Staff or support only.
     ```
     
     
-    1.  **API Source:** [`users_user_registration_trend_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_registration_trend_list.py)
+    1.  **Model Source:** [`MarketplaceServiceProviderUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_o_enum.py)
+    2.  **API Source:** [`users_user_registration_trend_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_user_registration_trend_list.py)
 
 === "TypeScript"
 

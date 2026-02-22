@@ -31,7 +31,8 @@ Returns a paginated list of software versions. Can be filtered by package, catal
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_software_versions import marketplace_software_versions_list # (1)
+    from waldur_api_client.models.software_version_o_enum import SoftwareVersionOEnum # (1)
+    from waldur_api_client.api.marketplace_software_versions import marketplace_software_versions_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     ```
     
     
-    1.  **API Source:** [`marketplace_software_versions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_versions/marketplace_software_versions_list.py)
+    1.  **Model Source:** [`SoftwareVersionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_version_o_enum.py)
+    2.  **API Source:** [`marketplace_software_versions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_versions/marketplace_software_versions_list.py)
 
 === "TypeScript"
 

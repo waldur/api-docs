@@ -27,7 +27,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support_attachments import support_attachments_list # (1)
+    from waldur_api_client.models.attachment_field_enum import AttachmentFieldEnum # (1)
+    from waldur_api_client.api.support_attachments import support_attachments_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -39,7 +40,8 @@
     ```
     
     
-    1.  **API Source:** [`support_attachments_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_attachments/support_attachments_list.py)
+    1.  **Model Source:** [`AttachmentFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/attachment_field_enum.py)
+    2.  **API Source:** [`support_attachments_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_attachments/support_attachments_list.py)
 
 === "TypeScript"
 
@@ -106,7 +108,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support_attachments import support_attachments_retrieve # (1)
+    from waldur_api_client.models.attachment_field_enum import AttachmentFieldEnum # (1)
+    from waldur_api_client.api.support_attachments import support_attachments_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -120,7 +123,8 @@
     ```
     
     
-    1.  **API Source:** [`support_attachments_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_attachments/support_attachments_retrieve.py)
+    1.  **Model Source:** [`AttachmentFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/attachment_field_enum.py)
+    2.  **API Source:** [`support_attachments_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_attachments/support_attachments_retrieve.py)
 
 === "TypeScript"
 

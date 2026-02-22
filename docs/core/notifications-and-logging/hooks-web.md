@@ -29,7 +29,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.hooks_web import hooks_web_list # (1)
+    from waldur_api_client.models.web_hook_content_type_enum1 import WebHookContentTypeEnum1 # (1)
+    from waldur_api_client.api.hooks_web import hooks_web_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -41,7 +42,8 @@
     ```
     
     
-    1.  **API Source:** [`hooks_web_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/hooks_web/hooks_web_list.py)
+    1.  **Model Source:** [`WebHookContentTypeEnum1`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/web_hook_content_type_enum1.py)
+    2.  **API Source:** [`hooks_web_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/hooks_web/hooks_web_list.py)
 
 === "TypeScript"
 
@@ -67,7 +69,7 @@
     | `author_fullname` | string | User full name contains |
     | `author_username` | string |  |
     | `author_uuid` | string (uuid) |  |
-    | `content_type` | integer | _Enum: `1`, `2`_ |
+    | `content_type` | string | _Enum: `1`, `2`_ |
     | `destination_url` | string |  |
     | `is_active` | boolean |  |
     | `last_published` | string (date-time) |  |

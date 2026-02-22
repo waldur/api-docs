@@ -25,7 +25,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.expertise_categories import expertise_categories_list # (1)
+    from waldur_api_client.models.expertise_category_o_enum import ExpertiseCategoryOEnum # (1)
+    from waldur_api_client.api.expertise_categories import expertise_categories_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +38,8 @@
     ```
     
     
-    1.  **API Source:** [`expertise_categories_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/expertise_categories/expertise_categories_list.py)
+    1.  **Model Source:** [`ExpertiseCategoryOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/expertise_category_o_enum.py)
+    2.  **API Source:** [`expertise_categories_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/expertise_categories/expertise_categories_list.py)
 
 === "TypeScript"
 

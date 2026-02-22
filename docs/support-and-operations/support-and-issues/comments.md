@@ -28,7 +28,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support_comments import support_comments_list # (1)
+    from waldur_api_client.models.thread_session_o_enum import ThreadSessionOEnum # (1)
+    from waldur_api_client.api.support_comments import support_comments_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -40,7 +41,8 @@
     ```
     
     
-    1.  **API Source:** [`support_comments_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_comments/support_comments_list.py)
+    1.  **Model Source:** [`ThreadSessionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_o_enum.py)
+    2.  **API Source:** [`support_comments_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_comments/support_comments_list.py)
 
 === "TypeScript"
 

@@ -25,7 +25,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_requested_resources import proposal_requested_resources_list # (1)
+    from waldur_api_client.models.provider_requested_resource_o_enum import ProviderRequestedResourceOEnum # (1)
+    from waldur_api_client.api.proposal_requested_resources import proposal_requested_resources_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +38,8 @@
     ```
     
     
-    1.  **API Source:** [`proposal_requested_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_requested_resources/proposal_requested_resources_list.py)
+    1.  **Model Source:** [`ProviderRequestedResourceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_requested_resource_o_enum.py)
+    2.  **API Source:** [`proposal_requested_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_requested_resources/proposal_requested_resources_list.py)
 
 === "TypeScript"
 

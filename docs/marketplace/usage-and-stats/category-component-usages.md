@@ -34,7 +34,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_category_component_usages import marketplace_category_component_usages_list # (1)
+    from waldur_api_client.models.category_component_usage_field_enum import CategoryComponentUsageFieldEnum # (1)
+    from waldur_api_client.api.marketplace_category_component_usages import marketplace_category_component_usages_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -46,7 +47,8 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_category_component_usages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_category_component_usages/marketplace_category_component_usages_list.py)
+    1.  **Model Source:** [`CategoryComponentUsageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/category_component_usage_field_enum.py)
+    2.  **API Source:** [`marketplace_category_component_usages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_category_component_usages/marketplace_category_component_usages_list.py)
 
 === "TypeScript"
 
@@ -114,7 +116,8 @@ Returns the details of a single aggregated usage record for a category component
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_category_component_usages import marketplace_category_component_usages_retrieve # (1)
+    from waldur_api_client.models.category_component_usage_field_enum import CategoryComponentUsageFieldEnum # (1)
+    from waldur_api_client.api.marketplace_category_component_usages import marketplace_category_component_usages_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -128,7 +131,8 @@ Returns the details of a single aggregated usage record for a category component
     ```
     
     
-    1.  **API Source:** [`marketplace_category_component_usages_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_category_component_usages/marketplace_category_component_usages_retrieve.py)
+    1.  **Model Source:** [`CategoryComponentUsageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/category_component_usage_field_enum.py)
+    2.  **API Source:** [`marketplace_category_component_usages_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_category_component_usages/marketplace_category_component_usages_retrieve.py)
 
 === "TypeScript"
 

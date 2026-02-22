@@ -26,7 +26,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.event_subscription_queues import event_subscription_queues_list # (1)
+    from waldur_api_client.models.backend_resource_req_o_enum import BackendResourceReqOEnum # (1)
+    from waldur_api_client.api.event_subscription_queues import event_subscription_queues_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -38,7 +39,8 @@
     ```
     
     
-    1.  **API Source:** [`event_subscription_queues_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/event_subscription_queues/event_subscription_queues_list.py)
+    1.  **Model Source:** [`BackendResourceReqOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_o_enum.py)
+    2.  **API Source:** [`event_subscription_queues_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/event_subscription_queues/event_subscription_queues_list.py)
 
 === "TypeScript"
 

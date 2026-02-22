@@ -36,7 +36,8 @@ Returns a paginated list of Terms of Service consents for the current user. Staf
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_user_offering_consents import marketplace_user_offering_consents_list # (1)
+    from waldur_api_client.models.user_offering_consent_o_enum import UserOfferingConsentOEnum # (1)
+    from waldur_api_client.api.marketplace_user_offering_consents import marketplace_user_offering_consents_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -48,7 +49,8 @@ Returns a paginated list of Terms of Service consents for the current user. Staf
     ```
     
     
-    1.  **API Source:** [`marketplace_user_offering_consents_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_user_offering_consents/marketplace_user_offering_consents_list.py)
+    1.  **Model Source:** [`UserOfferingConsentOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_offering_consent_o_enum.py)
+    2.  **API Source:** [`marketplace_user_offering_consents_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_user_offering_consents/marketplace_user_offering_consents_list.py)
 
 === "TypeScript"
 

@@ -27,7 +27,9 @@ Returns a paginated list of integration statuses for offerings. This is used to 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_integration_statuses import marketplace_integration_statuses_list # (1)
+    from waldur_api_client.models.integration_status_details_o_enum import IntegrationStatusDetailsOEnum # (1)
+    from waldur_api_client.models.integration_status_details_status_enum import IntegrationStatusDetailsStatusEnum # (2)
+    from waldur_api_client.api.marketplace_integration_statuses import marketplace_integration_statuses_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -39,7 +41,9 @@ Returns a paginated list of integration statuses for offerings. This is used to 
     ```
     
     
-    1.  **API Source:** [`marketplace_integration_statuses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_integration_statuses/marketplace_integration_statuses_list.py)
+    1.  **Model Source:** [`IntegrationStatusDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/integration_status_details_o_enum.py)
+    2.  **Model Source:** [`IntegrationStatusDetailsStatusEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/integration_status_details_status_enum.py)
+    3.  **API Source:** [`marketplace_integration_statuses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_integration_statuses/marketplace_integration_statuses_list.py)
 
 === "TypeScript"
 

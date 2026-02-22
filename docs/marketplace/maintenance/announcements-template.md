@@ -31,7 +31,8 @@ Returns a paginated list of reusable templates for maintenance announcements.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.maintenance_announcements_template import maintenance_announcements_template_list # (1)
+    from waldur_api_client.models.maintenance_announcement_template_o_enum import MaintenanceAnnouncementTemplateOEnum # (1)
+    from waldur_api_client.api.maintenance_announcements_template import maintenance_announcements_template_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@ Returns a paginated list of reusable templates for maintenance announcements.
     ```
     
     
-    1.  **API Source:** [`maintenance_announcements_template_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/maintenance_announcements_template/maintenance_announcements_template_list.py)
+    1.  **Model Source:** [`MaintenanceAnnouncementTemplateOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/maintenance_announcement_template_o_enum.py)
+    2.  **API Source:** [`maintenance_announcements_template_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/maintenance_announcements_template/maintenance_announcements_template_list.py)
 
 === "TypeScript"
 

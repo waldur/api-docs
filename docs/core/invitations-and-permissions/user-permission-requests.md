@@ -34,7 +34,9 @@ Retrieve a list of permission requests visible to the user.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.user_permission_requests import user_permission_requests_list # (1)
+    from waldur_api_client.models.proposal_review_o_enum import ProposalReviewOEnum # (1)
+    from waldur_api_client.models.remote_project_update_request_state_enum import RemoteProjectUpdateRequestStateEnum # (2)
+    from waldur_api_client.api.user_permission_requests import user_permission_requests_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -46,7 +48,9 @@ Retrieve a list of permission requests visible to the user.
     ```
     
     
-    1.  **API Source:** [`user_permission_requests_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_permission_requests/user_permission_requests_list.py)
+    1.  **Model Source:** [`ProposalReviewOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_review_o_enum.py)
+    2.  **Model Source:** [`RemoteProjectUpdateRequestStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/remote_project_update_request_state_enum.py)
+    3.  **API Source:** [`user_permission_requests_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_permission_requests/user_permission_requests_list.py)
 
 === "TypeScript"
 

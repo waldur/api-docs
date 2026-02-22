@@ -27,7 +27,8 @@ Get a list of provider-level external networks discovered from OpenStack.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_external_networks import openstack_external_networks_list # (1)
+    from waldur_api_client.models.external_network_field_enum import ExternalNetworkFieldEnum # (1)
+    from waldur_api_client.api.openstack_external_networks import openstack_external_networks_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -39,7 +40,8 @@ Get a list of provider-level external networks discovered from OpenStack.
     ```
     
     
-    1.  **API Source:** [`openstack_external_networks_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_external_networks/openstack_external_networks_list.py)
+    1.  **Model Source:** [`ExternalNetworkFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/external_network_field_enum.py)
+    2.  **API Source:** [`openstack_external_networks_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_external_networks/openstack_external_networks_list.py)
 
 === "TypeScript"
 
@@ -120,7 +122,8 @@ Retrieve details of a specific external network, including its subnets.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_external_networks import openstack_external_networks_retrieve # (1)
+    from waldur_api_client.models.external_network_field_enum import ExternalNetworkFieldEnum # (1)
+    from waldur_api_client.api.openstack_external_networks import openstack_external_networks_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -134,7 +137,8 @@ Retrieve details of a specific external network, including its subnets.
     ```
     
     
-    1.  **API Source:** [`openstack_external_networks_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_external_networks/openstack_external_networks_retrieve.py)
+    1.  **Model Source:** [`ExternalNetworkFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/external_network_field_enum.py)
+    2.  **API Source:** [`openstack_external_networks_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_external_networks/openstack_external_networks_retrieve.py)
 
 === "TypeScript"
 

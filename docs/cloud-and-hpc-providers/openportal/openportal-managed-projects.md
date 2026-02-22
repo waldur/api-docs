@@ -36,7 +36,8 @@ List all managed projects
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openportal_managed_projects import openportal_managed_projects_list # (1)
+    from waldur_api_client.models.remote_project_update_request_state_enum import RemoteProjectUpdateRequestStateEnum # (1)
+    from waldur_api_client.api.openportal_managed_projects import openportal_managed_projects_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -48,7 +49,8 @@ List all managed projects
     ```
     
     
-    1.  **API Source:** [`openportal_managed_projects_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_managed_projects/openportal_managed_projects_list.py)
+    1.  **Model Source:** [`RemoteProjectUpdateRequestStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/remote_project_update_request_state_enum.py)
+    2.  **API Source:** [`openportal_managed_projects_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_managed_projects/openportal_managed_projects_list.py)
 
 === "TypeScript"
 

@@ -39,7 +39,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.rancher_ingresses import rancher_ingresses_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.rancher_ingress_field_enum import RancherIngressFieldEnum # (2)
+    from waldur_api_client.api.rancher_ingresses import rancher_ingresses_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -51,7 +53,9 @@
     ```
     
     
-    1.  **API Source:** [`rancher_ingresses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_ingresses/rancher_ingresses_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`RancherIngressFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_ingress_field_enum.py)
+    3.  **API Source:** [`rancher_ingresses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_ingresses/rancher_ingresses_list.py)
 
 === "TypeScript"
 
@@ -167,7 +171,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.rancher_ingresses import rancher_ingresses_retrieve # (1)
+    from waldur_api_client.models.rancher_ingress_field_enum import RancherIngressFieldEnum # (1)
+    from waldur_api_client.api.rancher_ingresses import rancher_ingresses_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -181,7 +186,8 @@
     ```
     
     
-    1.  **API Source:** [`rancher_ingresses_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_ingresses/rancher_ingresses_retrieve.py)
+    1.  **Model Source:** [`RancherIngressFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_ingress_field_enum.py)
+    2.  **API Source:** [`rancher_ingresses_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_ingresses/rancher_ingresses_retrieve.py)
 
 === "TypeScript"
 
@@ -906,7 +912,8 @@ Delete resource from the database without scheduling operations on backend
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.rancher_ingresses import rancher_ingresses_yaml_retrieve # (1)
+    from waldur_api_client.models.rancher_ingress_field_enum import RancherIngressFieldEnum # (1)
+    from waldur_api_client.api.rancher_ingresses import rancher_ingresses_yaml_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -920,7 +927,8 @@ Delete resource from the database without scheduling operations on backend
     ```
     
     
-    1.  **API Source:** [`rancher_ingresses_yaml_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_ingresses/rancher_ingresses_yaml_retrieve.py)
+    1.  **Model Source:** [`RancherIngressFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_ingress_field_enum.py)
+    2.  **API Source:** [`rancher_ingresses_yaml_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_ingresses/rancher_ingresses_yaml_retrieve.py)
 
 === "TypeScript"
 

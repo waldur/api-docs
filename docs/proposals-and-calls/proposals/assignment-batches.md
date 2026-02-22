@@ -36,7 +36,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.assignment_batches import assignment_batches_list # (1)
+    from waldur_api_client.models.assignment_batch_list_o_enum import AssignmentBatchListOEnum # (1)
+    from waldur_api_client.models.assignment_batch_status import AssignmentBatchStatus # (2)
+    from waldur_api_client.models.assignment_source import AssignmentSource # (3)
+    from waldur_api_client.api.assignment_batches import assignment_batches_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -48,7 +51,10 @@
     ```
     
     
-    1.  **API Source:** [`assignment_batches_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/assignment_batches/assignment_batches_list.py)
+    1.  **Model Source:** [`AssignmentBatchListOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/assignment_batch_list_o_enum.py)
+    2.  **Model Source:** [`AssignmentBatchStatus`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/assignment_batch_status.py)
+    3.  **Model Source:** [`AssignmentSource`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/assignment_source.py)
+    4.  **API Source:** [`assignment_batches_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/assignment_batches/assignment_batches_list.py)
 
 === "TypeScript"
 

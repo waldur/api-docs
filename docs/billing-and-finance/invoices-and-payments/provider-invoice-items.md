@@ -25,7 +25,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.provider_invoice_items import provider_invoice_items_list # (1)
+    from waldur_api_client.models.invoice_item_o_enum1 import InvoiceItemOEnum1 # (1)
+    from waldur_api_client.api.provider_invoice_items import provider_invoice_items_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +38,8 @@
     ```
     
     
-    1.  **API Source:** [`provider_invoice_items_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_invoice_items/provider_invoice_items_list.py)
+    1.  **Model Source:** [`InvoiceItemOEnum1`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_item_o_enum1.py)
+    2.  **API Source:** [`provider_invoice_items_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_invoice_items/provider_invoice_items_list.py)
 
 === "TypeScript"
 

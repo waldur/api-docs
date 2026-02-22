@@ -27,7 +27,8 @@ Returns a paginated list of Datacite referrals associated with marketplace offer
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_offering_referrals import marketplace_offering_referrals_list # (1)
+    from waldur_api_client.models.offering_referral_o_enum import OfferingReferralOEnum # (1)
+    from waldur_api_client.api.marketplace_offering_referrals import marketplace_offering_referrals_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -39,7 +40,8 @@ Returns a paginated list of Datacite referrals associated with marketplace offer
     ```
     
     
-    1.  **API Source:** [`marketplace_offering_referrals_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_referrals/marketplace_offering_referrals_list.py)
+    1.  **Model Source:** [`OfferingReferralOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_referral_o_enum.py)
+    2.  **API Source:** [`marketplace_offering_referrals_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_referrals/marketplace_offering_referrals_list.py)
 
 === "TypeScript"
 

@@ -29,7 +29,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.checklists_admin_questions import checklists_admin_questions_list # (1)
+    from waldur_api_client.models.checklist_type_enum import ChecklistTypeEnum # (1)
+    from waldur_api_client.api.checklists_admin_questions import checklists_admin_questions_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -41,7 +42,8 @@
     ```
     
     
-    1.  **API Source:** [`checklists_admin_questions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/checklists_admin_questions/checklists_admin_questions_list.py)
+    1.  **Model Source:** [`ChecklistTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/checklist_type_enum.py)
+    2.  **API Source:** [`checklists_admin_questions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/checklists_admin_questions/checklists_admin_questions_list.py)
 
 === "TypeScript"
 
@@ -63,7 +65,7 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `offering_compliance`, `onboarding_customer`, `onboarding_intent`, `project_compliance`, `project_metadata`, `proposal_compliance`_ |
+    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`_ |
     | `checklist_uuid` | string (uuid) |  |
     | `has_onboarding_mapping` | boolean | Filter questions that have onboarding metadata mapping |
     | `page` | integer | A page number within the paginated result set. |

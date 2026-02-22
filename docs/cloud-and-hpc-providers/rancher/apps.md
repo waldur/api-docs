@@ -37,7 +37,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.rancher_apps import rancher_apps_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.rancher_application_field_enum import RancherApplicationFieldEnum # (2)
+    from waldur_api_client.api.rancher_apps import rancher_apps_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -49,7 +51,9 @@
     ```
     
     
-    1.  **API Source:** [`rancher_apps_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_apps/rancher_apps_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`RancherApplicationFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_application_field_enum.py)
+    3.  **API Source:** [`rancher_apps_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_apps/rancher_apps_list.py)
 
 === "TypeScript"
 
@@ -169,7 +173,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.rancher_apps import rancher_apps_retrieve # (1)
+    from waldur_api_client.models.rancher_application_field_enum import RancherApplicationFieldEnum # (1)
+    from waldur_api_client.api.rancher_apps import rancher_apps_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -183,7 +188,8 @@
     ```
     
     
-    1.  **API Source:** [`rancher_apps_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_apps/rancher_apps_retrieve.py)
+    1.  **Model Source:** [`RancherApplicationFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_application_field_enum.py)
+    2.  **API Source:** [`rancher_apps_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_apps/rancher_apps_retrieve.py)
 
 === "TypeScript"
 

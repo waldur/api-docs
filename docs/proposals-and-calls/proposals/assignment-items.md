@@ -37,7 +37,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.assignment_items import assignment_items_list # (1)
+    from waldur_api_client.models.assignment_item_o_enum import AssignmentItemOEnum # (1)
+    from waldur_api_client.models.assignment_item_status import AssignmentItemStatus # (2)
+    from waldur_api_client.api.assignment_items import assignment_items_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -49,7 +51,9 @@
     ```
     
     
-    1.  **API Source:** [`assignment_items_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/assignment_items/assignment_items_list.py)
+    1.  **Model Source:** [`AssignmentItemOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/assignment_item_o_enum.py)
+    2.  **Model Source:** [`AssignmentItemStatus`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/assignment_item_status.py)
+    3.  **API Source:** [`assignment_items_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/assignment_items/assignment_items_list.py)
 
 === "TypeScript"
 

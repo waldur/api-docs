@@ -29,7 +29,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_screenshots import marketplace_screenshots_list # (1)
+    from waldur_api_client.models.maintenance_announcement_template_o_enum import MaintenanceAnnouncementTemplateOEnum # (1)
+    from waldur_api_client.api.marketplace_screenshots import marketplace_screenshots_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -41,7 +42,8 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_screenshots_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_screenshots/marketplace_screenshots_list.py)
+    1.  **Model Source:** [`MaintenanceAnnouncementTemplateOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/maintenance_announcement_template_o_enum.py)
+    2.  **API Source:** [`marketplace_screenshots_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_screenshots/marketplace_screenshots_list.py)
 
 === "TypeScript"
 

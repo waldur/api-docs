@@ -31,7 +31,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_project_update_requests import marketplace_project_update_requests_list # (1)
+    from waldur_api_client.models.remote_project_update_request_state_enum import RemoteProjectUpdateRequestStateEnum # (1)
+    from waldur_api_client.api.marketplace_project_update_requests import marketplace_project_update_requests_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_project_update_requests_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_project_update_requests/marketplace_project_update_requests_list.py)
+    1.  **Model Source:** [`RemoteProjectUpdateRequestStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/remote_project_update_request_state_enum.py)
+    2.  **API Source:** [`marketplace_project_update_requests_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_project_update_requests/marketplace_project_update_requests_list.py)
 
 === "TypeScript"
 

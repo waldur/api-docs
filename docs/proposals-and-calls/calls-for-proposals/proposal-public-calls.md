@@ -30,7 +30,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_public_calls import proposal_public_calls_list # (1)
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.models.public_call_field_enum import PublicCallFieldEnum # (3)
+    from waldur_api_client.api.proposal_public_calls import proposal_public_calls_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -42,7 +45,10 @@
     ```
     
     
-    1.  **API Source:** [`proposal_public_calls_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_public_calls/proposal_public_calls_list.py)
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **Model Source:** [`PublicCallFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/public_call_field_enum.py)
+    4.  **API Source:** [`proposal_public_calls_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_public_calls/proposal_public_calls_list.py)
 
 === "TypeScript"
 
@@ -197,7 +203,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_public_calls import proposal_public_calls_retrieve # (1)
+    from waldur_api_client.models.public_call_field_enum import PublicCallFieldEnum # (1)
+    from waldur_api_client.api.proposal_public_calls import proposal_public_calls_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -211,7 +218,8 @@
     ```
     
     
-    1.  **API Source:** [`proposal_public_calls_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_public_calls/proposal_public_calls_retrieve.py)
+    1.  **Model Source:** [`PublicCallFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/public_call_field_enum.py)
+    2.  **API Source:** [`proposal_public_calls_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_public_calls/proposal_public_calls_retrieve.py)
 
 === "TypeScript"
 

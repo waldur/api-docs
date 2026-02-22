@@ -61,7 +61,9 @@ Returns a paginated list of course project accounts that have access to resource
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_course_accounts_list # (1)
+    from waldur_api_client.models.course_account_o_enum import CourseAccountOEnum # (1)
+    from waldur_api_client.models.service_account_state import ServiceAccountState # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_course_accounts_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -76,7 +78,9 @@ Returns a paginated list of course project accounts that have access to resource
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_course_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_course_accounts_list.py)
+    1.  **Model Source:** [`CourseAccountOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_account_o_enum.py)
+    2.  **Model Source:** [`ServiceAccountState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_account_state.py)
+    3.  **API Source:** [`marketplace_service_providers_course_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_course_accounts_list.py)
 
 === "TypeScript"
 
@@ -170,7 +174,9 @@ Returns a paginated list of projects belonging to a specific customer that have 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_customer_projects_list # (1)
+    from waldur_api_client.models.marketplace_provider_customer_project_field_enum import MarketplaceProviderCustomerProjectFieldEnum # (1)
+    from waldur_api_client.models.marketplace_provider_customer_project_o_enum import MarketplaceProviderCustomerProjectOEnum # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_customer_projects_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -186,7 +192,9 @@ Returns a paginated list of projects belonging to a specific customer that have 
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_customer_projects_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_customer_projects_list.py)
+    1.  **Model Source:** [`MarketplaceProviderCustomerProjectFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_provider_customer_project_field_enum.py)
+    2.  **Model Source:** [`MarketplaceProviderCustomerProjectOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_provider_customer_project_o_enum.py)
+    3.  **API Source:** [`marketplace_service_providers_customer_projects_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_customer_projects_list.py)
 
 === "TypeScript"
 
@@ -280,7 +288,8 @@ Returns a paginated list of customers who have consumed resources from the speci
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_customers_list # (1)
+    from waldur_api_client.models.marketplace_provider_customer_field_enum import MarketplaceProviderCustomerFieldEnum # (1)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_customers_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -295,7 +304,8 @@ Returns a paginated list of customers who have consumed resources from the speci
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_customers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_customers_list.py)
+    1.  **Model Source:** [`MarketplaceProviderCustomerFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_provider_customer_field_enum.py)
+    2.  **API Source:** [`marketplace_service_providers_customers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_customers_list.py)
 
 === "TypeScript"
 
@@ -406,7 +416,9 @@ Returns a paginated list of SSH public keys for all users who have consumed reso
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_keys_list # (1)
+    from waldur_api_client.models.ssh_key_field_enum import SshKeyFieldEnum # (1)
+    from waldur_api_client.models.ssh_key_o_enum import SshKeyOEnum # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_keys_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -421,7 +433,9 @@ Returns a paginated list of SSH public keys for all users who have consumed reso
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_keys_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_keys_list.py)
+    1.  **Model Source:** [`SshKeyFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/ssh_key_field_enum.py)
+    2.  **Model Source:** [`SshKeyOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/ssh_key_o_enum.py)
+    3.  **API Source:** [`marketplace_service_providers_keys_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_keys_list.py)
 
 === "TypeScript"
 
@@ -508,7 +522,9 @@ Returns a paginated list of service providers.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_list # (1)
+    from waldur_api_client.models.call_managing_organisation_o_enum import CallManagingOrganisationOEnum # (1)
+    from waldur_api_client.models.service_provider_field_enum import ServiceProviderFieldEnum # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -520,7 +536,9 @@ Returns a paginated list of service providers.
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_list.py)
+    1.  **Model Source:** [`CallManagingOrganisationOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_managing_organisation_o_enum.py)
+    2.  **Model Source:** [`ServiceProviderFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_provider_field_enum.py)
+    3.  **API Source:** [`marketplace_service_providers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_list.py)
 
 === "TypeScript"
 
@@ -603,7 +621,9 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_list_users_list # (1)
+    from waldur_api_client.models.user_role_details_field_enum import UserRoleDetailsFieldEnum # (1)
+    from waldur_api_client.models.user_role_details_o_enum import UserRoleDetailsOEnum # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_list_users_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -618,7 +638,9 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_list_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_list_users_list.py)
+    1.  **Model Source:** [`UserRoleDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_details_field_enum.py)
+    2.  **Model Source:** [`UserRoleDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_details_o_enum.py)
+    3.  **API Source:** [`marketplace_service_providers_list_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_list_users_list.py)
 
 === "TypeScript"
 
@@ -705,7 +727,10 @@ Returns a paginated list of all billable, shared offerings provided by the speci
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_offerings_list # (1)
+    from waldur_api_client.models.offering_state import OfferingState # (1)
+    from waldur_api_client.models.provider_offering_details_o_enum import ProviderOfferingDetailsOEnum # (2)
+    from waldur_api_client.models.provider_offering_field_enum import ProviderOfferingFieldEnum # (3)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_offerings_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -720,7 +745,10 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_offerings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_offerings_list.py)
+    1.  **Model Source:** [`OfferingState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_state.py)
+    2.  **Model Source:** [`ProviderOfferingDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_offering_details_o_enum.py)
+    3.  **Model Source:** [`ProviderOfferingFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_offering_field_enum.py)
+    4.  **API Source:** [`marketplace_service_providers_offerings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_offerings_list.py)
 
 === "TypeScript"
 
@@ -894,7 +922,9 @@ Returns a paginated list of project permissions for all projects that have consu
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_project_permissions_list # (1)
+    from waldur_api_client.models.offering_permission_o_enum import OfferingPermissionOEnum # (1)
+    from waldur_api_client.models.project_permission_log_field_enum import ProjectPermissionLogFieldEnum # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_project_permissions_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -909,7 +939,9 @@ Returns a paginated list of project permissions for all projects that have consu
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_project_permissions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_project_permissions_list.py)
+    1.  **Model Source:** [`OfferingPermissionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_permission_o_enum.py)
+    2.  **Model Source:** [`ProjectPermissionLogFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_permission_log_field_enum.py)
+    3.  **API Source:** [`marketplace_service_providers_project_permissions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_project_permissions_list.py)
 
 === "TypeScript"
 
@@ -1015,7 +1047,8 @@ Returns a paginated list of project service accounts that have access to resourc
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_project_service_accounts_list # (1)
+    from waldur_api_client.models.service_account_state import ServiceAccountState # (1)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_project_service_accounts_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1030,7 +1063,8 @@ Returns a paginated list of project service accounts that have access to resourc
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_project_service_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_project_service_accounts_list.py)
+    1.  **Model Source:** [`ServiceAccountState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_account_state.py)
+    2.  **API Source:** [`marketplace_service_providers_project_service_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_project_service_accounts_list.py)
 
 === "TypeScript"
 
@@ -1119,7 +1153,9 @@ Returns a paginated list of all projects that have consumed resources from the s
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_projects_list # (1)
+    from waldur_api_client.models.marketplace_provider_customer_project_o_enum import MarketplaceProviderCustomerProjectOEnum # (1)
+    from waldur_api_client.models.project_field_enum import ProjectFieldEnum # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_projects_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1134,7 +1170,9 @@ Returns a paginated list of all projects that have consumed resources from the s
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_projects_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_projects_list.py)
+    1.  **Model Source:** [`MarketplaceProviderCustomerProjectOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_provider_customer_project_o_enum.py)
+    2.  **Model Source:** [`ProjectFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_field_enum.py)
+    3.  **API Source:** [`marketplace_service_providers_projects_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_projects_list.py)
 
 === "TypeScript"
 
@@ -1254,7 +1292,8 @@ Returns details of a specific service provider.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_retrieve # (1)
+    from waldur_api_client.models.service_provider_field_enum import ServiceProviderFieldEnum # (1)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1268,7 +1307,8 @@ Returns details of a specific service provider.
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_retrieve.py)
+    1.  **Model Source:** [`ServiceProviderFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_provider_field_enum.py)
+    2.  **API Source:** [`marketplace_service_providers_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_retrieve.py)
 
 === "TypeScript"
 
@@ -1687,7 +1727,8 @@ Returns a paginated list of customers that a specified user has access to within
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_user_customers_list # (1)
+    from waldur_api_client.models.marketplace_provider_customer_field_enum import MarketplaceProviderCustomerFieldEnum # (1)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_user_customers_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1703,7 +1744,8 @@ Returns a paginated list of customers that a specified user has access to within
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_user_customers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_user_customers_list.py)
+    1.  **Model Source:** [`MarketplaceProviderCustomerFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_provider_customer_field_enum.py)
+    2.  **API Source:** [`marketplace_service_providers_user_customers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_user_customers_list.py)
 
 === "TypeScript"
 
@@ -1818,7 +1860,9 @@ Returns a paginated list of all users who have consumed resources from the speci
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_users_list # (1)
+    from waldur_api_client.models.marketplace_service_provider_user_field_enum import MarketplaceServiceProviderUserFieldEnum # (1)
+    from waldur_api_client.models.marketplace_service_provider_user_o_enum import MarketplaceServiceProviderUserOEnum # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_users_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1833,7 +1877,9 @@ Returns a paginated list of all users who have consumed resources from the speci
     ```
     
     
-    1.  **API Source:** [`marketplace_service_providers_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_users_list.py)
+    1.  **Model Source:** [`MarketplaceServiceProviderUserFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_field_enum.py)
+    2.  **Model Source:** [`MarketplaceServiceProviderUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_o_enum.py)
+    3.  **API Source:** [`marketplace_service_providers_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_users_list.py)
 
 === "TypeScript"
 

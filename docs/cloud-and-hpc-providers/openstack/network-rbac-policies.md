@@ -31,7 +31,8 @@ Get a list of network RBAC policies.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_network_rbac_policies import openstack_network_rbac_policies_list # (1)
+    from waldur_api_client.models.policy_type_enum import PolicyTypeEnum # (1)
+    from waldur_api_client.api.openstack_network_rbac_policies import openstack_network_rbac_policies_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@ Get a list of network RBAC policies.
     ```
     
     
-    1.  **API Source:** [`openstack_network_rbac_policies_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_network_rbac_policies/openstack_network_rbac_policies_list.py)
+    1.  **Model Source:** [`PolicyTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/policy_type_enum.py)
+    2.  **API Source:** [`openstack_network_rbac_policies_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_network_rbac_policies/openstack_network_rbac_policies_list.py)
 
 === "TypeScript"
 
@@ -69,7 +71,7 @@ Get a list of network RBAC policies.
     | `network_uuid` | string (uuid) | Network UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `policy_type` | string | Type of access granted - either shared access or external network access<br><br><br>_Enum: `access_as_external`, `access_as_shared`_ |
+    | `policy_type` | string | Type of access granted - either shared access or external network access<br><br><br>_Enum: `access_as_shared`, `access_as_external`_ |
     | `target_tenant` | string (uri) | Target tenant URL |
     | `target_tenant_uuid` | string (uuid) | Target tenant UUID |
     | `tenant` | string (uri) | Tenant URL |

@@ -36,7 +36,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.promotions_campaigns import promotions_campaigns_list # (1)
+    from waldur_api_client.models.campaign_o_enum import CampaignOEnum # (1)
+    from waldur_api_client.models.campaign_state_enum import CampaignStateEnum # (2)
+    from waldur_api_client.api.promotions_campaigns import promotions_campaigns_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -48,7 +50,9 @@
     ```
     
     
-    1.  **API Source:** [`promotions_campaigns_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/promotions_campaigns/promotions_campaigns_list.py)
+    1.  **Model Source:** [`CampaignOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/campaign_o_enum.py)
+    2.  **Model Source:** [`CampaignStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/campaign_state_enum.py)
+    3.  **API Source:** [`promotions_campaigns_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/promotions_campaigns/promotions_campaigns_list.py)
 
 === "TypeScript"
 
@@ -538,7 +542,8 @@ Return a list of orders for which the campaign is applied.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.promotions_campaigns import promotions_campaigns_orders_list # (1)
+    from waldur_api_client.models.order_details_field_enum import OrderDetailsFieldEnum # (1)
+    from waldur_api_client.api.promotions_campaigns import promotions_campaigns_orders_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -553,7 +558,8 @@ Return a list of orders for which the campaign is applied.
     ```
     
     
-    1.  **API Source:** [`promotions_campaigns_orders_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/promotions_campaigns/promotions_campaigns_orders_list.py)
+    1.  **Model Source:** [`OrderDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_details_field_enum.py)
+    2.  **API Source:** [`promotions_campaigns_orders_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/promotions_campaigns/promotions_campaigns_orders_list.py)
 
 === "TypeScript"
 
@@ -703,7 +709,8 @@ Return a list of resources for which the campaign is applied.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.promotions_campaigns import promotions_campaigns_resources_list # (1)
+    from waldur_api_client.models.resource_field_enum import ResourceFieldEnum # (1)
+    from waldur_api_client.api.promotions_campaigns import promotions_campaigns_resources_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -718,7 +725,8 @@ Return a list of resources for which the campaign is applied.
     ```
     
     
-    1.  **API Source:** [`promotions_campaigns_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/promotions_campaigns/promotions_campaigns_resources_list.py)
+    1.  **Model Source:** [`ResourceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_field_enum.py)
+    2.  **API Source:** [`promotions_campaigns_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/promotions_campaigns/promotions_campaigns_resources_list.py)
 
 === "TypeScript"
 

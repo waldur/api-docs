@@ -25,7 +25,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.azure_resource_groups import azure_resource_groups_list # (1)
+    from waldur_api_client.models.azure_resource_group_field_enum import AzureResourceGroupFieldEnum # (1)
+    from waldur_api_client.api.azure_resource_groups import azure_resource_groups_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +38,8 @@
     ```
     
     
-    1.  **API Source:** [`azure_resource_groups_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/azure_resource_groups/azure_resource_groups_list.py)
+    1.  **Model Source:** [`AzureResourceGroupFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/azure_resource_group_field_enum.py)
+    2.  **API Source:** [`azure_resource_groups_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/azure_resource_groups/azure_resource_groups_list.py)
 
 === "TypeScript"
 
@@ -127,7 +129,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.azure_resource_groups import azure_resource_groups_retrieve # (1)
+    from waldur_api_client.models.azure_resource_group_field_enum import AzureResourceGroupFieldEnum # (1)
+    from waldur_api_client.api.azure_resource_groups import azure_resource_groups_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -141,7 +144,8 @@
     ```
     
     
-    1.  **API Source:** [`azure_resource_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/azure_resource_groups/azure_resource_groups_retrieve.py)
+    1.  **Model Source:** [`AzureResourceGroupFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/azure_resource_group_field_enum.py)
+    2.  **API Source:** [`azure_resource_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/azure_resource_groups/azure_resource_groups_retrieve.py)
 
 === "TypeScript"
 

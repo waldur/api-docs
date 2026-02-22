@@ -63,7 +63,11 @@ Returns a paginated list of resources for offerings managed by the current user 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_list # (1)
+    from waldur_api_client.models.order_state import OrderState # (1)
+    from waldur_api_client.models.resource_field_enum import ResourceFieldEnum # (2)
+    from waldur_api_client.models.resource_o_enum import ResourceOEnum # (3)
+    from waldur_api_client.models.resource_state import ResourceState # (4)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -75,7 +79,11 @@ Returns a paginated list of resources for offerings managed by the current user 
     ```
     
     
-    1.  **API Source:** [`marketplace_provider_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_list.py)
+    1.  **Model Source:** [`OrderState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_state.py)
+    2.  **Model Source:** [`ResourceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_field_enum.py)
+    3.  **Model Source:** [`ResourceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_o_enum.py)
+    4.  **Model Source:** [`ResourceState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_state.py)
+    5.  **API Source:** [`marketplace_provider_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_list.py)
 
 === "TypeScript"
 
@@ -276,7 +284,8 @@ Returns details of a specific resource from a provider's perspective.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_retrieve # (1)
+    from waldur_api_client.models.resource_field_enum import ResourceFieldEnum # (1)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -290,7 +299,8 @@ Returns details of a specific resource from a provider's perspective.
     ```
     
     
-    1.  **API Source:** [`marketplace_provider_resources_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_retrieve.py)
+    1.  **Model Source:** [`ResourceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_field_enum.py)
+    2.  **API Source:** [`marketplace_provider_resources_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_retrieve.py)
 
 === "TypeScript"
 
@@ -1200,7 +1210,10 @@ Returns the version history for this object. Only accessible by staff and suppor
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_history_list # (1)
+    from waldur_api_client.models.order_state import OrderState # (1)
+    from waldur_api_client.models.resource_o_enum import ResourceOEnum # (2)
+    from waldur_api_client.models.resource_state import ResourceState # (3)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_history_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1215,7 +1228,10 @@ Returns the version history for this object. Only accessible by staff and suppor
     ```
     
     
-    1.  **API Source:** [`marketplace_provider_resources_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_history_list.py)
+    1.  **Model Source:** [`OrderState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_state.py)
+    2.  **Model Source:** [`ResourceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_o_enum.py)
+    3.  **Model Source:** [`ResourceState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_state.py)
+    4.  **API Source:** [`marketplace_provider_resources_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_history_list.py)
 
 === "TypeScript"
 

@@ -31,7 +31,11 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.booking_resources import booking_resources_list # (1)
+    from waldur_api_client.models.booking_resource_field_enum import BookingResourceFieldEnum # (1)
+    from waldur_api_client.models.booking_resource_o_enum import BookingResourceOEnum # (2)
+    from waldur_api_client.models.order_state import OrderState # (3)
+    from waldur_api_client.models.resource_state import ResourceState # (4)
+    from waldur_api_client.api.booking_resources import booking_resources_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +47,11 @@
     ```
     
     
-    1.  **API Source:** [`booking_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/booking_resources/booking_resources_list.py)
+    1.  **Model Source:** [`BookingResourceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/booking_resource_field_enum.py)
+    2.  **Model Source:** [`BookingResourceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/booking_resource_o_enum.py)
+    3.  **Model Source:** [`OrderState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_state.py)
+    4.  **Model Source:** [`ResourceState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_state.py)
+    5.  **API Source:** [`booking_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/booking_resources/booking_resources_list.py)
 
 === "TypeScript"
 
@@ -252,7 +260,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.booking_resources import booking_resources_retrieve # (1)
+    from waldur_api_client.models.booking_resource_field_enum import BookingResourceFieldEnum # (1)
+    from waldur_api_client.api.booking_resources import booking_resources_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -266,7 +275,8 @@
     ```
     
     
-    1.  **API Source:** [`booking_resources_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/booking_resources/booking_resources_retrieve.py)
+    1.  **Model Source:** [`BookingResourceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/booking_resource_field_enum.py)
+    2.  **API Source:** [`booking_resources_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/booking_resources/booking_resources_retrieve.py)
 
 === "TypeScript"
 

@@ -33,7 +33,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_site_agent_services import marketplace_site_agent_services_list # (1)
+    from waldur_api_client.models.agent_service_state_enum import AgentServiceStateEnum # (1)
+    from waldur_api_client.api.marketplace_site_agent_services import marketplace_site_agent_services_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -45,7 +46,8 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_site_agent_services_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_site_agent_services/marketplace_site_agent_services_list.py)
+    1.  **Model Source:** [`AgentServiceStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/agent_service_state_enum.py)
+    2.  **API Source:** [`marketplace_site_agent_services_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_site_agent_services/marketplace_site_agent_services_list.py)
 
 === "TypeScript"
 

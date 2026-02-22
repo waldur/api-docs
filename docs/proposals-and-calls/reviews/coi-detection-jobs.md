@@ -25,7 +25,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.coi_detection_jobs import coi_detection_jobs_list # (1)
+    from waldur_api_client.models.coi_detection_job_job_type_enum import COIDetectionJobJobTypeEnum # (1)
+    from waldur_api_client.models.coi_detection_job_o_enum import COIDetectionJobOEnum # (2)
+    from waldur_api_client.models.coi_detection_job_state_enum import COIDetectionJobStateEnum # (3)
+    from waldur_api_client.api.coi_detection_jobs import coi_detection_jobs_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +40,10 @@
     ```
     
     
-    1.  **API Source:** [`coi_detection_jobs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/coi_detection_jobs/coi_detection_jobs_list.py)
+    1.  **Model Source:** [`COIDetectionJobJobTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/coi_detection_job_job_type_enum.py)
+    2.  **Model Source:** [`COIDetectionJobOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/coi_detection_job_o_enum.py)
+    3.  **Model Source:** [`COIDetectionJobStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/coi_detection_job_state_enum.py)
+    4.  **API Source:** [`coi_detection_jobs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/coi_detection_jobs/coi_detection_jobs_list.py)
 
 === "TypeScript"
 

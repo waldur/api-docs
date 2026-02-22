@@ -36,7 +36,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.broadcast_messages import broadcast_messages_list # (1)
+    from waldur_api_client.models.broadcast_message_field_enum import BroadcastMessageFieldEnum # (1)
+    from waldur_api_client.models.broadcast_message_o_enum import BroadcastMessageOEnum # (2)
+    from waldur_api_client.models.broadcast_message_state_enum import BroadcastMessageStateEnum # (3)
+    from waldur_api_client.api.broadcast_messages import broadcast_messages_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -48,7 +51,10 @@
     ```
     
     
-    1.  **API Source:** [`broadcast_messages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_list.py)
+    1.  **Model Source:** [`BroadcastMessageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_field_enum.py)
+    2.  **Model Source:** [`BroadcastMessageOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_o_enum.py)
+    3.  **Model Source:** [`BroadcastMessageStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_state_enum.py)
+    4.  **API Source:** [`broadcast_messages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_list.py)
 
 === "TypeScript"
 
@@ -114,7 +120,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.broadcast_messages import broadcast_messages_retrieve # (1)
+    from waldur_api_client.models.broadcast_message_field_enum import BroadcastMessageFieldEnum # (1)
+    from waldur_api_client.api.broadcast_messages import broadcast_messages_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -128,7 +135,8 @@
     ```
     
     
-    1.  **API Source:** [`broadcast_messages_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_retrieve.py)
+    1.  **Model Source:** [`BroadcastMessageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_field_enum.py)
+    2.  **API Source:** [`broadcast_messages_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_retrieve.py)
 
 === "TypeScript"
 
@@ -551,7 +559,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.broadcast_messages import broadcast_messages_recipients_retrieve # (1)
+    from waldur_api_client.models.broadcast_message_field_enum import BroadcastMessageFieldEnum # (1)
+    from waldur_api_client.api.broadcast_messages import broadcast_messages_recipients_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -562,7 +571,8 @@
     ```
     
     
-    1.  **API Source:** [`broadcast_messages_recipients_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_recipients_retrieve.py)
+    1.  **Model Source:** [`BroadcastMessageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_field_enum.py)
+    2.  **API Source:** [`broadcast_messages_recipients_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_recipients_retrieve.py)
 
 === "TypeScript"
 

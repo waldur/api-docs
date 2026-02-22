@@ -42,7 +42,9 @@ Get a list of networks.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_networks import openstack_networks_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_network_field_enum import OpenStackNetworkFieldEnum # (2)
+    from waldur_api_client.api.openstack_networks import openstack_networks_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -54,7 +56,9 @@ Get a list of networks.
     ```
     
     
-    1.  **API Source:** [`openstack_networks_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_networks/openstack_networks_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackNetworkFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_network_field_enum.py)
+    3.  **API Source:** [`openstack_networks_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_networks/openstack_networks_list.py)
 
 === "TypeScript"
 
@@ -197,7 +201,8 @@ Retrieve details of a specific network.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_networks import openstack_networks_retrieve # (1)
+    from waldur_api_client.models.open_stack_network_field_enum import OpenStackNetworkFieldEnum # (1)
+    from waldur_api_client.api.openstack_networks import openstack_networks_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -211,7 +216,8 @@ Retrieve details of a specific network.
     ```
     
     
-    1.  **API Source:** [`openstack_networks_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_networks/openstack_networks_retrieve.py)
+    1.  **Model Source:** [`OpenStackNetworkFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_network_field_enum.py)
+    2.  **API Source:** [`openstack_networks_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_networks/openstack_networks_retrieve.py)
 
 === "TypeScript"
 

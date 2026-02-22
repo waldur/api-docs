@@ -10,7 +10,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/chat-sessions/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/` | [List Chat Threads](#list-chat-threads) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/{uuid}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/chat-messages/{uuid}/edit/` | [Edit message](#edit-message) |
 | <span class="http-badge http-post">POST</span> | `/api/chat/stream/` | [Stream](#stream) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/archive/` | [Archive thread](#archive-thread) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/unarchive/` | [Unarchive thread](#unarchive-thread) |
@@ -65,12 +64,11 @@
 
 === "Query Parameters"
 
-    | Name | Type | Description |
-    |---|---|---|
-    | `include_history` | boolean |  |
-    | `page` | integer | A page number within the paginated result set. |
-    | `page_size` | integer | Number of results to return per page. |
-    | `thread` | string (uuid) |  |
+    | Name | Type |
+    |---|---|
+    | `include_history` | boolean |
+    | `is_flagged` | boolean |
+    | `thread` | string (uuid) |
 
 
 === "Responses"
@@ -88,6 +86,10 @@
     | `sequence_index` | integer |
     | `replaces` | string (uuid) |
     | `created` | string (date-time) |
+    | `is_flagged` | boolean |
+    | `injection_score` | number (double) |
+    | `injection_severity` | string |
+    | `injection_categories` | any |
 
 ---
 
@@ -169,7 +171,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.chat_sessions import chat_sessions_list # (1)
+    from waldur_api_client.models.chat_session_field_enum import ChatSessionFieldEnum # (1)
+    from waldur_api_client.api.chat_sessions import chat_sessions_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -181,7 +184,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     ```
     
     
-    1.  **API Source:** [`chat_sessions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_list.py)
+    1.  **Model Source:** [`ChatSessionFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/chat_session_field_enum.py)
+    2.  **API Source:** [`chat_sessions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_list.py)
 
 === "TypeScript"
 
@@ -241,7 +245,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.chat_sessions import chat_sessions_retrieve # (1)
+    from waldur_api_client.models.chat_session_field_enum import ChatSessionFieldEnum # (1)
+    from waldur_api_client.api.chat_sessions import chat_sessions_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -255,7 +260,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     ```
     
     
-    1.  **API Source:** [`chat_sessions_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_retrieve.py)
+    1.  **Model Source:** [`ChatSessionFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/chat_session_field_enum.py)
+    2.  **API Source:** [`chat_sessions_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_retrieve.py)
 
 === "TypeScript"
 
@@ -321,7 +327,10 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.chat_threads import chat_threads_list # (1)
+    from waldur_api_client.models.thread_session_field_enum import ThreadSessionFieldEnum # (1)
+    from waldur_api_client.models.thread_session_max_severity_enum import ThreadSessionMaxSeverityEnum # (2)
+    from waldur_api_client.models.thread_session_o_enum import ThreadSessionOEnum # (3)
+    from waldur_api_client.api.chat_threads import chat_threads_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -333,7 +342,10 @@ Returns the current user's chat session, creating it if it doesn't exist.
     ```
     
     
-    1.  **API Source:** [`chat_threads_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_list.py)
+    1.  **Model Source:** [`ThreadSessionFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_field_enum.py)
+    2.  **Model Source:** [`ThreadSessionMaxSeverityEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_max_severity_enum.py)
+    3.  **Model Source:** [`ThreadSessionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_o_enum.py)
+    4.  **API Source:** [`chat_threads_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_list.py)
 
 === "TypeScript"
 
@@ -358,6 +370,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `created` | string (date) |  |
     | `field` | array |  |
     | `is_archived` | boolean |  |
+    | `is_flagged` | boolean |  |
+    | `max_severity` | string | _Enum: `critical`, `high`, `low`, `medium`, `none`_ |
     | `modified` | string (date) |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
@@ -380,6 +394,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `flags` | any |
     | `is_archived` | boolean |
     | `message_count` | integer |
+    | `is_flagged` | boolean |
+    | `max_severity` | string |
     | `user_username` | string |
     | `user_full_name` | string |
     | `created` | string (date-time) |
@@ -403,7 +419,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.chat_threads import chat_threads_retrieve # (1)
+    from waldur_api_client.models.thread_session_field_enum import ThreadSessionFieldEnum # (1)
+    from waldur_api_client.api.chat_threads import chat_threads_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -417,7 +434,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     ```
     
     
-    1.  **API Source:** [`chat_threads_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_retrieve.py)
+    1.  **Model Source:** [`ThreadSessionFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_field_enum.py)
+    2.  **API Source:** [`chat_threads_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_retrieve.py)
 
 === "TypeScript"
 
@@ -464,93 +482,12 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `flags` | any |
     | `is_archived` | boolean |
     | `message_count` | integer |
+    | `is_flagged` | boolean |
+    | `max_severity` | string |
     | `user_username` | string |
     | `user_full_name` | string |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
-
----
-
-### Edit message
-
-Edit a message (creates a new message with replaces reference). Only allows editing the last user message in a thread.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/chat-messages/a1b2c3d4-e5f6-7890-abcd-ef1234567890/edit/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.chat_messages import chat_messages_edit # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = chat_messages_edit.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`chat_messages_edit`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_messages/chat_messages_edit.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { chatMessagesEdit } from 'waldur-js-client';
-    
-    try {
-      const response = await chatMessagesEdit({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `content` | string |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `thread` | string (uuid) |
-    | `role` | any |
-    | `content` | string |
-    | `sequence_index` | integer |
-    | `replaces` | string (uuid) |
-    | `created` | string (date-time) |
 
 ---
 
@@ -619,7 +556,8 @@ Edit a message (creates a new message with replaces reference). Only allows edit
     | `input` | string | ✓ | User input text for the chat model. |
     | `thread_uuid` | string (uuid) |  | Existing thread UUID. If omitted, a new thread is created. |
     | `update_thread_name` | string (uuid) |  | Thread UUID whose name should be set to the assistant's response. Skips message persistence for this call. |
-    | `mode` | any |  | 'reload': replace the last assistant response. Omit for normal new-message behavior. |
+    | `mode` | any |  | 'reload': replace the last assistant response. 'edit': edit a user message and re-stream. Omit for normal new-message behavior. |
+    | `edit_message_uuid` | string (uuid) |  | UUID of the user message to edit. Required when mode='edit'. |
 
 
 === "Responses"

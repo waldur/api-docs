@@ -45,7 +45,9 @@ Get a list of network ports.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_ports import openstack_ports_list # (1)
+    from waldur_api_client.models.open_stack_port_field_enum import OpenStackPortFieldEnum # (1)
+    from waldur_api_client.models.open_stack_port_o_enum import OpenStackPortOEnum # (2)
+    from waldur_api_client.api.openstack_ports import openstack_ports_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -57,7 +59,9 @@ Get a list of network ports.
     ```
     
     
-    1.  **API Source:** [`openstack_ports_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_ports/openstack_ports_list.py)
+    1.  **Model Source:** [`OpenStackPortFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_port_field_enum.py)
+    2.  **Model Source:** [`OpenStackPortOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_port_o_enum.py)
+    3.  **API Source:** [`openstack_ports_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_ports/openstack_ports_list.py)
 
 === "TypeScript"
 
@@ -187,7 +191,8 @@ Retrieve details of a specific network port.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_ports import openstack_ports_retrieve # (1)
+    from waldur_api_client.models.open_stack_port_field_enum import OpenStackPortFieldEnum # (1)
+    from waldur_api_client.api.openstack_ports import openstack_ports_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -201,7 +206,8 @@ Retrieve details of a specific network port.
     ```
     
     
-    1.  **API Source:** [`openstack_ports_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_ports/openstack_ports_retrieve.py)
+    1.  **Model Source:** [`OpenStackPortFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_port_field_enum.py)
+    2.  **API Source:** [`openstack_ports_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_ports/openstack_ports_retrieve.py)
 
 === "TypeScript"
 

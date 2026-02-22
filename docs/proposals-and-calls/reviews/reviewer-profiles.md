@@ -819,7 +819,8 @@ List expertise keywords for a reviewer profile.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.reviewer_profiles import reviewer_profiles_list # (1)
+    from waldur_api_client.models.reviewer_profile_o_enum import ReviewerProfileOEnum # (1)
+    from waldur_api_client.api.reviewer_profiles import reviewer_profiles_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -831,7 +832,8 @@ List expertise keywords for a reviewer profile.
     ```
     
     
-    1.  **API Source:** [`reviewer_profiles_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/reviewer_profiles/reviewer_profiles_list.py)
+    1.  **Model Source:** [`ReviewerProfileOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/reviewer_profile_o_enum.py)
+    2.  **API Source:** [`reviewer_profiles_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/reviewer_profiles/reviewer_profiles_list.py)
 
 === "TypeScript"
 

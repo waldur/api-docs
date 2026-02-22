@@ -29,7 +29,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.keycloak_user_group_memberships import keycloak_user_group_memberships_list # (1)
+    from waldur_api_client.models.keycloak_user_group_membership_state import KeycloakUserGroupMembershipState # (1)
+    from waldur_api_client.api.keycloak_user_group_memberships import keycloak_user_group_memberships_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -41,7 +42,8 @@
     ```
     
     
-    1.  **API Source:** [`keycloak_user_group_memberships_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/keycloak_user_group_memberships/keycloak_user_group_memberships_list.py)
+    1.  **Model Source:** [`KeycloakUserGroupMembershipState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/keycloak_user_group_membership_state.py)
+    2.  **API Source:** [`keycloak_user_group_memberships_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/keycloak_user_group_memberships/keycloak_user_group_memberships_list.py)
 
 === "TypeScript"
 

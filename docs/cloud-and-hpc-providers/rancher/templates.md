@@ -25,7 +25,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.rancher_templates import rancher_templates_list # (1)
+    from waldur_api_client.models.rancher_template_o_enum import RancherTemplateOEnum # (1)
+    from waldur_api_client.api.rancher_templates import rancher_templates_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +38,8 @@
     ```
     
     
-    1.  **API Source:** [`rancher_templates_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_templates/rancher_templates_list.py)
+    1.  **Model Source:** [`RancherTemplateOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_template_o_enum.py)
+    2.  **API Source:** [`rancher_templates_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_templates/rancher_templates_list.py)
 
 === "TypeScript"
 

@@ -26,7 +26,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.data_access_logs import data_access_logs_list # (1)
+    from waldur_api_client.models.accessor_type_enum import AccessorTypeEnum # (1)
+    from waldur_api_client.models.global_user_data_access_log_o_enum import GlobalUserDataAccessLogOEnum # (2)
+    from waldur_api_client.api.data_access_logs import data_access_logs_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -38,7 +40,9 @@
     ```
     
     
-    1.  **API Source:** [`data_access_logs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/data_access_logs/data_access_logs_list.py)
+    1.  **Model Source:** [`AccessorTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/accessor_type_enum.py)
+    2.  **Model Source:** [`GlobalUserDataAccessLogOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/global_user_data_access_log_o_enum.py)
+    3.  **API Source:** [`data_access_logs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/data_access_logs/data_access_logs_list.py)
 
 === "TypeScript"
 
@@ -60,7 +64,7 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessor_type` | string | Type of accessor<br><br><br>_Enum: `organization_member`, `self`, `service_provider`, `staff`, `support`_ |
+    | `accessor_type` | string | Type of accessor<br><br><br>_Enum: `staff`, `support`, `organization_member`, `service_provider`, `self`_ |
     | `accessor_uuid` | string (uuid) |  |
     | `end_date` | string (date) |  |
     | `o` | array | Ordering<br><br> |

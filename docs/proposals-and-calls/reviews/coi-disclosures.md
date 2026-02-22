@@ -26,7 +26,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.coi_disclosures import coi_disclosures_list # (1)
+    from waldur_api_client.models.coi_disclosure_form_o_enum import COIDisclosureFormOEnum # (1)
+    from waldur_api_client.api.coi_disclosures import coi_disclosures_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -38,7 +39,8 @@
     ```
     
     
-    1.  **API Source:** [`coi_disclosures_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/coi_disclosures/coi_disclosures_list.py)
+    1.  **Model Source:** [`COIDisclosureFormOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/coi_disclosure_form_o_enum.py)
+    2.  **API Source:** [`coi_disclosures_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/coi_disclosures/coi_disclosures_list.py)
 
 === "TypeScript"
 

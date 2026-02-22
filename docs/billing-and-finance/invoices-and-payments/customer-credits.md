@@ -36,7 +36,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.customer_credits import customer_credits_list # (1)
+    from waldur_api_client.models.customer_credit_o_enum import CustomerCreditOEnum # (1)
+    from waldur_api_client.api.customer_credits import customer_credits_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -48,7 +49,8 @@
     ```
     
     
-    1.  **API Source:** [`customer_credits_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_list.py)
+    1.  **Model Source:** [`CustomerCreditOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/customer_credit_o_enum.py)
+    2.  **API Source:** [`customer_credits_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_list.py)
 
 === "TypeScript"
 
@@ -590,7 +592,8 @@ Get credit consumption history grouped by month.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.customer_credits import customer_credits_consumptions_list # (1)
+    from waldur_api_client.models.customer_credit_o_enum import CustomerCreditOEnum # (1)
+    from waldur_api_client.api.customer_credits import customer_credits_consumptions_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -605,7 +608,8 @@ Get credit consumption history grouped by month.
     ```
     
     
-    1.  **API Source:** [`customer_credits_consumptions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_consumptions_list.py)
+    1.  **Model Source:** [`CustomerCreditOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/customer_credit_o_enum.py)
+    2.  **API Source:** [`customer_credits_consumptions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_consumptions_list.py)
 
 === "TypeScript"
 

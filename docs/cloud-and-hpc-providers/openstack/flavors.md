@@ -32,7 +32,9 @@ Get a list of available VM instance flavors.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_flavors import openstack_flavors_list # (1)
+    from waldur_api_client.models.open_stack_flavor_field_enum import OpenStackFlavorFieldEnum # (1)
+    from waldur_api_client.models.open_stack_flavor_o_enum import OpenStackFlavorOEnum # (2)
+    from waldur_api_client.api.openstack_flavors import openstack_flavors_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -44,7 +46,9 @@ Get a list of available VM instance flavors.
     ```
     
     
-    1.  **API Source:** [`openstack_flavors_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_flavors/openstack_flavors_list.py)
+    1.  **Model Source:** [`OpenStackFlavorFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_flavor_field_enum.py)
+    2.  **Model Source:** [`OpenStackFlavorOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_flavor_o_enum.py)
+    3.  **API Source:** [`openstack_flavors_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_flavors/openstack_flavors_list.py)
 
 === "TypeScript"
 
@@ -127,7 +131,8 @@ Retrieve details of a specific VM instance flavor.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_flavors import openstack_flavors_retrieve # (1)
+    from waldur_api_client.models.open_stack_flavor_field_enum import OpenStackFlavorFieldEnum # (1)
+    from waldur_api_client.api.openstack_flavors import openstack_flavors_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -141,7 +146,8 @@ Retrieve details of a specific VM instance flavor.
     ```
     
     
-    1.  **API Source:** [`openstack_flavors_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_flavors/openstack_flavors_retrieve.py)
+    1.  **Model Source:** [`OpenStackFlavorFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_flavor_field_enum.py)
+    2.  **API Source:** [`openstack_flavors_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_flavors/openstack_flavors_retrieve.py)
 
 === "TypeScript"
 
@@ -215,7 +221,8 @@ Retrieve usage statistics for VM instance flavors, showing running and created i
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_flavors import openstack_flavors_usage_stats_retrieve # (1)
+    from waldur_api_client.models.open_stack_flavor_field_enum import OpenStackFlavorFieldEnum # (1)
+    from waldur_api_client.api.openstack_flavors import openstack_flavors_usage_stats_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -226,7 +233,8 @@ Retrieve usage statistics for VM instance flavors, showing running and created i
     ```
     
     
-    1.  **API Source:** [`openstack_flavors_usage_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_flavors/openstack_flavors_usage_stats_retrieve.py)
+    1.  **Model Source:** [`OpenStackFlavorFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_flavor_field_enum.py)
+    2.  **API Source:** [`openstack_flavors_usage_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_flavors/openstack_flavors_usage_stats_retrieve.py)
 
 === "TypeScript"
 

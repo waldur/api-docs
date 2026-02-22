@@ -25,7 +25,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.service_settings import service_settings_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.service_settings_field_enum import ServiceSettingsFieldEnum # (2)
+    from waldur_api_client.api.service_settings import service_settings_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +39,9 @@
     ```
     
     
-    1.  **API Source:** [`service_settings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/service_settings/service_settings_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`ServiceSettingsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_settings_field_enum.py)
+    3.  **API Source:** [`service_settings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/service_settings/service_settings_list.py)
 
 === "TypeScript"
 
@@ -115,7 +119,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.service_settings import service_settings_retrieve # (1)
+    from waldur_api_client.models.service_settings_field_enum import ServiceSettingsFieldEnum # (1)
+    from waldur_api_client.api.service_settings import service_settings_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -129,7 +134,8 @@
     ```
     
     
-    1.  **API Source:** [`service_settings_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/service_settings/service_settings_retrieve.py)
+    1.  **Model Source:** [`ServiceSettingsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_settings_field_enum.py)
+    2.  **API Source:** [`service_settings_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/service_settings/service_settings_retrieve.py)
 
 === "TypeScript"
 

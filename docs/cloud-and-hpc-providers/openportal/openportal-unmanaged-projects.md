@@ -47,7 +47,9 @@ Retrieve a list of projects. The list is filtered based on the user's permission
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_list # (1)
+    from waldur_api_client.models.marketplace_provider_customer_project_o_enum import MarketplaceProviderCustomerProjectOEnum # (1)
+    from waldur_api_client.models.project_field_enum import ProjectFieldEnum # (2)
+    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -59,7 +61,9 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     ```
     
     
-    1.  **API Source:** [`openportal_unmanaged_projects_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_list.py)
+    1.  **Model Source:** [`MarketplaceProviderCustomerProjectOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_provider_customer_project_o_enum.py)
+    2.  **Model Source:** [`ProjectFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_field_enum.py)
+    3.  **API Source:** [`openportal_unmanaged_projects_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_list.py)
 
 === "TypeScript"
 
@@ -172,7 +176,8 @@ Fetch the details of a specific project by its UUID. Users can access details of
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_retrieve # (1)
+    from waldur_api_client.models.project_field_enum import ProjectFieldEnum # (1)
+    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -186,7 +191,8 @@ Fetch the details of a specific project by its UUID. Users can access details of
     ```
     
     
-    1.  **API Source:** [`openportal_unmanaged_projects_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_retrieve.py)
+    1.  **Model Source:** [`ProjectFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_field_enum.py)
+    2.  **API Source:** [`openportal_unmanaged_projects_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_retrieve.py)
 
 === "TypeScript"
 
@@ -764,7 +770,9 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_list_users_list # (1)
+    from waldur_api_client.models.user_role_details_field_enum import UserRoleDetailsFieldEnum # (1)
+    from waldur_api_client.models.user_role_details_o_enum import UserRoleDetailsOEnum # (2)
+    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_list_users_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -779,7 +787,9 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     ```
     
     
-    1.  **API Source:** [`openportal_unmanaged_projects_list_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_list_users_list.py)
+    1.  **Model Source:** [`UserRoleDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_details_field_enum.py)
+    2.  **Model Source:** [`UserRoleDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_details_o_enum.py)
+    3.  **API Source:** [`openportal_unmanaged_projects_list_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_list_users_list.py)
 
 === "TypeScript"
 

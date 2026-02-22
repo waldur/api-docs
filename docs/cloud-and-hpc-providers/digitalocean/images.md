@@ -25,7 +25,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.digitalocean_images import digitalocean_images_list # (1)
+    from waldur_api_client.models.digital_ocean_image_o_enum import DigitalOceanImageOEnum # (1)
+    from waldur_api_client.api.digitalocean_images import digitalocean_images_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +38,8 @@
     ```
     
     
-    1.  **API Source:** [`digitalocean_images_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/digitalocean_images/digitalocean_images_list.py)
+    1.  **Model Source:** [`DigitalOceanImageOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/digital_ocean_image_o_enum.py)
+    2.  **API Source:** [`digitalocean_images_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/digitalocean_images/digitalocean_images_list.py)
 
 === "TypeScript"
 

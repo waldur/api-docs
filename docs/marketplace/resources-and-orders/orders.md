@@ -53,7 +53,11 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_orders import marketplace_orders_list # (1)
+    from waldur_api_client.models.order_details_field_enum import OrderDetailsFieldEnum # (1)
+    from waldur_api_client.models.order_details_o_enum import OrderDetailsOEnum # (2)
+    from waldur_api_client.models.order_state import OrderState # (3)
+    from waldur_api_client.models.request_types import RequestTypes # (4)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -65,7 +69,11 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     ```
     
     
-    1.  **API Source:** [`marketplace_orders_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_list.py)
+    1.  **Model Source:** [`OrderDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_details_field_enum.py)
+    2.  **Model Source:** [`OrderDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_details_o_enum.py)
+    3.  **Model Source:** [`OrderState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_state.py)
+    4.  **Model Source:** [`RequestTypes`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/request_types.py)
+    5.  **API Source:** [`marketplace_orders_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_list.py)
 
 === "TypeScript"
 
@@ -226,7 +234,8 @@ Returns the details of a specific order.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_orders import marketplace_orders_retrieve # (1)
+    from waldur_api_client.models.order_details_field_enum import OrderDetailsFieldEnum # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -240,7 +249,8 @@ Returns the details of a specific order.
     ```
     
     
-    1.  **API Source:** [`marketplace_orders_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_retrieve.py)
+    1.  **Model Source:** [`OrderDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_details_field_enum.py)
+    2.  **API Source:** [`marketplace_orders_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_retrieve.py)
 
 === "TypeScript"
 

@@ -40,7 +40,9 @@ Get a list of snapshots.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_snapshots import openstack_snapshots_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_snapshot_field_enum import OpenStackSnapshotFieldEnum # (2)
+    from waldur_api_client.api.openstack_snapshots import openstack_snapshots_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -52,7 +54,9 @@ Get a list of snapshots.
     ```
     
     
-    1.  **API Source:** [`openstack_snapshots_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_snapshots/openstack_snapshots_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackSnapshotFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_snapshot_field_enum.py)
+    3.  **API Source:** [`openstack_snapshots_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_snapshots/openstack_snapshots_list.py)
 
 === "TypeScript"
 
@@ -187,7 +191,8 @@ Retrieve details of a specific snapshot.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_snapshots import openstack_snapshots_retrieve # (1)
+    from waldur_api_client.models.open_stack_snapshot_field_enum import OpenStackSnapshotFieldEnum # (1)
+    from waldur_api_client.api.openstack_snapshots import openstack_snapshots_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -201,7 +206,8 @@ Retrieve details of a specific snapshot.
     ```
     
     
-    1.  **API Source:** [`openstack_snapshots_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_snapshots/openstack_snapshots_retrieve.py)
+    1.  **Model Source:** [`OpenStackSnapshotFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_snapshot_field_enum.py)
+    2.  **API Source:** [`openstack_snapshots_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_snapshots/openstack_snapshots_retrieve.py)
 
 === "TypeScript"
 

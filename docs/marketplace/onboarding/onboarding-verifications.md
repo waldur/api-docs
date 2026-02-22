@@ -41,7 +41,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_list # (1)
+    from waldur_api_client.models.onboarding_verification_o_enum import OnboardingVerificationOEnum # (1)
+    from waldur_api_client.models.onboarding_verification_status_enum1 import OnboardingVerificationStatusEnum1 # (2)
+    from waldur_api_client.models.onboarding_verification_validation_method_enum import OnboardingVerificationValidationMethodEnum # (3)
+    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -53,7 +56,10 @@
     ```
     
     
-    1.  **API Source:** [`onboarding_verifications_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_list.py)
+    1.  **Model Source:** [`OnboardingVerificationOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_verification_o_enum.py)
+    2.  **Model Source:** [`OnboardingVerificationStatusEnum1`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_verification_status_enum1.py)
+    3.  **Model Source:** [`OnboardingVerificationValidationMethodEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_verification_validation_method_enum.py)
+    4.  **API Source:** [`onboarding_verifications_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_list.py)
 
 === "TypeScript"
 
@@ -866,7 +872,8 @@ Get available onboarding checklists (customer and intent) for preview. This endp
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_available_checklists_retrieve # (1)
+    from waldur_api_client.models.available_checklists_response_checklist_type_enum import AvailableChecklistsResponseChecklistTypeEnum # (1)
+    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_available_checklists_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -877,7 +884,8 @@ Get available onboarding checklists (customer and intent) for preview. This endp
     ```
     
     
-    1.  **API Source:** [`onboarding_verifications_available_checklists_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_available_checklists_retrieve.py)
+    1.  **Model Source:** [`AvailableChecklistsResponseChecklistTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/available_checklists_response_checklist_type_enum.py)
+    2.  **API Source:** [`onboarding_verifications_available_checklists_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_available_checklists_retrieve.py)
 
 === "TypeScript"
 
@@ -899,7 +907,7 @@ Get available onboarding checklists (customer and intent) for preview. This endp
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of checklist to retrieve (customer, intent, or all). Defaults to all.<br>_Default: `all`_<br>_Enum: `customer`, `intent`, `all`_ |
+    | `checklist_type` | string | Type of checklist to retrieve (customer, intent, or all). Defaults to all.<br>_Enum: `customer`, `intent`, `all`_ |
 
 
 === "Responses"
@@ -931,7 +939,8 @@ Get checklist with questions and existing answers. Supports both customer and in
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_checklist_retrieve # (1)
+    from waldur_api_client.models.checklist_response_checklist_type_enum import ChecklistResponseChecklistTypeEnum # (1)
+    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_checklist_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -945,7 +954,8 @@ Get checklist with questions and existing answers. Supports both customer and in
     ```
     
     
-    1.  **API Source:** [`onboarding_verifications_checklist_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_checklist_retrieve.py)
+    1.  **Model Source:** [`ChecklistResponseChecklistTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/checklist_response_checklist_type_enum.py)
+    2.  **API Source:** [`onboarding_verifications_checklist_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_checklist_retrieve.py)
 
 === "TypeScript"
 
@@ -977,7 +987,7 @@ Get checklist with questions and existing answers. Supports both customer and in
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of checklist to retrieve (customer or intent). Defaults to intent.<br>_Default: `intent`_<br>_Enum: `customer`, `intent`_ |
+    | `checklist_type` | string | Type of checklist to retrieve (customer or intent). Defaults to intent.<br>_Enum: `customer`, `intent`_ |
     | `include_all` | boolean | If true, returns all questions including hidden ones.<br>_Default: `False`_ |
 
 
@@ -1163,7 +1173,8 @@ Get checklist completion status. Supports both customer and intent checklists vi
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_completion_status_retrieve # (1)
+    from waldur_api_client.models.checklist_response_checklist_type_enum import ChecklistResponseChecklistTypeEnum # (1)
+    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_completion_status_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1177,7 +1188,8 @@ Get checklist completion status. Supports both customer and intent checklists vi
     ```
     
     
-    1.  **API Source:** [`onboarding_verifications_completion_status_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_completion_status_retrieve.py)
+    1.  **Model Source:** [`ChecklistResponseChecklistTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/checklist_response_checklist_type_enum.py)
+    2.  **API Source:** [`onboarding_verifications_completion_status_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_completion_status_retrieve.py)
 
 === "TypeScript"
 
@@ -1209,7 +1221,7 @@ Get checklist completion status. Supports both customer and intent checklists vi
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of checklist to retrieve (customer or intent). Defaults to intent.<br>_Default: `intent`_<br>_Enum: `customer`, `intent`_ |
+    | `checklist_type` | string | Type of checklist to retrieve (customer or intent). Defaults to intent.<br>_Enum: `customer`, `intent`_ |
 
 
 === "Responses"

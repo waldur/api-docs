@@ -40,7 +40,9 @@ Returns a paginated list of robot accounts accessible to the current user.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_robot_accounts import marketplace_robot_accounts_list # (1)
+    from waldur_api_client.models.remote_resource_sync_status_remote_state_enum import RemoteResourceSyncStatusRemoteStateEnum # (1)
+    from waldur_api_client.models.robot_account_details_field_enum import RobotAccountDetailsFieldEnum # (2)
+    from waldur_api_client.api.marketplace_robot_accounts import marketplace_robot_accounts_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -52,7 +54,9 @@ Returns a paginated list of robot accounts accessible to the current user.
     ```
     
     
-    1.  **API Source:** [`marketplace_robot_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_robot_accounts/marketplace_robot_accounts_list.py)
+    1.  **Model Source:** [`RemoteResourceSyncStatusRemoteStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/remote_resource_sync_status_remote_state_enum.py)
+    2.  **Model Source:** [`RobotAccountDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/robot_account_details_field_enum.py)
+    3.  **API Source:** [`marketplace_robot_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_robot_accounts/marketplace_robot_accounts_list.py)
 
 === "TypeScript"
 
@@ -163,7 +167,8 @@ Returns the details of a specific robot account.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_robot_accounts import marketplace_robot_accounts_retrieve # (1)
+    from waldur_api_client.models.robot_account_details_field_enum import RobotAccountDetailsFieldEnum # (1)
+    from waldur_api_client.api.marketplace_robot_accounts import marketplace_robot_accounts_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -177,7 +182,8 @@ Returns the details of a specific robot account.
     ```
     
     
-    1.  **API Source:** [`marketplace_robot_accounts_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_robot_accounts/marketplace_robot_accounts_retrieve.py)
+    1.  **Model Source:** [`RobotAccountDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/robot_account_details_field_enum.py)
+    2.  **API Source:** [`marketplace_robot_accounts_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_robot_accounts/marketplace_robot_accounts_retrieve.py)
 
 === "TypeScript"
 

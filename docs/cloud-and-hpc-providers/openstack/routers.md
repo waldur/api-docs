@@ -38,7 +38,9 @@ Get a list of routers.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_routers import openstack_routers_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_router_field_enum import OpenStackRouterFieldEnum # (2)
+    from waldur_api_client.api.openstack_routers import openstack_routers_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -50,7 +52,9 @@ Get a list of routers.
     ```
     
     
-    1.  **API Source:** [`openstack_routers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_routers/openstack_routers_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackRouterFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_router_field_enum.py)
+    3.  **API Source:** [`openstack_routers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_routers/openstack_routers_list.py)
 
 === "TypeScript"
 
@@ -222,7 +226,8 @@ Retrieve details of a specific router.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_routers import openstack_routers_retrieve # (1)
+    from waldur_api_client.models.open_stack_router_field_enum import OpenStackRouterFieldEnum # (1)
+    from waldur_api_client.api.openstack_routers import openstack_routers_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -236,7 +241,8 @@ Retrieve details of a specific router.
     ```
     
     
-    1.  **API Source:** [`openstack_routers_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_routers/openstack_routers_retrieve.py)
+    1.  **Model Source:** [`OpenStackRouterFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_router_field_enum.py)
+    2.  **API Source:** [`openstack_routers_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_routers/openstack_routers_retrieve.py)
 
 === "TypeScript"
 

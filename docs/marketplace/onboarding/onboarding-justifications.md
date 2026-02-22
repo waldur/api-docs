@@ -37,7 +37,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.onboarding_justifications import onboarding_justifications_list # (1)
+    from waldur_api_client.models.onboarding_justification_o_enum import OnboardingJustificationOEnum # (1)
+    from waldur_api_client.models.onboarding_justification_validation_decision_enum import OnboardingJustificationValidationDecisionEnum # (2)
+    from waldur_api_client.api.onboarding_justifications import onboarding_justifications_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -49,7 +51,9 @@
     ```
     
     
-    1.  **API Source:** [`onboarding_justifications_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_justifications/onboarding_justifications_list.py)
+    1.  **Model Source:** [`OnboardingJustificationOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_justification_o_enum.py)
+    2.  **Model Source:** [`OnboardingJustificationValidationDecisionEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_justification_validation_decision_enum.py)
+    3.  **API Source:** [`onboarding_justifications_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_justifications/onboarding_justifications_list.py)
 
 === "TypeScript"
 

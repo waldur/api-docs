@@ -33,7 +33,10 @@ Returns a paginated list of public offerings. The list is filtered to show only 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_public_offerings import marketplace_public_offerings_list # (1)
+    from waldur_api_client.models.offering_state import OfferingState # (1)
+    from waldur_api_client.models.provider_offering_details_o_enum import ProviderOfferingDetailsOEnum # (2)
+    from waldur_api_client.models.public_offering_details_field_enum import PublicOfferingDetailsFieldEnum # (3)
+    from waldur_api_client.api.marketplace_public_offerings import marketplace_public_offerings_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -45,7 +48,10 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     ```
     
     
-    1.  **API Source:** [`marketplace_public_offerings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_public_offerings/marketplace_public_offerings_list.py)
+    1.  **Model Source:** [`OfferingState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_state.py)
+    2.  **Model Source:** [`ProviderOfferingDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_offering_details_o_enum.py)
+    3.  **Model Source:** [`PublicOfferingDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/public_offering_details_field_enum.py)
+    4.  **API Source:** [`marketplace_public_offerings_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_public_offerings/marketplace_public_offerings_list.py)
 
 === "TypeScript"
 
@@ -328,7 +334,8 @@ Returns the details of a specific public offering. Access is granted if the offe
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_public_offerings import marketplace_public_offerings_retrieve # (1)
+    from waldur_api_client.models.public_offering_details_field_enum import PublicOfferingDetailsFieldEnum # (1)
+    from waldur_api_client.api.marketplace_public_offerings import marketplace_public_offerings_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -342,7 +349,8 @@ Returns the details of a specific public offering. Access is granted if the offe
     ```
     
     
-    1.  **API Source:** [`marketplace_public_offerings_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_public_offerings/marketplace_public_offerings_retrieve.py)
+    1.  **Model Source:** [`PublicOfferingDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/public_offering_details_field_enum.py)
+    2.  **API Source:** [`marketplace_public_offerings_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_public_offerings/marketplace_public_offerings_retrieve.py)
 
 === "TypeScript"
 

@@ -35,7 +35,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support_issues import support_issues_list # (1)
+    from waldur_api_client.models.issue_o_enum import IssueOEnum # (1)
+    from waldur_api_client.api.support_issues import support_issues_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -47,7 +48,8 @@
     ```
     
     
-    1.  **API Source:** [`support_issues_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_issues/support_issues_list.py)
+    1.  **Model Source:** [`IssueOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/issue_o_enum.py)
+    2.  **API Source:** [`support_issues_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_issues/support_issues_list.py)
 
 === "TypeScript"
 

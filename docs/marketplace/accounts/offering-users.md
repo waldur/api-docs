@@ -54,7 +54,10 @@ Returns a paginated list of users associated with offerings. The visibility of u
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_list # (1)
+    from waldur_api_client.models.offering_user_field_enum import OfferingUserFieldEnum # (1)
+    from waldur_api_client.models.offering_user_o_enum import OfferingUserOEnum # (2)
+    from waldur_api_client.models.offering_user_state import OfferingUserState # (3)
+    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -66,7 +69,10 @@ Returns a paginated list of users associated with offerings. The visibility of u
     ```
     
     
-    1.  **API Source:** [`marketplace_offering_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_list.py)
+    1.  **Model Source:** [`OfferingUserFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_field_enum.py)
+    2.  **Model Source:** [`OfferingUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_o_enum.py)
+    3.  **Model Source:** [`OfferingUserState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_state.py)
+    4.  **API Source:** [`marketplace_offering_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_list.py)
 
 === "TypeScript"
 
@@ -182,7 +188,8 @@ Returns the details of a specific offering-user link. Visibility follows the sam
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_retrieve # (1)
+    from waldur_api_client.models.offering_user_field_enum import OfferingUserFieldEnum # (1)
+    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -196,7 +203,8 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     ```
     
     
-    1.  **API Source:** [`marketplace_offering_users_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_retrieve.py)
+    1.  **Model Source:** [`OfferingUserFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_field_enum.py)
+    2.  **API Source:** [`marketplace_offering_users_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_retrieve.py)
 
 === "TypeScript"
 

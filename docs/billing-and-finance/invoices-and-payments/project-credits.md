@@ -29,7 +29,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.project_credits import project_credits_list # (1)
+    from waldur_api_client.models.project_credit_o_enum import ProjectCreditOEnum # (1)
+    from waldur_api_client.api.project_credits import project_credits_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -41,7 +42,8 @@
     ```
     
     
-    1.  **API Source:** [`project_credits_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/project_credits/project_credits_list.py)
+    1.  **Model Source:** [`ProjectCreditOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_credit_o_enum.py)
+    2.  **API Source:** [`project_credits_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/project_credits/project_credits_list.py)
 
 === "TypeScript"
 

@@ -27,7 +27,8 @@ Get a list of all permissions for the current user. Staff and support users can 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.user_permissions import user_permissions_list # (1)
+    from waldur_api_client.models.offering_permission_o_enum import OfferingPermissionOEnum # (1)
+    from waldur_api_client.api.user_permissions import user_permissions_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -39,7 +40,8 @@ Get a list of all permissions for the current user. Staff and support users can 
     ```
     
     
-    1.  **API Source:** [`user_permissions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_permissions/user_permissions_list.py)
+    1.  **Model Source:** [`OfferingPermissionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_permission_o_enum.py)
+    2.  **API Source:** [`user_permissions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_permissions/user_permissions_list.py)
 
 === "TypeScript"
 

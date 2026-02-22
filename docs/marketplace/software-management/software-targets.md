@@ -31,7 +31,8 @@ Returns a paginated list of software targets, which represent specific builds of
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_software_targets import marketplace_software_targets_list # (1)
+    from waldur_api_client.models.software_target_o_enum import SoftwareTargetOEnum # (1)
+    from waldur_api_client.api.marketplace_software_targets import marketplace_software_targets_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@ Returns a paginated list of software targets, which represent specific builds of
     ```
     
     
-    1.  **API Source:** [`marketplace_software_targets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_targets/marketplace_software_targets_list.py)
+    1.  **Model Source:** [`SoftwareTargetOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_target_o_enum.py)
+    2.  **API Source:** [`marketplace_software_targets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_targets/marketplace_software_targets_list.py)
 
 === "TypeScript"
 

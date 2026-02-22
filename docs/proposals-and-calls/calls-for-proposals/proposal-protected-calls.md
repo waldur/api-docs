@@ -88,7 +88,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_list # (1)
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_field_enum import ProtectedCallFieldEnum # (2)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (3)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -100,7 +103,10 @@
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_list.py)
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_field_enum.py)
+    3.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    4.  **API Source:** [`proposal_protected_calls_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_list.py)
 
 === "TypeScript"
 
@@ -266,7 +272,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_retrieve # (1)
+    from waldur_api_client.models.protected_call_field_enum import ProtectedCallFieldEnum # (1)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -280,7 +287,8 @@
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_retrieve.py)
+    1.  **Model Source:** [`ProtectedCallFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_field_enum.py)
+    2.  **API Source:** [`proposal_protected_calls_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_retrieve.py)
 
 === "TypeScript"
 
@@ -1434,7 +1442,9 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_list_users_list # (1)
+    from waldur_api_client.models.user_role_details_field_enum import UserRoleDetailsFieldEnum # (1)
+    from waldur_api_client.models.user_role_details_o_enum import UserRoleDetailsOEnum # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_list_users_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1449,7 +1459,9 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_list_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_list_users_list.py)
+    1.  **Model Source:** [`UserRoleDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_details_field_enum.py)
+    2.  **Model Source:** [`UserRoleDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_details_o_enum.py)
+    3.  **API Source:** [`proposal_protected_calls_list_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_list_users_list.py)
 
 === "TypeScript"
 
@@ -1820,7 +1832,8 @@ Get affinity matrix for reviewer-proposal matching.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_affinity_matrix_retrieve # (1)
+    from waldur_api_client.models.affinity_matrix_response_scope_enum import AffinityMatrixResponseScopeEnum # (1)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_affinity_matrix_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1834,7 +1847,8 @@ Get affinity matrix for reviewer-proposal matching.
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_affinity_matrix_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_affinity_matrix_retrieve.py)
+    1.  **Model Source:** [`AffinityMatrixResponseScopeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/affinity_matrix_response_scope_enum.py)
+    2.  **API Source:** [`proposal_protected_calls_affinity_matrix_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_affinity_matrix_retrieve.py)
 
 === "TypeScript"
 
@@ -1998,7 +2012,9 @@ Get available compliance checklists for call creation/editing.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_available_compliance_checklists_list # (1)
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_available_compliance_checklists_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2013,7 +2029,9 @@ Get available compliance checklists for call creation/editing.
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_available_compliance_checklists_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_available_compliance_checklists_list.py)
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **API Source:** [`proposal_protected_calls_available_compliance_checklists_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_available_compliance_checklists_list.py)
 
 === "TypeScript"
 
@@ -2319,7 +2337,9 @@ List all conflicts of interest detected for this call.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_conflicts_list # (1)
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_conflicts_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2334,7 +2354,9 @@ List all conflicts of interest detected for this call.
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_conflicts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_conflicts_list.py)
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **API Source:** [`proposal_protected_calls_conflicts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_conflicts_list.py)
 
 === "TypeScript"
 
@@ -2761,7 +2783,9 @@ Get detailed compliance answers for a specific proposal (call managers only).
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_proposals_compliance_answers_list # (1)
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_proposals_compliance_answers_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2777,7 +2801,9 @@ Get detailed compliance answers for a specific proposal (call managers only).
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_proposals_compliance_answers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_proposals_compliance_answers_list.py)
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **API Source:** [`proposal_protected_calls_proposals_compliance_answers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_proposals_compliance_answers_list.py)
 
 === "TypeScript"
 
@@ -2863,7 +2889,9 @@ Get proposed reviewer-proposal assignments.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_proposed_assignments_list # (1)
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_proposed_assignments_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2878,7 +2906,9 @@ Get proposed reviewer-proposal assignments.
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_proposed_assignments_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_proposed_assignments_list.py)
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **API Source:** [`proposal_protected_calls_proposed_assignments_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_proposed_assignments_list.py)
 
 === "TypeScript"
 
@@ -3453,7 +3483,9 @@ List all reviewer suggestions for this call with affinity scores.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_suggestions_list # (1)
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_suggestions_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -3468,7 +3500,9 @@ List all reviewer suggestions for this call with affinity scores.
     ```
     
     
-    1.  **API Source:** [`proposal_protected_calls_suggestions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_suggestions_list.py)
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **API Source:** [`proposal_protected_calls_suggestions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_suggestions_list.py)
 
 === "TypeScript"
 
@@ -4378,8 +4412,10 @@ Invite reviewers to join the call's reviewer pool.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.reviewer_invitation_request import ReviewerInvitationRequest # (1)
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_invite_reviewers # (2)
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.models.reviewer_invitation_request import ReviewerInvitationRequest # (3)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_invite_reviewers # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -4399,8 +4435,10 @@ Invite reviewers to join the call's reviewer pool.
     ```
     
     
-    1.  **Model Source:** [`ReviewerInvitationRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/reviewer_invitation_request.py)
-    2.  **API Source:** [`proposal_protected_calls_invite_reviewers`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_invite_reviewers.py)
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **Model Source:** [`ReviewerInvitationRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/reviewer_invitation_request.py)
+    4.  **API Source:** [`proposal_protected_calls_invite_reviewers`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_invite_reviewers.py)
 
 === "TypeScript"
 

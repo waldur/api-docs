@@ -31,7 +31,8 @@ Returns a paginated list of software packages available in the catalogs. Can be 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_software_packages import marketplace_software_packages_list # (1)
+    from waldur_api_client.models.software_package_o_enum import SoftwarePackageOEnum # (1)
+    from waldur_api_client.api.marketplace_software_packages import marketplace_software_packages_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +44,8 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     ```
     
     
-    1.  **API Source:** [`marketplace_software_packages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_packages/marketplace_software_packages_list.py)
+    1.  **Model Source:** [`SoftwarePackageOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_package_o_enum.py)
+    2.  **API Source:** [`marketplace_software_packages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_packages/marketplace_software_packages_list.py)
 
 === "TypeScript"
 

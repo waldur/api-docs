@@ -39,7 +39,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.aws_volumes import aws_volumes_list # (1)
+    from waldur_api_client.models.aws_volume_field_enum import AwsVolumeFieldEnum # (1)
+    from waldur_api_client.api.aws_volumes import aws_volumes_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -51,7 +52,8 @@
     ```
     
     
-    1.  **API Source:** [`aws_volumes_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/aws_volumes/aws_volumes_list.py)
+    1.  **Model Source:** [`AwsVolumeFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/aws_volume_field_enum.py)
+    2.  **API Source:** [`aws_volumes_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/aws_volumes/aws_volumes_list.py)
 
 === "TypeScript"
 
@@ -145,7 +147,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.aws_volumes import aws_volumes_retrieve # (1)
+    from waldur_api_client.models.aws_volume_field_enum import AwsVolumeFieldEnum # (1)
+    from waldur_api_client.api.aws_volumes import aws_volumes_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -159,7 +162,8 @@
     ```
     
     
-    1.  **API Source:** [`aws_volumes_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/aws_volumes/aws_volumes_retrieve.py)
+    1.  **Model Source:** [`AwsVolumeFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/aws_volume_field_enum.py)
+    2.  **API Source:** [`aws_volumes_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/aws_volumes/aws_volumes_retrieve.py)
 
 === "TypeScript"
 

@@ -37,7 +37,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.slurm_jobs import slurm_jobs_list # (1)
+    from waldur_api_client.models.firecrest_job_field_enum import FirecrestJobFieldEnum # (1)
+    from waldur_api_client.api.slurm_jobs import slurm_jobs_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -49,7 +50,8 @@
     ```
     
     
-    1.  **API Source:** [`slurm_jobs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/slurm_jobs/slurm_jobs_list.py)
+    1.  **Model Source:** [`FirecrestJobFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/firecrest_job_field_enum.py)
+    2.  **API Source:** [`slurm_jobs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/slurm_jobs/slurm_jobs_list.py)
 
 === "TypeScript"
 
@@ -134,7 +136,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.slurm_jobs import slurm_jobs_retrieve # (1)
+    from waldur_api_client.models.firecrest_job_field_enum import FirecrestJobFieldEnum # (1)
+    from waldur_api_client.api.slurm_jobs import slurm_jobs_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -148,7 +151,8 @@
     ```
     
     
-    1.  **API Source:** [`slurm_jobs_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/slurm_jobs/slurm_jobs_retrieve.py)
+    1.  **Model Source:** [`FirecrestJobFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/firecrest_job_field_enum.py)
+    2.  **API Source:** [`slurm_jobs_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/slurm_jobs/slurm_jobs_retrieve.py)
 
 === "TypeScript"
 

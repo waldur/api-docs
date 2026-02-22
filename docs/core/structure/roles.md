@@ -53,7 +53,8 @@ Get a list of all available roles.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.roles import roles_list # (1)
+    from waldur_api_client.models.role_details_field_enum import RoleDetailsFieldEnum # (1)
+    from waldur_api_client.api.roles import roles_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -65,7 +66,8 @@ Get a list of all available roles.
     ```
     
     
-    1.  **API Source:** [`roles_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/roles/roles_list.py)
+    1.  **Model Source:** [`RoleDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/role_details_field_enum.py)
+    2.  **API Source:** [`roles_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/roles/roles_list.py)
 
 === "TypeScript"
 
@@ -146,7 +148,8 @@ Retrieve the details of a specific role by its UUID.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.roles import roles_retrieve # (1)
+    from waldur_api_client.models.role_details_field_enum import RoleDetailsFieldEnum # (1)
+    from waldur_api_client.api.roles import roles_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -160,7 +163,8 @@ Retrieve the details of a specific role by its UUID.
     ```
     
     
-    1.  **API Source:** [`roles_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/roles/roles_retrieve.py)
+    1.  **Model Source:** [`RoleDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/role_details_field_enum.py)
+    2.  **API Source:** [`roles_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/roles/roles_retrieve.py)
 
 === "TypeScript"
 

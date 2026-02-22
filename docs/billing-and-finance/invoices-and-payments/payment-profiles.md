@@ -34,7 +34,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.payment_profiles import payment_profiles_list # (1)
+    from waldur_api_client.models.payment_profile_o_enum import PaymentProfileOEnum # (1)
+    from waldur_api_client.models.payment_type_enum import PaymentTypeEnum # (2)
+    from waldur_api_client.api.payment_profiles import payment_profiles_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -46,7 +48,9 @@
     ```
     
     
-    1.  **API Source:** [`payment_profiles_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/payment_profiles/payment_profiles_list.py)
+    1.  **Model Source:** [`PaymentProfileOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/payment_profile_o_enum.py)
+    2.  **Model Source:** [`PaymentTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/payment_type_enum.py)
+    3.  **API Source:** [`payment_profiles_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/payment_profiles/payment_profiles_list.py)
 
 === "TypeScript"
 

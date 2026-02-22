@@ -37,7 +37,9 @@ Get a list of server groups.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_server_groups import openstack_server_groups_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_server_group_field_enum import OpenStackServerGroupFieldEnum # (2)
+    from waldur_api_client.api.openstack_server_groups import openstack_server_groups_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -49,7 +51,9 @@ Get a list of server groups.
     ```
     
     
-    1.  **API Source:** [`openstack_server_groups_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_server_groups/openstack_server_groups_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackServerGroupFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_server_group_field_enum.py)
+    3.  **API Source:** [`openstack_server_groups_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_server_groups/openstack_server_groups_list.py)
 
 === "TypeScript"
 
@@ -169,7 +173,8 @@ Retrieve details of a specific server group.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_server_groups import openstack_server_groups_retrieve # (1)
+    from waldur_api_client.models.open_stack_server_group_field_enum import OpenStackServerGroupFieldEnum # (1)
+    from waldur_api_client.api.openstack_server_groups import openstack_server_groups_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -183,7 +188,8 @@ Retrieve details of a specific server group.
     ```
     
     
-    1.  **API Source:** [`openstack_server_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_server_groups/openstack_server_groups_retrieve.py)
+    1.  **Model Source:** [`OpenStackServerGroupFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_server_group_field_enum.py)
+    2.  **API Source:** [`openstack_server_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_server_groups/openstack_server_groups_retrieve.py)
 
 === "TypeScript"
 

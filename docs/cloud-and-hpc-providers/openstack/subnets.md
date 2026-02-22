@@ -40,7 +40,9 @@ Get a list of subnets.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_subnets import openstack_subnets_list # (1)
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_sub_net_field_enum import OpenStackSubNetFieldEnum # (2)
+    from waldur_api_client.api.openstack_subnets import openstack_subnets_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -52,7 +54,9 @@ Get a list of subnets.
     ```
     
     
-    1.  **API Source:** [`openstack_subnets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_subnets/openstack_subnets_list.py)
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackSubNetFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_sub_net_field_enum.py)
+    3.  **API Source:** [`openstack_subnets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_subnets/openstack_subnets_list.py)
 
 === "TypeScript"
 
@@ -186,7 +190,8 @@ Retrieve details of a specific subnet.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack_subnets import openstack_subnets_retrieve # (1)
+    from waldur_api_client.models.open_stack_sub_net_field_enum import OpenStackSubNetFieldEnum # (1)
+    from waldur_api_client.api.openstack_subnets import openstack_subnets_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -200,7 +205,8 @@ Retrieve details of a specific subnet.
     ```
     
     
-    1.  **API Source:** [`openstack_subnets_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_subnets/openstack_subnets_retrieve.py)
+    1.  **Model Source:** [`OpenStackSubNetFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_sub_net_field_enum.py)
+    2.  **API Source:** [`openstack_subnets_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_subnets/openstack_subnets_retrieve.py)
 
 === "TypeScript"
 

@@ -40,7 +40,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.invoices import invoices_list # (1)
+    from waldur_api_client.models.invoice_field_enum import InvoiceFieldEnum # (1)
+    from waldur_api_client.models.invoice_o_enum import InvoiceOEnum # (2)
+    from waldur_api_client.models.invoice_state_enum import InvoiceStateEnum # (3)
+    from waldur_api_client.api.invoices import invoices_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -52,7 +55,10 @@
     ```
     
     
-    1.  **API Source:** [`invoices_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_list.py)
+    1.  **Model Source:** [`InvoiceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_field_enum.py)
+    2.  **Model Source:** [`InvoiceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_o_enum.py)
+    3.  **Model Source:** [`InvoiceStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_state_enum.py)
+    4.  **API Source:** [`invoices_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_list.py)
 
 === "TypeScript"
 
@@ -187,7 +193,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.invoices import invoices_retrieve # (1)
+    from waldur_api_client.models.invoice_field_enum import InvoiceFieldEnum # (1)
+    from waldur_api_client.api.invoices import invoices_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -201,7 +208,8 @@
     ```
     
     
-    1.  **API Source:** [`invoices_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_retrieve.py)
+    1.  **Model Source:** [`InvoiceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_field_enum.py)
+    2.  **API Source:** [`invoices_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_retrieve.py)
 
 === "TypeScript"
 
@@ -504,7 +512,9 @@ Returns the version history for this object. Only accessible by staff and suppor
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.invoices import invoices_history_list # (1)
+    from waldur_api_client.models.invoice_o_enum import InvoiceOEnum # (1)
+    from waldur_api_client.models.invoice_state_enum import InvoiceStateEnum # (2)
+    from waldur_api_client.api.invoices import invoices_history_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -519,7 +529,9 @@ Returns the version history for this object. Only accessible by staff and suppor
     ```
     
     
-    1.  **API Source:** [`invoices_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_history_list.py)
+    1.  **Model Source:** [`InvoiceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_o_enum.py)
+    2.  **Model Source:** [`InvoiceStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_state_enum.py)
+    3.  **API Source:** [`invoices_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_history_list.py)
 
 === "TypeScript"
 
@@ -601,7 +613,8 @@ Retrieve a list of invoice items for the specified invoice.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.invoices import invoices_items_retrieve # (1)
+    from waldur_api_client.models.invoice_item_o_enum import InvoiceItemOEnum # (1)
+    from waldur_api_client.api.invoices import invoices_items_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -615,7 +628,8 @@ Retrieve a list of invoice items for the specified invoice.
     ```
     
     
-    1.  **API Source:** [`invoices_items_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_items_retrieve.py)
+    1.  **Model Source:** [`InvoiceItemOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_item_o_enum.py)
+    2.  **API Source:** [`invoices_items_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_items_retrieve.py)
 
 === "TypeScript"
 
@@ -723,7 +737,9 @@ Spendings grouped by offerings and filtered by provider.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.invoices import invoices_stats_list # (1)
+    from waldur_api_client.models.invoice_o_enum import InvoiceOEnum # (1)
+    from waldur_api_client.models.invoice_state_enum import InvoiceStateEnum # (2)
+    from waldur_api_client.api.invoices import invoices_stats_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -738,7 +754,9 @@ Spendings grouped by offerings and filtered by provider.
     ```
     
     
-    1.  **API Source:** [`invoices_stats_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_stats_list.py)
+    1.  **Model Source:** [`InvoiceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_o_enum.py)
+    2.  **Model Source:** [`InvoiceStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/invoice_state_enum.py)
+    3.  **API Source:** [`invoices_stats_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoices/invoices_stats_list.py)
 
 === "TypeScript"
 

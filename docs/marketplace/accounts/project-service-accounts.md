@@ -34,7 +34,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_project_service_accounts import marketplace_project_service_accounts_list # (1)
+    from waldur_api_client.models.service_account_state import ServiceAccountState # (1)
+    from waldur_api_client.api.marketplace_project_service_accounts import marketplace_project_service_accounts_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -46,7 +47,8 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_project_service_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_project_service_accounts/marketplace_project_service_accounts_list.py)
+    1.  **Model Source:** [`ServiceAccountState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_account_state.py)
+    2.  **API Source:** [`marketplace_project_service_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_project_service_accounts/marketplace_project_service_accounts_list.py)
 
 === "TypeScript"
 

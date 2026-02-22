@@ -31,7 +31,10 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.system_logs import system_logs_list # (1)
+    from waldur_api_client.models.system_log_level_enum import SystemLogLevelEnum # (1)
+    from waldur_api_client.models.system_log_o_enum import SystemLogOEnum # (2)
+    from waldur_api_client.models.system_log_source_enum import SystemLogSourceEnum # (3)
+    from waldur_api_client.api.system_logs import system_logs_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +46,10 @@
     ```
     
     
-    1.  **API Source:** [`system_logs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/system_logs/system_logs_list.py)
+    1.  **Model Source:** [`SystemLogLevelEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_log_level_enum.py)
+    2.  **Model Source:** [`SystemLogOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_log_o_enum.py)
+    3.  **Model Source:** [`SystemLogSourceEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_log_source_enum.py)
+    4.  **API Source:** [`system_logs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/system_logs/system_logs_list.py)
 
 === "TypeScript"
 
@@ -75,7 +81,7 @@
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `source` | string | _Enum: `api`, `beat`, `worker`_ |
+    | `source` | string | _Enum: `api`, `worker`, `beat`_ |
 
 
 === "Responses"
@@ -195,7 +201,10 @@ List all known instances (pods/containers) with their last activity.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.system_logs import system_logs_instances_list # (1)
+    from waldur_api_client.models.system_log_level_enum import SystemLogLevelEnum # (1)
+    from waldur_api_client.models.system_log_o_enum import SystemLogOEnum # (2)
+    from waldur_api_client.models.system_log_source_enum import SystemLogSourceEnum # (3)
+    from waldur_api_client.api.system_logs import system_logs_instances_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -207,7 +216,10 @@ List all known instances (pods/containers) with their last activity.
     ```
     
     
-    1.  **API Source:** [`system_logs_instances_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/system_logs/system_logs_instances_list.py)
+    1.  **Model Source:** [`SystemLogLevelEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_log_level_enum.py)
+    2.  **Model Source:** [`SystemLogOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_log_o_enum.py)
+    3.  **Model Source:** [`SystemLogSourceEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_log_source_enum.py)
+    4.  **API Source:** [`system_logs_instances_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/system_logs/system_logs_instances_list.py)
 
 === "TypeScript"
 
@@ -239,7 +251,7 @@ List all known instances (pods/containers) with their last activity.
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `source` | string | _Enum: `api`, `beat`, `worker`_ |
+    | `source` | string | _Enum: `api`, `worker`, `beat`_ |
 
 
 === "Responses"

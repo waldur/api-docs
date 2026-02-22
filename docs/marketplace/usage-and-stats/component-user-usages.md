@@ -31,7 +31,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_component_user_usages import marketplace_component_user_usages_list # (1)
+    from waldur_api_client.models.component_user_usage_field_enum import ComponentUserUsageFieldEnum # (1)
+    from waldur_api_client.models.component_user_usage_o_enum import ComponentUserUsageOEnum # (2)
+    from waldur_api_client.api.marketplace_component_user_usages import marketplace_component_user_usages_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -43,7 +45,9 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_component_user_usages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_component_user_usages/marketplace_component_user_usages_list.py)
+    1.  **Model Source:** [`ComponentUserUsageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/component_user_usage_field_enum.py)
+    2.  **Model Source:** [`ComponentUserUsageOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/component_user_usage_o_enum.py)
+    3.  **API Source:** [`marketplace_component_user_usages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_component_user_usages/marketplace_component_user_usages_list.py)
 
 === "TypeScript"
 
@@ -133,7 +137,8 @@ Returns the details of a single user-specific component usage record.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_component_user_usages import marketplace_component_user_usages_retrieve # (1)
+    from waldur_api_client.models.component_user_usage_field_enum import ComponentUserUsageFieldEnum # (1)
+    from waldur_api_client.api.marketplace_component_user_usages import marketplace_component_user_usages_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -147,7 +152,8 @@ Returns the details of a single user-specific component usage record.
     ```
     
     
-    1.  **API Source:** [`marketplace_component_user_usages_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_component_user_usages/marketplace_component_user_usages_retrieve.py)
+    1.  **Model Source:** [`ComponentUserUsageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/component_user_usage_field_enum.py)
+    2.  **API Source:** [`marketplace_component_user_usages_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_component_user_usages/marketplace_component_user_usages_retrieve.py)
 
 === "TypeScript"
 

@@ -38,7 +38,8 @@ Returns a paginated list of available software catalogs, such as EESSI or Spack.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_software_catalogs import marketplace_software_catalogs_list # (1)
+    from waldur_api_client.models.software_catalog_o_enum import SoftwareCatalogOEnum # (1)
+    from waldur_api_client.api.marketplace_software_catalogs import marketplace_software_catalogs_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -50,7 +51,8 @@ Returns a paginated list of available software catalogs, such as EESSI or Spack.
     ```
     
     
-    1.  **API Source:** [`marketplace_software_catalogs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_catalogs/marketplace_software_catalogs_list.py)
+    1.  **Model Source:** [`SoftwareCatalogOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_catalog_o_enum.py)
+    2.  **API Source:** [`marketplace_software_catalogs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_catalogs/marketplace_software_catalogs_list.py)
 
 === "TypeScript"
 
@@ -703,7 +705,8 @@ Queries upstream sources (EESSI, Spack) for available catalog versions without c
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_software_catalogs import marketplace_software_catalogs_discover_list # (1)
+    from waldur_api_client.models.software_catalog_o_enum import SoftwareCatalogOEnum # (1)
+    from waldur_api_client.api.marketplace_software_catalogs import marketplace_software_catalogs_discover_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -715,7 +718,8 @@ Queries upstream sources (EESSI, Spack) for available catalog versions without c
     ```
     
     
-    1.  **API Source:** [`marketplace_software_catalogs_discover_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_catalogs/marketplace_software_catalogs_discover_list.py)
+    1.  **Model Source:** [`SoftwareCatalogOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_catalog_o_enum.py)
+    2.  **API Source:** [`marketplace_software_catalogs_discover_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_catalogs/marketplace_software_catalogs_discover_list.py)
 
 === "TypeScript"
 

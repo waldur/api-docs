@@ -32,7 +32,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.events import events_list # (1)
+    from waldur_api_client.models.backend_resource_req_o_enum import BackendResourceReqOEnum # (1)
+    from waldur_api_client.models.event_field_enum import EventFieldEnum # (2)
+    from waldur_api_client.api.events import events_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -44,7 +46,9 @@
     ```
     
     
-    1.  **API Source:** [`events_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_list.py)
+    1.  **Model Source:** [`BackendResourceReqOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_o_enum.py)
+    2.  **Model Source:** [`EventFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/event_field_enum.py)
+    3.  **API Source:** [`events_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_list.py)
 
 === "TypeScript"
 
@@ -113,7 +117,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.events import events_retrieve # (1)
+    from waldur_api_client.models.event_field_enum import EventFieldEnum # (1)
+    from waldur_api_client.api.events import events_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -127,7 +132,8 @@
     ```
     
     
-    1.  **API Source:** [`events_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_retrieve.py)
+    1.  **Model Source:** [`EventFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/event_field_enum.py)
+    2.  **API Source:** [`events_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_retrieve.py)
 
 === "TypeScript"
 
@@ -195,7 +201,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.events import events_count_retrieve # (1)
+    from waldur_api_client.models.event_field_enum import EventFieldEnum # (1)
+    from waldur_api_client.api.events import events_count_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -206,7 +213,8 @@
     ```
     
     
-    1.  **API Source:** [`events_count_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_count_retrieve.py)
+    1.  **Model Source:** [`EventFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/event_field_enum.py)
+    2.  **API Source:** [`events_count_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_count_retrieve.py)
 
 === "TypeScript"
 
@@ -264,7 +272,8 @@ Group is used in exclude_features query param.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.events import events_event_groups_retrieve # (1)
+    from waldur_api_client.models.event_field_enum import EventFieldEnum # (1)
+    from waldur_api_client.api.events import events_event_groups_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -275,7 +284,8 @@ Group is used in exclude_features query param.
     ```
     
     
-    1.  **API Source:** [`events_event_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_event_groups_retrieve.py)
+    1.  **Model Source:** [`EventFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/event_field_enum.py)
+    2.  **API Source:** [`events_event_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_event_groups_retrieve.py)
 
 === "TypeScript"
 
@@ -332,7 +342,8 @@ Returns a list of scope types acceptable by events filter.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.events import events_scope_types_retrieve # (1)
+    from waldur_api_client.models.event_field_enum import EventFieldEnum # (1)
+    from waldur_api_client.api.events import events_scope_types_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -343,7 +354,8 @@ Returns a list of scope types acceptable by events filter.
     ```
     
     
-    1.  **API Source:** [`events_scope_types_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_scope_types_retrieve.py)
+    1.  **Model Source:** [`EventFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/event_field_enum.py)
+    2.  **API Source:** [`events_scope_types_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_scope_types_retrieve.py)
 
 === "TypeScript"
 

@@ -25,7 +25,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.email_logs import email_logs_list # (1)
+    from waldur_api_client.models.email_log_o_enum import EmailLogOEnum # (1)
+    from waldur_api_client.api.email_logs import email_logs_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +38,8 @@
     ```
     
     
-    1.  **API Source:** [`email_logs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/email_logs/email_logs_list.py)
+    1.  **Model Source:** [`EmailLogOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/email_log_o_enum.py)
+    2.  **API Source:** [`email_logs_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/email_logs/email_logs_list.py)
 
 === "TypeScript"
 

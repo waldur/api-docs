@@ -38,7 +38,8 @@ Retrieve a list of group invitations. Unauthenticated users can only see public 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.user_group_invitations import user_group_invitations_list # (1)
+    from waldur_api_client.models.backend_resource_req_o_enum import BackendResourceReqOEnum # (1)
+    from waldur_api_client.api.user_group_invitations import user_group_invitations_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -50,7 +51,8 @@ Retrieve a list of group invitations. Unauthenticated users can only see public 
     ```
     
     
-    1.  **API Source:** [`user_group_invitations_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_group_invitations/user_group_invitations_list.py)
+    1.  **Model Source:** [`BackendResourceReqOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_o_enum.py)
+    2.  **API Source:** [`user_group_invitations_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_group_invitations/user_group_invitations_list.py)
 
 === "TypeScript"
 
