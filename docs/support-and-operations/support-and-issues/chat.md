@@ -88,7 +88,7 @@
     | `created` | string (date-time) |
     | `is_flagged` | boolean |
     | `injection_score` | number (double) |
-    | `injection_severity` | string |
+    | `injection_severity` | any |
     | `injection_categories` | any |
 
 ---
@@ -327,8 +327,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.thread_session_field_enum import ThreadSessionFieldEnum # (1)
-    from waldur_api_client.models.thread_session_max_severity_enum import ThreadSessionMaxSeverityEnum # (2)
+    from waldur_api_client.models.injection_severity_enum import InjectionSeverityEnum # (1)
+    from waldur_api_client.models.thread_session_field_enum import ThreadSessionFieldEnum # (2)
     from waldur_api_client.models.thread_session_o_enum import ThreadSessionOEnum # (3)
     from waldur_api_client.api.chat_threads import chat_threads_list # (4)
     
@@ -342,8 +342,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     ```
     
     
-    1.  **Model Source:** [`ThreadSessionFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_field_enum.py)
-    2.  **Model Source:** [`ThreadSessionMaxSeverityEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_max_severity_enum.py)
+    1.  **Model Source:** [`InjectionSeverityEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/injection_severity_enum.py)
+    2.  **Model Source:** [`ThreadSessionFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_field_enum.py)
     3.  **Model Source:** [`ThreadSessionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_o_enum.py)
     4.  **API Source:** [`chat_threads_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_list.py)
 
@@ -371,7 +371,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `field` | array |  |
     | `is_archived` | boolean |  |
     | `is_flagged` | boolean |  |
-    | `max_severity` | string | _Enum: `critical`, `high`, `low`, `medium`, `none`_ |
+    | `max_severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
     | `modified` | string (date) |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
@@ -395,7 +395,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `is_archived` | boolean |
     | `message_count` | integer |
     | `is_flagged` | boolean |
-    | `max_severity` | string |
+    | `max_severity` | any |
     | `user_username` | string |
     | `user_full_name` | string |
     | `created` | string (date-time) |
@@ -483,7 +483,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `is_archived` | boolean |
     | `message_count` | integer |
     | `is_flagged` | boolean |
-    | `max_severity` | string |
+    | `max_severity` | any |
     | `user_username` | string |
     | `user_full_name` | string |
     | `created` | string (date-time) |
