@@ -99,7 +99,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `K8S_JOB_TIMEOUT` | integer |
     | `ENABLE_STRICT_CHECK_ACCEPTING_INVITATION` | boolean |
     | `INVITATION_DISABLE_MULTIPLE_ROLES` | boolean |
-    | `DEFAULT_IDP` | string |
+    | `DEFAULT_IDP` | any |
     | `DOCS_URL` | string (uri) |
     | `SHORT_PAGE_TITLE` | string |
     | `FULL_PAGE_TITLE` | string |
@@ -233,17 +233,17 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |
     | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |
     | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |
-    | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of strings |
-    | `INVITATION_ALLOWED_FIELDS` | array of strings |
-    | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of strings |
-    | `MANDATORY_USER_ATTRIBUTES` | array of strings |
+    | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of anys |
+    | `INVITATION_ALLOWED_FIELDS` | array of anys |
+    | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of anys |
+    | `MANDATORY_USER_ATTRIBUTES` | array of anys |
     | `ENFORCE_MANDATORY_USER_ATTRIBUTES` | boolean |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_BEFORE_MINUTES` | integer |
-    | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of strings |
+    | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of anys |
     | `ENFORCE_USER_CONSENT_FOR_OFFERINGS` | boolean |
     | `ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS` | boolean |
-    | `DISABLED_OFFERING_TYPES` | array of strings |
-    | `ONBOARDING_VALIDATION_METHODS` | array of strings |
+    | `DISABLED_OFFERING_TYPES` | array of anys |
+    | `ONBOARDING_VALIDATION_METHODS` | array of anys |
     | `ONBOARDING_VERIFICATION_EXPIRY_HOURS` | integer |
     | `ONBOARDING_ARIREGISTER_BASE_URL` | string (uri) |
     | `ONBOARDING_ARIREGISTER_USERNAME` | string |
@@ -300,7 +300,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ARROW_BILLING_CHECK_INTERVAL_HOURS` | integer |
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |
-    | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of strings |
+    | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of anys |
     | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |
     | `ENABLE_PROJECT_DIGEST` | boolean |
 
@@ -400,7 +400,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `K8S_JOB_TIMEOUT` | integer |  |
     | `ENABLE_STRICT_CHECK_ACCEPTING_INVITATION` | boolean |  |
     | `INVITATION_DISABLE_MULTIPLE_ROLES` | boolean |  |
-    | `DEFAULT_IDP` | string |  |
+    | `DEFAULT_IDP` | any |  |
     | `DOCS_URL` | string (uri) |  |
     | `SHORT_PAGE_TITLE` | string |  |
     | `FULL_PAGE_TITLE` | string |  |
@@ -534,17 +534,17 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |  |
     | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |  |
     | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |  |
-    | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of strings |  |
-    | `INVITATION_ALLOWED_FIELDS` | array of strings |  |
-    | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of strings |  |
-    | `MANDATORY_USER_ATTRIBUTES` | array of strings |  |
+    | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of anys |  |
+    | `INVITATION_ALLOWED_FIELDS` | array of anys |  |
+    | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of anys |  |
+    | `MANDATORY_USER_ATTRIBUTES` | array of anys |  |
     | `ENFORCE_MANDATORY_USER_ATTRIBUTES` | boolean |  |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_BEFORE_MINUTES` | integer |  |
-    | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of strings |  |
+    | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of anys |  |
     | `ENFORCE_USER_CONSENT_FOR_OFFERINGS` | boolean |  |
     | `ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS` | boolean |  |
-    | `DISABLED_OFFERING_TYPES` | array of strings |  |
-    | `ONBOARDING_VALIDATION_METHODS` | array of strings |  |
+    | `DISABLED_OFFERING_TYPES` | array of anys |  |
+    | `ONBOARDING_VALIDATION_METHODS` | array of anys |  |
     | `ONBOARDING_VERIFICATION_EXPIRY_HOURS` | integer |  |
     | `ONBOARDING_ARIREGISTER_BASE_URL` | string (uri) |  |
     | `ONBOARDING_ARIREGISTER_USERNAME` | string |  |
@@ -601,7 +601,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ARROW_BILLING_CHECK_INTERVAL_HOURS` | integer |  |
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |  |
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |  |
-    | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of strings |  |
+    | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of anys |  |
     | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |  |
     | `ENABLE_PROJECT_DIGEST` | boolean |  |
 

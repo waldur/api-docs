@@ -783,6 +783,7 @@ Creates a new provider offering.
     | `plugin_options.enable_provider_consumer_messaging` | boolean |  | If set to True, service providers can send messages with attachments to consumers on pending orders, and consumers can respond. |
     | `plugin_options.notify_about_provider_consumer_messages` | boolean |  | If set to True, send email notifications when providers or consumers exchange messages on pending orders. |
     | `plugin_options.restrict_deletion_with_active_resources` | boolean |  | If set to True, offering cannot be deleted while it has non-terminated resources. |
+    | `plugin_options.resource_name_pattern` | string |  | Python format string for generating resource names. Available variables: {customer_name}, {customer_slug}, {project_name}, {project_slug}, {offering_name}, {offering_slug}, {plan_name}, {counter}, {attributes[KEY]}. |
     | `plugin_options.default_internal_network_mtu` | integer |  | If set, it will be used as a default MTU for the first network in a tenant |
     | `plugin_options.max_instances` | integer |  | Default limit for number of instances in OpenStack tenant |
     | `plugin_options.max_volumes` | integer |  | Default limit for number of volumes in OpenStack tenant |
@@ -5547,6 +5548,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.enable_provider_consumer_messaging` | boolean |  | If set to True, service providers can send messages with attachments to consumers on pending orders, and consumers can respond. |
     | `plugin_options.notify_about_provider_consumer_messages` | boolean |  | If set to True, send email notifications when providers or consumers exchange messages on pending orders. |
     | `plugin_options.restrict_deletion_with_active_resources` | boolean |  | If set to True, offering cannot be deleted while it has non-terminated resources. |
+    | `plugin_options.resource_name_pattern` | string |  | Python format string for generating resource names. Available variables: {customer_name}, {customer_slug}, {project_name}, {project_slug}, {offering_name}, {offering_slug}, {plan_name}, {counter}, {attributes[KEY]}. |
     | `plugin_options.default_internal_network_mtu` | integer |  | If set, it will be used as a default MTU for the first network in a tenant |
     | `plugin_options.max_instances` | integer |  | Default limit for number of instances in OpenStack tenant |
     | `plugin_options.max_volumes` | integer |  | Default limit for number of volumes in OpenStack tenant |
