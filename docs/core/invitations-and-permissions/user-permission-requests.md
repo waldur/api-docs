@@ -7,6 +7,7 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/user-permission-requests/` | [List permission requests](#list-permission-requests) |
 | <span class="http-badge http-get">GET</span> | `/api/user-permission-requests/{uuid}/` | [Retrieve permission request](#retrieve-permission-request) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/user-permission-requests/{uuid}/` | [Delete a permission request (staff only)](#delete-a-permission-request-staff-only) |
 | **Other Actions** | | |
 | <span class="http-badge http-post">POST</span> | `/api/user-permission-requests/{uuid}/approve/` | [Approve a permission request](#approve-a-permission-request) |
 | <span class="http-badge http-post">POST</span> | `/api/user-permission-requests/{uuid}/cancel_request/` | [Cancel a permission request](#cancel-a-permission-request) |
@@ -197,6 +198,73 @@ Retrieve details of a specific permission request.
     | `role_name` | string |  |
     | `role_description` | string |  |
     | `project_name_template` | string |  |
+
+---
+
+### Delete a permission request (staff only)
+
+Deletes a permission request. This action is restricted to staff users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/user-permission-requests/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.user_permission_requests import user_permission_requests_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = user_permission_requests_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`user_permission_requests_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_permission_requests/user_permission_requests_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { userPermissionRequestsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await userPermissionRequestsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
 
 ---
 

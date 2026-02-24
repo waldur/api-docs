@@ -31,8 +31,9 @@ Returns a paginated list of software versions. Can be filtered by package, catal
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.software_version_o_enum import SoftwareVersionOEnum # (1)
-    from waldur_api_client.api.marketplace_software_versions import marketplace_software_versions_list # (2)
+    from waldur_api_client.models.catalog_type_enum import CatalogTypeEnum # (1)
+    from waldur_api_client.models.software_version_o_enum import SoftwareVersionOEnum # (2)
+    from waldur_api_client.api.marketplace_software_versions import marketplace_software_versions_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -44,8 +45,9 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     ```
     
     
-    1.  **Model Source:** [`SoftwareVersionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_version_o_enum.py)
-    2.  **API Source:** [`marketplace_software_versions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_versions/marketplace_software_versions_list.py)
+    1.  **Model Source:** [`CatalogTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/catalog_type_enum.py)
+    2.  **Model Source:** [`SoftwareVersionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_version_o_enum.py)
+    3.  **API Source:** [`marketplace_software_versions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_versions/marketplace_software_versions_list.py)
 
 === "TypeScript"
 
@@ -67,6 +69,7 @@ Returns a paginated list of software versions. Can be filtered by package, catal
 
     | Name | Type | Description |
     |---|---|---|
+    | `catalog_type` | string | Filter versions by catalog type (binary_runtime, source_package, package_manager)<br><br><br>_Enum: `binary_runtime`, `source_package`, `package_manager`_ |
     | `catalog_uuid` | string (uuid) |  |
     | `cpu_family` | string |  |
     | `cpu_microarchitecture` | string |  |
@@ -76,7 +79,13 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     | `package_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `release_date_after` | string (date) | Filter versions by release date range (release_date_after, release_date_before) |
+    | `release_date_before` | string (date) | Filter versions by release date range (release_date_after, release_date_before) |
+    | `toolchain_families_compatibility` | string | Filter versions compatible with a specific toolchain family (e.g., foss_2022b) |
+    | `toolchain_name` | string | Filter versions by toolchain name (e.g., foss, gfbf) |
+    | `toolchain_version` | string | Filter versions by toolchain version (e.g., 2023b) |
     | `version` | string |  |
+    | `version_exact` | string | Filter versions by exact version string |
 
 
 === "Responses"

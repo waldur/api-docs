@@ -31,8 +31,9 @@ Returns a paginated list of software packages available in the catalogs. Can be 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.software_package_o_enum import SoftwarePackageOEnum # (1)
-    from waldur_api_client.api.marketplace_software_packages import marketplace_software_packages_list # (2)
+    from waldur_api_client.models.catalog_type_enum import CatalogTypeEnum # (1)
+    from waldur_api_client.models.software_package_o_enum import SoftwarePackageOEnum # (2)
+    from waldur_api_client.api.marketplace_software_packages import marketplace_software_packages_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -44,8 +45,9 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     ```
     
     
-    1.  **Model Source:** [`SoftwarePackageOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_package_o_enum.py)
-    2.  **API Source:** [`marketplace_software_packages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_packages/marketplace_software_packages_list.py)
+    1.  **Model Source:** [`CatalogTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/catalog_type_enum.py)
+    2.  **Model Source:** [`SoftwarePackageOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_package_o_enum.py)
+    3.  **API Source:** [`marketplace_software_packages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_packages/marketplace_software_packages_list.py)
 
 === "TypeScript"
 
@@ -68,8 +70,10 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | Name | Type | Description |
     |---|---|---|
     | `catalog_name` | string | Filter packages by catalog name (case-insensitive partial match) |
+    | `catalog_type` | string | Filter packages by catalog type (binary_runtime, source_package, package_manager)<br><br><br>_Enum: `binary_runtime`, `source_package`, `package_manager`_ |
     | `catalog_uuid` | string (uuid) | Filter packages from a specific software catalog |
     | `catalog_version` | string | Filter packages by catalog version (case-insensitive partial match) |
+    | `category` | string | Filter packages by category (e.g., bio, hpc, chemistry) |
     | `cpu_family` | string | Filter packages available for specific CPU family (e.g., x86_64, aarch64) |
     | `cpu_microarchitecture` | string | Filter packages available for specific CPU microarchitecture (e.g., generic, zen2, haswell) |
     | `description` | string | Filter packages by description (case-insensitive partial match) |
@@ -77,13 +81,17 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `extension_type` | string | Filter packages having extensions of a specific type (e.g., 'python') |
     | `has_version` | string | Filter packages that have a specific version |
     | `is_extension` | boolean | Filter packages that are extensions of other packages |
+    | `license` | string | Filter packages by license (e.g., GPL-3.0, MIT) |
     | `name` | string | Filter packages by name (case-insensitive partial match) |
     | `name_exact` | string | Filter packages by exact name (case-insensitive) |
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) | Filter packages available for a specific offering |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `parent_software_uuid` | string (uuid) | Filter extension packages belonging to a specific parent package |
     | `query` | string | Query packages by name, description, or version (case-insensitive partial match) |
+    | `toolchain_families_compatibility` | string | Filter packages compatible with a specific toolchain family (e.g., foss_2022b) |
+    | `toolchain_name` | string | Filter packages by toolchain name (e.g., foss, gfbf) |
 
 
 === "Responses"
