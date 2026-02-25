@@ -19,8 +19,7 @@ List customer quotas.
     http \
       GET \
       https://api.example.com/api/customer-quotas/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      quota_name=="estimated_price"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
@@ -33,10 +32,7 @@ List customer quotas.
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    response = customer_quotas_list.sync(
-        client=client,
-        quota_name=CustomerQuotasQuotaNameEnum.ESTIMATED_PRICE
-    )
+    response = customer_quotas_list.sync(client=client)
     
     for item in response:
         print(item)
@@ -53,10 +49,7 @@ List customer quotas.
     
     try {
       const response = await customerQuotasList({
-      auth: "Token YOUR_API_TOKEN",
-      query: {
-        "quota_name": "estimated_price"
-      }
+      auth: "Token YOUR_API_TOKEN"
     });
       console.log('Success:', response);
     } catch (error) {
@@ -67,11 +60,11 @@ List customer quotas.
 
 === "Query Parameters"
 
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `page` | integer |  | A page number within the paginated result set. |
-    | `page_size` | integer |  | Number of results to return per page. |
-    | `quota_name` | string | ✓ | Name of the quota<br>_Enum: `estimated_price`, `nc_resource_count`, `os_cpu_count`, `os_ram_size`, `os_storage_size`, `vpc_cpu_count`, `vpc_floating_ip_count`, `vpc_instance_count`, `vpc_ram_size`, `vpc_storage_size`_ |
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `quota_name` | string | Name of the quota<br>_Enum: `estimated_price`, `nc_resource_count`, `os_cpu_count`, `os_ram_size`, `os_storage_size`, `vpc_cpu_count`, `vpc_floating_ip_count`, `vpc_instance_count`, `vpc_ram_size`, `vpc_storage_size`_ |
 
 
 === "Responses"
