@@ -1987,6 +1987,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
+    | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
     | `gender` | any | ISO 5218 gender code |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |

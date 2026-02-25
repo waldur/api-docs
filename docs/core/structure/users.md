@@ -39,6 +39,7 @@ A User object on its own has limited capabilities beyond logging in and managing
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/change_password/` | [Change user password](#change-user-password) |
 | <span class="http-badge http-post">POST</span> | `/api/users/confirm_email/` | [Confirm email change](#confirm-email-change) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/refresh_token/` | [Refresh user auth token](#refresh-user-auth-token) |
+| <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/remove_password/` | [Remove user password](#remove-user-password) |
 | <span class="http-badge http-post">POST</span> | `/api/users/scim_sync_all/` | [Trigger SCIM synchronization for all users](#trigger-scim-synchronization-for-all-users) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/send_notification/` | [Send action notification to a specific user](#send-action-notification-to-a-specific-user) |
 
@@ -188,6 +189,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
+    | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
     | `gender` | any | ISO 5218 gender code |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -330,6 +332,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
+    | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
     | `gender` | any | ISO 5218 gender code |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -503,6 +506,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
+    | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
     | `gender` | any | ISO 5218 gender code |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -836,6 +840,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
+    | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
     | `gender` | any | ISO 5218 gender code |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -1010,6 +1015,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
+    | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
     | `gender` | any | ISO 5218 gender code |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -1717,6 +1723,7 @@ Get current user details, including authentication token and profile completenes
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
     | `has_active_session` | boolean |  |
+    | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
     | `gender` | any | ISO 5218 gender code |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -2536,6 +2543,73 @@ Confirm email update using code
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
     | `token` | string |  |
+
+---
+
+### Remove user password
+
+Allows staff user to remove password for any user, making it unusable.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/remove_password/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_remove_password # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_remove_password.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_remove_password`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_remove_password.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersRemovePassword } from 'waldur-js-client';
+    
+    try {
+      const response = await usersRemovePassword({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---
 
