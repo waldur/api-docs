@@ -555,7 +555,6 @@ Returns the current user's chat session, creating it if it doesn't exist.
     |---|---|---|---|
     | `input` | string | ✓ | User input text for the chat model. |
     | `thread_uuid` | string (uuid) |  | Existing thread UUID. If omitted, a new thread is created. |
-    | `update_thread_name` | string (uuid) |  | Thread UUID whose name should be set to the assistant's response. Skips message persistence for this call. |
     | `mode` | any |  | 'reload': replace the last assistant response. 'edit': edit a user message and re-stream. Omit for normal new-message behavior. |
     | `edit_message_uuid` | string (uuid) |  | UUID of the user message to edit. Required when mode='edit'. |
 
