@@ -89,6 +89,7 @@
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
     | `offering` | string (uuid) | UUID of an offering with a site-agent compatible type. |
+    | `created_by` | string (uuid) |  |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -176,6 +177,7 @@
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
     | `offering` | string (uuid) | UUID of an offering with a site-agent compatible type. |
+    | `created_by` | string (uuid) |  |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -279,6 +281,7 @@
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
     | `offering` | string (uuid) | UUID of an offering with a site-agent compatible type. |
+    | `created_by` | string (uuid) |  |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
@@ -393,6 +396,7 @@
     | `uuid` | string (uuid) |  |
     | `url` | string (uri) |  |
     | `offering` | string (uuid) | UUID of an offering with a site-agent compatible type. |
+    | `created_by` | string (uuid) |  |
     | `name` | string |  |
     | `version` | string |  |
     | `dependencies` | any |  |
