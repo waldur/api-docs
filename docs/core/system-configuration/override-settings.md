@@ -85,6 +85,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `DISABLE_SENDING_NOTIFICATIONS_ABOUT_RESOURCE_UPDATE` | boolean |
     | `MARKETPLACE_LANDING_PAGE` | string |
     | `ENABLE_STALE_RESOURCE_NOTIFICATIONS` | boolean |
+    | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |
     | `TELEMETRY_URL` | string |
     | `TELEMETRY_VERSION` | integer |
     | `SCRIPT_RUN_MODE` | string |
@@ -303,6 +304,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of anys |
     | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |
     | `ENABLE_PROJECT_DIGEST` | boolean |
+    | `SSH_KEY_ALLOWED_TYPES` | array of anys |
+    | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |
 
 ---
 
@@ -386,6 +389,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `DISABLE_SENDING_NOTIFICATIONS_ABOUT_RESOURCE_UPDATE` | boolean |  |
     | `MARKETPLACE_LANDING_PAGE` | string |  |
     | `ENABLE_STALE_RESOURCE_NOTIFICATIONS` | boolean |  |
+    | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |  |
     | `TELEMETRY_URL` | string |  |
     | `TELEMETRY_VERSION` | integer |  |
     | `SCRIPT_RUN_MODE` | string |  |
@@ -604,6 +608,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of anys |  |
     | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |  |
     | `ENABLE_PROJECT_DIGEST` | boolean |  |
+    | `SSH_KEY_ALLOWED_TYPES` | array of anys |  |
+    | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |  |
 
 
 === "Responses"
