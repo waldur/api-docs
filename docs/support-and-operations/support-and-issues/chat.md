@@ -87,9 +87,10 @@
     | `replaces` | string (uuid) |
     | `created` | string (date-time) |
     | `is_flagged` | boolean |
-    | `injection_score` | number (double) |
-    | `injection_severity` | any |
+    | `severity` | any |
     | `injection_categories` | any |
+    | `pii_categories` | any |
+    | `action_taken` | any |
 
 ---
 
