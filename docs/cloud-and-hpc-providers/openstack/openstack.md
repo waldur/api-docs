@@ -484,6 +484,7 @@ Discover available external networks.
     | `user_domain_name` | string |  | Keystone user domain name<br>_Constraints: default: `Default`_ |
     | `project_domain_name` | string |  | Keystone project domain name<br>_Constraints: default: `Default`_ |
     | `project_name` | string |  | Keystone project (tenant) name<br>_Constraints: default: `admin`_ |
+    | `auth_type` | any |  | Authentication method: password or v3applicationcredential<br>_Constraints: default: `password`_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `False`_ |
     | `certificate` | string |  | PEM-encoded CA certificate for SSL verification<br>_Constraints: write-only_ |
 
@@ -593,6 +594,7 @@ Discover available flavors.
     | `user_domain_name` | string |  | Keystone user domain name<br>_Constraints: default: `Default`_ |
     | `project_domain_name` | string |  | Keystone project domain name<br>_Constraints: default: `Default`_ |
     | `project_name` | string |  | Keystone project (tenant) name<br>_Constraints: default: `admin`_ |
+    | `auth_type` | any |  | Authentication method: password or v3applicationcredential<br>_Constraints: default: `password`_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `False`_ |
     | `certificate` | string |  | PEM-encoded CA certificate for SSL verification<br>_Constraints: write-only_ |
 
@@ -698,6 +700,7 @@ Discover available Nova instance availability zones.
     | `user_domain_name` | string |  | Keystone user domain name<br>_Constraints: default: `Default`_ |
     | `project_domain_name` | string |  | Keystone project domain name<br>_Constraints: default: `Default`_ |
     | `project_name` | string |  | Keystone project (tenant) name<br>_Constraints: default: `admin`_ |
+    | `auth_type` | any |  | Authentication method: password or v3applicationcredential<br>_Constraints: default: `password`_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `False`_ |
     | `certificate` | string |  | PEM-encoded CA certificate for SSL verification<br>_Constraints: write-only_ |
 
@@ -800,6 +803,7 @@ Discover available Cinder volume availability zones.
     | `user_domain_name` | string |  | Keystone user domain name<br>_Constraints: default: `Default`_ |
     | `project_domain_name` | string |  | Keystone project domain name<br>_Constraints: default: `Default`_ |
     | `project_name` | string |  | Keystone project (tenant) name<br>_Constraints: default: `admin`_ |
+    | `auth_type` | any |  | Authentication method: password or v3applicationcredential<br>_Constraints: default: `password`_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `False`_ |
     | `certificate` | string |  | PEM-encoded CA certificate for SSL verification<br>_Constraints: write-only_ |
 
@@ -902,6 +906,7 @@ Discover available volume types.
     | `user_domain_name` | string |  | Keystone user domain name<br>_Constraints: default: `Default`_ |
     | `project_domain_name` | string |  | Keystone project domain name<br>_Constraints: default: `Default`_ |
     | `project_name` | string |  | Keystone project (tenant) name<br>_Constraints: default: `admin`_ |
+    | `auth_type` | any |  | Authentication method: password or v3applicationcredential<br>_Constraints: default: `password`_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `False`_ |
     | `certificate` | string |  | PEM-encoded CA certificate for SSL verification<br>_Constraints: write-only_ |
 
@@ -996,6 +1001,7 @@ Build service_attributes and plugin_options from selected values.
     | `user_domain_name` | string |  | Keystone user domain name<br>_Constraints: default: `Default`_ |
     | `project_domain_name` | string |  | Keystone project domain name<br>_Constraints: default: `Default`_ |
     | `project_name` | string |  | Keystone project (tenant) name<br>_Constraints: default: `admin`_ |
+    | `auth_type` | any |  | Authentication method: password or v3applicationcredential<br>_Constraints: default: `password`_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `False`_ |
     | `certificate` | string |  | PEM-encoded CA certificate for SSL verification<br>_Constraints: write-only_ |
     | `external_network_id` | string |  | Selected external network ID<br>_Constraints: default: ``_ |
@@ -1090,6 +1096,7 @@ Validate OpenStack credentials without saving them.
     | `user_domain_name` | string |  | Keystone user domain name<br>_Constraints: default: `Default`_ |
     | `project_domain_name` | string |  | Keystone project domain name<br>_Constraints: default: `Default`_ |
     | `project_name` | string |  | Keystone project (tenant) name<br>_Constraints: default: `admin`_ |
+    | `auth_type` | any |  | Authentication method: password or v3applicationcredential<br>_Constraints: default: `password`_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `False`_ |
     | `certificate` | string |  | PEM-encoded CA certificate for SSL verification<br>_Constraints: write-only_ |
 

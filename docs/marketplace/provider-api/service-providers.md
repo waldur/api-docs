@@ -250,6 +250,7 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `project_customer_uuid` | string (uuid) | ✓ | UUID of the customer to filter projects by. |
     | `query` | string |  | Filter by name, slug, UUID, backend ID or resource effective ID |
     | `slug` | string |  | Slug |
+    | `user_uuid` | string (uuid) |  | Filter projects where the given user has a role. |
 
 
 === "Responses"
@@ -1224,6 +1225,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, slug, UUID, backend ID or resource effective ID |
     | `slug` | string | Slug |
+    | `user_uuid` | string (uuid) | Filter projects where the given user has a role. |
 
 
 === "Responses"

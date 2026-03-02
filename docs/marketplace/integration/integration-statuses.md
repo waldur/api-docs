@@ -85,6 +85,7 @@ Returns a paginated list of integration statuses for offerings. This is used to 
     
     | Field | Type |
     |---|---|
+    | `agent_type` | any |
     | `status` | string |
     | `last_request_timestamp` | string (date-time) |
     | `offering` | string (uri) |
@@ -158,6 +159,7 @@ Returns the details of a specific integration status, including the agent type, 
     
     | Field | Type |
     |---|---|
+    | `agent_type` | any |
     | `status` | string |
     | `last_request_timestamp` | string (date-time) |
     | `offering` | string (uri) |

@@ -572,7 +572,6 @@ Create ProjectTemplate object
       https://api.example.com/api/openportal-project-template/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-openportal-project-template" \
-      offering="string-value" \
       provider="https://api.example.com/api/provider/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       portal="string-value" \
       customer="https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
@@ -592,7 +591,6 @@ Create ProjectTemplate object
     
     body_data = ProjectTemplateRequest(
         name="my-awesome-openportal-project-template",
-        offering="string-value",
         provider="https://api.example.com/api/provider/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         portal="string-value",
         customer="https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
@@ -620,7 +618,6 @@ Create ProjectTemplate object
       auth: "Token YOUR_API_TOKEN",
       body: {
         "name": "my-awesome-openportal-project-template",
-        "offering": "string-value",
         "provider": "https://api.example.com/api/provider/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "portal": "string-value",
         "customer": "https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
@@ -639,7 +636,7 @@ Create ProjectTemplate object
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `offering` | string | ✓ | The offering for which this template applies. |
+    | `offering` | string |  | The offering for which this template applies. |
     | `provider` | string (uri) | ✓ |  |
     | `portal` | string | ✓ |  |
     | `key` | string |  | The key that is used to authenticate requests for this class. |
@@ -877,7 +874,6 @@ Update ProjectTemplate object (full update)
       https://api.example.com/api/openportal-project-template/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-openportal-project-template" \
-      offering="string-value" \
       provider="https://api.example.com/api/provider/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       portal="string-value" \
       customer="https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
@@ -897,7 +893,6 @@ Update ProjectTemplate object (full update)
     
     body_data = ProjectTemplateRequest(
         name="my-awesome-openportal-project-template",
-        offering="string-value",
         provider="https://api.example.com/api/provider/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         portal="string-value",
         customer="https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
@@ -929,7 +924,6 @@ Update ProjectTemplate object (full update)
       },
       body: {
         "name": "my-awesome-openportal-project-template",
-        "offering": "string-value",
         "provider": "https://api.example.com/api/provider/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "portal": "string-value",
         "customer": "https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
@@ -955,7 +949,7 @@ Update ProjectTemplate object (full update)
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `offering` | string | ✓ | The offering for which this template applies. |
+    | `offering` | string |  | The offering for which this template applies. |
     | `provider` | string (uri) | ✓ |  |
     | `portal` | string | ✓ |  |
     | `key` | string |  | The key that is used to authenticate requests for this class. |
