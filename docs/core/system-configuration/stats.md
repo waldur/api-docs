@@ -8,6 +8,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/stats/database/` | [Get comprehensive database statistics](#get-comprehensive-database-statistics) |
 | <span class="http-badge http-get">GET</span> | `/api/stats/table-growth/` | [Get table growth statistics](#get-table-growth-statistics) |
 | <span class="http-badge http-post">POST</span> | `/api/stats/query/` | [Execute read-only SQL query](#execute-read-only-sql-query) |
+| <span class="http-badge http-post">POST</span> | `/api/stats/table-growth/` | [Trigger table size sampling](#trigger-table-size-sampling) |
 
 ---
 
@@ -344,5 +345,62 @@ Execute a given SQL query against a read-only database replica. This is a powerf
     
     **`400`** - No response body
     
+
+---
+
+### Trigger table size sampling
+
+Triggers the sample_table_sizes Celery task to collect current table size data. Requires staff permissions.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/stats/table-growth/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.stats import stats_table_growth # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = stats_table_growth.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`stats_table_growth`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/stats/stats_table_growth.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { statsTableGrowth } from 'waldur-js-client';
+    
+    try {
+      const response = await statsTableGrowth({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`202`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `detail` | string | Status message about the triggered task |
 
 ---

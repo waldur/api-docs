@@ -763,6 +763,7 @@ Creates a new provider offering.
     | `plugin_options.auto_approve_remote_orders` | boolean |  | If set to True, an order can be processed without approval |
     | `plugin_options.resource_expiration_threshold` | integer |  | Resource expiration threshold in days.<br>_Constraints: default: `30`_ |
     | `plugin_options.service_provider_can_create_offering_user` | boolean |  | Service provider can create offering user |
+    | `plugin_options.offering_user_auto_deletion` | boolean |  | If set to True, offering users will be automatically marked for deletion by the cleanup task when users lose project access. If False (default), deletion must be triggered manually by the service provider.<br>_Constraints: default: `False`_ |
     | `plugin_options.max_resource_termination_offset_in_days` | integer |  | Maximum resource termination offset in days |
     | `plugin_options.default_resource_termination_offset_in_days` | integer |  | If set, it will be used as a default resource termination offset in days |
     | `plugin_options.is_resource_termination_date_required` | boolean |  | If set to True, resource termination date is required |
@@ -5529,6 +5530,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.auto_approve_remote_orders` | boolean |  | If set to True, an order can be processed without approval |
     | `plugin_options.resource_expiration_threshold` | integer |  | Resource expiration threshold in days.<br>_Constraints: default: `30`_ |
     | `plugin_options.service_provider_can_create_offering_user` | boolean |  | Service provider can create offering user |
+    | `plugin_options.offering_user_auto_deletion` | boolean |  | If set to True, offering users will be automatically marked for deletion by the cleanup task when users lose project access. If False (default), deletion must be triggered manually by the service provider.<br>_Constraints: default: `False`_ |
     | `plugin_options.max_resource_termination_offset_in_days` | integer |  | Maximum resource termination offset in days |
     | `plugin_options.default_resource_termination_offset_in_days` | integer |  | If set, it will be used as a default resource termination offset in days |
     | `plugin_options.is_resource_termination_date_required` | boolean |  | If set to True, resource termination date is required |
