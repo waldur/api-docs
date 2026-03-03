@@ -17,6 +17,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/evaluation-logs/` | [List evaluation logs for this policy](#list-evaluation-logs-for-this-policy) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/dry-run/` | [Dry run](#dry-run) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/evaluate/` | [Evaluate](#evaluate) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/force-period-reset/` | [Force period reset](#force-period-reset) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/preview_impact/` | [Preview impact](#preview-impact) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-slurm-periodic-usage-policies/{uuid}/report-command-result/` | [Report command execution result from site agent](#report-command-execution-result-from-site-agent) |
 
@@ -1069,6 +1070,96 @@ Staff-only. Run synchronous policy evaluation: calculates usage, applies actions
     
     try {
       const response = await marketplaceSlurmPeriodicUsagePoliciesEvaluate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `resource_uuid` | string (uuid) |  | Evaluate a specific resource. If omitted, evaluates all offering resources. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `policy_uuid` | string (uuid) |
+    | `billing_period` | string |
+    | `resources` | array of objects |
+    | `resources.resource_uuid` | string (uuid) |
+    | `resources.resource_name` | string |
+    | `resources.usage_percentage` | number (double) |
+    | `resources.actions_taken` | array of strings |
+    | `resources.previous_state` | object (free-form) |
+    | `resources.new_state` | object (free-form) |
+
+---
+
+### Force period reset
+
+Staff-only. Force-trigger period reset: re-evaluates paused/downscaled resources whose usage in the current period is below thresholds. Useful after a Celery beat outage or to immediately unblock resources.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-slurm-periodic-usage-policies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/force-period-reset/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.slurm_policy_evaluate_request_request import SlurmPolicyEvaluateRequestRequest # (1)
+    from waldur_api_client.api.marketplace_slurm_periodic_usage_policies import marketplace_slurm_periodic_usage_policies_force_period_reset # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SlurmPolicyEvaluateRequestRequest()
+    response = marketplace_slurm_periodic_usage_policies_force_period_reset.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SlurmPolicyEvaluateRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/slurm_policy_evaluate_request_request.py)
+    2.  **API Source:** [`marketplace_slurm_periodic_usage_policies_force_period_reset`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_slurm_periodic_usage_policies/marketplace_slurm_periodic_usage_policies_force_period_reset.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSlurmPeriodicUsagePoliciesForcePeriodReset } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSlurmPeriodicUsagePoliciesForcePeriodReset({
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
