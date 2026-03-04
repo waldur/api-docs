@@ -12471,6 +12471,16 @@
 <td>Filter packages having extensions of a specific type (e.g., 'python')</td>
 </tr>
 <tr>
+<td><code>gpu_arch</code></td>
+<td>string</td>
+<td>Filter packages by GPU architecture (e.g., nvidia/cc90)</td>
+</tr>
+<tr>
+<td><code>has_gpu</code></td>
+<td>boolean</td>
+<td>Filter packages that have GPU-enabled builds</td>
+</tr>
+<tr>
 <td><code>has_version</code></td>
 <td>string</td>
 <td>Filter packages that have a specific version</td>
@@ -12714,6 +12724,11 @@
 <td><code>versions.targets.metadata</code></td>
 <td>any</td>
 <td>Target-specific metadata (build options, system requirements, etc.)</td>
+</tr>
+<tr>
+<td><code>versions.targets.gpu_architectures</code></td>
+<td>any</td>
+<td>List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90'])</td>
 </tr>
 <tr>
 <td><code>versions.module</code></td>
@@ -13010,6 +13025,11 @@
 <td><code>versions.targets.metadata</code></td>
 <td>any</td>
 <td>Target-specific metadata (build options, system requirements, etc.)</td>
+</tr>
+<tr>
+<td><code>versions.targets.gpu_architectures</code></td>
+<td>any</td>
+<td>List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90'])</td>
 </tr>
 <tr>
 <td><code>versions.module</code></td>
@@ -13369,6 +13389,11 @@
 <td><code>versions.targets.metadata</code></td>
 <td>any</td>
 <td>Target-specific metadata (build options, system requirements, etc.)</td>
+</tr>
+<tr>
+<td><code>versions.targets.gpu_architectures</code></td>
+<td>any</td>
+<td>List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90'])</td>
 </tr>
 <tr>
 <td><code>versions.module</code></td>
@@ -13756,6 +13781,11 @@
 <td>Target-specific metadata (build options, system requirements, etc.)</td>
 </tr>
 <tr>
+<td><code>versions.targets.gpu_architectures</code></td>
+<td>any</td>
+<td>List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90'])</td>
+</tr>
+<tr>
 <td><code>versions.module</code></td>
 <td>object (free-form)</td>
 <td></td>
@@ -14121,6 +14151,11 @@
 <td><code>versions.targets.metadata</code></td>
 <td>any</td>
 <td>Target-specific metadata (build options, system requirements, etc.)</td>
+</tr>
+<tr>
+<td><code>versions.targets.gpu_architectures</code></td>
+<td>any</td>
+<td>List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90'])</td>
 </tr>
 <tr>
 <td><code>versions.module</code></td>
