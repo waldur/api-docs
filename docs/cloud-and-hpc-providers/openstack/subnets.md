@@ -161,6 +161,7 @@ Get a list of subnets.
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -291,6 +292,7 @@ Retrieve details of a specific subnet.
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -588,6 +590,7 @@ Update an existing subnet.
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -732,6 +735,7 @@ Update specific fields of a subnet.
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |

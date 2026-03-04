@@ -143,6 +143,7 @@
     | `location_name` | string |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
     | `marketplace_offering_plugin_options` | object (free-form) |
     | `marketplace_category_uuid` | string |
     | `marketplace_category_name` | string |
@@ -261,6 +262,7 @@
     | `location_name` | string |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
     | `marketplace_offering_plugin_options` | object (free-form) |
     | `marketplace_category_uuid` | string |
     | `marketplace_category_name` | string |
@@ -391,6 +393,7 @@
     | `location_name` | string |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
     | `marketplace_offering_plugin_options` | object (free-form) |
     | `marketplace_category_uuid` | string |
     | `marketplace_category_name` | string |
@@ -767,6 +770,7 @@ Delete resource from the database without scheduling operations on backend
     | `location_name` | string |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
     | `marketplace_offering_plugin_options` | object (free-form) |
     | `marketplace_category_uuid` | string |
     | `marketplace_category_name` | string |
@@ -890,6 +894,7 @@ Delete resource from the database without scheduling operations on backend
     | `location_name` | string |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
     | `marketplace_offering_plugin_options` | object (free-form) |
     | `marketplace_category_uuid` | string |
     | `marketplace_category_name` | string |

@@ -21,6 +21,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/customer_member_summary/` | [Return summary statistics for customer members](#return-summary-statistics-for-customer-members) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/offering_costs_summary/` | [Return summary statistics for offering costs](#return-summary-statistics-for-offering-costs) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/offerings_counter_stats/` | [Offerings counter stats](#offerings-counter-stats) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/openstack_instances_aggregate/` | [Aggregate OpenStack instances by a dimension.](#aggregate-openstack-instances-by-a-dimension) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/openstack_instances/` | [List all OpenStack instances with infrastructure details.](#list-all-openstack-instances-with-infrastructure-details) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/order_stats/` | [Order stats](#order-stats) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/organization_project_count/` | [Return project count per organization](#return-project-count-per-organization) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/organization_resource_count/` | [Return resource count per organization](#return-resource-count-per-organization) |
@@ -1244,6 +1246,215 @@ Retrieve statistics about the number of offerings, grouped by category and servi
     | `service_provider_name` | string | Name of the service provider |
     | `service_provider_uuid` | string (uuid) | UUID of the service provider |
     | `count` | integer | Number of offerings |
+
+---
+
+### Aggregate OpenStack instances by a dimension.
+
+Returns aggregated metrics (count, cores, RAM, disk) grouped by the specified dimension.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-stats/openstack_instances_aggregate/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      group_by=="availability_zone"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_instance_aggregate_group_by_enum import OpenStackInstanceAggregateGroupByEnum # (1)
+    from waldur_api_client.api.marketplace_stats import marketplace_stats_openstack_instances_aggregate_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_stats_openstack_instances_aggregate_list.sync(
+        client=client,
+        group_by=OpenStackInstanceAggregateGroupByEnum.AVAILABILITY_ZONE
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackInstanceAggregateGroupByEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_instance_aggregate_group_by_enum.py)
+    2.  **API Source:** [`marketplace_stats_openstack_instances_aggregate_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_stats/marketplace_stats_openstack_instances_aggregate_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceStatsOpenstackInstancesAggregateList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceStatsOpenstackInstancesAggregateList({
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "group_by": "availability_zone"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `customer_uuid` | string (uuid) |  | Filter by customer UUID. |
+    | `flavor_name` | string |  | Filter by flavor name (case-insensitive partial match). |
+    | `group_by` | string | ✓ | Dimension to group by.<br>_Enum: `availability_zone`, `customer`, `flavor_name`, `hypervisor_hostname`, `image_name`, `runtime_state`, `service_settings`_ |
+    | `hypervisor_hostname` | string |  | Filter by hypervisor hostname (case-insensitive partial match). |
+    | `image_name` | string |  | Filter by image name (case-insensitive partial match). |
+    | `name` | string |  | Filter by instance name (case-insensitive partial match). |
+    | `page` | integer |  | A page number within the paginated result set. |
+    | `page_size` | integer |  | Number of results to return per page. |
+    | `project_uuid` | string (uuid) |  | Filter by project UUID. |
+    | `runtime_state` | string |  | Filter by runtime state (e.g. ACTIVE, SHUTOFF). |
+    | `service_settings_uuid` | string (uuid) |  | Filter by cluster (service settings) UUID. |
+    | `state` | string |  | Filter by provisioning state (e.g. OK, ERRED). |
+    | `tenant_uuid` | string (uuid) |  | Filter by tenant UUID. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `group_key` | string | Group key value |
+    | `group_label` | string | Human-readable group label |
+    | `instance_count` | integer | Number of instances |
+    | `total_cores` | integer | Total vCPUs |
+    | `total_ram_mb` | integer | Total RAM in MiB |
+    | `total_disk_mb` | integer | Total disk in MiB |
+    | `total_volume_size_mb` | integer | Total attached volume size in MiB |
+    | `total_floating_ips` | integer | Total number of floating IPs |
+
+---
+
+### List all OpenStack instances with infrastructure details.
+
+Returns a paginated flat list of all OpenStack instances across all clusters. Staff and support users can filter by infrastructure properties.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-stats/openstack_instances/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_stats import marketplace_stats_openstack_instances_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_stats_openstack_instances_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_stats_openstack_instances_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_stats/marketplace_stats_openstack_instances_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceStatsOpenstackInstancesList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceStatsOpenstackInstancesList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `availability_zone_name` | string | Filter by availability zone name. |
+    | `cores_max` | integer | Maximum number of vCPUs. |
+    | `cores_min` | integer | Minimum number of vCPUs. |
+    | `customer_uuid` | string (uuid) | Filter by customer UUID. |
+    | `disk_max` | integer | Maximum disk in MiB. |
+    | `disk_min` | integer | Minimum disk in MiB. |
+    | `flavor_name` | string | Filter by flavor name (case-insensitive partial match). |
+    | `hypervisor_hostname` | string | Filter by hypervisor hostname (case-insensitive partial match). |
+    | `image_name` | string | Filter by image name (case-insensitive partial match). |
+    | `name` | string | Filter by instance name (case-insensitive partial match). |
+    | `o` | string | Ordering field. Prefix with - for descending. Options: name, cores, ram, disk, created, runtime_state, flavor_name, hypervisor_hostname, customer_name, project_name, cluster_name, start_time. |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `project_uuid` | string (uuid) | Filter by project UUID. |
+    | `ram_max` | integer | Maximum RAM in MiB. |
+    | `ram_min` | integer | Minimum RAM in MiB. |
+    | `runtime_state` | string | Filter by runtime state (e.g. ACTIVE, SHUTOFF). |
+    | `service_settings_uuid` | string (uuid) | Filter by cluster (service settings) UUID. |
+    | `state` | string | Filter by provisioning state (e.g. OK, ERRED). Supports multiple values. |
+    | `tenant_uuid` | string (uuid) | Filter by tenant UUID. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) | Instance UUID |
+    | `name` | string | Instance name |
+    | `created` | string (date-time) | Creation timestamp |
+    | `cores` | integer | Number of vCPUs |
+    | `ram` | integer | RAM in MiB |
+    | `disk` | integer | Root disk in MiB |
+    | `flavor_name` | string | Flavor name |
+    | `flavor_disk` | integer | Flavor disk in MiB |
+    | `image_name` | string | Image name |
+    | `hypervisor_hostname` | string | Hypervisor hostname |
+    | `runtime_state` | string | Runtime state (e.g. ACTIVE, SHUTOFF) |
+    | `state` | string | Provisioning state |
+    | `availability_zone_name` | string | Availability zone name |
+    | `start_time` | string (date-time) | Last start time of the VM |
+    | `service_settings_uuid` | string (uuid) | Cluster UUID |
+    | `service_settings_name` | string | Cluster name |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
+    | `tenant_name` | string | Tenant name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `project_name` | string | Project name |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `customer_name` | string | Customer name |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `volume_count` | integer | Number of attached volumes |
+    | `total_volume_size_mb` | integer | Total attached volume size in MiB |
+    | `floating_ip_count` | integer | Number of floating IPs |
+    | `port_count` | integer | Number of ports |
+    | `internal_ips` | array of strings | List of internal IP addresses |
+    | `external_ips` | array of strings | List of external IP addresses |
 
 ---
 

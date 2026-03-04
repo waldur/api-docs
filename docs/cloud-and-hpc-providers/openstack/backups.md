@@ -235,6 +235,7 @@ Get a list of instance backups.
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
+    | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `restorations.ports.security_groups.marketplace_category_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_category_name` | string |  |
@@ -317,6 +318,7 @@ Get a list of instance backups.
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
+    | `instance_ports.security_groups.marketplace_offering_type` | string |  |
     | `instance_ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `instance_ports.security_groups.marketplace_category_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_category_name` | string |  |
@@ -341,6 +343,7 @@ Get a list of instance backups.
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -550,6 +553,7 @@ Retrieve details of a specific instance backup.
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
+    | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `restorations.ports.security_groups.marketplace_category_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_category_name` | string |  |
@@ -632,6 +636,7 @@ Retrieve details of a specific instance backup.
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
+    | `instance_ports.security_groups.marketplace_offering_type` | string |  |
     | `instance_ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `instance_ports.security_groups.marketplace_category_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_category_name` | string |  |
@@ -656,6 +661,7 @@ Retrieve details of a specific instance backup.
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -1023,6 +1029,7 @@ Update an existing instance backup.
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
+    | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `restorations.ports.security_groups.marketplace_category_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_category_name` | string |  |
@@ -1105,6 +1112,7 @@ Update an existing instance backup.
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
+    | `instance_ports.security_groups.marketplace_offering_type` | string |  |
     | `instance_ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `instance_ports.security_groups.marketplace_category_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_category_name` | string |  |
@@ -1129,6 +1137,7 @@ Update an existing instance backup.
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -1343,6 +1352,7 @@ Update specific fields of an instance backup.
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
+    | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `restorations.ports.security_groups.marketplace_category_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_category_name` | string |  |
@@ -1425,6 +1435,7 @@ Update specific fields of an instance backup.
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
+    | `instance_ports.security_groups.marketplace_offering_type` | string |  |
     | `instance_ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `instance_ports.security_groups.marketplace_category_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_category_name` | string |  |
@@ -1449,6 +1460,7 @@ Update specific fields of an instance backup.
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -1774,6 +1786,7 @@ Restore instance from backup
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
+    | `ports.security_groups.marketplace_offering_type` | string |  |
     | `ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `ports.security_groups.marketplace_category_uuid` | string |  |
     | `ports.security_groups.marketplace_category_name` | string |  |
@@ -1795,6 +1808,7 @@ Restore instance from backup
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |

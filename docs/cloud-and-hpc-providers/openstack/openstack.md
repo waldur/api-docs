@@ -4,14 +4,19 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
-| **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/` | [List Openstack Discovery](#list-openstack-discovery) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/{id}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-health-monitors/` | [List health monitors](#list-health-monitors) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-health-monitors/{uuid}/` | [Get health monitor details](#get-health-monitor-details) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-listeners/` | [List listeners](#list-listeners) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-listeners/{uuid}/` | [Get listener details](#get-listener-details) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-loadbalancers/` | [List load balancers](#list-load-balancers) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-loadbalancers/{uuid}/` | [Get load balancer details](#get-load-balancer-details) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-pool-members/` | [List pool members](#list-pool-members) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-pool-members/{uuid}/` | [Get pool member details](#get-pool-member-details) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-pools/` | [List pools](#list-pools) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-pools/{uuid}/` | [Get pool details](#get-pool-details) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/` | [Create](#create) |
-| <span class="http-badge http-put">PUT</span> | `/api/openstack/discovery/{id}/` | [Update](#update) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/openstack/discovery/{id}/` | [Partial Update](#partial-update) |
-| <span class="http-badge http-delete">DELETE</span> | `/api/openstack/discovery/{id}/` | [Delete](#delete) |
-| **Other Actions** | | |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/discover_external_networks/` | [Discover available external networks](#discover-available-external-networks) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/discover_flavors/` | [Discover available flavors](#discover-available-flavors) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/discover_instance_availability_zones/` | [Discover available Nova instance availability zones](#discover-available-nova-instance-availability-zones) |
@@ -19,10 +24,34 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/discover_volume_types/` | [Discover available volume types](#discover-available-volume-types) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/preview_service_attributes/` | [Build service_attributes and plugin_options from selected values](#build-service_attributes-and-plugin_options-from-selected-values) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/validate_credentials/` | [Validate OpenStack credentials without saving them](#validate-openstack-credentials-without-saving-them) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-health-monitors/` | [Create health monitor](#create-health-monitor) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-listeners/` | [Create listener](#create-listener) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/attach_floating_ip/` | [Attach floating IP to VIP](#attach-floating-ip-to-vip) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/` | [Create load balancer](#create-load-balancer) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/detach_floating_ip/` | [Detach floating IP from VIP](#detach-floating-ip-from-vip) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/update_vip_security_groups/` | [Update VIP security groups](#update-vip-security-groups) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-pool-members/` | [Create pool member](#create-pool-member) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-pools/` | [Create pool](#create-pool) |
+| <span class="http-badge http-put">PUT</span> | `/api/openstack/discovery/{id}/` | [Update](#update) |
+| <span class="http-badge http-put">PUT</span> | `/api/openstack-health-monitors/{uuid}/` | [Update health monitor](#update-health-monitor) |
+| <span class="http-badge http-put">PUT</span> | `/api/openstack-listeners/{uuid}/` | [Update listener](#update-listener) |
+| <span class="http-badge http-put">PUT</span> | `/api/openstack-loadbalancers/{uuid}/` | [Update load balancer](#update-load-balancer) |
+| <span class="http-badge http-put">PUT</span> | `/api/openstack-pool-members/{uuid}/` | [Update pool member](#update-pool-member) |
+| <span class="http-badge http-put">PUT</span> | `/api/openstack-pools/{uuid}/` | [Update pool](#update-pool) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/openstack/discovery/{id}/` | [Partial Update](#partial-update) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/openstack-health-monitors/{uuid}/` | [Partially update health monitor](#partially-update-health-monitor) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/openstack-listeners/{uuid}/` | [Partially update listener](#partially-update-listener) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/openstack-loadbalancers/{uuid}/` | [Partially update load balancer](#partially-update-load-balancer) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/openstack-pool-members/{uuid}/` | [Partially update pool member](#partially-update-pool-member) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/openstack-pools/{uuid}/` | [Partially update pool](#partially-update-pool) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/openstack/discovery/{id}/` | [Delete](#delete) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/openstack-health-monitors/{uuid}/` | [Delete health monitor](#delete-health-monitor) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/openstack-listeners/{uuid}/` | [Delete listener](#delete-listener) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/openstack-loadbalancers/{uuid}/` | [Delete load balancer](#delete-load-balancer) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/openstack-pool-members/{uuid}/` | [Delete pool member](#delete-pool-member) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/openstack-pools/{uuid}/` | [Delete pool](#delete-pool) |
 
 ---
-## Core CRUD
-
 
 ### List Openstack Discovery
 
@@ -149,6 +178,1237 @@
 
 ---
 
+### List health monitors
+
+Get a list of pool health monitors.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-health-monitors/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_health_monitor_field_enum import OpenStackHealthMonitorFieldEnum # (2)
+    from waldur_api_client.api.openstack_health_monitors import openstack_health_monitors_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_health_monitors_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackHealthMonitorFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_health_monitor_field_enum.py)
+    3.  **API Source:** [`openstack_health_monitors_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_health_monitors/openstack_health_monitors_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHealthMonitorsList } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHealthMonitorsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `field` | array |  |
+    | `load_balancer_uuid` | string (uuid) | Load balancer UUID |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `pool` | string (uri) | Pool URL |
+    | `pool_uuid` | string (uuid) | Pool UUID |
+    | `state` | array | State<br><br> |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Health monitor ID in Octavia |
+    | `access_url` | string |  |
+    | `pool` | string (uri) | Pool this health monitor belongs to |
+    | `pool_name` | string |  |
+    | `pool_uuid` | string (uuid) |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `type` | string |  |
+    | `delay` | integer |  |
+    | `timeout` | integer |  |
+    | `max_retries` | integer |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Get health monitor details
+
+Retrieve details of a specific health monitor.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-health-monitors/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_health_monitor_field_enum import OpenStackHealthMonitorFieldEnum # (1)
+    from waldur_api_client.api.openstack_health_monitors import openstack_health_monitors_retrieve # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_health_monitors_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackHealthMonitorFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_health_monitor_field_enum.py)
+    2.  **API Source:** [`openstack_health_monitors_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_health_monitors/openstack_health_monitors_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHealthMonitorsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHealthMonitorsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Health monitor ID in Octavia |
+    | `access_url` | string |  |
+    | `pool` | string (uri) | Pool this health monitor belongs to |
+    | `pool_name` | string |  |
+    | `pool_uuid` | string (uuid) |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `type` | string |  |
+    | `delay` | integer |  |
+    | `timeout` | integer |  |
+    | `max_retries` | integer |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### List listeners
+
+Get a list of load balancer listeners.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-listeners/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_listener_field_enum import OpenStackListenerFieldEnum # (2)
+    from waldur_api_client.api.openstack_listeners import openstack_listeners_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_listeners_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackListenerFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_listener_field_enum.py)
+    3.  **API Source:** [`openstack_listeners_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_listeners/openstack_listeners_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackListenersList } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackListenersList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `field` | array |  |
+    | `load_balancer` | string (uri) | Load balancer URL |
+    | `load_balancer_uuid` | string (uuid) | Load balancer UUID |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `state` | array | State<br><br> |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Listener ID in Octavia |
+    | `access_url` | string |  |
+    | `load_balancer` | string (uri) | Load balancer this listener belongs to |
+    | `load_balancer_name` | string |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `protocol` | string |  |
+    | `protocol_port` | integer |  |
+    | `default_pool` | string (uri) | Default pool for this listener |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Get listener details
+
+Retrieve details of a specific listener.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-listeners/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_listener_field_enum import OpenStackListenerFieldEnum # (1)
+    from waldur_api_client.api.openstack_listeners import openstack_listeners_retrieve # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_listeners_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackListenerFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_listener_field_enum.py)
+    2.  **API Source:** [`openstack_listeners_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_listeners/openstack_listeners_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackListenersRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackListenersRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Listener ID in Octavia |
+    | `access_url` | string |  |
+    | `load_balancer` | string (uri) | Load balancer this listener belongs to |
+    | `load_balancer_name` | string |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `protocol` | string |  |
+    | `protocol_port` | integer |  |
+    | `default_pool` | string (uri) | Default pool for this listener |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### List load balancers
+
+Get a list of load balancers.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-loadbalancers/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_load_balancer_field_enum import OpenStackLoadBalancerFieldEnum # (2)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_loadbalancers_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackLoadBalancerFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_load_balancer_field_enum.py)
+    3.  **API Source:** [`openstack_loadbalancers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersList } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `field` | array |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `state` | array | State<br><br> |
+    | `tenant` | string (uri) | Tenant URL |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Load balancer ID in Octavia |
+    | `access_url` | string |  |
+    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
+    | `tenant_name` | string |  |
+    | `tenant_uuid` | string (uuid) |  |
+    | `vip_address` | any | An IPv4 or IPv6 address. |
+    | `vip_subnet_id` | string |  |
+    | `vip_port_id` | string |  |
+    | `attached_floating_ip` | string (uri) | Floating IP attached to the VIP port |
+    | `provider` | string |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Get load balancer details
+
+Retrieve details of a specific load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_load_balancer_field_enum import OpenStackLoadBalancerFieldEnum # (1)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_retrieve # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_loadbalancers_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackLoadBalancerFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_load_balancer_field_enum.py)
+    2.  **API Source:** [`openstack_loadbalancers_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Load balancer ID in Octavia |
+    | `access_url` | string |  |
+    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
+    | `tenant_name` | string |  |
+    | `tenant_uuid` | string (uuid) |  |
+    | `vip_address` | any | An IPv4 or IPv6 address. |
+    | `vip_subnet_id` | string |  |
+    | `vip_port_id` | string |  |
+    | `attached_floating_ip` | string (uri) | Floating IP attached to the VIP port |
+    | `provider` | string |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### List pool members
+
+Get a list of pool members.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-pool-members/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_pool_member_field_enum import OpenStackPoolMemberFieldEnum # (2)
+    from waldur_api_client.api.openstack_pool_members import openstack_pool_members_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_pool_members_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackPoolMemberFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_pool_member_field_enum.py)
+    3.  **API Source:** [`openstack_pool_members_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pool_members/openstack_pool_members_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolMembersList } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolMembersList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `field` | array |  |
+    | `load_balancer_uuid` | string (uuid) | Load balancer UUID |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `pool` | string (uri) | Pool URL |
+    | `pool_uuid` | string (uuid) | Pool UUID |
+    | `state` | array | State<br><br> |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Member ID in Octavia |
+    | `access_url` | string |  |
+    | `pool` | string (uri) | Pool this member belongs to |
+    | `pool_name` | string |  |
+    | `pool_uuid` | string (uuid) |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `address` | any | An IPv4 or IPv6 address. |
+    | `protocol_port` | integer |  |
+    | `subnet_id` | string | Subnet ID for the member (required for creation) |
+    | `weight` | integer |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Get pool member details
+
+Retrieve details of a specific pool member.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-pool-members/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_pool_member_field_enum import OpenStackPoolMemberFieldEnum # (1)
+    from waldur_api_client.api.openstack_pool_members import openstack_pool_members_retrieve # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_pool_members_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackPoolMemberFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_pool_member_field_enum.py)
+    2.  **API Source:** [`openstack_pool_members_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pool_members/openstack_pool_members_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolMembersRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolMembersRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Member ID in Octavia |
+    | `access_url` | string |  |
+    | `pool` | string (uri) | Pool this member belongs to |
+    | `pool_name` | string |  |
+    | `pool_uuid` | string (uuid) |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `address` | any | An IPv4 or IPv6 address. |
+    | `protocol_port` | integer |  |
+    | `subnet_id` | string | Subnet ID for the member (required for creation) |
+    | `weight` | integer |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### List pools
+
+Get a list of load balancer pools.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-pools/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.models.open_stack_pool_field_enum import OpenStackPoolFieldEnum # (2)
+    from waldur_api_client.api.openstack_pools import openstack_pools_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_pools_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **Model Source:** [`OpenStackPoolFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_pool_field_enum.py)
+    3.  **API Source:** [`openstack_pools_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolsList } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `field` | array |  |
+    | `load_balancer` | string (uri) | Load balancer URL |
+    | `load_balancer_uuid` | string (uuid) | Load balancer UUID |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `state` | array | State<br><br> |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Pool ID in Octavia |
+    | `access_url` | string |  |
+    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
+    | `load_balancer_name` | string |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `protocol` | string |  |
+    | `lb_algorithm` | string |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Get pool details
+
+Retrieve details of a specific pool.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_pool_field_enum import OpenStackPoolFieldEnum # (1)
+    from waldur_api_client.api.openstack_pools import openstack_pools_retrieve # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_pools_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackPoolFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_pool_field_enum.py)
+    2.  **API Source:** [`openstack_pools_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Pool ID in Octavia |
+    | `access_url` | string |  |
+    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
+    | `load_balancer_name` | string |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `protocol` | string |  |
+    | `lb_algorithm` | string |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
 ### Create
 
 
@@ -200,204 +1460,6 @@
     
 
 ---
-
-### Update
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PUT \
-      https://api.example.com/api/openstack/discovery/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_update # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_update.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
-### Partial Update
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/openstack/discovery/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_partial_update # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_partial_update.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
-### Delete
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      DELETE \
-      https://api.example.com/api/openstack/discovery/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_destroy # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_destroy.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_destroy.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryDestroy } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryDestroy({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
-
-
-=== "Responses"
-
-    **`204`** - No response body
-    
-
----
-
-## Other Actions
-
 
 ### Discover available external networks
 
@@ -1111,5 +2173,2335 @@ Validate OpenStack credentials without saving them.
     | `message` | string |
     | `error` | string |
     | `server_info` | any |
+
+---
+
+### Create health monitor
+
+Create a new health monitor for a pool.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-health-monitors/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      pool="https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      type="TCP" \
+      delay=123 \
+      timeout=123 \
+      max_retries=123
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.create_health_monitor_request import CreateHealthMonitorRequest # (1)
+    from waldur_api_client.api.openstack_health_monitors import openstack_health_monitors_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CreateHealthMonitorRequest(
+        pool="https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        type="TCP",
+        delay=123,
+        timeout=123,
+        max_retries=123
+    )
+    response = openstack_health_monitors_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CreateHealthMonitorRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/create_health_monitor_request.py)
+    2.  **API Source:** [`openstack_health_monitors_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_health_monitors/openstack_health_monitors_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHealthMonitorsCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHealthMonitorsCreate({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "pool": "https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "type": "TCP",
+        "delay": 123,
+        "timeout": 123,
+        "max_retries": 123
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `pool` | string (uri) | ✓ | Pool this health monitor belongs to |
+    | `name` | string |  |  |
+    | `type` | string | ✓ | <br>_Enum: `TCP`, `UDP`_ |
+    | `delay` | integer | ✓ | Interval between health checks in seconds |
+    | `timeout` | integer | ✓ | Time in seconds to timeout a health check |
+    | `max_retries` | integer | ✓ | Number of retries before marking member as down |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `pool` | string (uri) | Pool this health monitor belongs to |
+    | `name` | string |  |
+    | `type` | string | <br>_Enum: `TCP`, `UDP`_ |
+    | `delay` | integer | Interval between health checks in seconds |
+    | `timeout` | integer | Time in seconds to timeout a health check |
+    | `max_retries` | integer | Number of retries before marking member as down |
+    | `project` | string (uri) |  |
+    | `service_settings` | string (uri) |  |
+
+---
+
+### Create listener
+
+Create a new listener for a load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-listeners/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      name="my-awesome-openstack-listener" \
+      protocol="TCP" \
+      protocol_port=8080
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.create_listener_request import CreateListenerRequest # (1)
+    from waldur_api_client.api.openstack_listeners import openstack_listeners_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CreateListenerRequest(
+        load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        name="my-awesome-openstack-listener",
+        protocol="TCP",
+        protocol_port=8080
+    )
+    response = openstack_listeners_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CreateListenerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/create_listener_request.py)
+    2.  **API Source:** [`openstack_listeners_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_listeners/openstack_listeners_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackListenersCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackListenersCreate({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "load_balancer": "https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "name": "my-awesome-openstack-listener",
+        "protocol": "TCP",
+        "protocol_port": 8080
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `load_balancer` | string (uri) | ✓ | Load balancer this listener belongs to |
+    | `name` | string | ✓ |  |
+    | `protocol` | string | ✓ | <br>_Enum: `TCP`, `UDP`_ |
+    | `protocol_port` | integer | ✓ | Port on which the listener listens |
+    | `default_pool` | string (uri) |  |  |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `load_balancer` | string (uri) | Load balancer this listener belongs to |
+    | `name` | string |  |
+    | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
+    | `protocol_port` | integer | Port on which the listener listens |
+    | `default_pool` | string (uri) |  |
+    | `project` | string (uri) |  |
+    | `service_settings` | string (uri) |  |
+
+---
+
+### Attach floating IP to VIP
+
+Attach a floating IP to the load balancer VIP port.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/attach_floating_ip/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      floating_ip="8.8.8.8"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.load_balancer_attach_floating_ip_request import LoadBalancerAttachFloatingIPRequest # (1)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_attach_floating_ip # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = LoadBalancerAttachFloatingIPRequest(
+        floating_ip="8.8.8.8"
+    )
+    response = openstack_loadbalancers_attach_floating_ip.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`LoadBalancerAttachFloatingIPRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/load_balancer_attach_floating_ip_request.py)
+    2.  **API Source:** [`openstack_loadbalancers_attach_floating_ip`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_attach_floating_ip.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersAttachFloatingIp } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersAttachFloatingIp({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "floating_ip": "8.8.8.8"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `floating_ip` | string (uri) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
+### Create load balancer
+
+Create a new load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-loadbalancers/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      name="my-awesome-openstack-loadbalancer" \
+      vip_subnet_id="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.create_load_balancer_request import CreateLoadBalancerRequest # (1)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CreateLoadBalancerRequest(
+        tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        name="my-awesome-openstack-loadbalancer",
+        vip_subnet_id="string-value"
+    )
+    response = openstack_loadbalancers_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CreateLoadBalancerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/create_load_balancer_request.py)
+    2.  **API Source:** [`openstack_loadbalancers_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersCreate({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "tenant": "https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "name": "my-awesome-openstack-loadbalancer",
+        "vip_subnet_id": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `tenant` | string (uri) | ✓ | OpenStack tenant this load balancer belongs to |
+    | `name` | string | ✓ |  |
+    | `vip_subnet_id` | string | ✓ |  |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
+    | `name` | string |  |
+    | `vip_subnet_id` | string |  |
+    | `project` | string (uri) |  |
+    | `service_settings` | string (uri) |  |
+
+---
+
+### Detach floating IP from VIP
+
+Detach floating IP from the load balancer VIP port.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/detach_floating_ip/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_detach_floating_ip # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_loadbalancers_detach_floating_ip.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_loadbalancers_detach_floating_ip`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_detach_floating_ip.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersDetachFloatingIp } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersDetachFloatingIp({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
+### Update VIP security groups
+
+Update security groups on the load balancer VIP port.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_vip_security_groups/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      security_groups:='["web-server-sg"]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.load_balancer_update_vip_security_groups_request import LoadBalancerUpdateVIPSecurityGroupsRequest # (1)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_update_vip_security_groups # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = LoadBalancerUpdateVIPSecurityGroupsRequest(
+        security_groups=[
+                "web-server-sg"
+            ]
+    )
+    response = openstack_loadbalancers_update_vip_security_groups.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`LoadBalancerUpdateVIPSecurityGroupsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/load_balancer_update_vip_security_groups_request.py)
+    2.  **API Source:** [`openstack_loadbalancers_update_vip_security_groups`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_update_vip_security_groups.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersUpdateVipSecurityGroups } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersUpdateVipSecurityGroups({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "security_groups": [
+          "web-server-sg"
+        ]
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `security_groups` | array of string (uri)s | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
+### Create pool member
+
+Create a new member for a pool.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-pool-members/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      pool="https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      address=null \
+      protocol_port=8080 \
+      subnet_id="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.create_pool_member_request import CreatePoolMemberRequest # (1)
+    from waldur_api_client.api.openstack_pool_members import openstack_pool_members_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CreatePoolMemberRequest(
+        pool="https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        address=null,
+        protocol_port=8080,
+        subnet_id="string-value"
+    )
+    response = openstack_pool_members_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CreatePoolMemberRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/create_pool_member_request.py)
+    2.  **API Source:** [`openstack_pool_members_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pool_members/openstack_pool_members_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolMembersCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolMembersCreate({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "pool": "https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "address": null,
+        "protocol_port": 8080,
+        "subnet_id": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `pool` | string (uri) | ✓ | Pool this member belongs to |
+    | `name` | string |  |  |
+    | `address` | any | ✓ | An IPv4 or IPv6 address. |
+    | `protocol_port` | integer | ✓ | Port on the backend server |
+    | `subnet_id` | string | ✓ |  |
+    | `weight` | integer |  | <br>_Constraints: default: `1`_ |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `pool` | string (uri) | Pool this member belongs to |
+    | `name` | string |  |
+    | `address` | any | An IPv4 or IPv6 address. |
+    | `protocol_port` | integer | Port on the backend server |
+    | `subnet_id` | string |  |
+    | `weight` | integer |  |
+    | `project` | string (uri) |  |
+    | `service_settings` | string (uri) |  |
+
+---
+
+### Create pool
+
+Create a new pool for a load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-pools/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      name="my-awesome-openstack-pool" \
+      protocol="TCP"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.create_pool_request import CreatePoolRequest # (1)
+    from waldur_api_client.api.openstack_pools import openstack_pools_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CreatePoolRequest(
+        load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        name="my-awesome-openstack-pool",
+        protocol="TCP"
+    )
+    response = openstack_pools_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CreatePoolRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/create_pool_request.py)
+    2.  **API Source:** [`openstack_pools_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolsCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolsCreate({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "load_balancer": "https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "name": "my-awesome-openstack-pool",
+        "protocol": "TCP"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `load_balancer` | string (uri) | ✓ | Load balancer this pool belongs to |
+    | `name` | string | ✓ |  |
+    | `protocol` | string | ✓ | <br>_Enum: `TCP`, `UDP`_ |
+    | `lb_algorithm` | any |  | <br>_Constraints: default: `SOURCE_IP_PORT`_ |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
+    | `name` | string |  |
+    | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
+    | `lb_algorithm` | any |  |
+    | `project` | string (uri) |  |
+    | `service_settings` | string (uri) |  |
+
+---
+
+### Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/openstack/discovery/123/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack import openstack_discovery_update # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_discovery_update.sync(
+        id=123,
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_discovery_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackDiscoveryUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackDiscoveryUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "id": 123
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
+### Update health monitor
+
+Update an existing health monitor.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/openstack-health-monitors/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.update_health_monitor_request import UpdateHealthMonitorRequest # (1)
+    from waldur_api_client.api.openstack_health_monitors import openstack_health_monitors_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = UpdateHealthMonitorRequest()
+    response = openstack_health_monitors_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`UpdateHealthMonitorRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_health_monitor_request.py)
+    2.  **API Source:** [`openstack_health_monitors_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_health_monitors/openstack_health_monitors_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHealthMonitorsUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHealthMonitorsUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `delay` | integer |  |
+    | `timeout` | integer |  |
+    | `max_retries` | integer |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `name` | string |
+    | `delay` | integer |
+    | `timeout` | integer |
+    | `max_retries` | integer |
+
+---
+
+### Update listener
+
+Update an existing listener.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/openstack-listeners/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.update_listener_request import UpdateListenerRequest # (1)
+    from waldur_api_client.api.openstack_listeners import openstack_listeners_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = UpdateListenerRequest()
+    response = openstack_listeners_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`UpdateListenerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_listener_request.py)
+    2.  **API Source:** [`openstack_listeners_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_listeners/openstack_listeners_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackListenersUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackListenersUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `default_pool` | string (uri) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `name` | string |
+    | `default_pool` | string (uri) |
+
+---
+
+### Update load balancer
+
+Update an existing load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-openstack-loadbalancer" \
+      service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_load_balancer_request import OpenStackLoadBalancerRequest # (1)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OpenStackLoadBalancerRequest(
+        name="my-awesome-openstack-loadbalancer",
+        service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    )
+    response = openstack_loadbalancers_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackLoadBalancerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_load_balancer_request.py)
+    2.  **API Source:** [`openstack_loadbalancers_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "name": "my-awesome-openstack-loadbalancer",
+        "service_settings": "https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "tenant": "https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `service_settings` | string (uri) | ✓ |  |
+    | `project` | string (uri) | ✓ |  |
+    | `error_message` | string |  |  |
+    | `error_traceback` | string |  |  |
+    | `backend_id` | string |  | Load balancer ID in Octavia |
+    | `tenant` | string (uri) | ✓ | OpenStack tenant this load balancer belongs to |
+    | `attached_floating_ip` | string (uri) |  | Floating IP attached to the VIP port |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Load balancer ID in Octavia |
+    | `access_url` | string |  |
+    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
+    | `tenant_name` | string |  |
+    | `tenant_uuid` | string (uuid) |  |
+    | `vip_address` | any | An IPv4 or IPv6 address. |
+    | `vip_subnet_id` | string |  |
+    | `vip_port_id` | string |  |
+    | `attached_floating_ip` | string (uri) | Floating IP attached to the VIP port |
+    | `provider` | string |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Update pool member
+
+Update an existing pool member.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/openstack-pool-members/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.update_pool_member_request import UpdatePoolMemberRequest # (1)
+    from waldur_api_client.api.openstack_pool_members import openstack_pool_members_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = UpdatePoolMemberRequest()
+    response = openstack_pool_members_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`UpdatePoolMemberRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_pool_member_request.py)
+    2.  **API Source:** [`openstack_pool_members_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pool_members/openstack_pool_members_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolMembersUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolMembersUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `weight` | integer |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `name` | string |
+    | `weight` | integer |
+
+---
+
+### Update pool
+
+Update an existing pool.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/openstack-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-openstack-pool" \
+      service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_pool_request import OpenStackPoolRequest # (1)
+    from waldur_api_client.api.openstack_pools import openstack_pools_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OpenStackPoolRequest(
+        name="my-awesome-openstack-pool",
+        service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    )
+    response = openstack_pools_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackPoolRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_pool_request.py)
+    2.  **API Source:** [`openstack_pools_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolsUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolsUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "name": "my-awesome-openstack-pool",
+        "service_settings": "https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "load_balancer": "https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `service_settings` | string (uri) | ✓ |  |
+    | `project` | string (uri) | ✓ |  |
+    | `error_message` | string |  |  |
+    | `error_traceback` | string |  |  |
+    | `backend_id` | string |  | Pool ID in Octavia |
+    | `load_balancer` | string (uri) | ✓ | Load balancer this pool belongs to |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Pool ID in Octavia |
+    | `access_url` | string |  |
+    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
+    | `load_balancer_name` | string |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `protocol` | string |  |
+    | `lb_algorithm` | string |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Partial Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/openstack/discovery/123/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack import openstack_discovery_partial_update # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_discovery_partial_update.sync(
+        id=123,
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_discovery_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackDiscoveryPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackDiscoveryPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "id": 123
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
+### Partially update health monitor
+
+Update specific fields of a health monitor.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/openstack-health-monitors/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_update_health_monitor_request import PatchedUpdateHealthMonitorRequest # (1)
+    from waldur_api_client.api.openstack_health_monitors import openstack_health_monitors_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedUpdateHealthMonitorRequest()
+    response = openstack_health_monitors_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedUpdateHealthMonitorRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_update_health_monitor_request.py)
+    2.  **API Source:** [`openstack_health_monitors_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_health_monitors/openstack_health_monitors_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHealthMonitorsPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHealthMonitorsPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `delay` | integer |  |
+    | `timeout` | integer |  |
+    | `max_retries` | integer |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `name` | string |
+    | `delay` | integer |
+    | `timeout` | integer |
+    | `max_retries` | integer |
+
+---
+
+### Partially update listener
+
+Update specific fields of a listener.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/openstack-listeners/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_update_listener_request import PatchedUpdateListenerRequest # (1)
+    from waldur_api_client.api.openstack_listeners import openstack_listeners_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedUpdateListenerRequest()
+    response = openstack_listeners_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedUpdateListenerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_update_listener_request.py)
+    2.  **API Source:** [`openstack_listeners_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_listeners/openstack_listeners_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackListenersPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackListenersPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `default_pool` | string (uri) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `name` | string |
+    | `default_pool` | string (uri) |
+
+---
+
+### Partially update load balancer
+
+Update specific fields of a load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_open_stack_load_balancer_request import PatchedOpenStackLoadBalancerRequest # (1)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedOpenStackLoadBalancerRequest()
+    response = openstack_loadbalancers_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedOpenStackLoadBalancerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_open_stack_load_balancer_request.py)
+    2.  **API Source:** [`openstack_loadbalancers_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string |  |  |
+    | `description` | string |  |  |
+    | `service_settings` | string (uri) |  |  |
+    | `project` | string (uri) |  |  |
+    | `error_message` | string |  |  |
+    | `error_traceback` | string |  |  |
+    | `backend_id` | string |  | Load balancer ID in Octavia |
+    | `tenant` | string (uri) |  | OpenStack tenant this load balancer belongs to |
+    | `attached_floating_ip` | string (uri) |  | Floating IP attached to the VIP port |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Load balancer ID in Octavia |
+    | `access_url` | string |  |
+    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
+    | `tenant_name` | string |  |
+    | `tenant_uuid` | string (uuid) |  |
+    | `vip_address` | any | An IPv4 or IPv6 address. |
+    | `vip_subnet_id` | string |  |
+    | `vip_port_id` | string |  |
+    | `attached_floating_ip` | string (uri) | Floating IP attached to the VIP port |
+    | `provider` | string |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Partially update pool member
+
+Update specific fields of a pool member.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/openstack-pool-members/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_update_pool_member_request import PatchedUpdatePoolMemberRequest # (1)
+    from waldur_api_client.api.openstack_pool_members import openstack_pool_members_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedUpdatePoolMemberRequest()
+    response = openstack_pool_members_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedUpdatePoolMemberRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_update_pool_member_request.py)
+    2.  **API Source:** [`openstack_pool_members_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pool_members/openstack_pool_members_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolMembersPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolMembersPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `weight` | integer |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `name` | string |
+    | `weight` | integer |
+
+---
+
+### Partially update pool
+
+Update specific fields of a pool.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/openstack-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_open_stack_pool_request import PatchedOpenStackPoolRequest # (1)
+    from waldur_api_client.api.openstack_pools import openstack_pools_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedOpenStackPoolRequest()
+    response = openstack_pools_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedOpenStackPoolRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_open_stack_pool_request.py)
+    2.  **API Source:** [`openstack_pools_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolsPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolsPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string |  |  |
+    | `description` | string |  |  |
+    | `service_settings` | string (uri) |  |  |
+    | `project` | string (uri) |  |  |
+    | `error_message` | string |  |  |
+    | `error_traceback` | string |  |  |
+    | `backend_id` | string |  | Pool ID in Octavia |
+    | `load_balancer` | string (uri) |  | Load balancer this pool belongs to |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Pool ID in Octavia |
+    | `access_url` | string |  |
+    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
+    | `load_balancer_name` | string |  |
+    | `load_balancer_uuid` | string (uuid) |  |
+    | `protocol` | string |  |
+    | `lb_algorithm` | string |  |
+    | `provisioning_status` | string |  |
+    | `operating_status` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
+
+---
+
+### Delete
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/openstack/discovery/123/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack import openstack_discovery_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_discovery_destroy.sync(
+        id=123,
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_discovery_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackDiscoveryDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackDiscoveryDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "id": 123
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Delete health monitor
+
+Delete a health monitor.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/openstack-health-monitors/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_health_monitors import openstack_health_monitors_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_health_monitors_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_health_monitors_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_health_monitors/openstack_health_monitors_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHealthMonitorsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHealthMonitorsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Delete listener
+
+Delete a listener.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/openstack-listeners/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_listeners import openstack_listeners_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_listeners_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_listeners_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_listeners/openstack_listeners_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackListenersDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackListenersDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Delete load balancer
+
+Delete a load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_loadbalancers_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_loadbalancers_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Delete pool member
+
+Delete a pool member.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/openstack-pool-members/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_pool_members import openstack_pool_members_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_pool_members_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_pool_members_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pool_members/openstack_pool_members_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolMembersDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolMembersDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Delete pool
+
+Delete a pool.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/openstack-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_pools import openstack_pools_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_pools_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_pools_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
 
 ---

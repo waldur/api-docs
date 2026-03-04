@@ -172,6 +172,7 @@ Get a list of networks.
     | `rbac_policies.created` | string (date-time) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -313,6 +314,7 @@ Retrieve details of a specific network.
     | `rbac_policies.created` | string (date-time) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -463,6 +465,7 @@ Create a new subnet within the network.
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -761,6 +764,7 @@ Update an existing network.
     | `rbac_policies.created` | string (date-time) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -906,6 +910,7 @@ Update specific fields of a network.
     | `rbac_policies.created` | string (date-time) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |

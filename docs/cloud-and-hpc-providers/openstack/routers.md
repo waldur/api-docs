@@ -186,6 +186,7 @@ Get a list of routers.
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
+    | `ports.security_groups.marketplace_offering_type` | string |  |
     | `ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `ports.security_groups.marketplace_category_uuid` | string |  |
     | `ports.security_groups.marketplace_category_name` | string |  |
@@ -196,6 +197,7 @@ Get a list of routers.
     | `ports.security_groups.is_limit_based` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -375,6 +377,7 @@ Retrieve details of a specific router.
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
+    | `ports.security_groups.marketplace_offering_type` | string |  |
     | `ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `ports.security_groups.marketplace_category_uuid` | string |  |
     | `ports.security_groups.marketplace_category_name` | string |  |
@@ -385,6 +388,7 @@ Retrieve details of a specific router.
     | `ports.security_groups.is_limit_based` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |

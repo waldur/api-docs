@@ -168,6 +168,7 @@ Get a list of volumes.
     | `extend_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -302,6 +303,7 @@ Retrieve details of a specific volume.
     | `extend_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -594,6 +596,7 @@ Update an existing volume.
     | `extend_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -733,6 +736,7 @@ Update specific fields of a volume.
     | `extend_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -1355,6 +1359,7 @@ Create snapshot from volume
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |

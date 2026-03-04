@@ -153,6 +153,7 @@ Get a list of security groups.
     | `rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -281,6 +282,7 @@ Retrieve details of a specific security group.
     | `rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |

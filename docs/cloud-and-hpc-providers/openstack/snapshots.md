@@ -162,6 +162,7 @@ Get a list of snapshots.
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -294,6 +295,7 @@ Retrieve details of a specific snapshot.
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -585,6 +587,7 @@ Update an existing snapshot.
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -723,6 +726,7 @@ Update specific fields of a snapshot.
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -1026,6 +1030,7 @@ Restore volume from snapshot
     | `extend_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |

@@ -276,6 +276,7 @@ Get a list of VM instances.
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
+    | `ports.security_groups.marketplace_offering_type` | string |  |
     | `ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `ports.security_groups.marketplace_category_uuid` | string |  |
     | `ports.security_groups.marketplace_category_name` | string |  |
@@ -297,6 +298,7 @@ Get a list of VM instances.
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -529,6 +531,7 @@ Retrieve details of a specific VM instance.
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
+    | `ports.security_groups.marketplace_offering_type` | string |  |
     | `ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `ports.security_groups.marketplace_category_uuid` | string |  |
     | `ports.security_groups.marketplace_category_name` | string |  |
@@ -550,6 +553,7 @@ Retrieve details of a specific VM instance.
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -939,6 +943,7 @@ Update an existing VM instance.
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
+    | `ports.security_groups.marketplace_offering_type` | string |  |
     | `ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `ports.security_groups.marketplace_category_uuid` | string |  |
     | `ports.security_groups.marketplace_category_name` | string |  |
@@ -960,6 +965,7 @@ Update an existing VM instance.
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -1196,6 +1202,7 @@ Update specific fields of a VM instance.
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
+    | `ports.security_groups.marketplace_offering_type` | string |  |
     | `ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `ports.security_groups.marketplace_category_uuid` | string |  |
     | `ports.security_groups.marketplace_category_name` | string |  |
@@ -1217,6 +1224,7 @@ Update specific fields of a VM instance.
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
@@ -1805,6 +1813,7 @@ Get a list of instance ports
     | `security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `security_groups.marketplace_offering_uuid` | string |  |
     | `security_groups.marketplace_offering_name` | string |  |
+    | `security_groups.marketplace_offering_type` | string |  |
     | `security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `security_groups.marketplace_category_uuid` | string |  |
     | `security_groups.marketplace_category_name` | string |  |
@@ -2025,6 +2034,7 @@ Create backup from instance
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
+    | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `restorations.ports.security_groups.marketplace_category_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_category_name` | string |  |
@@ -2107,6 +2117,7 @@ Create backup from instance
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
+    | `instance_ports.security_groups.marketplace_offering_type` | string |  |
     | `instance_ports.security_groups.marketplace_offering_plugin_options` | object (free-form) |  |
     | `instance_ports.security_groups.marketplace_category_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_category_name` | string |  |
@@ -2131,6 +2142,7 @@ Create backup from instance
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
     | `marketplace_offering_plugin_options` | object (free-form) |  |
     | `marketplace_category_uuid` | string |  |
     | `marketplace_category_name` | string |  |
