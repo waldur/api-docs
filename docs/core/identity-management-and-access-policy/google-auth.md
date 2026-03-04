@@ -104,6 +104,7 @@
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
+    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `calendar_token` | string |  |
     | `calendar_refresh_token` | string |  |
     | `google_auth_url` | string |  |
@@ -206,6 +207,7 @@
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
+    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `calendar_token` | string |  |
     | `calendar_refresh_token` | string |  |
     | `google_auth_url` | string |  |
@@ -311,6 +313,7 @@
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
+    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `calendar_token` | string |  |
     | `calendar_refresh_token` | string |  |
     | `google_auth_url` | string |  |

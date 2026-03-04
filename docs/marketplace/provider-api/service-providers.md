@@ -601,6 +601,7 @@ Returns a paginated list of service providers.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
+    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -1374,6 +1375,7 @@ Returns details of a specific service provider.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
+    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -2475,12 +2477,13 @@ Creates a new service provider profile for a customer.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `description` | string |  |
-    | `enable_notifications` | boolean |  |
-    | `customer` | string (uri) | ✓ |
-    | `image` | string (binary) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `description` | string |  |  |
+    | `enable_notifications` | boolean |  |  |
+    | `customer` | string (uri) | ✓ |  |
+    | `image` | string (binary) |  |  |
+    | `allowed_domains` | any |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -2512,6 +2515,7 @@ Creates a new service provider profile for a customer.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
+    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -3018,12 +3022,13 @@ Updates an existing service provider profile.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `description` | string |  |
-    | `enable_notifications` | boolean |  |
-    | `customer` | string (uri) | ✓ |
-    | `image` | string (binary) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `description` | string |  |  |
+    | `enable_notifications` | boolean |  |  |
+    | `customer` | string (uri) | ✓ |  |
+    | `image` | string (binary) |  |  |
+    | `allowed_domains` | any |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -3055,6 +3060,7 @@ Updates an existing service provider profile.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
+    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -3125,11 +3131,12 @@ Partially updates an existing service provider profile.
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `description` | string |  |
-    | `enable_notifications` | boolean |  |
-    | `image` | string (binary) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `description` | string |  |  |
+    | `enable_notifications` | boolean |  |  |
+    | `image` | string (binary) |  |  |
+    | `allowed_domains` | any |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -3161,6 +3168,7 @@ Partially updates an existing service provider profile.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
+    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 

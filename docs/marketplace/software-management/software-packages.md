@@ -114,7 +114,10 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
     | `maintainers` | any | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
-    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `parent_softwares` | array of objects |  |
+    | `parent_softwares.uuid` | string (uuid) |  |
+    | `parent_softwares.name` | string |  |
+    | `parent_softwares.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
@@ -218,7 +221,10 @@ Returns the details of a specific software package, including its description, h
     | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
     | `maintainers` | any | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
-    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `parent_softwares` | array of objects |  |
+    | `parent_softwares.uuid` | string (uuid) |  |
+    | `parent_softwares.name` | string |  |
+    | `parent_softwares.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
@@ -319,7 +325,6 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
     | `maintainers` | any |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
-    | `parent_software` | string (uri) |  | Parent package for extensions (e.g., Python package within Python) |
 
 
 === "Responses"
@@ -340,7 +345,10 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
     | `maintainers` | any | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
-    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `parent_softwares` | array of objects |  |
+    | `parent_softwares.uuid` | string (uuid) |  |
+    | `parent_softwares.name` | string |  |
+    | `parent_softwares.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
@@ -452,7 +460,6 @@ Updates an existing software package. Requires staff permissions.
     | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
     | `maintainers` | any |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
-    | `parent_software` | string (uri) |  | Parent package for extensions (e.g., Python package within Python) |
 
 
 === "Responses"
@@ -473,7 +480,10 @@ Updates an existing software package. Requires staff permissions.
     | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
     | `maintainers` | any | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
-    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `parent_softwares` | array of objects |  |
+    | `parent_softwares.uuid` | string (uuid) |  |
+    | `parent_softwares.name` | string |  |
+    | `parent_softwares.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
@@ -576,7 +586,6 @@ Partially updates an existing software package. Requires staff permissions.
     | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
     | `maintainers` | any |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
-    | `parent_software` | string (uri) |  | Parent package for extensions (e.g., Python package within Python) |
 
 
 === "Responses"
@@ -597,7 +606,10 @@ Partially updates an existing software package. Requires staff permissions.
     | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
     | `maintainers` | any | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
-    | `parent_software` | string (uri) | Parent package for extensions (e.g., Python package within Python) |
+    | `parent_softwares` | array of objects |  |
+    | `parent_softwares.uuid` | string (uuid) |  |
+    | `parent_softwares.name` | string |  |
+    | `parent_softwares.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
