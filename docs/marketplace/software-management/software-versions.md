@@ -73,6 +73,8 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     | `catalog_uuid` | string (uuid) |  |
     | `cpu_family` | string |  |
     | `cpu_microarchitecture` | string |  |
+    | `gpu_arch` | string | Filter versions by GPU architecture (e.g., nvidia/cc90) |
+    | `has_gpu` | boolean | Filter versions that have GPU-enabled builds |
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `package_name` | string |  |

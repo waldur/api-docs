@@ -118,6 +118,8 @@
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
+    | `offerings_data.partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `offerings_data.partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `offerings_data.partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `offerings_data.partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `offerings_data.partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -388,6 +390,8 @@
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
+    | `offerings_data.partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `offerings_data.partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `offerings_data.partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `offerings_data.partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `offerings_data.partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -690,6 +694,8 @@ Create ProjectTemplate object
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
+    | `offerings_data.partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `offerings_data.partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `offerings_data.partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `offerings_data.partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `offerings_data.partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -1003,6 +1009,8 @@ Update ProjectTemplate object (full update)
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
+    | `offerings_data.partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `offerings_data.partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `offerings_data.partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `offerings_data.partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `offerings_data.partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -1298,6 +1306,8 @@ Partially update ProjectTemplate object
     | `offerings_data.partitions` | array of objects |  |
     | `offerings_data.partitions.uuid` | string (uuid) |  |
     | `offerings_data.partitions.partition_name` | string | Name of the SLURM partition |
+    | `offerings_data.partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `offerings_data.partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `offerings_data.partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `offerings_data.partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `offerings_data.partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |

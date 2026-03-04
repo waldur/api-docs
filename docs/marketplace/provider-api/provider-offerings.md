@@ -225,6 +225,8 @@ Returns a paginated list of offerings for the provider.
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
+    | `partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -489,6 +491,8 @@ Returns details of a specific provider offering.
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
+    | `partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -891,6 +895,8 @@ Creates a new provider offering.
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
+    | `partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -2357,6 +2363,8 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
+    | `partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -3722,6 +3730,8 @@ Adds a new partition configuration to an offering.
     |---|---|---|---|
     | `offering` | string (uuid) | ✓ |  |
     | `partition_name` | string | ✓ | Name of the SLURM partition |
+    | `cpu_arch` | string |  | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `gpu_arch` | string |  | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `cpu_bind` | integer |  | Default task binding policy (SLURM cpu_bind) |
     | `def_cpu_per_gpu` | integer |  | Default CPUs allocated per GPU |
     | `max_cpus_per_node` | integer |  | Maximum allocated CPUs per node |
@@ -3755,6 +3765,8 @@ Adds a new partition configuration to an offering.
     | `offering` | string (uuid) |  |
     | `offering_name` | string |  |
     | `partition_name` | string | Name of the SLURM partition |
+    | `cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -4113,6 +4125,8 @@ Updates the configuration of an existing partition associated with an offering.
     |---|---|---|---|
     | `partition_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
     | `partition_name` | string |  | Name of the SLURM partition |
+    | `cpu_arch` | string |  | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `gpu_arch` | string |  | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `cpu_bind` | integer |  | Default task binding policy (SLURM cpu_bind) |
     | `def_cpu_per_gpu` | integer |  | Default CPUs allocated per GPU |
     | `max_cpus_per_node` | integer |  | Maximum allocated CPUs per node |
@@ -4146,6 +4160,8 @@ Updates the configuration of an existing partition associated with an offering.
     | `offering` | string (uuid) |  |
     | `offering_name` | string |  |
     | `partition_name` | string | Name of the SLURM partition |
+    | `cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -4933,6 +4949,8 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
+    | `partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |

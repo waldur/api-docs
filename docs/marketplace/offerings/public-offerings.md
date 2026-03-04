@@ -145,6 +145,8 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
+    | `partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
@@ -414,6 +416,8 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `partitions` | array of objects |  |
     | `partitions.uuid` | string (uuid) |  |
     | `partitions.partition_name` | string | Name of the SLURM partition |
+    | `partitions.cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `partitions.gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
     | `partitions.cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
     | `partitions.def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
     | `partitions.max_cpus_per_node` | integer | Maximum allocated CPUs per node |
