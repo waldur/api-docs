@@ -31,7 +31,7 @@ Returns a paginated list of course accounts accessible to the current user.
     ```python
     from waldur_api_client.client import AuthenticatedClient
     from waldur_api_client.models.course_account_o_enum import CourseAccountOEnum # (1)
-    from waldur_api_client.models.service_account_state import ServiceAccountState # (2)
+    from waldur_api_client.models.course_account_state_enum import CourseAccountStateEnum # (2)
     from waldur_api_client.api.marketplace_course_accounts import marketplace_course_accounts_list # (3)
     
     client = AuthenticatedClient(
@@ -45,7 +45,7 @@ Returns a paginated list of course accounts accessible to the current user.
     
     
     1.  **Model Source:** [`CourseAccountOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_account_o_enum.py)
-    2.  **Model Source:** [`ServiceAccountState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_account_state.py)
+    2.  **Model Source:** [`CourseAccountStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_account_state_enum.py)
     3.  **API Source:** [`marketplace_course_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_course_accounts/marketplace_course_accounts_list.py)
 
 === "TypeScript"
@@ -317,8 +317,8 @@ Creates multiple course accounts within a specified course project in a single r
     ```python
     from waldur_api_client.client import AuthenticatedClient
     from waldur_api_client.models.course_account_o_enum import CourseAccountOEnum # (1)
-    from waldur_api_client.models.course_accounts_bulk_create_request import CourseAccountsBulkCreateRequest # (2)
-    from waldur_api_client.models.service_account_state import ServiceAccountState # (3)
+    from waldur_api_client.models.course_account_state_enum import CourseAccountStateEnum # (2)
+    from waldur_api_client.models.course_accounts_bulk_create_request import CourseAccountsBulkCreateRequest # (3)
     from waldur_api_client.api.marketplace_course_accounts import marketplace_course_accounts_create_bulk # (4)
     
     client = AuthenticatedClient(
@@ -340,8 +340,8 @@ Creates multiple course accounts within a specified course project in a single r
     
     
     1.  **Model Source:** [`CourseAccountOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_account_o_enum.py)
-    2.  **Model Source:** [`CourseAccountsBulkCreateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_accounts_bulk_create_request.py)
-    3.  **Model Source:** [`ServiceAccountState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_account_state.py)
+    2.  **Model Source:** [`CourseAccountStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_account_state_enum.py)
+    3.  **Model Source:** [`CourseAccountsBulkCreateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_accounts_bulk_create_request.py)
     4.  **API Source:** [`marketplace_course_accounts_create_bulk`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_course_accounts/marketplace_course_accounts_create_bulk.py)
 
 === "TypeScript"

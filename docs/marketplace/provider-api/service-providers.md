@@ -62,7 +62,7 @@ Returns a paginated list of course project accounts that have access to resource
     ```python
     from waldur_api_client.client import AuthenticatedClient
     from waldur_api_client.models.course_account_o_enum import CourseAccountOEnum # (1)
-    from waldur_api_client.models.service_account_state import ServiceAccountState # (2)
+    from waldur_api_client.models.course_account_state_enum import CourseAccountStateEnum # (2)
     from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_course_accounts_list # (3)
     
     client = AuthenticatedClient(
@@ -79,7 +79,7 @@ Returns a paginated list of course project accounts that have access to resource
     
     
     1.  **Model Source:** [`CourseAccountOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_account_o_enum.py)
-    2.  **Model Source:** [`ServiceAccountState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_account_state.py)
+    2.  **Model Source:** [`CourseAccountStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/course_account_state_enum.py)
     3.  **API Source:** [`marketplace_service_providers_course_accounts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_course_accounts_list.py)
 
 === "TypeScript"
