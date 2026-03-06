@@ -6,7 +6,6 @@
 |:--- |:--- |:--- |
 | **Core CRUD** | | |
 | <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/pull_offering_details/{uuid}/` | [Details](#details) |
-| <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/pull_offering_invoices/{uuid}/` | [Invoices](#invoices) |
 | <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/pull_offering_orders/{uuid}/` | [Orders](#orders) |
 | <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/pull_offering_resources/{uuid}/` | [Resources](#resources) |
 | <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/pull_offering_robot_accounts/{uuid}/` | [Accounts](#accounts) |
@@ -70,71 +69,6 @@
     
     try {
       const response = await remoteWaldurApiPullOfferingDetails({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "string-value"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
-### Invoices
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/remote-waldur-api/pull_offering_invoices/string-value/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.remote_waldur_api import remote_waldur_api_pull_offering_invoices # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = remote_waldur_api_pull_offering_invoices.sync(
-        uuid="string-value",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`remote_waldur_api_pull_offering_invoices`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/remote_waldur_api/remote_waldur_api_pull_offering_invoices.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { remoteWaldurApiPullOfferingInvoices } from 'waldur-js-client';
-    
-    try {
-      const response = await remoteWaldurApiPullOfferingInvoices({
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "string-value"
