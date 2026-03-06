@@ -125,7 +125,8 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, slug, UUID, backend ID or resource effective ID |
     | `slug` | string | Slug |
-    | `user_uuid` | string (uuid) | Filter projects where the given user has a role. |
+    | `user_uuid` | string (uuid) | Filter by user UUID. |
+    | `user_uuid_with_active_role` | string (uuid) | Filter projects where the given user has a role. |
 
 
 === "Responses"
