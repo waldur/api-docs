@@ -617,6 +617,7 @@ Return a list of orders for which the campaign is applied.
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
@@ -784,6 +785,7 @@ Return a list of resources for which the campaign is applied.
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |

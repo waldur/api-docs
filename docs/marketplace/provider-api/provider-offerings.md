@@ -6781,6 +6781,7 @@ Returns a paginated list of orders associated with a specific offering.
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
@@ -6937,6 +6938,7 @@ Returns details of a specific order associated with an offering.
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
@@ -7359,6 +7361,7 @@ Imports a backend resource into the marketplace.
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |

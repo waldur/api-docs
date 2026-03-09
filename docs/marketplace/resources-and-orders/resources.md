@@ -170,6 +170,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
@@ -353,6 +354,7 @@ Returns details of a specific resource accessible to the consumer.
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
@@ -1117,6 +1119,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
@@ -3097,6 +3100,7 @@ Creates marketplace orders to reallocate limits from source resource to target r
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |

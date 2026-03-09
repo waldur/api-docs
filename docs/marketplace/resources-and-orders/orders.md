@@ -142,6 +142,7 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
@@ -304,6 +305,7 @@ Returns the details of a specific order.
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
@@ -477,6 +479,7 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |

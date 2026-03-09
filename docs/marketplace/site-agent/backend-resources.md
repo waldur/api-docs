@@ -452,6 +452,7 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
+    | `provider_description` | string |  |
     | `category_title` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_icon` | string (uri) |  |
