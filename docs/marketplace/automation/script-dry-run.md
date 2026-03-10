@@ -96,6 +96,8 @@
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
@@ -371,6 +373,8 @@
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |

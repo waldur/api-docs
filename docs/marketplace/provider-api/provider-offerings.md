@@ -210,6 +210,8 @@ Returns a paginated list of offerings for the provider.
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
@@ -476,6 +478,8 @@ Returns details of a specific provider offering.
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
@@ -734,6 +738,8 @@ Creates a new provider offering.
     | `description` | string |  |  |
     | `full_description` | string |  |  |
     | `privacy_policy_link` | string (uri) |  |  |
+    | `helpdesk_url` | string (uri) |  |  |
+    | `documentation_url` | string (uri) |  |  |
     | `access_url` | string (uri) |  | Publicly accessible offering access URL |
     | `customer` | string (uri) |  |  |
     | `category` | string (uri) | ✓ |  |
@@ -880,6 +886,8 @@ Creates a new provider offering.
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
@@ -2348,6 +2356,8 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
@@ -4934,6 +4944,8 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
@@ -5964,6 +5976,8 @@ Updates the overview fields of an offering, such as name, description, and getti
     | `description` | string |  |  |
     | `full_description` | string |  |  |
     | `privacy_policy_link` | string (uri) |  |  |
+    | `helpdesk_url` | string (uri) |  |  |
+    | `documentation_url` | string (uri) |  |  |
     | `access_url` | string (uri) |  | Publicly accessible offering access URL |
     | `getting_started` | string |  |  |
     | `integration_guide` | string |  |  |

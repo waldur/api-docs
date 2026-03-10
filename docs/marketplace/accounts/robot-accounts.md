@@ -88,8 +88,11 @@ Returns a paginated list of robot accounts accessible to the current user.
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `resource` | string (uri) | Resource URL |
     | `resource_uuid` | string (uuid) | Resource UUID |
+    | `responsible_user_uuid` | string (uuid) | Responsible user UUID |
     | `state` | integer | Robot account state<br><br><br>_Enum: `1`, `2`, `3`, `4`, `5`, `6`_ |
     | `type` | string |  |
+    | `user_email` | string | Connected user email contains |
+    | `username` | string | Username contains |
 
 
 === "Responses"

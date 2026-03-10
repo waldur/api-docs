@@ -130,6 +130,8 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
@@ -401,6 +403,8 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `description` | string |  |
     | `full_description` | string |  |
     | `privacy_policy_link` | string (uri) |  |
+    | `helpdesk_url` | string (uri) |  |
+    | `documentation_url` | string (uri) |  |
     | `access_url` | string (uri) | Publicly accessible offering access URL |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |

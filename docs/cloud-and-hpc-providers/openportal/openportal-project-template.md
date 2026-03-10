@@ -103,6 +103,8 @@
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
+    | `offerings_data.helpdesk_url` | string (uri) |  |
+    | `offerings_data.documentation_url` | string (uri) |  |
     | `offerings_data.access_url` | string (uri) | Publicly accessible offering access URL |
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
@@ -375,6 +377,8 @@
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
+    | `offerings_data.helpdesk_url` | string (uri) |  |
+    | `offerings_data.documentation_url` | string (uri) |  |
     | `offerings_data.access_url` | string (uri) | Publicly accessible offering access URL |
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
@@ -679,6 +683,8 @@ Create ProjectTemplate object
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
+    | `offerings_data.helpdesk_url` | string (uri) |  |
+    | `offerings_data.documentation_url` | string (uri) |  |
     | `offerings_data.access_url` | string (uri) | Publicly accessible offering access URL |
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
@@ -994,6 +1000,8 @@ Update ProjectTemplate object (full update)
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
+    | `offerings_data.helpdesk_url` | string (uri) |  |
+    | `offerings_data.documentation_url` | string (uri) |  |
     | `offerings_data.access_url` | string (uri) | Publicly accessible offering access URL |
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
@@ -1291,6 +1299,8 @@ Partially update ProjectTemplate object
     | `offerings_data.description` | string |  |
     | `offerings_data.full_description` | string |  |
     | `offerings_data.privacy_policy_link` | string (uri) |  |
+    | `offerings_data.helpdesk_url` | string (uri) |  |
+    | `offerings_data.documentation_url` | string (uri) |  |
     | `offerings_data.access_url` | string (uri) | Publicly accessible offering access URL |
     | `offerings_data.endpoints` | array of objects |  |
     | `offerings_data.endpoints.uuid` | string (uuid) |  |
