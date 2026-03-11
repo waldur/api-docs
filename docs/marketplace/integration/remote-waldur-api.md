@@ -1116,12 +1116,15 @@ List remote marketplace categories
     | `sections.key` | string |  |
     | `sections.title` | string |  |
     | `sections.attributes` | array of objects |  |
+    | `sections.attributes.uuid` | string (uuid) |  |
     | `sections.attributes.key` | string |  |
     | `sections.attributes.title` | string |  |
     | `sections.attributes.type` | string | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `sections.attributes.options` | array of objects |  |
+    | `sections.attributes.options.uuid` | string (uuid) |  |
     | `sections.attributes.options.key` | string |  |
     | `sections.attributes.options.title` | string |  |
+    | `sections.attributes.options.is_default` | boolean | Return True if this option is the default for its attribute. |
     | `sections.attributes.required` | boolean | A value must be provided for the attribute. |
     | `sections.attributes.default` | any |  |
     | `sections.is_standalone` | boolean | Whether section is rendered as a separate tab. |
