@@ -160,6 +160,7 @@ Returns a paginated list of offerings for the provider.
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -169,6 +170,7 @@ Returns a paginated list of offerings for the provider.
     | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -1671,6 +1673,7 @@ Returns a paginated list of course accounts for projects that have resources of 
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -1679,6 +1682,7 @@ Returns a paginated list of course accounts for projects that have resources of 
     | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -1811,6 +1815,7 @@ Returns a paginated list of customer-level service accounts for customers who ha
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -1819,6 +1824,7 @@ Returns a paginated list of customer-level service accounts for customers who ha
     | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -2098,6 +2104,7 @@ Returns a paginated list of project-level service accounts for projects that hav
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -2106,6 +2113,7 @@ Returns a paginated list of project-level service accounts for projects that hav
     | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -6158,6 +6166,7 @@ Returns monthly usage statistics for the components of an offering within a spec
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -6167,6 +6176,7 @@ Returns monthly usage statistics for the components of an offering within a spec
     | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -6290,6 +6300,7 @@ Returns monthly cost data for an offering within a specified date range.
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -6299,6 +6310,7 @@ Returns monthly cost data for an offering within a specified date range.
     | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -6419,6 +6431,7 @@ Returns a paginated list of customers who have resources for this offering.
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -6428,6 +6441,7 @@ Returns a paginated list of customers who have resources for this offering.
     | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -6534,6 +6548,7 @@ Returns a paginated list of active, shared offerings grouped by their service pr
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -6541,6 +6556,7 @@ Returns a paginated list of active, shared offerings grouped by their service pr
     | `has_terms_of_service` | boolean | Has Terms of Service |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -7724,6 +7740,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `importable` | string | Filter by importable offerings. |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |

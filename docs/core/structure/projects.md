@@ -109,6 +109,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `can_manage` | boolean | Return a list of projects where current user is manager or a customer owner. |
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | array | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string | Customer abbreviation |
     | `customer_name` | string | Customer name |
@@ -118,6 +119,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `include_terminated` | boolean | Include soft-deleted (terminated) projects. Only available to staff and support users, or users with organizational roles who can see their terminated projects. |
     | `is_removed` | boolean | Is removed |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |

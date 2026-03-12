@@ -72,7 +72,9 @@ Returns a paginated list of backend resources that are available for import. Thi
     |---|---|---|
     | `backend_id` | string | Backend ID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |

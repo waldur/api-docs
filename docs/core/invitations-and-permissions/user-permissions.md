@@ -64,9 +64,11 @@ Get a list of all permissions for the current user. Staff and support users can 
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `expiration_time` | string (date-time) |  |
     | `full_name` | string | User full name contains |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `native_name` | string |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |

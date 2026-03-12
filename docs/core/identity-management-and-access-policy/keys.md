@@ -72,12 +72,14 @@
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `field` | array |  |
     | `fingerprint_md5` | string |  |
     | `fingerprint_sha256` | string |  |
     | `fingerprint_sha512` | string |  |
     | `is_shared` | boolean |  |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -518,6 +520,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `fingerprint_sha512` | string |  |
     | `is_shared` | boolean |  |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |

@@ -109,6 +109,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `category_uuid` | string (uuid) | Category UUID |
     | `component_count` | number | Filter by exact number of components |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `downscaled` | boolean | Downscaled |
@@ -119,6 +120,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `limit_based` | boolean | Filter by limit-based offerings |
     | `limit_component_count` | number | Filter by exact number of limit-based components |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -1280,6 +1282,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `limit_based` | boolean | Filter by limit-based offerings |
     | `limit_component_count` | number | Filter by exact number of limit-based components |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |

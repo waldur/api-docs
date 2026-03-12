@@ -62,9 +62,11 @@
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uuid) |  |
     | `full_name` | string | User full name contains |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `native_name` | string |  |
     | `o` | array | Ordering<br><br> |
     | `offering` | string (uuid) |  |

@@ -81,6 +81,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -89,6 +90,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `has_terms_of_service` | boolean | Has Terms of Service |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |

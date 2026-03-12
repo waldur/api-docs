@@ -74,8 +74,10 @@ Returns a paginated list of requests for backend resources.
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `finished` | string (date-time) | Modified after |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |

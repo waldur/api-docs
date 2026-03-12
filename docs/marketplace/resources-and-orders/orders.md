@@ -99,9 +99,11 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `can_approve_as_provider` | boolean | Can approve as provider |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `field` | array |  |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `o` | array | Ordering<br><br> |
     | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |

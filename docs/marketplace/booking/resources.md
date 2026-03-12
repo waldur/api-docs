@@ -78,6 +78,7 @@
     | `component_count` | number | Filter by exact number of components |
     | `connected_customer_uuid` | string (uuid) |  |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `downscaled` | boolean | Downscaled |
@@ -88,6 +89,7 @@
     | `limit_based` | boolean | Filter by limit-based offerings |
     | `limit_component_count` | number | Filter by exact number of limit-based components |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |

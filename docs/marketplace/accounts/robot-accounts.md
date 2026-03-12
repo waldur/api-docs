@@ -79,9 +79,11 @@ Returns a paginated list of robot accounts accessible to the current user.
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `field` | array |  |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `project_uuid` | string (uuid) | Project UUID |

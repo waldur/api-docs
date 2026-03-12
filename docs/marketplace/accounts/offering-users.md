@@ -95,11 +95,13 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `field` | array |  |
     | `has_complete_profile` | boolean | User has complete profile for the offering |
     | `has_consent` | boolean | User Has Consent |
     | `is_restricted` | boolean | Is restricted |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `o` | array | Ordering<br><br> |
     | `offering` | string (uri) |  |
     | `offering_slug` | array | Multiple values may be separated by commas. |

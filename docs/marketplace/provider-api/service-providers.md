@@ -234,6 +234,7 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `can_manage` | boolean |  | Return a list of projects where current user is manager or a customer owner. |
     | `conceal_finished_projects` | boolean |  | Conceal finished projects |
     | `created` | string (date-time) |  | Created after |
+    | `created_before` | string (date-time) |  | Created before |
     | `customer` | array |  | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string |  | Customer abbreviation |
     | `customer_name` | string |  | Customer name |
@@ -242,6 +243,7 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `field` | array |  |  |
     | `is_removed` | boolean |  | Is removed |
     | `modified` | string (date-time) |  | Modified after |
+    | `modified_before` | string (date-time) |  | Modified before |
     | `name` | string |  | Name |
     | `name_exact` | string |  | Name (exact) |
     | `o` | array |  | Ordering<br><br> |
@@ -469,12 +471,14 @@ Returns a paginated list of SSH public keys for all users who have consumed reso
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `field` | array |  |
     | `fingerprint_md5` | string |  |
     | `fingerprint_sha256` | string |  |
     | `fingerprint_sha512` | string |  |
     | `is_shared` | boolean |  |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -790,6 +794,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `description` | string | Description contains |
@@ -798,6 +803,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `has_terms_of_service` | boolean | Has Terms of Service |
     | `keyword` | string | Keyword |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
@@ -976,10 +982,12 @@ Returns a paginated list of project permissions for all projects that have consu
     | Name | Type | Description |
     |---|---|---|
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `expiration_time` | string (date-time) |  |
     | `field` | array |  |
     | `full_name` | string | User full name contains |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `native_name` | string |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
@@ -1211,6 +1219,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `can_manage` | boolean | Return a list of projects where current user is manager or a customer owner. |
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | array | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string | Customer abbreviation |
     | `customer_name` | string | Customer name |
@@ -1219,6 +1228,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `field` | array |  |
     | `is_removed` | boolean | Is removed |
     | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
