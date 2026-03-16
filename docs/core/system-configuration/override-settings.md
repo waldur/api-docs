@@ -263,6 +263,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `LLM_INFERENCES_API_URL` | string (uri) |
     | `LLM_INFERENCES_API_TOKEN` | string |
     | `LLM_INFERENCES_MODEL` | string |
+    | `LLM_COMPLETION_KWARGS` | string |
     | `LLM_TOKEN_LIMIT_DAILY` | integer |
     | `LLM_TOKEN_LIMIT_WEEKLY` | integer |
     | `LLM_TOKEN_LIMIT_MONTHLY` | integer |
@@ -307,6 +308,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLE_PROJECT_DIGEST` | boolean |
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |
+    | `ENABLED_REPORTING_SCREENS` | array of anys |
 
 ---
 
@@ -568,6 +570,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `LLM_INFERENCES_API_URL` | string (uri) |  |
     | `LLM_INFERENCES_API_TOKEN` | string |  |
     | `LLM_INFERENCES_MODEL` | string |  |
+    | `LLM_COMPLETION_KWARGS` | string |  |
     | `LLM_TOKEN_LIMIT_DAILY` | integer |  |
     | `LLM_TOKEN_LIMIT_WEEKLY` | integer |  |
     | `LLM_TOKEN_LIMIT_MONTHLY` | integer |  |
@@ -612,6 +615,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLE_PROJECT_DIGEST` | boolean |  |
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |  |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |  |
+    | `ENABLED_REPORTING_SCREENS` | array of anys |  |
 
 
 === "Responses"

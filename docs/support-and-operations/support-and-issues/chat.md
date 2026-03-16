@@ -83,6 +83,7 @@
     | `thread` | string (uuid) |
     | `role` | any |
     | `content` | string |
+    | `tool_calls` | any |
     | `sequence_index` | integer |
     | `replaces` | string (uuid) |
     | `created` | string (date-time) |
