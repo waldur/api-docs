@@ -170,6 +170,8 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
+    | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
@@ -285,6 +287,8 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
+    | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
@@ -417,6 +421,8 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
+    | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
@@ -560,6 +566,8 @@ Update the details of a project. Requires project administrator or customer owne
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
+    | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
@@ -694,6 +702,8 @@ Partially update the details of a project. Requires project administrator or cus
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
+    | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
@@ -884,6 +894,8 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
+    | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
@@ -1510,6 +1522,8 @@ Moves a project and its associated resources to a different customer. You can ch
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
+    | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |

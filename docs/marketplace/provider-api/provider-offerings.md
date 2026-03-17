@@ -6709,6 +6709,8 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
+    | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
@@ -7418,6 +7420,7 @@ Imports a backend resource into the marketplace.
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
