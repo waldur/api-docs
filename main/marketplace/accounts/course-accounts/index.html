@@ -6504,7 +6504,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Operations Summary">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core CRUD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core CRUD">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -6556,6 +6567,34 @@
     <span class="md-ellipsis">
       
         Delete (close) a course account
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Actions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retry-a-failed-course-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retry a failed course account
       
     </span>
   </a>
@@ -12297,7 +12336,7 @@
   <span class="md-ellipsis">
     
   
-    System logs
+    Project end date change requests
   
 
     
@@ -12310,6 +12349,92 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project end date change requests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../uncategorized/project-end-date-change-requests/project-end-date-change-requests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project End Date Change Requests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_7" id="__nav_9_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System logs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -12397,7 +12522,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Operations Summary">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core CRUD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core CRUD">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -12460,6 +12596,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#other-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Actions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retry-a-failed-course-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retry a failed course account
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -12489,6 +12653,11 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: left;"><strong>Core CRUD</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-course-accounts/</code></td>
 <td style="text-align: left;"><a href="#list-course-accounts">List course accounts</a></td>
@@ -12513,9 +12682,20 @@
 <td style="text-align: left;"><code>/api/marketplace-course-accounts/{uuid}/</code></td>
 <td style="text-align: left;"><a href="#delete-close-a-course-account">Delete (close) a course account</a></td>
 </tr>
+<tr>
+<td style="text-align: left;"><strong>Other Actions</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-course-accounts/{uuid}/retry/</code></td>
+<td style="text-align: left;"><a href="#retry-a-failed-course-account">Retry a failed course account</a></td>
+</tr>
 </tbody>
 </table>
 <hr />
+<h2 id="core-crud">Core CRUD</h2>
 <h3 id="list-course-accounts">List course accounts</h3>
 <p>Returns a paginated list of course accounts accessible to the current user.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTTPie</label><label for="__tabbed_1_2">Python</label><label for="__tabbed_1_3">TypeScript</label><label for="__tabbed_1_4">Query Parameters</label><label for="__tabbed_1_5">Responses</label></div>
@@ -13516,6 +13696,187 @@
 </div>
 </div>
 <hr />
+<h2 id="other-actions">Other Actions</h2>
+<h3 id="retry-a-failed-course-account">Retry a failed course account</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:5"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-course-accounts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/retry/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_course_accounts</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_course_accounts_retry</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_course_accounts_retry</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_course_accounts/marketplace_course_accounts_retry.py"><code>marketplace_course_accounts_retry</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceCourseAccountsRetry</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceCourseAccountsRetry</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>202</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>string (date-time)</td>
+</tr>
+<tr>
+<td><code>modified</code></td>
+<td>string (date-time)</td>
+</tr>
+<tr>
+<td><code>project</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>project_slug</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>project_start_date</code></td>
+<td>string (date)</td>
+</tr>
+<tr>
+<td><code>project_end_date</code></td>
+<td>string (date)</td>
+</tr>
+<tr>
+<td><code>user_uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>any</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string (email)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>error_message</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>error_traceback</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
 
 
 
@@ -13536,7 +13897,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-03-05
+    2026-03-18
   </span>
 
     

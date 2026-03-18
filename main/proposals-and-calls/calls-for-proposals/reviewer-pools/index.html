@@ -10405,6 +10405,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#force-accept-a-pool-invitation-manager-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Force-accept a pool invitation (manager override)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -12325,7 +12336,7 @@
   <span class="md-ellipsis">
     
   
-    System logs
+    Project end date change requests
   
 
     
@@ -12338,6 +12349,92 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project end date change requests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../uncategorized/project-end-date-change-requests/project-end-date-change-requests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project End Date Change Requests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_7" id="__nav_9_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System logs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -12511,6 +12608,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#force-accept-a-pool-invitation-manager-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Force-accept a pool invitation (manager override)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -12578,6 +12686,11 @@
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/call-reviewer-pools/{uuid}/decline/</code></td>
 <td style="text-align: left;"><a href="#decline-a-pool-invitation-authenticated-users-only">Decline a pool invitation (authenticated users only)</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/call-reviewer-pools/{uuid}/force-accept/</code></td>
+<td style="text-align: left;"><a href="#force-accept-a-pool-invitation-manager-override">Force-accept a pool invitation (manager override)</a></td>
 </tr>
 </tbody>
 </table>
@@ -12859,6 +12972,21 @@
 <td>integer</td>
 <td>Count reviews in 'submitted' state.</td>
 </tr>
+<tr>
+<td><code>override_reason</code></td>
+<td>string</td>
+<td>Reason for manager override of invitation status.</td>
+</tr>
+<tr>
+<td><code>overridden_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>overridden_at</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -13113,6 +13241,21 @@
 <td><code>reviews_completed</code></td>
 <td>integer</td>
 <td>Count reviews in 'submitted' state.</td>
+</tr>
+<tr>
+<td><code>override_reason</code></td>
+<td>string</td>
+<td>Reason for manager override of invitation status.</td>
+</tr>
+<tr>
+<td><code>overridden_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>overridden_at</code></td>
+<td>string (date-time)</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -13586,6 +13729,316 @@
 </div>
 </div>
 <hr />
+<h3 id="force-accept-a-pool-invitation-manager-override">Force-accept a pool invitation (manager override)</h3>
+<p>Force-accept a pool invitation (manager override).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Request Body (required)</label><label for="__tabbed_6_6">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/call-reviewer-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/force-accept/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">override_reason</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.force_accept_pool_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForceAcceptPoolRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.call_reviewer_pools</span><span class="w"> </span><span class="kn">import</span> <span class="n">call_reviewer_pools_force_accept</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">ForceAcceptPoolRequest</span><span class="p">(</span>
+    <span class="n">override_reason</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">call_reviewer_pools_force_accept</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/force_accept_pool_request.py"><code>ForceAcceptPoolRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/call_reviewer_pools/call_reviewer_pools_force_accept.py"><code>call_reviewer_pools_force_accept</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">callReviewerPoolsForceAccept</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">callReviewerPoolsForceAccept</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;override_reason&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>override_reason</code></td>
+<td>string</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>call</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>call_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>call_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reviewer</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reviewer_uuid</code></td>
+<td>string</td>
+<td>Get reviewer profile UUID if available.</td>
+</tr>
+<tr>
+<td><code>reviewer_name</code></td>
+<td>string</td>
+<td>Get reviewer name from profile or invited_user.</td>
+</tr>
+<tr>
+<td><code>reviewer_email</code></td>
+<td>string</td>
+<td>Get email from profile, invited_user, or invited_email.</td>
+</tr>
+<tr>
+<td><code>has_profile</code></td>
+<td>boolean</td>
+<td>Check if reviewer has a profile.</td>
+</tr>
+<tr>
+<td><code>invited_email</code></td>
+<td>string (email)</td>
+<td>Email address for direct invitations</td>
+</tr>
+<tr>
+<td><code>invited_user</code></td>
+<td>string (uri)</td>
+<td>Waldur user if email matches existing account</td>
+</tr>
+<tr>
+<td><code>invited_user_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>invited_at</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>invitation_status</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>invitation_status_display</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>response_date</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>decline_reason</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>max_assignments</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>current_assignments</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>expertise_match_score</code></td>
+<td>number (double)</td>
+<td>Calculated affinity to call topics (0-1)</td>
+</tr>
+<tr>
+<td><code>invited_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>invitation_token</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>invitation_expires_at</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>coi_count</code></td>
+<td>integer</td>
+<td>Count total COIs for this reviewer in this call.</td>
+</tr>
+<tr>
+<td><code>coi_by_severity</code></td>
+<td>object (free-form)</td>
+<td>Count COIs by severity level.</td>
+</tr>
+<tr>
+<td><code>reviews_pending</code></td>
+<td>integer</td>
+<td>Legacy field - always returns 0.  Previously counted reviews in 'created' state, but that state has been removed. Reviews are now created directly in 'in_review' state. Kept for backwards compatibility with frontend.</td>
+</tr>
+<tr>
+<td><code>reviews_in_progress</code></td>
+<td>integer</td>
+<td>Count reviews in 'in_review' state.</td>
+</tr>
+<tr>
+<td><code>reviews_completed</code></td>
+<td>integer</td>
+<td>Count reviews in 'submitted' state.</td>
+</tr>
+<tr>
+<td><code>override_reason</code></td>
+<td>string</td>
+<td>Reason for manager override of invitation status.</td>
+</tr>
+<tr>
+<td><code>overridden_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>overridden_at</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
 
 
 
@@ -13606,7 +14059,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-02-22
+    2026-03-18
   </span>
 
     
