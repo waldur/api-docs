@@ -258,19 +258,19 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ONBOARDING_BOLAGSVERKET_CLIENT_ID` | string |
     | `ONBOARDING_BOLAGSVERKET_CLIENT_SECRET` | string |
     | `ONBOARDING_BREG_API_URL` | string (uri) |
-    | `LLM_CHAT_ENABLED` | boolean |
-    | `LLM_CHAT_ENABLED_ROLES` | string |
-    | `LLM_INFERENCES_BACKEND_TYPE` | string |
-    | `LLM_INFERENCES_API_URL` | string (uri) |
-    | `LLM_INFERENCES_API_TOKEN` | string |
-    | `LLM_INFERENCES_MODEL` | string |
-    | `LLM_COMPLETION_KWARGS` | string |
-    | `LLM_TOKEN_LIMIT_DAILY` | integer |
-    | `LLM_TOKEN_LIMIT_WEEKLY` | integer |
-    | `LLM_TOKEN_LIMIT_MONTHLY` | integer |
-    | `LLM_CHAT_SESSION_RETENTION_DAYS` | integer |
-    | `LLM_CHAT_HISTORY_LIMIT` | integer |
-    | `LLM_INJECTION_ALLOWLIST` | string |
+    | `AI_ASSISTANT_ENABLED` | boolean |
+    | `AI_ASSISTANT_ENABLED_ROLES` | string |
+    | `AI_ASSISTANT_BACKEND_TYPE` | string |
+    | `AI_ASSISTANT_API_URL` | string (uri) |
+    | `AI_ASSISTANT_API_TOKEN` | string |
+    | `AI_ASSISTANT_MODEL` | string |
+    | `AI_ASSISTANT_COMPLETION_KWARGS` | string |
+    | `AI_ASSISTANT_TOKEN_LIMIT_DAILY` | integer |
+    | `AI_ASSISTANT_TOKEN_LIMIT_WEEKLY` | integer |
+    | `AI_ASSISTANT_TOKEN_LIMIT_MONTHLY` | integer |
+    | `AI_ASSISTANT_SESSION_RETENTION_DAYS` | integer |
+    | `AI_ASSISTANT_HISTORY_LIMIT` | integer |
+    | `AI_ASSISTANT_INJECTION_ALLOWLIST` | string |
     | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |
     | `SOFTWARE_CATALOG_EESSI_VERSION` | string |
     | `SOFTWARE_CATALOG_EESSI_API_URL` | string |
@@ -566,19 +566,19 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ONBOARDING_BOLAGSVERKET_CLIENT_ID` | string |  |
     | `ONBOARDING_BOLAGSVERKET_CLIENT_SECRET` | string |  |
     | `ONBOARDING_BREG_API_URL` | string (uri) |  |
-    | `LLM_CHAT_ENABLED` | boolean |  |
-    | `LLM_CHAT_ENABLED_ROLES` | string |  |
-    | `LLM_INFERENCES_BACKEND_TYPE` | string |  |
-    | `LLM_INFERENCES_API_URL` | string (uri) |  |
-    | `LLM_INFERENCES_API_TOKEN` | string |  |
-    | `LLM_INFERENCES_MODEL` | string |  |
-    | `LLM_COMPLETION_KWARGS` | string |  |
-    | `LLM_TOKEN_LIMIT_DAILY` | integer |  |
-    | `LLM_TOKEN_LIMIT_WEEKLY` | integer |  |
-    | `LLM_TOKEN_LIMIT_MONTHLY` | integer |  |
-    | `LLM_CHAT_SESSION_RETENTION_DAYS` | integer |  |
-    | `LLM_CHAT_HISTORY_LIMIT` | integer |  |
-    | `LLM_INJECTION_ALLOWLIST` | string |  |
+    | `AI_ASSISTANT_ENABLED` | boolean |  |
+    | `AI_ASSISTANT_ENABLED_ROLES` | string |  |
+    | `AI_ASSISTANT_BACKEND_TYPE` | string |  |
+    | `AI_ASSISTANT_API_URL` | string (uri) |  |
+    | `AI_ASSISTANT_API_TOKEN` | string |  |
+    | `AI_ASSISTANT_MODEL` | string |  |
+    | `AI_ASSISTANT_COMPLETION_KWARGS` | string |  |
+    | `AI_ASSISTANT_TOKEN_LIMIT_DAILY` | integer |  |
+    | `AI_ASSISTANT_TOKEN_LIMIT_WEEKLY` | integer |  |
+    | `AI_ASSISTANT_TOKEN_LIMIT_MONTHLY` | integer |  |
+    | `AI_ASSISTANT_SESSION_RETENTION_DAYS` | integer |  |
+    | `AI_ASSISTANT_HISTORY_LIMIT` | integer |  |
+    | `AI_ASSISTANT_INJECTION_ALLOWLIST` | string |  |
     | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |  |
     | `SOFTWARE_CATALOG_EESSI_VERSION` | string |  |
     | `SOFTWARE_CATALOG_EESSI_API_URL` | string |  |
