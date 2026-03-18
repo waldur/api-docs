@@ -4,13 +4,18 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-course-accounts/` | [List course accounts](#list-course-accounts) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-course-accounts/{uuid}/` | [Retrieve a course account](#retrieve-a-course-account) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-course-accounts/` | [Create a course account](#create-a-course-account) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-course-accounts/create_bulk/` | [Bulk create course accounts](#bulk-create-course-accounts) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-course-accounts/{uuid}/` | [Delete (close) a course account](#delete-close-a-course-account) |
+| **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-course-accounts/{uuid}/retry/` | [Retry a failed course account](#retry-a-failed-course-account) |
 
 ---
+## Core CRUD
+
 
 ### List course accounts
 
@@ -485,5 +490,94 @@ Deletes a course account, which triggers a 'close' operation in the backend.
 
     **`204`** - No response body
     
+
+---
+
+## Other Actions
+
+
+### Retry a failed course account
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-course-accounts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/retry/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_course_accounts import marketplace_course_accounts_retry # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_course_accounts_retry.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_course_accounts_retry`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_course_accounts/marketplace_course_accounts_retry.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceCourseAccountsRetry } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceCourseAccountsRetry({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+    | `project` | string (uuid) |
+    | `project_uuid` | string (uuid) |
+    | `project_name` | string |
+    | `project_slug` | string |
+    | `project_start_date` | string (date) |
+    | `project_end_date` | string (date) |
+    | `user_uuid` | string (uuid) |
+    | `username` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `state` | any |
+    | `email` | string (email) |
+    | `description` | string |
+    | `error_message` | string |
+    | `error_traceback` | string |
 
 ---

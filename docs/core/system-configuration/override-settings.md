@@ -259,6 +259,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ONBOARDING_BOLAGSVERKET_CLIENT_SECRET` | string |
     | `ONBOARDING_BREG_API_URL` | string (uri) |
     | `LLM_CHAT_ENABLED` | boolean |
+    | `LLM_CHAT_ENABLED_ROLES` | string |
     | `LLM_INFERENCES_BACKEND_TYPE` | string |
     | `LLM_INFERENCES_API_URL` | string (uri) |
     | `LLM_INFERENCES_API_TOKEN` | string |
@@ -566,6 +567,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ONBOARDING_BOLAGSVERKET_CLIENT_SECRET` | string |  |
     | `ONBOARDING_BREG_API_URL` | string (uri) |  |
     | `LLM_CHAT_ENABLED` | boolean |  |
+    | `LLM_CHAT_ENABLED_ROLES` | string |  |
     | `LLM_INFERENCES_BACKEND_TYPE` | string |  |
     | `LLM_INFERENCES_API_URL` | string (uri) |  |
     | `LLM_INFERENCES_API_TOKEN` | string |  |

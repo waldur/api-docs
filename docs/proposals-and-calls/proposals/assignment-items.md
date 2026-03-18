@@ -15,6 +15,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/assignment-items/{uuid}/suggest_alternatives/` | [Suggest alternative reviewers for a declined assignment](#suggest-alternative-reviewers-for-a-declined-assignment) |
 | <span class="http-badge http-post">POST</span> | `/api/assignment-items/{uuid}/accept/` | [Accept this assignment item. Creates a Review record](#accept-this-assignment-item-creates-a-review-record) |
 | <span class="http-badge http-post">POST</span> | `/api/assignment-items/{uuid}/decline/` | [Decline this assignment item](#decline-this-assignment-item) |
+| <span class="http-badge http-post">POST</span> | `/api/assignment-items/{uuid}/force-unblock/` | [Force-unblock a COI-blocked assignment item (manager override)](#force-unblock-a-coi-blocked-assignment-item-manager-override) |
 | <span class="http-badge http-post">POST</span> | `/api/assignment-items/{uuid}/reassign/` | [Reassign this item to a different reviewer](#reassign-this-item-to-a-different-reviewer) |
 
 ---
@@ -112,6 +113,9 @@
     | `review` | string (uri) | The Review record created when this assignment was accepted. |
     | `review_uuid` | string (uuid) |  |
     | `reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `override_reason` | string | Reason for manager override of COI block. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
 ---
@@ -197,6 +201,9 @@
     | `review` | string (uri) | The Review record created when this assignment was accepted. |
     | `review_uuid` | string (uuid) |  |
     | `reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `override_reason` | string | Reason for manager override of COI block. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
 ---
@@ -283,6 +290,9 @@
     | `review` | string (uri) | The Review record created when this assignment was accepted. |
     | `review_uuid` | string (uuid) |  |
     | `reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `override_reason` | string | Reason for manager override of COI block. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
 ---
@@ -380,6 +390,9 @@
     | `review` | string (uri) | The Review record created when this assignment was accepted. |
     | `review_uuid` | string (uuid) |  |
     | `reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `override_reason` | string | Reason for manager override of COI block. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
 ---
@@ -477,6 +490,9 @@
     | `review` | string (uri) | The Review record created when this assignment was accepted. |
     | `review_uuid` | string (uuid) |  |
     | `reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `override_reason` | string | Reason for manager override of COI block. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
 ---
@@ -770,6 +786,114 @@ Decline this assignment item.
     |---|---|---|
     | `detail` | string |  |
     | `review_uuid` | string (uuid) | UUID of created review (only on accept) |
+
+---
+
+### Force-unblock a COI-blocked assignment item (manager override)
+
+Force-unblock a COI-blocked assignment item (manager override).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/assignment-items/a1b2c3d4-e5f6-7890-abcd-ef1234567890/force-unblock/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      override_reason="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.force_unblock_request import ForceUnblockRequest # (1)
+    from waldur_api_client.api.assignment_items import assignment_items_force_unblock # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ForceUnblockRequest(
+        override_reason="string-value"
+    )
+    response = assignment_items_force_unblock.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ForceUnblockRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/force_unblock_request.py)
+    2.  **API Source:** [`assignment_items_force_unblock`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/assignment_items/assignment_items_force_unblock.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { assignmentItemsForceUnblock } from 'waldur-js-client';
+    
+    try {
+      const response = await assignmentItemsForceUnblock({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "override_reason": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `override_reason` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `batch` | string (uri) |  |
+    | `proposal` | string (uri) |  |
+    | `proposal_uuid` | string (uuid) |  |
+    | `proposal_name` | string |  |
+    | `proposal_slug` | string |  |
+    | `status` | any |  |
+    | `status_display` | string |  |
+    | `affinity_score` | number (double) | Affinity score used for assignment (0-1). |
+    | `has_coi` | boolean | Whether COI was detected during pre-check. |
+    | `coi_count` | integer | Count of COI records blocking this assignment. |
+    | `responded_at` | string (date-time) |  |
+    | `decline_reason` | string | Reason provided by reviewer for declining. |
+    | `review` | string (uri) | The Review record created when this assignment was accepted. |
+    | `review_uuid` | string (uuid) |  |
+    | `reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `override_reason` | string | Reason for manager override of COI block. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
+    | `created` | string (date-time) |  |
 
 ---
 

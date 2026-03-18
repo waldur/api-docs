@@ -11,6 +11,7 @@
 | **Other Actions** | | |
 | <span class="http-badge http-post">POST</span> | `/api/call-reviewer-pools/{uuid}/accept/` | [Accept a pool invitation (authenticated users only)](#accept-a-pool-invitation-authenticated-users-only) |
 | <span class="http-badge http-post">POST</span> | `/api/call-reviewer-pools/{uuid}/decline/` | [Decline a pool invitation (authenticated users only)](#decline-a-pool-invitation-authenticated-users-only) |
+| <span class="http-badge http-post">POST</span> | `/api/call-reviewer-pools/{uuid}/force-accept/` | [Force-accept a pool invitation (manager override)](#force-accept-a-pool-invitation-manager-override) |
 
 ---
 ## Core CRUD
@@ -117,6 +118,9 @@
     | `reviews_pending` | integer | Legacy field - always returns 0.  Previously counted reviews in 'created' state, but that state has been removed. Reviews are now created directly in 'in_review' state. Kept for backwards compatibility with frontend. |
     | `reviews_in_progress` | integer | Count reviews in 'in_review' state. |
     | `reviews_completed` | integer | Count reviews in 'submitted' state. |
+    | `override_reason` | string | Reason for manager override of invitation status. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
 
 ---
 
@@ -214,6 +218,9 @@
     | `reviews_pending` | integer | Legacy field - always returns 0.  Previously counted reviews in 'created' state, but that state has been removed. Reviews are now created directly in 'in_review' state. Kept for backwards compatibility with frontend. |
     | `reviews_in_progress` | integer | Count reviews in 'in_review' state. |
     | `reviews_completed` | integer | Count reviews in 'submitted' state. |
+    | `override_reason` | string | Reason for manager override of invitation status. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
 
 ---
 
@@ -479,5 +486,125 @@ Decline a pool invitation (authenticated users only).
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+---
+
+### Force-accept a pool invitation (manager override)
+
+Force-accept a pool invitation (manager override).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/call-reviewer-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/force-accept/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      override_reason="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.force_accept_pool_request import ForceAcceptPoolRequest # (1)
+    from waldur_api_client.api.call_reviewer_pools import call_reviewer_pools_force_accept # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ForceAcceptPoolRequest(
+        override_reason="string-value"
+    )
+    response = call_reviewer_pools_force_accept.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ForceAcceptPoolRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/force_accept_pool_request.py)
+    2.  **API Source:** [`call_reviewer_pools_force_accept`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/call_reviewer_pools/call_reviewer_pools_force_accept.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { callReviewerPoolsForceAccept } from 'waldur-js-client';
+    
+    try {
+      const response = await callReviewerPoolsForceAccept({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "override_reason": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `override_reason` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `call` | string (uri) |  |
+    | `call_uuid` | string (uuid) |  |
+    | `call_name` | string |  |
+    | `reviewer` | string (uri) |  |
+    | `reviewer_uuid` | string | Get reviewer profile UUID if available. |
+    | `reviewer_name` | string | Get reviewer name from profile or invited_user. |
+    | `reviewer_email` | string | Get email from profile, invited_user, or invited_email. |
+    | `has_profile` | boolean | Check if reviewer has a profile. |
+    | `invited_email` | string (email) | Email address for direct invitations |
+    | `invited_user` | string (uri) | Waldur user if email matches existing account |
+    | `invited_user_name` | string |  |
+    | `invited_at` | string (date-time) |  |
+    | `invitation_status` | any |  |
+    | `invitation_status_display` | string |  |
+    | `response_date` | string (date-time) |  |
+    | `decline_reason` | string |  |
+    | `max_assignments` | integer |  |
+    | `current_assignments` | integer |  |
+    | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
+    | `invited_by_name` | string |  |
+    | `invitation_token` | string |  |
+    | `invitation_expires_at` | string (date-time) |  |
+    | `created` | string (date-time) |  |
+    | `coi_count` | integer | Count total COIs for this reviewer in this call. |
+    | `coi_by_severity` | object (free-form) | Count COIs by severity level. |
+    | `reviews_pending` | integer | Legacy field - always returns 0.  Previously counted reviews in 'created' state, but that state has been removed. Reviews are now created directly in 'in_review' state. Kept for backwards compatibility with frontend. |
+    | `reviews_in_progress` | integer | Count reviews in 'in_review' state. |
+    | `reviews_completed` | integer | Count reviews in 'submitted' state. |
+    | `override_reason` | string | Reason for manager override of invitation status. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
 
 ---

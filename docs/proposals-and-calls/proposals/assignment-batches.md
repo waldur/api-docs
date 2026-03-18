@@ -227,6 +227,9 @@
     | `items.review` | string (uri) | The Review record created when this assignment was accepted. |
     | `items.review_uuid` | string (uuid) |  |
     | `items.reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `items.override_reason` | string | Reason for manager override of COI block. |
+    | `items.overridden_by_name` | string |  |
+    | `items.overridden_at` | string (date-time) |  |
     | `items.created` | string (date-time) |  |
     | `items_count` | integer | Total count of items in batch. |
     | `items_pending_count` | integer | Count of pending items. |
@@ -340,6 +343,9 @@
     | `items.review` | string (uri) | The Review record created when this assignment was accepted. |
     | `items.review_uuid` | string (uuid) |  |
     | `items.reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `items.override_reason` | string | Reason for manager override of COI block. |
+    | `items.overridden_by_name` | string |  |
+    | `items.overridden_at` | string (date-time) |  |
     | `items.created` | string (date-time) |  |
     | `items_count` | integer | Total count of items in batch. |
     | `items_pending_count` | integer | Count of pending items. |
@@ -464,6 +470,9 @@
     | `items.review` | string (uri) | The Review record created when this assignment was accepted. |
     | `items.review_uuid` | string (uuid) |  |
     | `items.reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `items.override_reason` | string | Reason for manager override of COI block. |
+    | `items.overridden_by_name` | string |  |
+    | `items.overridden_at` | string (date-time) |  |
     | `items.created` | string (date-time) |  |
     | `items_count` | integer | Total count of items in batch. |
     | `items_pending_count` | integer | Count of pending items. |
@@ -588,6 +597,9 @@
     | `items.review` | string (uri) | The Review record created when this assignment was accepted. |
     | `items.review_uuid` | string (uuid) |  |
     | `items.reassign_count` | integer | Number of times this proposal has been reassigned. |
+    | `items.override_reason` | string | Reason for manager override of COI block. |
+    | `items.overridden_by_name` | string |  |
+    | `items.overridden_at` | string (date-time) |  |
     | `items.created` | string (date-time) |  |
     | `items_count` | integer | Total count of items in batch. |
     | `items_pending_count` | integer | Count of pending items. |

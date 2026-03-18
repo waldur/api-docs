@@ -3266,6 +3266,9 @@ List reviewer pool members for a call.
     | `reviews_pending` | integer | Legacy field - always returns 0.  Previously counted reviews in 'created' state, but that state has been removed. Reviews are now created directly in 'in_review' state. Kept for backwards compatibility with frontend. |
     | `reviews_in_progress` | integer | Count reviews in 'in_review' state. |
     | `reviews_completed` | integer | Count reviews in 'submitted' state. |
+    | `override_reason` | string | Reason for manager override of invitation status. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
 
 ---
 
@@ -4390,6 +4393,9 @@ Invite a reviewer by email address. Creates an invitation that requires the revi
     | `reviews_pending` | integer | Legacy field - always returns 0.  Previously counted reviews in 'created' state, but that state has been removed. Reviews are now created directly in 'in_review' state. Kept for backwards compatibility with frontend. |
     | `reviews_in_progress` | integer | Count reviews in 'in_review' state. |
     | `reviews_completed` | integer | Count reviews in 'submitted' state. |
+    | `override_reason` | string | Reason for manager override of invitation status. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
 
 ---
 
@@ -4533,6 +4539,9 @@ Invite reviewers to join the call's reviewer pool.
     | `reviews_pending` | integer | Legacy field - always returns 0.  Previously counted reviews in 'created' state, but that state has been removed. Reviews are now created directly in 'in_review' state. Kept for backwards compatibility with frontend. |
     | `reviews_in_progress` | integer | Count reviews in 'in_review' state. |
     | `reviews_completed` | integer | Count reviews in 'submitted' state. |
+    | `override_reason` | string | Reason for manager override of invitation status. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
 
 ---
 
