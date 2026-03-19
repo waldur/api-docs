@@ -26,6 +26,7 @@
 | **Data & Reporting** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-orders/{uuid}/offering/` | [Get offering details](#get-offering-details) |
 | **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-orders/{uuid}/retry/` | [Retry an erred order](#retry-an-erred-order) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-orders/{uuid}/set_consumer_info/` | [Set consumer info on order](#set-consumer-info-on-order) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-orders/{uuid}/set_provider_info/` | [Set provider info on order](#set-provider-info-on-order) |
 | <span class="http-badge http-put">PUT</span> | `/api/marketplace-orders/{uuid}/` | [Update](#update) |
@@ -1801,6 +1802,73 @@ Returns details of the offering connected to the requested object.
 
 ## Other Actions
 
+
+### Retry an erred order
+
+Resets an erred order and its resource back to an active state so that the order can be reprocessed.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-orders/a1b2c3d4-e5f6-7890-abcd-ef1234567890/retry/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_retry # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_orders_retry.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_orders_retry`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_retry.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceOrdersRetry } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceOrdersRetry({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
 
 ### Set consumer info on order
 
