@@ -94,6 +94,7 @@
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `requested_end_date` | string (date) | The requested new end date for the project |
+    | `comment` | string | Optional comment from the requester |
     | `created` | string (date-time) |  |
     | `created_by_uuid` | string (uuid) |  |
     | `created_by_full_name` | string |  |
@@ -177,6 +178,7 @@
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `requested_end_date` | string (date) | The requested new end date for the project |
+    | `comment` | string | Optional comment from the requester |
     | `created` | string (date-time) |  |
     | `created_by_uuid` | string (uuid) |  |
     | `created_by_full_name` | string |  |
@@ -254,6 +256,7 @@
     |---|---|---|---|
     | `project` | string (uri) | ✓ |  |
     | `requested_end_date` | string (date) | ✓ | The requested new end date for the project |
+    | `comment` | string |  | Optional comment from the requester |
 
 
 === "Responses"
@@ -264,6 +267,7 @@
     |---|---|---|
     | `project` | string (uri) |  |
     | `requested_end_date` | string (date) | The requested new end date for the project |
+    | `comment` | string | Optional comment from the requester |
     | `uuid` | string (uuid) |  |
     | `state` | string |  |
 
@@ -362,38 +366,28 @@ Cancel project end date change request. Only the creator can cancel.
     http \
       POST \
       https://api.example.com/api/project-end-date-change-requests/a1b2c3d4-e5f6-7890-abcd-ef1234567890/cancel/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      requested_end_date="2023-10-01"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.project_end_date_change_request_request import ProjectEndDateChangeRequestRequest # (1)
-    from waldur_api_client.api.project_end_date_change_requests import project_end_date_change_requests_cancel # (2)
+    from waldur_api_client.api.project_end_date_change_requests import project_end_date_change_requests_cancel # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ProjectEndDateChangeRequestRequest(
-        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        requested_end_date="2023-10-01"
-    )
     response = project_end_date_change_requests_cancel.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ProjectEndDateChangeRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_end_date_change_request_request.py)
-    2.  **API Source:** [`project_end_date_change_requests_cancel`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/project_end_date_change_requests/project_end_date_change_requests_cancel.py)
+    1.  **API Source:** [`project_end_date_change_requests_cancel`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/project_end_date_change_requests/project_end_date_change_requests_cancel.py)
 
 === "TypeScript"
 
@@ -405,10 +399,6 @@ Cancel project end date change request. Only the creator can cancel.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "requested_end_date": "2023-10-01"
       }
     });
       console.log('Success:', response);
@@ -423,15 +413,6 @@ Cancel project end date change request. Only the creator can cancel.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `project` | string (uri) | ✓ |  |
-    | `requested_end_date` | string (date) | ✓ | The requested new end date for the project |
-    | `review_comment` | string |  | Optional comment provided during review |
 
 
 === "Responses"
