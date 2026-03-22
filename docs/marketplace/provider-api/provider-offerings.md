@@ -6698,6 +6698,7 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
     | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
+    | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |

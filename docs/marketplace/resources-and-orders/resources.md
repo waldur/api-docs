@@ -39,6 +39,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/estimate_renewal/` | [Estimate renewal cost breakdown](#estimate-renewal-cost-breakdown) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/reallocate_limits/` | [Reallocate resource limits](#reallocate-resource-limits) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/restore/` | [Restore](#restore) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/set_end_date/` | [Set end date of the resource](#set-end-date-of-the-resource) |
 
 ---
 ## Core CRUD
@@ -1313,7 +1314,7 @@ Creates a renewal order to extend the subscription period of a prepaid resource.
 
 ### Set end date of the resource by staff
 
-Allows a staff user to set or update the end date for a resource, which will schedule it for termination.
+Deprecated: Use set_end_date instead. Allows a staff user to set or update the end date for a resource.
 
 
 === "HTTPie"
@@ -3202,5 +3203,84 @@ Creates marketplace orders to reallocate limits from source resource to target r
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
     | `offering_components.max_prepaid_duration` | integer |  |
+
+---
+
+### Set end date of the resource
+
+Allows a consumer (customer owner) to set or update the end date for a resource.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_end_date/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.resource_end_date_request import ResourceEndDateRequest # (1)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_set_end_date # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ResourceEndDateRequest()
+    response = marketplace_resources_set_end_date.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ResourceEndDateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_end_date_request.py)
+    2.  **API Source:** [`marketplace_resources_set_end_date`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_set_end_date.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourcesSetEndDate } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourcesSetEndDate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `end_date` | string (date) |  | The date is inclusive. Once reached, a resource will be scheduled for termination. |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---

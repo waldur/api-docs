@@ -30,6 +30,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_backend_id/` | [Set resource backend ID](#set-resource-backend-id) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_backend_metadata/` | [Set resource backend metadata](#set-resource-backend-metadata) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_downscaled/` | [Set downscaled flag for resource](#set-downscaled-flag-for-resource) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date/` | [Set end date of the resource](#set-end-date-of-the-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_provider/` | [Set end date by provider](#set-end-date-by-provider) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_staff/` | [Set end date of the resource by staff](#set-end-date-of-the-resource-by-staff) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_keycloak_scopes/` | [Set Keycloak scope options for a resource](#set-keycloak-scope-options-for-a-resource) |
@@ -2699,9 +2700,88 @@ Sets the 'downscaled' flag for a resource. Requires staff permissions.
 
 ---
 
+### Set end date of the resource
+
+Allows a service provider to set or update the end date for a resource.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_end_date/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.resource_end_date_request import ResourceEndDateRequest # (1)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_set_end_date # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ResourceEndDateRequest()
+    response = marketplace_provider_resources_set_end_date.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ResourceEndDateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_end_date_request.py)
+    2.  **API Source:** [`marketplace_provider_resources_set_end_date`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_set_end_date.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesSetEndDate } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesSetEndDate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `end_date` | string (date) |  | The date is inclusive. Once reached, a resource will be scheduled for termination. |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
 ### Set end date by provider
 
-Allows a service provider to set or update the end date for a resource, scheduling it for termination. A notification is sent to the consumer.
+Deprecated: Use set_end_date instead. Allows a service provider to set or update the end date for a resource.
 
 
 === "HTTPie"
@@ -2780,7 +2860,7 @@ Allows a service provider to set or update the end date for a resource, scheduli
 
 ### Set end date of the resource by staff
 
-Allows a staff user to set or update the end date for a resource, which will schedule it for termination.
+Deprecated: Use set_end_date instead. Allows a staff user to set or update the end date for a resource.
 
 
 === "HTTPie"

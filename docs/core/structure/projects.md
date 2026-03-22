@@ -159,6 +159,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
     | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
+    | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
@@ -276,6 +277,7 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
     | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
+    | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
@@ -410,6 +412,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
     | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
+    | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
@@ -555,6 +558,7 @@ Update the details of a project. Requires project administrator or customer owne
     | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
     | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
+    | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
@@ -691,6 +695,7 @@ Partially update the details of a project. Requires project administrator or cus
     | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
     | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
+    | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
@@ -883,6 +888,7 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
     | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
+    | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
@@ -1511,6 +1517,7 @@ Moves a project and its associated resources to a different customer. You can ch
     | `start_date` | string (date) | Project start date. Cannot be edited after the start date has arrived. |
     | `end_date` | string (date) | Project end date. Setting this field requires DELETE_PROJECT permission. |
     | `end_date_requested_by` | string (uri) |  |
+    | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string | Human-readable label for the OECD FOS 2007 classification code |
     | `is_industry` | boolean |  |
