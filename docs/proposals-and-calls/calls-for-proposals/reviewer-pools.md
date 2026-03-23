@@ -110,7 +110,7 @@
     | `current_assignments` | integer |  |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
-    | `invitation_token` | string |  |
+    | `invitation_link` | string |  |
     | `invitation_expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `coi_count` | integer | Count total COIs for this reviewer in this call. |
@@ -210,7 +210,7 @@
     | `current_assignments` | integer |  |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
-    | `invitation_token` | string |  |
+    | `invitation_link` | string |  |
     | `invitation_expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `coi_count` | integer | Count total COIs for this reviewer in this call. |
@@ -595,7 +595,7 @@ Force-accept a pool invitation (manager override).
     | `current_assignments` | integer |  |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
-    | `invitation_token` | string |  |
+    | `invitation_link` | string |  |
     | `invitation_expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `coi_count` | integer | Count total COIs for this reviewer in this call. |

@@ -3258,7 +3258,7 @@ List reviewer pool members for a call.
     | `current_assignments` | integer |  |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
-    | `invitation_token` | string |  |
+    | `invitation_link` | string |  |
     | `invitation_expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `coi_count` | integer | Count total COIs for this reviewer in this call. |
@@ -4385,7 +4385,7 @@ Invite a reviewer by email address. Creates an invitation that requires the revi
     | `current_assignments` | integer |  |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
-    | `invitation_token` | string |  |
+    | `invitation_link` | string |  |
     | `invitation_expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `coi_count` | integer | Count total COIs for this reviewer in this call. |
@@ -4531,7 +4531,7 @@ Invite reviewers to join the call's reviewer pool.
     | `current_assignments` | integer |  |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
-    | `invitation_token` | string |  |
+    | `invitation_link` | string |  |
     | `invitation_expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `coi_count` | integer | Count total COIs for this reviewer in this call. |
