@@ -27,6 +27,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/organization_project_count/` | [Return project count per organization](#return-project-count-per-organization) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/organization_resource_count/` | [Return resource count per organization](#return-resource-count-per-organization) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/project_classification_summary/` | [Return summary statistics for project classification](#return-summary-statistics-for-project-classification) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/project_creation_trend/` | [Return project creation counts grouped by month](#return-project-creation-counts-grouped-by-month) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/projects_limits_grouped_by_industry_flag/` | [Group project limits by industry flag](#group-project-limits-by-industry-flag) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/projects_limits_grouped_by_oecd/` | [Group project limits by OECD code](#group-project-limits-by-oecd-code) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/projects_usages_grouped_by_industry_flag/` | [Group project usages by industry flag](#group-project-usages-by-industry-flag) |
@@ -34,6 +35,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/provider_customers/` | [Return customer statistics for a service provider](#return-customer-statistics-for-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/provider_offerings/` | [Return offering performance statistics for a service provider](#return-offering-performance-statistics-for-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/provider_resources/` | [Return resource statistics for a service provider](#return-resource-statistics-for-a-service-provider) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/resource_creation_trend/` | [Return resource creation counts grouped by month](#return-resource-creation-counts-grouped-by-month) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/resource_provisioning_stats/` | [Get resource provisioning statistics](#get-resource-provisioning-statistics) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/resource_usage_by_creator_affiliation/` | [Return resource usage grouped by creator's affiliation](#return-resource-usage-grouped-by-creators-affiliation) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/resource_usage_by_customer/` | [Return resource usage statistics grouped by customer](#return-resource-usage-statistics-grouped-by-customer) |
@@ -41,13 +43,16 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/resources_geography_summary/` | [Return summary statistics for resource geographic distribution](#return-summary-statistics-for-resource-geographic-distribution) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/resources_limits/` | [Return resources limits per offering](#return-resources-limits-per-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/resources_missing_usage/` | [Resources missing usage](#resources-missing-usage) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/top_service_providers_by_resources/` | [Return top service providers by number of active resources](#return-top-service-providers-by-number-of-active-resources) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/total_cost_of_active_resources_per_offering/` | [Total cost of active resources per offering](#total-cost-of-active-resources-per-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_affiliation_count/` | [Return user count grouped by affiliation](#return-user-count-grouped-by-affiliation) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_auth_method_count/` | [Return user count grouped by authentication method](#return-user-count-grouped-by-authentication-method) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_identity_source_count/` | [Return user count grouped by identity source](#return-user-count-grouped-by-identity-source) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_job_title_count/` | [Return user count grouped by job title](#return-user-count-grouped-by-job-title) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_nationality/` | [Return user count per nationality](#return-user-count-per-nationality) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_organization_count/` | [Return user count grouped by organization](#return-user-count-grouped-by-organization) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_organization_type_count/` | [Return user count grouped by organization type (SCHAC URN)](#return-user-count-grouped-by-organization-type-schac-urn) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_residence_country/` | [Return user count per residence country](#return-user-count-per-residence-country) |
 
 ---
 
@@ -463,6 +468,7 @@ Count active resources grouped by offering.
 
     | Name | Type | Description |
     |---|---|---|
+    | `limit` | integer | Limit number of results (e.g. top N offerings). No limit by default. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
 
@@ -1735,6 +1741,75 @@ Return summary statistics for project classification.
 
 ---
 
+### Return project creation counts grouped by month
+
+Return project creation counts grouped by month.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-stats/project_creation_trend/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_stats import marketplace_stats_project_creation_trend_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_stats_project_creation_trend_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_stats_project_creation_trend_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_stats/marketplace_stats_project_creation_trend_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceStatsProjectCreationTrendList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceStatsProjectCreationTrendList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `month` | string | Month in YYYY-MM format |
+    | `count` | integer | Number of items created |
+
+---
+
 ### Group project limits by industry flag
 
 Group project limits by industry flag.
@@ -2180,6 +2255,75 @@ Return resource statistics for a service provider.
     | `by_state` | object (free-form) | Resource counts grouped by state |
     | `by_offering` | array of objects | Resource counts grouped by offering |
     | `monthly` | array of objects | Monthly resource counts |
+
+---
+
+### Return resource creation counts grouped by month
+
+Return resource creation counts grouped by month.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-stats/resource_creation_trend/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_stats import marketplace_stats_resource_creation_trend_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_stats_resource_creation_trend_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_stats_resource_creation_trend_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_stats/marketplace_stats_resource_creation_trend_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceStatsResourceCreationTrendList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceStatsResourceCreationTrendList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `month` | string | Month in YYYY-MM format |
+    | `count` | integer | Number of items created |
 
 ---
 
@@ -2697,6 +2841,78 @@ Return usage-based resources with no usage reported in the specified billing per
 
 ---
 
+### Return top service providers by number of active resources
+
+Return top service providers by number of active resources.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-stats/top_service_providers_by_resources/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_stats import marketplace_stats_top_service_providers_by_resources_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_stats_top_service_providers_by_resources_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_stats_top_service_providers_by_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_stats/marketplace_stats_top_service_providers_by_resources_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceStatsTopServiceProvidersByResourcesList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceStatsTopServiceProvidersByResourcesList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `limit` | integer | Number of top providers to return. Default is 5. |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `customer_uuid` | string (uuid) | UUID of the service provider |
+    | `customer_name` | string | Name of the service provider |
+    | `resources_count` | integer | Number of active resources |
+    | `projects_count` | integer | Number of distinct projects |
+
+---
+
 ### Total cost of active resources per offering
 
 Total cost of active resources per offering.
@@ -3043,6 +3259,75 @@ Return user count grouped by job title.
 
 ---
 
+### Return user count per nationality
+
+Return user count per nationality.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-stats/user_nationality/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_stats import marketplace_stats_user_nationality_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_stats_user_nationality_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_stats_user_nationality_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_stats/marketplace_stats_user_nationality_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceStatsUserNationalityList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceStatsUserNationalityList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `nationality` | string | Nationality code |
+    | `count` | integer | Number of users |
+
+---
+
 ### Return user count grouped by organization
 
 Return user count grouped by organization.
@@ -3177,6 +3462,75 @@ Return user count grouped by organization type (SCHAC URN).
     | Field | Type | Description |
     |---|---|---|
     | `organization_type` | string | Organization type (SCHAC URN) |
+    | `count` | integer | Number of users |
+
+---
+
+### Return user count per residence country
+
+Return user count per residence country.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-stats/user_residence_country/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_stats import marketplace_stats_user_residence_country_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_stats_user_residence_country_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_stats_user_residence_country_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_stats/marketplace_stats_user_residence_country_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceStatsUserResidenceCountryList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceStatsUserResidenceCountryList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `country_of_residence` | string | Country of residence code |
     | `count` | integer | Number of users |
 
 ---
