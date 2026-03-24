@@ -30,6 +30,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_backend_id/` | [Set resource backend ID](#set-resource-backend-id) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_backend_metadata/` | [Set resource backend metadata](#set-resource-backend-metadata) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_downscaled/` | [Set downscaled flag for resource](#set-downscaled-flag-for-resource) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_effective_id/` | [Set resource effective ID](#set-resource-effective-id) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date/` | [Set end date of the resource](#set-end-date-of-the-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_provider/` | [Set end date by provider](#set-end-date-by-provider) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_staff/` | [Set end date of the resource by staff](#set-end-date-of-the-resource-by-staff) |
@@ -2697,6 +2698,88 @@ Sets the 'downscaled' flag for a resource. Requires staff permissions.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+---
+
+### Set resource effective ID
+
+Allows a service provider to set or update the effective ID for a resource. The effective ID represents the backend identifier assigned by a downstream provider in federated Waldur deployments.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_effective_id/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.resource_effective_id_request import ResourceEffectiveIDRequest # (1)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_set_effective_id # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ResourceEffectiveIDRequest()
+    response = marketplace_provider_resources_set_effective_id.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ResourceEffectiveIDRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_effective_id_request.py)
+    2.  **API Source:** [`marketplace_provider_resources_set_effective_id`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_set_effective_id.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesSetEffectiveId } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesSetEffectiveId({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `effective_id` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
