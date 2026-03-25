@@ -235,6 +235,10 @@
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
     | `offering_components.max_prepaid_duration` | integer |  |
+    | `offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `created_by` | string (uri) |  |
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
@@ -428,6 +432,10 @@
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
     | `offering_components.max_prepaid_duration` | integer |  |
+    | `offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `created_by` | string (uri) |  |
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |

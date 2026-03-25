@@ -267,6 +267,10 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
     | `offering_components.max_prepaid_duration` | integer |  |
+    | `offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
 
 ---
 
@@ -452,6 +456,10 @@ Returns details of a specific resource accessible to the consumer.
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
     | `offering_components.max_prepaid_duration` | integer |  |
+    | `offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
 
 ---
 
@@ -1218,6 +1226,10 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
     | `offering_components.max_prepaid_duration` | integer |  |
+    | `offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
 
 ---
 
@@ -2207,6 +2219,10 @@ Returns details of the offering connected to the requested object.
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
     | `components.max_prepaid_duration` | integer |  |
+    | `components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plugin_options` | any |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
@@ -3203,6 +3219,10 @@ Creates marketplace orders to reallocate limits from source resource to target r
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
     | `offering_components.max_prepaid_duration` | integer |  |
+    | `offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
 
 ---
 

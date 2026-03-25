@@ -868,6 +868,10 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
     | `components.max_prepaid_duration` | integer |  |
+    | `components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plans` | array of objects |  |
     | `plans.url` | string (uri) |  |
     | `plans.uuid` | string (uuid) |  |

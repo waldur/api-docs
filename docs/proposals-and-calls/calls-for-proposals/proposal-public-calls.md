@@ -141,6 +141,10 @@
     | `offerings.components.overage_component` | string (uuid) |  |
     | `offerings.components.min_prepaid_duration` | integer |  |
     | `offerings.components.max_prepaid_duration` | integer |  |
+    | `offerings.components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -309,6 +313,10 @@
     | `offerings.components.overage_component` | string (uuid) |  |
     | `offerings.components.min_prepaid_duration` | integer |  |
     | `offerings.components.max_prepaid_duration` | integer |  |
+    | `offerings.components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
