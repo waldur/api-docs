@@ -4,9 +4,67 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| <span class="http-badge http-get">GET</span> | `/api/identity-bridge/allowed-fields/` | [Get allowed Identity Bridge fields](#get-allowed-identity-bridge-fields) |
 | <span class="http-badge http-get">GET</span> | `/api/identity-bridge/stats/` | [Get Identity Bridge statistics](#get-identity-bridge-statistics) |
 | <span class="http-badge http-post">POST</span> | `/api/identity-bridge/` | [Push user attributes from an ISD](#push-user-attributes-from-an-isd) |
 | <span class="http-badge http-post">POST</span> | `/api/identity-bridge/remove/` | [Remove a user from an ISD](#remove-a-user-from-an-isd) |
+
+---
+
+### Get allowed Identity Bridge fields
+
+Returns the list of user attribute fields that the Identity Bridge currently accepts. Useful for clients to pre-filter payloads. Requires staff or identity manager permissions.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/identity-bridge/allowed-fields/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.identity_bridge import identity_bridge_allowed_fields_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = identity_bridge_allowed_fields_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`identity_bridge_allowed_fields_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/identity_bridge/identity_bridge_allowed_fields_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { identityBridgeAllowedFieldsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await identityBridgeAllowedFieldsRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `allowed_fields` | array of strings |
 
 ---
 
