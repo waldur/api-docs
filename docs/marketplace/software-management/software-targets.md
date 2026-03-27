@@ -77,7 +77,7 @@ Returns a paginated list of software targets, which represent specific builds of
     | `package_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `path` | string |  |
+    | `path` | string | Filter targets by location/path (case-insensitive partial match) |
     | `target_name` | string | Filter targets by name (e.g., x86_64, aarch64) |
     | `target_subtype` | string | Filter targets by subtype (e.g., microarchitecture, distribution) |
     | `target_type` | string | Filter targets by type (e.g., architecture, platform, variant) |
