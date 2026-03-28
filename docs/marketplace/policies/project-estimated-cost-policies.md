@@ -74,6 +74,7 @@
     | `page_size` | integer | Number of results to return per page. |
     | `project` | string (uri) |  |
     | `project_uuid` | string (uuid) |  |
+    | `query` | string |  |
     | `scope` | string (uri) |  |
     | `scope_uuid` | string (uuid) |  |
 
