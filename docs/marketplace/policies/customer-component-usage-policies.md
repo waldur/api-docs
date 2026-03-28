@@ -96,6 +96,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -181,6 +182,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -285,6 +287,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -400,6 +403,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -503,6 +507,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |
@@ -643,6 +648,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
     | `component_limits_set.limit` | integer |  |

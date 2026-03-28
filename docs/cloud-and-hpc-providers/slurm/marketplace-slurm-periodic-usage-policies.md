@@ -101,6 +101,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
@@ -196,6 +197,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
@@ -320,6 +322,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
@@ -455,6 +458,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
@@ -578,6 +582,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |
@@ -728,6 +733,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |

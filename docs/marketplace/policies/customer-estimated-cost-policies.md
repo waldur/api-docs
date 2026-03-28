@@ -96,6 +96,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
@@ -180,6 +181,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
@@ -281,6 +283,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
@@ -393,6 +396,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
@@ -493,6 +497,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
@@ -632,6 +637,7 @@
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
     | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `affected_resources_count` | integer |  |
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
