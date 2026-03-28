@@ -84,6 +84,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `NOTIFY_ABOUT_RESOURCE_CHANGE` | boolean |
     | `DISABLE_SENDING_NOTIFICATIONS_ABOUT_RESOURCE_UPDATE` | boolean |
     | `MARKETPLACE_LANDING_PAGE` | string |
+    | `MARKETPLACE_LAYOUT_MODE` | string |
+    | `MARKETPLACE_CARD_STYLE` | string |
     | `ENABLE_STALE_RESOURCE_NOTIFICATIONS` | boolean |
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |
     | `TELEMETRY_URL` | string |
@@ -392,6 +394,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `NOTIFY_ABOUT_RESOURCE_CHANGE` | boolean |  |
     | `DISABLE_SENDING_NOTIFICATIONS_ABOUT_RESOURCE_UPDATE` | boolean |  |
     | `MARKETPLACE_LANDING_PAGE` | string |  |
+    | `MARKETPLACE_LAYOUT_MODE` | string |  |
+    | `MARKETPLACE_CARD_STYLE` | string |  |
     | `ENABLE_STALE_RESOURCE_NOTIFICATIONS` | boolean |  |
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |  |
     | `TELEMETRY_URL` | string |  |
