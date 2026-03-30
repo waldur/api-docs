@@ -12,6 +12,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/chat/stream/` | [Stream](#stream) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/archive/` | [Archive thread](#archive-thread) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/cancel/` | [Cancel active stream](#cancel-active-stream) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/unarchive/` | [Unarchive thread](#unarchive-thread) |
 
 ---
@@ -645,6 +646,86 @@ Archive a thread (soft delete).
 === "Responses"
 
     **`204`** - No response body
+    
+
+---
+
+### Cancel active stream
+
+Request cancellation of the active LLM stream for this thread.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-threads/a1b2c3d4-e5f6-7890-abcd-ef1234567890/cancel/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.thread_session_request import ThreadSessionRequest # (1)
+    from waldur_api_client.api.chat_threads import chat_threads_cancel # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ThreadSessionRequest()
+    response = chat_threads_cancel.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ThreadSessionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_request.py)
+    2.  **API Source:** [`chat_threads_cancel`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_cancel.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsCancel } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsCancel({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `is_archived` | boolean |  |
+
+
+=== "Responses"
+
+    **`200`** - No response body
     
 
 ---
