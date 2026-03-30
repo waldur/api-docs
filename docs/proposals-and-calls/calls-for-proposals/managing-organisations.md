@@ -17,6 +17,9 @@
 | <span class="http-badge http-post">POST</span> | `/api/call-managing-organisations/{uuid}/delete_user/` | [Revoke a role from a user](#revoke-a-role-from-a-user) |
 | <span class="http-badge http-post">POST</span> | `/api/call-managing-organisations/{uuid}/update_user/` | [Update a user's role expiration](#update-a-users-role-expiration) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/global_stats_performance/` | [Get call performance statistics across all calls](#get-call-performance-statistics-across-all-calls) |
+| <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/global_stats_resource_demand/` | [Get resource demand statistics across all calls and offerings](#get-resource-demand-statistics-across-all-calls-and-offerings) |
+| <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/global_stats_review_progress/` | [Get review progress statistics across all reviewers](#get-review-progress-statistics-across-all-reviewers) |
 | <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/{uuid}/stats/` | [Return statistics for call managing organisation](#return-statistics-for-call-managing-organisation) |
 
 ---
@@ -921,6 +924,263 @@ Updates the expiration time for a user's existing role in the current scope. Thi
 
 ## Other Actions
 
+
+### Get call performance statistics across all calls
+
+Get call performance statistics across all calls.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/call-managing-organisations/global_stats_performance/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.call_managing_organisation_o_enum import CallManagingOrganisationOEnum # (1)
+    from waldur_api_client.api.call_managing_organisations import call_managing_organisations_global_stats_performance_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = call_managing_organisations_global_stats_performance_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CallManagingOrganisationOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_managing_organisation_o_enum.py)
+    2.  **API Source:** [`call_managing_organisations_global_stats_performance_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/call_managing_organisations/call_managing_organisations_global_stats_performance_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { callManagingOrganisationsGlobalStatsPerformanceList } from 'waldur-js-client';
+    
+    try {
+      const response = await callManagingOrganisationsGlobalStatsPerformanceList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `customer` | string (uri) |  |
+    | `customer_keyword` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `o` | array | Ordering<br><br> |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `call_uuid` | string (uuid) |
+    | `call_name` | string |
+    | `managing_organization_name` | string |
+    | `state` | string |
+    | `total_proposals` | integer |
+    | `proposals_draft` | integer |
+    | `proposals_submitted` | integer |
+    | `proposals_in_review` | integer |
+    | `proposals_accepted` | integer |
+    | `proposals_rejected` | integer |
+    | `proposals_canceled` | integer |
+    | `acceptance_rate` | number (double) |
+    | `total_reviews` | integer |
+    | `reviews_completed` | integer |
+    | `average_score` | number (double) |
+    | `active_rounds` | integer |
+    | `last_submission_date` | string (date) |
+
+---
+
+### Get resource demand statistics across all calls and offerings
+
+Get resource demand statistics across all calls and offerings.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/call-managing-organisations/global_stats_resource_demand/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.call_managing_organisation_o_enum import CallManagingOrganisationOEnum # (1)
+    from waldur_api_client.api.call_managing_organisations import call_managing_organisations_global_stats_resource_demand_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = call_managing_organisations_global_stats_resource_demand_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CallManagingOrganisationOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_managing_organisation_o_enum.py)
+    2.  **API Source:** [`call_managing_organisations_global_stats_resource_demand_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/call_managing_organisations/call_managing_organisations_global_stats_resource_demand_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { callManagingOrganisationsGlobalStatsResourceDemandList } from 'waldur-js-client';
+    
+    try {
+      const response = await callManagingOrganisationsGlobalStatsResourceDemandList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `customer` | string (uri) |  |
+    | `customer_keyword` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `o` | array | Ordering<br><br> |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `offering_uuid` | string (uuid) |
+    | `offering_name` | string |
+    | `offering_type` | string |
+    | `provider_name` | string |
+    | `proposal_count` | integer |
+    | `request_count` | integer |
+    | `approved_count` | integer |
+    | `pending_count` | integer |
+    | `total_requested_limits` | object (free-form) |
+    | `total_approved_limits` | object (free-form) |
+
+---
+
+### Get review progress statistics across all reviewers
+
+Get review progress statistics across all reviewers.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/call-managing-organisations/global_stats_review_progress/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.call_managing_organisation_o_enum import CallManagingOrganisationOEnum # (1)
+    from waldur_api_client.api.call_managing_organisations import call_managing_organisations_global_stats_review_progress_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = call_managing_organisations_global_stats_review_progress_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CallManagingOrganisationOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_managing_organisation_o_enum.py)
+    2.  **API Source:** [`call_managing_organisations_global_stats_review_progress_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/call_managing_organisations/call_managing_organisations_global_stats_review_progress_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { callManagingOrganisationsGlobalStatsReviewProgressList } from 'waldur-js-client';
+    
+    try {
+      const response = await callManagingOrganisationsGlobalStatsReviewProgressList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `customer` | string (uri) |  |
+    | `customer_keyword` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `o` | array | Ordering<br><br> |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `reviewer_uuid` | string (uuid) |
+    | `reviewer_name` | string |
+    | `reviewer_email` | string (email) |
+    | `total_assigned` | integer |
+    | `pending` | integer |
+    | `in_progress` | integer |
+    | `completed` | integer |
+    | `declined` | integer |
+    | `average_score` | number (double) |
+    | `average_review_time_days` | number (double) |
+    | `completion_rate` | number (double) |
+
+---
 
 ### Return statistics for call managing organisation
 

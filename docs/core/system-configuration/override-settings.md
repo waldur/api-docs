@@ -273,6 +273,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `AI_ASSISTANT_SESSION_RETENTION_DAYS` | integer |
     | `AI_ASSISTANT_HISTORY_LIMIT` | integer |
     | `AI_ASSISTANT_INJECTION_ALLOWLIST` | string |
+    | `AI_ASSISTANT_NAME` | string |
     | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |
     | `SOFTWARE_CATALOG_EESSI_VERSION` | string |
     | `SOFTWARE_CATALOG_EESSI_API_URL` | string |
@@ -583,6 +584,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `AI_ASSISTANT_SESSION_RETENTION_DAYS` | integer |  |
     | `AI_ASSISTANT_HISTORY_LIMIT` | integer |  |
     | `AI_ASSISTANT_INJECTION_ALLOWLIST` | string |  |
+    | `AI_ASSISTANT_NAME` | string |  |
     | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |  |
     | `SOFTWARE_CATALOG_EESSI_VERSION` | string |  |
     | `SOFTWARE_CATALOG_EESSI_API_URL` | string |  |
