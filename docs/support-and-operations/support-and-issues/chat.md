@@ -89,6 +89,8 @@
     | `sequence_index` | integer |
     | `replaces` | string (uuid) |
     | `created` | string (date-time) |
+    | `input_tokens` | integer |
+    | `output_tokens` | integer |
     | `is_flagged` | boolean |
     | `severity` | any |
     | `injection_categories` | any |
@@ -373,14 +375,20 @@ Returns the current user's chat session, creating it if it doesn't exist.
     |---|---|---|
     | `created` | string (date) |  |
     | `field` | array |  |
+    | `input_tokens_max` | number |  |
+    | `input_tokens_min` | number |  |
     | `is_archived` | boolean |  |
     | `is_flagged` | boolean |  |
     | `max_severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
     | `modified` | string (date) |  |
     | `o` | array | Ordering<br><br> |
+    | `output_tokens_max` | number |  |
+    | `output_tokens_min` | number |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string |  |
+    | `total_tokens_max` | number |  |
+    | `total_tokens_min` | number |  |
     | `user` | string (uuid) |  |
 
 
@@ -398,6 +406,11 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `flags` | any |
     | `is_archived` | boolean |
     | `message_count` | integer |
+    | `input_tokens` | integer |
+    | `output_tokens` | integer |
+    | `total_tokens` | integer |
+    | `title_gen_input_tokens` | integer |
+    | `title_gen_output_tokens` | integer |
     | `is_flagged` | boolean |
     | `max_severity` | any |
     | `user_username` | string |
@@ -486,6 +499,11 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `flags` | any |
     | `is_archived` | boolean |
     | `message_count` | integer |
+    | `input_tokens` | integer |
+    | `output_tokens` | integer |
+    | `total_tokens` | integer |
+    | `title_gen_input_tokens` | integer |
+    | `title_gen_output_tokens` | integer |
     | `is_flagged` | boolean |
     | `max_severity` | any |
     | `user_username` | string |

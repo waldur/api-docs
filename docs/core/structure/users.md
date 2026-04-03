@@ -205,6 +205,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
     | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
     | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
 
 ---
 
@@ -348,6 +349,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
     | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
     | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
 
 ---
 
@@ -447,6 +449,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `managed_isds` | any |  | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `deactivation_reason` | string |  | Reason why the user was deactivated. Visible to staff and support. |
 
 
 === "Responses"
@@ -522,6 +525,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
     | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
     | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
 
 ---
 
@@ -781,6 +785,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `managed_isds` | any |  | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `deactivation_reason` | string |  | Reason why the user was deactivated. Visible to staff and support. |
 
 
 === "Responses"
@@ -856,6 +861,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
     | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
     | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
 
 ---
 
@@ -956,6 +962,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `eduperson_assurance` | any |  | REFEDS assurance profile URIs from identity provider |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `managed_isds` | any |  | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `deactivation_reason` | string |  | Reason why the user was deactivated. Visible to staff and support. |
 
 
 === "Responses"
@@ -1031,6 +1038,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
     | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
     | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
 
 ---
 
@@ -1739,6 +1747,7 @@ Get current user details, including authentication token and profile completenes
     | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
     | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
     | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
 
 ---
 
