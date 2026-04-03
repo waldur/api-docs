@@ -144,6 +144,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `project_uuid` | string (uuid) | Project UUID |
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
+    | `resource_attributes` | string | Resource attributes (JSON) |
     | `restrict_member_access` | boolean | Restrict member access |
     | `runtime_state` | string | Runtime state |
     | `scope` | string (uri) | Filter by scope URL. |
@@ -1316,6 +1317,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `project_uuid` | string (uuid) | Project UUID |
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
+    | `resource_attributes` | string | Resource attributes (JSON) |
     | `restrict_member_access` | boolean | Restrict member access |
     | `runtime_state` | string | Runtime state |
     | `scope` | string (uri) | Filter by scope URL. |

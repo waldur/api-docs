@@ -111,6 +111,7 @@
     | `project_uuid` | string (uuid) | Project UUID |
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
+    | `resource_attributes` | string | Resource attributes (JSON) |
     | `restrict_member_access` | boolean | Restrict member access |
     | `runtime_state` | string | Runtime state |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
