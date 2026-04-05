@@ -264,6 +264,7 @@
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
@@ -530,6 +531,7 @@
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |

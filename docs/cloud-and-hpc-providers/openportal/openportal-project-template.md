@@ -281,6 +281,7 @@
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
     | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `offerings_data.effective_available_limits` | array of strings |  |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |
@@ -559,6 +560,7 @@
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
     | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `offerings_data.effective_available_limits` | array of strings |  |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |
@@ -869,6 +871,7 @@ Create ProjectTemplate object
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
     | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `offerings_data.effective_available_limits` | array of strings |  |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |
@@ -1190,6 +1193,7 @@ Update ProjectTemplate object (full update)
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
     | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `offerings_data.effective_available_limits` | array of strings |  |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |
@@ -1493,6 +1497,7 @@ Partially update ProjectTemplate object
     | `offerings_data.backend_metadata` | any |  |
     | `offerings_data.has_compliance_requirements` | boolean |  |
     | `offerings_data.billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `offerings_data.effective_available_limits` | array of strings |  |
     | `offerings_data.compliance_checklist` | string (uri) |  |
     | `offerings_data.integration_status` | array of objects |  |
     | `offerings_data.integration_status.agent_type` | any |  |

@@ -87,6 +87,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/import_offering/` | [Import offering data](#import-offering-data) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_available/` | [Mark an offering as available](#mark-an-offering-as-available) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_unavailable/` | [Mark an offering as unavailable](#mark-an-offering-as-unavailable) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/switch_billing_mode/` | [Switch billing mode for builtin components](#switch-billing-mode-for-builtin-components) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/` | [Update offering backend_id rules](#update-offering-backend_id-rules) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_tags/` | [Update tags for offering](#update-tags-for-offering) |
 
@@ -390,6 +391,7 @@ Returns a paginated list of offerings for the provider.
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
@@ -662,6 +664,7 @@ Returns details of a specific provider offering.
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
@@ -1078,6 +1081,7 @@ Creates a new provider offering.
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
@@ -2559,6 +2563,7 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
@@ -5156,6 +5161,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `backend_metadata` | any |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
+    | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
@@ -8409,6 +8415,91 @@ Marks an active offering as unavailable, blocking all operations on its resource
     |---|---|
     | `detail` | string |
     | `state` | string |
+
+---
+
+### Switch billing mode for builtin components
+
+Switches all builtin components between monthly (LIMIT) and prepaid (ONE_TIME + is_prepaid) billing modes.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/switch_billing_mode/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      billing_mode=null
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.switch_billing_mode_request import SwitchBillingModeRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_switch_billing_mode # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SwitchBillingModeRequest(
+        billing_mode=null
+    )
+    response = marketplace_provider_offerings_switch_billing_mode.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SwitchBillingModeRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/switch_billing_mode_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_switch_billing_mode`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_switch_billing_mode.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsSwitchBillingMode } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsSwitchBillingMode({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "billing_mode": null
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `billing_mode` | any | ✓ | Switch all builtin components to monthly (LIMIT) or prepaid (ONE_TIME + is_prepaid) billing. |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---
 
