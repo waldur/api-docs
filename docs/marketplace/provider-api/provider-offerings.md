@@ -80,6 +80,7 @@
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/` | [Get version history](#get-version-history) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/state_counters/` | [Get offering resource and user state counters](#get-offering-resource-and-user-state-counters) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/user-attribute-config/` | [Get user attribute config](#get-user-attribute-config) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/check_unique_backend_id/` | [Check if backend_id is unique](#check-if-backend_id-is-unique) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/delete_tags/` | [Delete tags for offering](#delete-tags-for-offering) |
@@ -7831,6 +7832,81 @@ Returns the version history for this object. Only accessible by staff and suppor
 
 ---
 
+### Get offering resource and user state counters
+
+Returns resource and offering-user counts grouped by state for the given offering.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/state_counters/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_state_counters_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_offerings_state_counters_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_offerings_state_counters_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_state_counters_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsStateCountersRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsStateCountersRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `resources` | array of objects |
+    | `resources.state` | string |
+    | `resources.count` | integer |
+    | `users` | array of objects |
+    | `users.state` | string |
+    | `users.count` | integer |
+
+---
+
 ### Get user attribute config
 
 Returns the user attribute configuration for this offering, which determines which user attributes are exposed to the service provider.
@@ -8422,7 +8498,7 @@ Marks an active offering as unavailable, blocking all operations on its resource
 
 ### Switch billing mode for builtin components
 
-Switches all builtin components between monthly (LIMIT) and prepaid (ONE_TIME + is_prepaid) billing modes.
+Switches all builtin components between monthly (LIMIT), prepaid (ONE_TIME + is_prepaid), and usage-based billing modes. Works for any offering type that has registered builtin components.
 
 
 === "HTTPie"
@@ -8495,7 +8571,7 @@ Switches all builtin components between monthly (LIMIT) and prepaid (ONE_TIME + 
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `billing_mode` | any | ✓ | Switch all builtin components to monthly (LIMIT) or prepaid (ONE_TIME + is_prepaid) billing. |
+    | `billing_mode` | any | ✓ | Switch all builtin components to monthly (LIMIT), prepaid (ONE_TIME + is_prepaid), or usage-based billing. |
 
 
 === "Responses"
