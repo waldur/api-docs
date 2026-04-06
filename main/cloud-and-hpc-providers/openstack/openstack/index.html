@@ -2838,10 +2838,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-vip-security-groups" class="md-nav__link">
+  <a href="#unlink-load-balancer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Update VIP security groups
+        Unlink load balancer
       
     </span>
   </a>
@@ -13385,10 +13385,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-vip-security-groups" class="md-nav__link">
+  <a href="#unlink-load-balancer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Update VIP security groups
+        Unlink load balancer
       
     </span>
   </a>
@@ -13775,8 +13775,8 @@
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
-<td style="text-align: left;"><code>/api/openstack-loadbalancers/{uuid}/update_vip_security_groups/</code></td>
-<td style="text-align: left;"><a href="#update-vip-security-groups">Update VIP security groups</a></td>
+<td style="text-align: left;"><code>/api/openstack-loadbalancers/{uuid}/unlink/</code></td>
+<td style="text-align: left;"><a href="#unlink-load-balancer">Unlink load balancer</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -15783,13 +15783,13 @@
 <td>An IPv4 or IPv6 address.</td>
 </tr>
 <tr>
-<td><code>vip_subnet_id</code></td>
-<td>string</td>
+<td><code>vip_subnet</code></td>
+<td>string (uri)</td>
 <td></td>
 </tr>
 <tr>
-<td><code>vip_port_id</code></td>
-<td>string</td>
+<td><code>vip_port</code></td>
+<td>string (uri)</td>
 <td></td>
 </tr>
 <tr>
@@ -16138,13 +16138,13 @@
 <td>An IPv4 or IPv6 address.</td>
 </tr>
 <tr>
-<td><code>vip_subnet_id</code></td>
-<td>string</td>
+<td><code>vip_subnet</code></td>
+<td>string (uri)</td>
 <td></td>
 </tr>
 <tr>
-<td><code>vip_port_id</code></td>
-<td>string</td>
+<td><code>vip_port</code></td>
+<td>string (uri)</td>
 <td></td>
 </tr>
 <tr>
@@ -16526,9 +16526,9 @@
 <td></td>
 </tr>
 <tr>
-<td><code>subnet_id</code></td>
-<td>string</td>
-<td>Subnet ID for the member (required for creation)</td>
+<td><code>subnet</code></td>
+<td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>weight</code></td>
@@ -16881,9 +16881,9 @@
 <td></td>
 </tr>
 <tr>
-<td><code>subnet_id</code></td>
-<td>string</td>
-<td>Subnet ID for the member (required for creation)</td>
+<td><code>subnet</code></td>
+<td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>weight</code></td>
@@ -19255,18 +19255,12 @@
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/openstack-health-monitors/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">pool</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;TCP&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">delay</span><span class="o">=</span><span class="m">123</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">timeout</span><span class="o">=</span><span class="m">123</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">max_retries</span><span class="o">=</span><span class="m">123</span>
+<span class="w">  </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;TCP&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -19287,10 +19281,7 @@
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.create_health_monitor_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">CreateHealthMonitorRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_health_monitors</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_health_monitors_create</span> <span class="c1"># (2)</span>
 
@@ -19300,10 +19291,7 @@
 
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">CreateHealthMonitorRequest</span><span class="p">(</span>
     <span class="n">pool</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;TCP&quot;</span><span class="p">,</span>
-    <span class="n">delay</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
-    <span class="n">timeout</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
-    <span class="n">max_retries</span><span class="o">=</span><span class="mi">123</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;TCP&quot;</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_health_monitors_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -19331,20 +19319,14 @@
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackHealthMonitorsCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackHealthMonitorsCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackHealthMonitorsCreate</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;pool&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;TCP&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;delay&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">123</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;timeout&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">123</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;max_retries&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">123</span>
+<span class="w">    </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;TCP&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -19365,40 +19347,46 @@
 </thead>
 <tbody>
 <tr>
-<td><code>pool</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td>Pool this health monitor belongs to</td>
-</tr>
-<tr>
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>type</code></td>
-<td>string</td>
-<td>✓</td>
-<td><br><em>Enum: <code>TCP</code>, <code>UDP</code></em></td>
-</tr>
-<tr>
 <td><code>delay</code></td>
 <td>integer</td>
-<td>✓</td>
-<td>Interval between health checks in seconds</td>
+<td></td>
+<td>Interval between health checks in seconds<br><em>Constraints: default: <code>5</code></em></td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
 <td>integer</td>
-<td>✓</td>
-<td>Time in seconds to timeout a health check</td>
+<td></td>
+<td>Time in seconds to timeout a health check<br><em>Constraints: default: <code>5</code></em></td>
 </tr>
 <tr>
 <td><code>max_retries</code></td>
 <td>integer</td>
+<td></td>
+<td><br><em>Constraints: default: <code>3</code></em></td>
+</tr>
+<tr>
+<td><code>max_retries_down</code></td>
+<td>integer</td>
+<td></td>
+<td><br><em>Constraints: default: <code>3</code></em></td>
+</tr>
+<tr>
+<td><code>pool</code></td>
+<td>string (uri)</td>
 <td>✓</td>
-<td>Number of retries before marking member as down</td>
+<td>Pool this health monitor belongs to</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>✓</td>
+<td><br><em>Enum: <code>TCP</code>, <code>UDP</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -19425,19 +19413,9 @@
 <td></td>
 </tr>
 <tr>
-<td><code>pool</code></td>
-<td>string (uri)</td>
-<td>Pool this health monitor belongs to</td>
-</tr>
-<tr>
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
-</tr>
-<tr>
-<td><code>type</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>TCP</code>, <code>UDP</code></em></td>
 </tr>
 <tr>
 <td><code>delay</code></td>
@@ -19452,17 +19430,22 @@
 <tr>
 <td><code>max_retries</code></td>
 <td>integer</td>
-<td>Number of retries before marking member as down</td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
 <td></td>
 </tr>
 <tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
+<td><code>max_retries_down</code></td>
+<td>integer</td>
 <td></td>
+</tr>
+<tr>
+<td><code>pool</code></td>
+<td>string (uri)</td>
+<td>Pool this health monitor belongs to</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>TCP</code>, <code>UDP</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -19481,13 +19464,11 @@
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/openstack-listeners/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">load_balancer</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-listener&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">protocol</span><span class="o">=</span><span class="s2">&quot;TCP&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">protocol_port</span><span class="o">=</span><span class="m">8080</span>
 </code></pre></div></td></tr></table></div>
@@ -19511,8 +19492,7 @@
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.create_listener_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">CreateListenerRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_listeners</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_listeners_create</span> <span class="c1"># (2)</span>
 
@@ -19522,7 +19502,6 @@
 
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">CreateListenerRequest</span><span class="p">(</span>
     <span class="n">load_balancer</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-listener&quot;</span><span class="p">,</span>
     <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;TCP&quot;</span><span class="p">,</span>
     <span class="n">protocol_port</span><span class="o">=</span><span class="mi">8080</span>
 <span class="p">)</span>
@@ -19553,15 +19532,13 @@
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackListenersCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackListenersCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackListenersCreate</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;load_balancer&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-openstack-listener&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;protocol&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;TCP&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;protocol_port&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">8080</span>
 <span class="w">  </span><span class="p">}</span>
@@ -19584,16 +19561,22 @@
 </thead>
 <tbody>
 <tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>default_pool</code></td>
+<td>string (uri)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>load_balancer</code></td>
 <td>string (uri)</td>
 <td>✓</td>
 <td>Load balancer this listener belongs to</td>
-</tr>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>✓</td>
-<td></td>
 </tr>
 <tr>
 <td><code>protocol</code></td>
@@ -19606,12 +19589,6 @@
 <td>integer</td>
 <td>✓</td>
 <td>Port on which the listener listens</td>
-</tr>
-<tr>
-<td><code>default_pool</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -19628,6 +19605,16 @@
 </thead>
 <tbody>
 <tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>default_pool</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -19643,11 +19630,6 @@
 <td>Load balancer this listener belongs to</td>
 </tr>
 <tr>
-<td><code>name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>protocol</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>TCP</code>, <code>UDP</code></em></td>
@@ -19656,21 +19638,6 @@
 <td><code>protocol_port</code></td>
 <td>integer</td>
 <td>Port on which the listener listens</td>
-</tr>
-<tr>
-<td><code>default_pool</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -19807,7 +19774,23 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - No response body</p>
+<p><strong><code>202</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Message that execution of the operation was scheduled.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -19827,9 +19810,9 @@
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/openstack-loadbalancers/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">tenant</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">vip_subnet_id</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="nv">tenant</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">vip_subnet</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/vip-subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -19860,9 +19843,9 @@
 <span class="p">)</span>
 
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">CreateLoadBalancerRequest</span><span class="p">(</span>
-    <span class="n">tenant</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span><span class="p">,</span>
-    <span class="n">vip_subnet_id</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+    <span class="n">tenant</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
+    <span class="n">vip_subnet</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/vip-subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_loadbalancers_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -19897,9 +19880,9 @@
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackLoadbalancersCreate</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;tenant&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;vip_subnet_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">    </span><span class="s2">&quot;tenant&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;vip_subnet&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/vip-subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -19920,20 +19903,20 @@
 </thead>
 <tbody>
 <tr>
-<td><code>tenant</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td>OpenStack tenant this load balancer belongs to</td>
-</tr>
-<tr>
 <td><code>name</code></td>
 <td>string</td>
 <td>✓</td>
 <td></td>
 </tr>
 <tr>
-<td><code>vip_subnet_id</code></td>
-<td>string</td>
+<td><code>tenant</code></td>
+<td>string (uri)</td>
+<td>✓</td>
+<td>OpenStack tenant this load balancer belongs to</td>
+</tr>
+<tr>
+<td><code>vip_subnet</code></td>
+<td>string (uri)</td>
 <td>✓</td>
 <td></td>
 </tr>
@@ -19962,27 +19945,17 @@
 <td></td>
 </tr>
 <tr>
-<td><code>tenant</code></td>
-<td>string (uri)</td>
-<td>OpenStack tenant this load balancer belongs to</td>
-</tr>
-<tr>
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
 </tr>
 <tr>
-<td><code>vip_subnet_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
+<td><code>tenant</code></td>
 <td>string (uri)</td>
-<td></td>
+<td>OpenStack tenant this load balancer belongs to</td>
 </tr>
 <tr>
-<td><code>service_settings</code></td>
+<td><code>vip_subnet</code></td>
 <td>string (uri)</td>
 <td></td>
 </tr>
@@ -20082,25 +20055,39 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - No response body</p>
+<p><strong><code>202</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Message that execution of the operation was scheduled.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <hr />
-<h3 id="update-vip-security-groups">Update VIP security groups</h3>
-<p>Update security groups on the load balancer VIP port.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="26:6"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><input id="__tabbed_26_6" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Request Body (required)</label><label for="__tabbed_26_6">Responses</label></div>
+<h3 id="unlink-load-balancer">Unlink load balancer</h3>
+<p>Delete the load balancer from the Waldur database without scheduling operations on the OpenStack backend and without checking resource state. Staff-only; intended for cleaning up records stuck in transitional states.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:5"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_vip_security_groups/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>security_groups:<span class="o">=</span><span class="s1">&#39;[&quot;web-server-sg&quot;]&#39;</span>
+<span class="w">  </span>https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/unlink/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -20115,38 +20102,21 @@
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.load_balancer_update_vip_security_groups_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoadBalancerUpdateVIPSecurityGroupsRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_loadbalancers</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_loadbalancers_update_vip_security_groups</span> <span class="c1"># (2)</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_loadbalancers</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_loadbalancers_unlink</span> <span class="c1"># (1)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
-
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">LoadBalancerUpdateVIPSecurityGroupsRequest</span><span class="p">(</span>
-    <span class="n">security_groups</span><span class="o">=</span><span class="p">[</span>
-            <span class="s2">&quot;web-server-sg&quot;</span>
-        <span class="p">]</span>
-<span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">openstack_loadbalancers_update_vip_security_groups</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">openstack_loadbalancers_unlink</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/load_balancer_update_vip_security_groups_request.py"><code>LoadBalancerUpdateVIPSecurityGroupsRequest</code></a></li>
-<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_update_vip_security_groups.py"><code>openstack_loadbalancers_update_vip_security_groups</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_unlink.py"><code>openstack_loadbalancers_unlink</code></a></li>
 </ol>
 </div>
 <div class="tabbed-block">
@@ -20162,23 +20132,13 @@
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackLoadbalancersUpdateVipSecurityGroups</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackLoadbalancersUnlink</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackLoadbalancersUpdateVipSecurityGroups</span><span class="p">({</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackLoadbalancersUnlink</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;security_groups&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="s2">&quot;web-server-sg&quot;</span>
-<span class="w">    </span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -20206,25 +20166,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>security_groups</code></td>
-<td>array of string (uri)s</td>
-<td>✓</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
-<p><strong><code>200</code></strong> - No response body</p>
+<p><strong><code>204</code></strong> - No response body</p>
 </div>
 </div>
 </div>
@@ -20248,7 +20190,7 @@
 <span class="w">  </span><span class="nv">pool</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">address</span><span class="o">=</span>null<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">protocol_port</span><span class="o">=</span><span class="m">8080</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">subnet_id</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="nv">subnet</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -20283,7 +20225,7 @@
     <span class="n">pool</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
     <span class="n">address</span><span class="o">=</span><span class="n">null</span><span class="p">,</span>
     <span class="n">protocol_port</span><span class="o">=</span><span class="mi">8080</span><span class="p">,</span>
-    <span class="n">subnet_id</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+    <span class="n">subnet</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_pool_members_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -20322,7 +20264,7 @@
 <span class="w">    </span><span class="s2">&quot;pool&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;address&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;protocol_port&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">8080</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;subnet_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">    </span><span class="s2">&quot;subnet&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -20343,16 +20285,22 @@
 </thead>
 <tbody>
 <tr>
-<td><code>pool</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td>Pool this member belongs to</td>
-</tr>
-<tr>
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>integer</td>
+<td></td>
+<td><br><em>Constraints: default: <code>1</code></em></td>
+</tr>
+<tr>
+<td><code>pool</code></td>
+<td>string (uri)</td>
+<td>✓</td>
+<td>Pool this member belongs to</td>
 </tr>
 <tr>
 <td><code>address</code></td>
@@ -20367,16 +20315,10 @@
 <td>Port on the backend server</td>
 </tr>
 <tr>
-<td><code>subnet_id</code></td>
-<td>string</td>
+<td><code>subnet</code></td>
+<td>string (uri)</td>
 <td>✓</td>
 <td></td>
-</tr>
-<tr>
-<td><code>weight</code></td>
-<td>integer</td>
-<td></td>
-<td><br><em>Constraints: default: <code>1</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -20403,14 +20345,19 @@
 <td></td>
 </tr>
 <tr>
-<td><code>pool</code></td>
-<td>string (uri)</td>
-<td>Pool this member belongs to</td>
-</tr>
-<tr>
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pool</code></td>
+<td>string (uri)</td>
+<td>Pool this member belongs to</td>
 </tr>
 <tr>
 <td><code>address</code></td>
@@ -20423,22 +20370,7 @@
 <td>Port on the backend server</td>
 </tr>
 <tr>
-<td><code>subnet_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>weight</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
+<td><code>subnet</code></td>
 <td>string (uri)</td>
 <td></td>
 </tr>
@@ -20463,8 +20395,8 @@
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/openstack-pools/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">load_balancer</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">load_balancer</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">protocol</span><span class="o">=</span><span class="s2">&quot;TCP&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -20496,8 +20428,8 @@
 <span class="p">)</span>
 
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">CreatePoolRequest</span><span class="p">(</span>
-    <span class="n">load_balancer</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span><span class="p">,</span>
+    <span class="n">load_balancer</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
     <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;TCP&quot;</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_pools_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
@@ -20533,8 +20465,8 @@
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackPoolsCreate</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;load_balancer&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;load_balancer&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;protocol&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;TCP&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
@@ -20556,28 +20488,22 @@
 </thead>
 <tbody>
 <tr>
-<td><code>load_balancer</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td>Load balancer this pool belongs to</td>
-</tr>
-<tr>
 <td><code>name</code></td>
 <td>string</td>
 <td>✓</td>
 <td></td>
 </tr>
 <tr>
+<td><code>load_balancer</code></td>
+<td>string (uri)</td>
+<td>✓</td>
+<td>Load balancer this pool belongs to</td>
+</tr>
+<tr>
 <td><code>protocol</code></td>
 <td>string</td>
 <td>✓</td>
 <td><br><em>Enum: <code>TCP</code>, <code>UDP</code></em></td>
-</tr>
-<tr>
-<td><code>lb_algorithm</code></td>
-<td>any</td>
-<td></td>
-<td><br><em>Constraints: default: <code>SOURCE_IP_PORT</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -20604,34 +20530,19 @@
 <td></td>
 </tr>
 <tr>
-<td><code>load_balancer</code></td>
-<td>string (uri)</td>
-<td>Load balancer this pool belongs to</td>
-</tr>
-<tr>
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
 </tr>
 <tr>
+<td><code>load_balancer</code></td>
+<td>string (uri)</td>
+<td>Load balancer this pool belongs to</td>
+</tr>
+<tr>
 <td><code>protocol</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>TCP</code>, <code>UDP</code></em></td>
-</tr>
-<tr>
-<td><code>lb_algorithm</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -20840,6 +20751,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -20847,21 +20759,31 @@
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>delay</code></td>
 <td>integer</td>
 <td></td>
+<td>Interval between health checks in seconds<br><em>Constraints: default: <code>5</code></em></td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
 <td>integer</td>
 <td></td>
+<td>Time in seconds to timeout a health check<br><em>Constraints: default: <code>5</code></em></td>
 </tr>
 <tr>
 <td><code>max_retries</code></td>
 <td>integer</td>
 <td></td>
+<td><br><em>Constraints: default: <code>3</code></em></td>
+</tr>
+<tr>
+<td><code>max_retries_down</code></td>
+<td>integer</td>
+<td></td>
+<td><br><em>Constraints: default: <code>3</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -20873,24 +20795,44 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
 <td><code>name</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>delay</code></td>
 <td>integer</td>
+<td>Interval between health checks in seconds</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
 <td>integer</td>
+<td>Time in seconds to timeout a health check</td>
 </tr>
 <tr>
 <td><code>max_retries</code></td>
 <td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>max_retries_down</code></td>
+<td>integer</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -21052,17 +20994,11 @@
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>PUT<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">service_settings</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">project</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">tenant</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
+<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -21083,22 +21019,16 @@
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.open_stack_load_balancer_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenStackLoadBalancerRequest</span> <span class="c1"># (1)</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.update_load_balancer_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">UpdateLoadBalancerRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_loadbalancers</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_loadbalancers_update</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">OpenStackLoadBalancerRequest</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span><span class="p">,</span>
-    <span class="n">service_settings</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">tenant</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">UpdateLoadBalancerRequest</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_loadbalancers_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
@@ -21109,7 +21039,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_load_balancer_request.py"><code>OpenStackLoadBalancerRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_load_balancer_request.py"><code>UpdateLoadBalancerRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_update.py"><code>openstack_loadbalancers_update</code></a></li>
 </ol>
 </div>
@@ -21129,10 +21059,7 @@
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackLoadbalancersUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackLoadbalancersUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackLoadbalancersUpdate</span><span class="p">({</span>
@@ -21141,10 +21068,7 @@
 <span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;service_settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;project&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;tenant&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-openstack-loadbalancer&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -21178,7 +21102,6 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -21186,55 +21109,6 @@
 <td><code>name</code></td>
 <td>string</td>
 <td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-<td>Load balancer ID in Octavia</td>
-</tr>
-<tr>
-<td><code>tenant</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td>OpenStack tenant this load balancer belongs to</td>
-</tr>
-<tr>
-<td><code>attached_floating_ip</code></td>
-<td>string (uri)</td>
-<td></td>
-<td>Floating IP attached to the VIP port</td>
 </tr>
 </tbody>
 </table>
@@ -21246,239 +21120,20 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>name</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_native_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td>Load balancer ID in Octavia</td>
-</tr>
-<tr>
-<td><code>access_url</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>tenant</code></td>
-<td>string (uri)</td>
-<td>OpenStack tenant this load balancer belongs to</td>
-</tr>
-<tr>
-<td><code>tenant_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>tenant_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>vip_address</code></td>
-<td>any</td>
-<td>An IPv4 or IPv6 address.</td>
-</tr>
-<tr>
-<td><code>vip_subnet_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>vip_port_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>attached_floating_ip</code></td>
-<td>string (uri)</td>
-<td>Floating IP attached to the VIP port</td>
-</tr>
-<tr>
-<td><code>provider</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>provisioning_status</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>operating_status</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_plugin_options</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_plan_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_usage_based</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_limit_based</code></td>
-<td>boolean</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -21618,6 +21273,14 @@
 </thead>
 <tbody>
 <tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
 <td><code>name</code></td>
 <td>string</td>
 </tr>
@@ -21640,17 +21303,11 @@
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>PUT<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/openstack-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">service_settings</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">project</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">load_balancer</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
+<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -21671,22 +21328,16 @@
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.open_stack_pool_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenStackPoolRequest</span> <span class="c1"># (1)</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.update_pool_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">UpdatePoolRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_pools</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_pools_update</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">OpenStackPoolRequest</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span><span class="p">,</span>
-    <span class="n">service_settings</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">load_balancer</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">UpdatePoolRequest</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_pools_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
@@ -21697,7 +21348,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_pool_request.py"><code>OpenStackPoolRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_pool_request.py"><code>UpdatePoolRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_update.py"><code>openstack_pools_update</code></a></li>
 </ol>
 </div>
@@ -21717,10 +21368,7 @@
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackPoolsUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackPoolsUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackPoolsUpdate</span><span class="p">({</span>
@@ -21729,10 +21377,7 @@
 <span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;service_settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;project&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;load_balancer&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-openstack-pool&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -21766,7 +21411,6 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -21774,49 +21418,6 @@
 <td><code>name</code></td>
 <td>string</td>
 <td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-<td>Pool ID in Octavia</td>
-</tr>
-<tr>
-<td><code>load_balancer</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td>Load balancer this pool belongs to</td>
 </tr>
 </tbody>
 </table>
@@ -21828,224 +21429,20 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>name</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_native_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td>Pool ID in Octavia</td>
-</tr>
-<tr>
-<td><code>access_url</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>load_balancer</code></td>
-<td>string (uri)</td>
-<td>Load balancer this pool belongs to</td>
-</tr>
-<tr>
-<td><code>load_balancer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>load_balancer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>protocol</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>lb_algorithm</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>provisioning_status</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>operating_status</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_plugin_options</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_plan_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_usage_based</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_limit_based</code></td>
-<td>boolean</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -22254,6 +21651,7 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -22261,21 +21659,31 @@
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>delay</code></td>
 <td>integer</td>
 <td></td>
+<td>Interval between health checks in seconds<br><em>Constraints: default: <code>5</code></em></td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
 <td>integer</td>
 <td></td>
+<td>Time in seconds to timeout a health check<br><em>Constraints: default: <code>5</code></em></td>
 </tr>
 <tr>
 <td><code>max_retries</code></td>
 <td>integer</td>
 <td></td>
+<td><br><em>Constraints: default: <code>3</code></em></td>
+</tr>
+<tr>
+<td><code>max_retries_down</code></td>
+<td>integer</td>
+<td></td>
+<td><br><em>Constraints: default: <code>3</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -22287,24 +21695,44 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
 <td><code>name</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>delay</code></td>
 <td>integer</td>
+<td>Interval between health checks in seconds</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
 <td>integer</td>
+<td>Time in seconds to timeout a health check</td>
 </tr>
 <tr>
 <td><code>max_retries</code></td>
 <td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>max_retries_down</code></td>
+<td>integer</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -22488,14 +21916,14 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.patched_open_stack_load_balancer_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">PatchedOpenStackLoadBalancerRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.patched_update_load_balancer_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">PatchedUpdateLoadBalancerRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_loadbalancers</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_loadbalancers_partial_update</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">PatchedOpenStackLoadBalancerRequest</span><span class="p">()</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">PatchedUpdateLoadBalancerRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_loadbalancers_partial_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -22505,7 +21933,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_open_stack_load_balancer_request.py"><code>PatchedOpenStackLoadBalancerRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_update_load_balancer_request.py"><code>PatchedUpdateLoadBalancerRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_partial_update.py"><code>openstack_loadbalancers_partial_update</code></a></li>
 </ol>
 </div>
@@ -22562,7 +21990,6 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -22570,55 +21997,6 @@
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-<td>Load balancer ID in Octavia</td>
-</tr>
-<tr>
-<td><code>tenant</code></td>
-<td>string (uri)</td>
-<td></td>
-<td>OpenStack tenant this load balancer belongs to</td>
-</tr>
-<tr>
-<td><code>attached_floating_ip</code></td>
-<td>string (uri)</td>
-<td></td>
-<td>Floating IP attached to the VIP port</td>
 </tr>
 </tbody>
 </table>
@@ -22630,239 +22008,20 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>name</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_native_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td>Load balancer ID in Octavia</td>
-</tr>
-<tr>
-<td><code>access_url</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>tenant</code></td>
-<td>string (uri)</td>
-<td>OpenStack tenant this load balancer belongs to</td>
-</tr>
-<tr>
-<td><code>tenant_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>tenant_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>vip_address</code></td>
-<td>any</td>
-<td>An IPv4 or IPv6 address.</td>
-</tr>
-<tr>
-<td><code>vip_subnet_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>vip_port_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>attached_floating_ip</code></td>
-<td>string (uri)</td>
-<td>Floating IP attached to the VIP port</td>
-</tr>
-<tr>
-<td><code>provider</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>provisioning_status</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>operating_status</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_plugin_options</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_plan_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_usage_based</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_limit_based</code></td>
-<td>boolean</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -23002,6 +22161,14 @@
 </thead>
 <tbody>
 <tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
 <td><code>name</code></td>
 <td>string</td>
 </tr>
@@ -23046,14 +22213,14 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.patched_open_stack_pool_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">PatchedOpenStackPoolRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.patched_update_pool_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">PatchedUpdatePoolRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_pools</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_pools_partial_update</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">PatchedOpenStackPoolRequest</span><span class="p">()</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">PatchedUpdatePoolRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_pools_partial_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -23063,7 +22230,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_open_stack_pool_request.py"><code>PatchedOpenStackPoolRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_update_pool_request.py"><code>PatchedUpdatePoolRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_partial_update.py"><code>openstack_pools_partial_update</code></a></li>
 </ol>
 </div>
@@ -23120,7 +22287,6 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -23128,49 +22294,6 @@
 <td><code>name</code></td>
 <td>string</td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-<td>Pool ID in Octavia</td>
-</tr>
-<tr>
-<td><code>load_balancer</code></td>
-<td>string (uri)</td>
-<td></td>
-<td>Load balancer this pool belongs to</td>
 </tr>
 </tbody>
 </table>
@@ -23182,224 +22305,20 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>name</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_native_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td>Pool ID in Octavia</td>
-</tr>
-<tr>
-<td><code>access_url</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>load_balancer</code></td>
-<td>string (uri)</td>
-<td>Load balancer this pool belongs to</td>
-</tr>
-<tr>
-<td><code>load_balancer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>load_balancer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>protocol</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>lb_algorithm</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>provisioning_status</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>operating_status</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_plugin_options</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_plan_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_usage_based</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_limit_based</code></td>
-<td>boolean</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -23998,7 +22917,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-03-04
+    2026-04-06
   </span>
 
     
