@@ -503,6 +503,13 @@ Create customer from successful verification.
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `city` | string |  |
+    | `state` | string |  |
+    | `parish` | string |  |
+    | `street` | string |  |
+    | `house_nr` | string |  |
+    | `apartment_nr` | string |  |
+    | `household` | string |  |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |

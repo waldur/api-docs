@@ -818,6 +818,7 @@ Creates a new provider offering.
     | `plugin_options.max_security_groups` | integer |  | Default limit for number of security groups in OpenStack tenant |
     | `plugin_options.storage_mode` | any |  | Storage mode for OpenStack offering |
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
+    | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
@@ -5635,6 +5636,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.max_security_groups` | integer |  | Default limit for number of security groups in OpenStack tenant |
     | `plugin_options.storage_mode` | any |  | Storage mode for OpenStack offering |
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
+    | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |

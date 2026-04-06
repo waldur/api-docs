@@ -191,6 +191,13 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `city` | string |  |
+    | `state` | string |  |
+    | `parish` | string |  |
+    | `street` | string |  |
+    | `house_nr` | string |  |
+    | `apartment_nr` | string |  |
+    | `household` | string |  |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |
@@ -340,6 +347,13 @@ Fetch the details of a specific customer by its UUID.
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `city` | string |  |
+    | `state` | string |  |
+    | `parish` | string |  |
+    | `street` | string |  |
+    | `house_nr` | string |  |
+    | `apartment_nr` | string |  |
+    | `household` | string |  |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |
@@ -463,6 +477,13 @@ A new customer can only be created by users with staff privilege.
     | `bank_account` | string |  |  |
     | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
+    | `city` | string |  |  |
+    | `state` | string |  |  |
+    | `parish` | string |  |  |
+    | `street` | string |  |  |
+    | `house_nr` | string |  |  |
+    | `apartment_nr` | string |  |  |
+    | `household` | string |  |  |
 
 
 === "Responses"
@@ -522,6 +543,13 @@ A new customer can only be created by users with staff privilege.
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `city` | string |  |
+    | `state` | string |  |
+    | `parish` | string |  |
+    | `street` | string |  |
+    | `house_nr` | string |  |
+    | `apartment_nr` | string |  |
+    | `household` | string |  |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |
@@ -656,6 +684,13 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `bank_account` | string |  |  |
     | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
+    | `city` | string |  |  |
+    | `state` | string |  |  |
+    | `parish` | string |  |  |
+    | `street` | string |  |  |
+    | `house_nr` | string |  |  |
+    | `apartment_nr` | string |  |  |
+    | `household` | string |  |  |
 
 
 === "Responses"
@@ -715,6 +750,13 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `city` | string |  |
+    | `state` | string |  |
+    | `parish` | string |  |
+    | `street` | string |  |
+    | `house_nr` | string |  |
+    | `apartment_nr` | string |  |
+    | `household` | string |  |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |
@@ -936,6 +978,13 @@ Partially update the details of an existing customer. Requires customer owner or
     | `bank_account` | string |  |  |
     | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
+    | `city` | string |  |  |
+    | `state` | string |  |  |
+    | `parish` | string |  |  |
+    | `street` | string |  |  |
+    | `house_nr` | string |  |  |
+    | `apartment_nr` | string |  |  |
+    | `household` | string |  |  |
 
 
 === "Responses"
@@ -995,6 +1044,13 @@ Partially update the details of an existing customer. Requires customer owner or
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `city` | string |  |
+    | `state` | string |  |
+    | `parish` | string |  |
+    | `street` | string |  |
+    | `house_nr` | string |  |
+    | `apartment_nr` | string |  |
+    | `household` | string |  |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |

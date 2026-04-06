@@ -29,7 +29,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/attach_floating_ip/` | [Attach floating IP to VIP](#attach-floating-ip-to-vip) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/` | [Create load balancer](#create-load-balancer) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/detach_floating_ip/` | [Detach floating IP from VIP](#detach-floating-ip-from-vip) |
-| <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/update_vip_security_groups/` | [Update VIP security groups](#update-vip-security-groups) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/unlink/` | [Unlink load balancer](#unlink-load-balancer) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pool-members/` | [Create pool member](#create-pool-member) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pools/` | [Create pool](#create-pool) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack/discovery/{id}/` | [Update](#update) |
@@ -774,8 +774,8 @@ Get a list of load balancers.
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
     | `vip_address` | any | An IPv4 or IPv6 address. |
-    | `vip_subnet_id` | string |  |
-    | `vip_port_id` | string |  |
+    | `vip_subnet` | string (uri) |  |
+    | `vip_port` | string (uri) |  |
     | `attached_floating_ip` | string (uri) | Floating IP attached to the VIP port |
     | `provider` | string |  |
     | `provisioning_status` | string |  |
@@ -898,8 +898,8 @@ Retrieve details of a specific load balancer.
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
     | `vip_address` | any | An IPv4 or IPv6 address. |
-    | `vip_subnet_id` | string |  |
-    | `vip_port_id` | string |  |
+    | `vip_subnet` | string (uri) |  |
+    | `vip_port` | string (uri) |  |
     | `attached_floating_ip` | string (uri) | Floating IP attached to the VIP port |
     | `provider` | string |  |
     | `provisioning_status` | string |  |
@@ -1025,7 +1025,7 @@ Get a list of pool members.
     | `load_balancer_uuid` | string (uuid) |  |
     | `address` | any | An IPv4 or IPv6 address. |
     | `protocol_port` | integer |  |
-    | `subnet_id` | string | Subnet ID for the member (required for creation) |
+    | `subnet` | string (uri) |  |
     | `weight` | integer |  |
     | `provisioning_status` | string |  |
     | `operating_status` | string |  |
@@ -1149,7 +1149,7 @@ Retrieve details of a specific pool member.
     | `load_balancer_uuid` | string (uuid) |  |
     | `address` | any | An IPv4 or IPv6 address. |
     | `protocol_port` | integer |  |
-    | `subnet_id` | string | Subnet ID for the member (required for creation) |
+    | `subnet` | string (uri) |  |
     | `weight` | integer |  |
     | `provisioning_status` | string |  |
     | `operating_status` | string |  |
@@ -2189,10 +2189,7 @@ Create a new health monitor for a pool.
       https://api.example.com/api/openstack-health-monitors/ \
       Authorization:"Token YOUR_API_TOKEN" \
       pool="https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      type="TCP" \
-      delay=123 \
-      timeout=123 \
-      max_retries=123
+      type="TCP"
     ```
 
 === "Python"
@@ -2208,10 +2205,7 @@ Create a new health monitor for a pool.
     
     body_data = CreateHealthMonitorRequest(
         pool="https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        type="TCP",
-        delay=123,
-        timeout=123,
-        max_retries=123
+        type="TCP"
     )
     response = openstack_health_monitors_create.sync(
         client=client,
@@ -2235,10 +2229,7 @@ Create a new health monitor for a pool.
       auth: "Token YOUR_API_TOKEN",
       body: {
         "pool": "https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "type": "TCP",
-        "delay": 123,
-        "timeout": 123,
-        "max_retries": 123
+        "type": "TCP"
       }
     });
       console.log('Success:', response);
@@ -2252,12 +2243,13 @@ Create a new health monitor for a pool.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `pool` | string (uri) | ✓ | Pool this health monitor belongs to |
     | `name` | string |  |  |
+    | `delay` | integer |  | Interval between health checks in seconds<br>_Constraints: default: `5`_ |
+    | `timeout` | integer |  | Time in seconds to timeout a health check<br>_Constraints: default: `5`_ |
+    | `max_retries` | integer |  | <br>_Constraints: default: `3`_ |
+    | `max_retries_down` | integer |  | <br>_Constraints: default: `3`_ |
+    | `pool` | string (uri) | ✓ | Pool this health monitor belongs to |
     | `type` | string | ✓ | <br>_Enum: `TCP`, `UDP`_ |
-    | `delay` | integer | ✓ | Interval between health checks in seconds |
-    | `timeout` | integer | ✓ | Time in seconds to timeout a health check |
-    | `max_retries` | integer | ✓ | Number of retries before marking member as down |
 
 
 === "Responses"
@@ -2268,14 +2260,13 @@ Create a new health monitor for a pool.
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `pool` | string (uri) | Pool this health monitor belongs to |
     | `name` | string |  |
-    | `type` | string | <br>_Enum: `TCP`, `UDP`_ |
     | `delay` | integer | Interval between health checks in seconds |
     | `timeout` | integer | Time in seconds to timeout a health check |
-    | `max_retries` | integer | Number of retries before marking member as down |
-    | `project` | string (uri) |  |
-    | `service_settings` | string (uri) |  |
+    | `max_retries` | integer |  |
+    | `max_retries_down` | integer |  |
+    | `pool` | string (uri) | Pool this health monitor belongs to |
+    | `type` | string | <br>_Enum: `TCP`, `UDP`_ |
 
 ---
 
@@ -2292,7 +2283,6 @@ Create a new listener for a load balancer.
       https://api.example.com/api/openstack-listeners/ \
       Authorization:"Token YOUR_API_TOKEN" \
       load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      name="my-awesome-openstack-listener" \
       protocol="TCP" \
       protocol_port=8080
     ```
@@ -2310,7 +2300,6 @@ Create a new listener for a load balancer.
     
     body_data = CreateListenerRequest(
         load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        name="my-awesome-openstack-listener",
         protocol="TCP",
         protocol_port=8080
     )
@@ -2336,7 +2325,6 @@ Create a new listener for a load balancer.
       auth: "Token YOUR_API_TOKEN",
       body: {
         "load_balancer": "https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "name": "my-awesome-openstack-listener",
         "protocol": "TCP",
         "protocol_port": 8080
       }
@@ -2352,11 +2340,11 @@ Create a new listener for a load balancer.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
+    | `name` | string |  |  |
+    | `default_pool` | string (uri) |  |  |
     | `load_balancer` | string (uri) | ✓ | Load balancer this listener belongs to |
-    | `name` | string | ✓ |  |
     | `protocol` | string | ✓ | <br>_Enum: `TCP`, `UDP`_ |
     | `protocol_port` | integer | ✓ | Port on which the listener listens |
-    | `default_pool` | string (uri) |  |  |
 
 
 === "Responses"
@@ -2365,15 +2353,13 @@ Create a new listener for a load balancer.
     
     | Field | Type | Description |
     |---|---|---|
+    | `name` | string |  |
+    | `default_pool` | string (uri) |  |
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `load_balancer` | string (uri) | Load balancer this listener belongs to |
-    | `name` | string |  |
     | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
     | `protocol_port` | integer | Port on which the listener listens |
-    | `default_pool` | string (uri) |  |
-    | `project` | string (uri) |  |
-    | `service_settings` | string (uri) |  |
 
 ---
 
@@ -2457,8 +2443,11 @@ Attach a floating IP to the load balancer VIP port.
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Message that execution of the operation was scheduled. |
 
 ---
 
@@ -2474,9 +2463,9 @@ Create a new load balancer.
       POST \
       https://api.example.com/api/openstack-loadbalancers/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       name="my-awesome-openstack-loadbalancer" \
-      vip_subnet_id="string-value"
+      tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
+      vip_subnet="https://api.example.com/api/vip-subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
     ```
 
 === "Python"
@@ -2491,9 +2480,9 @@ Create a new load balancer.
     )
     
     body_data = CreateLoadBalancerRequest(
-        tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         name="my-awesome-openstack-loadbalancer",
-        vip_subnet_id="string-value"
+        tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        vip_subnet="https://api.example.com/api/vip-subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
     )
     response = openstack_loadbalancers_create.sync(
         client=client,
@@ -2516,9 +2505,9 @@ Create a new load balancer.
       const response = await openstackLoadbalancersCreate({
       auth: "Token YOUR_API_TOKEN",
       body: {
-        "tenant": "https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "name": "my-awesome-openstack-loadbalancer",
-        "vip_subnet_id": "string-value"
+        "tenant": "https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
+        "vip_subnet": "https://api.example.com/api/vip-subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
       }
     });
       console.log('Success:', response);
@@ -2532,9 +2521,9 @@ Create a new load balancer.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `tenant` | string (uri) | ✓ | OpenStack tenant this load balancer belongs to |
     | `name` | string | ✓ |  |
-    | `vip_subnet_id` | string | ✓ |  |
+    | `tenant` | string (uri) | ✓ | OpenStack tenant this load balancer belongs to |
+    | `vip_subnet` | string (uri) | ✓ |  |
 
 
 === "Responses"
@@ -2545,11 +2534,9 @@ Create a new load balancer.
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
     | `name` | string |  |
-    | `vip_subnet_id` | string |  |
-    | `project` | string (uri) |  |
-    | `service_settings` | string (uri) |  |
+    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
+    | `vip_subnet` | string (uri) |  |
 
 ---
 
@@ -2615,14 +2602,17 @@ Detach floating IP from the load balancer VIP port.
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Message that execution of the operation was scheduled. |
 
 ---
 
-### Update VIP security groups
+### Unlink load balancer
 
-Update security groups on the load balancer VIP port.
+Delete the load balancer from the Waldur database without scheduling operations on the OpenStack backend and without checking resource state. Staff-only; intended for cleaning up records stuck in transitional states.
 
 
 === "HTTPie"
@@ -2630,55 +2620,40 @@ Update security groups on the load balancer VIP port.
     ```bash
     http \
       POST \
-      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_vip_security_groups/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      security_groups:='["web-server-sg"]'
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/unlink/ \
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.load_balancer_update_vip_security_groups_request import LoadBalancerUpdateVIPSecurityGroupsRequest # (1)
-    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_update_vip_security_groups # (2)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_unlink # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = LoadBalancerUpdateVIPSecurityGroupsRequest(
-        security_groups=[
-                "web-server-sg"
-            ]
-    )
-    response = openstack_loadbalancers_update_vip_security_groups.sync(
+    response = openstack_loadbalancers_unlink.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`LoadBalancerUpdateVIPSecurityGroupsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/load_balancer_update_vip_security_groups_request.py)
-    2.  **API Source:** [`openstack_loadbalancers_update_vip_security_groups`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_update_vip_security_groups.py)
+    1.  **API Source:** [`openstack_loadbalancers_unlink`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_unlink.py)
 
 === "TypeScript"
 
     ```typescript
-    import { openstackLoadbalancersUpdateVipSecurityGroups } from 'waldur-js-client';
+    import { openstackLoadbalancersUnlink } from 'waldur-js-client';
     
     try {
-      const response = await openstackLoadbalancersUpdateVipSecurityGroups({
+      const response = await openstackLoadbalancersUnlink({
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "security_groups": [
-          "web-server-sg"
-        ]
       }
     });
       console.log('Success:', response);
@@ -2695,16 +2670,9 @@ Update security groups on the load balancer VIP port.
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body (required)"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `security_groups` | array of string (uri)s | ✓ |
-
-
 === "Responses"
 
-    **`200`** - No response body
+    **`204`** - No response body
     
 
 ---
@@ -2724,7 +2692,7 @@ Create a new member for a pool.
       pool="https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       address=null \
       protocol_port=8080 \
-      subnet_id="string-value"
+      subnet="https://api.example.com/api/subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
     ```
 
 === "Python"
@@ -2742,7 +2710,7 @@ Create a new member for a pool.
         pool="https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         address=null,
         protocol_port=8080,
-        subnet_id="string-value"
+        subnet="https://api.example.com/api/subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
     )
     response = openstack_pool_members_create.sync(
         client=client,
@@ -2768,7 +2736,7 @@ Create a new member for a pool.
         "pool": "https://api.example.com/api/pool/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "address": null,
         "protocol_port": 8080,
-        "subnet_id": "string-value"
+        "subnet": "https://api.example.com/api/subnet/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
       }
     });
       console.log('Success:', response);
@@ -2782,12 +2750,12 @@ Create a new member for a pool.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `pool` | string (uri) | ✓ | Pool this member belongs to |
     | `name` | string |  |  |
+    | `weight` | integer |  | <br>_Constraints: default: `1`_ |
+    | `pool` | string (uri) | ✓ | Pool this member belongs to |
     | `address` | any | ✓ | An IPv4 or IPv6 address. |
     | `protocol_port` | integer | ✓ | Port on the backend server |
-    | `subnet_id` | string | ✓ |  |
-    | `weight` | integer |  | <br>_Constraints: default: `1`_ |
+    | `subnet` | string (uri) | ✓ |  |
 
 
 === "Responses"
@@ -2798,14 +2766,12 @@ Create a new member for a pool.
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `pool` | string (uri) | Pool this member belongs to |
     | `name` | string |  |
+    | `weight` | integer |  |
+    | `pool` | string (uri) | Pool this member belongs to |
     | `address` | any | An IPv4 or IPv6 address. |
     | `protocol_port` | integer | Port on the backend server |
-    | `subnet_id` | string |  |
-    | `weight` | integer |  |
-    | `project` | string (uri) |  |
-    | `service_settings` | string (uri) |  |
+    | `subnet` | string (uri) |  |
 
 ---
 
@@ -2821,8 +2787,8 @@ Create a new pool for a load balancer.
       POST \
       https://api.example.com/api/openstack-pools/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       name="my-awesome-openstack-pool" \
+      load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       protocol="TCP"
     ```
 
@@ -2838,8 +2804,8 @@ Create a new pool for a load balancer.
     )
     
     body_data = CreatePoolRequest(
-        load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         name="my-awesome-openstack-pool",
+        load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         protocol="TCP"
     )
     response = openstack_pools_create.sync(
@@ -2863,8 +2829,8 @@ Create a new pool for a load balancer.
       const response = await openstackPoolsCreate({
       auth: "Token YOUR_API_TOKEN",
       body: {
-        "load_balancer": "https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "name": "my-awesome-openstack-pool",
+        "load_balancer": "https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "protocol": "TCP"
       }
     });
@@ -2879,10 +2845,9 @@ Create a new pool for a load balancer.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `load_balancer` | string (uri) | ✓ | Load balancer this pool belongs to |
     | `name` | string | ✓ |  |
+    | `load_balancer` | string (uri) | ✓ | Load balancer this pool belongs to |
     | `protocol` | string | ✓ | <br>_Enum: `TCP`, `UDP`_ |
-    | `lb_algorithm` | any |  | <br>_Constraints: default: `SOURCE_IP_PORT`_ |
 
 
 === "Responses"
@@ -2893,12 +2858,9 @@ Create a new pool for a load balancer.
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
     | `name` | string |  |
+    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
     | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
-    | `lb_algorithm` | any |  |
-    | `project` | string (uri) |  |
-    | `service_settings` | string (uri) |  |
 
 ---
 
@@ -3034,24 +2996,28 @@ Update an existing health monitor.
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string |  |
-    | `delay` | integer |  |
-    | `timeout` | integer |  |
-    | `max_retries` | integer |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string |  |  |
+    | `delay` | integer |  | Interval between health checks in seconds<br>_Constraints: default: `5`_ |
+    | `timeout` | integer |  | Time in seconds to timeout a health check<br>_Constraints: default: `5`_ |
+    | `max_retries` | integer |  | <br>_Constraints: default: `3`_ |
+    | `max_retries_down` | integer |  | <br>_Constraints: default: `3`_ |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `delay` | integer |
-    | `timeout` | integer |
-    | `max_retries` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `delay` | integer | Interval between health checks in seconds |
+    | `timeout` | integer | Time in seconds to timeout a health check |
+    | `max_retries` | integer |  |
+    | `max_retries_down` | integer |  |
 
 ---
 
@@ -3151,28 +3117,22 @@ Update an existing load balancer.
       PUT \
       https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-openstack-loadbalancer" \
-      service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      name="my-awesome-openstack-loadbalancer"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.open_stack_load_balancer_request import OpenStackLoadBalancerRequest # (1)
+    from waldur_api_client.models.update_load_balancer_request import UpdateLoadBalancerRequest # (1)
     from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_update # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = OpenStackLoadBalancerRequest(
-        name="my-awesome-openstack-loadbalancer",
-        service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        tenant="https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    body_data = UpdateLoadBalancerRequest(
+        name="my-awesome-openstack-loadbalancer"
     )
     response = openstack_loadbalancers_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -3184,7 +3144,7 @@ Update an existing load balancer.
     ```
     
     
-    1.  **Model Source:** [`OpenStackLoadBalancerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_load_balancer_request.py)
+    1.  **Model Source:** [`UpdateLoadBalancerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_load_balancer_request.py)
     2.  **API Source:** [`openstack_loadbalancers_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_update.py)
 
 === "TypeScript"
@@ -3199,10 +3159,7 @@ Update an existing load balancer.
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
       body: {
-        "name": "my-awesome-openstack-loadbalancer",
-        "service_settings": "https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "tenant": "https://api.example.com/api/tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+        "name": "my-awesome-openstack-loadbalancer"
       }
     });
       console.log('Success:', response);
@@ -3221,71 +3178,20 @@ Update an existing load balancer.
 
 === "Request Body (required)"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) | ✓ |  |
-    | `project` | string (uri) | ✓ |  |
-    | `error_message` | string |  |  |
-    | `error_traceback` | string |  |  |
-    | `backend_id` | string |  | Load balancer ID in Octavia |
-    | `tenant` | string (uri) | ✓ | OpenStack tenant this load balancer belongs to |
-    | `attached_floating_ip` | string (uri) |  | Floating IP attached to the VIP port |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string | ✓ |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string | Load balancer ID in Octavia |
-    | `access_url` | string |  |
-    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
-    | `tenant_name` | string |  |
-    | `tenant_uuid` | string (uuid) |  |
-    | `vip_address` | any | An IPv4 or IPv6 address. |
-    | `vip_subnet_id` | string |  |
-    | `vip_port_id` | string |  |
-    | `attached_floating_ip` | string (uri) | Floating IP attached to the VIP port |
-    | `provider` | string |  |
-    | `provisioning_status` | string |  |
-    | `operating_status` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
 
 ---
 
@@ -3368,6 +3274,8 @@ Update an existing pool member.
     
     | Field | Type |
     |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
     | `name` | string |
     | `weight` | integer |
 
@@ -3385,28 +3293,22 @@ Update an existing pool.
       PUT \
       https://api.example.com/api/openstack-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-openstack-pool" \
-      service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      name="my-awesome-openstack-pool"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.open_stack_pool_request import OpenStackPoolRequest # (1)
+    from waldur_api_client.models.update_pool_request import UpdatePoolRequest # (1)
     from waldur_api_client.api.openstack_pools import openstack_pools_update # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = OpenStackPoolRequest(
-        name="my-awesome-openstack-pool",
-        service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        load_balancer="https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    body_data = UpdatePoolRequest(
+        name="my-awesome-openstack-pool"
     )
     response = openstack_pools_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -3418,7 +3320,7 @@ Update an existing pool.
     ```
     
     
-    1.  **Model Source:** [`OpenStackPoolRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_pool_request.py)
+    1.  **Model Source:** [`UpdatePoolRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_pool_request.py)
     2.  **API Source:** [`openstack_pools_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_update.py)
 
 === "TypeScript"
@@ -3433,10 +3335,7 @@ Update an existing pool.
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
       body: {
-        "name": "my-awesome-openstack-pool",
-        "service_settings": "https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "load_balancer": "https://api.example.com/api/load-balancer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+        "name": "my-awesome-openstack-pool"
       }
     });
       console.log('Success:', response);
@@ -3455,67 +3354,20 @@ Update an existing pool.
 
 === "Request Body (required)"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) | ✓ |  |
-    | `project` | string (uri) | ✓ |  |
-    | `error_message` | string |  |  |
-    | `error_traceback` | string |  |  |
-    | `backend_id` | string |  | Pool ID in Octavia |
-    | `load_balancer` | string (uri) | ✓ | Load balancer this pool belongs to |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string | ✓ |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string | Pool ID in Octavia |
-    | `access_url` | string |  |
-    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
-    | `load_balancer_name` | string |  |
-    | `load_balancer_uuid` | string (uuid) |  |
-    | `protocol` | string |  |
-    | `lb_algorithm` | string |  |
-    | `provisioning_status` | string |  |
-    | `operating_status` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
 
 ---
 
@@ -3651,24 +3503,28 @@ Update specific fields of a health monitor.
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string |  |
-    | `delay` | integer |  |
-    | `timeout` | integer |  |
-    | `max_retries` | integer |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string |  |  |
+    | `delay` | integer |  | Interval between health checks in seconds<br>_Constraints: default: `5`_ |
+    | `timeout` | integer |  | Time in seconds to timeout a health check<br>_Constraints: default: `5`_ |
+    | `max_retries` | integer |  | <br>_Constraints: default: `3`_ |
+    | `max_retries_down` | integer |  | <br>_Constraints: default: `3`_ |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `delay` | integer |
-    | `timeout` | integer |
-    | `max_retries` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `delay` | integer | Interval between health checks in seconds |
+    | `timeout` | integer | Time in seconds to timeout a health check |
+    | `max_retries` | integer |  |
+    | `max_retries_down` | integer |  |
 
 ---
 
@@ -3774,14 +3630,14 @@ Update specific fields of a load balancer.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_open_stack_load_balancer_request import PatchedOpenStackLoadBalancerRequest # (1)
+    from waldur_api_client.models.patched_update_load_balancer_request import PatchedUpdateLoadBalancerRequest # (1)
     from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_partial_update # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = PatchedOpenStackLoadBalancerRequest()
+    body_data = PatchedUpdateLoadBalancerRequest()
     response = openstack_loadbalancers_partial_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -3792,7 +3648,7 @@ Update specific fields of a load balancer.
     ```
     
     
-    1.  **Model Source:** [`PatchedOpenStackLoadBalancerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_open_stack_load_balancer_request.py)
+    1.  **Model Source:** [`PatchedUpdateLoadBalancerRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_update_load_balancer_request.py)
     2.  **API Source:** [`openstack_loadbalancers_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_partial_update.py)
 
 === "TypeScript"
@@ -3823,71 +3679,20 @@ Update specific fields of a load balancer.
 
 === "Request Body"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string |  |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) |  |  |
-    | `project` | string (uri) |  |  |
-    | `error_message` | string |  |  |
-    | `error_traceback` | string |  |  |
-    | `backend_id` | string |  | Load balancer ID in Octavia |
-    | `tenant` | string (uri) |  | OpenStack tenant this load balancer belongs to |
-    | `attached_floating_ip` | string (uri) |  | Floating IP attached to the VIP port |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string | Load balancer ID in Octavia |
-    | `access_url` | string |  |
-    | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
-    | `tenant_name` | string |  |
-    | `tenant_uuid` | string (uuid) |  |
-    | `vip_address` | any | An IPv4 or IPv6 address. |
-    | `vip_subnet_id` | string |  |
-    | `vip_port_id` | string |  |
-    | `attached_floating_ip` | string (uri) | Floating IP attached to the VIP port |
-    | `provider` | string |  |
-    | `provisioning_status` | string |  |
-    | `operating_status` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
 
 ---
 
@@ -3970,6 +3775,8 @@ Update specific fields of a pool member.
     
     | Field | Type |
     |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
     | `name` | string |
     | `weight` | integer |
 
@@ -3993,14 +3800,14 @@ Update specific fields of a pool.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_open_stack_pool_request import PatchedOpenStackPoolRequest # (1)
+    from waldur_api_client.models.patched_update_pool_request import PatchedUpdatePoolRequest # (1)
     from waldur_api_client.api.openstack_pools import openstack_pools_partial_update # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = PatchedOpenStackPoolRequest()
+    body_data = PatchedUpdatePoolRequest()
     response = openstack_pools_partial_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -4011,7 +3818,7 @@ Update specific fields of a pool.
     ```
     
     
-    1.  **Model Source:** [`PatchedOpenStackPoolRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_open_stack_pool_request.py)
+    1.  **Model Source:** [`PatchedUpdatePoolRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_update_pool_request.py)
     2.  **API Source:** [`openstack_pools_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_partial_update.py)
 
 === "TypeScript"
@@ -4042,67 +3849,20 @@ Update specific fields of a pool.
 
 === "Request Body"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string |  |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) |  |  |
-    | `project` | string (uri) |  |  |
-    | `error_message` | string |  |  |
-    | `error_traceback` | string |  |  |
-    | `backend_id` | string |  | Pool ID in Octavia |
-    | `load_balancer` | string (uri) |  | Load balancer this pool belongs to |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string | Pool ID in Octavia |
-    | `access_url` | string |  |
-    | `load_balancer` | string (uri) | Load balancer this pool belongs to |
-    | `load_balancer_name` | string |  |
-    | `load_balancer_uuid` | string (uuid) |  |
-    | `protocol` | string |  |
-    | `lb_algorithm` | string |  |
-    | `provisioning_status` | string |  |
-    | `operating_status` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
 
 ---
 
