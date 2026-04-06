@@ -10088,6 +10088,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-offering-resource-and-user-state-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get offering resource and user state counters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-user-attribute-config" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -14506,6 +14517,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-offering-resource-and-user-state-counters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get offering resource and user state counters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-user-attribute-config" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -15027,6 +15049,11 @@
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-provider-offerings/{uuid}/history/</code></td>
 <td style="text-align: left;"><a href="#get-version-history">Get version history</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/marketplace-provider-offerings/{uuid}/state_counters/</code></td>
+<td style="text-align: left;"><a href="#get-offering-resource-and-user-state-counters">Get offering resource and user state counters</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
@@ -36070,9 +36097,138 @@
 </div>
 </div>
 <hr />
+<h3 id="get-offering-resource-and-user-state-counters">Get offering resource and user state counters</h3>
+<p>Returns resource and offering-user counts grouped by state for the given offering.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="66:5"><input checked="checked" id="__tabbed_66_1" name="__tabbed_66" type="radio" /><input id="__tabbed_66_2" name="__tabbed_66" type="radio" /><input id="__tabbed_66_3" name="__tabbed_66" type="radio" /><input id="__tabbed_66_4" name="__tabbed_66" type="radio" /><input id="__tabbed_66_5" name="__tabbed_66" type="radio" /><div class="tabbed-labels"><label for="__tabbed_66_1">HTTPie</label><label for="__tabbed_66_2">Python</label><label for="__tabbed_66_3">TypeScript</label><label for="__tabbed_66_4">Path Parameters</label><label for="__tabbed_66_5">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/state_counters/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_provider_offerings</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_provider_offerings_state_counters_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_provider_offerings_state_counters_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_state_counters_retrieve.py"><code>marketplace_provider_offerings_state_counters_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceProviderOfferingsStateCountersRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceProviderOfferingsStateCountersRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resources</code></td>
+<td>array of objects</td>
+</tr>
+<tr>
+<td><code>resources.state</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>resources.count</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>users</code></td>
+<td>array of objects</td>
+</tr>
+<tr>
+<td><code>users.state</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>users.count</code></td>
+<td>integer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="get-user-attribute-config">Get user attribute config</h3>
 <p>Returns the user attribute configuration for this offering, which determines which user attributes are exposed to the service provider.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="66:5"><input checked="checked" id="__tabbed_66_1" name="__tabbed_66" type="radio" /><input id="__tabbed_66_2" name="__tabbed_66" type="radio" /><input id="__tabbed_66_3" name="__tabbed_66" type="radio" /><input id="__tabbed_66_4" name="__tabbed_66" type="radio" /><input id="__tabbed_66_5" name="__tabbed_66" type="radio" /><div class="tabbed-labels"><label for="__tabbed_66_1">HTTPie</label><label for="__tabbed_66_2">Python</label><label for="__tabbed_66_3">TypeScript</label><label for="__tabbed_66_4">Path Parameters</label><label for="__tabbed_66_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="67:5"><input checked="checked" id="__tabbed_67_1" name="__tabbed_67" type="radio" /><input id="__tabbed_67_2" name="__tabbed_67" type="radio" /><input id="__tabbed_67_3" name="__tabbed_67" type="radio" /><input id="__tabbed_67_4" name="__tabbed_67" type="radio" /><input id="__tabbed_67_5" name="__tabbed_67" type="radio" /><div class="tabbed-labels"><label for="__tabbed_67_1">HTTPie</label><label for="__tabbed_67_2">Python</label><label for="__tabbed_67_3">TypeScript</label><label for="__tabbed_67_4">Path Parameters</label><label for="__tabbed_67_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -36318,7 +36474,7 @@
 <hr />
 <h3 id="check-if-backend_id-is-unique">Check if backend_id is unique</h3>
 <p>Checks if the provided backend_id has been used in resources of this offering or all offerings of the same customer. Returns true if unique, false if already used.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="67:6"><input checked="checked" id="__tabbed_67_1" name="__tabbed_67" type="radio" /><input id="__tabbed_67_2" name="__tabbed_67" type="radio" /><input id="__tabbed_67_3" name="__tabbed_67" type="radio" /><input id="__tabbed_67_4" name="__tabbed_67" type="radio" /><input id="__tabbed_67_5" name="__tabbed_67" type="radio" /><input id="__tabbed_67_6" name="__tabbed_67" type="radio" /><div class="tabbed-labels"><label for="__tabbed_67_1">HTTPie</label><label for="__tabbed_67_2">Python</label><label for="__tabbed_67_3">TypeScript</label><label for="__tabbed_67_4">Path Parameters</label><label for="__tabbed_67_5">Request Body (required)</label><label for="__tabbed_67_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="68:6"><input checked="checked" id="__tabbed_68_1" name="__tabbed_68" type="radio" /><input id="__tabbed_68_2" name="__tabbed_68" type="radio" /><input id="__tabbed_68_3" name="__tabbed_68" type="radio" /><input id="__tabbed_68_4" name="__tabbed_68" type="radio" /><input id="__tabbed_68_5" name="__tabbed_68" type="radio" /><input id="__tabbed_68_6" name="__tabbed_68" type="radio" /><div class="tabbed-labels"><label for="__tabbed_68_1">HTTPie</label><label for="__tabbed_68_2">Python</label><label for="__tabbed_68_3">TypeScript</label><label for="__tabbed_68_4">Path Parameters</label><label for="__tabbed_68_5">Request Body (required)</label><label for="__tabbed_68_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -36492,7 +36648,7 @@
 <hr />
 <h3 id="delete-tags-for-offering">Delete tags for offering</h3>
 <p>Removes all tag associations from this offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="68:5"><input checked="checked" id="__tabbed_68_1" name="__tabbed_68" type="radio" /><input id="__tabbed_68_2" name="__tabbed_68" type="radio" /><input id="__tabbed_68_3" name="__tabbed_68" type="radio" /><input id="__tabbed_68_4" name="__tabbed_68" type="radio" /><input id="__tabbed_68_5" name="__tabbed_68" type="radio" /><div class="tabbed-labels"><label for="__tabbed_68_1">HTTPie</label><label for="__tabbed_68_2">Python</label><label for="__tabbed_68_3">TypeScript</label><label for="__tabbed_68_4">Path Parameters</label><label for="__tabbed_68_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="69:5"><input checked="checked" id="__tabbed_69_1" name="__tabbed_69" type="radio" /><input id="__tabbed_69_2" name="__tabbed_69" type="radio" /><input id="__tabbed_69_3" name="__tabbed_69" type="radio" /><input id="__tabbed_69_4" name="__tabbed_69" type="radio" /><input id="__tabbed_69_5" name="__tabbed_69" type="radio" /><div class="tabbed-labels"><label for="__tabbed_69_1">HTTPie</label><label for="__tabbed_69_2">Python</label><label for="__tabbed_69_3">TypeScript</label><label for="__tabbed_69_4">Path Parameters</label><label for="__tabbed_69_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -36587,7 +36743,7 @@
 <hr />
 <h3 id="export-offering-data">Export offering data</h3>
 <p>Exports an offering and all its connected parts to YAML format. Allows configuration of which components to include in the export.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="69:6"><input checked="checked" id="__tabbed_69_1" name="__tabbed_69" type="radio" /><input id="__tabbed_69_2" name="__tabbed_69" type="radio" /><input id="__tabbed_69_3" name="__tabbed_69" type="radio" /><input id="__tabbed_69_4" name="__tabbed_69" type="radio" /><input id="__tabbed_69_5" name="__tabbed_69" type="radio" /><input id="__tabbed_69_6" name="__tabbed_69" type="radio" /><div class="tabbed-labels"><label for="__tabbed_69_1">HTTPie</label><label for="__tabbed_69_2">Python</label><label for="__tabbed_69_3">TypeScript</label><label for="__tabbed_69_4">Path Parameters</label><label for="__tabbed_69_5">Request Body</label><label for="__tabbed_69_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="70:6"><input checked="checked" id="__tabbed_70_1" name="__tabbed_70" type="radio" /><input id="__tabbed_70_2" name="__tabbed_70" type="radio" /><input id="__tabbed_70_3" name="__tabbed_70" type="radio" /><input id="__tabbed_70_4" name="__tabbed_70" type="radio" /><input id="__tabbed_70_5" name="__tabbed_70" type="radio" /><input id="__tabbed_70_6" name="__tabbed_70" type="radio" /><div class="tabbed-labels"><label for="__tabbed_70_1">HTTPie</label><label for="__tabbed_70_2">Python</label><label for="__tabbed_70_3">TypeScript</label><label for="__tabbed_70_4">Path Parameters</label><label for="__tabbed_70_5">Request Body</label><label for="__tabbed_70_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -36813,7 +36969,7 @@
 <hr />
 <h3 id="import-offering-data">Import offering data</h3>
 <p>Imports an offering and all its connected parts from YAML format. Allows configuration of which components to import and how to handle conflicts. Imported offerings are always created in DRAFT state for security.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="70:5"><input checked="checked" id="__tabbed_70_1" name="__tabbed_70" type="radio" /><input id="__tabbed_70_2" name="__tabbed_70" type="radio" /><input id="__tabbed_70_3" name="__tabbed_70" type="radio" /><input id="__tabbed_70_4" name="__tabbed_70" type="radio" /><input id="__tabbed_70_5" name="__tabbed_70" type="radio" /><div class="tabbed-labels"><label for="__tabbed_70_1">HTTPie</label><label for="__tabbed_70_2">Python</label><label for="__tabbed_70_3">TypeScript</label><label for="__tabbed_70_4">Request Body (required)</label><label for="__tabbed_70_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="71:5"><input checked="checked" id="__tabbed_71_1" name="__tabbed_71" type="radio" /><input id="__tabbed_71_2" name="__tabbed_71" type="radio" /><input id="__tabbed_71_3" name="__tabbed_71" type="radio" /><input id="__tabbed_71_4" name="__tabbed_71" type="radio" /><input id="__tabbed_71_5" name="__tabbed_71" type="radio" /><div class="tabbed-labels"><label for="__tabbed_71_1">HTTPie</label><label for="__tabbed_71_2">Python</label><label for="__tabbed_71_3">TypeScript</label><label for="__tabbed_71_4">Request Body (required)</label><label for="__tabbed_71_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37037,7 +37193,7 @@
 <hr />
 <h3 id="mark-an-offering-as-available">Mark an offering as available</h3>
 <p>Marks an unavailable offering as available.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="71:5"><input checked="checked" id="__tabbed_71_1" name="__tabbed_71" type="radio" /><input id="__tabbed_71_2" name="__tabbed_71" type="radio" /><input id="__tabbed_71_3" name="__tabbed_71" type="radio" /><input id="__tabbed_71_4" name="__tabbed_71" type="radio" /><input id="__tabbed_71_5" name="__tabbed_71" type="radio" /><div class="tabbed-labels"><label for="__tabbed_71_1">HTTPie</label><label for="__tabbed_71_2">Python</label><label for="__tabbed_71_3">TypeScript</label><label for="__tabbed_71_4">Path Parameters</label><label for="__tabbed_71_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="72:5"><input checked="checked" id="__tabbed_72_1" name="__tabbed_72" type="radio" /><input id="__tabbed_72_2" name="__tabbed_72" type="radio" /><input id="__tabbed_72_3" name="__tabbed_72" type="radio" /><input id="__tabbed_72_4" name="__tabbed_72" type="radio" /><input id="__tabbed_72_5" name="__tabbed_72" type="radio" /><div class="tabbed-labels"><label for="__tabbed_72_1">HTTPie</label><label for="__tabbed_72_2">Python</label><label for="__tabbed_72_3">TypeScript</label><label for="__tabbed_72_4">Path Parameters</label><label for="__tabbed_72_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37150,7 +37306,7 @@
 <hr />
 <h3 id="mark-an-offering-as-unavailable">Mark an offering as unavailable</h3>
 <p>Marks an active offering as unavailable, blocking all operations on its resources.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="72:5"><input checked="checked" id="__tabbed_72_1" name="__tabbed_72" type="radio" /><input id="__tabbed_72_2" name="__tabbed_72" type="radio" /><input id="__tabbed_72_3" name="__tabbed_72" type="radio" /><input id="__tabbed_72_4" name="__tabbed_72" type="radio" /><input id="__tabbed_72_5" name="__tabbed_72" type="radio" /><div class="tabbed-labels"><label for="__tabbed_72_1">HTTPie</label><label for="__tabbed_72_2">Python</label><label for="__tabbed_72_3">TypeScript</label><label for="__tabbed_72_4">Path Parameters</label><label for="__tabbed_72_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="73:5"><input checked="checked" id="__tabbed_73_1" name="__tabbed_73" type="radio" /><input id="__tabbed_73_2" name="__tabbed_73" type="radio" /><input id="__tabbed_73_3" name="__tabbed_73" type="radio" /><input id="__tabbed_73_4" name="__tabbed_73" type="radio" /><input id="__tabbed_73_5" name="__tabbed_73" type="radio" /><div class="tabbed-labels"><label for="__tabbed_73_1">HTTPie</label><label for="__tabbed_73_2">Python</label><label for="__tabbed_73_3">TypeScript</label><label for="__tabbed_73_4">Path Parameters</label><label for="__tabbed_73_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37262,8 +37418,8 @@
 </div>
 <hr />
 <h3 id="switch-billing-mode-for-builtin-components">Switch billing mode for builtin components</h3>
-<p>Switches all builtin components between monthly (LIMIT) and prepaid (ONE_TIME + is_prepaid) billing modes.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="73:6"><input checked="checked" id="__tabbed_73_1" name="__tabbed_73" type="radio" /><input id="__tabbed_73_2" name="__tabbed_73" type="radio" /><input id="__tabbed_73_3" name="__tabbed_73" type="radio" /><input id="__tabbed_73_4" name="__tabbed_73" type="radio" /><input id="__tabbed_73_5" name="__tabbed_73" type="radio" /><input id="__tabbed_73_6" name="__tabbed_73" type="radio" /><div class="tabbed-labels"><label for="__tabbed_73_1">HTTPie</label><label for="__tabbed_73_2">Python</label><label for="__tabbed_73_3">TypeScript</label><label for="__tabbed_73_4">Path Parameters</label><label for="__tabbed_73_5">Request Body (required)</label><label for="__tabbed_73_6">Responses</label></div>
+<p>Switches all builtin components between monthly (LIMIT), prepaid (ONE_TIME + is_prepaid), and usage-based billing modes. Works for any offering type that has registered builtin components.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="74:6"><input checked="checked" id="__tabbed_74_1" name="__tabbed_74" type="radio" /><input id="__tabbed_74_2" name="__tabbed_74" type="radio" /><input id="__tabbed_74_3" name="__tabbed_74" type="radio" /><input id="__tabbed_74_4" name="__tabbed_74" type="radio" /><input id="__tabbed_74_5" name="__tabbed_74" type="radio" /><input id="__tabbed_74_6" name="__tabbed_74" type="radio" /><div class="tabbed-labels"><label for="__tabbed_74_1">HTTPie</label><label for="__tabbed_74_2">Python</label><label for="__tabbed_74_3">TypeScript</label><label for="__tabbed_74_4">Path Parameters</label><label for="__tabbed_74_5">Request Body (required)</label><label for="__tabbed_74_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37386,7 +37542,7 @@
 <td><code>billing_mode</code></td>
 <td>any</td>
 <td>✓</td>
-<td>Switch all builtin components to monthly (LIMIT) or prepaid (ONE_TIME + is_prepaid) billing.</td>
+<td>Switch all builtin components to monthly (LIMIT), prepaid (ONE_TIME + is_prepaid), or usage-based billing.</td>
 </tr>
 </tbody>
 </table>
@@ -37399,7 +37555,7 @@
 <hr />
 <h3 id="update-offering-backend_id-rules">Update offering backend_id rules</h3>
 <p>Configure validation rules for resource backend_id: format regex and uniqueness scope.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="74:6"><input checked="checked" id="__tabbed_74_1" name="__tabbed_74" type="radio" /><input id="__tabbed_74_2" name="__tabbed_74" type="radio" /><input id="__tabbed_74_3" name="__tabbed_74" type="radio" /><input id="__tabbed_74_4" name="__tabbed_74" type="radio" /><input id="__tabbed_74_5" name="__tabbed_74" type="radio" /><input id="__tabbed_74_6" name="__tabbed_74" type="radio" /><div class="tabbed-labels"><label for="__tabbed_74_1">HTTPie</label><label for="__tabbed_74_2">Python</label><label for="__tabbed_74_3">TypeScript</label><label for="__tabbed_74_4">Path Parameters</label><label for="__tabbed_74_5">Request Body</label><label for="__tabbed_74_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="75:6"><input checked="checked" id="__tabbed_75_1" name="__tabbed_75" type="radio" /><input id="__tabbed_75_2" name="__tabbed_75" type="radio" /><input id="__tabbed_75_3" name="__tabbed_75" type="radio" /><input id="__tabbed_75_4" name="__tabbed_75" type="radio" /><input id="__tabbed_75_5" name="__tabbed_75" type="radio" /><input id="__tabbed_75_6" name="__tabbed_75" type="radio" /><div class="tabbed-labels"><label for="__tabbed_75_1">HTTPie</label><label for="__tabbed_75_2">Python</label><label for="__tabbed_75_3">TypeScript</label><label for="__tabbed_75_4">Path Parameters</label><label for="__tabbed_75_5">Request Body</label><label for="__tabbed_75_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37523,7 +37679,7 @@
 <hr />
 <h3 id="update-tags-for-offering">Update tags for offering</h3>
 <p>Sets the list of tags for this offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="75:6"><input checked="checked" id="__tabbed_75_1" name="__tabbed_75" type="radio" /><input id="__tabbed_75_2" name="__tabbed_75" type="radio" /><input id="__tabbed_75_3" name="__tabbed_75" type="radio" /><input id="__tabbed_75_4" name="__tabbed_75" type="radio" /><input id="__tabbed_75_5" name="__tabbed_75" type="radio" /><input id="__tabbed_75_6" name="__tabbed_75" type="radio" /><div class="tabbed-labels"><label for="__tabbed_75_1">HTTPie</label><label for="__tabbed_75_2">Python</label><label for="__tabbed_75_3">TypeScript</label><label for="__tabbed_75_4">Path Parameters</label><label for="__tabbed_75_5">Request Body</label><label for="__tabbed_75_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="76:6"><input checked="checked" id="__tabbed_76_1" name="__tabbed_76" type="radio" /><input id="__tabbed_76_2" name="__tabbed_76" type="radio" /><input id="__tabbed_76_3" name="__tabbed_76" type="radio" /><input id="__tabbed_76_4" name="__tabbed_76" type="radio" /><input id="__tabbed_76_5" name="__tabbed_76" type="radio" /><input id="__tabbed_76_6" name="__tabbed_76" type="radio" /><div class="tabbed-labels"><label for="__tabbed_76_1">HTTPie</label><label for="__tabbed_76_2">Python</label><label for="__tabbed_76_3">TypeScript</label><label for="__tabbed_76_4">Path Parameters</label><label for="__tabbed_76_5">Request Body</label><label for="__tabbed_76_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
