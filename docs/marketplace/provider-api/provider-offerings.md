@@ -6752,6 +6752,7 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `termination_metadata` | any | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
+    | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `user_email_patterns` | any |  |

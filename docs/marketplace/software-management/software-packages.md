@@ -120,6 +120,10 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `parent_softwares.uuid` | string (uuid) |  |
     | `parent_softwares.name` | string |  |
     | `parent_softwares.url` | string (uri) |  |
+    | `extensions` | array of objects |  |
+    | `extensions.uuid` | string (uuid) |  |
+    | `extensions.name` | string |  |
+    | `extensions.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
@@ -228,6 +232,10 @@ Returns the details of a specific software package, including its description, h
     | `parent_softwares.uuid` | string (uuid) |  |
     | `parent_softwares.name` | string |  |
     | `parent_softwares.url` | string (uri) |  |
+    | `extensions` | array of objects |  |
+    | `extensions.uuid` | string (uuid) |  |
+    | `extensions.name` | string |  |
+    | `extensions.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
@@ -353,6 +361,10 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `parent_softwares.uuid` | string (uuid) |  |
     | `parent_softwares.name` | string |  |
     | `parent_softwares.url` | string (uri) |  |
+    | `extensions` | array of objects |  |
+    | `extensions.uuid` | string (uuid) |  |
+    | `extensions.name` | string |  |
+    | `extensions.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
@@ -489,6 +501,10 @@ Updates an existing software package. Requires staff permissions.
     | `parent_softwares.uuid` | string (uuid) |  |
     | `parent_softwares.name` | string |  |
     | `parent_softwares.url` | string (uri) |  |
+    | `extensions` | array of objects |  |
+    | `extensions.uuid` | string (uuid) |  |
+    | `extensions.name` | string |  |
+    | `extensions.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
@@ -616,6 +632,10 @@ Partially updates an existing software package. Requires staff permissions.
     | `parent_softwares.uuid` | string (uuid) |  |
     | `parent_softwares.name` | string |  |
     | `parent_softwares.url` | string (uri) |  |
+    | `extensions` | array of objects |  |
+    | `extensions.uuid` | string (uuid) |  |
+    | `extensions.name` | string |  |
+    | `extensions.url` | string (uri) |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
     | `catalog_type` | string |  |
