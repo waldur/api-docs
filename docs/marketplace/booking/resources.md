@@ -115,6 +115,7 @@
     | `restrict_member_access` | boolean | Restrict member access |
     | `runtime_state` | string | Runtime state |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `slug` | string | Slug |
     | `state` | array | Resource state<br><br> |
     | `usage_based` | boolean | Filter by usage-based offerings |
     | `visible_to_providers` | boolean | Include only resources visible to service providers |

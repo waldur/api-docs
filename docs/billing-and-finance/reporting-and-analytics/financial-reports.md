@@ -79,6 +79,7 @@
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
+    | `slug` | string | Slug |
     | `year` | integer | Filter by year. |
 
 

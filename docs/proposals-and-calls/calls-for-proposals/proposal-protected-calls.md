@@ -139,6 +139,7 @@
     | `offerings_provider_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
     | `state` | array |  |
 
 
@@ -2087,6 +2088,7 @@ Get available compliance checklists for call creation/editing.
     | `offerings_provider_uuid` | string (uuid) |  |  |
     | `page` | integer |  | A page number within the paginated result set. |
     | `page_size` | integer |  | Number of results to return per page. |
+    | `slug` | string |  | Slug |
     | `state` | array |  |  |
 
 
@@ -2418,6 +2420,7 @@ List all conflicts of interest detected for this call.
     | `offerings_provider_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
     | `state` | array |  |
 
 
@@ -2875,6 +2878,7 @@ Get detailed compliance answers for a specific proposal (call managers only).
     | `offerings_provider_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
     | `state` | array |  |
 
 
@@ -2978,6 +2982,7 @@ Get proposed reviewer-proposal assignments.
     | `offerings_provider_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
     | `state` | array |  |
 
 
@@ -3575,6 +3580,7 @@ List all reviewer suggestions for this call with affinity scores.
     | `offerings_provider_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
     | `state` | array |  |
 
 
@@ -4517,6 +4523,7 @@ Invite reviewers to join the call's reviewer pool.
     | `offerings_provider_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
     | `state` | array |  |
 
 

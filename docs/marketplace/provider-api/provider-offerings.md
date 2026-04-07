@@ -187,6 +187,7 @@ Returns a paginated list of offerings for the provider.
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |
@@ -1719,6 +1720,7 @@ Returns a paginated list of course accounts for projects that have resources of 
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |
@@ -1861,6 +1863,7 @@ Returns a paginated list of customer-level service accounts for customers who ha
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |
@@ -2151,6 +2154,7 @@ Returns a paginated list of project-level service accounts for projects that hav
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |
@@ -6233,6 +6237,7 @@ Returns monthly usage statistics for the components of an offering within a spec
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `start` | string | Start date in format YYYY-MM. |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
@@ -6367,6 +6372,7 @@ Returns monthly cost data for an offering within a specified date range.
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `start` | string | Start date in format YYYY-MM. |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
@@ -6498,6 +6504,7 @@ Returns a paginated list of customers who have resources for this offering.
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |
@@ -6613,6 +6620,7 @@ Returns a paginated list of active, shared offerings grouped by their service pr
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |
@@ -7806,6 +7814,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |

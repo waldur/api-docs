@@ -105,6 +105,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |

@@ -129,6 +129,7 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
     | `service_provider_uuid` | string (uuid) | Filter by service provider UUID. |
+    | `slug` | string | Slug |
     | `user_uuid` | string (uuid) | Filter by user UUID. |
 
 
@@ -2261,6 +2262,7 @@ Returns a list of countries that can be used when creating or updating a custome
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
     | `service_provider_uuid` | string (uuid) | Filter by service provider UUID. |
+    | `slug` | string | Slug |
     | `user_uuid` | string (uuid) | Filter by user UUID. |
 
 
@@ -2552,6 +2554,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
     | `service_provider_uuid` | string (uuid) | Filter by service provider UUID. |
+    | `slug` | string | Slug |
     | `user_uuid` | string (uuid) | Filter by user UUID. |
 
 

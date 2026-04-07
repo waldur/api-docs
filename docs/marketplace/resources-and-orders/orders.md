@@ -120,6 +120,7 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `resource_name` | string | Resource name |
     | `resource_uuid` | string (uuid) | Resource UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `slug` | string | Slug |
     | `state` | array | Order state<br><br> |
     | `type` | array | Order type<br><br> |
 

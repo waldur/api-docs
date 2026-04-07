@@ -81,6 +81,7 @@
     | `offerings_provider_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
     | `state` | array |  |
 
 

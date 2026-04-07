@@ -147,6 +147,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `runtime_state` | string | Runtime state |
     | `scope` | string (uri) | Filter by scope URL. |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `slug` | string | Slug |
     | `state` | array | Resource state<br><br> |
     | `usage_based` | boolean | Filter by usage-based offerings |
     | `visible_to_providers` | boolean | Include only resources visible to service providers |
@@ -2805,6 +2806,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `runtime_state` | string | Runtime state |
     | `scope` | string (uri) | Filter by scope URL. |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `slug` | string | Slug |
     | `state` | array | Resource state<br><br> |
     | `usage_based` | boolean | Filter by usage-based offerings |
     | `visible_to_providers` | boolean | Include only resources visible to service providers |

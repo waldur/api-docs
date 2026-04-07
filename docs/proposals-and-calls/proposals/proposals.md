@@ -102,6 +102,7 @@
     | `page_size` | integer | Number of results to return per page. |
     | `round` | string (uuid) |  |
     | `round_uuid` | string (uuid) |  |
+    | `slug` | string | Slug |
     | `state` | array |  |
 
 

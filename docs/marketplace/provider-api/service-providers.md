@@ -357,6 +357,7 @@ Returns a paginated list of customers who have consumed resources from the speci
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |
+    | `slug` | string | Slug |
 
 
 === "Responses"
@@ -818,6 +819,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `scope_uuid` | string | Scope UUID |
     | `service_manager_uuid` | string (uuid) | Service manager UUID |
     | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
     | `state` | array | Offering state<br><br> |
     | `tag` | array | Tag UUID (OR logic) |
     | `tag_name` | array | Tag name (OR logic) |
@@ -1819,6 +1821,7 @@ Returns a paginated list of customers that a specified user has access to within
     | `page_size` | integer |  | Number of results to return per page. |
     | `query` | string |  | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
     | `registration_code` | string |  |  |
+    | `slug` | string |  | Slug |
     | `user_uuid` | string (uuid) | ✓ | UUID of the user to get related customers for. |
 
 
