@@ -1988,7 +1988,7 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `job_title` | string |  |
-    | `gender` | any | ISO 5218 gender code |
+    | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
     | `country_of_residence` | string |  |

@@ -2041,7 +2041,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
-    | `gender` | any | ISO 5218 gender code |
+    | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
     | `country_of_residence` | string |  |

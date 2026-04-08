@@ -141,7 +141,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
     | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
-    | `user_gender` | any | ISO 5218 gender code |
+    | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_country_of_residence` | string |  |
@@ -264,7 +264,7 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
     | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
-    | `user_gender` | any | ISO 5218 gender code |
+    | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_country_of_residence` | string |  |
@@ -383,7 +383,7 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
     | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
-    | `user_gender` | any | ISO 5218 gender code |
+    | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_country_of_residence` | string |  |
@@ -596,7 +596,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
     | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
-    | `user_gender` | any | ISO 5218 gender code |
+    | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_country_of_residence` | string |  |
@@ -724,7 +724,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
     | `user_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
-    | `user_gender` | any | ISO 5218 gender code |
+    | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_country_of_residence` | string |  |

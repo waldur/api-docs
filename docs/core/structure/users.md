@@ -191,7 +191,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
-    | `gender` | any | ISO 5218 gender code |
+    | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
     | `country_of_residence` | string |  |
@@ -335,7 +335,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
-    | `gender` | any | ISO 5218 gender code |
+    | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
     | `country_of_residence` | string |  |
@@ -437,7 +437,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `last_name` | string |  |  |
     | `birth_date` | string (date) |  |  |
     | `image` | string (binary) |  |  |
-    | `gender` | any |  | ISO 5218 gender code |
+    | `gender` | any |  | User's gender (male, female, or unknown) |
     | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |  |
     | `country_of_residence` | string |  |  |
@@ -511,7 +511,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
-    | `gender` | any | ISO 5218 gender code |
+    | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
     | `country_of_residence` | string |  |
@@ -773,7 +773,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `last_name` | string |  |  |
     | `birth_date` | string (date) |  |  |
     | `image` | string (binary) |  |  |
-    | `gender` | any |  | ISO 5218 gender code |
+    | `gender` | any |  | User's gender (male, female, or unknown) |
     | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |  |
     | `country_of_residence` | string |  |  |
@@ -847,7 +847,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
-    | `gender` | any | ISO 5218 gender code |
+    | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
     | `country_of_residence` | string |  |
@@ -950,7 +950,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `last_name` | string |  |  |
     | `birth_date` | string (date) |  |  |
     | `image` | string (binary) |  |  |
-    | `gender` | any |  | ISO 5218 gender code |
+    | `gender` | any |  | User's gender (male, female, or unknown) |
     | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |  |
     | `country_of_residence` | string |  |  |
@@ -1024,7 +1024,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
-    | `gender` | any | ISO 5218 gender code |
+    | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
     | `country_of_residence` | string |  |
@@ -1733,7 +1733,7 @@ Get current user details, including authentication token and profile completenes
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
-    | `gender` | any | ISO 5218 gender code |
+    | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
     | `country_of_residence` | string |  |
