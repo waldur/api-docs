@@ -110,6 +110,8 @@ Retrieve a list of permission requests visible to the user.
     | `role_name` | string |  |
     | `role_description` | string |  |
     | `project_name_template` | string |  |
+    | `project_name` | string | Custom project name provided by user during invitation acceptance. |
+    | `project_description` | string | Custom project description provided by user during invitation acceptance. |
 
 ---
 
@@ -198,6 +200,8 @@ Retrieve details of a specific permission request.
     | `role_name` | string |  |
     | `role_description` | string |  |
     | `project_name_template` | string |  |
+    | `project_name` | string | Custom project name provided by user during invitation acceptance. |
+    | `project_description` | string | Custom project description provided by user during invitation acceptance. |
 
 ---
 
