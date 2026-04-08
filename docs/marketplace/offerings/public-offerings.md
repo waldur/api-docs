@@ -251,6 +251,8 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |
@@ -529,6 +531,8 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |
@@ -708,6 +712,8 @@ Returns a list of plans available for a specific offering. The plans are filtere
     | `components.future_price` | string (decimal) |  |
     | `components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `components.discount_rate` | integer | Discount rate in percentage. |
+    | `components.discounted_price` | string (decimal) |  |
+    | `components.discount_description` | string |  |
     | `prices` | object (free-form) |  |
     | `future_prices` | object (free-form) |  |
     | `quotas` | object (free-form) |  |
@@ -816,6 +822,8 @@ Returns the details of a specific plan if it is available to the current user fo
     | `components.future_price` | string (decimal) |  |
     | `components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `components.discount_rate` | integer | Discount rate in percentage. |
+    | `components.discounted_price` | string (decimal) |  |
+    | `components.discount_description` | string |  |
     | `prices` | object (free-form) |  |
     | `future_prices` | object (free-form) |  |
     | `quotas` | object (free-form) |  |

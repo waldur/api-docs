@@ -214,6 +214,8 @@
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |
@@ -496,6 +498,8 @@
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |

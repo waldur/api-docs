@@ -124,6 +124,8 @@ Returns a paginated list of plans managed by the provider. The list is filtered 
     | `components.future_price` | string (decimal) |  |
     | `components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `components.discount_rate` | integer | Discount rate in percentage. |
+    | `components.discounted_price` | string (decimal) |  |
+    | `components.discount_description` | string |  |
     | `offering` | string (uri) |  |
     | `prices` | object (free-form) |  |
     | `future_prices` | object (free-form) |  |
@@ -230,6 +232,8 @@ Returns details of a specific plan.
     | `components.future_price` | string (decimal) |  |
     | `components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `components.discount_rate` | integer | Discount rate in percentage. |
+    | `components.discounted_price` | string (decimal) |  |
+    | `components.discount_description` | string |  |
     | `offering` | string (uri) |  |
     | `prices` | object (free-form) |  |
     | `future_prices` | object (free-form) |  |
@@ -354,6 +358,8 @@ Creates a new billing plan for an offering.
     | `components.future_price` | string (decimal) |  |
     | `components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `components.discount_rate` | integer | Discount rate in percentage. |
+    | `components.discounted_price` | string (decimal) |  |
+    | `components.discount_description` | string |  |
     | `offering` | string (uri) |  |
     | `prices` | object (free-form) |  |
     | `future_prices` | object (free-form) |  |
@@ -833,6 +839,8 @@ Updates an existing plan. Note: A plan cannot be updated if it is already used b
     | `components.future_price` | string (decimal) |  |
     | `components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `components.discount_rate` | integer | Discount rate in percentage. |
+    | `components.discounted_price` | string (decimal) |  |
+    | `components.discount_description` | string |  |
     | `offering` | string (uri) |  |
     | `prices` | object (free-form) |  |
     | `future_prices` | object (free-form) |  |
@@ -958,6 +966,8 @@ Partially updates an existing plan. Note: A plan cannot be updated if it is alre
     | `components.future_price` | string (decimal) |  |
     | `components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `components.discount_rate` | integer | Discount rate in percentage. |
+    | `components.discounted_price` | string (decimal) |  |
+    | `components.discount_description` | string |  |
     | `offering` | string (uri) |  |
     | `prices` | object (free-form) |  |
     | `future_prices` | object (free-form) |  |

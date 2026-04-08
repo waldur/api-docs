@@ -335,6 +335,8 @@ Returns a paginated list of offerings for the provider.
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |
@@ -608,6 +610,8 @@ Returns details of a specific provider offering.
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |
@@ -1026,6 +1030,8 @@ Creates a new provider offering.
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |
@@ -2511,6 +2517,8 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |
@@ -5110,6 +5118,8 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `plans.components.future_price` | string (decimal) |  |
     | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
     | `plans.quotas` | object (free-form) |  |

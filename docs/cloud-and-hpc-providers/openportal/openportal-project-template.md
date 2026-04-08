@@ -223,6 +223,8 @@
     | `offerings_data.plans.components.future_price` | string (decimal) |  |
     | `offerings_data.plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `offerings_data.plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `offerings_data.plans.components.discounted_price` | string (decimal) |  |
+    | `offerings_data.plans.components.discount_description` | string |  |
     | `offerings_data.plans.prices` | object (free-form) |  |
     | `offerings_data.plans.future_prices` | object (free-form) |  |
     | `offerings_data.plans.quotas` | object (free-form) |  |
@@ -502,6 +504,8 @@
     | `offerings_data.plans.components.future_price` | string (decimal) |  |
     | `offerings_data.plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `offerings_data.plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `offerings_data.plans.components.discounted_price` | string (decimal) |  |
+    | `offerings_data.plans.components.discount_description` | string |  |
     | `offerings_data.plans.prices` | object (free-form) |  |
     | `offerings_data.plans.future_prices` | object (free-form) |  |
     | `offerings_data.plans.quotas` | object (free-form) |  |
@@ -813,6 +817,8 @@ Create ProjectTemplate object
     | `offerings_data.plans.components.future_price` | string (decimal) |  |
     | `offerings_data.plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `offerings_data.plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `offerings_data.plans.components.discounted_price` | string (decimal) |  |
+    | `offerings_data.plans.components.discount_description` | string |  |
     | `offerings_data.plans.prices` | object (free-form) |  |
     | `offerings_data.plans.future_prices` | object (free-form) |  |
     | `offerings_data.plans.quotas` | object (free-form) |  |
@@ -1135,6 +1141,8 @@ Update ProjectTemplate object (full update)
     | `offerings_data.plans.components.future_price` | string (decimal) |  |
     | `offerings_data.plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `offerings_data.plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `offerings_data.plans.components.discounted_price` | string (decimal) |  |
+    | `offerings_data.plans.components.discount_description` | string |  |
     | `offerings_data.plans.prices` | object (free-form) |  |
     | `offerings_data.plans.future_prices` | object (free-form) |  |
     | `offerings_data.plans.quotas` | object (free-form) |  |
@@ -1439,6 +1447,8 @@ Partially update ProjectTemplate object
     | `offerings_data.plans.components.future_price` | string (decimal) |  |
     | `offerings_data.plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
     | `offerings_data.plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `offerings_data.plans.components.discounted_price` | string (decimal) |  |
+    | `offerings_data.plans.components.discount_description` | string |  |
     | `offerings_data.plans.prices` | object (free-form) |  |
     | `offerings_data.plans.future_prices` | object (free-form) |  |
     | `offerings_data.plans.quotas` | object (free-form) |  |
