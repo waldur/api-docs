@@ -120,6 +120,8 @@ Retrieve a list of group invitations. Unauthenticated users can only see public 
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
+    | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
+    | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
 ---
 
@@ -215,6 +217,8 @@ Retrieve details of a specific group invitation. Unauthenticated users can only 
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
+    | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
+    | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
 ---
 
@@ -296,6 +300,8 @@ Create a new group invitation, which acts as a template for users to request per
     | `user_email_patterns` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
     | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
+    | `allow_multiple_requests` | boolean |  | Allow users to submit multiple permission requests for this invitation. |
+    | `allow_custom_project_details` | boolean |  | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
 
 === "Responses"
@@ -330,6 +336,8 @@ Create a new group invitation, which acts as a template for users to request per
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
+    | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
+    | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
 ---
 
@@ -413,6 +421,8 @@ Update an active group invitation. Only active invitations can be edited.
     | `user_email_patterns` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
     | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
+    | `allow_multiple_requests` | boolean |  | Allow users to submit multiple permission requests for this invitation. |
+    | `allow_custom_project_details` | boolean |  | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
 
 === "Responses"
@@ -432,6 +442,8 @@ Update an active group invitation. Only active invitations can be edited.
     | `user_email_patterns` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
+    | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
+    | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
 ---
 
@@ -515,6 +527,8 @@ Partially update an active group invitation. Only active invitations can be edit
     | `user_email_patterns` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
     | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
+    | `allow_multiple_requests` | boolean |  | Allow users to submit multiple permission requests for this invitation. |
+    | `allow_custom_project_details` | boolean |  | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
 
 === "Responses"
@@ -534,6 +548,8 @@ Partially update an active group invitation. Only active invitations can be edit
     | `user_email_patterns` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
+    | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
+    | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
 ---
 
