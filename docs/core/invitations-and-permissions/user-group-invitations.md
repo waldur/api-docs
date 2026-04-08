@@ -790,21 +790,26 @@ Creates a permission request based on a group invitation for the currently authe
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.user_group_invitations import user_group_invitations_submit_request # (1)
+    from waldur_api_client.models.submit_request_request import SubmitRequestRequest # (1)
+    from waldur_api_client.api.user_group_invitations import user_group_invitations_submit_request # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
+    
+    body_data = SubmitRequestRequest()
     response = user_group_invitations_submit_request.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
+        client=client,
+        body=body_data
     )
     
     print(response)
     ```
     
     
-    1.  **API Source:** [`user_group_invitations_submit_request`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_group_invitations/user_group_invitations_submit_request.py)
+    1.  **Model Source:** [`SubmitRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/submit_request_request.py)
+    2.  **API Source:** [`user_group_invitations_submit_request`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_group_invitations/user_group_invitations_submit_request.py)
 
 === "TypeScript"
 
@@ -830,6 +835,14 @@ Creates a permission request based on a group invitation for the currently authe
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `project_name` | string |  | Custom project name to use instead of auto-generated one |
+    | `project_description` | string |  | Custom project description |
 
 
 === "Responses"
