@@ -637,9 +637,11 @@ Return a list of orders for which the campaign is applied.
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
+    | `output_updated_at` | string (date-time) |  |
     | `marketplace_resource_uuid` | string (uuid) |  |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+    | `error_updated_at` | string (date-time) |  |
     | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |

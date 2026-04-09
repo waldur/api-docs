@@ -355,7 +355,7 @@ Returns a paginated list of offerings for the provider.
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |
@@ -630,7 +630,7 @@ Returns details of a specific provider offering.
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |
@@ -1050,7 +1050,7 @@ Creates a new provider offering.
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |
@@ -2537,7 +2537,7 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |
@@ -5138,7 +5138,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |
@@ -6895,9 +6895,11 @@ Returns a paginated list of orders associated with a specific offering.
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
+    | `output_updated_at` | string (date-time) |  |
     | `marketplace_resource_uuid` | string (uuid) |  |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+    | `error_updated_at` | string (date-time) |  |
     | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
@@ -7052,9 +7054,11 @@ Returns details of a specific order associated with an offering.
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
+    | `output_updated_at` | string (date-time) |  |
     | `marketplace_resource_uuid` | string (uuid) |  |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+    | `error_updated_at` | string (date-time) |  |
     | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |

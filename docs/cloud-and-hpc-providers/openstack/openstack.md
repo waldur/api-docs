@@ -25,13 +25,18 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/preview_service_attributes/` | [Build service_attributes and plugin_options from selected values](#build-service_attributes-and-plugin_options-from-selected-values) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/validate_credentials/` | [Validate OpenStack credentials without saving them](#validate-openstack-credentials-without-saving-them) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-health-monitors/` | [Create health monitor](#create-health-monitor) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-health-monitors/{uuid}/pull/` | [Pull health monitor](#pull-health-monitor) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-listeners/` | [Create listener](#create-listener) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-listeners/{uuid}/pull/` | [Pull listener](#pull-listener) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/attach_floating_ip/` | [Attach floating IP to VIP](#attach-floating-ip-to-vip) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/` | [Create load balancer](#create-load-balancer) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/detach_floating_ip/` | [Detach floating IP from VIP](#detach-floating-ip-from-vip) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/pull/` | [Pull load balancer](#pull-load-balancer) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/unlink/` | [Unlink load balancer](#unlink-load-balancer) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pool-members/` | [Create pool member](#create-pool-member) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-pool-members/{uuid}/pull/` | [Pull pool member](#pull-pool-member) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pools/` | [Create pool](#create-pool) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-pools/{uuid}/pull/` | [Pull pool](#pull-pool) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack/discovery/{id}/` | [Update](#update) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack-health-monitors/{uuid}/` | [Update health monitor](#update-health-monitor) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack-listeners/{uuid}/` | [Update listener](#update-listener) |
@@ -2270,6 +2275,73 @@ Create a new health monitor for a pool.
 
 ---
 
+### Pull health monitor
+
+Synchronize health monitor state from the OpenStack backend. Also pulls the associated pool and load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-health-monitors/a1b2c3d4-e5f6-7890-abcd-ef1234567890/pull/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_health_monitors import openstack_health_monitors_pull # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_health_monitors_pull.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_health_monitors_pull`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_health_monitors/openstack_health_monitors_pull.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHealthMonitorsPull } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHealthMonitorsPull({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - No response body
+    
+
+---
+
 ### Create listener
 
 Create a new listener for a load balancer.
@@ -2360,6 +2432,73 @@ Create a new listener for a load balancer.
     | `load_balancer` | string (uri) | Load balancer this listener belongs to |
     | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
     | `protocol_port` | integer | Port on which the listener listens |
+
+---
+
+### Pull listener
+
+Synchronize listener state from the OpenStack backend. Also pulls pools of the load balancer and the load balancer itself.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-listeners/a1b2c3d4-e5f6-7890-abcd-ef1234567890/pull/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_listeners import openstack_listeners_pull # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_listeners_pull.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_listeners_pull`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_listeners/openstack_listeners_pull.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackListenersPull } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackListenersPull({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - No response body
+    
 
 ---
 
@@ -2610,6 +2749,73 @@ Detach floating IP from the load balancer VIP port.
 
 ---
 
+### Pull load balancer
+
+Synchronize load balancer state from the OpenStack backend.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/pull/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_pull # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_loadbalancers_pull.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_loadbalancers_pull`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_pull.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersPull } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersPull({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - No response body
+    
+
+---
+
 ### Unlink load balancer
 
 Delete the load balancer from the Waldur database without scheduling operations on the OpenStack backend and without checking resource state. Staff-only; intended for cleaning up records stuck in transitional states.
@@ -2775,6 +2981,73 @@ Create a new member for a pool.
 
 ---
 
+### Pull pool member
+
+Synchronize pool member state from the OpenStack backend. Also pulls the associated pool and load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-pool-members/a1b2c3d4-e5f6-7890-abcd-ef1234567890/pull/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_pool_members import openstack_pool_members_pull # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_pool_members_pull.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_pool_members_pull`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pool_members/openstack_pool_members_pull.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolMembersPull } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolMembersPull({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - No response body
+    
+
+---
+
 ### Create pool
 
 Create a new pool for a load balancer.
@@ -2861,6 +3134,73 @@ Create a new pool for a load balancer.
     | `name` | string |  |
     | `load_balancer` | string (uri) | Load balancer this pool belongs to |
     | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
+
+---
+
+### Pull pool
+
+Synchronize pool state from the OpenStack backend. Also pulls the associated load balancer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/pull/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_pools import openstack_pools_pull # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_pools_pull.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_pools_pull`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_pools/openstack_pools_pull.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPoolsPull } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPoolsPull({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - No response body
+    
 
 ---
 

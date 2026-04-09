@@ -167,9 +167,11 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
+    | `output_updated_at` | string (date-time) |  |
     | `marketplace_resource_uuid` | string (uuid) |  |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+    | `error_updated_at` | string (date-time) |  |
     | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
@@ -330,9 +332,11 @@ Returns the details of a specific order.
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
+    | `output_updated_at` | string (date-time) |  |
     | `marketplace_resource_uuid` | string (uuid) |  |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+    | `error_updated_at` | string (date-time) |  |
     | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
@@ -504,9 +508,11 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
+    | `output_updated_at` | string (date-time) |  |
     | `marketplace_resource_uuid` | string (uuid) |  |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+    | `error_updated_at` | string (date-time) |  |
     | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
@@ -1750,7 +1756,7 @@ Returns details of the offering connected to the requested object.
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |

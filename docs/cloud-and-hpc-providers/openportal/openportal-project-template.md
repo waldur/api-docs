@@ -243,7 +243,7 @@
     | `offerings_data.billable` | boolean | Purchase and usage is invoiced. |
     | `offerings_data.scope` | string |  |
     | `offerings_data.scope_uuid` | string (uuid) |  |
-    | `offerings_data.scope_name` | string (uuid) |  |
+    | `offerings_data.scope_name` | string |  |
     | `offerings_data.scope_state` | any |  |
     | `offerings_data.scope_error_message` | string |  |
     | `offerings_data.files` | array of objects |  |
@@ -524,7 +524,7 @@
     | `offerings_data.billable` | boolean | Purchase and usage is invoiced. |
     | `offerings_data.scope` | string |  |
     | `offerings_data.scope_uuid` | string (uuid) |  |
-    | `offerings_data.scope_name` | string (uuid) |  |
+    | `offerings_data.scope_name` | string |  |
     | `offerings_data.scope_state` | any |  |
     | `offerings_data.scope_error_message` | string |  |
     | `offerings_data.files` | array of objects |  |
@@ -837,7 +837,7 @@ Create ProjectTemplate object
     | `offerings_data.billable` | boolean | Purchase and usage is invoiced. |
     | `offerings_data.scope` | string |  |
     | `offerings_data.scope_uuid` | string (uuid) |  |
-    | `offerings_data.scope_name` | string (uuid) |  |
+    | `offerings_data.scope_name` | string |  |
     | `offerings_data.scope_state` | any |  |
     | `offerings_data.scope_error_message` | string |  |
     | `offerings_data.files` | array of objects |  |
@@ -1161,7 +1161,7 @@ Update ProjectTemplate object (full update)
     | `offerings_data.billable` | boolean | Purchase and usage is invoiced. |
     | `offerings_data.scope` | string |  |
     | `offerings_data.scope_uuid` | string (uuid) |  |
-    | `offerings_data.scope_name` | string (uuid) |  |
+    | `offerings_data.scope_name` | string |  |
     | `offerings_data.scope_state` | any |  |
     | `offerings_data.scope_error_message` | string |  |
     | `offerings_data.files` | array of objects |  |
@@ -1467,7 +1467,7 @@ Partially update ProjectTemplate object
     | `offerings_data.billable` | boolean | Purchase and usage is invoiced. |
     | `offerings_data.scope` | string |  |
     | `offerings_data.scope_uuid` | string (uuid) |  |
-    | `offerings_data.scope_name` | string (uuid) |  |
+    | `offerings_data.scope_name` | string |  |
     | `offerings_data.scope_state` | any |  |
     | `offerings_data.scope_error_message` | string |  |
     | `offerings_data.files` | array of objects |  |

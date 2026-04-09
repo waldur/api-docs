@@ -1632,7 +1632,7 @@ Returns details of the offering connected to the requested object.
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |

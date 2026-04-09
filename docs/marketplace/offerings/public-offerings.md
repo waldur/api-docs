@@ -271,7 +271,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |
@@ -551,7 +551,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `billable` | boolean | Purchase and usage is invoiced. |
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
-    | `scope_name` | string (uuid) |  |
+    | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
     | `files` | array of objects |  |
