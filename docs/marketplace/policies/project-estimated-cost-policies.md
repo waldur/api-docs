@@ -103,8 +103,8 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `project_credit` | number (double) |  |
-    | `customer_credit` | number (double) |  |
+    | `project_credit` | string |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -189,8 +189,8 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `project_credit` | number (double) |  |
-    | `customer_credit` | number (double) |  |
+    | `project_credit` | string |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -292,8 +292,8 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `project_credit` | number (double) |  |
-    | `customer_credit` | number (double) |  |
+    | `project_credit` | string |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -406,8 +406,8 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `project_credit` | number (double) |  |
-    | `customer_credit` | number (double) |  |
+    | `project_credit` | string |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -508,8 +508,8 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `project_credit` | number (double) |  |
-    | `customer_credit` | number (double) |  |
+    | `project_credit` | string |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -649,8 +649,8 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `project_credit` | number (double) |  |
-    | `customer_credit` | number (double) |  |
+    | `project_credit` | string |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---

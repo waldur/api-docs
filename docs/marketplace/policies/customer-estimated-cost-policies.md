@@ -100,7 +100,7 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `customer_credit` | integer |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -185,7 +185,7 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `customer_credit` | integer |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -287,7 +287,7 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `customer_credit` | integer |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -400,7 +400,7 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `customer_credit` | integer |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -501,7 +501,7 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `customer_credit` | integer |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -641,7 +641,7 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
-    | `customer_credit` | integer |  |
+    | `customer_credit` | string |  |
     | `billing_price_estimate` | any |  |
 
 ---
