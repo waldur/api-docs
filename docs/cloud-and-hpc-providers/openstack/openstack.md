@@ -32,6 +32,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/` | [Create load balancer](#create-load-balancer) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/detach_floating_ip/` | [Detach floating IP from VIP](#detach-floating-ip-from-vip) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/pull/` | [Pull load balancer](#pull-load-balancer) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/set_security_groups/` | [Set security groups on VIP port](#set-security-groups-on-vip-port) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-loadbalancers/{uuid}/unlink/` | [Unlink load balancer](#unlink-load-balancer) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pool-members/` | [Create pool member](#create-pool-member) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pool-members/{uuid}/pull/` | [Pull pool member](#pull-pool-member) |
@@ -785,6 +786,7 @@ Get a list of load balancers.
     | `provider` | string |  |
     | `provisioning_status` | string |  |
     | `operating_status` | string |  |
+    | `vip_security_groups` | array of objects | Security groups assigned to the VIP port. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -909,6 +911,7 @@ Retrieve details of a specific load balancer.
     | `provider` | string |  |
     | `provisioning_status` | string |  |
     | `operating_status` | string |  |
+    | `vip_security_groups` | array of objects | Security groups assigned to the VIP port. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -2816,6 +2819,98 @@ Synchronize load balancer state from the OpenStack backend.
 
 ---
 
+### Set security groups on VIP port
+
+Set security groups on the load balancer VIP port to control access.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-loadbalancers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_security_groups/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      security_groups:='["web-server-sg"]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.load_balancer_set_security_groups_request import LoadBalancerSetSecurityGroupsRequest # (1)
+    from waldur_api_client.api.openstack_loadbalancers import openstack_loadbalancers_set_security_groups # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = LoadBalancerSetSecurityGroupsRequest(
+        security_groups=[
+                "web-server-sg"
+            ]
+    )
+    response = openstack_loadbalancers_set_security_groups.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`LoadBalancerSetSecurityGroupsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/load_balancer_set_security_groups_request.py)
+    2.  **API Source:** [`openstack_loadbalancers_set_security_groups`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_loadbalancers/openstack_loadbalancers_set_security_groups.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackLoadbalancersSetSecurityGroups } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackLoadbalancersSetSecurityGroups({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "security_groups": [
+          "web-server-sg"
+        ]
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `security_groups` | array of string (uri)s | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Message that execution of the operation was scheduled. |
+
+---
+
 ### Unlink load balancer
 
 Delete the load balancer from the Waldur database without scheduling operations on the OpenStack backend and without checking resource state. Staff-only; intended for cleaning up records stuck in transitional states.
@@ -3121,6 +3216,7 @@ Create a new pool for a load balancer.
     | `name` | string | ✓ |  |
     | `load_balancer` | string (uri) | ✓ | Load balancer this pool belongs to |
     | `protocol` | string | ✓ | <br>_Enum: `TCP`, `UDP`_ |
+    | `lb_algorithm` | any |  | <br>_Constraints: default: `SOURCE_IP_PORT`_ |
 
 
 === "Responses"
@@ -3134,6 +3230,7 @@ Create a new pool for a load balancer.
     | `name` | string |  |
     | `load_balancer` | string (uri) | Load balancer this pool belongs to |
     | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
+    | `lb_algorithm` | any |  |
 
 ---
 
