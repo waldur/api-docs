@@ -20,6 +20,7 @@ This entity acts as a scope for collaboration, allowing a subset of users from t
 | <span class="http-badge http-get">GET</span> | `/api/projects/` | [List projects](#list-projects) |
 | <span class="http-badge http-get">GET</span> | `/api/projects/{uuid}/` | [Retrieve project details](#retrieve-project-details) |
 | <span class="http-badge http-post">POST</span> | `/api/projects/` | [Create a new project](#create-a-new-project) |
+| <span class="http-badge http-post">POST</span> | `/api/projects/{uuid}/update_affiliated_organizations/` | [Update affiliated organizations for a project](#update-affiliated-organizations-for-a-project) |
 | <span class="http-badge http-put">PUT</span> | `/api/projects/{uuid}/` | [Update project details](#update-project-details) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/projects/{uuid}/` | [Partially update project details](#partially-update-project-details) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/projects/{uuid}/` | [Delete a project](#delete-a-project) |
@@ -104,6 +105,8 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | Name | Type | Description |
     |---|---|---|
     | `accounting_is_running` | boolean | Filter by whether accounting is running. |
+    | `affiliated_organization_name` | string | Affiliated organization name |
+    | `affiliated_organization_uuid` | array | Affiliated organization UUID |
     | `backend_id` | string |  |
     | `can_admin` | boolean | Return a list of projects where current user is admin. |
     | `can_manage` | boolean | Return a list of projects where current user is manager or a customer owner. |
@@ -116,6 +119,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `customer_native_name` | string | Customer native name |
     | `description` | string | Description |
     | `field` | array |  |
+    | `has_affiliated_organization` | boolean | Filter projects that have at least one affiliated organization. |
     | `include_terminated` | boolean | Include soft-deleted (terminated) projects. Only available to staff and support users, or users with organizational roles who can see their terminated projects. |
     | `is_removed` | boolean | Is removed |
     | `modified` | string (date-time) | Modified after |
@@ -177,6 +181,20 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `affiliated_organizations` | array of objects |  |
+    | `affiliated_organizations.uuid` | string (uuid) |  |
+    | `affiliated_organizations.url` | string (uri) |  |
+    | `affiliated_organizations.name` | string |  |
+    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `affiliated_organizations.abbreviation` | string |  |
+    | `affiliated_organizations.description` | string |  |
+    | `affiliated_organizations.email` | string (email) |  |
+    | `affiliated_organizations.homepage` | string (uri) |  |
+    | `affiliated_organizations.country` | string |  |
+    | `affiliated_organizations.address` | string |  |
+    | `affiliated_organizations.created` | string (date-time) |  |
+    | `affiliated_organizations.modified` | string (date-time) |  |
+    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -296,6 +314,20 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `affiliated_organizations` | array of objects |  |
+    | `affiliated_organizations.uuid` | string (uuid) |  |
+    | `affiliated_organizations.url` | string (uri) |  |
+    | `affiliated_organizations.name` | string |  |
+    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `affiliated_organizations.abbreviation` | string |  |
+    | `affiliated_organizations.description` | string |  |
+    | `affiliated_organizations.email` | string (email) |  |
+    | `affiliated_organizations.homepage` | string (uri) |  |
+    | `affiliated_organizations.country` | string |  |
+    | `affiliated_organizations.address` | string |  |
+    | `affiliated_organizations.created` | string (date-time) |  |
+    | `affiliated_organizations.modified` | string (date-time) |  |
+    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -432,9 +464,102 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `affiliated_organizations` | array of objects |  |
+    | `affiliated_organizations.uuid` | string (uuid) |  |
+    | `affiliated_organizations.url` | string (uri) |  |
+    | `affiliated_organizations.name` | string |  |
+    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `affiliated_organizations.abbreviation` | string |  |
+    | `affiliated_organizations.description` | string |  |
+    | `affiliated_organizations.email` | string (email) |  |
+    | `affiliated_organizations.homepage` | string (uri) |  |
+    | `affiliated_organizations.country` | string |  |
+    | `affiliated_organizations.address` | string |  |
+    | `affiliated_organizations.created` | string (date-time) |  |
+    | `affiliated_organizations.modified` | string (date-time) |  |
+    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+
+---
+
+### Update affiliated organizations for a project
+
+Assigns a project to one or more affiliated organizations. Replaces the current set.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_affiliated_organizations/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.affiliated_organizations_update_request import AffiliatedOrganizationsUpdateRequest # (1)
+    from waldur_api_client.api.projects import projects_update_affiliated_organizations # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = AffiliatedOrganizationsUpdateRequest()
+    response = projects_update_affiliated_organizations.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`AffiliatedOrganizationsUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/affiliated_organizations_update_request.py)
+    2.  **API Source:** [`projects_update_affiliated_organizations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/projects/projects_update_affiliated_organizations.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { projectsUpdateAffiliatedOrganizations } from 'waldur-js-client';
+    
+    try {
+      const response = await projectsUpdateAffiliatedOrganizations({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `affiliated_organizations` | array of string (uuid)s |  |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---
 
@@ -579,6 +704,20 @@ Update the details of a project. Requires project administrator or customer owne
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `affiliated_organizations` | array of objects |  |
+    | `affiliated_organizations.uuid` | string (uuid) |  |
+    | `affiliated_organizations.url` | string (uri) |  |
+    | `affiliated_organizations.name` | string |  |
+    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `affiliated_organizations.abbreviation` | string |  |
+    | `affiliated_organizations.description` | string |  |
+    | `affiliated_organizations.email` | string (email) |  |
+    | `affiliated_organizations.homepage` | string (uri) |  |
+    | `affiliated_organizations.country` | string |  |
+    | `affiliated_organizations.address` | string |  |
+    | `affiliated_organizations.created` | string (date-time) |  |
+    | `affiliated_organizations.modified` | string (date-time) |  |
+    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -717,6 +856,20 @@ Partially update the details of a project. Requires project administrator or cus
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `affiliated_organizations` | array of objects |  |
+    | `affiliated_organizations.uuid` | string (uuid) |  |
+    | `affiliated_organizations.url` | string (uri) |  |
+    | `affiliated_organizations.name` | string |  |
+    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `affiliated_organizations.abbreviation` | string |  |
+    | `affiliated_organizations.description` | string |  |
+    | `affiliated_organizations.email` | string (email) |  |
+    | `affiliated_organizations.homepage` | string (uri) |  |
+    | `affiliated_organizations.country` | string |  |
+    | `affiliated_organizations.address` | string |  |
+    | `affiliated_organizations.created` | string (date-time) |  |
+    | `affiliated_organizations.modified` | string (date-time) |  |
+    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -911,6 +1064,20 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `affiliated_organizations` | array of objects |  |
+    | `affiliated_organizations.uuid` | string (uuid) |  |
+    | `affiliated_organizations.url` | string (uri) |  |
+    | `affiliated_organizations.name` | string |  |
+    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `affiliated_organizations.abbreviation` | string |  |
+    | `affiliated_organizations.description` | string |  |
+    | `affiliated_organizations.email` | string (email) |  |
+    | `affiliated_organizations.homepage` | string (uri) |  |
+    | `affiliated_organizations.country` | string |  |
+    | `affiliated_organizations.address` | string |  |
+    | `affiliated_organizations.created` | string (date-time) |  |
+    | `affiliated_organizations.modified` | string (date-time) |  |
+    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -1541,6 +1708,20 @@ Moves a project and its associated resources to a different customer. You can ch
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `affiliated_organizations` | array of objects |  |
+    | `affiliated_organizations.uuid` | string (uuid) |  |
+    | `affiliated_organizations.url` | string (uri) |  |
+    | `affiliated_organizations.name` | string |  |
+    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `affiliated_organizations.abbreviation` | string |  |
+    | `affiliated_organizations.description` | string |  |
+    | `affiliated_organizations.email` | string (email) |  |
+    | `affiliated_organizations.homepage` | string (uri) |  |
+    | `affiliated_organizations.country` | string |  |
+    | `affiliated_organizations.address` | string |  |
+    | `affiliated_organizations.created` | string (date-time) |  |
+    | `affiliated_organizations.modified` | string (date-time) |  |
+    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
