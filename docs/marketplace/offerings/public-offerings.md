@@ -258,7 +258,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |
@@ -538,7 +538,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |
@@ -719,7 +719,7 @@ Returns a list of plans available for a specific offering. The plans are filtere
     | `quotas` | object (free-form) |  |
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
-    | `minimal_price` | number (double) |  |
+    | `minimal_price` | string |  |
 
 ---
 
@@ -829,6 +829,6 @@ Returns the details of a specific plan if it is available to the current user fo
     | `quotas` | object (free-form) |  |
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
-    | `minimal_price` | number (double) |  |
+    | `minimal_price` | string |  |
 
 ---

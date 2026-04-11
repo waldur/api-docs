@@ -230,7 +230,7 @@
     | `offerings_data.plans.quotas` | object (free-form) |  |
     | `offerings_data.plans.resources_count` | integer |  |
     | `offerings_data.plans.plan_type` | string |  |
-    | `offerings_data.plans.minimal_price` | number (double) |  |
+    | `offerings_data.plans.minimal_price` | string |  |
     | `offerings_data.screenshots` | array of objects |  |
     | `offerings_data.screenshots.name` | string |  |
     | `offerings_data.screenshots.uuid` | string (uuid) |  |
@@ -511,7 +511,7 @@
     | `offerings_data.plans.quotas` | object (free-form) |  |
     | `offerings_data.plans.resources_count` | integer |  |
     | `offerings_data.plans.plan_type` | string |  |
-    | `offerings_data.plans.minimal_price` | number (double) |  |
+    | `offerings_data.plans.minimal_price` | string |  |
     | `offerings_data.screenshots` | array of objects |  |
     | `offerings_data.screenshots.name` | string |  |
     | `offerings_data.screenshots.uuid` | string (uuid) |  |
@@ -824,7 +824,7 @@ Create ProjectTemplate object
     | `offerings_data.plans.quotas` | object (free-form) |  |
     | `offerings_data.plans.resources_count` | integer |  |
     | `offerings_data.plans.plan_type` | string |  |
-    | `offerings_data.plans.minimal_price` | number (double) |  |
+    | `offerings_data.plans.minimal_price` | string |  |
     | `offerings_data.screenshots` | array of objects |  |
     | `offerings_data.screenshots.name` | string |  |
     | `offerings_data.screenshots.uuid` | string (uuid) |  |
@@ -1148,7 +1148,7 @@ Update ProjectTemplate object (full update)
     | `offerings_data.plans.quotas` | object (free-form) |  |
     | `offerings_data.plans.resources_count` | integer |  |
     | `offerings_data.plans.plan_type` | string |  |
-    | `offerings_data.plans.minimal_price` | number (double) |  |
+    | `offerings_data.plans.minimal_price` | string |  |
     | `offerings_data.screenshots` | array of objects |  |
     | `offerings_data.screenshots.name` | string |  |
     | `offerings_data.screenshots.uuid` | string (uuid) |  |
@@ -1454,7 +1454,7 @@ Partially update ProjectTemplate object
     | `offerings_data.plans.quotas` | object (free-form) |  |
     | `offerings_data.plans.resources_count` | integer |  |
     | `offerings_data.plans.plan_type` | string |  |
-    | `offerings_data.plans.minimal_price` | number (double) |  |
+    | `offerings_data.plans.minimal_price` | string |  |
     | `offerings_data.screenshots` | array of objects |  |
     | `offerings_data.screenshots.name` | string |  |
     | `offerings_data.screenshots.uuid` | string (uuid) |  |

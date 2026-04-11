@@ -915,7 +915,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `options` | any | Fields describing resource provision form. |
     | `resource_options` | any | Fields describing resource report form. |
     | `secret_options` | any |  |

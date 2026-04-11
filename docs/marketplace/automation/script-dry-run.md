@@ -221,7 +221,7 @@
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |
@@ -505,7 +505,7 @@
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |

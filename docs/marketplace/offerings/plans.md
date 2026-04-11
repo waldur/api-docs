@@ -132,7 +132,7 @@ Returns a paginated list of plans managed by the provider. The list is filtered 
     | `quotas` | object (free-form) |  |
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
-    | `minimal_price` | number (double) |  |
+    | `minimal_price` | string |  |
 
 ---
 
@@ -240,7 +240,7 @@ Returns details of a specific plan.
     | `quotas` | object (free-form) |  |
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
-    | `minimal_price` | number (double) |  |
+    | `minimal_price` | string |  |
 
 ---
 
@@ -366,7 +366,7 @@ Creates a new billing plan for an offering.
     | `quotas` | object (free-form) |  |
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
-    | `minimal_price` | number (double) |  |
+    | `minimal_price` | string |  |
 
 ---
 
@@ -847,7 +847,7 @@ Updates an existing plan. Note: A plan cannot be updated if it is already used b
     | `quotas` | object (free-form) |  |
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
-    | `minimal_price` | number (double) |  |
+    | `minimal_price` | string |  |
 
 ---
 
@@ -974,7 +974,7 @@ Partially updates an existing plan. Note: A plan cannot be updated if it is alre
     | `quotas` | object (free-form) |  |
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
-    | `minimal_price` | number (double) |  |
+    | `minimal_price` | string |  |
 
 ---
 

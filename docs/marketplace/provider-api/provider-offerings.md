@@ -342,7 +342,7 @@ Returns a paginated list of offerings for the provider.
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |
@@ -617,7 +617,7 @@ Returns details of a specific provider offering.
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |
@@ -1037,7 +1037,7 @@ Creates a new provider offering.
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |
@@ -2524,7 +2524,7 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |
@@ -5125,7 +5125,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `plans.quotas` | object (free-form) |  |
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
-    | `plans.minimal_price` | number (double) |  |
+    | `plans.minimal_price` | string |  |
     | `screenshots` | array of objects |  |
     | `screenshots.name` | string |  |
     | `screenshots.uuid` | string (uuid) |  |
