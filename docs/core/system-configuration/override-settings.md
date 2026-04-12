@@ -77,6 +77,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `CURRENCY_NAME` | string |
     | `THUMBNAIL_SIZE` | string |
     | `ANONYMOUS_USER_CAN_VIEW_OFFERINGS` | boolean |
+    | `SHOW_OFFERING_COVER_IMAGE` | boolean |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |
     | `RESTRICTED_OFFERING_VISIBILITY_MODE` | string |
     | `ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT` | boolean |
@@ -392,6 +393,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `CURRENCY_NAME` | string |  |
     | `THUMBNAIL_SIZE` | string |  |
     | `ANONYMOUS_USER_CAN_VIEW_OFFERINGS` | boolean |  |
+    | `SHOW_OFFERING_COVER_IMAGE` | boolean |  |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |  |
     | `RESTRICTED_OFFERING_VISIBILITY_MODE` | string |  |
     | `ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT` | boolean |  |
