@@ -216,7 +216,7 @@ Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Create
     | `civil_number` | string |  |  |
     | `phone_number` | string |  |  |
     | `identity_source` | string |  |  |
-    | `gender` | integer |  |  |
+    | `gender` | any |  |  |
     | `personal_title` | string |  |  |
     | `birth_date` | string (date) |  |  |
     | `place_of_birth` | string |  |  |
