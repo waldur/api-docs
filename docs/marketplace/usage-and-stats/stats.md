@@ -2823,18 +2823,18 @@ Return usage-based resources with no usage reported in the specified billing per
     
     | Field | Type | Description |
     |---|---|---|
-    | `uuid` | string (uuid) | UUID of the resource |
-    | `name` | string | Name of the resource |
-    | `state` | string | Current state of the resource |
-    | `created` | string (date-time) | Creation date of the resource |
-    | `offering_name` | string | Name of the offering |
-    | `offering_uuid` | string (uuid) | UUID of the offering |
-    | `provider_name` | string | Name of the service provider |
-    | `provider_uuid` | string (uuid) | UUID of the service provider |
-    | `customer_name` | string | Name of the customer organization |
-    | `customer_uuid` | string (uuid) | UUID of the customer organization |
-    | `project_name` | string | Name of the project |
-    | `project_uuid` | string (uuid) | UUID of the project |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `state` | string |  |
+    | `created` | string (date-time) |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `provider_name` | string |  |
+    | `provider_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
     | `last_usage_date` | string (date-time) | Date of the last usage report |
     | `days_since_last_report` | integer | Number of days since last usage report |
 

@@ -8,6 +8,9 @@
 | <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/{id}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-health-monitors/` | [List health monitors](#list-health-monitors) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-health-monitors/{uuid}/` | [Get health monitor details](#get-health-monitor-details) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisors/` | [List Openstack Hypervisors](#list-openstack-hypervisors) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisors/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisors/summary/` | [Get hypervisor summary statistics](#get-hypervisor-summary-statistics) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-listeners/` | [List listeners](#list-listeners) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-listeners/{uuid}/` | [Get listener details](#get-listener-details) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-loadbalancers/` | [List load balancers](#list-load-balancers) |
@@ -430,6 +433,238 @@ Retrieve details of a specific health monitor.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+---
+
+### List Openstack Hypervisors
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-hypervisors/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_hypervisors import openstack_hypervisors_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_hypervisors_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_hypervisors_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisors/openstack_hypervisors_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHypervisorsList } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHypervisorsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `hypervisor_type` | string |  |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `settings` | string (uri) | Settings URL |
+    | `settings_uuid` | string (uuid) | Settings UUID |
+    | `state` | string |  |
+    | `status` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `settings` | string (uri) |  |
+    | `backend_id` | string |  |
+    | `hypervisor_type` | string | Hypervisor type, e.g. KVM, QEMU, VMware |
+    | `vcpus` | integer | Total vCPUs |
+    | `vcpus_used` | integer | Used vCPUs |
+    | `memory_mb` | integer | Total RAM in MiB |
+    | `memory_mb_used` | integer | Used RAM in MiB |
+    | `local_gb` | integer | Total disk in GiB |
+    | `local_gb_used` | integer | Used disk in GiB |
+    | `running_vms` | integer | Number of running VMs |
+    | `state` | string | Hypervisor state, e.g. up or down |
+    | `status` | string | Hypervisor status, e.g. enabled or disabled |
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-hypervisors/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_hypervisors import openstack_hypervisors_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_hypervisors_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_hypervisors_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisors/openstack_hypervisors_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHypervisorsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHypervisorsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `settings` | string (uri) |  |
+    | `backend_id` | string |  |
+    | `hypervisor_type` | string | Hypervisor type, e.g. KVM, QEMU, VMware |
+    | `vcpus` | integer | Total vCPUs |
+    | `vcpus_used` | integer | Used vCPUs |
+    | `memory_mb` | integer | Total RAM in MiB |
+    | `memory_mb_used` | integer | Used RAM in MiB |
+    | `local_gb` | integer | Total disk in GiB |
+    | `local_gb_used` | integer | Used disk in GiB |
+    | `running_vms` | integer | Number of running VMs |
+    | `state` | string | Hypervisor state, e.g. up or down |
+    | `status` | string | Hypervisor status, e.g. enabled or disabled |
+
+---
+
+### Get hypervisor summary statistics
+
+Return aggregated vCPU, RAM and disk totals across all hypervisors matching the current filter (e.g. settings_uuid).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-hypervisors/summary/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_hypervisors import openstack_hypervisors_summary_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_hypervisors_summary_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_hypervisors_summary_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisors/openstack_hypervisors_summary_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHypervisorsSummaryRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHypervisorsSummaryRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `total_vcpus` | integer |
+    | `used_vcpus` | integer |
+    | `total_memory_mb` | integer |
+    | `used_memory_mb` | integer |
+    | `total_local_gb` | integer |
+    | `used_local_gb` | integer |
+    | `total_running_vms` | integer |
 
 ---
 
