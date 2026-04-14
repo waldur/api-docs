@@ -2607,6 +2607,39 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#list-openstack-hypervisors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Openstack Hypervisors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieve_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retrieve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-hypervisor-summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get hypervisor summary statistics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-listeners" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -13420,6 +13453,39 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#list-openstack-hypervisors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Openstack Hypervisors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieve_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retrieve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-hypervisor-summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get hypervisor summary statistics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-listeners" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -13999,6 +14065,21 @@
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/openstack-health-monitors/{uuid}/</code></td>
 <td style="text-align: left;"><a href="#get-health-monitor-details">Get health monitor details</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/openstack-hypervisors/</code></td>
+<td style="text-align: left;"><a href="#list-openstack-hypervisors">List Openstack Hypervisors</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/openstack-hypervisors/{uuid}/</code></td>
+<td style="text-align: left;"><a href="#retrieve">Retrieve</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/openstack-hypervisors/summary/</code></td>
+<td style="text-align: left;"><a href="#get-hypervisor-summary-statistics">Get hypervisor summary statistics</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
@@ -15159,9 +15240,503 @@
 </div>
 </div>
 <hr />
+<h3 id="list-openstack-hypervisors">List Openstack Hypervisors</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:5"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Query Parameters</label><label for="__tabbed_5_5">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/openstack-hypervisors/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_hypervisors</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_hypervisors_list</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">openstack_hypervisors_list</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisors/openstack_hypervisors_list.py"><code>openstack_hypervisors_list</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackHypervisorsList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackHypervisorsList</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hypervisor_type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name</td>
+</tr>
+<tr>
+<td><code>name_exact</code></td>
+<td>string</td>
+<td>Name (exact)</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>integer</td>
+<td>A page number within the paginated result set.</td>
+</tr>
+<tr>
+<td><code>page_size</code></td>
+<td>integer</td>
+<td>Number of results to return per page.</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td>string (uri)</td>
+<td>Settings URL</td>
+</tr>
+<tr>
+<td><code>settings_uuid</code></td>
+<td>string (uuid)</td>
+<td>Settings UUID</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<p>The response body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>backend_id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>hypervisor_type</code></td>
+<td>string</td>
+<td>Hypervisor type, e.g. KVM, QEMU, VMware</td>
+</tr>
+<tr>
+<td><code>vcpus</code></td>
+<td>integer</td>
+<td>Total vCPUs</td>
+</tr>
+<tr>
+<td><code>vcpus_used</code></td>
+<td>integer</td>
+<td>Used vCPUs</td>
+</tr>
+<tr>
+<td><code>memory_mb</code></td>
+<td>integer</td>
+<td>Total RAM in MiB</td>
+</tr>
+<tr>
+<td><code>memory_mb_used</code></td>
+<td>integer</td>
+<td>Used RAM in MiB</td>
+</tr>
+<tr>
+<td><code>local_gb</code></td>
+<td>integer</td>
+<td>Total disk in GiB</td>
+</tr>
+<tr>
+<td><code>local_gb_used</code></td>
+<td>integer</td>
+<td>Used disk in GiB</td>
+</tr>
+<tr>
+<td><code>running_vms</code></td>
+<td>integer</td>
+<td>Number of running VMs</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+<td>Hypervisor state, e.g. up or down</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Hypervisor status, e.g. enabled or disabled</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="retrieve_1">Retrieve</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:5"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/openstack-hypervisors/a1b2c3d4-e5f6-7890-abcd-ef1234567890/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_hypervisors</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_hypervisors_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">openstack_hypervisors_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisors/openstack_hypervisors_retrieve.py"><code>openstack_hypervisors_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackHypervisorsRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackHypervisorsRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>backend_id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>hypervisor_type</code></td>
+<td>string</td>
+<td>Hypervisor type, e.g. KVM, QEMU, VMware</td>
+</tr>
+<tr>
+<td><code>vcpus</code></td>
+<td>integer</td>
+<td>Total vCPUs</td>
+</tr>
+<tr>
+<td><code>vcpus_used</code></td>
+<td>integer</td>
+<td>Used vCPUs</td>
+</tr>
+<tr>
+<td><code>memory_mb</code></td>
+<td>integer</td>
+<td>Total RAM in MiB</td>
+</tr>
+<tr>
+<td><code>memory_mb_used</code></td>
+<td>integer</td>
+<td>Used RAM in MiB</td>
+</tr>
+<tr>
+<td><code>local_gb</code></td>
+<td>integer</td>
+<td>Total disk in GiB</td>
+</tr>
+<tr>
+<td><code>local_gb_used</code></td>
+<td>integer</td>
+<td>Used disk in GiB</td>
+</tr>
+<tr>
+<td><code>running_vms</code></td>
+<td>integer</td>
+<td>Number of running VMs</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+<td>Hypervisor state, e.g. up or down</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Hypervisor status, e.g. enabled or disabled</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="get-hypervisor-summary-statistics">Get hypervisor summary statistics</h3>
+<p>Return aggregated vCPU, RAM and disk totals across all hypervisors matching the current filter (e.g. settings_uuid).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:4"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/openstack-hypervisors/summary/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_hypervisors</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_hypervisors_summary_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">openstack_hypervisors_summary_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisors/openstack_hypervisors_summary_retrieve.py"><code>openstack_hypervisors_summary_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openstackHypervisorsSummaryRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openstackHypervisorsSummaryRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>total_vcpus</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>used_vcpus</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>total_memory_mb</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>used_memory_mb</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>total_local_gb</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>used_local_gb</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>total_running_vms</code></td>
+<td>integer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="list-listeners">List listeners</h3>
 <p>Get a list of load balancer listeners.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:5"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Query Parameters</label><label for="__tabbed_5_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:5"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Query Parameters</label><label for="__tabbed_8_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -15524,7 +16099,7 @@
 <hr />
 <h3 id="get-listener-details">Get listener details</h3>
 <p>Retrieve details of a specific listener.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Query Parameters</label><label for="__tabbed_6_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:6"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Query Parameters</label><label for="__tabbed_9_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -15869,7 +16444,7 @@
 <hr />
 <h3 id="list-load-balancers">List load balancers</h3>
 <p>Get a list of load balancers.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:5"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Query Parameters</label><label for="__tabbed_7_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:5"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><input id="__tabbed_10_5" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">HTTPie</label><label for="__tabbed_10_2">Python</label><label for="__tabbed_10_3">TypeScript</label><label for="__tabbed_10_4">Query Parameters</label><label for="__tabbed_10_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -16242,7 +16817,7 @@
 <hr />
 <h3 id="get-load-balancer-details">Get load balancer details</h3>
 <p>Retrieve details of a specific load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:6"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Query Parameters</label><label for="__tabbed_8_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:6"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><input id="__tabbed_11_5" name="__tabbed_11" type="radio" /><input id="__tabbed_11_6" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">HTTPie</label><label for="__tabbed_11_2">Python</label><label for="__tabbed_11_3">TypeScript</label><label for="__tabbed_11_4">Path Parameters</label><label for="__tabbed_11_5">Query Parameters</label><label for="__tabbed_11_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -16602,7 +17177,7 @@
 <hr />
 <h3 id="list-pool-members">List pool members</h3>
 <p>Get a list of pool members.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:5"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Query Parameters</label><label for="__tabbed_9_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:5"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><input id="__tabbed_12_4" name="__tabbed_12" type="radio" /><input id="__tabbed_12_5" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">HTTPie</label><label for="__tabbed_12_2">Python</label><label for="__tabbed_12_3">TypeScript</label><label for="__tabbed_12_4">Query Parameters</label><label for="__tabbed_12_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -16980,7 +17555,7 @@
 <hr />
 <h3 id="get-pool-member-details">Get pool member details</h3>
 <p>Retrieve details of a specific pool member.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:6"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><input id="__tabbed_10_5" name="__tabbed_10" type="radio" /><input id="__tabbed_10_6" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">HTTPie</label><label for="__tabbed_10_2">Python</label><label for="__tabbed_10_3">TypeScript</label><label for="__tabbed_10_4">Path Parameters</label><label for="__tabbed_10_5">Query Parameters</label><label for="__tabbed_10_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:6"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><input id="__tabbed_13_3" name="__tabbed_13" type="radio" /><input id="__tabbed_13_4" name="__tabbed_13" type="radio" /><input id="__tabbed_13_5" name="__tabbed_13" type="radio" /><input id="__tabbed_13_6" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">HTTPie</label><label for="__tabbed_13_2">Python</label><label for="__tabbed_13_3">TypeScript</label><label for="__tabbed_13_4">Path Parameters</label><label for="__tabbed_13_5">Query Parameters</label><label for="__tabbed_13_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17335,7 +17910,7 @@
 <hr />
 <h3 id="list-pools">List pools</h3>
 <p>Get a list of load balancer pools.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:5"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><input id="__tabbed_11_5" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">HTTPie</label><label for="__tabbed_11_2">Python</label><label for="__tabbed_11_3">TypeScript</label><label for="__tabbed_11_4">Query Parameters</label><label for="__tabbed_11_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:5"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><input id="__tabbed_14_3" name="__tabbed_14" type="radio" /><input id="__tabbed_14_4" name="__tabbed_14" type="radio" /><input id="__tabbed_14_5" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">HTTPie</label><label for="__tabbed_14_2">Python</label><label for="__tabbed_14_3">TypeScript</label><label for="__tabbed_14_4">Query Parameters</label><label for="__tabbed_14_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -17693,7 +18268,7 @@
 <hr />
 <h3 id="get-pool-details">Get pool details</h3>
 <p>Retrieve details of a specific pool.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:6"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><input id="__tabbed_12_4" name="__tabbed_12" type="radio" /><input id="__tabbed_12_5" name="__tabbed_12" type="radio" /><input id="__tabbed_12_6" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">HTTPie</label><label for="__tabbed_12_2">Python</label><label for="__tabbed_12_3">TypeScript</label><label for="__tabbed_12_4">Path Parameters</label><label for="__tabbed_12_5">Query Parameters</label><label for="__tabbed_12_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:6"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><input id="__tabbed_15_4" name="__tabbed_15" type="radio" /><input id="__tabbed_15_5" name="__tabbed_15" type="radio" /><input id="__tabbed_15_6" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">HTTPie</label><label for="__tabbed_15_2">Python</label><label for="__tabbed_15_3">TypeScript</label><label for="__tabbed_15_4">Path Parameters</label><label for="__tabbed_15_5">Query Parameters</label><label for="__tabbed_15_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -18032,7 +18607,7 @@
 </div>
 <hr />
 <h3 id="create">Create</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:4"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><input id="__tabbed_13_3" name="__tabbed_13" type="radio" /><input id="__tabbed_13_4" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">HTTPie</label><label for="__tabbed_13_2">Python</label><label for="__tabbed_13_3">TypeScript</label><label for="__tabbed_13_4">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:4"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><input id="__tabbed_16_3" name="__tabbed_16" type="radio" /><input id="__tabbed_16_4" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">HTTPie</label><label for="__tabbed_16_2">Python</label><label for="__tabbed_16_3">TypeScript</label><label for="__tabbed_16_4">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -18097,7 +18672,7 @@
 <hr />
 <h3 id="discover-available-external-networks">Discover available external networks</h3>
 <p>Discover available external networks.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:6"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><input id="__tabbed_14_3" name="__tabbed_14" type="radio" /><input id="__tabbed_14_4" name="__tabbed_14" type="radio" /><input id="__tabbed_14_5" name="__tabbed_14" type="radio" /><input id="__tabbed_14_6" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">HTTPie</label><label for="__tabbed_14_2">Python</label><label for="__tabbed_14_3">TypeScript</label><label for="__tabbed_14_4">Query Parameters</label><label for="__tabbed_14_5">Request Body (required)</label><label for="__tabbed_14_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:6"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><input id="__tabbed_17_4" name="__tabbed_17" type="radio" /><input id="__tabbed_17_5" name="__tabbed_17" type="radio" /><input id="__tabbed_17_6" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HTTPie</label><label for="__tabbed_17_2">Python</label><label for="__tabbed_17_3">TypeScript</label><label for="__tabbed_17_4">Query Parameters</label><label for="__tabbed_17_5">Request Body (required)</label><label for="__tabbed_17_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -18339,7 +18914,7 @@
 <hr />
 <h3 id="discover-available-flavors">Discover available flavors</h3>
 <p>Discover available flavors.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:6"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><input id="__tabbed_15_4" name="__tabbed_15" type="radio" /><input id="__tabbed_15_5" name="__tabbed_15" type="radio" /><input id="__tabbed_15_6" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">HTTPie</label><label for="__tabbed_15_2">Python</label><label for="__tabbed_15_3">TypeScript</label><label for="__tabbed_15_4">Query Parameters</label><label for="__tabbed_15_5">Request Body (required)</label><label for="__tabbed_15_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:6"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><input id="__tabbed_18_4" name="__tabbed_18" type="radio" /><input id="__tabbed_18_5" name="__tabbed_18" type="radio" /><input id="__tabbed_18_6" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HTTPie</label><label for="__tabbed_18_2">Python</label><label for="__tabbed_18_3">TypeScript</label><label for="__tabbed_18_4">Query Parameters</label><label for="__tabbed_18_5">Request Body (required)</label><label for="__tabbed_18_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -18571,7 +19146,7 @@
 <hr />
 <h3 id="discover-available-nova-instance-availability-zones">Discover available Nova instance availability zones</h3>
 <p>Discover available Nova instance availability zones.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:6"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><input id="__tabbed_16_3" name="__tabbed_16" type="radio" /><input id="__tabbed_16_4" name="__tabbed_16" type="radio" /><input id="__tabbed_16_5" name="__tabbed_16" type="radio" /><input id="__tabbed_16_6" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">HTTPie</label><label for="__tabbed_16_2">Python</label><label for="__tabbed_16_3">TypeScript</label><label for="__tabbed_16_4">Query Parameters</label><label for="__tabbed_16_5">Request Body (required)</label><label for="__tabbed_16_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:6"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><input id="__tabbed_19_6" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Query Parameters</label><label for="__tabbed_19_5">Request Body (required)</label><label for="__tabbed_19_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -18785,7 +19360,7 @@
 <hr />
 <h3 id="discover-available-cinder-volume-availability-zones">Discover available Cinder volume availability zones</h3>
 <p>Discover available Cinder volume availability zones.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:6"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><input id="__tabbed_17_4" name="__tabbed_17" type="radio" /><input id="__tabbed_17_5" name="__tabbed_17" type="radio" /><input id="__tabbed_17_6" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HTTPie</label><label for="__tabbed_17_2">Python</label><label for="__tabbed_17_3">TypeScript</label><label for="__tabbed_17_4">Query Parameters</label><label for="__tabbed_17_5">Request Body (required)</label><label for="__tabbed_17_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:6"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><input id="__tabbed_20_6" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Query Parameters</label><label for="__tabbed_20_5">Request Body (required)</label><label for="__tabbed_20_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -18999,7 +19574,7 @@
 <hr />
 <h3 id="discover-available-volume-types">Discover available volume types</h3>
 <p>Discover available volume types.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:6"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><input id="__tabbed_18_4" name="__tabbed_18" type="radio" /><input id="__tabbed_18_5" name="__tabbed_18" type="radio" /><input id="__tabbed_18_6" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HTTPie</label><label for="__tabbed_18_2">Python</label><label for="__tabbed_18_3">TypeScript</label><label for="__tabbed_18_4">Query Parameters</label><label for="__tabbed_18_5">Request Body (required)</label><label for="__tabbed_18_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:6"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Query Parameters</label><label for="__tabbed_21_5">Request Body (required)</label><label for="__tabbed_21_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19217,7 +19792,7 @@
 <hr />
 <h3 id="build-service_attributes-and-plugin_options-from-selected-values">Build service_attributes and plugin_options from selected values</h3>
 <p>Build service_attributes and plugin_options from selected values.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:5"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Request Body (required)</label><label for="__tabbed_19_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:5"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Request Body (required)</label><label for="__tabbed_22_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19423,7 +19998,7 @@
 <hr />
 <h3 id="validate-openstack-credentials-without-saving-them">Validate OpenStack credentials without saving them</h3>
 <p>Validate OpenStack credentials without saving them.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:5"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Request Body (required)</label><label for="__tabbed_20_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:5"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Request Body (required)</label><label for="__tabbed_23_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19619,7 +20194,7 @@
 <hr />
 <h3 id="create-health-monitor">Create health monitor</h3>
 <p>Create a new health monitor for a pool.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:5"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Request Body (required)</label><label for="__tabbed_21_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:5"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Request Body (required)</label><label for="__tabbed_24_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19827,7 +20402,7 @@
 <hr />
 <h3 id="pull-health-monitor">Pull health monitor</h3>
 <p>Synchronize health monitor state from the OpenStack backend. Also pulls the associated pool and load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:5"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Path Parameters</label><label for="__tabbed_22_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:5"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19922,7 +20497,7 @@
 <hr />
 <h3 id="create-listener">Create listener</h3>
 <p>Create a new listener for a load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="23:5"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Request Body (required)</label><label for="__tabbed_23_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:5"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Request Body (required)</label><label for="__tabbed_26_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20114,7 +20689,7 @@
 <hr />
 <h3 id="pull-listener">Pull listener</h3>
 <p>Synchronize listener state from the OpenStack backend. Also pulls pools of the load balancer and the load balancer itself.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="24:5"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Path Parameters</label><label for="__tabbed_24_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="27:5"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><input id="__tabbed_27_2" name="__tabbed_27" type="radio" /><input id="__tabbed_27_3" name="__tabbed_27" type="radio" /><input id="__tabbed_27_4" name="__tabbed_27" type="radio" /><input id="__tabbed_27_5" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">HTTPie</label><label for="__tabbed_27_2">Python</label><label for="__tabbed_27_3">TypeScript</label><label for="__tabbed_27_4">Path Parameters</label><label for="__tabbed_27_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20209,7 +20784,7 @@
 <hr />
 <h3 id="attach-floating-ip-to-vip">Attach floating IP to VIP</h3>
 <p>Attach a floating IP to the load balancer VIP port.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="25:6"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><input id="__tabbed_25_6" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Request Body (required)</label><label for="__tabbed_25_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="28:6"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><input id="__tabbed_28_2" name="__tabbed_28" type="radio" /><input id="__tabbed_28_3" name="__tabbed_28" type="radio" /><input id="__tabbed_28_4" name="__tabbed_28" type="radio" /><input id="__tabbed_28_5" name="__tabbed_28" type="radio" /><input id="__tabbed_28_6" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">HTTPie</label><label for="__tabbed_28_2">Python</label><label for="__tabbed_28_3">TypeScript</label><label for="__tabbed_28_4">Path Parameters</label><label for="__tabbed_28_5">Request Body (required)</label><label for="__tabbed_28_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20359,7 +20934,7 @@
 <hr />
 <h3 id="create-load-balancer">Create load balancer</h3>
 <p>Create a new load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="26:5"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Request Body (required)</label><label for="__tabbed_26_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="29:5"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Request Body (required)</label><label for="__tabbed_29_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20529,7 +21104,7 @@
 <hr />
 <h3 id="detach-floating-ip-from-vip">Detach floating IP from VIP</h3>
 <p>Detach floating IP from the load balancer VIP port.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="27:5"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><input id="__tabbed_27_2" name="__tabbed_27" type="radio" /><input id="__tabbed_27_3" name="__tabbed_27" type="radio" /><input id="__tabbed_27_4" name="__tabbed_27" type="radio" /><input id="__tabbed_27_5" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">HTTPie</label><label for="__tabbed_27_2">Python</label><label for="__tabbed_27_3">TypeScript</label><label for="__tabbed_27_4">Path Parameters</label><label for="__tabbed_27_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="30:5"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><input id="__tabbed_30_2" name="__tabbed_30" type="radio" /><input id="__tabbed_30_3" name="__tabbed_30" type="radio" /><input id="__tabbed_30_4" name="__tabbed_30" type="radio" /><input id="__tabbed_30_5" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">HTTPie</label><label for="__tabbed_30_2">Python</label><label for="__tabbed_30_3">TypeScript</label><label for="__tabbed_30_4">Path Parameters</label><label for="__tabbed_30_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20640,7 +21215,7 @@
 <hr />
 <h3 id="pull-load-balancer">Pull load balancer</h3>
 <p>Synchronize load balancer state from the OpenStack backend.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="28:5"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><input id="__tabbed_28_2" name="__tabbed_28" type="radio" /><input id="__tabbed_28_3" name="__tabbed_28" type="radio" /><input id="__tabbed_28_4" name="__tabbed_28" type="radio" /><input id="__tabbed_28_5" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">HTTPie</label><label for="__tabbed_28_2">Python</label><label for="__tabbed_28_3">TypeScript</label><label for="__tabbed_28_4">Path Parameters</label><label for="__tabbed_28_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="31:5"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><input id="__tabbed_31_2" name="__tabbed_31" type="radio" /><input id="__tabbed_31_3" name="__tabbed_31" type="radio" /><input id="__tabbed_31_4" name="__tabbed_31" type="radio" /><input id="__tabbed_31_5" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">HTTPie</label><label for="__tabbed_31_2">Python</label><label for="__tabbed_31_3">TypeScript</label><label for="__tabbed_31_4">Path Parameters</label><label for="__tabbed_31_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20735,7 +21310,7 @@
 <hr />
 <h3 id="set-security-groups-on-vip-port">Set security groups on VIP port</h3>
 <p>Set security groups on the load balancer VIP port to control access.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="29:6"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><input id="__tabbed_29_6" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Path Parameters</label><label for="__tabbed_29_5">Request Body (required)</label><label for="__tabbed_29_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="32:6"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><input id="__tabbed_32_6" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Request Body (required)</label><label for="__tabbed_32_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20893,7 +21468,7 @@
 <hr />
 <h3 id="unlink-load-balancer">Unlink load balancer</h3>
 <p>Delete the load balancer from the Waldur database without scheduling operations on the OpenStack backend and without checking resource state. Staff-only; intended for cleaning up records stuck in transitional states.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="30:5"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><input id="__tabbed_30_2" name="__tabbed_30" type="radio" /><input id="__tabbed_30_3" name="__tabbed_30" type="radio" /><input id="__tabbed_30_4" name="__tabbed_30" type="radio" /><input id="__tabbed_30_5" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">HTTPie</label><label for="__tabbed_30_2">Python</label><label for="__tabbed_30_3">TypeScript</label><label for="__tabbed_30_4">Path Parameters</label><label for="__tabbed_30_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="33:5"><input checked="checked" id="__tabbed_33_1" name="__tabbed_33" type="radio" /><input id="__tabbed_33_2" name="__tabbed_33" type="radio" /><input id="__tabbed_33_3" name="__tabbed_33" type="radio" /><input id="__tabbed_33_4" name="__tabbed_33" type="radio" /><input id="__tabbed_33_5" name="__tabbed_33" type="radio" /><div class="tabbed-labels"><label for="__tabbed_33_1">HTTPie</label><label for="__tabbed_33_2">Python</label><label for="__tabbed_33_3">TypeScript</label><label for="__tabbed_33_4">Path Parameters</label><label for="__tabbed_33_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20988,7 +21563,7 @@
 <hr />
 <h3 id="create-pool-member">Create pool member</h3>
 <p>Create a new member for a pool.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="31:5"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><input id="__tabbed_31_2" name="__tabbed_31" type="radio" /><input id="__tabbed_31_3" name="__tabbed_31" type="radio" /><input id="__tabbed_31_4" name="__tabbed_31" type="radio" /><input id="__tabbed_31_5" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">HTTPie</label><label for="__tabbed_31_2">Python</label><label for="__tabbed_31_3">TypeScript</label><label for="__tabbed_31_4">Request Body (required)</label><label for="__tabbed_31_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="34:5"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><input id="__tabbed_34_2" name="__tabbed_34" type="radio" /><input id="__tabbed_34_3" name="__tabbed_34" type="radio" /><input id="__tabbed_34_4" name="__tabbed_34" type="radio" /><input id="__tabbed_34_5" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">HTTPie</label><label for="__tabbed_34_2">Python</label><label for="__tabbed_34_3">TypeScript</label><label for="__tabbed_34_4">Request Body (required)</label><label for="__tabbed_34_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21197,7 +21772,7 @@
 <hr />
 <h3 id="pull-pool-member">Pull pool member</h3>
 <p>Synchronize pool member state from the OpenStack backend. Also pulls the associated pool and load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="32:5"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="35:5"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><input id="__tabbed_35_2" name="__tabbed_35" type="radio" /><input id="__tabbed_35_3" name="__tabbed_35" type="radio" /><input id="__tabbed_35_4" name="__tabbed_35" type="radio" /><input id="__tabbed_35_5" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">HTTPie</label><label for="__tabbed_35_2">Python</label><label for="__tabbed_35_3">TypeScript</label><label for="__tabbed_35_4">Path Parameters</label><label for="__tabbed_35_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21292,7 +21867,7 @@
 <hr />
 <h3 id="create-pool">Create pool</h3>
 <p>Create a new pool for a load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="33:5"><input checked="checked" id="__tabbed_33_1" name="__tabbed_33" type="radio" /><input id="__tabbed_33_2" name="__tabbed_33" type="radio" /><input id="__tabbed_33_3" name="__tabbed_33" type="radio" /><input id="__tabbed_33_4" name="__tabbed_33" type="radio" /><input id="__tabbed_33_5" name="__tabbed_33" type="radio" /><div class="tabbed-labels"><label for="__tabbed_33_1">HTTPie</label><label for="__tabbed_33_2">Python</label><label for="__tabbed_33_3">TypeScript</label><label for="__tabbed_33_4">Request Body (required)</label><label for="__tabbed_33_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="36:5"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><input id="__tabbed_36_2" name="__tabbed_36" type="radio" /><input id="__tabbed_36_3" name="__tabbed_36" type="radio" /><input id="__tabbed_36_4" name="__tabbed_36" type="radio" /><input id="__tabbed_36_5" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">HTTPie</label><label for="__tabbed_36_2">Python</label><label for="__tabbed_36_3">TypeScript</label><label for="__tabbed_36_4">Request Body (required)</label><label for="__tabbed_36_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21473,7 +22048,7 @@
 <hr />
 <h3 id="pull-pool">Pull pool</h3>
 <p>Synchronize pool state from the OpenStack backend. Also pulls the associated load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="34:5"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><input id="__tabbed_34_2" name="__tabbed_34" type="radio" /><input id="__tabbed_34_3" name="__tabbed_34" type="radio" /><input id="__tabbed_34_4" name="__tabbed_34" type="radio" /><input id="__tabbed_34_5" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">HTTPie</label><label for="__tabbed_34_2">Python</label><label for="__tabbed_34_3">TypeScript</label><label for="__tabbed_34_4">Path Parameters</label><label for="__tabbed_34_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="37:5"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><input id="__tabbed_37_2" name="__tabbed_37" type="radio" /><input id="__tabbed_37_3" name="__tabbed_37" type="radio" /><input id="__tabbed_37_4" name="__tabbed_37" type="radio" /><input id="__tabbed_37_5" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">HTTPie</label><label for="__tabbed_37_2">Python</label><label for="__tabbed_37_3">TypeScript</label><label for="__tabbed_37_4">Path Parameters</label><label for="__tabbed_37_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21567,7 +22142,7 @@
 </div>
 <hr />
 <h3 id="update">Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="35:5"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><input id="__tabbed_35_2" name="__tabbed_35" type="radio" /><input id="__tabbed_35_3" name="__tabbed_35" type="radio" /><input id="__tabbed_35_4" name="__tabbed_35" type="radio" /><input id="__tabbed_35_5" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">HTTPie</label><label for="__tabbed_35_2">Python</label><label for="__tabbed_35_3">TypeScript</label><label for="__tabbed_35_4">Path Parameters</label><label for="__tabbed_35_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="38:5"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><input id="__tabbed_38_2" name="__tabbed_38" type="radio" /><input id="__tabbed_38_3" name="__tabbed_38" type="radio" /><input id="__tabbed_38_4" name="__tabbed_38" type="radio" /><input id="__tabbed_38_5" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">HTTPie</label><label for="__tabbed_38_2">Python</label><label for="__tabbed_38_3">TypeScript</label><label for="__tabbed_38_4">Path Parameters</label><label for="__tabbed_38_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21664,7 +22239,7 @@
 <hr />
 <h3 id="update-health-monitor">Update health monitor</h3>
 <p>Update an existing health monitor.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="36:6"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><input id="__tabbed_36_2" name="__tabbed_36" type="radio" /><input id="__tabbed_36_3" name="__tabbed_36" type="radio" /><input id="__tabbed_36_4" name="__tabbed_36" type="radio" /><input id="__tabbed_36_5" name="__tabbed_36" type="radio" /><input id="__tabbed_36_6" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">HTTPie</label><label for="__tabbed_36_2">Python</label><label for="__tabbed_36_3">TypeScript</label><label for="__tabbed_36_4">Path Parameters</label><label for="__tabbed_36_5">Request Body</label><label for="__tabbed_36_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="39:6"><input checked="checked" id="__tabbed_39_1" name="__tabbed_39" type="radio" /><input id="__tabbed_39_2" name="__tabbed_39" type="radio" /><input id="__tabbed_39_3" name="__tabbed_39" type="radio" /><input id="__tabbed_39_4" name="__tabbed_39" type="radio" /><input id="__tabbed_39_5" name="__tabbed_39" type="radio" /><input id="__tabbed_39_6" name="__tabbed_39" type="radio" /><div class="tabbed-labels"><label for="__tabbed_39_1">HTTPie</label><label for="__tabbed_39_2">Python</label><label for="__tabbed_39_3">TypeScript</label><label for="__tabbed_39_4">Path Parameters</label><label for="__tabbed_39_5">Request Body</label><label for="__tabbed_39_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21858,7 +22433,7 @@
 <hr />
 <h3 id="update-listener">Update listener</h3>
 <p>Update an existing listener.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="37:6"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><input id="__tabbed_37_2" name="__tabbed_37" type="radio" /><input id="__tabbed_37_3" name="__tabbed_37" type="radio" /><input id="__tabbed_37_4" name="__tabbed_37" type="radio" /><input id="__tabbed_37_5" name="__tabbed_37" type="radio" /><input id="__tabbed_37_6" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">HTTPie</label><label for="__tabbed_37_2">Python</label><label for="__tabbed_37_3">TypeScript</label><label for="__tabbed_37_4">Path Parameters</label><label for="__tabbed_37_5">Request Body</label><label for="__tabbed_37_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="40:6"><input checked="checked" id="__tabbed_40_1" name="__tabbed_40" type="radio" /><input id="__tabbed_40_2" name="__tabbed_40" type="radio" /><input id="__tabbed_40_3" name="__tabbed_40" type="radio" /><input id="__tabbed_40_4" name="__tabbed_40" type="radio" /><input id="__tabbed_40_5" name="__tabbed_40" type="radio" /><input id="__tabbed_40_6" name="__tabbed_40" type="radio" /><div class="tabbed-labels"><label for="__tabbed_40_1">HTTPie</label><label for="__tabbed_40_2">Python</label><label for="__tabbed_40_3">TypeScript</label><label for="__tabbed_40_4">Path Parameters</label><label for="__tabbed_40_5">Request Body</label><label for="__tabbed_40_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22003,7 +22578,7 @@
 <hr />
 <h3 id="update-load-balancer">Update load balancer</h3>
 <p>Update an existing load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="38:6"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><input id="__tabbed_38_2" name="__tabbed_38" type="radio" /><input id="__tabbed_38_3" name="__tabbed_38" type="radio" /><input id="__tabbed_38_4" name="__tabbed_38" type="radio" /><input id="__tabbed_38_5" name="__tabbed_38" type="radio" /><input id="__tabbed_38_6" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">HTTPie</label><label for="__tabbed_38_2">Python</label><label for="__tabbed_38_3">TypeScript</label><label for="__tabbed_38_4">Path Parameters</label><label for="__tabbed_38_5">Request Body (required)</label><label for="__tabbed_38_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="41:6"><input checked="checked" id="__tabbed_41_1" name="__tabbed_41" type="radio" /><input id="__tabbed_41_2" name="__tabbed_41" type="radio" /><input id="__tabbed_41_3" name="__tabbed_41" type="radio" /><input id="__tabbed_41_4" name="__tabbed_41" type="radio" /><input id="__tabbed_41_5" name="__tabbed_41" type="radio" /><input id="__tabbed_41_6" name="__tabbed_41" type="radio" /><div class="tabbed-labels"><label for="__tabbed_41_1">HTTPie</label><label for="__tabbed_41_2">Python</label><label for="__tabbed_41_3">TypeScript</label><label for="__tabbed_41_4">Path Parameters</label><label for="__tabbed_41_5">Request Body (required)</label><label for="__tabbed_41_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22159,7 +22734,7 @@
 <hr />
 <h3 id="update-pool-member">Update pool member</h3>
 <p>Update an existing pool member.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="39:6"><input checked="checked" id="__tabbed_39_1" name="__tabbed_39" type="radio" /><input id="__tabbed_39_2" name="__tabbed_39" type="radio" /><input id="__tabbed_39_3" name="__tabbed_39" type="radio" /><input id="__tabbed_39_4" name="__tabbed_39" type="radio" /><input id="__tabbed_39_5" name="__tabbed_39" type="radio" /><input id="__tabbed_39_6" name="__tabbed_39" type="radio" /><div class="tabbed-labels"><label for="__tabbed_39_1">HTTPie</label><label for="__tabbed_39_2">Python</label><label for="__tabbed_39_3">TypeScript</label><label for="__tabbed_39_4">Path Parameters</label><label for="__tabbed_39_5">Request Body</label><label for="__tabbed_39_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="42:6"><input checked="checked" id="__tabbed_42_1" name="__tabbed_42" type="radio" /><input id="__tabbed_42_2" name="__tabbed_42" type="radio" /><input id="__tabbed_42_3" name="__tabbed_42" type="radio" /><input id="__tabbed_42_4" name="__tabbed_42" type="radio" /><input id="__tabbed_42_5" name="__tabbed_42" type="radio" /><input id="__tabbed_42_6" name="__tabbed_42" type="radio" /><div class="tabbed-labels"><label for="__tabbed_42_1">HTTPie</label><label for="__tabbed_42_2">Python</label><label for="__tabbed_42_3">TypeScript</label><label for="__tabbed_42_4">Path Parameters</label><label for="__tabbed_42_5">Request Body</label><label for="__tabbed_42_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22312,7 +22887,7 @@
 <hr />
 <h3 id="update-pool">Update pool</h3>
 <p>Update an existing pool.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="40:6"><input checked="checked" id="__tabbed_40_1" name="__tabbed_40" type="radio" /><input id="__tabbed_40_2" name="__tabbed_40" type="radio" /><input id="__tabbed_40_3" name="__tabbed_40" type="radio" /><input id="__tabbed_40_4" name="__tabbed_40" type="radio" /><input id="__tabbed_40_5" name="__tabbed_40" type="radio" /><input id="__tabbed_40_6" name="__tabbed_40" type="radio" /><div class="tabbed-labels"><label for="__tabbed_40_1">HTTPie</label><label for="__tabbed_40_2">Python</label><label for="__tabbed_40_3">TypeScript</label><label for="__tabbed_40_4">Path Parameters</label><label for="__tabbed_40_5">Request Body (required)</label><label for="__tabbed_40_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="43:6"><input checked="checked" id="__tabbed_43_1" name="__tabbed_43" type="radio" /><input id="__tabbed_43_2" name="__tabbed_43" type="radio" /><input id="__tabbed_43_3" name="__tabbed_43" type="radio" /><input id="__tabbed_43_4" name="__tabbed_43" type="radio" /><input id="__tabbed_43_5" name="__tabbed_43" type="radio" /><input id="__tabbed_43_6" name="__tabbed_43" type="radio" /><div class="tabbed-labels"><label for="__tabbed_43_1">HTTPie</label><label for="__tabbed_43_2">Python</label><label for="__tabbed_43_3">TypeScript</label><label for="__tabbed_43_4">Path Parameters</label><label for="__tabbed_43_5">Request Body (required)</label><label for="__tabbed_43_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22467,7 +23042,7 @@
 </div>
 <hr />
 <h3 id="partial-update">Partial Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="41:5"><input checked="checked" id="__tabbed_41_1" name="__tabbed_41" type="radio" /><input id="__tabbed_41_2" name="__tabbed_41" type="radio" /><input id="__tabbed_41_3" name="__tabbed_41" type="radio" /><input id="__tabbed_41_4" name="__tabbed_41" type="radio" /><input id="__tabbed_41_5" name="__tabbed_41" type="radio" /><div class="tabbed-labels"><label for="__tabbed_41_1">HTTPie</label><label for="__tabbed_41_2">Python</label><label for="__tabbed_41_3">TypeScript</label><label for="__tabbed_41_4">Path Parameters</label><label for="__tabbed_41_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="44:5"><input checked="checked" id="__tabbed_44_1" name="__tabbed_44" type="radio" /><input id="__tabbed_44_2" name="__tabbed_44" type="radio" /><input id="__tabbed_44_3" name="__tabbed_44" type="radio" /><input id="__tabbed_44_4" name="__tabbed_44" type="radio" /><input id="__tabbed_44_5" name="__tabbed_44" type="radio" /><div class="tabbed-labels"><label for="__tabbed_44_1">HTTPie</label><label for="__tabbed_44_2">Python</label><label for="__tabbed_44_3">TypeScript</label><label for="__tabbed_44_4">Path Parameters</label><label for="__tabbed_44_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22564,7 +23139,7 @@
 <hr />
 <h3 id="partially-update-health-monitor">Partially update health monitor</h3>
 <p>Update specific fields of a health monitor.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="42:6"><input checked="checked" id="__tabbed_42_1" name="__tabbed_42" type="radio" /><input id="__tabbed_42_2" name="__tabbed_42" type="radio" /><input id="__tabbed_42_3" name="__tabbed_42" type="radio" /><input id="__tabbed_42_4" name="__tabbed_42" type="radio" /><input id="__tabbed_42_5" name="__tabbed_42" type="radio" /><input id="__tabbed_42_6" name="__tabbed_42" type="radio" /><div class="tabbed-labels"><label for="__tabbed_42_1">HTTPie</label><label for="__tabbed_42_2">Python</label><label for="__tabbed_42_3">TypeScript</label><label for="__tabbed_42_4">Path Parameters</label><label for="__tabbed_42_5">Request Body</label><label for="__tabbed_42_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="45:6"><input checked="checked" id="__tabbed_45_1" name="__tabbed_45" type="radio" /><input id="__tabbed_45_2" name="__tabbed_45" type="radio" /><input id="__tabbed_45_3" name="__tabbed_45" type="radio" /><input id="__tabbed_45_4" name="__tabbed_45" type="radio" /><input id="__tabbed_45_5" name="__tabbed_45" type="radio" /><input id="__tabbed_45_6" name="__tabbed_45" type="radio" /><div class="tabbed-labels"><label for="__tabbed_45_1">HTTPie</label><label for="__tabbed_45_2">Python</label><label for="__tabbed_45_3">TypeScript</label><label for="__tabbed_45_4">Path Parameters</label><label for="__tabbed_45_5">Request Body</label><label for="__tabbed_45_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22758,7 +23333,7 @@
 <hr />
 <h3 id="partially-update-listener">Partially update listener</h3>
 <p>Update specific fields of a listener.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="43:6"><input checked="checked" id="__tabbed_43_1" name="__tabbed_43" type="radio" /><input id="__tabbed_43_2" name="__tabbed_43" type="radio" /><input id="__tabbed_43_3" name="__tabbed_43" type="radio" /><input id="__tabbed_43_4" name="__tabbed_43" type="radio" /><input id="__tabbed_43_5" name="__tabbed_43" type="radio" /><input id="__tabbed_43_6" name="__tabbed_43" type="radio" /><div class="tabbed-labels"><label for="__tabbed_43_1">HTTPie</label><label for="__tabbed_43_2">Python</label><label for="__tabbed_43_3">TypeScript</label><label for="__tabbed_43_4">Path Parameters</label><label for="__tabbed_43_5">Request Body</label><label for="__tabbed_43_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="46:6"><input checked="checked" id="__tabbed_46_1" name="__tabbed_46" type="radio" /><input id="__tabbed_46_2" name="__tabbed_46" type="radio" /><input id="__tabbed_46_3" name="__tabbed_46" type="radio" /><input id="__tabbed_46_4" name="__tabbed_46" type="radio" /><input id="__tabbed_46_5" name="__tabbed_46" type="radio" /><input id="__tabbed_46_6" name="__tabbed_46" type="radio" /><div class="tabbed-labels"><label for="__tabbed_46_1">HTTPie</label><label for="__tabbed_46_2">Python</label><label for="__tabbed_46_3">TypeScript</label><label for="__tabbed_46_4">Path Parameters</label><label for="__tabbed_46_5">Request Body</label><label for="__tabbed_46_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22903,7 +23478,7 @@
 <hr />
 <h3 id="partially-update-load-balancer">Partially update load balancer</h3>
 <p>Update specific fields of a load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="44:6"><input checked="checked" id="__tabbed_44_1" name="__tabbed_44" type="radio" /><input id="__tabbed_44_2" name="__tabbed_44" type="radio" /><input id="__tabbed_44_3" name="__tabbed_44" type="radio" /><input id="__tabbed_44_4" name="__tabbed_44" type="radio" /><input id="__tabbed_44_5" name="__tabbed_44" type="radio" /><input id="__tabbed_44_6" name="__tabbed_44" type="radio" /><div class="tabbed-labels"><label for="__tabbed_44_1">HTTPie</label><label for="__tabbed_44_2">Python</label><label for="__tabbed_44_3">TypeScript</label><label for="__tabbed_44_4">Path Parameters</label><label for="__tabbed_44_5">Request Body</label><label for="__tabbed_44_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="47:6"><input checked="checked" id="__tabbed_47_1" name="__tabbed_47" type="radio" /><input id="__tabbed_47_2" name="__tabbed_47" type="radio" /><input id="__tabbed_47_3" name="__tabbed_47" type="radio" /><input id="__tabbed_47_4" name="__tabbed_47" type="radio" /><input id="__tabbed_47_5" name="__tabbed_47" type="radio" /><input id="__tabbed_47_6" name="__tabbed_47" type="radio" /><div class="tabbed-labels"><label for="__tabbed_47_1">HTTPie</label><label for="__tabbed_47_2">Python</label><label for="__tabbed_47_3">TypeScript</label><label for="__tabbed_47_4">Path Parameters</label><label for="__tabbed_47_5">Request Body</label><label for="__tabbed_47_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23047,7 +23622,7 @@
 <hr />
 <h3 id="partially-update-pool-member">Partially update pool member</h3>
 <p>Update specific fields of a pool member.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="45:6"><input checked="checked" id="__tabbed_45_1" name="__tabbed_45" type="radio" /><input id="__tabbed_45_2" name="__tabbed_45" type="radio" /><input id="__tabbed_45_3" name="__tabbed_45" type="radio" /><input id="__tabbed_45_4" name="__tabbed_45" type="radio" /><input id="__tabbed_45_5" name="__tabbed_45" type="radio" /><input id="__tabbed_45_6" name="__tabbed_45" type="radio" /><div class="tabbed-labels"><label for="__tabbed_45_1">HTTPie</label><label for="__tabbed_45_2">Python</label><label for="__tabbed_45_3">TypeScript</label><label for="__tabbed_45_4">Path Parameters</label><label for="__tabbed_45_5">Request Body</label><label for="__tabbed_45_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="48:6"><input checked="checked" id="__tabbed_48_1" name="__tabbed_48" type="radio" /><input id="__tabbed_48_2" name="__tabbed_48" type="radio" /><input id="__tabbed_48_3" name="__tabbed_48" type="radio" /><input id="__tabbed_48_4" name="__tabbed_48" type="radio" /><input id="__tabbed_48_5" name="__tabbed_48" type="radio" /><input id="__tabbed_48_6" name="__tabbed_48" type="radio" /><div class="tabbed-labels"><label for="__tabbed_48_1">HTTPie</label><label for="__tabbed_48_2">Python</label><label for="__tabbed_48_3">TypeScript</label><label for="__tabbed_48_4">Path Parameters</label><label for="__tabbed_48_5">Request Body</label><label for="__tabbed_48_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23200,7 +23775,7 @@
 <hr />
 <h3 id="partially-update-pool">Partially update pool</h3>
 <p>Update specific fields of a pool.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="46:6"><input checked="checked" id="__tabbed_46_1" name="__tabbed_46" type="radio" /><input id="__tabbed_46_2" name="__tabbed_46" type="radio" /><input id="__tabbed_46_3" name="__tabbed_46" type="radio" /><input id="__tabbed_46_4" name="__tabbed_46" type="radio" /><input id="__tabbed_46_5" name="__tabbed_46" type="radio" /><input id="__tabbed_46_6" name="__tabbed_46" type="radio" /><div class="tabbed-labels"><label for="__tabbed_46_1">HTTPie</label><label for="__tabbed_46_2">Python</label><label for="__tabbed_46_3">TypeScript</label><label for="__tabbed_46_4">Path Parameters</label><label for="__tabbed_46_5">Request Body</label><label for="__tabbed_46_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="49:6"><input checked="checked" id="__tabbed_49_1" name="__tabbed_49" type="radio" /><input id="__tabbed_49_2" name="__tabbed_49" type="radio" /><input id="__tabbed_49_3" name="__tabbed_49" type="radio" /><input id="__tabbed_49_4" name="__tabbed_49" type="radio" /><input id="__tabbed_49_5" name="__tabbed_49" type="radio" /><input id="__tabbed_49_6" name="__tabbed_49" type="radio" /><div class="tabbed-labels"><label for="__tabbed_49_1">HTTPie</label><label for="__tabbed_49_2">Python</label><label for="__tabbed_49_3">TypeScript</label><label for="__tabbed_49_4">Path Parameters</label><label for="__tabbed_49_5">Request Body</label><label for="__tabbed_49_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23343,7 +23918,7 @@
 </div>
 <hr />
 <h3 id="delete">Delete</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="47:5"><input checked="checked" id="__tabbed_47_1" name="__tabbed_47" type="radio" /><input id="__tabbed_47_2" name="__tabbed_47" type="radio" /><input id="__tabbed_47_3" name="__tabbed_47" type="radio" /><input id="__tabbed_47_4" name="__tabbed_47" type="radio" /><input id="__tabbed_47_5" name="__tabbed_47" type="radio" /><div class="tabbed-labels"><label for="__tabbed_47_1">HTTPie</label><label for="__tabbed_47_2">Python</label><label for="__tabbed_47_3">TypeScript</label><label for="__tabbed_47_4">Path Parameters</label><label for="__tabbed_47_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="50:5"><input checked="checked" id="__tabbed_50_1" name="__tabbed_50" type="radio" /><input id="__tabbed_50_2" name="__tabbed_50" type="radio" /><input id="__tabbed_50_3" name="__tabbed_50" type="radio" /><input id="__tabbed_50_4" name="__tabbed_50" type="radio" /><input id="__tabbed_50_5" name="__tabbed_50" type="radio" /><div class="tabbed-labels"><label for="__tabbed_50_1">HTTPie</label><label for="__tabbed_50_2">Python</label><label for="__tabbed_50_3">TypeScript</label><label for="__tabbed_50_4">Path Parameters</label><label for="__tabbed_50_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23440,7 +24015,7 @@
 <hr />
 <h3 id="delete-health-monitor">Delete health monitor</h3>
 <p>Delete a health monitor.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="48:5"><input checked="checked" id="__tabbed_48_1" name="__tabbed_48" type="radio" /><input id="__tabbed_48_2" name="__tabbed_48" type="radio" /><input id="__tabbed_48_3" name="__tabbed_48" type="radio" /><input id="__tabbed_48_4" name="__tabbed_48" type="radio" /><input id="__tabbed_48_5" name="__tabbed_48" type="radio" /><div class="tabbed-labels"><label for="__tabbed_48_1">HTTPie</label><label for="__tabbed_48_2">Python</label><label for="__tabbed_48_3">TypeScript</label><label for="__tabbed_48_4">Path Parameters</label><label for="__tabbed_48_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="51:5"><input checked="checked" id="__tabbed_51_1" name="__tabbed_51" type="radio" /><input id="__tabbed_51_2" name="__tabbed_51" type="radio" /><input id="__tabbed_51_3" name="__tabbed_51" type="radio" /><input id="__tabbed_51_4" name="__tabbed_51" type="radio" /><input id="__tabbed_51_5" name="__tabbed_51" type="radio" /><div class="tabbed-labels"><label for="__tabbed_51_1">HTTPie</label><label for="__tabbed_51_2">Python</label><label for="__tabbed_51_3">TypeScript</label><label for="__tabbed_51_4">Path Parameters</label><label for="__tabbed_51_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23535,7 +24110,7 @@
 <hr />
 <h3 id="delete-listener">Delete listener</h3>
 <p>Delete a listener.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="49:5"><input checked="checked" id="__tabbed_49_1" name="__tabbed_49" type="radio" /><input id="__tabbed_49_2" name="__tabbed_49" type="radio" /><input id="__tabbed_49_3" name="__tabbed_49" type="radio" /><input id="__tabbed_49_4" name="__tabbed_49" type="radio" /><input id="__tabbed_49_5" name="__tabbed_49" type="radio" /><div class="tabbed-labels"><label for="__tabbed_49_1">HTTPie</label><label for="__tabbed_49_2">Python</label><label for="__tabbed_49_3">TypeScript</label><label for="__tabbed_49_4">Path Parameters</label><label for="__tabbed_49_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="52:5"><input checked="checked" id="__tabbed_52_1" name="__tabbed_52" type="radio" /><input id="__tabbed_52_2" name="__tabbed_52" type="radio" /><input id="__tabbed_52_3" name="__tabbed_52" type="radio" /><input id="__tabbed_52_4" name="__tabbed_52" type="radio" /><input id="__tabbed_52_5" name="__tabbed_52" type="radio" /><div class="tabbed-labels"><label for="__tabbed_52_1">HTTPie</label><label for="__tabbed_52_2">Python</label><label for="__tabbed_52_3">TypeScript</label><label for="__tabbed_52_4">Path Parameters</label><label for="__tabbed_52_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23630,7 +24205,7 @@
 <hr />
 <h3 id="delete-load-balancer">Delete load balancer</h3>
 <p>Delete a load balancer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="50:5"><input checked="checked" id="__tabbed_50_1" name="__tabbed_50" type="radio" /><input id="__tabbed_50_2" name="__tabbed_50" type="radio" /><input id="__tabbed_50_3" name="__tabbed_50" type="radio" /><input id="__tabbed_50_4" name="__tabbed_50" type="radio" /><input id="__tabbed_50_5" name="__tabbed_50" type="radio" /><div class="tabbed-labels"><label for="__tabbed_50_1">HTTPie</label><label for="__tabbed_50_2">Python</label><label for="__tabbed_50_3">TypeScript</label><label for="__tabbed_50_4">Path Parameters</label><label for="__tabbed_50_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="53:5"><input checked="checked" id="__tabbed_53_1" name="__tabbed_53" type="radio" /><input id="__tabbed_53_2" name="__tabbed_53" type="radio" /><input id="__tabbed_53_3" name="__tabbed_53" type="radio" /><input id="__tabbed_53_4" name="__tabbed_53" type="radio" /><input id="__tabbed_53_5" name="__tabbed_53" type="radio" /><div class="tabbed-labels"><label for="__tabbed_53_1">HTTPie</label><label for="__tabbed_53_2">Python</label><label for="__tabbed_53_3">TypeScript</label><label for="__tabbed_53_4">Path Parameters</label><label for="__tabbed_53_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23725,7 +24300,7 @@
 <hr />
 <h3 id="delete-pool-member">Delete pool member</h3>
 <p>Delete a pool member.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="51:5"><input checked="checked" id="__tabbed_51_1" name="__tabbed_51" type="radio" /><input id="__tabbed_51_2" name="__tabbed_51" type="radio" /><input id="__tabbed_51_3" name="__tabbed_51" type="radio" /><input id="__tabbed_51_4" name="__tabbed_51" type="radio" /><input id="__tabbed_51_5" name="__tabbed_51" type="radio" /><div class="tabbed-labels"><label for="__tabbed_51_1">HTTPie</label><label for="__tabbed_51_2">Python</label><label for="__tabbed_51_3">TypeScript</label><label for="__tabbed_51_4">Path Parameters</label><label for="__tabbed_51_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="54:5"><input checked="checked" id="__tabbed_54_1" name="__tabbed_54" type="radio" /><input id="__tabbed_54_2" name="__tabbed_54" type="radio" /><input id="__tabbed_54_3" name="__tabbed_54" type="radio" /><input id="__tabbed_54_4" name="__tabbed_54" type="radio" /><input id="__tabbed_54_5" name="__tabbed_54" type="radio" /><div class="tabbed-labels"><label for="__tabbed_54_1">HTTPie</label><label for="__tabbed_54_2">Python</label><label for="__tabbed_54_3">TypeScript</label><label for="__tabbed_54_4">Path Parameters</label><label for="__tabbed_54_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23820,7 +24395,7 @@
 <hr />
 <h3 id="delete-pool">Delete pool</h3>
 <p>Delete a pool.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="52:5"><input checked="checked" id="__tabbed_52_1" name="__tabbed_52" type="radio" /><input id="__tabbed_52_2" name="__tabbed_52" type="radio" /><input id="__tabbed_52_3" name="__tabbed_52" type="radio" /><input id="__tabbed_52_4" name="__tabbed_52" type="radio" /><input id="__tabbed_52_5" name="__tabbed_52" type="radio" /><div class="tabbed-labels"><label for="__tabbed_52_1">HTTPie</label><label for="__tabbed_52_2">Python</label><label for="__tabbed_52_3">TypeScript</label><label for="__tabbed_52_4">Path Parameters</label><label for="__tabbed_52_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="55:5"><input checked="checked" id="__tabbed_55_1" name="__tabbed_55" type="radio" /><input id="__tabbed_55_2" name="__tabbed_55" type="radio" /><input id="__tabbed_55_3" name="__tabbed_55" type="radio" /><input id="__tabbed_55_4" name="__tabbed_55" type="radio" /><input id="__tabbed_55_5" name="__tabbed_55" type="radio" /><div class="tabbed-labels"><label for="__tabbed_55_1">HTTPie</label><label for="__tabbed_55_2">Python</label><label for="__tabbed_55_3">TypeScript</label><label for="__tabbed_55_4">Path Parameters</label><label for="__tabbed_55_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23933,7 +24508,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-04-10
+    2026-04-14
   </span>
 
     
