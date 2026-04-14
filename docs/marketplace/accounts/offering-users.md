@@ -144,6 +144,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
+    | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -267,6 +268,7 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
+    | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -386,6 +388,7 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
+    | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -599,6 +602,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
+    | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -727,6 +731,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
+    | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `user_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |

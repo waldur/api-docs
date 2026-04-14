@@ -220,6 +220,7 @@ Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Create
     | `personal_title` | string |  |  |
     | `birth_date` | string (date) |  |  |
     | `place_of_birth` | string |  |  |
+    | `address` | string |  |  |
     | `country_of_residence` | string |  |  |
     | `nationality` | string |  |  |
     | `nationalities` | array of strings |  |  |

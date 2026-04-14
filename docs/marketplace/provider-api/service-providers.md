@@ -2011,6 +2011,7 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
+    | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |

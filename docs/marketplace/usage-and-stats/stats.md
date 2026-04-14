@@ -468,7 +468,6 @@ Count active resources grouped by offering.
 
     | Name | Type | Description |
     |---|---|---|
-    | `limit` | integer | Limit number of results (e.g. top N offerings). No limit by default. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
 

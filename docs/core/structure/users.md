@@ -194,6 +194,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
+    | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -338,6 +339,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
+    | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -440,6 +442,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `gender` | any |  | User's gender (male, female, or unknown) |
     | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |  |
+    | `address` | string |  |  |
     | `country_of_residence` | string |  |  |
     | `nationality` | string |  | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any |  | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -514,6 +517,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
+    | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -776,6 +780,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `gender` | any |  | User's gender (male, female, or unknown) |
     | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |  |
+    | `address` | string |  |  |
     | `country_of_residence` | string |  |  |
     | `nationality` | string |  | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any |  | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -850,6 +855,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
+    | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -953,6 +959,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `gender` | any |  | User's gender (male, female, or unknown) |
     | `personal_title` | string |  | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |  |
+    | `address` | string |  |  |
     | `country_of_residence` | string |  |  |
     | `nationality` | string |  | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any |  | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -1027,6 +1034,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
+    | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -1736,6 +1744,7 @@ Get current user details, including authentication token and profile completenes
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
+    | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |

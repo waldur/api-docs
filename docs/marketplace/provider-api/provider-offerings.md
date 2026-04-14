@@ -2044,6 +2044,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `place_of_birth` | string |  |
+    | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
     | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
@@ -3020,6 +3021,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
+    | `expose_address` | boolean |  |
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
@@ -3054,6 +3056,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
+    | `expose_address` | boolean |  |
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
@@ -3150,6 +3153,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
+    | `expose_address` | boolean |  |
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
@@ -3184,6 +3188,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
+    | `expose_address` | boolean |  |
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
@@ -3280,6 +3285,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
+    | `expose_address` | boolean |  |
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
@@ -3314,6 +3320,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
+    | `expose_address` | boolean |  |
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
@@ -8026,6 +8033,7 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
+    | `expose_address` | boolean |  |
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
