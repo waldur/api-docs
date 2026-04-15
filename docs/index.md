@@ -47,7 +47,7 @@ This section provides a detailed reference for all available API endpoints.
 - [AWS](./cloud-and-hpc-providers/aws/images.md)
 - [Azure](./cloud-and-hpc-providers/azure/images.md)
 - [DigitalOcean](./cloud-and-hpc-providers/digitalocean/droplets.md)
-- [OpenPortal](./cloud-and-hpc-providers/openportal/openportal-allocation-user-usage.md)
+- [OpenPortal](./cloud-and-hpc-providers/openportal/openportal.md)
 - [OpenStack](./cloud-and-hpc-providers/openstack/openstack.md)
 - [Rancher](./cloud-and-hpc-providers/rancher/keycloak-groups.md)
 - [SLURM](./cloud-and-hpc-providers/slurm/marketplace-slurm-periodic-usage-policies.md)

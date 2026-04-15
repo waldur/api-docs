@@ -74,12 +74,14 @@ List all managed projects
     |---|---|---|
     | `identifier` | string |  |
     | `local_identifier` | string |  |
+    | `o` | string | Which field to use when ordering the results. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `project` | string (uri) |  |
     | `project_template` | string (uri) |  |
     | `project_template_uuid` | string (uuid) |  |
     | `project_uuid` | string (uuid) |  |
+    | `query` | string |  |
     | `state` | array |  |
 
 
