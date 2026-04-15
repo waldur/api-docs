@@ -231,14 +231,20 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `id` | integer |
-    | `year` | integer |
-    | `month` | integer |
-    | `project_identifier` | string |
-    | `resource` | string |
-    | `report` | any |
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer |  |
+    | `year` | integer |  |
+    | `month` | integer |  |
+    | `project_identifier` | string |  |
+    | `resource` | string |  |
+    | `report` | object |  |
+    | `report.project` | string |  |
+    | `report.generated_at` | string | RFC3339 timestamp |
+    | `report.project_quotas` | object (free-form) | Volume → Quota |
+    | `report.user_quotas` | object (free-form) | UserIdentifier → (Volume → Quota) |
+    | `report.users` | object (free-form) | UserIdentifier → local_username |
+    | `report.daily_reports` | object (free-form) | "YYYY-MM-DD" → DailyStorageReportJson. Absent from JSON when there are no daily snapshots. |
 
 ---
 
@@ -304,14 +310,20 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `id` | integer |
-    | `year` | integer |
-    | `month` | integer |
-    | `project_identifier` | string |
-    | `resource` | string |
-    | `report` | any |
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer |  |
+    | `year` | integer |  |
+    | `month` | integer |  |
+    | `project_identifier` | string |  |
+    | `resource` | string |  |
+    | `report` | object |  |
+    | `report.project` | string |  |
+    | `report.generated_at` | string | RFC3339 timestamp |
+    | `report.project_quotas` | object (free-form) | Volume → Quota |
+    | `report.user_quotas` | object (free-form) | UserIdentifier → (Volume → Quota) |
+    | `report.users` | object (free-form) | UserIdentifier → local_username |
+    | `report.daily_reports` | object (free-form) | "YYYY-MM-DD" → DailyStorageReportJson. Absent from JSON when there are no daily snapshots. |
 
 ---
 
@@ -381,15 +393,18 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `id` | integer |
-    | `year` | integer |
-    | `month` | integer |
-    | `project_identifier` | string |
-    | `resource` | string |
-    | `is_complete` | boolean |
-    | `report` | any |
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer |  |
+    | `year` | integer |  |
+    | `month` | integer |  |
+    | `project_identifier` | string |  |
+    | `resource` | string |  |
+    | `is_complete` | boolean |  |
+    | `report` | object |  |
+    | `report.project` | string | ProjectIdentifier string e.g. "aiproject.brics" |
+    | `report.reports` | object (free-form) | "YYYY-MM-DD" → DailyProjectUsageReportJson |
+    | `report.users` | object (free-form) | UserIdentifier → local_username. e.g. { "chris.aiproject.brics": "chris.aiproject" } |
 
 ---
 
@@ -455,14 +470,17 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `id` | integer |
-    | `year` | integer |
-    | `month` | integer |
-    | `project_identifier` | string |
-    | `resource` | string |
-    | `is_complete` | boolean |
-    | `report` | any |
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer |  |
+    | `year` | integer |  |
+    | `month` | integer |  |
+    | `project_identifier` | string |  |
+    | `resource` | string |  |
+    | `is_complete` | boolean |  |
+    | `report` | object |  |
+    | `report.project` | string | ProjectIdentifier string e.g. "aiproject.brics" |
+    | `report.reports` | object (free-form) | "YYYY-MM-DD" → DailyProjectUsageReportJson |
+    | `report.users` | object (free-form) | UserIdentifier → local_username. e.g. { "chris.aiproject.brics": "chris.aiproject" } |
 
 ---
