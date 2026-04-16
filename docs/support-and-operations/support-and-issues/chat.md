@@ -83,9 +83,11 @@
     | `uuid` | string (uuid) |
     | `thread` | string (uuid) |
     | `role` | any |
-    | `content` | string |
-    | `content_display` | string |
-    | `tool_calls` | any |
+    | `blocks` | array of objects |
+    | `blocks.id` | string |
+    | `blocks.key` | string |
+    | `blocks.status` | string |
+    | `warning` | string |
     | `sequence_index` | integer |
     | `replaces` | string (uuid) |
     | `created` | string (date-time) |
@@ -336,7 +338,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     from waldur_api_client.models.injection_severity_enum import InjectionSeverityEnum # (1)
     from waldur_api_client.models.thread_session_field_enum import ThreadSessionFieldEnum # (2)
     from waldur_api_client.models.thread_session_o_enum import ThreadSessionOEnum # (3)
-    from waldur_api_client.api.chat_threads import chat_threads_list # (4)
+    from waldur_api_client.models.thread_session_scope_enum import ThreadSessionScopeEnum # (4)
+    from waldur_api_client.api.chat_threads import chat_threads_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -351,7 +354,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     1.  **Model Source:** [`InjectionSeverityEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/injection_severity_enum.py)
     2.  **Model Source:** [`ThreadSessionFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_field_enum.py)
     3.  **Model Source:** [`ThreadSessionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_o_enum.py)
-    4.  **API Source:** [`chat_threads_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_list.py)
+    4.  **Model Source:** [`ThreadSessionScopeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_scope_enum.py)
+    5.  **API Source:** [`chat_threads_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_list.py)
 
 === "TypeScript"
 
@@ -387,6 +391,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string |  |
+    | `scope` | string | _Enum: `own`_ |
     | `total_tokens_max` | number |  |
     | `total_tokens_min` | number |  |
     | `user` | string (uuid) |  |
