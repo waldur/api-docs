@@ -104,6 +104,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `modified_before` | string (date-time) | Modified before |
     | `o` | array | Ordering<br><br> |
     | `offering` | string (uri) |  |
+    | `offering_has_active_tos` | boolean | Offering has active Terms of Service |
     | `offering_slug` | array | Multiple values may be separated by commas. |
     | `offering_uuid` | array | Multiple values may be separated by commas. |
     | `page` | integer | A page number within the paginated result set. |
@@ -166,6 +167,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
+    | `offering_has_active_tos` | boolean |  |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
@@ -290,6 +292,7 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
+    | `offering_has_active_tos` | boolean |  |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
@@ -410,6 +413,7 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
+    | `offering_has_active_tos` | boolean |  |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
@@ -624,6 +628,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
+    | `offering_has_active_tos` | boolean |  |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
@@ -753,6 +758,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
+    | `offering_has_active_tos` | boolean |  |
     | `has_compliance_checklist` | boolean | Check if the offering user has a connected compliance checklist completion. |
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
