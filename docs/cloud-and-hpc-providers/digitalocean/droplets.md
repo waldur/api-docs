@@ -134,7 +134,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -262,7 +262,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -411,7 +411,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -718,7 +718,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -850,7 +850,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |

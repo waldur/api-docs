@@ -141,7 +141,7 @@ Get a list of subnets.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `network` | string (uri) | Network to which this subnet belongs |
@@ -272,7 +272,7 @@ Retrieve details of a specific subnet.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `network` | string (uri) | Network to which this subnet belongs |
@@ -570,7 +570,7 @@ Update an existing subnet.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `network` | string (uri) | Network to which this subnet belongs |
@@ -715,7 +715,7 @@ Update specific fields of a subnet.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `network` | string (uri) | Network to which this subnet belongs |

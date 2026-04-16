@@ -133,7 +133,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `template` | string (uri) |
     | `rancher_project` | string (uri) |
@@ -255,7 +255,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `template` | string (uri) |
     | `rancher_project` | string (uri) |
@@ -403,7 +403,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `template` | string (uri) |
     | `rancher_project` | string (uri) |
@@ -709,7 +709,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `template` | string (uri) |
     | `rancher_project` | string (uri) |
@@ -847,7 +847,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `template` | string (uri) |
     | `rancher_project` | string (uri) |

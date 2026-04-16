@@ -131,7 +131,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `mac_address` | string |
     | `vm` | string (uri) |
     | `vm_uuid` | string (uuid) |
@@ -249,7 +249,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `mac_address` | string |
     | `vm` | string (uri) |
     | `vm_uuid` | string (uuid) |

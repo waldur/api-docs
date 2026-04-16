@@ -132,7 +132,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `node_limit` | integer (int64) |
     | `groupname` | string |
     | `node_usage` | string (decimal) |
@@ -248,7 +248,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `node_limit` | integer (int64) |
     | `groupname` | string |
     | `node_usage` | string (decimal) |
@@ -373,7 +373,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `node_limit` | integer (int64) |
     | `groupname` | string |
     | `node_usage` | string (decimal) |
@@ -656,7 +656,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `node_limit` | integer (int64) |
     | `groupname` | string |
     | `node_usage` | string (decimal) |
@@ -778,7 +778,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `node_limit` | integer (int64) |
     | `groupname` | string |
     | `node_usage` | string (decimal) |

@@ -133,7 +133,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `resource_group` | string (uri) |
     | `username` | string |
     | `password` | string |
@@ -252,7 +252,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `resource_group` | string (uri) |
     | `username` | string |
     | `password` | string |
@@ -383,7 +383,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `resource_group` | string (uri) |
     | `username` | string |
     | `password` | string |
@@ -760,7 +760,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `resource_group` | string (uri) |
     | `username` | string |
     | `password` | string |
@@ -884,7 +884,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `resource_group` | string (uri) |
     | `username` | string |
     | `password` | string |

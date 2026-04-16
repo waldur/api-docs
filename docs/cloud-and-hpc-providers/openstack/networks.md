@@ -141,7 +141,7 @@ Get a list of networks.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -283,7 +283,7 @@ Retrieve details of a specific network.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -445,7 +445,7 @@ Create a new subnet within the network.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `network` | string (uri) | Network to which this subnet belongs |
@@ -733,7 +733,7 @@ Update an existing network.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -879,7 +879,7 @@ Update specific fields of a network.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |

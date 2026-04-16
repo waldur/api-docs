@@ -141,7 +141,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `guest_os` | any |  |
     | `guest_os_name` | string |  |
     | `cores` | integer | Number of cores in a VM |
@@ -280,7 +280,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `guest_os` | any |  |
     | `guest_os_name` | string |  |
     | `cores` | integer | Number of cores in a VM |
@@ -436,7 +436,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `guest_os` | any |  |
     | `guest_os_name` | string |  |
     | `cores` | integer | Number of cores in a VM |
@@ -585,7 +585,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `size` | integer | Size in MiB |
     | `vm` | string (uri) |  |
     | `vm_uuid` | string (uuid) |  |
@@ -711,7 +711,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `mac_address` | string |
     | `vm` | string (uri) |
     | `vm_uuid` | string (uuid) |
@@ -1004,7 +1004,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `guest_os` | any |  |
     | `guest_os_name` | string |  |
     | `cores` | integer | Number of cores in a VM |
@@ -1149,7 +1149,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `guest_os` | any |  |
     | `guest_os_name` | string |  |
     | `cores` | integer | Number of cores in a VM |

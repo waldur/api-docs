@@ -136,7 +136,7 @@ Get a list of instance backups.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `kept_until` | string (date-time) | Guaranteed time of backup retention. If null - keep forever. |
     | `metadata` | any |  |
     | `instance` | string (uri) | Instance that this backup is created from |
@@ -217,7 +217,7 @@ Get a list of instance backups.
     | `restorations.ports.security_groups.created` | string (date-time) |  |
     | `restorations.ports.security_groups.modified` | string (date-time) |  |
     | `restorations.ports.security_groups.backend_id` | string |  |
-    | `restorations.ports.security_groups.access_url` | string |  |
+    | `restorations.ports.security_groups.access_url` | any |  |
     | `restorations.ports.security_groups.tenant` | string (uri) |  |
     | `restorations.ports.security_groups.tenant_name` | string |  |
     | `restorations.ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -300,7 +300,7 @@ Get a list of instance backups.
     | `instance_ports.security_groups.created` | string (date-time) |  |
     | `instance_ports.security_groups.modified` | string (date-time) |  |
     | `instance_ports.security_groups.backend_id` | string |  |
-    | `instance_ports.security_groups.access_url` | string |  |
+    | `instance_ports.security_groups.access_url` | any |  |
     | `instance_ports.security_groups.tenant` | string (uri) |  |
     | `instance_ports.security_groups.tenant_name` | string |  |
     | `instance_ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -454,7 +454,7 @@ Retrieve details of a specific instance backup.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `kept_until` | string (date-time) | Guaranteed time of backup retention. If null - keep forever. |
     | `metadata` | any |  |
     | `instance` | string (uri) | Instance that this backup is created from |
@@ -535,7 +535,7 @@ Retrieve details of a specific instance backup.
     | `restorations.ports.security_groups.created` | string (date-time) |  |
     | `restorations.ports.security_groups.modified` | string (date-time) |  |
     | `restorations.ports.security_groups.backend_id` | string |  |
-    | `restorations.ports.security_groups.access_url` | string |  |
+    | `restorations.ports.security_groups.access_url` | any |  |
     | `restorations.ports.security_groups.tenant` | string (uri) |  |
     | `restorations.ports.security_groups.tenant_name` | string |  |
     | `restorations.ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -618,7 +618,7 @@ Retrieve details of a specific instance backup.
     | `instance_ports.security_groups.created` | string (date-time) |  |
     | `instance_ports.security_groups.modified` | string (date-time) |  |
     | `instance_ports.security_groups.backend_id` | string |  |
-    | `instance_ports.security_groups.access_url` | string |  |
+    | `instance_ports.security_groups.access_url` | any |  |
     | `instance_ports.security_groups.tenant` | string (uri) |  |
     | `instance_ports.security_groups.tenant_name` | string |  |
     | `instance_ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -930,7 +930,7 @@ Update an existing instance backup.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `kept_until` | string (date-time) | Guaranteed time of backup retention. If null - keep forever. |
     | `metadata` | any |  |
     | `instance` | string (uri) | Instance that this backup is created from |
@@ -1011,7 +1011,7 @@ Update an existing instance backup.
     | `restorations.ports.security_groups.created` | string (date-time) |  |
     | `restorations.ports.security_groups.modified` | string (date-time) |  |
     | `restorations.ports.security_groups.backend_id` | string |  |
-    | `restorations.ports.security_groups.access_url` | string |  |
+    | `restorations.ports.security_groups.access_url` | any |  |
     | `restorations.ports.security_groups.tenant` | string (uri) |  |
     | `restorations.ports.security_groups.tenant_name` | string |  |
     | `restorations.ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -1094,7 +1094,7 @@ Update an existing instance backup.
     | `instance_ports.security_groups.created` | string (date-time) |  |
     | `instance_ports.security_groups.modified` | string (date-time) |  |
     | `instance_ports.security_groups.backend_id` | string |  |
-    | `instance_ports.security_groups.access_url` | string |  |
+    | `instance_ports.security_groups.access_url` | any |  |
     | `instance_ports.security_groups.tenant` | string (uri) |  |
     | `instance_ports.security_groups.tenant_name` | string |  |
     | `instance_ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -1253,7 +1253,7 @@ Update specific fields of an instance backup.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `kept_until` | string (date-time) | Guaranteed time of backup retention. If null - keep forever. |
     | `metadata` | any |  |
     | `instance` | string (uri) | Instance that this backup is created from |
@@ -1334,7 +1334,7 @@ Update specific fields of an instance backup.
     | `restorations.ports.security_groups.created` | string (date-time) |  |
     | `restorations.ports.security_groups.modified` | string (date-time) |  |
     | `restorations.ports.security_groups.backend_id` | string |  |
-    | `restorations.ports.security_groups.access_url` | string |  |
+    | `restorations.ports.security_groups.access_url` | any |  |
     | `restorations.ports.security_groups.tenant` | string (uri) |  |
     | `restorations.ports.security_groups.tenant_name` | string |  |
     | `restorations.ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -1417,7 +1417,7 @@ Update specific fields of an instance backup.
     | `instance_ports.security_groups.created` | string (date-time) |  |
     | `instance_ports.security_groups.modified` | string (date-time) |  |
     | `instance_ports.security_groups.backend_id` | string |  |
-    | `instance_ports.security_groups.access_url` | string |  |
+    | `instance_ports.security_groups.access_url` | any |  |
     | `instance_ports.security_groups.tenant` | string (uri) |  |
     | `instance_ports.security_groups.tenant_name` | string |  |
     | `instance_ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -1664,7 +1664,7 @@ Restore instance from backup
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Instance ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -1768,7 +1768,7 @@ Restore instance from backup
     | `ports.security_groups.created` | string (date-time) |  |
     | `ports.security_groups.modified` | string (date-time) |  |
     | `ports.security_groups.backend_id` | string |  |
-    | `ports.security_groups.access_url` | string |  |
+    | `ports.security_groups.access_url` | any |  |
     | `ports.security_groups.tenant` | string (uri) |  |
     | `ports.security_groups.tenant_name` | string |  |
     | `ports.security_groups.tenant_uuid` | string (uuid) |  |

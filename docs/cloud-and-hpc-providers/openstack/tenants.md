@@ -147,7 +147,7 @@ Get a list of OpenStack tenants.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
@@ -274,7 +274,7 @@ Retrieve details of a specific OpenStack tenant.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
@@ -574,7 +574,7 @@ Update an existing OpenStack tenant.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
@@ -721,7 +721,7 @@ Update specific fields of an OpenStack tenant.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
@@ -1064,7 +1064,7 @@ Create floating IP for tenant
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `runtime_state` | string |  |
     | `address` | any | The public IPv4 address of the floating IP |
     | `backend_network_id` | string | ID of network in OpenStack where this floating IP is allocated |
@@ -1202,7 +1202,7 @@ Create network for tenant
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -1366,7 +1366,7 @@ Create a security group for the tenant.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -1506,7 +1506,7 @@ Create a new server group for the tenant.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -1979,7 +1979,7 @@ Trigger job to pull security groups from remote VPC
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |
@@ -2097,7 +2097,7 @@ Trigger job to pull server groups from remote VPC
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
     | `internal_network_id` | string | ID of internal network in OpenStack tenant |
     | `external_network_id` | string | ID of external network connected to OpenStack tenant |

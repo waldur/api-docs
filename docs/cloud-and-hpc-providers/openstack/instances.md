@@ -154,7 +154,7 @@ Get a list of VM instances.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Instance ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -258,7 +258,7 @@ Get a list of VM instances.
     | `ports.security_groups.created` | string (date-time) |  |
     | `ports.security_groups.modified` | string (date-time) |  |
     | `ports.security_groups.backend_id` | string |  |
-    | `ports.security_groups.access_url` | string |  |
+    | `ports.security_groups.access_url` | any |  |
     | `ports.security_groups.tenant` | string (uri) |  |
     | `ports.security_groups.tenant_name` | string |  |
     | `ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -409,7 +409,7 @@ Retrieve details of a specific VM instance.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Instance ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -513,7 +513,7 @@ Retrieve details of a specific VM instance.
     | `ports.security_groups.created` | string (date-time) |  |
     | `ports.security_groups.modified` | string (date-time) |  |
     | `ports.security_groups.backend_id` | string |  |
-    | `ports.security_groups.access_url` | string |  |
+    | `ports.security_groups.access_url` | any |  |
     | `ports.security_groups.tenant` | string (uri) |  |
     | `ports.security_groups.tenant_name` | string |  |
     | `ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -821,7 +821,7 @@ Update an existing VM instance.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Instance ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -925,7 +925,7 @@ Update an existing VM instance.
     | `ports.security_groups.created` | string (date-time) |  |
     | `ports.security_groups.modified` | string (date-time) |  |
     | `ports.security_groups.backend_id` | string |  |
-    | `ports.security_groups.access_url` | string |  |
+    | `ports.security_groups.access_url` | any |  |
     | `ports.security_groups.tenant` | string (uri) |  |
     | `ports.security_groups.tenant_name` | string |  |
     | `ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -1080,7 +1080,7 @@ Update specific fields of a VM instance.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Instance ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `start_time` | string (date-time) |  |
     | `cores` | integer | Number of cores in a VM |
     | `ram` | integer | Memory size in MiB |
@@ -1184,7 +1184,7 @@ Update specific fields of a VM instance.
     | `ports.security_groups.created` | string (date-time) |  |
     | `ports.security_groups.modified` | string (date-time) |  |
     | `ports.security_groups.backend_id` | string |  |
-    | `ports.security_groups.access_url` | string |  |
+    | `ports.security_groups.access_url` | any |  |
     | `ports.security_groups.tenant` | string (uri) |  |
     | `ports.security_groups.tenant_name` | string |  |
     | `ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -1795,7 +1795,7 @@ Get a list of instance ports
     | `security_groups.created` | string (date-time) |  |
     | `security_groups.modified` | string (date-time) |  |
     | `security_groups.backend_id` | string |  |
-    | `security_groups.access_url` | string |  |
+    | `security_groups.access_url` | any |  |
     | `security_groups.tenant` | string (uri) |  |
     | `security_groups.tenant_name` | string |  |
     | `security_groups.tenant_uuid` | string (uuid) |  |
@@ -1935,7 +1935,7 @@ Create backup from instance
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `kept_until` | string (date-time) | Guaranteed time of backup retention. If null - keep forever. |
     | `metadata` | any |  |
     | `instance` | string (uri) | Instance that this backup is created from |
@@ -2016,7 +2016,7 @@ Create backup from instance
     | `restorations.ports.security_groups.created` | string (date-time) |  |
     | `restorations.ports.security_groups.modified` | string (date-time) |  |
     | `restorations.ports.security_groups.backend_id` | string |  |
-    | `restorations.ports.security_groups.access_url` | string |  |
+    | `restorations.ports.security_groups.access_url` | any |  |
     | `restorations.ports.security_groups.tenant` | string (uri) |  |
     | `restorations.ports.security_groups.tenant_name` | string |  |
     | `restorations.ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -2099,7 +2099,7 @@ Create backup from instance
     | `instance_ports.security_groups.created` | string (date-time) |  |
     | `instance_ports.security_groups.modified` | string (date-time) |  |
     | `instance_ports.security_groups.backend_id` | string |  |
-    | `instance_ports.security_groups.access_url` | string |  |
+    | `instance_ports.security_groups.access_url` | any |  |
     | `instance_ports.security_groups.tenant` | string (uri) |  |
     | `instance_ports.security_groups.tenant_name` | string |  |
     | `instance_ports.security_groups.tenant_uuid` | string (uuid) |  |

@@ -134,7 +134,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `server` | string (uri) |
     | `charset` | string |
     | `collation` | string |
@@ -254,7 +254,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `server` | string (uri) |
     | `charset` | string |
     | `collation` | string |
@@ -387,7 +387,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `server` | string (uri) |
     | `charset` | string |
     | `collation` | string |
@@ -678,7 +678,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `server` | string (uri) |
     | `charset` | string |
     | `collation` | string |
@@ -804,7 +804,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `server` | string (uri) |
     | `charset` | string |
     | `collation` | string |

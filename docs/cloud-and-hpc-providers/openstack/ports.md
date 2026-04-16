@@ -137,7 +137,7 @@ Get a list of network ports.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Port ID in OpenStack |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `fixed_ips` | array of objects |  |
     | `fixed_ips.ip_address` | any | IP address to assign to the port |
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -273,7 +273,7 @@ Retrieve details of a specific network port.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Port ID in OpenStack |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `fixed_ips` | array of objects |  |
     | `fixed_ips.ip_address` | any | IP address to assign to the port |
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -420,7 +420,7 @@ Create a new network port.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Port ID in OpenStack |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `fixed_ips` | array of objects |  |
     | `fixed_ips.ip_address` | any | IP address to assign to the port |
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -903,7 +903,7 @@ Update an existing network port.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Port ID in OpenStack |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `fixed_ips` | array of objects |  |
     | `fixed_ips.ip_address` | any | IP address to assign to the port |
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -1046,7 +1046,7 @@ Update specific fields of a network port.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Port ID in OpenStack |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `fixed_ips` | array of objects |  |
     | `fixed_ips.ip_address` | any | IP address to assign to the port |
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |

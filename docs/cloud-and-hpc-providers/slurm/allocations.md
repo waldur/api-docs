@@ -132,7 +132,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `cpu_limit` | integer |
     | `cpu_usage` | integer |
     | `gpu_limit` | integer |
@@ -253,7 +253,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `cpu_limit` | integer |
     | `cpu_usage` | integer |
     | `gpu_limit` | integer |
@@ -381,7 +381,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `cpu_limit` | integer |
     | `cpu_usage` | integer |
     | `gpu_limit` | integer |
@@ -667,7 +667,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `cpu_limit` | integer |
     | `cpu_usage` | integer |
     | `gpu_limit` | integer |
@@ -792,7 +792,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `cpu_limit` | integer |
     | `cpu_usage` | integer |
     | `gpu_limit` | integer |

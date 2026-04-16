@@ -287,7 +287,7 @@ Get a list of pool health monitors.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Health monitor ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `pool` | string (uri) | Pool this health monitor belongs to |
     | `pool_name` | string |  |
     | `pool_uuid` | string (uuid) |  |
@@ -411,7 +411,7 @@ Retrieve details of a specific health monitor.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Health monitor ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `pool` | string (uri) | Pool this health monitor belongs to |
     | `pool_name` | string |  |
     | `pool_uuid` | string (uuid) |  |
@@ -767,7 +767,7 @@ Get a list of load balancer listeners.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Listener ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `load_balancer` | string (uri) | Load balancer this listener belongs to |
     | `load_balancer_name` | string |  |
     | `load_balancer_uuid` | string (uuid) |  |
@@ -889,7 +889,7 @@ Retrieve details of a specific listener.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Listener ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `load_balancer` | string (uri) | Load balancer this listener belongs to |
     | `load_balancer_name` | string |  |
     | `load_balancer_uuid` | string (uuid) |  |
@@ -1010,7 +1010,7 @@ Get a list of load balancers.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Load balancer ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -1135,7 +1135,7 @@ Retrieve details of a specific load balancer.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Load balancer ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -1261,7 +1261,7 @@ Get a list of pool members.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Member ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `pool` | string (uri) | Pool this member belongs to |
     | `pool_name` | string |  |
     | `pool_uuid` | string (uuid) |  |
@@ -1385,7 +1385,7 @@ Retrieve details of a specific pool member.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Member ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `pool` | string (uri) | Pool this member belongs to |
     | `pool_name` | string |  |
     | `pool_uuid` | string (uuid) |  |
@@ -1509,7 +1509,7 @@ Get a list of load balancer pools.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Pool ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `load_balancer` | string (uri) | Load balancer this pool belongs to |
     | `load_balancer_name` | string |  |
     | `load_balancer_uuid` | string (uuid) |  |
@@ -1630,7 +1630,7 @@ Retrieve details of a specific pool.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Pool ID in Octavia |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `load_balancer` | string (uri) | Load balancer this pool belongs to |
     | `load_balancer_name` | string |  |
     | `load_balancer_uuid` | string (uuid) |  |

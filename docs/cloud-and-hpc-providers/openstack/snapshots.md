@@ -140,7 +140,7 @@ Get a list of snapshots.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Snapshot ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_volume` | string (uri) | Volume from which this snapshot was created |
     | `size` | integer | Size in MiB |
     | `metadata` | any |  |
@@ -273,7 +273,7 @@ Retrieve details of a specific snapshot.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Snapshot ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_volume` | string (uri) | Volume from which this snapshot was created |
     | `size` | integer | Size in MiB |
     | `metadata` | any |  |
@@ -565,7 +565,7 @@ Update an existing snapshot.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Snapshot ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_volume` | string (uri) | Volume from which this snapshot was created |
     | `size` | integer | Size in MiB |
     | `metadata` | any |  |
@@ -704,7 +704,7 @@ Update specific fields of a snapshot.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Snapshot ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_volume` | string (uri) | Volume from which this snapshot was created |
     | `size` | integer | Size in MiB |
     | `metadata` | any |  |
@@ -1006,7 +1006,7 @@ Restore volume from snapshot
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Volume ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |

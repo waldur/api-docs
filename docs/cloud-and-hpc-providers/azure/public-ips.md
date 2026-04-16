@@ -132,7 +132,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `location` | string (uri) |
     | `resource_group` | string (uri) |
     | `marketplace_offering_uuid` | string |
@@ -246,7 +246,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `location` | string (uri) |
     | `resource_group` | string (uri) |
     | `marketplace_offering_uuid` | string |
@@ -375,7 +375,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `location` | string (uri) |
     | `resource_group` | string (uri) |
     | `marketplace_offering_uuid` | string |
@@ -662,7 +662,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `location` | string (uri) |
     | `resource_group` | string (uri) |
     | `marketplace_offering_uuid` | string |
@@ -781,7 +781,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `location` | string (uri) |
     | `resource_group` | string (uri) |
     | `marketplace_offering_uuid` | string |

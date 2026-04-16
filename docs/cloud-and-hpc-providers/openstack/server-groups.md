@@ -132,7 +132,7 @@ Get a list of server groups.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -255,7 +255,7 @@ Retrieve details of a specific server group.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -376,7 +376,7 @@ Retrieve details of a specific server group.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |

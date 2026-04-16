@@ -135,7 +135,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `rancher_project` | string (uri) |
     | `rancher_project_name` | string |
@@ -253,7 +253,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `rancher_project` | string (uri) |
     | `rancher_project_name` | string |
@@ -388,7 +388,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `rancher_project` | string (uri) |
     | `rancher_project_name` | string |
@@ -681,7 +681,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `rancher_project` | string (uri) |
     | `rancher_project_name` | string |
@@ -812,7 +812,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `rancher_project` | string (uri) |
     | `rancher_project_name` | string |
@@ -998,7 +998,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `rancher_project` | string (uri) |
     | `rancher_project_name` | string |
@@ -1297,7 +1297,7 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `runtime_state` | string |
     | `rancher_project` | string (uri) |
     | `rancher_project_name` | string |

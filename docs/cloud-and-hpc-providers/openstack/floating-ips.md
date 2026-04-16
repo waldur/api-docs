@@ -137,7 +137,7 @@ Get a list of floating IP addresses. Status *DOWN* means that floating IP is not
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `runtime_state` | string |  |
     | `address` | any | The public IPv4 address of the floating IP |
     | `backend_network_id` | string | ID of network in OpenStack where this floating IP is allocated |
@@ -265,7 +265,7 @@ Retrieve details of a specific floating IP address.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `runtime_state` | string |  |
     | `address` | any | The public IPv4 address of the floating IP |
     | `backend_network_id` | string | ID of network in OpenStack where this floating IP is allocated |

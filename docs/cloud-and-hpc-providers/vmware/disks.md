@@ -130,7 +130,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `size` | integer | Size in MiB |
     | `vm` | string (uri) |  |
     | `vm_uuid` | string (uuid) |  |
@@ -246,7 +246,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `size` | integer | Size in MiB |
     | `vm` | string (uri) |  |
     | `vm_uuid` | string (uuid) |  |

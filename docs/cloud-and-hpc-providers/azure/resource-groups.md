@@ -98,7 +98,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `location` | string (uri) |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
@@ -211,7 +211,7 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
     | `backend_id` | string |
-    | `access_url` | string |
+    | `access_url` | any |
     | `location` | string (uri) |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |

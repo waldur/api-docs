@@ -112,7 +112,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `size` | integer | Size of volume in gigabytes |
     | `volume_type` | string | <br>_Enum: `gp2`, `io1`, `standard`_ |
     | `device` | string |  |
@@ -229,7 +229,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `size` | integer | Size of volume in gigabytes |
     | `volume_type` | string | <br>_Enum: `gp2`, `io1`, `standard`_ |
     | `device` | string |  |
@@ -365,7 +365,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `size` | integer | Size of volume in gigabytes |
     | `volume_type` | string | <br>_Enum: `gp2`, `io1`, `standard`_ |
     | `device` | string |  |
@@ -659,7 +659,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `size` | integer | Size of volume in gigabytes |
     | `volume_type` | string | <br>_Enum: `gp2`, `io1`, `standard`_ |
     | `device` | string |  |
@@ -767,7 +767,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `size` | integer | Size of volume in gigabytes |
     | `volume_type` | string | <br>_Enum: `gp2`, `io1`, `standard`_ |
     | `device` | string |  |

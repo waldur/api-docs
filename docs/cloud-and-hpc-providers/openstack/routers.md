@@ -10,9 +10,12 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/` | [Create router](#create-router) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-routers/{uuid}/` | [Delete router](#delete-router) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-routers/{uuid}/available_external_networks/` | [List available external networks](#list-available-external-networks) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/add_router_interface/` | [Add router interface](#add-router-interface) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/remove_external_gateway/` | [Remove external gateway](#remove-external-gateway) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/remove_router_interface/` | [Remove router interface](#remove-router-interface) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/set_erred/` | [Mark router as ERRED](#mark-router-as-erred) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/set_external_gateway/` | [Set external gateway](#set-external-gateway) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/set_ok/` | [Mark router as OK](#mark-router-as-ok) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/set_routes/` | [Set static routes](#set-static-routes) |
 
@@ -118,7 +121,7 @@ Get a list of routers.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Router ID in OpenStack |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this router belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -168,7 +171,7 @@ Get a list of routers.
     | `ports.security_groups.created` | string (date-time) |  |
     | `ports.security_groups.modified` | string (date-time) |  |
     | `ports.security_groups.backend_id` | string |  |
-    | `ports.security_groups.access_url` | string |  |
+    | `ports.security_groups.access_url` | any |  |
     | `ports.security_groups.tenant` | string (uri) |  |
     | `ports.security_groups.tenant_name` | string |  |
     | `ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -195,6 +198,12 @@ Get a list of routers.
     | `ports.security_groups.marketplace_resource_state` | string |  |
     | `ports.security_groups.is_usage_based` | boolean |  |
     | `ports.security_groups.is_limit_based` | boolean |  |
+    | `external_network_id` | string | Backend ID of the external network used as gateway |
+    | `external_network_uuid` | string (uuid) |  |
+    | `external_network_name` | string |  |
+    | `has_external_gateway` | boolean |  |
+    | `enable_snat` | boolean | Whether SNAT is enabled on the external gateway. None means OpenStack default (True). |
+    | `external_fixed_ips` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -309,7 +318,7 @@ Retrieve details of a specific router.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Router ID in OpenStack |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `tenant` | string (uri) | OpenStack tenant this router belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
@@ -359,7 +368,7 @@ Retrieve details of a specific router.
     | `ports.security_groups.created` | string (date-time) |  |
     | `ports.security_groups.modified` | string (date-time) |  |
     | `ports.security_groups.backend_id` | string |  |
-    | `ports.security_groups.access_url` | string |  |
+    | `ports.security_groups.access_url` | any |  |
     | `ports.security_groups.tenant` | string (uri) |  |
     | `ports.security_groups.tenant_name` | string |  |
     | `ports.security_groups.tenant_uuid` | string (uuid) |  |
@@ -386,6 +395,12 @@ Retrieve details of a specific router.
     | `ports.security_groups.marketplace_resource_state` | string |  |
     | `ports.security_groups.is_usage_based` | boolean |  |
     | `ports.security_groups.is_limit_based` | boolean |  |
+    | `external_network_id` | string | Backend ID of the external network used as gateway |
+    | `external_network_uuid` | string (uuid) |  |
+    | `external_network_name` | string |  |
+    | `has_external_gateway` | boolean |  |
+    | `enable_snat` | boolean | Whether SNAT is enabled on the external gateway. None means OpenStack default (True). |
+    | `external_fixed_ips` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -557,6 +572,98 @@ Delete a router.
 ## Other Actions
 
 
+### List available external networks
+
+Returns a merged list of external networks available for this router's tenant, from both global external networks and RBAC-exposed networks.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-routers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/available_external_networks/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.core_states import CoreStates # (1)
+    from waldur_api_client.api.openstack_routers import openstack_routers_available_external_networks_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_routers_available_external_networks_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CoreStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/core_states.py)
+    2.  **API Source:** [`openstack_routers_available_external_networks_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_routers/openstack_routers_available_external_networks_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackRoutersAvailableExternalNetworksList } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackRoutersAvailableExternalNetworksList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `state` | array | State<br><br> |
+    | `tenant` | string (uri) | Tenant URL |
+    | `tenant_uuid` | string (uuid) | Tenant UUID |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `backend_id` | string |
+    | `name` | string |
+    | `description` | string |
+    | `source` | string |
+    | `subnets` | array of objects |
+
+---
+
 ### Add router interface
 
 Add interface to router. Either subnet or port must be provided.
@@ -633,6 +740,73 @@ Add interface to router. Either subnet or port must be provided.
 === "Responses"
 
     **`200`** - No response body
+    
+
+---
+
+### Remove external gateway
+
+Remove the external gateway from this router.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-routers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/remove_external_gateway/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_routers import openstack_routers_remove_external_gateway # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_routers_remove_external_gateway.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_routers_remove_external_gateway`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_routers/openstack_routers_remove_external_gateway.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackRoutersRemoveExternalGateway } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackRoutersRemoveExternalGateway({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - No response body
     
 
 ---
@@ -797,6 +971,93 @@ Manually transition the router to ERRED state. This is useful for routers stuck 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+---
+
+### Set external gateway
+
+Set an external network as the gateway for this router. Advanced options (SNAT control, fixed IPs) require additional permissions.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-routers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_external_gateway/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      external_network_id="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_external_gateway_request import SetExternalGatewayRequest # (1)
+    from waldur_api_client.api.openstack_routers import openstack_routers_set_external_gateway # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetExternalGatewayRequest(
+        external_network_id="string-value"
+    )
+    response = openstack_routers_set_external_gateway.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetExternalGatewayRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_external_gateway_request.py)
+    2.  **API Source:** [`openstack_routers_set_external_gateway`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_routers/openstack_routers_set_external_gateway.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackRoutersSetExternalGateway } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackRoutersSetExternalGateway({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "external_network_id": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `external_network_id` | string | ✓ | Backend ID (OpenStack UUID) of the external network. |
+    | `enable_snat` | boolean |  | Whether to enable SNAT on the gateway. None means use OpenStack default (True). Requires advanced permissions. |
+    | `external_fixed_ips` | array of objects |  | List of fixed IP specifications for the gateway port. Each entry should have 'ip_address' and optionally 'subnet_id'. Requires advanced permissions. |
+
+
+=== "Responses"
+
+    **`202`** - No response body
+    
 
 ---
 

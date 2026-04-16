@@ -144,7 +144,7 @@ Get a list of volumes.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Volume ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |
@@ -279,7 +279,7 @@ Retrieve details of a specific volume.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Volume ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |
@@ -572,7 +572,7 @@ Update an existing volume.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Volume ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |
@@ -712,7 +712,7 @@ Update specific fields of a volume.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Volume ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |
@@ -1337,7 +1337,7 @@ Create snapshot from volume
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string | Snapshot ID in the OpenStack backend |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `source_volume` | string (uri) | Volume from which this snapshot was created |
     | `size` | integer | Size in MiB |
     | `metadata` | any |  |

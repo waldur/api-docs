@@ -130,7 +130,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `nodes` | array of objects |  |
     | `nodes.url` | string (uri) |  |
     | `nodes.role` | string | <br>_Enum: `agent`, `server`_ |
@@ -279,7 +279,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `nodes` | array of objects |  |
     | `nodes.url` | string (uri) |  |
     | `nodes.role` | string | <br>_Enum: `agent`, `server`_ |
@@ -441,7 +441,7 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `nodes` | array of objects |  |
     | `nodes.url` | string (uri) |  |
     | `nodes.role` | string | <br>_Enum: `agent`, `server`_ |
@@ -750,7 +750,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `nodes` | array of objects |  |
     | `nodes.url` | string (uri) |  |
     | `nodes.role` | string | <br>_Enum: `agent`, `server`_ |
@@ -906,7 +906,7 @@ Delete resource from the database without scheduling operations on backend
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `backend_id` | string |  |
-    | `access_url` | string |  |
+    | `access_url` | any |  |
     | `nodes` | array of objects |  |
     | `nodes.url` | string (uri) |  |
     | `nodes.role` | string | <br>_Enum: `agent`, `server`_ |
