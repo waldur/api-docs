@@ -249,6 +249,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_state` | any |  |
     | `offering_components` | array of objects |  |
     | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.offering_uuid` | string (uuid) |  |
     | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -438,6 +439,7 @@ Returns details of a specific resource accessible to the consumer.
     | `offering_state` | any |  |
     | `offering_components` | array of objects |  |
     | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.offering_uuid` | string (uuid) |  |
     | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1208,6 +1210,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_state` | any |  |
     | `offering_components` | array of objects |  |
     | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.offering_uuid` | string (uuid) |  |
     | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -2201,6 +2204,7 @@ Returns details of the offering connected to the requested object.
     | `resource_options` | any |  |
     | `components` | array of objects |  |
     | `components.uuid` | string (uuid) |  |
+    | `components.offering_uuid` | string (uuid) |  |
     | `components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -3206,6 +3210,7 @@ Creates marketplace orders to reallocate limits from source resource to target r
     | `offering_state` | any |  |
     | `offering_components` | array of objects |  |
     | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.offering_uuid` | string (uuid) |  |
     | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |

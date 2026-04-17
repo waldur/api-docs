@@ -1674,6 +1674,7 @@ Returns details of the offering connected to the requested object.
     | `resource_options` | any |  |
     | `components` | array of objects |  |
     | `components.uuid` | string (uuid) |  |
+    | `components.offering_uuid` | string (uuid) |  |
     | `components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1971,6 +1972,7 @@ Returns details of the resource connected to the requested object.
     | `offering_state` | any |  |
     | `offering_components` | array of objects |  |
     | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.offering_uuid` | string (uuid) |  |
     | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |

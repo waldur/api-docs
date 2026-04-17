@@ -528,6 +528,7 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `offering_state` | any |  |
     | `offering_components` | array of objects |  |
     | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.offering_uuid` | string (uuid) |  |
     | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |

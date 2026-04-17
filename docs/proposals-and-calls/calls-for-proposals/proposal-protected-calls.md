@@ -180,6 +180,7 @@
     | `offerings.options` | any |  |
     | `offerings.components` | array of objects |  |
     | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
     | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -363,6 +364,7 @@
     | `offerings.options` | any |  |
     | `offerings.components` | array of objects |  |
     | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
     | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -565,6 +567,7 @@
     | `offerings.options` | any |  |
     | `offerings.components` | array of objects |  |
     | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
     | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -983,6 +986,7 @@ Create or update applicant attribute exposure configuration.
     | `offerings.options` | any |  |
     | `offerings.components` | array of objects |  |
     | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
     | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1186,6 +1190,7 @@ Create or update applicant attribute exposure configuration.
     | `offerings.options` | any |  |
     | `offerings.components` | array of objects |  |
     | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
     | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -2646,6 +2651,7 @@ List offerings for a call.
     | `options` | any |  |
     | `components` | array of objects |  |
     | `components.uuid` | string (uuid) |  |
+    | `components.offering_uuid` | string (uuid) |  |
     | `components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -2762,6 +2768,7 @@ List offerings for a call.
     | `options` | any |  |
     | `components` | array of objects |  |
     | `components.uuid` | string (uuid) |  |
+    | `components.offering_uuid` | string (uuid) |  |
     | `components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -4682,6 +4689,7 @@ Create offering for a call.
     | `options` | any |  |
     | `components` | array of objects |  |
     | `components.uuid` | string (uuid) |  |
+    | `components.offering_uuid` | string (uuid) |  |
     | `components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -5046,6 +5054,7 @@ Mark proposal compliance as reviewed by call manager.
     | `offerings.options` | any |  |
     | `offerings.components` | array of objects |  |
     | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
     | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -5504,6 +5513,7 @@ Send invitations to all confirmed suggestions.
     | `options` | any |  |
     | `components` | array of objects |  |
     | `components.uuid` | string (uuid) |  |
+    | `components.offering_uuid` | string (uuid) |  |
     | `components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -6083,6 +6093,7 @@ Get or update matching configuration for this call.
     | `options` | any |  |
     | `components` | array of objects |  |
     | `components.uuid` | string (uuid) |  |
+    | `components.offering_uuid` | string (uuid) |  |
     | `components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |

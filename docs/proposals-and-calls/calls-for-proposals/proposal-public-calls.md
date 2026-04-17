@@ -122,6 +122,7 @@
     | `offerings.options` | any |  |
     | `offerings.components` | array of objects |  |
     | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
     | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -294,6 +295,7 @@
     | `offerings.options` | any |  |
     | `offerings.components` | array of objects |  |
     | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
     | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
     | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
