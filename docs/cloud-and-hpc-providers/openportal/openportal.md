@@ -4,12 +4,90 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| <span class="http-badge http-get">GET</span> | `/api/openportal/access_for_email/` | [Access for email](#access-for-email) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-accounting-summary/` | [List Openportal Accounting Summary](#list-openportal-accounting-summary) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-accounting-summary/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-project-storage-reports/` | [List Openportal Project Storage Reports](#list-openportal-project-storage-reports) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-project-storage-reports/{id}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-project-usage-reports/` | [List Openportal Project Usage Reports](#list-openportal-project-usage-reports) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-project-usage-reports/{id}/` | [Retrieve](#retrieve) |
+
+---
+
+### Access for email
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openportal/access_for_email/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      q=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openportal import openportal_access_for_email_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openportal_access_for_email_list.sync(
+        client=client,
+        q="string-value"
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`openportal_access_for_email_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal/openportal_access_for_email_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openportalAccessForEmailList } from 'waldur-js-client';
+    
+    try {
+      const response = await openportalAccessForEmailList({
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "q": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `q` | string | ✓ | Free text search query (email, short_name, project_name, or project_id) |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `email` | string (email) |
+    | `status` | string |
+    | `short_name` | string |
+    | `projects` | object (free-form) |
+    | `invited_by` | string |
+    | `reason` | string |
 
 ---
 
