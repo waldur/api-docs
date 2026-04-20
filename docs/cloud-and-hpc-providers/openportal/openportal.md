@@ -7,10 +7,13 @@
 | <span class="http-badge http-get">GET</span> | `/api/openportal/access_for_email/` | [Access for email](#access-for-email) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-accounting-summary/` | [List Openportal Accounting Summary](#list-openportal-accounting-summary) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-accounting-summary/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/openportal/offering_mapping/` | [Offering mapping](#offering-mapping) |
+| <span class="http-badge http-get">GET</span> | `/api/openportal/project_mapping/` | [Project mapping](#project-mapping) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-project-storage-reports/` | [List Openportal Project Storage Reports](#list-openportal-project-storage-reports) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-project-storage-reports/{id}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-project-usage-reports/` | [List Openportal Project Usage Reports](#list-openportal-project-usage-reports) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-project-usage-reports/{id}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/openportal/user_mapping/` | [User mapping](#user-mapping) |
 
 ---
 
@@ -241,6 +244,140 @@
     | `total_credits` | string (decimal) |
     | `total_spend` | string (decimal) |
     | `current_month_spend` | string (decimal) |
+
+---
+
+### Offering mapping
+
+Map OpenPortal destination strings to Waldur Offering objects. Pass each destination as a repeated 'identifier' query parameter. Returns a dict keyed by identifier; unknown destinations map to null. Accessible to all authenticated users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openportal/offering_mapping/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openportal import openportal_offering_mapping_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openportal_offering_mapping_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openportal_offering_mapping_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal/openportal_offering_mapping_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openportalOfferingMappingRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openportalOfferingMappingRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `identifier` | array | OpenPortal destination string (repeatable). |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string |
+    | `name` | string |
+    | `description` | string |
+    | `slug` | string |
+
+---
+
+### Project mapping
+
+Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each identifier as a repeated 'identifier' query parameter. Returns a dict keyed by identifier; unknown identifiers map to null. Staff and support see all projects; regular users see only projects they are a member of.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openportal/project_mapping/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openportal import openportal_project_mapping_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openportal_project_mapping_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openportal_project_mapping_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal/openportal_project_mapping_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openportalProjectMappingRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openportalProjectMappingRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `identifier` | array | OpenPortal ProjectIdentifier string (repeatable). |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string |
+    | `name` | string |
+    | `customer_uuid` | string |
+    | `customer_name` | string |
 
 ---
 
@@ -560,5 +697,72 @@
     | `report.project` | string | ProjectIdentifier string e.g. "aiproject.brics" |
     | `report.reports` | object (free-form) | "YYYY-MM-DD" → DailyProjectUsageReportJson |
     | `report.users` | object (free-form) | UserIdentifier → local_username. e.g. { "chris.aiproject.brics": "chris.aiproject" } |
+
+---
+
+### User mapping
+
+Map OpenPortal UserIdentifier strings (or email addresses) to Waldur User objects. Pass each value as a repeated 'identifier' query parameter. If the values contain '@' they are treated as email addresses (used for cached reports from remote portals); otherwise they are treated as UserIdentifier strings (used for local OpenPortal resources). Returns a dict keyed by the supplied string; unknown values map to null. Staff and support see all users; regular users may only look up users who share a project with them.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openportal/user_mapping/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openportal import openportal_user_mapping_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openportal_user_mapping_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openportal_user_mapping_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal/openportal_user_mapping_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openportalUserMappingRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openportalUserMappingRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `identifier` | array | OpenPortal UserIdentifier string or email address (repeatable). All values in a single request must be the same type. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string |
+    | `full_name` | string |
+    | `email` | string (email) |
+    | `username` | string |
 
 ---
