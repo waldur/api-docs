@@ -199,6 +199,7 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `house_nr` | string |  |
     | `apartment_nr` | string |  |
     | `household` | string |  |
+    | `project_slug_template` | string | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |
@@ -355,6 +356,7 @@ Fetch the details of a specific customer by its UUID.
     | `house_nr` | string |  |
     | `apartment_nr` | string |  |
     | `household` | string |  |
+    | `project_slug_template` | string | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |
@@ -485,6 +487,7 @@ A new customer can only be created by users with staff privilege.
     | `house_nr` | string |  |  |
     | `apartment_nr` | string |  |  |
     | `household` | string |  |  |
+    | `project_slug_template` | string |  | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
 
 
 === "Responses"
@@ -551,6 +554,7 @@ A new customer can only be created by users with staff privilege.
     | `house_nr` | string |  |
     | `apartment_nr` | string |  |
     | `household` | string |  |
+    | `project_slug_template` | string | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |
@@ -692,6 +696,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `house_nr` | string |  |  |
     | `apartment_nr` | string |  |  |
     | `household` | string |  |  |
+    | `project_slug_template` | string |  | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
 
 
 === "Responses"
@@ -758,6 +763,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `house_nr` | string |  |
     | `apartment_nr` | string |  |
     | `household` | string |  |
+    | `project_slug_template` | string | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |
@@ -986,6 +992,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `house_nr` | string |  |  |
     | `apartment_nr` | string |  |  |
     | `household` | string |  |  |
+    | `project_slug_template` | string |  | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
 
 
 === "Responses"
@@ -1052,6 +1059,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `house_nr` | string |  |
     | `apartment_nr` | string |  |
     | `household` | string |  |
+    | `project_slug_template` | string | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |

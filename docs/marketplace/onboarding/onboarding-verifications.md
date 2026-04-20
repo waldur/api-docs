@@ -510,6 +510,7 @@ Create customer from successful verification.
     | `house_nr` | string |  |
     | `apartment_nr` | string |  |
     | `household` | string |  |
+    | `project_slug_template` | string | Template for project slugs. Supports: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Default: slugified project name |
     | `payment_profiles` | array of objects |  |
     | `payment_profiles.uuid` | string (uuid) |  |
     | `payment_profiles.url` | string (uri) |  |

@@ -10,6 +10,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/chat-sessions/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/` | [List Chat Threads](#list-chat-threads) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-messages/{uuid}/feedback/` | [Submit or update feedback for an assistant message](#submit-or-update-feedback-for-an-assistant-message) |
 | <span class="http-badge http-post">POST</span> | `/api/chat/stream/` | [Stream](#stream) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/archive/` | [Archive thread](#archive-thread) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/cancel/` | [Cancel active stream](#cancel-active-stream) |
@@ -67,6 +68,7 @@
 
     | Name | Type |
     |---|---|
+    | `feedback_score` | boolean |
     | `include_history` | boolean |
     | `is_flagged` | boolean |
     | `thread` | string (uuid) |
@@ -78,26 +80,30 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `thread` | string (uuid) |
-    | `role` | any |
-    | `blocks` | array of objects |
-    | `blocks.id` | string |
-    | `blocks.key` | string |
-    | `blocks.status` | string |
-    | `warning` | string |
-    | `sequence_index` | integer |
-    | `replaces` | string (uuid) |
-    | `created` | string (date-time) |
-    | `input_tokens` | integer |
-    | `output_tokens` | integer |
-    | `is_flagged` | boolean |
-    | `severity` | any |
-    | `injection_categories` | any |
-    | `pii_categories` | any |
-    | `action_taken` | any |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `thread` | string (uuid) |  |
+    | `role` | any |  |
+    | `blocks` | array of objects |  |
+    | `blocks.id` | string |  |
+    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `resource_list`, `homeport_nav`, `tool`_ |
+    | `blocks.status` | string |  |
+    | `warning` | string |  |
+    | `sequence_index` | integer |  |
+    | `replaces` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `input_tokens` | integer |  |
+    | `output_tokens` | integer |  |
+    | `is_flagged` | boolean |  |
+    | `severity` | any |  |
+    | `injection_categories` | any |  |
+    | `pii_categories` | any |  |
+    | `action_taken` | any |  |
+    | `feedback_score` | boolean | User feedback: True=thumbs up, False=thumbs down, None=no feedback. |
+    | `feedback_comment` | string | Optional user comment accompanying feedback. |
+    | `feedback_category` | any | Category tag when feedback_score is False (thumbs down); null otherwise. |
+    | `feedback_submitted_at` | string (date-time) | Timestamp of the most recent feedback submission; overwritten on resubmit. |
 
 ---
 
@@ -379,6 +385,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     |---|---|---|
     | `created` | string (date) |  |
     | `field` | array |  |
+    | `has_feedback` | boolean |  |
     | `input_tokens_max` | number |  |
     | `input_tokens_min` | number |  |
     | `is_archived` | boolean |  |
@@ -418,6 +425,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `title_gen_output_tokens` | integer |
     | `is_flagged` | boolean |
     | `max_severity` | any |
+    | `has_feedback` | boolean |
     | `user_username` | string |
     | `user_full_name` | string |
     | `created` | string (date-time) |
@@ -511,10 +519,120 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `title_gen_output_tokens` | integer |
     | `is_flagged` | boolean |
     | `max_severity` | any |
+    | `has_feedback` | boolean |
     | `user_username` | string |
     | `user_full_name` | string |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+---
+
+### Submit or update feedback for an assistant message
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-messages/a1b2c3d4-e5f6-7890-abcd-ef1234567890/feedback/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      score=true
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.message_feedback_request import MessageFeedbackRequest # (1)
+    from waldur_api_client.api.chat_messages import chat_messages_feedback # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = MessageFeedbackRequest(
+        score=true
+    )
+    response = chat_messages_feedback.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`MessageFeedbackRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/message_feedback_request.py)
+    2.  **API Source:** [`chat_messages_feedback`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_messages/chat_messages_feedback.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatMessagesFeedback } from 'waldur-js-client';
+    
+    try {
+      const response = await chatMessagesFeedback({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "score": true
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `score` | boolean | ✓ | Feedback score: true=thumbs up, false=thumbs down. |
+    | `comment` | string |  | Optional comment. |
+    | `category` | any |  | Optional category tag (only accepted when score=false). |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `thread` | string (uuid) |  |
+    | `role` | any |  |
+    | `blocks` | array of objects |  |
+    | `blocks.id` | string |  |
+    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `resource_list`, `homeport_nav`, `tool`_ |
+    | `blocks.status` | string |  |
+    | `warning` | string |  |
+    | `sequence_index` | integer |  |
+    | `replaces` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `input_tokens` | integer |  |
+    | `output_tokens` | integer |  |
+    | `is_flagged` | boolean |  |
+    | `severity` | any |  |
+    | `injection_categories` | any |  |
+    | `pii_categories` | any |  |
+    | `action_taken` | any |  |
+    | `feedback_score` | boolean | User feedback: True=thumbs up, False=thumbs down, None=no feedback. |
+    | `feedback_comment` | string | Optional user comment accompanying feedback. |
+    | `feedback_category` | any | Category tag when feedback_score is False (thumbs down); null otherwise. |
+    | `feedback_submitted_at` | string (date-time) | Timestamp of the most recent feedback submission; overwritten on resubmit. |
 
 ---
 
