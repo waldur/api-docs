@@ -502,14 +502,14 @@ Assigns a project to one or more affiliated organizations. Replaces the current 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.affiliated_organizations_update_request import AffiliatedOrganizationsUpdateRequest # (1)
+    from waldur_api_client.models.project_affiliated_organizations_update_request import ProjectAffiliatedOrganizationsUpdateRequest # (1)
     from waldur_api_client.api.projects import projects_update_affiliated_organizations # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = AffiliatedOrganizationsUpdateRequest()
+    body_data = ProjectAffiliatedOrganizationsUpdateRequest()
     response = projects_update_affiliated_organizations.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -520,7 +520,7 @@ Assigns a project to one or more affiliated organizations. Replaces the current 
     ```
     
     
-    1.  **Model Source:** [`AffiliatedOrganizationsUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/affiliated_organizations_update_request.py)
+    1.  **Model Source:** [`ProjectAffiliatedOrganizationsUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_affiliated_organizations_update_request.py)
     2.  **API Source:** [`projects_update_affiliated_organizations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/projects/projects_update_affiliated_organizations.py)
 
 === "TypeScript"

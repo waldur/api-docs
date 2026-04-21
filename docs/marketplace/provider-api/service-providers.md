@@ -489,7 +489,6 @@ Returns a paginated list of SSH public keys for all users who have consumed reso
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `user_uuid` | string (uuid) | User UUID |
-    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"

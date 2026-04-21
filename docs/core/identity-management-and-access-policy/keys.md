@@ -86,7 +86,6 @@
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `user_uuid` | string (uuid) | User UUID |
-    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"
@@ -527,7 +526,6 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `user_uuid` | string (uuid) | User UUID |
-    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"

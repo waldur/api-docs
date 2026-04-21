@@ -1842,6 +1842,13 @@ Returns a list of users connected to the project of this resource, including the
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `has_consent` | boolean | When true, return only users who have active consent for this offering. |
+
+
 === "Responses"
 
     **`200`** - 

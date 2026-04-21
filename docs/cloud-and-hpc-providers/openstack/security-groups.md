@@ -100,7 +100,6 @@ Get a list of security groups.
     | `state` | array | State<br><br> |
     | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
-    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"

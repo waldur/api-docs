@@ -106,7 +106,6 @@ Get a list of networks.
     | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
     | `type` | string |  |
-    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"

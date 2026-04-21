@@ -86,7 +86,6 @@
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
     | `state` | array | State<br><br> |
-    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"

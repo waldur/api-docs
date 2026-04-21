@@ -101,7 +101,6 @@ Get a list of instance backups.
     | `state` | array | State<br><br> |
     | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
-    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"

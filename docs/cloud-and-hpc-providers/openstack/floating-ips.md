@@ -102,7 +102,6 @@ Get a list of floating IP addresses. Status *DOWN* means that floating IP is not
     | `state` | array | State<br><br> |
     | `tenant` | string (uri) | Tenant URL |
     | `tenant_uuid` | string (uuid) | Tenant UUID |
-    | `uuid` | string (uuid) | UUID |
 
 
 === "Responses"
