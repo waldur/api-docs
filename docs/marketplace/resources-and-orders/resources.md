@@ -1739,10 +1739,11 @@ Creates a marketplace order to update the limits (e.g., CPU, RAM) for a resource
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `limits` | object (free-form) | ✓ |
-    | `request_comment` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `limits` | object (free-form) | ✓ |  |
+    | `request_comment` | string |  |  |
+    | `attachment` | string (binary) |  | Optional PDF attachment for the limit update request. |
 
 
 === "Responses"

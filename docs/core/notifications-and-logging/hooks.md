@@ -57,10 +57,15 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `author_uuid` | string (uuid) | Filter by author UUID. |
-    | `is_active` | boolean | Filter by active status. |
+    | `author_email` | string |  |
+    | `author_fullname` | string | User full name contains |
+    | `author_username` | string |  |
+    | `author_uuid` | string (uuid) |  |
+    | `is_active` | boolean |  |
+    | `last_published` | string (date-time) |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string | Filter by author name, username and email |
 
 
 === "Responses"
