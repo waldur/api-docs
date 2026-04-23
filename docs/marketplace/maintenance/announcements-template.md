@@ -91,12 +91,12 @@ Returns a paginated list of reusable templates for maintenance announcements.
     | `affected_offerings` | array of objects |  |
     | `affected_offerings.url` | string (uri) |  |
     | `affected_offerings.uuid` | string (uuid) |  |
-    | `affected_offerings.maintenance` | string (uri) |  |
+    | `affected_offerings.maintenance_template` | string (uri) |  |
     | `affected_offerings.offering` | string (uri) |  |
-    | `affected_offerings.impact_level` | any | Expected impact on this offering |
-    | `affected_offerings.impact_level_display` | any |  |
-    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
     | `affected_offerings.offering_name` | string |  |
+    | `affected_offerings.offering_uuid` | string (uuid) |  |
+    | `affected_offerings.impact_level` | any | Expected impact on this offering |
+    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
 
 ---
 
@@ -175,12 +175,12 @@ Returns the details of a specific maintenance announcement template.
     | `affected_offerings` | array of objects |  |
     | `affected_offerings.url` | string (uri) |  |
     | `affected_offerings.uuid` | string (uuid) |  |
-    | `affected_offerings.maintenance` | string (uri) |  |
+    | `affected_offerings.maintenance_template` | string (uri) |  |
     | `affected_offerings.offering` | string (uri) |  |
-    | `affected_offerings.impact_level` | any | Expected impact on this offering |
-    | `affected_offerings.impact_level_display` | any |  |
-    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
     | `affected_offerings.offering_name` | string |  |
+    | `affected_offerings.offering_uuid` | string (uuid) |  |
+    | `affected_offerings.impact_level` | any | Expected impact on this offering |
+    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
 
 ---
 
@@ -272,12 +272,12 @@ Creates a new reusable template for maintenance announcements, including a defau
     | `affected_offerings` | array of objects |  |
     | `affected_offerings.url` | string (uri) |  |
     | `affected_offerings.uuid` | string (uuid) |  |
-    | `affected_offerings.maintenance` | string (uri) |  |
+    | `affected_offerings.maintenance_template` | string (uri) |  |
     | `affected_offerings.offering` | string (uri) |  |
-    | `affected_offerings.impact_level` | any | Expected impact on this offering |
-    | `affected_offerings.impact_level_display` | any |  |
-    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
     | `affected_offerings.offering_name` | string |  |
+    | `affected_offerings.offering_uuid` | string (uuid) |  |
+    | `affected_offerings.impact_level` | any | Expected impact on this offering |
+    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
 
 ---
 
@@ -380,12 +380,12 @@ Updates an existing maintenance announcement template.
     | `affected_offerings` | array of objects |  |
     | `affected_offerings.url` | string (uri) |  |
     | `affected_offerings.uuid` | string (uuid) |  |
-    | `affected_offerings.maintenance` | string (uri) |  |
+    | `affected_offerings.maintenance_template` | string (uri) |  |
     | `affected_offerings.offering` | string (uri) |  |
-    | `affected_offerings.impact_level` | any | Expected impact on this offering |
-    | `affected_offerings.impact_level_display` | any |  |
-    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
     | `affected_offerings.offering_name` | string |  |
+    | `affected_offerings.offering_uuid` | string (uuid) |  |
+    | `affected_offerings.impact_level` | any | Expected impact on this offering |
+    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
 
 ---
 
@@ -479,12 +479,12 @@ Partially updates an existing maintenance announcement template.
     | `affected_offerings` | array of objects |  |
     | `affected_offerings.url` | string (uri) |  |
     | `affected_offerings.uuid` | string (uuid) |  |
-    | `affected_offerings.maintenance` | string (uri) |  |
+    | `affected_offerings.maintenance_template` | string (uri) |  |
     | `affected_offerings.offering` | string (uri) |  |
-    | `affected_offerings.impact_level` | any | Expected impact on this offering |
-    | `affected_offerings.impact_level_display` | any |  |
-    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
     | `affected_offerings.offering_name` | string |  |
+    | `affected_offerings.offering_uuid` | string (uuid) |  |
+    | `affected_offerings.impact_level` | any | Expected impact on this offering |
+    | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
 
 ---
 

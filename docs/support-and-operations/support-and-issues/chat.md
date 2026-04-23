@@ -8,13 +8,21 @@
 | <span class="http-badge http-get">GET</span> | `/api/chat-sessions/current/` | [Get or create current user's chat session](#get-or-create-current-users-chat-session) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-sessions/` | [List Chat Sessions](#list-chat-sessions) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-sessions/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-system-prompts/` | [List Chat System Prompts](#list-chat-system-prompts) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-system-prompts/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/` | [List Chat Threads](#list-chat-threads) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-messages/{uuid}/feedback/` | [Submit or update feedback for an assistant message](#submit-or-update-feedback-for-an-assistant-message) |
 | <span class="http-badge http-post">POST</span> | `/api/chat/stream/` | [Stream](#stream) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-system-prompts/{uuid}/activate/` | [Activate a system prompt](#activate-a-system-prompt) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-system-prompts/` | [Create](#create) |
+| <span class="http-badge http-post">POST</span> | `/api/chat-system-prompts/{uuid}/deactivate/` | [Deactivate the active system prompt](#deactivate-the-active-system-prompt) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/archive/` | [Archive thread](#archive-thread) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/cancel/` | [Cancel active stream](#cancel-active-stream) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-threads/{uuid}/unarchive/` | [Unarchive thread](#unarchive-thread) |
+| <span class="http-badge http-put">PUT</span> | `/api/chat-system-prompts/{uuid}/` | [Update](#update) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/chat-system-prompts/{uuid}/` | [Partial Update](#partial-update) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/chat-system-prompts/{uuid}/` | [Delete](#delete) |
 
 ---
 
@@ -322,6 +330,152 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `user_full_name` | string |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+---
+
+### List Chat System Prompts
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-system-prompts/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_system_prompts import chat_system_prompts_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_system_prompts_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`chat_system_prompts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_system_prompts/chat_system_prompts_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSystemPromptsList } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSystemPromptsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-system-prompts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_system_prompts import chat_system_prompts_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_system_prompts_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`chat_system_prompts_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_system_prompts/chat_system_prompts_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSystemPromptsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSystemPromptsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 
@@ -711,6 +865,281 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
 ---
 
+### Activate a system prompt
+
+Set this prompt as the active one. Deactivates any currently active prompt.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-system-prompts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/activate/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-chat-system-prompt"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.system_prompt_request import SystemPromptRequest # (1)
+    from waldur_api_client.api.chat_system_prompts import chat_system_prompts_activate # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SystemPromptRequest(
+        name="my-awesome-chat-system-prompt"
+    )
+    response = chat_system_prompts_activate.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SystemPromptRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_prompt_request.py)
+    2.  **API Source:** [`chat_system_prompts_activate`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_system_prompts/chat_system_prompts_activate.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSystemPromptsActivate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSystemPromptsActivate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "name": "my-awesome-chat-system-prompt"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Create
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-system-prompts/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-chat-system-prompt"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.system_prompt_request import SystemPromptRequest # (1)
+    from waldur_api_client.api.chat_system_prompts import chat_system_prompts_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SystemPromptRequest(
+        name="my-awesome-chat-system-prompt"
+    )
+    response = chat_system_prompts_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SystemPromptRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_prompt_request.py)
+    2.  **API Source:** [`chat_system_prompts_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_system_prompts/chat_system_prompts_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSystemPromptsCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSystemPromptsCreate({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "name": "my-awesome-chat-system-prompt"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Deactivate the active system prompt
+
+Deactivate this prompt. The system will fall back to Constance overrides or built-in defaults.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/chat-system-prompts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/deactivate/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-chat-system-prompt"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.system_prompt_request import SystemPromptRequest # (1)
+    from waldur_api_client.api.chat_system_prompts import chat_system_prompts_deactivate # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SystemPromptRequest(
+        name="my-awesome-chat-system-prompt"
+    )
+    response = chat_system_prompts_deactivate.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SystemPromptRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_prompt_request.py)
+    2.  **API Source:** [`chat_system_prompts_deactivate`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_system_prompts/chat_system_prompts_deactivate.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSystemPromptsDeactivate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSystemPromptsDeactivate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "name": "my-awesome-chat-system-prompt"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
 ### Archive thread
 
 Archive a thread (soft delete).
@@ -942,6 +1371,253 @@ Restore an archived thread.
     |---|---|---|
     | `name` | string |  |
     | `is_archived` | boolean |  |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/chat-system-prompts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-chat-system-prompt"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.system_prompt_request import SystemPromptRequest # (1)
+    from waldur_api_client.api.chat_system_prompts import chat_system_prompts_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SystemPromptRequest(
+        name="my-awesome-chat-system-prompt"
+    )
+    response = chat_system_prompts_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SystemPromptRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/system_prompt_request.py)
+    2.  **API Source:** [`chat_system_prompts_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_system_prompts/chat_system_prompts_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSystemPromptsUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSystemPromptsUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "name": "my-awesome-chat-system-prompt"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `description` | string |  |  |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Partial Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/chat-system-prompts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_system_prompt_request import PatchedSystemPromptRequest # (1)
+    from waldur_api_client.api.chat_system_prompts import chat_system_prompts_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedSystemPromptRequest()
+    response = chat_system_prompts_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedSystemPromptRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_system_prompt_request.py)
+    2.  **API Source:** [`chat_system_prompts_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_system_prompts/chat_system_prompts_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSystemPromptsPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSystemPromptsPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string |  |  |
+    | `description` | string |  |  |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Delete
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/chat-system-prompts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.chat_system_prompts import chat_system_prompts_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_system_prompts_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`chat_system_prompts_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_system_prompts/chat_system_prompts_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatSystemPromptsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await chatSystemPromptsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
 
 
 === "Responses"
