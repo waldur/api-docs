@@ -158,6 +158,9 @@ Get a list of snapshots.
     | `restorations.volume_runtime_state` | string |  |
     | `restorations.volume_size` | integer | Size in MiB |
     | `restorations.volume_device` | string | Name of volume as instance device e.g. /dev/vdb. |
+    | `backups` | array of objects |  |
+    | `backups.uuid` | string (uuid) |  |
+    | `backups.name` | string |  |
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -291,6 +294,9 @@ Retrieve details of a specific snapshot.
     | `restorations.volume_runtime_state` | string |  |
     | `restorations.volume_size` | integer | Size in MiB |
     | `restorations.volume_device` | string | Name of volume as instance device e.g. /dev/vdb. |
+    | `backups` | array of objects |  |
+    | `backups.uuid` | string (uuid) |  |
+    | `backups.name` | string |  |
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -583,6 +589,9 @@ Update an existing snapshot.
     | `restorations.volume_runtime_state` | string |  |
     | `restorations.volume_size` | integer | Size in MiB |
     | `restorations.volume_device` | string | Name of volume as instance device e.g. /dev/vdb. |
+    | `backups` | array of objects |  |
+    | `backups.uuid` | string (uuid) |  |
+    | `backups.name` | string |  |
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -722,6 +731,9 @@ Update specific fields of a snapshot.
     | `restorations.volume_runtime_state` | string |  |
     | `restorations.volume_size` | integer | Size in MiB |
     | `restorations.volume_device` | string | Name of volume as instance device e.g. /dev/vdb. |
+    | `backups` | array of objects |  |
+    | `backups.uuid` | string (uuid) |  |
+    | `backups.name` | string |  |
     | `kept_until` | string (date-time) | Guaranteed time of snapshot retention. If null - keep forever. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |

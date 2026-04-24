@@ -35,7 +35,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.science_domains import science_domains_list # (1)
+    from waldur_api_client.models.science_domain_o_enum import ScienceDomainOEnum # (1)
+    from waldur_api_client.api.science_domains import science_domains_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -47,7 +48,8 @@
     ```
     
     
-    1.  **API Source:** [`science_domains_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_domains/science_domains_list.py)
+    1.  **Model Source:** [`ScienceDomainOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/science_domain_o_enum.py)
+    2.  **API Source:** [`science_domains_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_domains/science_domains_list.py)
 
 === "TypeScript"
 
@@ -71,7 +73,7 @@
     |---|---|---|
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
-    | `o` | string | Which field to use when ordering the results. |
+    | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
 
@@ -514,7 +516,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.science_domains import science_domains_presets_list # (1)
+    from waldur_api_client.models.science_domain_o_enum import ScienceDomainOEnum # (1)
+    from waldur_api_client.api.science_domains import science_domains_presets_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -526,7 +529,8 @@
     ```
     
     
-    1.  **API Source:** [`science_domains_presets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_domains/science_domains_presets_list.py)
+    1.  **Model Source:** [`ScienceDomainOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/science_domain_o_enum.py)
+    2.  **API Source:** [`science_domains_presets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_domains/science_domains_presets_list.py)
 
 === "TypeScript"
 
@@ -550,7 +554,7 @@
     |---|---|---|
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
-    | `o` | string | Which field to use when ordering the results. |
+    | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
 
