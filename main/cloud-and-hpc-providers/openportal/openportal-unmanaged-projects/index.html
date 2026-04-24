@@ -12971,7 +12971,7 @@
   <span class="md-ellipsis">
     
   
-    System logs
+    Science domains
   
 
     
@@ -12984,6 +12984,178 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Science domains
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../uncategorized/science-domains/science-domains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Science Domains
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_12" id="__nav_9_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Science sub domains
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Science sub domains
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../uncategorized/science-sub-domains/science-sub-domains/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Science Sub Domains
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_13" id="__nav_9_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System logs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_13">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -13667,6 +13839,16 @@
 <td>Filter by name, slug, UUID, backend ID or resource effective ID</td>
 </tr>
 <tr>
+<td><code>science_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td>Science domain UUID</td>
+</tr>
+<tr>
+<td><code>science_sub_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td>Science sub-domain UUID</td>
+</tr>
+<tr>
 <td><code>slug</code></td>
 <td>string</td>
 <td>Slug</td>
@@ -13955,6 +14137,36 @@
 <td><code>affiliated_organizations.projects_count</code></td>
 <td>integer</td>
 <td>Number of active projects affiliated with this organization</td>
+</tr>
+<tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_code</code></td>
+<td>string</td>
+<td>Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank.</td>
+</tr>
+<tr>
+<td><code>science_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_code</code></td>
+<td>string</td>
+<td>Domain code (e.g. '1'). Auto-derived if left blank.</td>
 </tr>
 <tr>
 <td><code>project_credit</code></td>
@@ -14357,6 +14569,36 @@
 <td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_code</code></td>
+<td>string</td>
+<td>Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank.</td>
+</tr>
+<tr>
+<td><code>science_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_code</code></td>
+<td>string</td>
+<td>Domain code (e.g. '1'). Auto-derived if left blank.</td>
+</tr>
+<tr>
 <td><code>project_credit</code></td>
 <td>number (double)</td>
 <td></td>
@@ -14579,6 +14821,12 @@
 <td>any</td>
 <td></td>
 <td>List of allowed identity sources (identity providers).</td>
+</tr>
+<tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -14853,6 +15101,36 @@
 <td><code>affiliated_organizations.projects_count</code></td>
 <td>integer</td>
 <td>Number of active projects affiliated with this organization</td>
+</tr>
+<tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_code</code></td>
+<td>string</td>
+<td>Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank.</td>
+</tr>
+<tr>
+<td><code>science_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_code</code></td>
+<td>string</td>
+<td>Domain code (e.g. '1'). Auto-derived if left blank.</td>
 </tr>
 <tr>
 <td><code>project_credit</code></td>
@@ -15226,6 +15504,12 @@
 <td></td>
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
+<tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -15499,6 +15783,36 @@
 <td><code>affiliated_organizations.projects_count</code></td>
 <td>integer</td>
 <td>Number of active projects affiliated with this organization</td>
+</tr>
+<tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_code</code></td>
+<td>string</td>
+<td>Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank.</td>
+</tr>
+<tr>
+<td><code>science_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_code</code></td>
+<td>string</td>
+<td>Domain code (e.g. '1'). Auto-derived if left blank.</td>
 </tr>
 <tr>
 <td><code>project_credit</code></td>
@@ -15732,6 +16046,12 @@
 <td></td>
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
+<tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -16005,6 +16325,36 @@
 <td><code>affiliated_organizations.projects_count</code></td>
 <td>integer</td>
 <td>Number of active projects affiliated with this organization</td>
+</tr>
+<tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_code</code></td>
+<td>string</td>
+<td>Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank.</td>
+</tr>
+<tr>
+<td><code>science_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_code</code></td>
+<td>string</td>
+<td>Domain code (e.g. '1'). Auto-derived if left blank.</td>
 </tr>
 <tr>
 <td><code>project_credit</code></td>
@@ -18197,6 +18547,36 @@
 <td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_code</code></td>
+<td>string</td>
+<td>Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank.</td>
+</tr>
+<tr>
+<td><code>science_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_code</code></td>
+<td>string</td>
+<td>Domain code (e.g. '1'). Auto-derived if left blank.</td>
+</tr>
+<tr>
 <td><code>project_credit</code></td>
 <td>number (double)</td>
 <td></td>
@@ -18619,6 +18999,36 @@
 <td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
+<td><code>science_sub_domain</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_sub_domain_code</code></td>
+<td>string</td>
+<td>Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank.</td>
+</tr>
+<tr>
+<td><code>science_domain_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>science_domain_code</code></td>
+<td>string</td>
+<td>Domain code (e.g. '1'). Auto-derived if left blank.</td>
+</tr>
+<tr>
 <td><code>project_credit</code></td>
 <td>number (double)</td>
 <td></td>
@@ -18845,7 +19255,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-04-21
+    2026-04-24
   </span>
 
     
