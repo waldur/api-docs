@@ -142,6 +142,10 @@
     | `call_managing_organisation_uuid` | string (uuid) |  |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string |  |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
     | `allocation_comment` | string |  |
     | `created` | string (date-time) |  |
     | `compliance_status` | object (free-form) |  |
@@ -241,6 +245,10 @@
     | `call_managing_organisation_uuid` | string (uuid) |  |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string |  |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
     | `allocation_comment` | string |  |
     | `created` | string (date-time) |  |
     | `compliance_status` | object (free-form) |  |
@@ -321,6 +329,7 @@
     | `duration_in_days` | integer |  | Duration in days after provisioning of resources. |
     | `round_uuid` | string (uuid) | ✓ | <br>_Constraints: write-only_ |
     | `oecd_fos_2007_code` | any |  |  |
+    | `science_sub_domain` | string (uuid) |  |  |
 
 
 === "Responses"
@@ -357,6 +366,10 @@
     | `call_managing_organisation_uuid` | string (uuid) |  |
     | `oecd_fos_2007_code` | any |  |
     | `oecd_fos_2007_label` | string |  |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
     | `allocation_comment` | string |  |
     | `created` | string (date-time) |  |
     | `compliance_status` | object (free-form) |  |

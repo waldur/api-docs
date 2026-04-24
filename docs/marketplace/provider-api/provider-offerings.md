@@ -827,6 +827,7 @@ Creates a new provider offering.
     | `plugin_options.storage_mode` | any |  | Storage mode for OpenStack offering |
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
+    | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
@@ -5664,6 +5665,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.storage_mode` | any |  | Storage mode for OpenStack offering |
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
+    | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
@@ -6802,6 +6804,12 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |

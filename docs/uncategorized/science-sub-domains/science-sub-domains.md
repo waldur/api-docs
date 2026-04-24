@@ -1,0 +1,521 @@
+# Science Sub Domains
+
+## Operations Summary
+
+| Method | Endpoint | Description |
+|:--- |:--- |:--- |
+| <span class="http-badge http-get">GET</span> | `/api/science-sub-domains/` | [List Science Sub Domains](#list-science-sub-domains) |
+| <span class="http-badge http-get">GET</span> | `/api/science-sub-domains/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-post">POST</span> | `/api/science-sub-domains/` | [Create](#create) |
+| <span class="http-badge http-put">PUT</span> | `/api/science-sub-domains/{uuid}/` | [Update](#update) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/science-sub-domains/{uuid}/` | [Partial Update](#partial-update) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/science-sub-domains/{uuid}/` | [Delete](#delete) |
+
+---
+
+### List Science Sub Domains
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/science-sub-domains/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.science_sub_domains import science_sub_domains_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = science_sub_domains_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`science_sub_domains_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_sub_domains/science_sub_domains_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { scienceSubDomainsList } from 'waldur-js-client';
+    
+    try {
+      const response = await scienceSubDomainsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `domain_name` | string | Domain name |
+    | `domain_uuid` | string (uuid) | Domain UUID |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `o` | string | Which field to use when ordering the results. |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `name` | string |  |
+    | `domain` | string (uri) |  |
+    | `domain_uuid` | string (uuid) |  |
+    | `domain_name` | string |  |
+    | `domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `projects_count` | integer | Number of active projects using this sub-domain |
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/science-sub-domains/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.science_sub_domains import science_sub_domains_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = science_sub_domains_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`science_sub_domains_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_sub_domains/science_sub_domains_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { scienceSubDomainsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await scienceSubDomainsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `name` | string |  |
+    | `domain` | string (uri) |  |
+    | `domain_uuid` | string (uuid) |  |
+    | `domain_name` | string |  |
+    | `domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `projects_count` | integer | Number of active projects using this sub-domain |
+
+---
+
+### Create
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/science-sub-domains/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-science-sub-domain" \
+      domain="https://api.example.com/api/domain/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.science_sub_domain_request import ScienceSubDomainRequest # (1)
+    from waldur_api_client.api.science_sub_domains import science_sub_domains_create # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ScienceSubDomainRequest(
+        name="my-awesome-science-sub-domain",
+        domain="https://api.example.com/api/domain/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    )
+    response = science_sub_domains_create.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ScienceSubDomainRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/science_sub_domain_request.py)
+    2.  **API Source:** [`science_sub_domains_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_sub_domains/science_sub_domains_create.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { scienceSubDomainsCreate } from 'waldur-js-client';
+    
+    try {
+      const response = await scienceSubDomainsCreate({
+      auth: "Token YOUR_API_TOKEN",
+      body: {
+        "name": "my-awesome-science-sub-domain",
+        "domain": "https://api.example.com/api/domain/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `code` | string |  | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `name` | string | ✓ |  |
+    | `domain` | string (uri) | ✓ |  |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `name` | string |  |
+    | `domain` | string (uri) |  |
+    | `domain_uuid` | string (uuid) |  |
+    | `domain_name` | string |  |
+    | `domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `projects_count` | integer | Number of active projects using this sub-domain |
+
+---
+
+### Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/science-sub-domains/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-science-sub-domain" \
+      domain="https://api.example.com/api/domain/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.science_sub_domain_request import ScienceSubDomainRequest # (1)
+    from waldur_api_client.api.science_sub_domains import science_sub_domains_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ScienceSubDomainRequest(
+        name="my-awesome-science-sub-domain",
+        domain="https://api.example.com/api/domain/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    )
+    response = science_sub_domains_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ScienceSubDomainRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/science_sub_domain_request.py)
+    2.  **API Source:** [`science_sub_domains_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_sub_domains/science_sub_domains_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { scienceSubDomainsUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await scienceSubDomainsUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "name": "my-awesome-science-sub-domain",
+        "domain": "https://api.example.com/api/domain/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `code` | string |  | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `name` | string | ✓ |  |
+    | `domain` | string (uri) | ✓ |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `name` | string |  |
+    | `domain` | string (uri) |  |
+    | `domain_uuid` | string (uuid) |  |
+    | `domain_name` | string |  |
+    | `domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `projects_count` | integer | Number of active projects using this sub-domain |
+
+---
+
+### Partial Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/science-sub-domains/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_science_sub_domain_request import PatchedScienceSubDomainRequest # (1)
+    from waldur_api_client.api.science_sub_domains import science_sub_domains_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedScienceSubDomainRequest()
+    response = science_sub_domains_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedScienceSubDomainRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_science_sub_domain_request.py)
+    2.  **API Source:** [`science_sub_domains_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_sub_domains/science_sub_domains_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { scienceSubDomainsPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await scienceSubDomainsPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `code` | string |  | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `name` | string |  |  |
+    | `domain` | string (uri) |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `name` | string |  |
+    | `domain` | string (uri) |  |
+    | `domain_uuid` | string (uuid) |  |
+    | `domain_name` | string |  |
+    | `domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `projects_count` | integer | Number of active projects using this sub-domain |
+
+---
+
+### Delete
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/science-sub-domains/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.science_sub_domains import science_sub_domains_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = science_sub_domains_destroy.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`science_sub_domains_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/science_sub_domains/science_sub_domains_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { scienceSubDomainsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await scienceSubDomainsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---

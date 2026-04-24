@@ -254,6 +254,8 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `page_size` | integer |  | Number of results to return per page. |
     | `project_customer_uuid` | string (uuid) | ✓ | UUID of the customer to filter projects by. |
     | `query` | string |  | Filter by name, slug, UUID, backend ID or resource effective ID |
+    | `science_domain_uuid` | string (uuid) |  | Science domain UUID |
+    | `science_sub_domain_uuid` | string (uuid) |  | Science sub-domain UUID |
     | `slug` | string |  | Slug |
     | `user_uuid_with_active_role` | string (uuid) |  | Filter projects where the given user has a role. |
 
@@ -1249,6 +1251,8 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, slug, UUID, backend ID or resource effective ID |
+    | `science_domain_uuid` | string (uuid) | Science domain UUID |
+    | `science_sub_domain_uuid` | string (uuid) | Science sub-domain UUID |
     | `slug` | string | Slug |
     | `user_uuid_with_active_role` | string (uuid) | Filter projects where the given user has a role. |
 
@@ -1313,6 +1317,12 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |

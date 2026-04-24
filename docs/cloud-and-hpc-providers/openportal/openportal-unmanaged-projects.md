@@ -112,6 +112,8 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `query` | string | Filter by name, slug, UUID, backend ID or resource effective ID |
+    | `science_domain_uuid` | string (uuid) | Science domain UUID |
+    | `science_sub_domain_uuid` | string (uuid) | Science sub-domain UUID |
     | `slug` | string | Slug |
     | `user_uuid` | string (uuid) | Filter by user UUID. |
     | `user_uuid_with_active_role` | string (uuid) | Filter projects where the given user has a role. |
@@ -177,6 +179,12 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -310,6 +318,12 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -400,6 +414,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `science_sub_domain` | string (uuid) |  |  |
 
 
 === "Responses"
@@ -460,6 +475,12 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -640,6 +661,7 @@ Update the details of a project. Requires project administrator or customer owne
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `science_sub_domain` | string (uuid) |  |  |
 
 
 === "Responses"
@@ -700,6 +722,12 @@ Update the details of a project. Requires project administrator or customer owne
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -792,6 +820,7 @@ Partially update the details of a project. Requires project administrator or cus
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `science_sub_domain` | string (uuid) |  |  |
 
 
 === "Responses"
@@ -852,6 +881,12 @@ Partially update the details of a project. Requires project administrator or cus
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -1873,6 +1908,12 @@ Moves a project and its associated resources to a different customer. You can ch
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
@@ -2011,6 +2052,12 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `affiliated_organizations.created` | string (date-time) |  |
     | `affiliated_organizations.modified` | string (date-time) |  |
     | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `science_sub_domain` | string (uuid) |  |
+    | `science_sub_domain_name` | string |  |
+    | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
+    | `science_domain_uuid` | string (uuid) |  |
+    | `science_domain_name` | string |  |
+    | `science_domain_code` | string | Domain code (e.g. '1'). Auto-derived if left blank. |
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
