@@ -205,6 +205,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -395,6 +396,7 @@ Returns details of a specific resource from a provider's perspective.
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -1994,6 +1996,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -2267,6 +2270,7 @@ Updates the 'last_sync' timestamp for a resource to the current time. This is us
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
