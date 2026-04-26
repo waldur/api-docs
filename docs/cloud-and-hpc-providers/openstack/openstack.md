@@ -616,7 +616,8 @@ Return aggregated vCPU, RAM and disk totals across all hypervisors matching the 
     http \
       GET \
       https://api.example.com/api/openstack-hypervisors/summary/ \
-      Authorization:"Token YOUR_API_TOKEN"
+      Authorization:"Token YOUR_API_TOKEN" \
+      settings_uuid=="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     ```
 
 === "Python"
@@ -628,7 +629,10 @@ Return aggregated vCPU, RAM and disk totals across all hypervisors matching the 
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    response = openstack_hypervisors_summary_retrieve.sync(client=client)
+    response = openstack_hypervisors_summary_retrieve.sync(
+        client=client,
+        settings_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
     
     print(response)
     ```
@@ -643,13 +647,23 @@ Return aggregated vCPU, RAM and disk totals across all hypervisors matching the 
     
     try {
       const response = await openstackHypervisorsSummaryRetrieve({
-      auth: "Token YOUR_API_TOKEN"
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "settings_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
     });
       console.log('Success:', response);
     } catch (error) {
       console.error('Error:', error);
     }
     ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `settings_uuid` | string (uuid) | ✓ | UUID of the OpenStack ServiceSettings to aggregate over. |
 
 
 === "Responses"
