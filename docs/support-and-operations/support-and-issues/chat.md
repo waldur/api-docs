@@ -95,7 +95,7 @@
     | `role` | any |  |
     | `blocks` | array of objects |  |
     | `blocks.id` | string |  |
-    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `resource_list`, `homeport_nav`, `tool`_ |
+    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `resource_list`, `homeport_nav`, `ask_user_form`, `tool`_ |
     | `blocks.status` | string |  |
     | `warning` | string |  |
     | `sequence_index` | integer |  |
@@ -770,7 +770,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `role` | any |  |
     | `blocks` | array of objects |  |
     | `blocks.id` | string |  |
-    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `resource_list`, `homeport_nav`, `tool`_ |
+    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `resource_list`, `homeport_nav`, `ask_user_form`, `tool`_ |
     | `blocks.status` | string |  |
     | `warning` | string |  |
     | `sequence_index` | integer |  |
