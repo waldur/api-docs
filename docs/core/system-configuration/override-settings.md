@@ -240,6 +240,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |
     | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |
     | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of anys |
+    | `DEFAULT_CALL_USER_ATTRIBUTES` | array of anys |
     | `INVITATION_ALLOWED_FIELDS` | array of anys |
     | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of anys |
     | `MANDATORY_USER_ATTRIBUTES` | array of anys |
@@ -558,6 +559,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `WALDUR_AUTH_SOCIAL_ROLE_CLAIM` | string |  |
     | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |  |
     | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of anys |  |
+    | `DEFAULT_CALL_USER_ATTRIBUTES` | array of anys |  |
     | `INVITATION_ALLOWED_FIELDS` | array of anys |  |
     | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of anys |  |
     | `MANDATORY_USER_ATTRIBUTES` | array of anys |  |

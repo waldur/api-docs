@@ -134,6 +134,31 @@
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `applicant_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `applicant_full_name` | string |  |
+    | `applicant_first_name` | string |  |
+    | `applicant_last_name` | string |  |
+    | `applicant_email` | string (email) |  |
+    | `applicant_registration_method` | string | Indicates what registration method was used. |
+    | `applicant_phone_number` | string |  |
+    | `applicant_organization` | string |  |
+    | `applicant_organization_country` | string |  |
+    | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_job_title` | string |  |
+    | `applicant_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_gender` | any | User's gender (male, female, or unknown) |
+    | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `applicant_place_of_birth` | string |  |
+    | `applicant_address` | string |  |
+    | `applicant_country_of_residence` | string |  |
+    | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `applicant_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `applicant_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `applicant_identity_source` | string | Indicates what identity provider was used. |
+    | `applicant_civil_number` | string |  |
+    | `applicant_birth_date` | string (date) |  |
+    | `applicant_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
@@ -237,6 +262,31 @@
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `applicant_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `applicant_full_name` | string |  |
+    | `applicant_first_name` | string |  |
+    | `applicant_last_name` | string |  |
+    | `applicant_email` | string (email) |  |
+    | `applicant_registration_method` | string | Indicates what registration method was used. |
+    | `applicant_phone_number` | string |  |
+    | `applicant_organization` | string |  |
+    | `applicant_organization_country` | string |  |
+    | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_job_title` | string |  |
+    | `applicant_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_gender` | any | User's gender (male, female, or unknown) |
+    | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `applicant_place_of_birth` | string |  |
+    | `applicant_address` | string |  |
+    | `applicant_country_of_residence` | string |  |
+    | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `applicant_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `applicant_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `applicant_identity_source` | string | Indicates what identity provider was used. |
+    | `applicant_civil_number` | string |  |
+    | `applicant_birth_date` | string (date) |  |
+    | `applicant_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
@@ -358,6 +408,31 @@
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `applicant_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `applicant_full_name` | string |  |
+    | `applicant_first_name` | string |  |
+    | `applicant_last_name` | string |  |
+    | `applicant_email` | string (email) |  |
+    | `applicant_registration_method` | string | Indicates what registration method was used. |
+    | `applicant_phone_number` | string |  |
+    | `applicant_organization` | string |  |
+    | `applicant_organization_country` | string |  |
+    | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_job_title` | string |  |
+    | `applicant_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_gender` | any | User's gender (male, female, or unknown) |
+    | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `applicant_place_of_birth` | string |  |
+    | `applicant_address` | string |  |
+    | `applicant_country_of_residence` | string |  |
+    | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `applicant_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `applicant_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `applicant_identity_source` | string | Indicates what identity provider was used. |
+    | `applicant_civil_number` | string |  |
+    | `applicant_birth_date` | string (date) |  |
+    | `applicant_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |

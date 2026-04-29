@@ -259,6 +259,7 @@
     | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |
 
 ---
 
@@ -443,6 +444,7 @@
     | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |
 
 ---
 
@@ -530,6 +532,7 @@
     | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |  |
 
 
 === "Responses"
@@ -646,6 +649,7 @@
     | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |
 
 ---
 
@@ -949,6 +953,7 @@ Create or update applicant attribute exposure configuration.
     | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |  |
 
 
 === "Responses"
@@ -1065,6 +1070,7 @@ Create or update applicant attribute exposure configuration.
     | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |
 
 ---
 
@@ -1153,6 +1159,7 @@ Create or update applicant attribute exposure configuration.
     | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |  |
 
 
 === "Responses"
@@ -1269,6 +1276,7 @@ Create or update applicant attribute exposure configuration.
     | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |
 
 ---
 
@@ -3949,6 +3957,7 @@ Compute affinity scores for all reviewer-proposal pairs.
     | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |  |
 
 
 === "Responses"
@@ -5017,6 +5026,7 @@ Mark proposal compliance as reviewed by call manager.
     | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |  |
 
 
 === "Responses"
@@ -5133,6 +5143,7 @@ Mark proposal compliance as reviewed by call manager.
     | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
     | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |
 
 ---
 

@@ -3015,14 +3015,17 @@ Creates or updates the user attribute configuration for this offering. This dete
 
     | Field | Type | Required |
     |---|---|---|
-    | `offering` | string (uuid) |  |
-    | `expose_username` | boolean |  |
     | `expose_full_name` | boolean |  |
     | `expose_email` | boolean |  |
-    | `expose_phone_number` | boolean |  |
+    | `expose_username` | boolean |  |
+    | `expose_registration_method` | boolean |  |
     | `expose_organization` | boolean |  |
-    | `expose_job_title` | boolean |  |
+    | `expose_organization_country` | boolean |  |
+    | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_affiliations` | boolean |  |
+    | `expose_phone_number` | boolean |  |
+    | `expose_job_title` | boolean |  |
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
@@ -3030,14 +3033,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
+    | `expose_identity_source` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
-    | `expose_identity_source` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `offering` | string (uuid) |  |
 
 
 === "Responses"
@@ -3049,15 +3050,17 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `offering_uuid` | string (uuid) |  |
-    | `offering_name` | string |  |
-    | `expose_username` | boolean |  |
     | `expose_full_name` | boolean |  |
     | `expose_email` | boolean |  |
-    | `expose_phone_number` | boolean |  |
+    | `expose_username` | boolean |  |
+    | `expose_registration_method` | boolean |  |
     | `expose_organization` | boolean |  |
-    | `expose_job_title` | boolean |  |
+    | `expose_organization_country` | boolean |  |
+    | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_affiliations` | boolean |  |
+    | `expose_phone_number` | boolean |  |
+    | `expose_job_title` | boolean |  |
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
@@ -3065,16 +3068,15 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
+    | `expose_identity_source` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
-    | `expose_identity_source` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `exposed_fields` | array of strings | Return list of field names currently configured for exposure. |
+    | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
 
 ---
 
@@ -3147,14 +3149,17 @@ Creates or updates the user attribute configuration for this offering. This dete
 
     | Field | Type | Required |
     |---|---|---|
-    | `offering` | string (uuid) |  |
-    | `expose_username` | boolean |  |
     | `expose_full_name` | boolean |  |
     | `expose_email` | boolean |  |
-    | `expose_phone_number` | boolean |  |
+    | `expose_username` | boolean |  |
+    | `expose_registration_method` | boolean |  |
     | `expose_organization` | boolean |  |
-    | `expose_job_title` | boolean |  |
+    | `expose_organization_country` | boolean |  |
+    | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_affiliations` | boolean |  |
+    | `expose_phone_number` | boolean |  |
+    | `expose_job_title` | boolean |  |
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
@@ -3162,14 +3167,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
+    | `expose_identity_source` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
-    | `expose_identity_source` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `offering` | string (uuid) |  |
 
 
 === "Responses"
@@ -3181,15 +3184,17 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `offering_uuid` | string (uuid) |  |
-    | `offering_name` | string |  |
-    | `expose_username` | boolean |  |
     | `expose_full_name` | boolean |  |
     | `expose_email` | boolean |  |
-    | `expose_phone_number` | boolean |  |
+    | `expose_username` | boolean |  |
+    | `expose_registration_method` | boolean |  |
     | `expose_organization` | boolean |  |
-    | `expose_job_title` | boolean |  |
+    | `expose_organization_country` | boolean |  |
+    | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_affiliations` | boolean |  |
+    | `expose_phone_number` | boolean |  |
+    | `expose_job_title` | boolean |  |
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
@@ -3197,16 +3202,15 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
+    | `expose_identity_source` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
-    | `expose_identity_source` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `exposed_fields` | array of strings | Return list of field names currently configured for exposure. |
+    | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
 
 ---
 
@@ -3279,14 +3283,17 @@ Creates or updates the user attribute configuration for this offering. This dete
 
     | Field | Type | Required |
     |---|---|---|
-    | `offering` | string (uuid) |  |
-    | `expose_username` | boolean |  |
     | `expose_full_name` | boolean |  |
     | `expose_email` | boolean |  |
-    | `expose_phone_number` | boolean |  |
+    | `expose_username` | boolean |  |
+    | `expose_registration_method` | boolean |  |
     | `expose_organization` | boolean |  |
-    | `expose_job_title` | boolean |  |
+    | `expose_organization_country` | boolean |  |
+    | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_affiliations` | boolean |  |
+    | `expose_phone_number` | boolean |  |
+    | `expose_job_title` | boolean |  |
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
@@ -3294,14 +3301,12 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
+    | `expose_identity_source` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
-    | `expose_identity_source` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `offering` | string (uuid) |  |
 
 
 === "Responses"
@@ -3313,15 +3318,17 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `offering_uuid` | string (uuid) |  |
-    | `offering_name` | string |  |
-    | `expose_username` | boolean |  |
     | `expose_full_name` | boolean |  |
     | `expose_email` | boolean |  |
-    | `expose_phone_number` | boolean |  |
+    | `expose_username` | boolean |  |
+    | `expose_registration_method` | boolean |  |
     | `expose_organization` | boolean |  |
-    | `expose_job_title` | boolean |  |
+    | `expose_organization_country` | boolean |  |
+    | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_affiliations` | boolean |  |
+    | `expose_phone_number` | boolean |  |
+    | `expose_job_title` | boolean |  |
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
@@ -3329,16 +3336,15 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
+    | `expose_identity_source` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
-    | `expose_identity_source` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `exposed_fields` | array of strings | Return list of field names currently configured for exposure. |
+    | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
 
 ---
 
@@ -8036,15 +8042,17 @@ Returns the user attribute configuration for this offering, which determines whi
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `offering_uuid` | string (uuid) |  |
-    | `offering_name` | string |  |
-    | `expose_username` | boolean |  |
     | `expose_full_name` | boolean |  |
     | `expose_email` | boolean |  |
-    | `expose_phone_number` | boolean |  |
+    | `expose_username` | boolean |  |
+    | `expose_registration_method` | boolean |  |
     | `expose_organization` | boolean |  |
-    | `expose_job_title` | boolean |  |
+    | `expose_organization_country` | boolean |  |
+    | `expose_organization_type` | boolean |  |
+    | `expose_organization_registry_code` | boolean |  |
     | `expose_affiliations` | boolean |  |
+    | `expose_phone_number` | boolean |  |
+    | `expose_job_title` | boolean |  |
     | `expose_gender` | boolean |  |
     | `expose_personal_title` | boolean |  |
     | `expose_place_of_birth` | boolean |  |
@@ -8052,16 +8060,15 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_country_of_residence` | boolean |  |
     | `expose_nationality` | boolean |  |
     | `expose_nationalities` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_registry_code` | boolean |  |
     | `expose_eduperson_assurance` | boolean |  |
+    | `expose_identity_source` | boolean |  |
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
-    | `expose_identity_source` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `exposed_fields` | array of strings | Return list of field names currently configured for exposure. |
+    | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
 
 ---
 
