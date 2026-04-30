@@ -9,10 +9,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/create-manual-assignment/` | [Create manual assignment](#create-manual-assignment) |
-| <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/update_applicant_attribute_config/` | [Create or update applicant attribute exposure configuration](#create-or-update-applicant-attribute-exposure-configuration) |
 | <span class="http-badge http-put">PUT</span> | `/api/proposal-protected-calls/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/` | [Partial Update](#partial-update) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/update_applicant_attribute_config/` | [Create or update applicant attribute exposure configuration](#create-or-update-applicant-attribute-exposure-configuration) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/` | [Delete](#delete) |
 | **Permissions & Users** | | |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/list_users/` | [List users and their roles in a scope](#list-users-and-their-roles-in-a-scope) |
@@ -21,7 +19,6 @@
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/update_user/` | [Update a user's role expiration](#update-a-users-role-expiration) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/affinity-matrix/` | [Get affinity matrix for reviewer-proposal matching](#get-affinity-matrix-for-reviewer-proposal-matching) |
-| <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/applicant_attribute_config/` | [Get applicant attribute exposure configuration for this call](#get-applicant-attribute-exposure-configuration-for-this-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/available_compliance_checklists/` | [Get available compliance checklists for call creation/editing](#get-available-compliance-checklists-for-call-creationediting) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/coi-configuration/` | [Get COI configuration for this call](#get-coi-configuration-for-this-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/compliance_overview/` | [Compliance overview](#compliance-overview) |
@@ -63,7 +60,6 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/offerings/{obj_uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/resource_templates/{obj_uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Partial Update](#partial-update) |
-| <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/delete_applicant_attribute_config/` | [Delete custom applicant attribute config, reverting to system defaults](#delete-custom-applicant-attribute-config-reverting-to-system-defaults) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/offerings/{obj_uuid}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/resource_templates/{obj_uuid}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Delete](#delete) |
@@ -748,116 +744,6 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
 
 ---
 
-### Create or update applicant attribute exposure configuration
-
-Create or update applicant attribute exposure configuration.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_applicant_attribute_config/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.call_applicant_attribute_config_request import CallApplicantAttributeConfigRequest # (1)
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_update_applicant_attribute_config # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = CallApplicantAttributeConfigRequest()
-    response = proposal_protected_calls_update_applicant_attribute_config.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`CallApplicantAttributeConfigRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_applicant_attribute_config_request.py)
-    2.  **API Source:** [`proposal_protected_calls_update_applicant_attribute_config`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_update_applicant_attribute_config.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProtectedCallsUpdateApplicantAttributeConfig } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProtectedCallsUpdateApplicantAttributeConfig({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `call` | string (uuid) |  | <br>_Constraints: write-only_ |
-    | `expose_full_name` | boolean |  |  |
-    | `expose_email` | boolean |  |  |
-    | `expose_organization` | boolean |  |  |
-    | `expose_affiliations` | boolean |  |  |
-    | `expose_organization_type` | boolean |  |  |
-    | `expose_organization_country` | boolean |  |  |
-    | `expose_nationality` | boolean |  |  |
-    | `expose_nationalities` | boolean |  |  |
-    | `expose_country_of_residence` | boolean |  |  |
-    | `expose_eduperson_assurance` | boolean |  |  |
-    | `expose_identity_source` | boolean |  |  |
-    | `reviewers_see_applicant_details` | boolean |  | If True, reviewers see applicant identity. If False, proposals are anonymized for reviewers. |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `call_uuid` | string (uuid) |  |
-    | `call_name` | string |  |
-    | `expose_full_name` | boolean |  |
-    | `expose_email` | boolean |  |
-    | `expose_organization` | boolean |  |
-    | `expose_affiliations` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_nationality` | boolean |  |
-    | `expose_nationalities` | boolean |  |
-    | `expose_country_of_residence` | boolean |  |
-    | `expose_eduperson_assurance` | boolean |  |
-    | `expose_identity_source` | boolean |  |
-    | `reviewers_see_applicant_details` | boolean | If True, reviewers see applicant identity. If False, proposals are anonymized for reviewers. |
-    | `exposed_fields` | array of strings | Return list of currently exposed field names. |
-    | `is_default` | boolean | Return True if this is a default (unsaved) config. |
-
----
-
 ### Update
 
 
@@ -1277,116 +1163,6 @@ Create or update applicant attribute exposure configuration.
     | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
-
----
-
-### Create or update applicant attribute exposure configuration
-
-Create or update applicant attribute exposure configuration.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_applicant_attribute_config/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_call_applicant_attribute_config_request import PatchedCallApplicantAttributeConfigRequest # (1)
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_update_applicant_attribute_config_partial_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = PatchedCallApplicantAttributeConfigRequest()
-    response = proposal_protected_calls_update_applicant_attribute_config_partial_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`PatchedCallApplicantAttributeConfigRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_call_applicant_attribute_config_request.py)
-    2.  **API Source:** [`proposal_protected_calls_update_applicant_attribute_config_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_update_applicant_attribute_config_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProtectedCallsUpdateApplicantAttributeConfigPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProtectedCallsUpdateApplicantAttributeConfigPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `call` | string (uuid) |  | <br>_Constraints: write-only_ |
-    | `expose_full_name` | boolean |  |  |
-    | `expose_email` | boolean |  |  |
-    | `expose_organization` | boolean |  |  |
-    | `expose_affiliations` | boolean |  |  |
-    | `expose_organization_type` | boolean |  |  |
-    | `expose_organization_country` | boolean |  |  |
-    | `expose_nationality` | boolean |  |  |
-    | `expose_nationalities` | boolean |  |  |
-    | `expose_country_of_residence` | boolean |  |  |
-    | `expose_eduperson_assurance` | boolean |  |  |
-    | `expose_identity_source` | boolean |  |  |
-    | `reviewers_see_applicant_details` | boolean |  | If True, reviewers see applicant identity. If False, proposals are anonymized for reviewers. |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `call_uuid` | string (uuid) |  |
-    | `call_name` | string |  |
-    | `expose_full_name` | boolean |  |
-    | `expose_email` | boolean |  |
-    | `expose_organization` | boolean |  |
-    | `expose_affiliations` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_nationality` | boolean |  |
-    | `expose_nationalities` | boolean |  |
-    | `expose_country_of_residence` | boolean |  |
-    | `expose_eduperson_assurance` | boolean |  |
-    | `expose_identity_source` | boolean |  |
-    | `reviewers_see_applicant_details` | boolean | If True, reviewers see applicant identity. If False, proposals are anonymized for reviewers. |
-    | `exposed_fields` | array of strings | Return list of currently exposed field names. |
-    | `is_default` | boolean | Return True if this is a default (unsaved) config. |
 
 ---
 
@@ -1938,92 +1714,6 @@ Get affinity matrix for reviewer-proposal matching.
     | `results.coi_severity` | string |
     | `results.coi_status` | string |
     | `results.source` | string |
-
----
-
-### Get applicant attribute exposure configuration for this call
-
-Get applicant attribute exposure configuration for this call.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/applicant_attribute_config/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_applicant_attribute_config_retrieve # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = proposal_protected_calls_applicant_attribute_config_retrieve.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`proposal_protected_calls_applicant_attribute_config_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_applicant_attribute_config_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProtectedCallsApplicantAttributeConfigRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProtectedCallsApplicantAttributeConfigRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `call_uuid` | string (uuid) |  |
-    | `call_name` | string |  |
-    | `expose_full_name` | boolean |  |
-    | `expose_email` | boolean |  |
-    | `expose_organization` | boolean |  |
-    | `expose_affiliations` | boolean |  |
-    | `expose_organization_type` | boolean |  |
-    | `expose_organization_country` | boolean |  |
-    | `expose_nationality` | boolean |  |
-    | `expose_nationalities` | boolean |  |
-    | `expose_country_of_residence` | boolean |  |
-    | `expose_eduperson_assurance` | boolean |  |
-    | `expose_identity_source` | boolean |  |
-    | `reviewers_see_applicant_details` | boolean | If True, reviewers see applicant identity. If False, proposals are anonymized for reviewers. |
-    | `exposed_fields` | array of strings | Return list of currently exposed field names. |
-    | `is_default` | boolean | Return True if this is a default (unsaved) config. |
 
 ---
 
@@ -6350,73 +6040,6 @@ Get or update matching configuration for this call.
     | `proposals.approved_by_name` | string |  |
     | `proposals.created_by_name` | string |  |
     | `proposals.created` | string (date-time) |  |
-
----
-
-### Delete custom applicant attribute config, reverting to system defaults
-
-Delete custom applicant attribute config, reverting to system defaults.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      DELETE \
-      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/delete_applicant_attribute_config/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_delete_applicant_attribute_config_destroy # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = proposal_protected_calls_delete_applicant_attribute_config_destroy.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`proposal_protected_calls_delete_applicant_attribute_config_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_delete_applicant_attribute_config_destroy.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProtectedCallsDeleteApplicantAttributeConfigDestroy } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProtectedCallsDeleteApplicantAttributeConfigDestroy({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`204`** - No response body
-    
 
 ---
 
