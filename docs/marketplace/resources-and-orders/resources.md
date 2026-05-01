@@ -6,9 +6,11 @@
 |:--- |:--- |:--- |
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/` | [List consumer resources](#list-consumer-resources) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/list_users/` | [List users and their roles in a scope](#list-users-and-their-roles-in-a-scope) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/` | [Retrieve a consumer resource](#retrieve-a-consumer-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/pull/` | [Pull resource data](#pull-resource-data) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/unlink/` | [Unlink a resource (staff only)](#unlink-a-resource-staff-only) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/update_user/` | [Update a user's role expiration](#update-a-users-role-expiration) |
 | <span class="http-badge http-put">PUT</span> | `/api/marketplace-resources/{uuid}/` | [Update a consumer resource](#update-a-consumer-resource) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-resources/{uuid}/` | [Partially update a consumer resource](#partially-update-a-consumer-resource) |
 | **State Management** | | |
@@ -31,11 +33,14 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/offering/` | [Get offering details](#get-offering-details) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/plan_periods/` | [List resource plan periods](#list-resource-plan-periods) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/team/` | [Get resource team](#get-resource-team) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/team_members/` | [List team members of a resource](#list-team-members-of-a-resource) |
 | **Naming** | | |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/suggest_name/` | [Suggest a resource name](#suggest-a-resource-name) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/history/` | [Get version history](#get-version-history) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/add_user/` | [Grant a role to a user](#grant-a-role-to-a-user) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/delete_user/` | [Revoke a role from a user](#revoke-a-role-from-a-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/estimate_renewal/` | [Estimate renewal cost breakdown](#estimate-renewal-cost-breakdown) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/reallocate_limits/` | [Reallocate resource limits](#reallocate-resource-limits) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/restore/` | [Restore](#restore) |
@@ -275,6 +280,112 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+
+---
+
+### List users and their roles in a scope
+
+Retrieves a list of users who have a role within a specific scope (e.g., a project or an organization). The list can be filtered by user details or role.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/list_users/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.user_role_details_field_enum import UserRoleDetailsFieldEnum # (1)
+    from waldur_api_client.models.user_role_details_o_enum import UserRoleDetailsOEnum # (2)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_list_users_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_resources_list_users_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`UserRoleDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_details_field_enum.py)
+    2.  **Model Source:** [`UserRoleDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_details_o_enum.py)
+    3.  **API Source:** [`marketplace_resources_list_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_list_users_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourcesListUsersList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourcesListUsersList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `field` | array | Fields to include in response |
+    | `full_name` | string | User full name |
+    | `native_name` | string | User native name |
+    | `o` | array | Ordering fields |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `role` | string (uuid) | Role UUID or name |
+    | `search_string` | string | Search string for user |
+    | `user` | string (uuid) | User UUID |
+    | `user_slug` | string | User slug |
+    | `user_url` | string | User URL |
+    | `username` | string | User username |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `expiration_time` | string (date-time) |  |
+    | `role_name` | string |  |
+    | `role_uuid` | string (uuid) |  |
+    | `user_email` | string (email) |  |
+    | `user_full_name` | string |  |
+    | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `user_uuid` | string (uuid) |  |
+    | `user_image` | string (uri) |  |
+    | `created_by_full_name` | string |  |
+    | `created_by_uuid` | string (uuid) |  |
 
 ---
 
@@ -608,6 +719,99 @@ Forcefully deletes a marketplace resource and its related plugin resource from t
     
     **`403`** - No response body
     
+
+---
+
+### Update a user's role expiration
+
+Updates the expiration time for a user's existing role in the current scope. This is useful for extending or shortening the duration of a permission. To make a role permanent, set expiration_time to null.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_user/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      role="string-value" \
+      user="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.user_role_update_request import UserRoleUpdateRequest # (1)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_update_user # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = UserRoleUpdateRequest(
+        role="string-value",
+        user="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = marketplace_resources_update_user.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`UserRoleUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_update_request.py)
+    2.  **API Source:** [`marketplace_resources_update_user`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_update_user.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourcesUpdateUser } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourcesUpdateUser({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "role": "string-value",
+        "user": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `role` | string | ✓ |
+    | `user` | string (uuid) | ✓ |
+    | `expiration_time` | string (date-time) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `expiration_time` | string (date-time) |
 
 ---
 
@@ -2190,10 +2394,6 @@ Returns details of the offering connected to the requested object.
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
-    | `roles` | array of objects |  |
-    | `roles.uuid` | string (uuid) |  |
-    | `roles.name` | string |  |
-    | `roles.url` | string (uri) |  |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -2332,6 +2532,8 @@ Returns details of the offering connected to the requested object.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `profile_uuid` | string (uuid) |  |
+    | `profile_name` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
@@ -2522,6 +2724,152 @@ Returns a list of users connected to the project of this resource, including the
     | `expiration_time` | string (date-time) |  |
     | `offering_user_username` | string |  |
     | `offering_user_state` | any |  |
+
+---
+
+### List team members of a resource
+
+One row per user (deduplicated) with their direct Resource role and a nested `resource_projects[]` array of their per-ResourceProject grants under this resource. Mirrors the org-level `customers/{uuid}/users/` shape so the frontend can render an expandable per-user view.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/team_members/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.order_state import OrderState # (1)
+    from waldur_api_client.models.resource_o_enum import ResourceOEnum # (2)
+    from waldur_api_client.models.resource_state import ResourceState # (3)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_team_members_list # (4)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_resources_team_members_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`OrderState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_state.py)
+    2.  **Model Source:** [`ResourceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_o_enum.py)
+    3.  **Model Source:** [`ResourceState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_state.py)
+    4.  **API Source:** [`marketplace_resources_team_members_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_team_members_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourcesTeamMembersList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourcesTeamMembersList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `backend_id` | string | Backend ID |
+    | `category_uuid` | string (uuid) | Category UUID |
+    | `component_count` | number | Filter by exact number of components |
+    | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
+    | `customer` | string (uri) | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `downscaled` | boolean | Downscaled |
+    | `has_terminate_date` | boolean | Has termination date |
+    | `is_attached` | boolean | Filter by attached state |
+    | `lexis_links_supported` | boolean | LEXIS links supported |
+    | `limit_based` | boolean | Filter by limit-based offerings |
+    | `limit_component_count` | number | Filter by exact number of limit-based components |
+    | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `o` | array | Ordering<br><br> |
+    | `offering` | string (uri) |  |
+    | `offering_billable` | boolean | Offering billable |
+    | `offering_shared` | boolean | Offering shared |
+    | `offering_slug` | array | Multiple values may be separated by commas. |
+    | `offering_type` | string | Offering type |
+    | `offering_uuid` | array | Multiple values may be separated by commas. |
+    | `only_limit_based` | boolean | Filter resources with only limit-based components |
+    | `only_usage_based` | boolean | Filter resources with only usage-based components |
+    | `order_state` | array | Order state<br><br> |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `parent_offering_uuid` | string (uuid) |  |
+    | `paused` | boolean | Paused |
+    | `plan_uuid` | string (uuid) | Plan UUID |
+    | `project_name` | string | Project name |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `provider_uuid` | string (uuid) | Provider UUID |
+    | `query` | string | Search by resource UUID, name, slug, backend ID, effective ID, IPs or hypervisor |
+    | `resource_attributes` | string | Resource attributes (JSON) |
+    | `restrict_member_access` | boolean | Restrict member access |
+    | `runtime_state` | string | Runtime state |
+    | `scope` | string (uri) | Filter by scope URL. |
+    | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `slug` | string | Slug |
+    | `state` | array | Resource state<br><br> |
+    | `usage_based` | boolean | Filter by usage-based offerings |
+    | `visible_to_providers` | boolean | Include only resources visible to service providers |
+    | `visible_to_username` | string | Visible to username |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `full_name` | string |  |
+    | `email` | string (email) |  |
+    | `image` | string (uri) |  |
+    | `role_name` | string |  |
+    | `role_uuid` | string |  |
+    | `expiration_time` | string (date-time) |  |
+    | `resource_projects` | array of objects |  |
+    | `resource_projects.url` | string (uri) |  |
+    | `resource_projects.uuid` | string |  |
+    | `resource_projects.name` | string |  |
+    | `resource_projects.role_name` | string |  |
+    | `resource_projects.role_uuid` | string (uuid) |  |
+    | `resource_projects.expiration_time` | string (date-time) |  |
 
 ---
 
@@ -2843,6 +3191,194 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_user` | object (free-form) | User who created this revision |
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+---
+
+### Grant a role to a user
+
+Assigns a specific role to a user within the current scope. An optional expiration time for the role can be set.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/add_user/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      role="string-value" \
+      user="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.user_role_create_request import UserRoleCreateRequest # (1)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_add_user # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = UserRoleCreateRequest(
+        role="string-value",
+        user="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = marketplace_resources_add_user.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`UserRoleCreateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_create_request.py)
+    2.  **API Source:** [`marketplace_resources_add_user`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_add_user.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourcesAddUser } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourcesAddUser({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "role": "string-value",
+        "user": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `role` | string | ✓ |
+    | `user` | string (uuid) | ✓ |
+    | `expiration_time` | string (date-time) |  |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `expiration_time` | string (date-time) |
+    
+    ---
+    
+    **`400`** - Validation error, for example when trying to add a user to a terminated project.
+    
+
+---
+
+### Revoke a role from a user
+
+Removes a specific role from a user within the current scope. This effectively revokes their permissions associated with that role.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/delete_user/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      role="string-value" \
+      user="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.user_role_delete_request import UserRoleDeleteRequest # (1)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_delete_user # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = UserRoleDeleteRequest(
+        role="string-value",
+        user="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = marketplace_resources_delete_user.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`UserRoleDeleteRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_delete_request.py)
+    2.  **API Source:** [`marketplace_resources_delete_user`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_delete_user.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourcesDeleteUser } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourcesDeleteUser({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "role": "string-value",
+        "user": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `role` | string | ✓ |
+    | `user` | string (uuid) | ✓ |
+    | `expiration_time` | string (date-time) |  |
+
+
+=== "Responses"
+
+    **`200`** - Role revoked successfully.
+    
 
 ---
 

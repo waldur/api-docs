@@ -96,7 +96,6 @@
     | `offering_name` | string |  |
     | `role` | string (uri) |  |
     | `role_name` | string |  |
-    | `role_scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
     | `resource` | string (uri) |  |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
@@ -179,7 +178,6 @@
     | `offering_name` | string |  |
     | `role` | string (uri) |  |
     | `role_name` | string |  |
-    | `role_scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
     | `resource` | string (uri) |  |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
@@ -738,7 +736,6 @@
     | `offering_name` | string |  |
     | `role` | string (uri) |  |
     | `role_name` | string |  |
-    | `role_scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
     | `resource` | string (uri) |  |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
@@ -835,7 +832,6 @@
     | `offering_name` | string |  |
     | `role` | string (uri) |  |
     | `role_name` | string |  |
-    | `role_scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
     | `resource` | string (uri) |  |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |

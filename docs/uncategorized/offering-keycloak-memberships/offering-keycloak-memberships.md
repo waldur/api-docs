@@ -98,8 +98,6 @@
     | `group_resource_name` | string |  |
     | `group_resource_uuid` | string (uuid) |  |
     | `group_scope_id` | string | Sub-entity identifier within a resource, e.g. Rancher project ID within a cluster. |
-    | `group_role_scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
-    | `group_role_scope_type_label` | string | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
     | `user` | string (uri) |  |
     | `state` | any |  |
     | `created` | string (date-time) |  |
@@ -188,8 +186,6 @@
     | `group_resource_name` | string |  |
     | `group_resource_uuid` | string (uuid) |  |
     | `group_scope_id` | string | Sub-entity identifier within a resource, e.g. Rancher project ID within a cluster. |
-    | `group_role_scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
-    | `group_role_scope_type_label` | string | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
     | `user` | string (uri) |  |
     | `state` | any |  |
     | `created` | string (date-time) |  |
@@ -300,8 +296,6 @@
     | `group_resource_name` | string |  |
     | `group_resource_uuid` | string (uuid) |  |
     | `group_scope_id` | string | Sub-entity identifier within a resource, e.g. Rancher project ID within a cluster. |
-    | `group_role_scope_type` | string | Level this role applies at, e.g. 'cluster', 'project'. Empty means offering-wide. |
-    | `group_role_scope_type_label` | string | Human-readable label for scope_type shown to end users, e.g. 'Rancher Project', 'Cluster Namespace'. Falls back to capitalized scope_type if empty. |
     | `user` | string (uri) |  |
     | `state` | any |  |
     | `created` | string (date-time) |  |

@@ -88,6 +88,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/import_offering/` | [Import offering data](#import-offering-data) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_available/` | [Mark an offering as available](#mark-an-offering-as-available) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_unavailable/` | [Mark an offering as unavailable](#mark-an-offering-as-unavailable) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/set_profile/` | [Bind / unbind offering to a service profile](#bind--unbind-offering-to-a-service-profile) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/switch_billing_mode/` | [Switch billing mode for builtin components](#switch-billing-mode-for-builtin-components) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/` | [Update offering backend_id rules](#update-offering-backend_id-rules) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_tags/` | [Update tags for offering](#update-tags-for-offering) |
@@ -253,10 +254,6 @@ Returns a paginated list of offerings for the provider.
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
-    | `roles` | array of objects |  |
-    | `roles.uuid` | string (uuid) |  |
-    | `roles.name` | string |  |
-    | `roles.url` | string (uri) |  |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -398,6 +395,8 @@ Returns a paginated list of offerings for the provider.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `profile_uuid` | string (uuid) |  |
+    | `profile_name` | string |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
     | `integration_status.status` | string |  |
@@ -529,10 +528,6 @@ Returns details of a specific provider offering.
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
-    | `roles` | array of objects |  |
-    | `roles.uuid` | string (uuid) |  |
-    | `roles.name` | string |  |
-    | `roles.url` | string (uri) |  |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -674,6 +669,8 @@ Returns details of a specific provider offering.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `profile_uuid` | string (uuid) |  |
+    | `profile_name` | string |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
     | `integration_status.status` | string |  |
@@ -815,6 +812,8 @@ Creates a new provider offering.
     | `plugin_options.require_purchase_order_upload` | boolean |  | If set to True, users will be required to upload purchase orders. |
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
+    | `plugin_options.enable_resource_projects` | boolean |  | Enable sub-project management within resources. |
+    | `plugin_options.create_orders_on_resource_project_change` | boolean |  | If set to True, create orders when resource projects are created, updated or deleted. |
     | `plugin_options.can_restore_resource` | boolean |  | If set to True, resource can be restored. |
     | `plugin_options.enable_provider_consumer_messaging` | boolean |  | If set to True, service providers can send messages with attachments to consumers on pending orders, and consumers can respond. |
     | `plugin_options.notify_about_provider_consumer_messages` | boolean |  | If set to True, send email notifications when providers or consumers exchange messages on pending orders. |
@@ -951,10 +950,6 @@ Creates a new provider offering.
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
-    | `roles` | array of objects |  |
-    | `roles.uuid` | string (uuid) |  |
-    | `roles.name` | string |  |
-    | `roles.url` | string (uri) |  |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -1096,6 +1091,8 @@ Creates a new provider offering.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `profile_uuid` | string (uuid) |  |
+    | `profile_name` | string |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
     | `integration_status.status` | string |  |
@@ -2031,6 +2028,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `permissions.scope_name` | string |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
+    | `permissions.resource_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |
@@ -2440,10 +2438,6 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
-    | `roles` | array of objects |  |
-    | `roles.uuid` | string (uuid) |  |
-    | `roles.name` | string |  |
-    | `roles.url` | string (uri) |  |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -2585,6 +2579,8 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `profile_uuid` | string (uuid) |  |
+    | `profile_name` | string |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
     | `integration_status.status` | string |  |
@@ -5056,10 +5052,6 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
-    | `roles` | array of objects |  |
-    | `roles.uuid` | string (uuid) |  |
-    | `roles.name` | string |  |
-    | `roles.url` | string (uri) |  |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -5198,6 +5190,8 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `profile_uuid` | string (uuid) |  |
+    | `profile_name` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
@@ -5659,6 +5653,8 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.require_purchase_order_upload` | boolean |  | If set to True, users will be required to upload purchase orders. |
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
+    | `plugin_options.enable_resource_projects` | boolean |  | Enable sub-project management within resources. |
+    | `plugin_options.create_orders_on_resource_project_change` | boolean |  | If set to True, create orders when resource projects are created, updated or deleted. |
     | `plugin_options.can_restore_resource` | boolean |  | If set to True, resource can be restored. |
     | `plugin_options.enable_provider_consumer_messaging` | boolean |  | If set to True, service providers can send messages with attachments to consumers on pending orders, and consumers can respond. |
     | `plugin_options.notify_about_provider_consumer_messages` | boolean |  | If set to True, send email notifications when providers or consumers exchange messages on pending orders. |
@@ -8561,6 +8557,85 @@ Marks an active offering as unavailable, blocking all operations on its resource
     |---|---|
     | `detail` | string |
     | `state` | string |
+
+---
+
+### Bind / unbind offering to a service profile
+
+Sets the offering's `profile` FK. Pass `profile: <uuid>` to bind, or `profile: null` to unbind. Requires UPDATE_OFFERING permission on the offering's customer (service-provider owners and staff). Triggers async reconciliation of RoleAvailability rows on this offering against the profile's role catalog (or wipes them on unbind).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_profile/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.offering_profile_bind_request import OfferingProfileBindRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_set_profile # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OfferingProfileBindRequest()
+    response = marketplace_provider_offerings_set_profile.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OfferingProfileBindRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_profile_bind_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_set_profile`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_set_profile.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsSetProfile } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsSetProfile({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `profile` | string (uuid) |  | OfferingProfile UUID to bind to. Pass null to unbind. |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---
 

@@ -127,10 +127,6 @@
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
-    | `roles` | array of objects |  |
-    | `roles.uuid` | string (uuid) |  |
-    | `roles.name` | string |  |
-    | `roles.url` | string (uri) |  |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -269,6 +265,8 @@
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `profile_uuid` | string (uuid) |  |
+    | `profile_name` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
     | `googlecalendar` | object |  |
@@ -397,10 +395,6 @@
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
-    | `roles` | array of objects |  |
-    | `roles.uuid` | string (uuid) |  |
-    | `roles.name` | string |  |
-    | `roles.url` | string (uri) |  |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -539,6 +533,8 @@
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `profile_uuid` | string (uuid) |  |
+    | `profile_name` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
     | `googlecalendar` | object |  |
