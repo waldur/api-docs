@@ -531,38 +531,28 @@ Activate a request type so it appears in issue creation.
     http \
       POST \
       https://api.example.com/api/support-request-types-admin/a1b2c3d4-e5f6-7890-abcd-ef1234567890/activate/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-support-request-types-admin" \
-      issue_type_name="string-value"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.request_type_admin_request import RequestTypeAdminRequest # (1)
-    from waldur_api_client.api.support_request_types_admin import support_request_types_admin_activate # (2)
+    from waldur_api_client.api.support_request_types_admin import support_request_types_admin_activate # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = RequestTypeAdminRequest(
-        name="my-awesome-support-request-types-admin",
-        issue_type_name="string-value"
-    )
     response = support_request_types_admin_activate.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`RequestTypeAdminRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/request_type_admin_request.py)
-    2.  **API Source:** [`support_request_types_admin_activate`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_request_types_admin/support_request_types_admin_activate.py)
+    1.  **API Source:** [`support_request_types_admin_activate`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_request_types_admin/support_request_types_admin_activate.py)
 
 === "TypeScript"
 
@@ -574,10 +564,6 @@ Activate a request type so it appears in issue creation.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "name": "my-awesome-support-request-types-admin",
-        "issue_type_name": "string-value"
       }
     });
       console.log('Success:', response);
@@ -592,16 +578,6 @@ Activate a request type so it appears in issue creation.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `issue_type_name` | string | ✓ |  |
-    | `is_active` | boolean |  | Whether this request type is available for issue creation. |
-    | `order` | integer |  | Display order. First type (lowest order) is the default. |
 
 
 === "Responses"
@@ -633,38 +609,28 @@ Deactivate a request type so it no longer appears in issue creation.
     http \
       POST \
       https://api.example.com/api/support-request-types-admin/a1b2c3d4-e5f6-7890-abcd-ef1234567890/deactivate/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-support-request-types-admin" \
-      issue_type_name="string-value"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.request_type_admin_request import RequestTypeAdminRequest # (1)
-    from waldur_api_client.api.support_request_types_admin import support_request_types_admin_deactivate # (2)
+    from waldur_api_client.api.support_request_types_admin import support_request_types_admin_deactivate # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = RequestTypeAdminRequest(
-        name="my-awesome-support-request-types-admin",
-        issue_type_name="string-value"
-    )
     response = support_request_types_admin_deactivate.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`RequestTypeAdminRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/request_type_admin_request.py)
-    2.  **API Source:** [`support_request_types_admin_deactivate`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_request_types_admin/support_request_types_admin_deactivate.py)
+    1.  **API Source:** [`support_request_types_admin_deactivate`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_request_types_admin/support_request_types_admin_deactivate.py)
 
 === "TypeScript"
 
@@ -676,10 +642,6 @@ Deactivate a request type so it no longer appears in issue creation.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "name": "my-awesome-support-request-types-admin",
-        "issue_type_name": "string-value"
       }
     });
       console.log('Success:', response);
@@ -694,16 +656,6 @@ Deactivate a request type so it no longer appears in issue creation.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `issue_type_name` | string | ✓ |  |
-    | `is_active` | boolean |  | Whether this request type is available for issue creation. |
-    | `order` | integer |  | Display order. First type (lowest order) is the default. |
 
 
 === "Responses"
@@ -736,24 +688,22 @@ Bulk update order for multiple request types.
       POST \
       https://api.example.com/api/support-request-types-admin/reorder/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-support-request-types-admin-reorder" \
-      issue_type_name="string-value"
+      items:='[]'
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.request_type_admin_request import RequestTypeAdminRequest # (1)
+    from waldur_api_client.models.request_type_reorder_request import RequestTypeReorderRequest # (1)
     from waldur_api_client.api.support_request_types_admin import support_request_types_admin_reorder # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = RequestTypeAdminRequest(
-        name="my-awesome-support-request-types-admin-reorder",
-        issue_type_name="string-value"
+    body_data = RequestTypeReorderRequest(
+        items=[]
     )
     response = support_request_types_admin_reorder.sync(
         client=client,
@@ -764,7 +714,7 @@ Bulk update order for multiple request types.
     ```
     
     
-    1.  **Model Source:** [`RequestTypeAdminRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/request_type_admin_request.py)
+    1.  **Model Source:** [`RequestTypeReorderRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/request_type_reorder_request.py)
     2.  **API Source:** [`support_request_types_admin_reorder`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_request_types_admin/support_request_types_admin_reorder.py)
 
 === "TypeScript"
@@ -776,8 +726,7 @@ Bulk update order for multiple request types.
       const response = await supportRequestTypesAdminReorder({
       auth: "Token YOUR_API_TOKEN",
       body: {
-        "name": "my-awesome-support-request-types-admin-reorder",
-        "issue_type_name": "string-value"
+        "items": []
       }
     });
       console.log('Success:', response);
@@ -789,12 +738,11 @@ Bulk update order for multiple request types.
 
 === "Request Body (required)"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `issue_type_name` | string | ✓ |  |
-    | `is_active` | boolean |  | Whether this request type is available for issue creation. |
-    | `order` | integer |  | Display order. First type (lowest order) is the default. |
+    | Field | Type | Required |
+    |---|---|---|
+    | `items` | array of objects | ✓ |
+    | `items.uuid` | string (uuid) | ✓ |
+    | `items.order` | integer | ✓ |
 
 
 === "Responses"

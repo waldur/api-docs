@@ -679,8 +679,6 @@ Return aggregated vCPU, RAM and disk totals across all hypervisors matching the 
     | `total_local_gb` | integer |
     | `used_local_gb` | integer |
     | `total_running_vms` | integer |
-    | `cpu_allocation_ratio` | number (double) |
-    | `effective_vcpus` | integer |
 
 ---
 
