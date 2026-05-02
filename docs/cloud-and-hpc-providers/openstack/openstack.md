@@ -8,6 +8,9 @@
 | <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/{id}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-health-monitors/` | [List health monitors](#list-health-monitors) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-health-monitors/{uuid}/` | [Get health monitor details](#get-health-monitor-details) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisor-inventories/` | [List Openstack Hypervisor Inventories](#list-openstack-hypervisor-inventories) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisor-inventories/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisors/allocation_candidates/` | [Pre-flight allocation candidates](#pre-flight-allocation-candidates) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisors/` | [List Openstack Hypervisors](#list-openstack-hypervisors) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisors/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisors/summary/` | [Get hypervisor summary statistics](#get-hypervisor-summary-statistics) |
@@ -433,6 +436,245 @@ Retrieve details of a specific health monitor.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+---
+
+### List Openstack Hypervisor Inventories
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-hypervisor-inventories/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_hypervisor_inventories import openstack_hypervisor_inventories_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_hypervisor_inventories_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_hypervisor_inventories_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisor_inventories/openstack_hypervisor_inventories_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHypervisorInventoriesList } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHypervisorInventoriesList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `hypervisor_uuid` | string (uuid) |  |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `resource_class` | string |  |
+    | `settings_uuid` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `hypervisor` | string (uri) |  |
+    | `hypervisor_uuid` | string (uuid) |  |
+    | `hypervisor_name` | string |  |
+    | `settings` | string (uri) |  |
+    | `settings_uuid` | string (uuid) |  |
+    | `resource_class` | string | Placement resource class, e.g. VCPU, MEMORY_MB, DISK_GB, VGPU, PCI_DEVICE, NUMA_CORE, CUSTOM_*. |
+    | `total` | integer (int64) |  |
+    | `reserved` | integer (int64) |  |
+    | `allocation_ratio` | number (double) |  |
+    | `used` | integer (int64) |  |
+    | `effective_total` | integer | Capacity the Nova scheduler treats as available. |
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-hypervisor-inventories/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_hypervisor_inventories import openstack_hypervisor_inventories_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_hypervisor_inventories_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_hypervisor_inventories_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisor_inventories/openstack_hypervisor_inventories_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHypervisorInventoriesRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHypervisorInventoriesRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `hypervisor` | string (uri) |  |
+    | `hypervisor_uuid` | string (uuid) |  |
+    | `hypervisor_name` | string |  |
+    | `settings` | string (uri) |  |
+    | `settings_uuid` | string (uuid) |  |
+    | `resource_class` | string | Placement resource class, e.g. VCPU, MEMORY_MB, DISK_GB, VGPU, PCI_DEVICE, NUMA_CORE, CUSTOM_*. |
+    | `total` | integer (int64) |  |
+    | `reserved` | integer (int64) |  |
+    | `allocation_ratio` | number (double) |  |
+    | `used` | integer (int64) |  |
+    | `effective_total` | integer | Capacity the Nova scheduler treats as available. |
+
+---
+
+### Pre-flight allocation candidates
+
+Ask Placement which compute hosts could currently satisfy a request for the given resources (and required traits). Useful as a pre-flight check before placing an order on a fully-booked cloud. Returns 0 candidates when nothing fits, with the same provider_summaries Placement returns for diagnostic display.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-hypervisors/allocation_candidates/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      resources=="string-value" \
+      settings_uuid=="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_hypervisors import openstack_hypervisors_allocation_candidates_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_hypervisors_allocation_candidates_retrieve.sync(
+        client=client,
+        resources="string-value",
+        settings_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_hypervisors_allocation_candidates_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_hypervisors/openstack_hypervisors_allocation_candidates_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackHypervisorsAllocationCandidatesRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackHypervisorsAllocationCandidatesRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "resources": "string-value",
+        "settings_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `limit` | integer |  | Cap on returned candidates (default 10). |
+    | `required` | string |  | e.g. HW_CPU_X86_AVX2,STORAGE_DISK_SSD |
+    | `resources` | string | ✓ | e.g. VCPU:4,MEMORY_MB:8192,DISK_GB:10 |
+    | `settings_uuid` | string (uuid) | ✓ |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `candidate_count` | integer | Total number of allocation candidates Placement returned. |
+    | `provider_summaries` | object (free-form) | Placement's per-provider summary: maps resource_provider_uuid → {resources: {CLASS: {used, capacity}, ...}, traits: [...]}. |
 
 ---
 
