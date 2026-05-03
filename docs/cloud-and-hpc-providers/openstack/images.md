@@ -66,6 +66,7 @@ Get a list of available VM instance images.
 
     | Name | Type | Description |
     |---|---|---|
+    | `is_rescue_image` | boolean | Filter to images usable as Nova rescue images. |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `offering_uuid` | string (uuid) | Offering UUID |
@@ -94,6 +95,9 @@ Get a list of available VM instance images.
     | `settings` | string (uri) |  |
     | `backend_id` | string |  |
     | `backend_created_at` | string (date-time) |  |
+    | `hw_rescue_device` | string | Glance hw_rescue_device property (cdrom/disk/floppy). |
+    | `hw_rescue_bus` | string | Glance hw_rescue_bus property (scsi/virtio/ide/usb). |
+    | `is_rescue_image` | boolean |  |
 
 ---
 
@@ -171,6 +175,9 @@ Retrieve details of a specific VM instance image.
     | `settings` | string (uri) |  |
     | `backend_id` | string |  |
     | `backend_created_at` | string (date-time) |  |
+    | `hw_rescue_device` | string | Glance hw_rescue_device property (cdrom/disk/floppy). |
+    | `hw_rescue_bus` | string | Glance hw_rescue_bus property (scsi/virtio/ide/usb). |
+    | `is_rescue_image` | boolean |  |
 
 ---
 
@@ -238,5 +245,8 @@ Retrieve usage statistics for VM instance images, showing running and created in
     | `settings` | string (uri) |  |
     | `backend_id` | string |  |
     | `backend_created_at` | string (date-time) |  |
+    | `hw_rescue_device` | string | Glance hw_rescue_device property (cdrom/disk/floppy). |
+    | `hw_rescue_bus` | string | Glance hw_rescue_bus property (scsi/virtio/ide/usb). |
+    | `is_rescue_image` | boolean |  |
 
 ---
