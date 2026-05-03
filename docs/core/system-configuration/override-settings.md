@@ -273,11 +273,20 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `AI_ASSISTANT_TOKEN_LIMIT_DAILY` | integer |
     | `AI_ASSISTANT_TOKEN_LIMIT_WEEKLY` | integer |
     | `AI_ASSISTANT_TOKEN_LIMIT_MONTHLY` | integer |
+    | `AI_ASSISTANT_GLOBAL_DAILY_TOKEN_BUDGET` | integer |
+    | `AI_ASSISTANT_GLOBAL_REQUESTS_PER_MINUTE` | integer |
     | `AI_ASSISTANT_SESSION_RETENTION_DAYS` | integer |
     | `AI_ASSISTANT_HISTORY_LIMIT` | integer |
+    | `AI_ASSISTANT_STREAM_TIMEOUT_SECONDS` | integer |
     | `AI_ASSISTANT_INJECTION_ALLOWLIST` | string |
     | `AI_ASSISTANT_NAME` | string |
     | `AI_ASSISTANT_SYSTEM_PROMPT_CUSTOM_INSTRUCTIONS` | string |
+    | `ANONYMOUS_CHAT_USER_SLUG_SALT` | string |
+    | `ANONYMOUS_CHAT_FEEDBACK_TOKEN_SECRET` | string |
+    | `ANONYMOUS_CHAT_CATALOG_MAX_ENTRIES` | integer |
+    | `ANONYMOUS_CHAT_REVIEW_ENABLED` | boolean |
+    | `ANONYMOUS_CHAT_REVIEW_DAILY_TOKEN_BUDGET` | integer |
+    | `ANONYMOUS_CHAT_ARTIFACT_RETENTION_DAYS` | integer |
     | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |
     | `SOFTWARE_CATALOG_EESSI_VERSION` | string |
     | `SOFTWARE_CATALOG_EESSI_API_URL` | string |
@@ -592,11 +601,20 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `AI_ASSISTANT_TOKEN_LIMIT_DAILY` | integer |  |
     | `AI_ASSISTANT_TOKEN_LIMIT_WEEKLY` | integer |  |
     | `AI_ASSISTANT_TOKEN_LIMIT_MONTHLY` | integer |  |
+    | `AI_ASSISTANT_GLOBAL_DAILY_TOKEN_BUDGET` | integer |  |
+    | `AI_ASSISTANT_GLOBAL_REQUESTS_PER_MINUTE` | integer |  |
     | `AI_ASSISTANT_SESSION_RETENTION_DAYS` | integer |  |
     | `AI_ASSISTANT_HISTORY_LIMIT` | integer |  |
+    | `AI_ASSISTANT_STREAM_TIMEOUT_SECONDS` | integer |  |
     | `AI_ASSISTANT_INJECTION_ALLOWLIST` | string |  |
     | `AI_ASSISTANT_NAME` | string |  |
     | `AI_ASSISTANT_SYSTEM_PROMPT_CUSTOM_INSTRUCTIONS` | string |  |
+    | `ANONYMOUS_CHAT_USER_SLUG_SALT` | string |  |
+    | `ANONYMOUS_CHAT_FEEDBACK_TOKEN_SECRET` | string |  |
+    | `ANONYMOUS_CHAT_CATALOG_MAX_ENTRIES` | integer |  |
+    | `ANONYMOUS_CHAT_REVIEW_ENABLED` | boolean |  |
+    | `ANONYMOUS_CHAT_REVIEW_DAILY_TOKEN_BUDGET` | integer |  |
+    | `ANONYMOUS_CHAT_ARTIFACT_RETENTION_DAYS` | integer |  |
     | `SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED` | boolean |  |
     | `SOFTWARE_CATALOG_EESSI_VERSION` | string |  |
     | `SOFTWARE_CATALOG_EESSI_API_URL` | string |  |
