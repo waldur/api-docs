@@ -92,6 +92,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
@@ -171,6 +172,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
@@ -263,6 +265,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
@@ -366,6 +369,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
@@ -460,6 +464,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |

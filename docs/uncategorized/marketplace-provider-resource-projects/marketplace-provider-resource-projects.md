@@ -94,6 +94,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
@@ -173,6 +174,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
@@ -276,6 +278,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
@@ -370,6 +373,7 @@
     | `description` | string |  |
     | `backend_id` | string |  |
     | `state` | string |  |
+    | `error_message` | string |  |
     | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
     | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
@@ -867,26 +871,21 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     http \
       POST \
       https://api.example.com/api/marketplace-provider-resource-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_state_erred/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      resource="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
-      name="my-awesome-marketplace-provider-resource-project"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.resource_project_request import ResourceProjectRequest # (1)
+    from waldur_api_client.models.resource_project_error_message_request import ResourceProjectErrorMessageRequest # (1)
     from waldur_api_client.api.marketplace_provider_resource_projects import marketplace_provider_resource_projects_set_state_erred # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = ResourceProjectRequest(
-        resource="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        name="my-awesome-marketplace-provider-resource-project"
-    )
+    body_data = ResourceProjectErrorMessageRequest()
     response = marketplace_provider_resource_projects_set_state_erred.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -897,7 +896,7 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     ```
     
     
-    1.  **Model Source:** [`ResourceProjectRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_project_request.py)
+    1.  **Model Source:** [`ResourceProjectErrorMessageRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_project_error_message_request.py)
     2.  **API Source:** [`marketplace_provider_resource_projects_set_state_erred`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resource_projects/marketplace_provider_resource_projects_set_state_erred.py)
 
 === "TypeScript"
@@ -910,10 +909,6 @@ Updates the expiration time for a user's existing role in the current scope. Thi
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "resource": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "name": "my-awesome-marketplace-provider-resource-project"
       }
     });
       console.log('Success:', response);
@@ -930,14 +925,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body (required)"
+=== "Request Body"
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `resource` | string (uuid) | ✓ |  |
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `limits` | any |  | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `error_message` | string |  | Free-form description of why the project transitioned to Erred.<br>_Constraints: default: ``_ |
 
 
 === "Responses"
@@ -946,18 +938,7 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     
     | Field | Type | Description |
     |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `resource` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `backend_id` | string |  |
-    | `state` | string |  |
-    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
-    | `resource_uuid` | string (uuid) |  |
-    | `resource_name` | string |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
+    | `error_message` | string | Free-form description of why the project transitioned to Erred. |
 
 ---
 
@@ -970,38 +951,28 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     http \
       POST \
       https://api.example.com/api/marketplace-provider-resource-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_state_ok/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      resource="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
-      name="my-awesome-marketplace-provider-resource-project"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.resource_project_request import ResourceProjectRequest # (1)
-    from waldur_api_client.api.marketplace_provider_resource_projects import marketplace_provider_resource_projects_set_state_ok # (2)
+    from waldur_api_client.api.marketplace_provider_resource_projects import marketplace_provider_resource_projects_set_state_ok # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ResourceProjectRequest(
-        resource="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        name="my-awesome-marketplace-provider-resource-project"
-    )
     response = marketplace_provider_resource_projects_set_state_ok.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ResourceProjectRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_project_request.py)
-    2.  **API Source:** [`marketplace_provider_resource_projects_set_state_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resource_projects/marketplace_provider_resource_projects_set_state_ok.py)
+    1.  **API Source:** [`marketplace_provider_resource_projects_set_state_ok`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resource_projects/marketplace_provider_resource_projects_set_state_ok.py)
 
 === "TypeScript"
 
@@ -1013,10 +984,6 @@ Updates the expiration time for a user's existing role in the current scope. Thi
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "resource": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "name": "my-awesome-marketplace-provider-resource-project"
       }
     });
       console.log('Success:', response);
@@ -1033,33 +1000,9 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `resource` | string (uuid) | ✓ |  |
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `limits` | any |  | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-
-
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `resource` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `backend_id` | string |  |
-    | `state` | string |  |
-    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
-    | `resource_uuid` | string (uuid) |  |
-    | `resource_name` | string |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
 
 ---
