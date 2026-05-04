@@ -43,6 +43,8 @@ This entity acts as a scope for collaboration, allowing a subset of users from t
 | <span class="http-badge http-post">POST</span> | `/api/projects/{uuid}/submit_answers/` | [Submit checklist answers](#submit-checklist-answers) |
 | **Remote Actions & Sync** | | |
 | <span class="http-badge http-post">POST</span> | `/api/projects/{uuid}/sync_user_roles/` | [Sync user roles](#sync-user-roles) |
+| **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/projects/{uuid}/components-usage/` | [Get project resource usage statistics broken down per offering](#get-project-resource-usage-statistics-broken-down-per-offering) |
 
 ---
 ## Core CRUD
@@ -2363,5 +2365,92 @@ Trigger user role sync for this project. Sends a notification to RabbitMQ that t
 
     **`200`** - No response body
     
+
+---
+
+## Other Actions
+
+
+### Get project resource usage statistics broken down per offering
+
+Returns one row per (offering, component type, billing type) for all non-terminated resources within the project. Each row's `usage` and `limit_usage` are aggregated using the offering's own `limit_period`, so quarterly offerings report quarter-to-date, yearly report year-to-date, total report lifetime, and monthly report current month. Each row also includes the resolved current period bounds (`current_period_label`, `current_period_start`, `current_period_end`).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/components-usage/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.projects import projects_components_usage_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = projects_components_usage_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`projects_components_usage_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/projects/projects_components_usage_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { projectsComponentsUsageRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await projectsComponentsUsageRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `components` | array of objects |
+    | `components.type` | string |
+    | `components.name` | string |
+    | `components.description` | string |
+    | `components.measured_unit` | string |
+    | `components.billing_type` | string |
+    | `components.usage` | number (double) |
+    | `components.limit_usage` | number (double) |
+    | `components.limit` | number (double) |
+    | `components.offering_name` | string |
+    | `components.offering_uuid` | string (uuid) |
+    | `components.limit_period` | string |
+    | `components.current_period_label` | string |
+    | `components.current_period_start` | string (date) |
+    | `components.current_period_end` | string (date) |
 
 ---
