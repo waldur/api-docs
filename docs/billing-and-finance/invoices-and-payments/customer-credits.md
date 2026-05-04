@@ -672,36 +672,28 @@ Get credit consumption history grouped by month.
     http \
       POST \
       https://api.example.com/api/customer-credits/a1b2c3d4-e5f6-7890-abcd-ef1234567890/apply_compensations/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      customer="https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.customer_credit_request import CustomerCreditRequest # (1)
-    from waldur_api_client.api.customer_credits import customer_credits_apply_compensations # (2)
+    from waldur_api_client.api.customer_credits import customer_credits_apply_compensations # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = CustomerCreditRequest(
-        customer="https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    )
     response = customer_credits_apply_compensations.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`CustomerCreditRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/customer_credit_request.py)
-    2.  **API Source:** [`customer_credits_apply_compensations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_apply_compensations.py)
+    1.  **API Source:** [`customer_credits_apply_compensations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_apply_compensations.py)
 
 === "TypeScript"
 
@@ -713,9 +705,6 @@ Get credit consumption history grouped by month.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "customer": "https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
       }
     });
       console.log('Success:', response);
@@ -730,19 +719,6 @@ Get credit consumption history grouped by month.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) | ✓ |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption_logic` | string |  |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
 
 
 === "Responses"
@@ -783,36 +759,28 @@ Get credit consumption history grouped by month.
     http \
       POST \
       https://api.example.com/api/customer-credits/a1b2c3d4-e5f6-7890-abcd-ef1234567890/clear_compensations/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      customer="https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.customer_credit_request import CustomerCreditRequest # (1)
-    from waldur_api_client.api.customer_credits import customer_credits_clear_compensations # (2)
+    from waldur_api_client.api.customer_credits import customer_credits_clear_compensations # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = CustomerCreditRequest(
-        customer="https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    )
     response = customer_credits_clear_compensations.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`CustomerCreditRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/customer_credit_request.py)
-    2.  **API Source:** [`customer_credits_clear_compensations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_clear_compensations.py)
+    1.  **API Source:** [`customer_credits_clear_compensations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_clear_compensations.py)
 
 === "TypeScript"
 
@@ -824,9 +792,6 @@ Get credit consumption history grouped by month.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "customer": "https://api.example.com/api/customer/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
       }
     });
       console.log('Success:', response);
@@ -841,19 +806,6 @@ Get credit consumption history grouped by month.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) | ✓ |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption_logic` | string |  |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
 
 
 === "Responses"

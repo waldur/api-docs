@@ -559,42 +559,28 @@
     http \
       POST \
       https://api.example.com/api/rancher-catalogs/a1b2c3d4-e5f6-7890-abcd-ef1234567890/refresh/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-rancher-catalog" \
-      catalog_url="https://api.example.com/api/catalog-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      branch="string-value" \
-      scope="string-value"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.rancher_catalog_request import RancherCatalogRequest # (1)
-    from waldur_api_client.api.rancher_catalogs import rancher_catalogs_refresh # (2)
+    from waldur_api_client.api.rancher_catalogs import rancher_catalogs_refresh # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = RancherCatalogRequest(
-        name="my-awesome-rancher-catalog",
-        catalog_url="https://api.example.com/api/catalog-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        branch="string-value",
-        scope="string-value"
-    )
     response = rancher_catalogs_refresh.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`RancherCatalogRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_catalog_request.py)
-    2.  **API Source:** [`rancher_catalogs_refresh`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_catalogs/rancher_catalogs_refresh.py)
+    1.  **API Source:** [`rancher_catalogs_refresh`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_catalogs/rancher_catalogs_refresh.py)
 
 === "TypeScript"
 
@@ -606,12 +592,6 @@
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "name": "my-awesome-rancher-catalog",
-        "catalog_url": "https://api.example.com/api/catalog-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "branch": "string-value",
-        "scope": "string-value"
       }
     });
       console.log('Success:', response);
@@ -626,17 +606,6 @@
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string | ✓ |
-    | `description` | string |  |
-    | `catalog_url` | string (uri) | ✓ |
-    | `branch` | string | ✓ |
-    | `scope` | string | ✓ |
 
 
 === "Responses"

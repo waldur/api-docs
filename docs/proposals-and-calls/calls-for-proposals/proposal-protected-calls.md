@@ -3561,38 +3561,28 @@ Compute affinity scores for all reviewer-proposal pairs.
     http \
       POST \
       https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/compute-affinities/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-proposal-protected-call" \
-      manager="https://api.example.com/api/manager/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.protected_call_request import ProtectedCallRequest # (1)
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_compute_affinities # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_compute_affinities # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ProtectedCallRequest(
-        name="my-awesome-proposal-protected-call",
-        manager="https://api.example.com/api/manager/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    )
     response = proposal_protected_calls_compute_affinities.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ProtectedCallRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_request.py)
-    2.  **API Source:** [`proposal_protected_calls_compute_affinities`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_compute_affinities.py)
+    1.  **API Source:** [`proposal_protected_calls_compute_affinities`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_compute_affinities.py)
 
 === "TypeScript"
 
@@ -3604,10 +3594,6 @@ Compute affinity scores for all reviewer-proposal pairs.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "name": "my-awesome-proposal-protected-call",
-        "manager": "https://api.example.com/api/manager/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
       }
     });
       console.log('Success:', response);
@@ -3622,32 +3608,6 @@ Compute affinity scores for all reviewer-proposal pairs.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `manager` | string (uri) | ✓ |  |
-    | `fixed_duration_in_days` | integer |  |  |
-    | `backend_id` | string |  |  |
-    | `external_url` | string (uri) |  |  |
-    | `reviewer_identity_visible_to_submitters` | boolean |  | Whether proposal applicants can see reviewer identities |
-    | `reviews_visible_to_submitters` | boolean |  | Whether proposal applicants can see review comments and scores |
-    | `created_by` | string (uri) |  |  |
-    | `reference_code` | string |  |  |
-    | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
-    | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
-    | `applicant_visibility_config` | any |  |  |
 
 
 === "Responses"

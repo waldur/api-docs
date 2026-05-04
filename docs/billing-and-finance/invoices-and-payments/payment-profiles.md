@@ -618,7 +618,21 @@
 
 === "Responses"
 
-    **`200`** - No response body
+    **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `url` | string (uri) |
+    | `name` | string |
+    | `organization_uuid` | string (uuid) |
+    | `organization` | string (uri) |
+    | `attributes` | object |
+    | `attributes.end_date` | string |
+    | `attributes.agreement_number` | string |
+    | `attributes.contract_sum` | integer |
+    | `payment_type` | string |
+    | `payment_type_display` | string |
+    | `is_active` | boolean |
 
 ---

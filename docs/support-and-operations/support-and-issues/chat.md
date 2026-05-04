@@ -1158,26 +1158,21 @@ Archive a thread (soft delete).
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.thread_session_request import ThreadSessionRequest # (1)
-    from waldur_api_client.api.chat_threads import chat_threads_archive # (2)
+    from waldur_api_client.api.chat_threads import chat_threads_archive # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ThreadSessionRequest()
     response = chat_threads_archive.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ThreadSessionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_request.py)
-    2.  **API Source:** [`chat_threads_archive`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_archive.py)
+    1.  **API Source:** [`chat_threads_archive`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_archive.py)
 
 === "TypeScript"
 
@@ -1203,14 +1198,6 @@ Archive a thread (soft delete).
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string |  |
-    | `is_archived` | boolean |  |
 
 
 === "Responses"
@@ -1318,26 +1305,21 @@ Restore an archived thread.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.thread_session_request import ThreadSessionRequest # (1)
-    from waldur_api_client.api.chat_threads import chat_threads_unarchive # (2)
+    from waldur_api_client.api.chat_threads import chat_threads_unarchive # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ThreadSessionRequest()
     response = chat_threads_unarchive.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ThreadSessionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_request.py)
-    2.  **API Source:** [`chat_threads_unarchive`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_unarchive.py)
+    1.  **API Source:** [`chat_threads_unarchive`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_unarchive.py)
 
 === "TypeScript"
 
@@ -1363,14 +1345,6 @@ Restore an archived thread.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string |  |
-    | `is_archived` | boolean |  |
 
 
 === "Responses"

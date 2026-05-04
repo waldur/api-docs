@@ -518,8 +518,133 @@
 
 === "Responses"
 
-    **`200`** - No response body
+    **`200`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `offering` | string (uri) |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_description` | string |  |
+    | `offering_image` | string (uri) |  |
+    | `offering_thumbnail` | string (uri) |  |
+    | `offering_type` | string |  |
+    | `offering_shared` | boolean | Accessible to all customers. |
+    | `offering_billable` | boolean | Purchase and usage is invoiced. |
+    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `provider_name` | string |  |
+    | `provider_uuid` | string (uuid) |  |
+    | `provider_slug` | string |  |
+    | `provider_description` | string |  |
+    | `category_title` | string |  |
+    | `category_uuid` | string (uuid) |  |
+    | `category_icon` | string (uri) |  |
+    | `plan` | string (uri) |  |
+    | `plan_unit` | any |  |
+    | `plan_name` | string |  |
+    | `plan_uuid` | string (uuid) |  |
+    | `plan_description` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `url` | string (uri) |  |
+    | `scope` | string |  |
+    | `description` | string |  |
+    | `state` | any |  |
+    | `resource_uuid` | string (uuid) |  |
+    | `backend_id` | string |  |
+    | `effective_id` | string |  |
+    | `resource_type` | string |  |
+    | `project` | string (uri) |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_name` | string |  |
+    | `project_description` | string |  |
+    | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
+    | `project_end_date_requested_by` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `offering_slug` | string |  |
+    | `parent_offering_uuid` | string (uuid) |  |
+    | `parent_offering_name` | string |  |
+    | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
+    | `parent_uuid` | string (uuid) |  |
+    | `parent_name` | string |  |
+    | `backend_metadata` | any |  |
+    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
+    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
+    | `name` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
+    | `can_terminate` | boolean |  |
+    | `report` | array of objects |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
+    | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
+    | `end_date_requested_by` | string (uri) |  |
+    | `username` | string |  |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `downscaled` | boolean |  |
+    | `restrict_member_access` | boolean |  |
+    | `paused` | boolean |  |
+    | `endpoints` | array of objects |  |
+    | `endpoints.uuid` | string (uuid) |  |
+    | `endpoints.name` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `options` | any |  |
+    | `available_actions` | array of strings |  |
+    | `last_sync` | string (date-time) |  |
+    | `order_in_progress` | any |  |
+    | `creation_order` | any |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `project_slug` | string |  |
+    | `customer_slug` | string |  |
+    | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
+    | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.offering_uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
+    | `offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `created_by` | string (uri) |  |
+    | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `created_by_full_name` | string |  |
+    | `consumer_reviewed_by` | string (uri) |  |
+    | `consumer_reviewed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `consumer_reviewed_by_full_name` | string |  |
+    | `slots` | array of objects |  |
+    | `slots.start` | string (date-time) |  |
+    | `slots.end` | string (date-time) |  |
+    | `slots.backend_id` | string |  |
 
 ---
 
@@ -583,7 +708,132 @@
 
 === "Responses"
 
-    **`200`** - No response body
+    **`200`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `offering` | string (uri) |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_description` | string |  |
+    | `offering_image` | string (uri) |  |
+    | `offering_thumbnail` | string (uri) |  |
+    | `offering_type` | string |  |
+    | `offering_shared` | boolean | Accessible to all customers. |
+    | `offering_billable` | boolean | Purchase and usage is invoiced. |
+    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `provider_name` | string |  |
+    | `provider_uuid` | string (uuid) |  |
+    | `provider_slug` | string |  |
+    | `provider_description` | string |  |
+    | `category_title` | string |  |
+    | `category_uuid` | string (uuid) |  |
+    | `category_icon` | string (uri) |  |
+    | `plan` | string (uri) |  |
+    | `plan_unit` | any |  |
+    | `plan_name` | string |  |
+    | `plan_uuid` | string (uuid) |  |
+    | `plan_description` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `url` | string (uri) |  |
+    | `scope` | string |  |
+    | `description` | string |  |
+    | `state` | any |  |
+    | `resource_uuid` | string (uuid) |  |
+    | `backend_id` | string |  |
+    | `effective_id` | string |  |
+    | `resource_type` | string |  |
+    | `project` | string (uri) |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_name` | string |  |
+    | `project_description` | string |  |
+    | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
+    | `project_end_date_requested_by` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `offering_slug` | string |  |
+    | `parent_offering_uuid` | string (uuid) |  |
+    | `parent_offering_name` | string |  |
+    | `parent_offering_slug` | string |  |
+    | `offering_backend_id` | string |  |
+    | `parent_uuid` | string (uuid) |  |
+    | `parent_name` | string |  |
+    | `backend_metadata` | any |  |
+    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
+    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
+    | `name` | string |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
+    | `can_terminate` | boolean |  |
+    | `report` | array of objects |  |
+    | `report.header` | string | Section header text |
+    | `report.body` | string | Section body content |
+    | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
+    | `end_date_requested_by` | string (uri) |  |
+    | `username` | string |  |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `downscaled` | boolean |  |
+    | `restrict_member_access` | boolean |  |
+    | `paused` | boolean |  |
+    | `endpoints` | array of objects |  |
+    | `endpoints.uuid` | string (uuid) |  |
+    | `endpoints.name` | string |  |
+    | `endpoints.url` | string | URL of the access endpoint |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `options` | any |  |
+    | `available_actions` | array of strings |  |
+    | `last_sync` | string (date-time) |  |
+    | `order_in_progress` | any |  |
+    | `creation_order` | any |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `project_slug` | string |  |
+    | `customer_slug` | string |  |
+    | `user_requires_reconsent` | boolean | Check if the current user needs to re-consent for this resource's offering. |
+    | `renewal_date` | object (free-form) |  |
+    | `offering_state` | any |  |
+    | `offering_components` | array of objects |  |
+    | `offering_components.uuid` | string (uuid) |  |
+    | `offering_components.offering_uuid` | string (uuid) |  |
+    | `offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offering_components.description` | string |  |
+    | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offering_components.limit_period` | any |  |
+    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.article_code` | string |  |
+    | `offering_components.max_value` | integer |  |
+    | `offering_components.min_value` | integer |  |
+    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.is_boolean` | boolean |  |
+    | `offering_components.default_limit` | integer |  |
+    | `offering_components.factor` | integer |  |
+    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_prepaid` | boolean |  |
+    | `offering_components.overage_component` | string (uuid) |  |
+    | `offering_components.min_prepaid_duration` | integer |  |
+    | `offering_components.max_prepaid_duration` | integer |  |
+    | `offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `created_by` | string (uri) |  |
+    | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `created_by_full_name` | string |  |
+    | `consumer_reviewed_by` | string (uri) |  |
+    | `consumer_reviewed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `consumer_reviewed_by_full_name` | string |  |
+    | `slots` | array of objects |  |
+    | `slots.start` | string (date-time) |  |
+    | `slots.end` | string (date-time) |  |
+    | `slots.backend_id` | string |  |
 
 ---

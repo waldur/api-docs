@@ -326,8 +326,20 @@ Unlink a payment from an invoice. Remove connection between payment and existing
 
 === "Responses"
 
-    **`200`** - No response body
+    **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `url` | string (uri) |
+    | `profile` | string (uri) |
+    | `date_of_payment` | string (date) |
+    | `sum` | string (decimal) |
+    | `proof` | string (uri) |
+    | `invoice` | string (uri) |
+    | `invoice_uuid` | string (uuid) |
+    | `invoice_period` | string |
+    | `customer_uuid` | string (uuid) |
 
 ---
 

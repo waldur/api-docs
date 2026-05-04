@@ -878,8 +878,63 @@ Connect the subnet to the default tenant router.
 
 === "Responses"
 
-    **`200`** - No response body
+    **`200`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string |  |
+    | `access_url` | any |  |
+    | `tenant` | string (uri) |  |
+    | `tenant_name` | string |  |
+    | `network` | string (uri) | Network to which this subnet belongs |
+    | `network_name` | string |  |
+    | `cidr` | string |  |
+    | `gateway_ip` | any | IP address of the gateway for this subnet |
+    | `disable_gateway` | boolean | If True, no gateway IP address will be allocated |
+    | `allocation_pools` | array of objects |  |
+    | `allocation_pools.start` | any | An IPv4 or IPv6 address. |
+    | `allocation_pools.end` | any | An IPv4 or IPv6 address. |
+    | `ip_version` | integer | IP protocol version (4 or 6) |
+    | `enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
+    | `dns_nameservers` | array of anys |  |
+    | `host_routes` | array of objects |  |
+    | `host_routes.destination` | string |  |
+    | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
+    | `is_connected` | boolean | Is subnet connected to the default tenant router. |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
 
 ---
 
@@ -945,8 +1000,63 @@ Disconnect the subnet from the default tenant router.
 
 === "Responses"
 
-    **`200`** - No response body
+    **`200`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string |  |
+    | `access_url` | any |  |
+    | `tenant` | string (uri) |  |
+    | `tenant_name` | string |  |
+    | `network` | string (uri) | Network to which this subnet belongs |
+    | `network_name` | string |  |
+    | `cidr` | string |  |
+    | `gateway_ip` | any | IP address of the gateway for this subnet |
+    | `disable_gateway` | boolean | If True, no gateway IP address will be allocated |
+    | `allocation_pools` | array of objects |  |
+    | `allocation_pools.start` | any | An IPv4 or IPv6 address. |
+    | `allocation_pools.end` | any | An IPv4 or IPv6 address. |
+    | `ip_version` | integer | IP protocol version (4 or 6) |
+    | `enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
+    | `dns_nameservers` | array of anys |  |
+    | `host_routes` | array of objects |  |
+    | `host_routes.destination` | string |  |
+    | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
+    | `is_connected` | boolean | Is subnet connected to the default tenant router. |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
 
 ---
 

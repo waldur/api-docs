@@ -813,6 +813,7 @@ Creates a new provider offering.
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
     | `plugin_options.enable_resource_projects` | boolean |  | Enable sub-project management within resources. |
+    | `plugin_options.resource_projects_limits_required` | boolean |  | If set to True, every limit-billing component declared by the offering must have a value when creating or updating a resource project. Use this for backends that reject projects without resource quotas (e.g. the rancher-keycloak-operator's project-level resourceQuota.limit cap). |
     | `plugin_options.create_orders_on_resource_project_change` | boolean |  | If set to True, create orders when resource projects are created, updated or deleted. |
     | `plugin_options.can_restore_resource` | boolean |  | If set to True, resource can be restored. |
     | `plugin_options.enable_provider_consumer_messaging` | boolean |  | If set to True, service providers can send messages with attachments to consumers on pending orders, and consumers can respond. |
@@ -5649,6 +5650,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
     | `plugin_options.enable_resource_projects` | boolean |  | Enable sub-project management within resources. |
+    | `plugin_options.resource_projects_limits_required` | boolean |  | If set to True, every limit-billing component declared by the offering must have a value when creating or updating a resource project. Use this for backends that reject projects without resource quotas (e.g. the rancher-keycloak-operator's project-level resourceQuota.limit cap). |
     | `plugin_options.create_orders_on_resource_project_change` | boolean |  | If set to True, create orders when resource projects are created, updated or deleted. |
     | `plugin_options.can_restore_resource` | boolean |  | If set to True, resource can be restored. |
     | `plugin_options.enable_provider_consumer_messaging` | boolean |  | If set to True, service providers can send messages with attachments to consumers on pending orders, and consumers can respond. |

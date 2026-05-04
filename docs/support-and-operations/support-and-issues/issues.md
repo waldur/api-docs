@@ -847,38 +847,28 @@
     http \
       POST \
       https://api.example.com/api/support-issues/a1b2c3d4-e5f6-7890-abcd-ef1234567890/sync/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      type="string-value" \
-      summary="string-value"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.issue_request import IssueRequest # (1)
-    from waldur_api_client.api.support_issues import support_issues_sync # (2)
+    from waldur_api_client.api.support_issues import support_issues_sync # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = IssueRequest(
-        type="string-value",
-        summary="string-value"
-    )
     response = support_issues_sync.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`IssueRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/issue_request.py)
-    2.  **API Source:** [`support_issues_sync`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_issues/support_issues_sync.py)
+    1.  **API Source:** [`support_issues_sync`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_issues/support_issues_sync.py)
 
 === "TypeScript"
 
@@ -890,10 +880,6 @@
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "type": "string-value",
-        "summary": "string-value"
       }
     });
       console.log('Success:', response);
@@ -908,24 +894,6 @@
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `type` | string | ✓ |  |
-    | `remote_id` | string |  |  |
-    | `summary` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `priority` | string |  |  |
-    | `caller` | string (uri) |  |  |
-    | `assignee` | string (uri) |  |  |
-    | `customer` | string (uri) |  |  |
-    | `project` | string (uri) |  |  |
-    | `resource` | string |  |  |
-    | `is_reported_manually` | boolean |  | Set true if issue is created by regular user via portal.<br>_Constraints: write-only, default: `False`_ |
-    | `template` | string (uri) |  |  |
 
 
 === "Responses"

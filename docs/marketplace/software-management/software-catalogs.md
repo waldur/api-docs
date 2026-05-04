@@ -317,38 +317,28 @@ Triggers a Celery task to update the given catalog from its upstream source. Ret
     http \
       POST \
       https://api.example.com/api/marketplace-software-catalogs/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_catalog/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-marketplace-software-catalog" \
-      version="string-value"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.software_catalog_request import SoftwareCatalogRequest # (1)
-    from waldur_api_client.api.marketplace_software_catalogs import marketplace_software_catalogs_update_catalog # (2)
+    from waldur_api_client.api.marketplace_software_catalogs import marketplace_software_catalogs_update_catalog # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = SoftwareCatalogRequest(
-        name="my-awesome-marketplace-software-catalog",
-        version="string-value"
-    )
     response = marketplace_software_catalogs_update_catalog.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`SoftwareCatalogRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_catalog_request.py)
-    2.  **API Source:** [`marketplace_software_catalogs_update_catalog`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_catalogs/marketplace_software_catalogs_update_catalog.py)
+    1.  **API Source:** [`marketplace_software_catalogs_update_catalog`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_catalogs/marketplace_software_catalogs_update_catalog.py)
 
 === "TypeScript"
 
@@ -360,10 +350,6 @@ Triggers a Celery task to update the given catalog from its upstream source. Ret
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "name": "my-awesome-marketplace-software-catalog",
-        "version": "string-value"
       }
     });
       console.log('Success:', response);
@@ -378,20 +364,6 @@ Triggers a Celery task to update the given catalog from its upstream source. Ret
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ | Catalog name (e.g., EESSI, Spack) |
-    | `version` | string | ✓ | Catalog version (e.g., 2023.06, 0.21.0) |
-    | `catalog_type` | any |  | Type of software catalog<br>_Constraints: default: `binary_runtime`_ |
-    | `source_url` | string (uri) |  | Catalog source URL |
-    | `description` | string |  |  |
-    | `metadata` | any |  | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
-    | `auto_update_enabled` | boolean |  | Whether to automatically update this catalog via scheduled tasks |
-    | `update_errors` | string |  |  |
 
 
 === "Responses"

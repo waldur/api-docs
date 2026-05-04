@@ -1006,8 +1006,51 @@ Delete resource from the database without scheduling operations on backend
 
 === "Responses"
 
-    **`200`** - No response body
+    **`200`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string |  |
+    | `access_url` | any |  |
+    | `size` | integer | Size of volume in gigabytes |
+    | `volume_type` | string | <br>_Enum: `gp2`, `io1`, `standard`_ |
+    | `device` | string |  |
+    | `instance` | string (uri) |  |
+    | `runtime_state` | string |  |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
 
 ---
 
