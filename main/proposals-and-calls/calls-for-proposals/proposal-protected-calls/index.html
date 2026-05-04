@@ -24326,20 +24326,16 @@
 <hr />
 <h3 id="compute-affinity-scores-for-all-reviewer-proposal-pairs">Compute affinity scores for all reviewer-proposal pairs</h3>
 <p>Compute affinity scores for all reviewer-proposal pairs.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="32:6"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><input id="__tabbed_32_6" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Request Body (required)</label><label for="__tabbed_32_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="32:5"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/compute-affinities/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-proposal-protected-call&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">manager</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/manager/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -24354,35 +24350,20 @@
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.protected_call_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProtectedCallRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_protected_calls</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_protected_calls_compute_affinities</span> <span class="c1"># (2)</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_protected_calls</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_protected_calls_compute_affinities</span> <span class="c1"># (1)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
-
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">ProtectedCallRequest</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-proposal-protected-call&quot;</span><span class="p">,</span>
-    <span class="n">manager</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/manager/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
-<span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">proposal_protected_calls_compute_affinities</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_request.py"><code>ProtectedCallRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_compute_affinities.py"><code>proposal_protected_calls_compute_affinities</code></a></li>
 </ol>
 </div>
@@ -24399,21 +24380,13 @@
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">proposalProtectedCallsComputeAffinities</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">proposalProtectedCallsComputeAffinities</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">proposalProtectedCallsComputeAffinities</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-proposal-protected-call&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;manager&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/manager/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -24436,140 +24409,6 @@
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
 <td>✓</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>slug</code></td>
-<td>string</td>
-<td></td>
-<td>URL-friendly identifier. Only editable by staff users.</td>
-</tr>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>manager</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>fixed_duration_in_days</code></td>
-<td>integer</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>external_url</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>reviewer_identity_visible_to_submitters</code></td>
-<td>boolean</td>
-<td></td>
-<td>Whether proposal applicants can see reviewer identities</td>
-</tr>
-<tr>
-<td><code>reviews_visible_to_submitters</code></td>
-<td>boolean</td>
-<td></td>
-<td>Whether proposal applicants can see review comments and scores</td>
-</tr>
-<tr>
-<td><code>created_by</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>reference_code</code></td>
-<td>string</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>compliance_checklist</code></td>
-<td>string (uuid)</td>
-<td></td>
-<td>Compliance checklist that proposals must complete before submission</td>
-</tr>
-<tr>
-<td><code>proposal_slug_template</code></td>
-<td>string</td>
-<td></td>
-<td>Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded}</td>
-</tr>
-<tr>
-<td><code>user_email_patterns</code></td>
-<td>any</td>
-<td></td>
-<td>List of email regex patterns. User must match one.</td>
-</tr>
-<tr>
-<td><code>user_affiliations</code></td>
-<td>any</td>
-<td></td>
-<td>List of allowed affiliations. User must have one.</td>
-</tr>
-<tr>
-<td><code>user_identity_sources</code></td>
-<td>any</td>
-<td></td>
-<td>List of allowed identity sources (identity providers).</td>
-</tr>
-<tr>
-<td><code>user_nationalities</code></td>
-<td>any</td>
-<td></td>
-<td>List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one.</td>
-</tr>
-<tr>
-<td><code>user_organization_types</code></td>
-<td>any</td>
-<td></td>
-<td>List of allowed organization type URNs (SCHAC). User must match one.</td>
-</tr>
-<tr>
-<td><code>user_assurance_levels</code></td>
-<td>any</td>
-<td></td>
-<td>List of required assurance URIs (REFEDS). User must have ALL of these.</td>
-</tr>
-<tr>
-<td><code>applicant_visibility_config</code></td>
-<td>any</td>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -30967,7 +30806,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-04-30
+    2026-05-04
   </span>
 
     
