@@ -41,7 +41,6 @@ All projects, resources, and costs are ultimately tied to a Customer. Users are 
 | <span class="http-badge http-get">GET</span> | `/api/customers/countries/` | [Get list of available countries](#get-list-of-available-countries) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/stats/` | [Get customer resource usage statistics](#get-customer-resource-usage-statistics) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/components-usage/` | [Get customer resource usage statistics broken down per offering](#get-customer-resource-usage-statistics-broken-down-per-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/project-digest-config/` | [Get project digest configuration](#get-project-digest-configuration) |
@@ -2377,90 +2376,6 @@ Provides statistics about the resource usage (e.g., CPU, RAM, storage) for all p
 
 ## Other Actions
 
-
-### Get customer resource usage statistics broken down per offering
-
-Returns one row per (offering, component type, billing type) for all non-terminated resources within the customer. Each row's `usage` and `limit_usage` are aggregated using the offering's own `limit_period`, so quarterly offerings report quarter-to-date, yearly report year-to-date, total report lifetime, and monthly report current month. Each row also includes the resolved current period bounds (`current_period_label`, `current_period_start`, `current_period_end`).
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/components-usage/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.customers import customers_components_usage_retrieve # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = customers_components_usage_retrieve.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`customers_components_usage_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_components_usage_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { customersComponentsUsageRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await customersComponentsUsageRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `components` | array of objects |
-    | `components.type` | string |
-    | `components.name` | string |
-    | `components.description` | string |
-    | `components.measured_unit` | string |
-    | `components.billing_type` | string |
-    | `components.usage` | number (double) |
-    | `components.limit_usage` | number (double) |
-    | `components.limit` | number (double) |
-    | `components.offering_name` | string |
-    | `components.offering_uuid` | string (uuid) |
-    | `components.limit_period` | string |
-    | `components.current_period_label` | string |
-    | `components.current_period_start` | string (date) |
-    | `components.current_period_end` | string (date) |
-
----
 
 ### Get object state at a specific timestamp
 
