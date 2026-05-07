@@ -5338,10 +5338,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-affiliated-organizations-for-a-project" class="md-nav__link">
+  <a href="#update-affiliation-for-a-project" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Update affiliated organizations for a project
+        Update affiliation for a project
       
     </span>
   </a>
@@ -14041,10 +14041,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-affiliated-organizations-for-a-project" class="md-nav__link">
+  <a href="#update-affiliation-for-a-project" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Update affiliated organizations for a project
+        Update affiliation for a project
       
     </span>
   </a>
@@ -14395,8 +14395,8 @@
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
-<td style="text-align: left;"><code>/api/projects/{uuid}/update_affiliated_organizations/</code></td>
-<td style="text-align: left;"><a href="#update-affiliated-organizations-for-a-project">Update affiliated organizations for a project</a></td>
+<td style="text-align: left;"><code>/api/projects/{uuid}/update_affiliation/</code></td>
+<td style="text-align: left;"><a href="#update-affiliation-for-a-project">Update affiliation for a project</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-put">PUT</span></td>
@@ -14595,14 +14595,14 @@
 <td>Filter by whether accounting is running.</td>
 </tr>
 <tr>
-<td><code>affiliated_organization_name</code></td>
+<td><code>affiliation_name</code></td>
 <td>string</td>
-<td>Affiliated organization name</td>
+<td>Affiliation name</td>
 </tr>
 <tr>
-<td><code>affiliated_organization_uuid</code></td>
+<td><code>affiliation_uuid</code></td>
 <td>array</td>
-<td>Affiliated organization UUID</td>
+<td>Affiliation UUID</td>
 </tr>
 <tr>
 <td><code>backend_id</code></td>
@@ -14665,9 +14665,9 @@
 <td></td>
 </tr>
 <tr>
-<td><code>has_affiliated_organization</code></td>
+<td><code>has_affiliation</code></td>
 <td>boolean</td>
-<td>Filter projects that have at least one affiliated organization.</td>
+<td>Filter projects that have an affiliation.</td>
 </tr>
 <tr>
 <td><code>include_terminated</code></td>
@@ -14950,74 +14950,9 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
-<td><code>affiliated_organizations</code></td>
-<td>array of objects</td>
+<td><code>affiliation</code></td>
+<td>any</td>
 <td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.code</code></td>
-<td>string</td>
-<td>Unique short identifier, e.g. CERN, EMBL.</td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.email</code></td>
-<td>string (email)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.homepage</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.address</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.projects_count</code></td>
-<td>integer</td>
-<td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
 <td><code>science_sub_domain</code></td>
@@ -15380,74 +15315,9 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
-<td><code>affiliated_organizations</code></td>
-<td>array of objects</td>
+<td><code>affiliation</code></td>
+<td>any</td>
 <td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.code</code></td>
-<td>string</td>
-<td>Unique short identifier, e.g. CERN, EMBL.</td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.email</code></td>
-<td>string (email)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.homepage</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.address</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.projects_count</code></td>
-<td>integer</td>
-<td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
 <td><code>science_sub_domain</code></td>
@@ -15704,6 +15574,12 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
+<td><code>affiliation_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td><br><em>Constraints: write-only</em></td>
+</tr>
+<tr>
 <td><code>science_sub_domain</code></td>
 <td>string (uuid)</td>
 <td></td>
@@ -15914,74 +15790,9 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
-<td><code>affiliated_organizations</code></td>
-<td>array of objects</td>
+<td><code>affiliation</code></td>
+<td>any</td>
 <td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.code</code></td>
-<td>string</td>
-<td>Unique short identifier, e.g. CERN, EMBL.</td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.email</code></td>
-<td>string (email)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.homepage</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.address</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.projects_count</code></td>
-<td>integer</td>
-<td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
 <td><code>science_sub_domain</code></td>
@@ -16034,8 +15845,8 @@
 </div>
 </div>
 <hr />
-<h3 id="update-affiliated-organizations-for-a-project">Update affiliated organizations for a project</h3>
-<p>Assigns a project to one or more affiliated organizations. Replaces the current set.</p>
+<h3 id="update-affiliation-for-a-project">Update affiliation for a project</h3>
+<p>Assigns the project to a single affiliation (or clears it when null).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Request Body</label><label for="__tabbed_4_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -16044,7 +15855,7 @@
 <span class="normal">3</span>
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>https://api.example.com/api/projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_affiliated_organizations/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_affiliation/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -16065,15 +15876,15 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.project_affiliated_organizations_update_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectAffiliatedOrganizationsUpdateRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.projects</span><span class="w"> </span><span class="kn">import</span> <span class="n">projects_update_affiliated_organizations</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.project_affiliation_update_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectAffiliationUpdateRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.projects</span><span class="w"> </span><span class="kn">import</span> <span class="n">projects_update_affiliation</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">ProjectAffiliatedOrganizationsUpdateRequest</span><span class="p">()</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">projects_update_affiliated_organizations</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">ProjectAffiliationUpdateRequest</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">projects_update_affiliation</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
     <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
@@ -16082,8 +15893,8 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_affiliated_organizations_update_request.py"><code>ProjectAffiliatedOrganizationsUpdateRequest</code></a></li>
-<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/projects/projects_update_affiliated_organizations.py"><code>projects_update_affiliated_organizations</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_affiliation_update_request.py"><code>ProjectAffiliationUpdateRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/projects/projects_update_affiliation.py"><code>projects_update_affiliation</code></a></li>
 </ol>
 </div>
 <div class="tabbed-block">
@@ -16099,10 +15910,10 @@
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">projectsUpdateAffiliatedOrganizations</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">projectsUpdateAffiliation</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">projectsUpdateAffiliatedOrganizations</span><span class="p">({</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">projectsUpdateAffiliation</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
@@ -16143,8 +15954,8 @@
 </thead>
 <tbody>
 <tr>
-<td><code>affiliated_organizations</code></td>
-<td>array of string (uuid)s</td>
+<td><code>affiliation</code></td>
+<td>string (uuid)</td>
 <td></td>
 </tr>
 </tbody>
@@ -16386,6 +16197,12 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
+<td><code>affiliation_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td><br><em>Constraints: write-only</em></td>
+</tr>
+<tr>
 <td><code>science_sub_domain</code></td>
 <td>string (uuid)</td>
 <td></td>
@@ -16596,74 +16413,9 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
-<td><code>affiliated_organizations</code></td>
-<td>array of objects</td>
+<td><code>affiliation</code></td>
+<td>any</td>
 <td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.code</code></td>
-<td>string</td>
-<td>Unique short identifier, e.g. CERN, EMBL.</td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.email</code></td>
-<td>string (email)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.homepage</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.address</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.projects_count</code></td>
-<td>integer</td>
-<td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
 <td><code>science_sub_domain</code></td>
@@ -16928,6 +16680,12 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
+<td><code>affiliation_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td><br><em>Constraints: write-only</em></td>
+</tr>
+<tr>
 <td><code>science_sub_domain</code></td>
 <td>string (uuid)</td>
 <td></td>
@@ -17138,74 +16896,9 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
-<td><code>affiliated_organizations</code></td>
-<td>array of objects</td>
+<td><code>affiliation</code></td>
+<td>any</td>
 <td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.code</code></td>
-<td>string</td>
-<td>Unique short identifier, e.g. CERN, EMBL.</td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.email</code></td>
-<td>string (email)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.homepage</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.address</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.projects_count</code></td>
-<td>integer</td>
-<td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
 <td><code>science_sub_domain</code></td>
@@ -17686,74 +17379,9 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
-<td><code>affiliated_organizations</code></td>
-<td>array of objects</td>
+<td><code>affiliation</code></td>
+<td>any</td>
 <td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.code</code></td>
-<td>string</td>
-<td>Unique short identifier, e.g. CERN, EMBL.</td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.email</code></td>
-<td>string (email)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.homepage</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.address</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.projects_count</code></td>
-<td>integer</td>
-<td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
 <td><code>science_sub_domain</code></td>
@@ -19129,74 +18757,9 @@
 <td>List of allowed identity sources (identity providers).</td>
 </tr>
 <tr>
-<td><code>affiliated_organizations</code></td>
-<td>array of objects</td>
+<td><code>affiliation</code></td>
+<td>any</td>
 <td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.code</code></td>
-<td>string</td>
-<td>Unique short identifier, e.g. CERN, EMBL.</td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.email</code></td>
-<td>string (email)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.homepage</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.address</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>affiliated_organizations.projects_count</code></td>
-<td>integer</td>
-<td>Number of active projects affiliated with this organization</td>
 </tr>
 <tr>
 <td><code>science_sub_domain</code></td>
@@ -20487,7 +20050,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-05-06
+    2026-05-07
   </span>
 
     
