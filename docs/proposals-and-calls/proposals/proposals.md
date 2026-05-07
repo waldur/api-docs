@@ -23,10 +23,13 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/` | [List resources for a proposal](#list-resources-for-a-proposal) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/workflow_states/` | [List all workflow step instances for this proposal](#list-all-workflow-step-instances-for-this-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/approve/` | [Approve a proposal](#approve-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/attach_document/` | [Attach document to proposal](#attach-document-to-proposal) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/complete_workflow_step/` | [Complete the current workflow step with an outcome](#complete-the-current-workflow-step-with-an-outcome) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/detach_documents/` | [Detach documents from proposal](#detach-documents-from-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/reject/` | [Reject a proposal](#reject-a-proposal) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/reject_workflow_step/` | [Reject the proposal at the current workflow step](#reject-the-proposal-at-the-current-workflow-step) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/resources/` | [Create resource for a proposal](#create-resource-for-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit/` | [Submit a proposal](#submit-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit_answers/` | [Submit checklist answers](#submit-checklist-answers) |
@@ -1710,6 +1713,112 @@ List resources for a proposal.
 
 ---
 
+### List all workflow step instances for this proposal
+
+List all workflow step instances for this proposal.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/workflow_states/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
+    from waldur_api_client.models.proposal_states import ProposalStates # (2)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_workflow_states_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_workflow_states_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
+    2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
+    3.  **API Source:** [`proposal_proposals_workflow_states_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_workflow_states_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsWorkflowStatesList } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsWorkflowStatesList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `call_uuid` | string (uuid) |  |
+    | `created_by_uuid` | string (uuid) |  |
+    | `my_proposals` | boolean |  |
+    | `name` | string |  |
+    | `o` | array | Ordering<br><br> |
+    | `organization_uuid` | string (uuid) |  |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `round` | string (uuid) |  |
+    | `round_uuid` | string (uuid) |  |
+    | `slug` | string | Slug |
+    | `state` | array |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `step` | any |  |
+    | `step_name` | string |  |
+    | `step_description` | string |  |
+    | `responsible_role` | string |  |
+    | `status` | any |  |
+    | `outcome` | string | Step-specific outcome (e.g., eligible, feasible, approved). |
+    | `outcome_reason` | string | Explanation for the outcome (e.g., rejection reason). |
+    | `started_at` | string (date-time) | When this step became active. |
+    | `completed_at` | string (date-time) |  |
+    | `completed_by` | string (uuid) |  |
+    | `deadline` | string (date-time) | Computed from started_at + step duration_in_days. |
+
+---
+
 ### Approve a proposal
 
 Approve a proposal.
@@ -1865,6 +1974,101 @@ Attach document to proposal.
 
     **`200`** - No response body
     
+
+---
+
+### Complete the current workflow step with an outcome
+
+Complete the current workflow step with an outcome.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/complete_workflow_step/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
+      outcome=null
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.complete_workflow_step_request import CompleteWorkflowStepRequest # (1)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_complete_workflow_step # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CompleteWorkflowStepRequest(
+        step_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        outcome=null
+    )
+    response = proposal_proposals_complete_workflow_step.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CompleteWorkflowStepRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/complete_workflow_step_request.py)
+    2.  **API Source:** [`proposal_proposals_complete_workflow_step`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_complete_workflow_step.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsCompleteWorkflowStep } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsCompleteWorkflowStep({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "step_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "outcome": null
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `step_uuid` | string (uuid) | ✓ | UUID of the workflow step instance the client believes is active. Used to detect concurrent step transitions. |
+    | `outcome` | any | ✓ | Step outcome. Must be in the active step's allow-list. 'rejected' and 'expired' are reserved for system transitions. |
+    | `outcome_reason` | string |  | Explanation for the outcome.<br>_Constraints: default: ``_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `detail` | string |  |
+    | `proposal_state` | string | New proposal state when the workflow terminates. |
+    | `next_step` | string | Identifier of the step that just became active. |
 
 ---
 
@@ -2029,6 +2233,99 @@ Reject a proposal.
 
     **`200`** - No response body
     
+
+---
+
+### Reject the proposal at the current workflow step
+
+Reject the proposal at the current workflow step.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reject_workflow_step/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
+      reason="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.reject_workflow_step_request import RejectWorkflowStepRequest # (1)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_reject_workflow_step # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = RejectWorkflowStepRequest(
+        step_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        reason="string-value"
+    )
+    response = proposal_proposals_reject_workflow_step.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`RejectWorkflowStepRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/reject_workflow_step_request.py)
+    2.  **API Source:** [`proposal_proposals_reject_workflow_step`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_reject_workflow_step.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsRejectWorkflowStep } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsRejectWorkflowStep({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "step_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "reason": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `step_uuid` | string (uuid) | ✓ | UUID of the workflow step instance the client believes is active. Used to detect concurrent step transitions. |
+    | `reason` | string | ✓ | Reason for rejecting the proposal at this step. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+    | `proposal_state` | string |
 
 ---
 

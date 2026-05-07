@@ -70,7 +70,7 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`_ |
+    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`, `workflow_step`_ |
     | `checklist_type__in` | array | Filter by multiple checklist types<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -563,7 +563,7 @@ Return checklist questions.
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`_ |
+    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`, `workflow_step`_ |
     | `checklist_type__in` | array | Filter by multiple checklist types<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |

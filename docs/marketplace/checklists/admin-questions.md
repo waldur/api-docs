@@ -65,7 +65,7 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`_ |
+    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`, `workflow_step`_ |
     | `checklist_uuid` | string (uuid) |  |
     | `has_onboarding_mapping` | boolean | Filter questions that have onboarding metadata mapping |
     | `page` | integer | A page number within the paginated result set. |

@@ -35,6 +35,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/` | [List rounds for a call](#list-rounds-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/suggestions/` | [List all reviewer suggestions for this call with affinity scores](#list-all-reviewer-suggestions-for-this-call-with-affinity-scores) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/` | [List workflow steps for a call](#list-workflow-steps-for-a-call) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/{obj_uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/activate/` | [Activate a call](#activate-a-call) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/archive/` | [Archive a call](#archive-a-call) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/attach_documents/` | [Attach documents to call](#attach-documents-to-call) |
@@ -52,17 +54,21 @@
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/rounds/` | [Create a round for a call](#create-a-round-for-a-call) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/send-all-assignments/` | [Send all draft assignment batches for this call](#send-all-draft-assignment-batches-for-this-call) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/send-invitations/` | [Send invitations to all confirmed suggestions](#send-invitations-to-all-confirmed-suggestions) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/` | [Create or update a workflow step for a call](#create-or-update-a-workflow-step-for-a-call) |
 | <span class="http-badge http-put">PUT</span> | `/api/proposal-protected-calls/{uuid}/offerings/{obj_uuid}/` | [Update](#update) |
 | <span class="http-badge http-put">PUT</span> | `/api/proposal-protected-calls/{uuid}/resource_templates/{obj_uuid}/` | [Update](#update) |
 | <span class="http-badge http-put">PUT</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Update](#update) |
+| <span class="http-badge http-put">PUT</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/{obj_uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/coi-configuration/` | [Get COI configuration for this call](#get-coi-configuration-for-this-call) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/matching-configuration/` | [Get or update matching configuration for this call](#get-or-update-matching-configuration-for-this-call) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/offerings/{obj_uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/resource_templates/{obj_uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Partial Update](#partial-update) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/{obj_uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/offerings/{obj_uuid}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/resource_templates/{obj_uuid}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Delete](#delete) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/{obj_uuid}/` | [Delete](#delete) |
 
 ---
 ## Core CRUD
@@ -3324,6 +3330,202 @@ List all reviewer suggestions for this call with affinity scores.
 
 ---
 
+### List workflow steps for a call
+
+List workflow steps for a call.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/workflow_steps/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_workflow_steps_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_protected_calls_workflow_steps_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_protected_calls_workflow_steps_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_workflow_steps_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsWorkflowStepsList } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsWorkflowStepsList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `step` | string | <br>_Enum: `administrative_check`, `technical_assessment`, `expert_review`, `panel_review`, `allocation_decision`, `award_response`_ |
+    | `call_uuid` | string (uuid) |  |
+    | `call_name` | string |  |
+    | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
+    | `checklist` | string (uuid) |  |
+    | `checklist_name` | string |  |
+    | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
+    | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
+    | `min_reviewers` | integer | Minimum reviews required before step can complete. |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
+    | `responsible_role` | any | Role expected to act on this step. |
+    | `transition_mode` | any | How this step advances to the next. |
+    | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `display_order` | integer | Optional override of catalog ordering. |
+    | `criteria` | array of objects |  |
+    | `criteria.uuid` | string (uuid) |  |
+    | `criteria.name` | string |  |
+    | `criteria.order` | integer |  |
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-protected-calls/string-value/workflow_steps/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_workflow_steps_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_protected_calls_workflow_steps_retrieve.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_protected_calls_workflow_steps_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_workflow_steps_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsWorkflowStepsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsWorkflowStepsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `step` | string | <br>_Enum: `administrative_check`, `technical_assessment`, `expert_review`, `panel_review`, `allocation_decision`, `award_response`_ |
+    | `call_uuid` | string (uuid) |  |
+    | `call_name` | string |  |
+    | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
+    | `checklist` | string (uuid) |  |
+    | `checklist_name` | string |  |
+    | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
+    | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
+    | `min_reviewers` | integer | Minimum reviews required before step can complete. |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
+    | `responsible_role` | any | Role expected to act on this step. |
+    | `transition_mode` | any | How this step advances to the next. |
+    | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `display_order` | integer | Optional override of catalog ordering. |
+    | `criteria` | array of objects |  |
+    | `criteria.uuid` | string (uuid) |  |
+    | `criteria.name` | string |  |
+    | `criteria.order` | integer |  |
+
+---
+
 ### Activate a call
 
 Activate a call.
@@ -5071,6 +5273,131 @@ Send invitations to all confirmed suggestions.
 
 ---
 
+### Create or update a workflow step for a call
+
+Create or update a workflow step for a call.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/workflow_steps/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step="administrative_check"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.call_workflow_step_request import CallWorkflowStepRequest # (1)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_workflow_steps_set # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CallWorkflowStepRequest(
+        step="administrative_check"
+    )
+    response = proposal_protected_calls_workflow_steps_set.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CallWorkflowStepRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_workflow_step_request.py)
+    2.  **API Source:** [`proposal_protected_calls_workflow_steps_set`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_workflow_steps_set.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsWorkflowStepsSet } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsWorkflowStepsSet({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "step": "administrative_check"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `step` | string | ✓ | <br>_Enum: `administrative_check`, `technical_assessment`, `expert_review`, `panel_review`, `allocation_decision`, `award_response`_ |
+    | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
+    | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
+    | `checklist` | string (uuid) |  |  |
+    | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
+    | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
+    | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
+    | `responsible_role` | any |  | Role expected to act on this step. |
+    | `transition_mode` | any |  | How this step advances to the next. |
+    | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `display_order` | integer |  | Optional override of catalog ordering. |
+    | `criteria` | array of objects |  |  |
+    | `criteria.name` | string | ✓ |  |
+    | `criteria.order` | integer |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `step` | string | <br>_Enum: `administrative_check`, `technical_assessment`, `expert_review`, `panel_review`, `allocation_decision`, `award_response`_ |
+    | `call_uuid` | string (uuid) |  |
+    | `call_name` | string |  |
+    | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
+    | `checklist` | string (uuid) |  |
+    | `checklist_name` | string |  |
+    | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
+    | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
+    | `min_reviewers` | integer | Minimum reviews required before step can complete. |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
+    | `responsible_role` | any | Role expected to act on this step. |
+    | `transition_mode` | any | How this step advances to the next. |
+    | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `display_order` | integer | Optional override of catalog ordering. |
+    | `criteria` | array of objects |  |
+    | `criteria.uuid` | string (uuid) |  |
+    | `criteria.name` | string |  |
+    | `criteria.order` | integer |  |
+
+---
+
 ### Update
 
 
@@ -5438,6 +5765,132 @@ Send invitations to all confirmed suggestions.
     | `proposals.approved_by_name` | string |  |
     | `proposals.created_by_name` | string |  |
     | `proposals.created` | string (date-time) |  |
+
+---
+
+### Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/proposal-protected-calls/string-value/workflow_steps/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step="administrative_check"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.call_workflow_step_request import CallWorkflowStepRequest # (1)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_workflow_steps_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CallWorkflowStepRequest(
+        step="administrative_check"
+    )
+    response = proposal_protected_calls_workflow_steps_update.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CallWorkflowStepRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_workflow_step_request.py)
+    2.  **API Source:** [`proposal_protected_calls_workflow_steps_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_workflow_steps_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsWorkflowStepsUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsWorkflowStepsUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      },
+      body: {
+        "step": "administrative_check"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `step` | string | ✓ | <br>_Enum: `administrative_check`, `technical_assessment`, `expert_review`, `panel_review`, `allocation_decision`, `award_response`_ |
+    | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
+    | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
+    | `checklist` | string (uuid) |  |  |
+    | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
+    | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
+    | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
+    | `responsible_role` | any |  | Role expected to act on this step. |
+    | `transition_mode` | any |  | How this step advances to the next. |
+    | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `display_order` | integer |  | Optional override of catalog ordering. |
+    | `criteria` | array of objects |  |  |
+    | `criteria.name` | string | ✓ |  |
+    | `criteria.order` | integer |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `step` | string | <br>_Enum: `administrative_check`, `technical_assessment`, `expert_review`, `panel_review`, `allocation_decision`, `award_response`_ |
+    | `call_uuid` | string (uuid) |  |
+    | `call_name` | string |  |
+    | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
+    | `checklist` | string (uuid) |  |
+    | `checklist_name` | string |  |
+    | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
+    | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
+    | `min_reviewers` | integer | Minimum reviews required before step can complete. |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
+    | `responsible_role` | any | Role expected to act on this step. |
+    | `transition_mode` | any | How this step advances to the next. |
+    | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `display_order` | integer | Optional override of catalog ordering. |
+    | `criteria` | array of objects |  |
+    | `criteria.uuid` | string (uuid) |  |
+    | `criteria.name` | string |  |
+    | `criteria.order` | integer |  |
 
 ---
 
@@ -6003,6 +6456,125 @@ Get or update matching configuration for this call.
 
 ---
 
+### Partial Update
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/proposal-protected-calls/string-value/workflow_steps/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_call_workflow_step_request import PatchedCallWorkflowStepRequest # (1)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_workflow_steps_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedCallWorkflowStepRequest()
+    response = proposal_protected_calls_workflow_steps_partial_update.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedCallWorkflowStepRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_call_workflow_step_request.py)
+    2.  **API Source:** [`proposal_protected_calls_workflow_steps_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_workflow_steps_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsWorkflowStepsPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsWorkflowStepsPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
+    | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
+    | `checklist` | string (uuid) |  |  |
+    | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
+    | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
+    | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
+    | `responsible_role` | any |  | Role expected to act on this step. |
+    | `transition_mode` | any |  | How this step advances to the next. |
+    | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `display_order` | integer |  | Optional override of catalog ordering. |
+    | `criteria` | array of objects |  |  |
+    | `criteria.name` | string | ✓ |  |
+    | `criteria.order` | integer |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `step` | string | <br>_Enum: `administrative_check`, `technical_assessment`, `expert_review`, `panel_review`, `allocation_decision`, `award_response`_ |
+    | `call_uuid` | string (uuid) |  |
+    | `call_name` | string |  |
+    | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
+    | `checklist` | string (uuid) |  |
+    | `checklist_name` | string |  |
+    | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
+    | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
+    | `min_reviewers` | integer | Minimum reviews required before step can complete. |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
+    | `responsible_role` | any | Role expected to act on this step. |
+    | `transition_mode` | any | How this step advances to the next. |
+    | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `display_order` | integer | Optional override of catalog ordering. |
+    | `criteria` | array of objects |  |
+    | `criteria.uuid` | string (uuid) |  |
+    | `criteria.name` | string |  |
+    | `criteria.order` | integer |  |
+
+---
+
 ### Delete
 
 
@@ -6179,6 +6751,74 @@ Get or update matching configuration for this call.
     
     try {
       const response = await proposalProtectedCallsRoundsDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
+### Delete
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/proposal-protected-calls/string-value/workflow_steps/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_workflow_steps_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_protected_calls_workflow_steps_destroy.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_protected_calls_workflow_steps_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_workflow_steps_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsWorkflowStepsDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsWorkflowStepsDestroy({
       auth: "Token YOUR_API_TOKEN",
       path: {
         "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",

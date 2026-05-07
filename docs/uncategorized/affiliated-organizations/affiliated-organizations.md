@@ -35,7 +35,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.affiliated_organizations import affiliated_organizations_list # (1)
+    from waldur_api_client.models.affiliated_organization_field_enum import AffiliatedOrganizationFieldEnum # (1)
+    from waldur_api_client.api.affiliated_organizations import affiliated_organizations_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -47,7 +48,8 @@
     ```
     
     
-    1.  **API Source:** [`affiliated_organizations_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/affiliated_organizations/affiliated_organizations_list.py)
+    1.  **Model Source:** [`AffiliatedOrganizationFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/affiliated_organization_field_enum.py)
+    2.  **API Source:** [`affiliated_organizations_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/affiliated_organizations/affiliated_organizations_list.py)
 
 === "TypeScript"
 
@@ -73,6 +75,7 @@
     | `code` | string | Code |
     | `country` | string | Country |
     | `default_for_customer` | string (uuid) | Limit to a customer's default affiliation list |
+    | `field` | array |  |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | string | Which field to use when ordering the results. |
@@ -121,7 +124,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.affiliated_organizations import affiliated_organizations_retrieve # (1)
+    from waldur_api_client.models.affiliated_organization_field_enum import AffiliatedOrganizationFieldEnum # (1)
+    from waldur_api_client.api.affiliated_organizations import affiliated_organizations_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -135,7 +139,8 @@
     ```
     
     
-    1.  **API Source:** [`affiliated_organizations_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/affiliated_organizations/affiliated_organizations_retrieve.py)
+    1.  **Model Source:** [`AffiliatedOrganizationFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/affiliated_organization_field_enum.py)
+    2.  **API Source:** [`affiliated_organizations_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/affiliated_organizations/affiliated_organizations_retrieve.py)
 
 === "TypeScript"
 
@@ -161,6 +166,13 @@
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
 
 
 === "Responses"
