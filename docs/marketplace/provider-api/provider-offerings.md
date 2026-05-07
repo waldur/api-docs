@@ -6784,20 +6784,7 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `affiliated_organizations` | array of objects |  |
-    | `affiliated_organizations.uuid` | string (uuid) |  |
-    | `affiliated_organizations.url` | string (uri) |  |
-    | `affiliated_organizations.name` | string |  |
-    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
-    | `affiliated_organizations.abbreviation` | string |  |
-    | `affiliated_organizations.description` | string |  |
-    | `affiliated_organizations.email` | string (email) |  |
-    | `affiliated_organizations.homepage` | string (uri) |  |
-    | `affiliated_organizations.country` | string |  |
-    | `affiliated_organizations.address` | string |  |
-    | `affiliated_organizations.created` | string (date-time) |  |
-    | `affiliated_organizations.modified` | string (date-time) |  |
-    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `affiliation` | any |  |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |

@@ -72,6 +72,7 @@
     | `abbreviation` | string | Abbreviation |
     | `code` | string | Code |
     | `country` | string | Country |
+    | `default_for_customer` | string (uuid) | Limit to a customer's default affiliation list |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | string | Which field to use when ordering the results. |
@@ -611,6 +612,7 @@ Staff-only report showing aggregated data for all affiliated organizations plus 
     | `abbreviation` | string | Abbreviation |
     | `code` | string | Code |
     | `country` | string | Country |
+    | `default_for_customer` | string (uuid) | Limit to a customer's default affiliation list |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | string | Which field to use when ordering the results. |

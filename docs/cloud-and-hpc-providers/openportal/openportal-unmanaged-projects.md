@@ -8,7 +8,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/` | [List projects](#list-projects) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/{uuid}/` | [Retrieve project details](#retrieve-project-details) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/` | [Create a new project](#create-a-new-project) |
-| <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/{uuid}/update_affiliated_organizations/` | [Update affiliated organizations for a project](#update-affiliated-organizations-for-a-project) |
+| <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/{uuid}/update_affiliation/` | [Update affiliation for a project](#update-affiliation-for-a-project) |
 | <span class="http-badge http-put">PUT</span> | `/api/openportal-unmanaged-projects/{uuid}/` | [Update project details](#update-project-details) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/openportal-unmanaged-projects/{uuid}/` | [Partially update project details](#partially-update-project-details) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openportal-unmanaged-projects/{uuid}/` | [Delete a project](#delete-a-project) |
@@ -87,8 +87,8 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | Name | Type | Description |
     |---|---|---|
     | `accounting_is_running` | boolean | Filter by whether accounting is running. |
-    | `affiliated_organization_name` | string | Affiliated organization name |
-    | `affiliated_organization_uuid` | array | Affiliated organization UUID |
+    | `affiliation_name` | string | Affiliation name |
+    | `affiliation_uuid` | array | Affiliation UUID |
     | `backend_id` | string |  |
     | `can_admin` | boolean | Return a list of projects where current user is admin. |
     | `can_manage` | boolean | Return a list of projects where current user is manager or a customer owner. |
@@ -101,7 +101,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `customer_native_name` | string | Customer native name |
     | `description` | string | Description |
     | `field` | array |  |
-    | `has_affiliated_organization` | boolean | Filter projects that have at least one affiliated organization. |
+    | `has_affiliation` | boolean | Filter projects that have an affiliation. |
     | `include_terminated` | boolean | Include soft-deleted (terminated) projects. Only available to staff and support users, or users with organizational roles who can see their terminated projects. |
     | `is_removed` | boolean | Is removed |
     | `modified` | string (date-time) | Modified after |
@@ -165,20 +165,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `affiliated_organizations` | array of objects |  |
-    | `affiliated_organizations.uuid` | string (uuid) |  |
-    | `affiliated_organizations.url` | string (uri) |  |
-    | `affiliated_organizations.name` | string |  |
-    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
-    | `affiliated_organizations.abbreviation` | string |  |
-    | `affiliated_organizations.description` | string |  |
-    | `affiliated_organizations.email` | string (email) |  |
-    | `affiliated_organizations.homepage` | string (uri) |  |
-    | `affiliated_organizations.country` | string |  |
-    | `affiliated_organizations.address` | string |  |
-    | `affiliated_organizations.created` | string (date-time) |  |
-    | `affiliated_organizations.modified` | string (date-time) |  |
-    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `affiliation` | any |  |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -304,20 +291,7 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `affiliated_organizations` | array of objects |  |
-    | `affiliated_organizations.uuid` | string (uuid) |  |
-    | `affiliated_organizations.url` | string (uri) |  |
-    | `affiliated_organizations.name` | string |  |
-    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
-    | `affiliated_organizations.abbreviation` | string |  |
-    | `affiliated_organizations.description` | string |  |
-    | `affiliated_organizations.email` | string (email) |  |
-    | `affiliated_organizations.homepage` | string (uri) |  |
-    | `affiliated_organizations.country` | string |  |
-    | `affiliated_organizations.address` | string |  |
-    | `affiliated_organizations.created` | string (date-time) |  |
-    | `affiliated_organizations.modified` | string (date-time) |  |
-    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `affiliation` | any |  |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -414,6 +388,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `affiliation_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
     | `science_sub_domain` | string (uuid) |  |  |
 
 
@@ -461,20 +436,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `affiliated_organizations` | array of objects |  |
-    | `affiliated_organizations.uuid` | string (uuid) |  |
-    | `affiliated_organizations.url` | string (uri) |  |
-    | `affiliated_organizations.name` | string |  |
-    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
-    | `affiliated_organizations.abbreviation` | string |  |
-    | `affiliated_organizations.description` | string |  |
-    | `affiliated_organizations.email` | string (email) |  |
-    | `affiliated_organizations.homepage` | string (uri) |  |
-    | `affiliated_organizations.country` | string |  |
-    | `affiliated_organizations.address` | string |  |
-    | `affiliated_organizations.created` | string (date-time) |  |
-    | `affiliated_organizations.modified` | string (date-time) |  |
-    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `affiliation` | any |  |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -487,9 +449,9 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
 
 ---
 
-### Update affiliated organizations for a project
+### Update affiliation for a project
 
-Assigns a project to one or more affiliated organizations. Replaces the current set.
+Assigns the project to a single affiliation (or clears it when null).
 
 
 === "HTTPie"
@@ -497,7 +459,7 @@ Assigns a project to one or more affiliated organizations. Replaces the current 
     ```bash
     http \
       POST \
-      https://api.example.com/api/openportal-unmanaged-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_affiliated_organizations/ \
+      https://api.example.com/api/openportal-unmanaged-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_affiliation/ \
       Authorization:"Token YOUR_API_TOKEN"
     ```
 
@@ -505,15 +467,15 @@ Assigns a project to one or more affiliated organizations. Replaces the current 
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.project_affiliated_organizations_update_request import ProjectAffiliatedOrganizationsUpdateRequest # (1)
-    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_update_affiliated_organizations # (2)
+    from waldur_api_client.models.project_affiliation_update_request import ProjectAffiliationUpdateRequest # (1)
+    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_update_affiliation # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = ProjectAffiliatedOrganizationsUpdateRequest()
-    response = openportal_unmanaged_projects_update_affiliated_organizations.sync(
+    body_data = ProjectAffiliationUpdateRequest()
+    response = openportal_unmanaged_projects_update_affiliation.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
         body=body_data
@@ -523,16 +485,16 @@ Assigns a project to one or more affiliated organizations. Replaces the current 
     ```
     
     
-    1.  **Model Source:** [`ProjectAffiliatedOrganizationsUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_affiliated_organizations_update_request.py)
-    2.  **API Source:** [`openportal_unmanaged_projects_update_affiliated_organizations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_update_affiliated_organizations.py)
+    1.  **Model Source:** [`ProjectAffiliationUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_affiliation_update_request.py)
+    2.  **API Source:** [`openportal_unmanaged_projects_update_affiliation`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_update_affiliation.py)
 
 === "TypeScript"
 
     ```typescript
-    import { openportalUnmanagedProjectsUpdateAffiliatedOrganizations } from 'waldur-js-client';
+    import { openportalUnmanagedProjectsUpdateAffiliation } from 'waldur-js-client';
     
     try {
-      const response = await openportalUnmanagedProjectsUpdateAffiliatedOrganizations({
+      const response = await openportalUnmanagedProjectsUpdateAffiliation({
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
@@ -556,7 +518,7 @@ Assigns a project to one or more affiliated organizations. Replaces the current 
 
     | Field | Type | Required |
     |---|---|---|
-    | `affiliated_organizations` | array of string (uuid)s |  |
+    | `affiliation` | string (uuid) |  |
 
 
 === "Responses"
@@ -661,6 +623,7 @@ Update the details of a project. Requires project administrator or customer owne
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `affiliation_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
     | `science_sub_domain` | string (uuid) |  |  |
 
 
@@ -708,20 +671,7 @@ Update the details of a project. Requires project administrator or customer owne
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `affiliated_organizations` | array of objects |  |
-    | `affiliated_organizations.uuid` | string (uuid) |  |
-    | `affiliated_organizations.url` | string (uri) |  |
-    | `affiliated_organizations.name` | string |  |
-    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
-    | `affiliated_organizations.abbreviation` | string |  |
-    | `affiliated_organizations.description` | string |  |
-    | `affiliated_organizations.email` | string (email) |  |
-    | `affiliated_organizations.homepage` | string (uri) |  |
-    | `affiliated_organizations.country` | string |  |
-    | `affiliated_organizations.address` | string |  |
-    | `affiliated_organizations.created` | string (date-time) |  |
-    | `affiliated_organizations.modified` | string (date-time) |  |
-    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `affiliation` | any |  |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -820,6 +770,7 @@ Partially update the details of a project. Requires project administrator or cus
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `affiliation_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
     | `science_sub_domain` | string (uuid) |  |  |
 
 
@@ -867,20 +818,7 @@ Partially update the details of a project. Requires project administrator or cus
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `affiliated_organizations` | array of objects |  |
-    | `affiliated_organizations.uuid` | string (uuid) |  |
-    | `affiliated_organizations.url` | string (uri) |  |
-    | `affiliated_organizations.name` | string |  |
-    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
-    | `affiliated_organizations.abbreviation` | string |  |
-    | `affiliated_organizations.description` | string |  |
-    | `affiliated_organizations.email` | string (email) |  |
-    | `affiliated_organizations.homepage` | string (uri) |  |
-    | `affiliated_organizations.country` | string |  |
-    | `affiliated_organizations.address` | string |  |
-    | `affiliated_organizations.created` | string (date-time) |  |
-    | `affiliated_organizations.modified` | string (date-time) |  |
-    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `affiliation` | any |  |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -1894,20 +1832,7 @@ Moves a project and its associated resources to a different customer. You can ch
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `affiliated_organizations` | array of objects |  |
-    | `affiliated_organizations.uuid` | string (uuid) |  |
-    | `affiliated_organizations.url` | string (uri) |  |
-    | `affiliated_organizations.name` | string |  |
-    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
-    | `affiliated_organizations.abbreviation` | string |  |
-    | `affiliated_organizations.description` | string |  |
-    | `affiliated_organizations.email` | string (email) |  |
-    | `affiliated_organizations.homepage` | string (uri) |  |
-    | `affiliated_organizations.country` | string |  |
-    | `affiliated_organizations.address` | string |  |
-    | `affiliated_organizations.created` | string (date-time) |  |
-    | `affiliated_organizations.modified` | string (date-time) |  |
-    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `affiliation` | any |  |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -2038,20 +1963,7 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `affiliated_organizations` | array of objects |  |
-    | `affiliated_organizations.uuid` | string (uuid) |  |
-    | `affiliated_organizations.url` | string (uri) |  |
-    | `affiliated_organizations.name` | string |  |
-    | `affiliated_organizations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
-    | `affiliated_organizations.abbreviation` | string |  |
-    | `affiliated_organizations.description` | string |  |
-    | `affiliated_organizations.email` | string (email) |  |
-    | `affiliated_organizations.homepage` | string (uri) |  |
-    | `affiliated_organizations.country` | string |  |
-    | `affiliated_organizations.address` | string |  |
-    | `affiliated_organizations.created` | string (date-time) |  |
-    | `affiliated_organizations.modified` | string (date-time) |  |
-    | `affiliated_organizations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `affiliation` | any |  |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |

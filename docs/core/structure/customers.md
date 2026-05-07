@@ -19,6 +19,7 @@ All projects, resources, and costs are ultimately tied to a Customer. Users are 
 | <span class="http-badge http-get">GET</span> | `/api/customers/` | [List customers](#list-customers) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/` | [Retrieve customer details](#retrieve-customer-details) |
 | <span class="http-badge http-post">POST</span> | `/api/customers/` | [Create a new customer](#create-a-new-customer) |
+| <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/update_default_affiliations/` | [Update default affiliations for an organization](#update-default-affiliations-for-an-organization) |
 | <span class="http-badge http-put">PUT</span> | `/api/customers/{uuid}/` | [Update a customer](#update-a-customer) |
 | <span class="http-badge http-put">PUT</span> | `/api/customers/{uuid}/update-project-digest-config/` | [Update project digest configuration](#update-project-digest-configuration) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/customers/{uuid}/` | [Partially update a customer](#partially-update-a-customer) |
@@ -170,6 +171,20 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
+    | `default_affiliations.uuid` | string (uuid) |  |
+    | `default_affiliations.url` | string (uri) |  |
+    | `default_affiliations.name` | string |  |
+    | `default_affiliations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `default_affiliations.abbreviation` | string |  |
+    | `default_affiliations.description` | string |  |
+    | `default_affiliations.email` | string (email) |  |
+    | `default_affiliations.homepage` | string (uri) |  |
+    | `default_affiliations.country` | string |  |
+    | `default_affiliations.address` | string |  |
+    | `default_affiliations.created` | string (date-time) |  |
+    | `default_affiliations.modified` | string (date-time) |  |
+    | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -327,6 +342,20 @@ Fetch the details of a specific customer by its UUID.
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
+    | `default_affiliations.uuid` | string (uuid) |  |
+    | `default_affiliations.url` | string (uri) |  |
+    | `default_affiliations.name` | string |  |
+    | `default_affiliations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `default_affiliations.abbreviation` | string |  |
+    | `default_affiliations.description` | string |  |
+    | `default_affiliations.email` | string (email) |  |
+    | `default_affiliations.homepage` | string (uri) |  |
+    | `default_affiliations.country` | string |  |
+    | `default_affiliations.address` | string |  |
+    | `default_affiliations.created` | string (date-time) |  |
+    | `default_affiliations.modified` | string (date-time) |  |
+    | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -525,6 +554,20 @@ A new customer can only be created by users with staff privilege.
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
+    | `default_affiliations.uuid` | string (uuid) |  |
+    | `default_affiliations.url` | string (uri) |  |
+    | `default_affiliations.name` | string |  |
+    | `default_affiliations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `default_affiliations.abbreviation` | string |  |
+    | `default_affiliations.description` | string |  |
+    | `default_affiliations.email` | string (email) |  |
+    | `default_affiliations.homepage` | string (uri) |  |
+    | `default_affiliations.country` | string |  |
+    | `default_affiliations.address` | string |  |
+    | `default_affiliations.created` | string (date-time) |  |
+    | `default_affiliations.modified` | string (date-time) |  |
+    | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -575,6 +618,85 @@ A new customer can only be created by users with staff privilege.
     | `service_provider_uuid` | string (uuid) |  |
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
+
+---
+
+### Update default affiliations for an organization
+
+Replaces the organization's default affiliation list. Project creators in the organization will be limited to choosing from this list when affiliating a project. Staff-only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_default_affiliations/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.customer_default_affiliations_update_request import CustomerDefaultAffiliationsUpdateRequest # (1)
+    from waldur_api_client.api.customers import customers_update_default_affiliations # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CustomerDefaultAffiliationsUpdateRequest()
+    response = customers_update_default_affiliations.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CustomerDefaultAffiliationsUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/customer_default_affiliations_update_request.py)
+    2.  **API Source:** [`customers_update_default_affiliations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_update_default_affiliations.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersUpdateDefaultAffiliations } from 'waldur-js-client';
+    
+    try {
+      const response = await customersUpdateDefaultAffiliations({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `default_affiliations` | array of string (uuid)s |  |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---
 
@@ -734,6 +856,20 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
+    | `default_affiliations.uuid` | string (uuid) |  |
+    | `default_affiliations.url` | string (uri) |  |
+    | `default_affiliations.name` | string |  |
+    | `default_affiliations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `default_affiliations.abbreviation` | string |  |
+    | `default_affiliations.description` | string |  |
+    | `default_affiliations.email` | string (email) |  |
+    | `default_affiliations.homepage` | string (uri) |  |
+    | `default_affiliations.country` | string |  |
+    | `default_affiliations.address` | string |  |
+    | `default_affiliations.created` | string (date-time) |  |
+    | `default_affiliations.modified` | string (date-time) |  |
+    | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -1030,6 +1166,20 @@ Partially update the details of an existing customer. Requires customer owner or
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
+    | `default_affiliations.uuid` | string (uuid) |  |
+    | `default_affiliations.url` | string (uri) |  |
+    | `default_affiliations.name` | string |  |
+    | `default_affiliations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `default_affiliations.abbreviation` | string |  |
+    | `default_affiliations.description` | string |  |
+    | `default_affiliations.email` | string (email) |  |
+    | `default_affiliations.homepage` | string (uri) |  |
+    | `default_affiliations.country` | string |  |
+    | `default_affiliations.address` | string |  |
+    | `default_affiliations.created` | string (date-time) |  |
+    | `default_affiliations.modified` | string (date-time) |  |
+    | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |

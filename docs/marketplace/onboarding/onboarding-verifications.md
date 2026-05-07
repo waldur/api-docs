@@ -481,6 +481,20 @@ Create customer from successful verification.
     | `user_email_patterns` | any |  |
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
+    | `default_affiliations.uuid` | string (uuid) |  |
+    | `default_affiliations.url` | string (uri) |  |
+    | `default_affiliations.name` | string |  |
+    | `default_affiliations.code` | string | Unique short identifier, e.g. CERN, EMBL. |
+    | `default_affiliations.abbreviation` | string |  |
+    | `default_affiliations.description` | string |  |
+    | `default_affiliations.email` | string (email) |  |
+    | `default_affiliations.homepage` | string (uri) |  |
+    | `default_affiliations.country` | string |  |
+    | `default_affiliations.address` | string |  |
+    | `default_affiliations.created` | string (date-time) |  |
+    | `default_affiliations.modified` | string (date-time) |  |
+    | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |

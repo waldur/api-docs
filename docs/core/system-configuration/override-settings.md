@@ -108,6 +108,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SHORT_PAGE_TITLE` | string |
     | `FULL_PAGE_TITLE` | string |
     | `PROJECT_END_DATE_MANDATORY` | boolean |
+    | `AFFILIATION_REQUIRED_AT_PROJECT_CREATION` | boolean |
     | `ENABLE_ORDER_START_DATE` | boolean |
     | `BRAND_COLOR` | string |
     | `HERO_LINK_LABEL` | string |
@@ -436,6 +437,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SHORT_PAGE_TITLE` | string |  |
     | `FULL_PAGE_TITLE` | string |  |
     | `PROJECT_END_DATE_MANDATORY` | boolean |  |
+    | `AFFILIATION_REQUIRED_AT_PROJECT_CREATION` | boolean |  |
     | `ENABLE_ORDER_START_DATE` | boolean |  |
     | `BRAND_COLOR` | string |  |
     | `HERO_LINK_LABEL` | string |  |
