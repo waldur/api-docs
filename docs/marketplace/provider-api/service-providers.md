@@ -1304,6 +1304,9 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
+    | `affiliation_uuid` | string (uuid) |  |
+    | `affiliation_name` | string |  |
+    | `affiliation_code` | string | Unique short identifier, e.g. CERN, EMBL. |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |

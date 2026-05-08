@@ -166,6 +166,9 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
+    | `affiliation_uuid` | string (uuid) |  |
+    | `affiliation_name` | string |  |
+    | `affiliation_code` | string | Unique short identifier, e.g. CERN, EMBL. |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -292,6 +295,9 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
+    | `affiliation_uuid` | string (uuid) |  |
+    | `affiliation_name` | string |  |
+    | `affiliation_code` | string | Unique short identifier, e.g. CERN, EMBL. |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -388,7 +394,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
-    | `affiliation_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
+    | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
 
@@ -437,6 +443,9 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
+    | `affiliation_uuid` | string (uuid) |  |
+    | `affiliation_name` | string |  |
+    | `affiliation_code` | string | Unique short identifier, e.g. CERN, EMBL. |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -623,7 +632,7 @@ Update the details of a project. Requires project administrator or customer owne
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
-    | `affiliation_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
+    | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
 
@@ -672,6 +681,9 @@ Update the details of a project. Requires project administrator or customer owne
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
+    | `affiliation_uuid` | string (uuid) |  |
+    | `affiliation_name` | string |  |
+    | `affiliation_code` | string | Unique short identifier, e.g. CERN, EMBL. |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -770,7 +782,7 @@ Partially update the details of a project. Requires project administrator or cus
     | `user_email_patterns` | any |  |  |
     | `user_affiliations` | any |  |  |
     | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
-    | `affiliation_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
+    | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
 
@@ -819,6 +831,9 @@ Partially update the details of a project. Requires project administrator or cus
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
+    | `affiliation_uuid` | string (uuid) |  |
+    | `affiliation_name` | string |  |
+    | `affiliation_code` | string | Unique short identifier, e.g. CERN, EMBL. |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -1833,6 +1848,9 @@ Moves a project and its associated resources to a different customer. You can ch
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
+    | `affiliation_uuid` | string (uuid) |  |
+    | `affiliation_name` | string |  |
+    | `affiliation_code` | string | Unique short identifier, e.g. CERN, EMBL. |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |
@@ -1964,6 +1982,9 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `user_affiliations` | any |  |
     | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
+    | `affiliation_uuid` | string (uuid) |  |
+    | `affiliation_name` | string |  |
+    | `affiliation_code` | string | Unique short identifier, e.g. CERN, EMBL. |
     | `science_sub_domain` | string (uuid) |  |
     | `science_sub_domain_name` | string |  |
     | `science_sub_domain_code` | string | Sub-domain code (e.g. '1.1'). Auto-derived from domain code if left blank. |

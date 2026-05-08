@@ -328,6 +328,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |
     | `ENABLED_REPORTING_SCREENS` | array of anys |
+    | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |
     | `PAT_ENABLED` | boolean |
     | `PAT_MAX_LIFETIME_DAYS` | integer |
     | `PAT_MAX_TOKENS_PER_USER` | integer |
@@ -657,6 +658,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |  |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |  |
     | `ENABLED_REPORTING_SCREENS` | array of anys |  |
+    | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |  |
     | `PAT_ENABLED` | boolean |  |
     | `PAT_MAX_LIFETIME_DAYS` | integer |  |
     | `PAT_MAX_TOKENS_PER_USER` | integer |  |
