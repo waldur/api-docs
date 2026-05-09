@@ -27,6 +27,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/offering/` | [Get offering details](#get-offering-details) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/plan_periods/` | [List resource plan periods](#list-resource-plan-periods) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/team/` | [Get resource team](#get-resource-team) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/adjust_dates/` | [Adjust resource start and end dates (staff only)](#adjust-resource-start-and-end-dates-staff-only) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/move_resource/` | [Move a resource to another project](#move-a-resource-to-another-project) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/refresh_last_sync/` | [Refresh last sync time](#refresh-last-sync-time) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/restore/` | [Restore](#restore) |
@@ -2260,6 +2261,99 @@ Returns a list of users connected to the project of this resource, including the
     | `expiration_time` | string (date-time) |  |
     | `offering_user_username` | string |  |
     | `offering_user_state` | any |  |
+
+---
+
+### Adjust resource start and end dates (staff only)
+
+Updates both the originating order's start_date and the resource's end_date in one atomic operation. Intended for helpdesk-style prepaid offerings where staff need to shift the service window forward. Does not regenerate invoices, issue credits, or send notifications.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/adjust_dates/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      start_date="2023-10-01" \
+      end_date="2023-10-01"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.adjust_resource_dates_request import AdjustResourceDatesRequest # (1)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_adjust_dates # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = AdjustResourceDatesRequest(
+        start_date="2023-10-01",
+        end_date="2023-10-01"
+    )
+    response = marketplace_provider_resources_adjust_dates.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`AdjustResourceDatesRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/adjust_resource_dates_request.py)
+    2.  **API Source:** [`marketplace_provider_resources_adjust_dates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_adjust_dates.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesAdjustDates } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesAdjustDates({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "start_date": "2023-10-01",
+        "end_date": "2023-10-01"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `start_date` | string (date) | ✓ | New start date of the originating order. |
+    | `end_date` | string (date) | ✓ | New end date of the resource. |
+    | `comment` | string |  | Optional reason captured in the audit trail. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
