@@ -105,6 +105,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `termination_metadata` | any |  |
 
 ---
 
@@ -189,6 +190,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `termination_metadata` | any |  |
 
 ---
 
@@ -286,6 +288,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `termination_metadata` | any |  |
 
 ---
 
@@ -394,6 +397,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `termination_metadata` | any |  |
 
 ---
 
@@ -493,6 +497,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `termination_metadata` | any |  |
 
 ---
 
@@ -1057,5 +1062,6 @@ Flips is_removed back to False on a previously soft-deleted resource project. Op
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `termination_metadata` | any |  |
 
 ---
