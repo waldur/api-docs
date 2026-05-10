@@ -16,6 +16,8 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resource-projects/{uuid}/add_user/` | [Grant a role to a user](#grant-a-role-to-a-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resource-projects/{uuid}/delete_user/` | [Revoke a role from a user](#revoke-a-role-from-a-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resource-projects/{uuid}/update_user/` | [Update a user's role expiration](#update-a-users-role-expiration) |
+| **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-resource-projects/{uuid}/recover/` | [Recover a soft-deleted resource project](#recover-a-soft-deleted-resource-project) |
 
 ---
 ## Core CRUD
@@ -532,6 +534,13 @@
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `force` | boolean | Staff-only: when true, hard-delete the resource project instead of soft-deleting it. |
+
+
 === "Responses"
 
     **`204`** - No response body
@@ -926,5 +935,103 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     | Field | Type |
     |---|---|
     | `expiration_time` | string (date-time) |
+
+---
+
+## Other Actions
+
+
+### Recover a soft-deleted resource project
+
+Flips is_removed back to False on a previously soft-deleted resource project. Optionally restores the team members captured at soft-delete time, or sends them new invitations. Pass ?include_removed=true on the lookup so the soft-deleted row can be resolved.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-resource-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/recover/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.resource_project_recovery_request import ResourceProjectRecoveryRequest # (1)
+    from waldur_api_client.api.marketplace_resource_projects import marketplace_resource_projects_recover # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ResourceProjectRecoveryRequest()
+    response = marketplace_resource_projects_recover.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ResourceProjectRecoveryRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_project_recovery_request.py)
+    2.  **API Source:** [`marketplace_resource_projects_recover`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resource_projects/marketplace_resource_projects_recover.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourceProjectsRecover } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourceProjectsRecover({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `restore_team_members` | boolean |  | Recreate the UserRole rows captured at soft-delete time. Requires termination_metadata to be present (set on soft-deletes performed after the recovery feature shipped).<br>_Constraints: default: `False`_ |
+    | `send_invitations_to_previous_members` | boolean |  | Send invitations to users who had access before soft-delete. Mutually exclusive with restore_team_members.<br>_Constraints: default: `False`_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `resource` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `backend_id` | string |  |
+    | `state` | string |  |
+    | `error_message` | string |  |
+    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
+    | `resource_uuid` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
