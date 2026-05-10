@@ -101,6 +101,10 @@
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+    | `is_removed` | boolean |  |
+    | `removed_date` | string (date-time) |  |
+    | `removed_by` | integer |  |
+    | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
 
 ---
 
@@ -181,6 +185,10 @@
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+    | `is_removed` | boolean |  |
+    | `removed_date` | string (date-time) |  |
+    | `removed_by` | integer |  |
+    | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
 
 ---
 
@@ -285,6 +293,10 @@
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+    | `is_removed` | boolean |  |
+    | `removed_date` | string (date-time) |  |
+    | `removed_by` | integer |  |
+    | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
 
 ---
 
@@ -380,6 +392,10 @@
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+    | `is_removed` | boolean |  |
+    | `removed_date` | string (date-time) |  |
+    | `removed_by` | integer |  |
+    | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
 
 ---
 
