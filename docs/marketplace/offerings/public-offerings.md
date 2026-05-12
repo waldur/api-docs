@@ -94,6 +94,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -311,6 +312,9 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `compliance_checklist` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
+    | `offering_group` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
@@ -590,6 +594,9 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `compliance_checklist` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
+    | `offering_group` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |

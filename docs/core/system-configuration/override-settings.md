@@ -224,6 +224,12 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SCIM_API_URL` | string |
     | `SCIM_API_KEY` | string |
     | `SCIM_URN_NAMESPACE` | string |
+    | `SCIM_INBOUND_ENABLED` | boolean |
+    | `SCIM_INBOUND_SOURCE_NAME` | string |
+    | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |
+    | `SCIM_PULL_API_URL` | string |
+    | `SCIM_PULL_API_KEY` | string |
+    | `SCIM_PULL_SOURCE_NAME` | string |
     | `KEYCLOAK_ICON` | string (uri) |
     | `COUNTRIES` | array of strings |
     | `OIDC_AUTH_URL` | string |
@@ -554,6 +560,12 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SCIM_API_URL` | string |  |
     | `SCIM_API_KEY` | string |  |
     | `SCIM_URN_NAMESPACE` | string |  |
+    | `SCIM_INBOUND_ENABLED` | boolean |  |
+    | `SCIM_INBOUND_SOURCE_NAME` | string |  |
+    | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |  |
+    | `SCIM_PULL_API_URL` | string |  |
+    | `SCIM_PULL_API_KEY` | string |  |
+    | `SCIM_PULL_SOURCE_NAME` | string |  |
     | `KEYCLOAK_ICON` | string (binary) |  |
     | `COUNTRIES` | array of strings |  |
     | `OIDC_AUTH_URL` | string |  |

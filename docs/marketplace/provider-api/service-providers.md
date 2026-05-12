@@ -812,6 +812,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -922,6 +923,8 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `resource_options` | any | Fields describing resource report form. |
     | `secret_options` | any |  |
     | `thumbnail` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
 
 ---
 

@@ -88,6 +88,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/import_offering/` | [Import offering data](#import-offering-data) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_available/` | [Mark an offering as available](#mark-an-offering-as-available) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_unavailable/` | [Mark an offering as unavailable](#mark-an-offering-as-unavailable) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/set_offering_group/` | [Assign or clear the offering group](#assign-or-clear-the-offering-group) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/set_profile/` | [Bind / unbind offering to a service profile](#bind--unbind-offering-to-a-service-profile) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/switch_billing_mode/` | [Switch billing mode for builtin components](#switch-billing-mode-for-builtin-components) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/` | [Update offering backend_id rules](#update-offering-backend_id-rules) |
@@ -177,6 +178,7 @@ Returns a paginated list of offerings for the provider.
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -397,6 +399,9 @@ Returns a paginated list of offerings for the provider.
     | `compliance_checklist` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
+    | `offering_group` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
     | `integration_status.status` | string |  |
@@ -671,6 +676,9 @@ Returns details of a specific provider offering.
     | `compliance_checklist` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
+    | `offering_group` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
     | `integration_status.status` | string |  |
@@ -892,6 +900,7 @@ Creates a new provider offering.
     | `image` | string (binary) |  |  |
     | `backend_metadata` | any |  |  |
     | `compliance_checklist` | string (uri) |  |  |
+    | `offering_group` | string (uuid) |  |  |
     | `limits` | object (free-form) |  | <br>_Constraints: write-only_ |
 
 
@@ -1090,6 +1099,9 @@ Creates a new provider offering.
     | `compliance_checklist` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
+    | `offering_group` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
     | `integration_status.status` | string |  |
@@ -1713,6 +1725,7 @@ Returns a paginated list of course accounts for projects that have resources of 
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -1856,6 +1869,7 @@ Returns a paginated list of customer-level service accounts for customers who ha
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -2149,6 +2163,7 @@ Returns a paginated list of project-level service accounts for projects that hav
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -2578,6 +2593,9 @@ Checks if a specified user has access to any non-terminated resource of this off
     | `compliance_checklist` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
+    | `offering_group` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
     | `integration_status` | array of objects |  |
     | `integration_status.agent_type` | any |  |
     | `integration_status.status` | string |  |
@@ -5189,6 +5207,9 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `compliance_checklist` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
+    | `offering_group` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
@@ -6246,6 +6267,7 @@ Returns monthly usage statistics for the components of an offering within a spec
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -6381,6 +6403,7 @@ Returns monthly cost data for an offering within a specified date range.
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -6513,6 +6536,7 @@ Returns a paginated list of customers who have resources for this offering.
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -6629,6 +6653,7 @@ Returns a paginated list of active, shared offerings grouped by their service pr
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -7839,6 +7864,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -8541,6 +8567,91 @@ Marks an active offering as unavailable, blocking all operations on its resource
     |---|---|
     | `detail` | string |
     | `state` | string |
+
+---
+
+### Assign or clear the offering group
+
+Sets the offering's ``offering_group`` FK. Pass ``offering_group: <uuid>`` to assign a group, or ``offering_group: null`` to clear it. The group must belong to the same customer as the offering.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_offering_group/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      offering_group="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.offering_group_assign_request import OfferingGroupAssignRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_set_offering_group # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OfferingGroupAssignRequest(
+        offering_group="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = marketplace_provider_offerings_set_offering_group.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OfferingGroupAssignRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_group_assign_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_set_offering_group`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_set_offering_group.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsSetOfferingGroup } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsSetOfferingGroup({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "offering_group": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `offering_group` | string (uuid) | ✓ | OfferingGroup UUID. Pass null to remove the assignment. |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
 
 ---
 

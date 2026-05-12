@@ -2071,6 +2071,9 @@ Returns details of the offering connected to the requested object.
     | `compliance_checklist` | string (uri) |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
+    | `offering_group` | string (uri) |  |
+    | `offering_group_uuid` | string (uuid) |  |
+    | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
     | `google_calendar_is_public` | boolean |  |

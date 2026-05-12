@@ -18,6 +18,7 @@ A User object on its own has limited capabilities beyond logging in and managing
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/users/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/pull_remote_user/` | [Synchronize user details from eduTEAMS](#synchronize-user-details-from-eduteams) |
+| <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/pull_scim_attributes/` | [Pull SCIM attributes from external IdP for this user](#pull-scim-attributes-from-external-idp-for-this-user) |
 | <span class="http-badge http-post">POST</span> | `/api/users/{uuid}/update_actions/` | [Recalculate user actions for a specific user](#recalculate-user-actions-for-a-specific-user) |
 | <span class="http-badge http-put">PUT</span> | `/api/users/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/users/{uuid}/` | [Partial Update](#partial-update) |
@@ -598,6 +599,77 @@ A User object on its own has limited capabilities beyond logging in and managing
 
     **`200`** - No response body
     
+
+---
+
+### Pull SCIM attributes from external IdP for this user
+
+Staff-only action that pulls the user's attributes from the configured external SCIM 2.0 directory (SCIM_PULL_API_URL). Pulled attributes are merged via the same source-aware policy as inbound SCIM and the Identity Bridge.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/pull_scim_attributes/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_pull_scim_attributes # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_pull_scim_attributes.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_pull_scim_attributes`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_pull_scim_attributes.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersPullScimAttributes } from 'waldur-js-client';
+    
+    try {
+      const response = await usersPullScimAttributes({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+    | `changed_fields` | array of strings |
 
 ---
 
