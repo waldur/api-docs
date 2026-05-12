@@ -10,6 +10,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/personal-access-tokens/` | [Create a personal access token](#create-a-personal-access-token) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/personal-access-tokens/{uuid}/` | [Revoke a personal access token](#revoke-a-personal-access-token) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/personal-access-tokens/available_binding_targets/` | [List entity types the caller can bind each permission to](#list-entity-types-the-caller-can-bind-each-permission-to) |
 | <span class="http-badge http-get">GET</span> | `/api/personal-access-tokens/available_scopes/` | [List available scopes for PAT creation](#list-available-scopes-for-pat-creation) |
 | <span class="http-badge http-post">POST</span> | `/api/personal-access-tokens/{uuid}/rotate/` | [Rotate a personal access token](#rotate-a-personal-access-token) |
 
@@ -83,6 +84,10 @@
     | `name` | string |  |
     | `token_prefix` | string |  |
     | `scopes` | array of strings |  |
+    | `allowed_scopes` | array of objects |  |
+    | `allowed_scopes.type` | string |  |
+    | `allowed_scopes.uuid` | string (uuid) |  |
+    | `allowed_scopes.name` | string |  |
     | `expires_at` | string (date-time) |  |
     | `is_active` | boolean |  |
     | `last_used_at` | string (date-time) |  |
@@ -160,6 +165,10 @@
     | `name` | string |  |
     | `token_prefix` | string |  |
     | `scopes` | array of strings |  |
+    | `allowed_scopes` | array of objects |  |
+    | `allowed_scopes.type` | string |  |
+    | `allowed_scopes.uuid` | string (uuid) |  |
+    | `allowed_scopes.name` | string |  |
     | `expires_at` | string (date-time) |  |
     | `is_active` | boolean |  |
     | `last_used_at` | string (date-time) |  |
@@ -235,11 +244,14 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string | ✓ |
-    | `scopes` | array of strings | ✓ |
-    | `expires_at` | string (date-time) | ✓ |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `scopes` | array of strings | ✓ |  |
+    | `allowed_scopes` | array of objects |  | Optional list of entity bindings restricting where this token can act. Empty list = no entity restriction. |
+    | `allowed_scopes.type` | string | ✓ |  |
+    | `allowed_scopes.uuid` | string (uuid) | ✓ |  |
+    | `expires_at` | string (date-time) | ✓ |  |
 
 
 === "Responses"
@@ -252,6 +264,10 @@
     | `name` | string |  |
     | `token` | string | Plaintext token — shown only once. |
     | `scopes` | array of strings |  |
+    | `allowed_scopes` | array of objects |  |
+    | `allowed_scopes.type` | string |  |
+    | `allowed_scopes.uuid` | string (uuid) |  |
+    | `allowed_scopes.name` | string |  |
     | `expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
@@ -325,6 +341,81 @@
 ## Other Actions
 
 
+### List entity types the caller can bind each permission to
+
+For each permission, which TYPE_MAP keys the caller could bind a PAT to.
+
+Drives the create-PAT frontend's type picker. For staff users every
+type is offered for every permission (they bypass UserRole checks).
+For other users we return only types where they hold an active role
+granting the permission directly (the binding then inherits to
+descendants at request time).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/personal-access-tokens/available_binding_targets/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.personal_access_tokens import personal_access_tokens_available_binding_targets_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = personal_access_tokens_available_binding_targets_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`personal_access_tokens_available_binding_targets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/personal_access_tokens/personal_access_tokens_available_binding_targets_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { personalAccessTokensAvailableBindingTargetsList } from 'waldur-js-client';
+    
+    try {
+      const response = await personalAccessTokensAvailableBindingTargetsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `permission` | string |
+    | `types` | array of strings |
+
+---
+
 ### List available scopes for PAT creation
 
 Return permissions the current user can delegate to a PAT.
@@ -396,7 +487,7 @@ Return permissions the current user can delegate to a PAT.
 
 ### Rotate a personal access token
 
-Atomically revoke the old token and create a new one with the same scopes.
+Atomically revoke the old token and create a new one with the same scopes and bindings.
 
 
 === "HTTPie"
@@ -464,6 +555,10 @@ Atomically revoke the old token and create a new one with the same scopes.
     | `name` | string |  |
     | `token` | string | Plaintext token — shown only once. |
     | `scopes` | array of strings |  |
+    | `allowed_scopes` | array of objects |  |
+    | `allowed_scopes.type` | string |  |
+    | `allowed_scopes.uuid` | string (uuid) |  |
+    | `allowed_scopes.name` | string |  |
     | `expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
