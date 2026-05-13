@@ -93,6 +93,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/switch_billing_mode/` | [Switch billing mode for builtin components](#switch-billing-mode-for-builtin-components) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/` | [Update offering backend_id rules](#update-offering-backend_id-rules) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_tags/` | [Update tags for offering](#update-tags-for-offering) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_type/` | [Swap offering type](#swap-offering-type) |
 
 ---
 ## Core CRUD
@@ -8968,6 +8969,91 @@ Sets the list of tags for this offering.
     | Field | Type | Required |
     |---|---|---|
     | `tags` | array of string (uuid)s |  |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
+### Swap offering type
+
+Changes the offering's `type` between Marketplace.Basic and the site-agent type (Marketplace.Slurm). Both plugins share the same data shape (the site-agent processors inherit from Basic and only delegate the send paths to the external agent), so the swap is safe in either direction. Refused if the offering's current type is not in the swappable set.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_type/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      type="Marketplace.Basic"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.offering_type_update_request import OfferingTypeUpdateRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_update_type # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OfferingTypeUpdateRequest(
+        type="Marketplace.Basic"
+    )
+    response = marketplace_provider_offerings_update_type.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OfferingTypeUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_type_update_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_update_type`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_update_type.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsUpdateType } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsUpdateType({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "type": "Marketplace.Basic"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `type` | string | ✓ |
 
 
 === "Responses"
