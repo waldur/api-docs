@@ -7040,7 +7040,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Operations Summary">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core CRUD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core CRUD">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -7103,6 +7114,34 @@
     <span class="md-ellipsis">
       
         Manage autoprovisioning rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Actions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dry-run-rule-evaluation-against-a-target-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dry-run rule evaluation against a target user.
       
     </span>
   </a>
@@ -13898,7 +13937,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Operations Summary">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core CRUD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core CRUD">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -13972,6 +14022,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#other-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Actions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dry-run-rule-evaluation-against-a-target-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dry-run rule evaluation against a target user.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -14000,6 +14078,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align: left;"><strong>Core CRUD</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/autoprovisioning-rules/</code></td>
@@ -14030,9 +14113,20 @@
 <td style="text-align: left;"><code>/api/autoprovisioning-rules/{uuid}/</code></td>
 <td style="text-align: left;"><a href="#manage-autoprovisioning-rules">Manage autoprovisioning rules</a></td>
 </tr>
+<tr>
+<td style="text-align: left;"><strong>Other Actions</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/autoprovisioning-rules/{uuid}/test-match/</code></td>
+<td style="text-align: left;"><a href="#dry-run-rule-evaluation-against-a-target-user">Dry-run rule evaluation against a target user.</a></td>
+</tr>
 </tbody>
 </table>
 <hr />
+<h2 id="core-crud">Core CRUD</h2>
 <h3 id="manage-autoprovisioning-rules">Manage autoprovisioning rules</h3>
 <p>Manage autoprovisioning rules.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTTPie</label><label for="__tabbed_1_2">Python</label><label for="__tabbed_1_3">TypeScript</label><label for="__tabbed_1_4">Query Parameters</label><label for="__tabbed_1_5">Responses</label></div>
@@ -15263,6 +15357,249 @@
 </div>
 </div>
 <hr />
+<h2 id="other-actions">Other Actions</h2>
+<h3 id="dry-run-rule-evaluation-against-a-target-user">Dry-run rule evaluation against a target user.</h3>
+<p>Evaluate this rule against the given user without provisioning. Returns per-filter outcomes, the customer-lookup verdict (when the rule uses use_user_organization_as_customer_name) and a top-line would_provision flag together with a human-readable block_reason.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Path Parameters</label><label for="__tabbed_7_5">Request Body (required)</label><label for="__tabbed_7_6">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/autoprovisioning-rules/a1b2c3d4-e5f6-7890-abcd-ef1234567890/test-match/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">user_uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.rule_test_match_request_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">RuleTestMatchRequestRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.autoprovisioning_rules</span><span class="w"> </span><span class="kn">import</span> <span class="n">autoprovisioning_rules_test_match</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">RuleTestMatchRequestRequest</span><span class="p">(</span>
+    <span class="n">user_uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">autoprovisioning_rules_test_match</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rule_test_match_request_request.py"><code>RuleTestMatchRequestRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/autoprovisioning_rules/autoprovisioning_rules_test_match.py"><code>autoprovisioning_rules_test_match</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">autoprovisioningRulesTestMatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">autoprovisioningRulesTestMatch</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;user_uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user_uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+<td>UUID of the user to evaluate this rule against.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>would_provision</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>block_reason</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>user_username</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>user_email</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>user_organization</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>user_registration_method</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>user_identity_source</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>user_affiliations</code></td>
+<td>array of strings</td>
+</tr>
+<tr>
+<td><code>user_is_protected</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>filter_results</code></td>
+<td>array of objects</td>
+</tr>
+<tr>
+<td><code>filter_results.name</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>filter_results.configured</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>filter_results.matched</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>filter_results.user_value</code></td>
+<td>any</td>
+</tr>
+<tr>
+<td><code>filter_results.rule_value</code></td>
+<td>any</td>
+</tr>
+<tr>
+<td><code>filter_results.reason</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>customer_lookup_performed</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>customer_candidates</code></td>
+<td>array of objects</td>
+</tr>
+<tr>
+<td><code>customer_candidates.uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
+<td><code>customer_candidates.name</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>customer_candidates.abbreviation</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>customer_candidates.url</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>customer_lookup_ambiguous</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>resolved_project_name</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<hr />
 
 
 
@@ -15283,7 +15620,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-01-27
+    2026-05-14
   </span>
 
     
