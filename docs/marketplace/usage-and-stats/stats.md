@@ -46,6 +46,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/top_service_providers_by_resources/` | [Return top service providers by number of active resources](#return-top-service-providers-by-number-of-active-resources) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/total_cost_of_active_resources_per_offering/` | [Total cost of active resources per offering](#total-cost-of-active-resources-per-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_affiliation_count/` | [Return user count grouped by affiliation](#return-user-count-grouped-by-affiliation) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_affiliation_details/` | [User affiliation details](#user-affiliation-details) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_auth_method_count/` | [Return user count grouped by authentication method](#return-user-count-grouped-by-authentication-method) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_identity_source_count/` | [Return user count grouped by identity source](#return-user-count-grouped-by-identity-source) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-stats/user_job_title_count/` | [Return user count grouped by job title](#return-user-count-grouped-by-job-title) |
@@ -3047,6 +3048,84 @@ Return user count grouped by affiliation.
     | Field | Type | Description |
     |---|---|---|
     | `affiliation` | string | Affiliation name |
+    | `count` | integer | Number of users |
+
+---
+
+### User affiliation details
+
+Paginated affiliation rows with parsed organization, country, category and identifier fields. Drives the affiliation details table; the unparsed aggregate counts remain available via user_affiliation_count.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-stats/user_affiliation_details/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_stats import marketplace_stats_user_affiliation_details_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_stats_user_affiliation_details_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_stats_user_affiliation_details_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_stats/marketplace_stats_user_affiliation_details_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceStatsUserAffiliationDetailsList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceStatsUserAffiliationDetailsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `category` | string | One of: home-organization, personal-identifier, organization-type, user-status, eduperson, other. |
+    | `country` | string | ISO country code (case-insensitive). |
+    | `o` | string | Ordering field; prefix with - for descending. Allowed: count, organization, country, category, affiliation. Defaults to -count. |
+    | `organization` | string | Exact organization domain match. |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `search` | string | Substring match against raw URN or organization. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `affiliation` | string | Raw affiliation URN |
+    | `organization` | string |  |
+    | `country` | string | ISO country code |
+    | `category` | string |  |
+    | `identifier` | string |  |
     | `count` | integer | Number of users |
 
 ---

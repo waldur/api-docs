@@ -270,7 +270,7 @@ Requires support user permissions.
 
 ### Execute read-only SQL query
 
-Execute a given SQL query against a read-only database replica. This is a powerful tool for diagnostics and reporting, but should be used with caution. Requires support user permissions.
+Execute a given SQL query against a read-only database replica. This is a powerful tool for diagnostics and reporting, but should be used with caution. Requires staff user permissions.
 
 
 === "HTTPie"
