@@ -190,6 +190,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `identity_provider_fields` | array of strings |  |
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
+    | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
@@ -336,6 +337,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `identity_provider_fields` | array of strings |  |
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
+    | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
@@ -515,6 +517,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `identity_provider_fields` | array of strings |  |
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
+    | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
@@ -925,6 +928,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `identity_provider_fields` | array of strings |  |
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
+    | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
@@ -1105,6 +1109,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `identity_provider_fields` | array of strings |  |
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
+    | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
@@ -1816,6 +1821,7 @@ Get current user details, including authentication token and profile completenes
     | `identity_provider_fields` | array of strings |  |
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
+    | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |

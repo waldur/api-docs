@@ -4,14 +4,19 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/autoprovisioning-rules/` | [Manage autoprovisioning rules](#manage-autoprovisioning-rules) |
 | <span class="http-badge http-get">GET</span> | `/api/autoprovisioning-rules/{uuid}/` | [Manage autoprovisioning rules](#manage-autoprovisioning-rules) |
 | <span class="http-badge http-post">POST</span> | `/api/autoprovisioning-rules/` | [Manage autoprovisioning rules](#manage-autoprovisioning-rules) |
 | <span class="http-badge http-put">PUT</span> | `/api/autoprovisioning-rules/{uuid}/` | [Manage autoprovisioning rules](#manage-autoprovisioning-rules) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/autoprovisioning-rules/{uuid}/` | [Manage autoprovisioning rules](#manage-autoprovisioning-rules) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/autoprovisioning-rules/{uuid}/` | [Manage autoprovisioning rules](#manage-autoprovisioning-rules) |
+| **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/autoprovisioning-rules/{uuid}/test-match/` | [Dry-run rule evaluation against a target user.](#dry-run-rule-evaluation-against-a-target-user) |
 
 ---
+## Core CRUD
+
 
 ### Manage autoprovisioning rules
 
@@ -584,5 +589,119 @@ Manage autoprovisioning rules.
 
     **`204`** - No response body
     
+
+---
+
+## Other Actions
+
+
+### Dry-run rule evaluation against a target user.
+
+Evaluate this rule against the given user without provisioning. Returns per-filter outcomes, the customer-lookup verdict (when the rule uses use_user_organization_as_customer_name) and a top-line would_provision flag together with a human-readable block_reason.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/autoprovisioning-rules/a1b2c3d4-e5f6-7890-abcd-ef1234567890/test-match/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      user_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.rule_test_match_request_request import RuleTestMatchRequestRequest # (1)
+    from waldur_api_client.api.autoprovisioning_rules import autoprovisioning_rules_test_match # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = RuleTestMatchRequestRequest(
+        user_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = autoprovisioning_rules_test_match.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`RuleTestMatchRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rule_test_match_request_request.py)
+    2.  **API Source:** [`autoprovisioning_rules_test_match`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/autoprovisioning_rules/autoprovisioning_rules_test_match.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { autoprovisioningRulesTestMatch } from 'waldur-js-client';
+    
+    try {
+      const response = await autoprovisioningRulesTestMatch({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "user_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `user_uuid` | string (uuid) | ✓ | UUID of the user to evaluate this rule against. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `would_provision` | boolean |
+    | `block_reason` | string |
+    | `user_username` | string |
+    | `user_email` | string |
+    | `user_organization` | string |
+    | `user_registration_method` | string |
+    | `user_identity_source` | string |
+    | `user_affiliations` | array of strings |
+    | `user_is_protected` | boolean |
+    | `filter_results` | array of objects |
+    | `filter_results.name` | string |
+    | `filter_results.configured` | boolean |
+    | `filter_results.matched` | boolean |
+    | `filter_results.user_value` | any |
+    | `filter_results.rule_value` | any |
+    | `filter_results.reason` | string |
+    | `customer_lookup_performed` | boolean |
+    | `customer_candidates` | array of objects |
+    | `customer_candidates.uuid` | string (uuid) |
+    | `customer_candidates.name` | string |
+    | `customer_candidates.abbreviation` | string |
+    | `customer_candidates.url` | string |
+    | `customer_lookup_ambiguous` | boolean |
+    | `resolved_project_name` | string |
 
 ---

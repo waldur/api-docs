@@ -2052,6 +2052,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `identity_provider_fields` | array of strings |  |
     | `image` | string (uri) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
+    | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
     | `ip_address` | string |  |
