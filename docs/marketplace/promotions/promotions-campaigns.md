@@ -690,6 +690,9 @@ Return a list of orders for which the campaign is applied.
     | `consumer_message_attachment` | string (uri) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
+    | `auto_approved` | boolean |  |
+    | `auto_approved_by_rule_uuid` | string (uuid) |  |
+    | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
 
 ---

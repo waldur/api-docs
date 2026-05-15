@@ -6995,6 +6995,9 @@ Returns a paginated list of orders associated with a specific offering.
     | `consumer_message_attachment` | string (uri) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
+    | `auto_approved` | boolean |  |
+    | `auto_approved_by_rule_uuid` | string (uuid) |  |
+    | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
 
 ---
@@ -7154,6 +7157,9 @@ Returns details of a specific order associated with an offering.
     | `consumer_message_attachment` | string (uri) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
+    | `auto_approved` | boolean |  |
+    | `auto_approved_by_rule_uuid` | string (uuid) |  |
+    | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
 
 ---

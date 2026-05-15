@@ -11,6 +11,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/` | [List service providers](#list-service-providers) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{uuid}/list_users/` | [List users and their roles in a scope](#list-users-and-their-roles-in-a-scope) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/offerings/` | [List offerings of a service provider](#list-offerings-of-a-service-provider) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/offerings/types/` | [List distinct offering types for a service provider](#list-distinct-offering-types-for-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/project_permissions/` | [List project permissions of a service provider](#list-project-permissions-of-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/project_service_accounts/` | [List project service accounts for a service provider](#list-project-service-accounts-for-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/projects/` | [List projects of a service provider](#list-projects-of-a-service-provider) |
@@ -925,6 +926,124 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `thumbnail` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
+
+---
+
+### List distinct offering types for a service provider
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-service-providers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/offerings/types/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.offering_state import OfferingState # (1)
+    from waldur_api_client.models.provider_offering_details_o_enum import ProviderOfferingDetailsOEnum # (2)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_offerings_types_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_service_providers_offerings_types_list.sync(
+        service_provider_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`OfferingState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_state.py)
+    2.  **Model Source:** [`ProviderOfferingDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_offering_details_o_enum.py)
+    3.  **API Source:** [`marketplace_service_providers_offerings_types_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_offerings_types_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceServiceProvidersOfferingsTypesList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceServiceProvidersOfferingsTypesList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "service_provider_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `service_provider_uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
+    | `attributes` | string | Offering attributes (JSON) |
+    | `billable` | boolean | Billable |
+    | `can_create_offering_user` | boolean |  |
+    | `category_group_uuid` | string (uuid) | Category group UUID |
+    | `category_uuid` | string (uuid) | Category UUID |
+    | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
+    | `customer` | string (uri) | Customer URL |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `description` | string | Description contains |
+    | `has_active_terms_of_service` | boolean | Has Active Terms of Service |
+    | `has_terms_of_service` | boolean | Has Terms of Service |
+    | `keyword` | string | Keyword |
+    | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `o` | array | Ordering<br><br> |
+    | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `organization_group_uuid` | string (uuid) | Organization group UUID |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `parent_uuid` | string (uuid) | Parent offering UUID |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `query` | string | Search by offering name, slug or description |
+    | `resource_customer_uuid` | string (uuid) | Resource customer UUID |
+    | `resource_project_uuid` | string (uuid) | Resource project UUID |
+    | `scope_uuid` | string | Scope UUID |
+    | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `shared` | boolean | Shared |
+    | `slug` | string | Slug |
+    | `state` | array | Offering state<br><br> |
+    | `tag` | array | Tag UUID (OR logic) |
+    | `tag_name` | array | Tag name (OR logic) |
+    | `tag_names_and` | string | Tag names with AND logic (comma-separated) |
+    | `tags_and` | string | Tag UUIDs with AND logic (comma-separated) |
+    | `type` | array | Offering type |
+    | `user_has_consent` | boolean | User Has Consent |
+    | `user_has_offering_user` | boolean | User Has Offering User |
+    | `uuid_list` | string | Comma-separated offering UUIDs |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
 
 ---
 

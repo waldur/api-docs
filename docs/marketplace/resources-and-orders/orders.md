@@ -124,6 +124,7 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `slug` | string | Slug |
     | `state` | array | Order state<br><br> |
     | `type` | array | Order type<br><br> |
+    | `was_auto_approved` | boolean | Auto-approved |
 
 
 === "Responses"
@@ -220,6 +221,9 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `consumer_message_attachment` | string (uri) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
+    | `auto_approved` | boolean |  |
+    | `auto_approved_by_rule_uuid` | string (uuid) |  |
+    | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
 
 ---
@@ -385,6 +389,9 @@ Returns the details of a specific order.
     | `consumer_message_attachment` | string (uri) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
+    | `auto_approved` | boolean |  |
+    | `auto_approved_by_rule_uuid` | string (uuid) |  |
+    | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
 
 ---
@@ -561,6 +568,9 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `consumer_message_attachment` | string (uri) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
+    | `auto_approved` | boolean |  |
+    | `auto_approved_by_rule_uuid` | string (uuid) |  |
+    | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
 
 ---
