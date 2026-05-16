@@ -108,6 +108,7 @@ Get a list of all permissions for the current user. Staff and support users can 
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
     | `resource_uuid` | string (uuid) |
+    | `project_uuid` | string (uuid) |
 
 ---
 
@@ -193,5 +194,6 @@ Retrieve the details of a specific user permission grant by its UUID.
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
     | `resource_uuid` | string (uuid) |
+    | `project_uuid` | string (uuid) |
 
 ---

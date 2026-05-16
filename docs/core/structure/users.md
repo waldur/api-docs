@@ -179,6 +179,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
+    | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |
@@ -326,6 +327,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
+    | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |
@@ -506,6 +508,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
+    | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |
@@ -917,6 +920,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
+    | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |
@@ -1098,6 +1102,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
+    | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |
@@ -1810,6 +1815,7 @@ Get current user details, including authentication token and profile completenes
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
+    | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |

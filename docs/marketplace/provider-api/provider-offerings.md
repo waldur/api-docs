@@ -2041,6 +2041,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
+    | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
     | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |
