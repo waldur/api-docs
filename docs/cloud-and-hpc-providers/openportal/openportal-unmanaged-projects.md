@@ -1404,6 +1404,12 @@ Get checklist with questions and existing answers.
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
+    | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
+    | `questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
+    | `questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
+    | `questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
+    | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
+    | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `questions.dependencies_info` | object (free-form) |  |
     
     ---
@@ -1503,6 +1509,12 @@ Get checklist template for creating new objects.
     | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
+    | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
+    | `questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
+    | `questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
+    | `questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
+    | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
+    | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `questions.operator` | any |  |
     | `questions.review_answer_value` | any | Answer value that trigger review. |
     | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
@@ -1527,6 +1539,12 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `initial_visible_questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
+    | `initial_visible_questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
+    | `initial_visible_questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
+    | `initial_visible_questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
+    | `initial_visible_questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
+    | `initial_visible_questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
+    | `initial_visible_questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `initial_visible_questions.operator` | any |  |
     | `initial_visible_questions.review_answer_value` | any | Answer value that trigger review. |
     | `initial_visible_questions.always_requires_review` | boolean | This question always requires review regardless of answer |
