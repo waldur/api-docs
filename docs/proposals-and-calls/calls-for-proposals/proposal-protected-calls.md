@@ -51,6 +51,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/offerings/` | [Create offering for a call](#create-offering-for-a-call) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/resource_templates/` | [Create resource template for a call](#create-resource-template-for-a-call) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/review_proposal_compliance/` | [Mark proposal compliance as reviewed by call manager](#mark-proposal-compliance-as-reviewed-by-call-manager) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/rounds-bulk-set/` | [Rounds bulk set](#rounds-bulk-set) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/close/` | [Close](#close) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/rounds/` | [Create a round for a call](#create-a-round-for-a-call) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/send-all-assignments/` | [Send all draft assignment batches for this call](#send-all-draft-assignment-batches-for-this-call) |
@@ -4984,6 +4985,160 @@ Mark proposal compliance as reviewed by call manager.
 
     **`200`** - 
     
+
+---
+
+### Rounds bulk set
+
+Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``cadence`` (monthly/quarterly/biannual/yearly/custom). Each round's ``cutoff_time`` is derived as ``start_time + submission_window_days``. Fixed-date allocation is not supported in bulk mode.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/rounds-bulk-set/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      start_time="2023-10-01T12:00:00Z" \
+      cadence="monthly" \
+      submission_window_days=123 \
+      number_of_rounds=123
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.bulk_round_create_request_request import BulkRoundCreateRequestRequest # (1)
+    from waldur_api_client.models.call_states import CallStates # (2)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (3)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_rounds_bulk_set # (4)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = BulkRoundCreateRequestRequest(
+        start_time="2023-10-01T12:00:00Z",
+        cadence="monthly",
+        submission_window_days=123,
+        number_of_rounds=123
+    )
+    response = proposal_protected_calls_rounds_bulk_set.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`BulkRoundCreateRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/bulk_round_create_request_request.py)
+    2.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    3.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    4.  **API Source:** [`proposal_protected_calls_rounds_bulk_set`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_rounds_bulk_set.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsRoundsBulkSet } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsRoundsBulkSet({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "start_time": "2023-10-01T12:00:00Z",
+        "cadence": "monthly",
+        "submission_window_days": 123,
+        "number_of_rounds": 123
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `customer` | string (uri) |  |
+    | `customer_keyword` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `has_active_round` | boolean |  |
+    | `name` | string |  |
+    | `o` | array | Ordering<br><br> |
+    | `offering_uuid` | string (uuid) |  |
+    | `offerings_provider_uuid` | string (uuid) |  |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
+    | `state` | array |  |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `start_time` | string (date-time) | ✓ |
+    | `review_strategy` | string |  |
+    | `deciding_entity` | string |  |
+    | `allocation_time` | string |  |
+    | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
+    | `minimal_average_scoring` | string (decimal) |  |
+    | `cadence` | string | ✓ |
+    | `custom_interval_months` | integer |  |
+    | `submission_window_days` | integer | ✓ |
+    | `number_of_rounds` | integer | ✓ |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `slug` | string |  |
+    | `name` | string |  |
+    | `start_time` | string (date-time) |  |
+    | `cutoff_time` | string (date-time) |  |
+    | `status` | any |  |
+    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
+    | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
+    | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
+    | `url` | string |  |
+    | `proposals` | array of objects |  |
+    | `proposals.uuid` | string (uuid) |  |
+    | `proposals.slug` | string |  |
+    | `proposals.name` | string |  |
+    | `proposals.state` | any |  |
+    | `proposals.reviews` | array of anys | Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled. |
+    | `proposals.approved_by_name` | string |  |
+    | `proposals.created_by_name` | string |  |
+    | `proposals.created` | string (date-time) |  |
 
 ---
 
