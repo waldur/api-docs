@@ -43,6 +43,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/compute-affinities/` | [Compute affinity scores for all reviewer-proposal pairs](#compute-affinity-scores-for-all-reviewer-proposal-pairs) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/detach_documents/` | [Detach documents from call](#detach-documents-from-call) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/detect-conflicts/` | [Trigger automated COI detection for all reviewer-proposal pairs](#trigger-automated-coi-detection-for-all-reviewer-proposal-pairs) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/duplicate/` | [Duplicate](#duplicate) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/generate-assignments/` | [Generate assignments](#generate-assignments) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/generate-suggestions/` | [Generate reviewer suggestions with configurable matching source](#generate-reviewer-suggestions-with-configurable-matching-source) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-protected-calls/{uuid}/invite-by-email/` | [Invite by email](#invite-by-email) |
@@ -4001,6 +4002,212 @@ Trigger automated COI detection for all reviewer-proposal pairs.
     | `completed_at` | string (date-time) |  |
     | `error_message` | string |  |
     | `created` | string (date-time) |  |
+
+---
+
+### Duplicate
+
+Duplicate a call. The new call inherits the source call's configuration (offerings, rounds, workflow steps, resource templates, role mappings, documents, and COI/matching/assignment/applicant-visibility settings) and starts in draft state. Proposals, reviews, team permissions, and reviewer-pool memberships are not copied.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/duplicate/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      name="my-awesome-proposal-protected-call"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.duplicate_call_request_request import DuplicateCallRequestRequest # (1)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_duplicate # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = DuplicateCallRequestRequest(
+        name="my-awesome-proposal-protected-call"
+    )
+    response = proposal_protected_calls_duplicate.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`DuplicateCallRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/duplicate_call_request_request.py)
+    2.  **API Source:** [`proposal_protected_calls_duplicate`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_duplicate.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsDuplicate } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsDuplicate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "name": "my-awesome-proposal-protected-call"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string | ✓ |
+    | `copy_documents` | boolean |  |
+    | `copy_offerings` | boolean |  |
+    | `copy_rounds` | boolean |  |
+    | `copy_workflow_steps` | boolean |  |
+    | `copy_resource_templates` | boolean |  |
+    | `copy_role_mappings` | boolean |  |
+    | `copy_applicant_visibility_config` | boolean |  |
+    | `copy_coi_configuration` | boolean |  |
+    | `copy_matching_configuration` | boolean |  |
+    | `copy_assignment_configuration` | boolean |  |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `start_date` | string (date-time) |  |
+    | `end_date` | string (date-time) |  |
+    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `state` | any |  |
+    | `manager` | string (uri) |  |
+    | `manager_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string (uuid) |  |
+    | `offerings.state` | any |  |
+    | `offerings.offering` | string (uri) |  |
+    | `offerings.offering_name` | string |  |
+    | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.provider_name` | string |  |
+    | `offerings.category_uuid` | string (uuid) |  |
+    | `offerings.category_name` | string |  |
+    | `offerings.call_managing_organisation` | string |  |
+    | `offerings.attributes` | any |  |
+    | `offerings.plan` | string (uri) |  |
+    | `offerings.plan_details` | any |  |
+    | `offerings.options` | any |  |
+    | `offerings.components` | array of objects |  |
+    | `offerings.components.uuid` | string (uuid) |  |
+    | `offerings.components.offering_uuid` | string (uuid) |  |
+    | `offerings.components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `offerings.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `offerings.components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `offerings.components.description` | string |  |
+    | `offerings.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `offerings.components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `offerings.components.limit_period` | any |  |
+    | `offerings.components.limit_amount` | integer |  |
+    | `offerings.components.article_code` | string |  |
+    | `offerings.components.max_value` | integer |  |
+    | `offerings.components.min_value` | integer |  |
+    | `offerings.components.max_available_limit` | integer |  |
+    | `offerings.components.is_boolean` | boolean |  |
+    | `offerings.components.default_limit` | integer |  |
+    | `offerings.components.factor` | integer |  |
+    | `offerings.components.is_builtin` | boolean |  |
+    | `offerings.components.is_prepaid` | boolean |  |
+    | `offerings.components.overage_component` | string (uuid) |  |
+    | `offerings.components.min_prepaid_duration` | integer |  |
+    | `offerings.components.max_prepaid_duration` | integer |  |
+    | `offerings.components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.created` | string (date-time) |  |
+    | `rounds` | array of objects |  |
+    | `rounds.uuid` | string (uuid) |  |
+    | `rounds.slug` | string |  |
+    | `rounds.name` | string |  |
+    | `rounds.start_time` | string (date-time) |  |
+    | `rounds.cutoff_time` | string (date-time) |  |
+    | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
+    | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
+    | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
+    | `documents` | array of objects |  |
+    | `documents.uuid` | string (uuid) |  |
+    | `documents.file` | string (uri) | Documentation for call for proposals. |
+    | `documents.file_name` | string |  |
+    | `documents.file_size` | integer |  |
+    | `documents.description` | string |  |
+    | `documents.created` | string (date-time) |  |
+    | `resource_templates` | array of objects |  |
+    | `resource_templates.uuid` | string (uuid) |  |
+    | `resource_templates.url` | string |  |
+    | `resource_templates.name` | string |  |
+    | `resource_templates.description` | string |  |
+    | `resource_templates.attributes` | any |  |
+    | `resource_templates.limits` | any |  |
+    | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
+    | `resource_templates.requested_offering` | string (uri) |  |
+    | `resource_templates.requested_offering_name` | string |  |
+    | `resource_templates.requested_offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.created_by` | string (uri) |  |
+    | `resource_templates.created_by_name` | string |  |
+    | `resource_templates.created` | string (date-time) |  |
+    | `fixed_duration_in_days` | integer |  |
+    | `backend_id` | string |  |
+    | `external_url` | string (uri) |  |
+    | `reviewer_identity_visible_to_submitters` | boolean | Whether proposal applicants can see reviewer identities |
+    | `reviews_visible_to_submitters` | boolean | Whether proposal applicants can see review comments and scores |
+    | `has_eligibility_restrictions` | boolean | Check if call has any eligibility restrictions configured. |
+    | `created_by` | string (uri) |  |
+    | `reference_code` | string |  |
+    | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
+    | `compliance_checklist_name` | string |  |
+    | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
+    | `user_email_patterns` | any | List of email regex patterns. User must match one. |
+    | `user_affiliations` | any | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `applicant_visibility_config` | any |  |
 
 ---
 
