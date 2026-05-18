@@ -1797,6 +1797,7 @@ Restore instance from backup
     | `availability_zone` | string (uri) | Availability zone where this instance is located |
     | `availability_zone_name` | string | Name of the availability zone where instance is located |
     | `connect_directly_to_external_network` | boolean | If True, instance will be connected directly to external network |
+    | `config_drive` | boolean | Force config drive on or off for this instance. If null, the tenant-wide default from service settings is used. |
     | `runtime_state` | string |  |
     | `action` | string |  |
     | `action_details` | any | Details about ongoing or completed actions |
