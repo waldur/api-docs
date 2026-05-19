@@ -6081,6 +6081,7 @@ Updates the overview fields of an offering, such as name, description, and getti
     | `getting_started` | string |  |  |
     | `integration_guide` | string |  |  |
     | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
+    | `backend_id` | string |  |  |
 
 
 === "Responses"
