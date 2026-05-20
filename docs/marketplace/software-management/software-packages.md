@@ -135,6 +135,7 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `versions` | array of objects |  |
     | `versions.uuid` | string (uuid) |  |
     | `versions.version` | string |  |
+    | `versions.module_version` | string | EESSI EasyBuild module version |
     | `versions.release_date` | string (date) |  |
     | `versions.targets` | array of objects |  |
     | `versions.targets.uuid` | string (uuid) |  |
@@ -249,6 +250,7 @@ Returns the details of a specific software package, including its description, h
     | `versions` | array of objects |  |
     | `versions.uuid` | string (uuid) |  |
     | `versions.version` | string |  |
+    | `versions.module_version` | string | EESSI EasyBuild module version |
     | `versions.release_date` | string (date) |  |
     | `versions.targets` | array of objects |  |
     | `versions.targets.uuid` | string (uuid) |  |
@@ -380,6 +382,7 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `versions` | array of objects |  |
     | `versions.uuid` | string (uuid) |  |
     | `versions.version` | string |  |
+    | `versions.module_version` | string | EESSI EasyBuild module version |
     | `versions.release_date` | string (date) |  |
     | `versions.targets` | array of objects |  |
     | `versions.targets.uuid` | string (uuid) |  |
@@ -522,6 +525,7 @@ Updates an existing software package. Requires staff permissions.
     | `versions` | array of objects |  |
     | `versions.uuid` | string (uuid) |  |
     | `versions.version` | string |  |
+    | `versions.module_version` | string | EESSI EasyBuild module version |
     | `versions.release_date` | string (date) |  |
     | `versions.targets` | array of objects |  |
     | `versions.targets.uuid` | string (uuid) |  |
@@ -655,6 +659,7 @@ Partially updates an existing software package. Requires staff permissions.
     | `versions` | array of objects |  |
     | `versions.uuid` | string (uuid) |  |
     | `versions.version` | string |  |
+    | `versions.module_version` | string | EESSI EasyBuild module version |
     | `versions.release_date` | string (date) |  |
     | `versions.targets` | array of objects |  |
     | `versions.targets.uuid` | string (uuid) |  |

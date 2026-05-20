@@ -103,6 +103,7 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `version` | string |  |
+    | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
     | `dependencies` | any | Package dependencies (format varies by catalog type) |
     | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
@@ -188,6 +189,7 @@ Returns the details of a specific software version, including its release date a
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `version` | string |  |
+    | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
     | `dependencies` | any | Package dependencies (format varies by catalog type) |
     | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
@@ -260,6 +262,7 @@ Creates a new version for a software package. Requires staff permissions.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `version` | string |  |
+    | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
     | `dependencies` | any | Package dependencies (format varies by catalog type) |
     | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
@@ -345,6 +348,7 @@ Updates an existing software version. Requires staff permissions.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `version` | string |  |
+    | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
     | `dependencies` | any | Package dependencies (format varies by catalog type) |
     | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
@@ -430,6 +434,7 @@ Partially updates an existing software version. Requires staff permissions.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `version` | string |  |
+    | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
     | `dependencies` | any | Package dependencies (format varies by catalog type) |
     | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
