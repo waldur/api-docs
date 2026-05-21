@@ -121,7 +121,9 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `downscaled` | boolean | Downscaled |
     | `field` | array |  |
+    | `flavor_name` | string | Flavor name |
     | `has_terminate_date` | boolean | Has termination date |
+    | `image_name` | string | Image name |
     | `is_attached` | boolean | Filter by attached state |
     | `lexis_links_supported` | boolean | LEXIS links supported |
     | `limit_based` | boolean | Filter by limit-based offerings |
@@ -1689,7 +1691,9 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `downscaled` | boolean | Downscaled |
+    | `flavor_name` | string | Flavor name |
     | `has_terminate_date` | boolean | Has termination date |
+    | `image_name` | string | Image name |
     | `is_attached` | boolean | Filter by attached state |
     | `lexis_links_supported` | boolean | LEXIS links supported |
     | `limit_based` | boolean | Filter by limit-based offerings |
