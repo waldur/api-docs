@@ -94,6 +94,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/` | [Update offering backend_id rules](#update-offering-backend_id-rules) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_tags/` | [Update tags for offering](#update-tags-for-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_type/` | [Swap offering type](#swap-offering-type) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/upload_markdown_image/` | [Upload markdown image](#upload-markdown-image) |
 
 ---
 ## Core CRUD
@@ -9070,5 +9071,93 @@ Changes the offering's `type` between Marketplace.Basic and the site-agent type 
 
     **`200`** - No response body
     
+
+---
+
+### Upload markdown image
+
+Uploads an image for embedding in offering markdown descriptions. Requires ENABLE_MARKDOWN_IMAGE_UPLOAD Constance setting.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/upload_markdown_image/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      image="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.markdown_image_upload_request import MarkdownImageUploadRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_upload_markdown_image # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = MarkdownImageUploadRequest(
+        image="string-value"
+    )
+    response = marketplace_provider_offerings_upload_markdown_image.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`MarkdownImageUploadRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/markdown_image_upload_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_upload_markdown_image`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_upload_markdown_image.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsUploadMarkdownImage } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsUploadMarkdownImage({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "image": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `image` | string (binary) | ✓ |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) | Absolute URL of the uploaded image for markdown embedding. |
 
 ---

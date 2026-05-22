@@ -76,6 +76,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SITE_PHONE` | string |
     | `CURRENCY_NAME` | string |
     | `THUMBNAIL_SIZE` | string |
+    | `ENABLE_MARKDOWN_IMAGE_UPLOAD` | boolean |
+    | `MARKDOWN_IMAGE_MAX_SIZE_MB` | integer |
     | `ANONYMOUS_USER_CAN_VIEW_OFFERINGS` | boolean |
     | `SHOW_OFFERING_COVER_IMAGE` | boolean |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |
@@ -412,6 +414,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SITE_PHONE` | string |  |
     | `CURRENCY_NAME` | string |  |
     | `THUMBNAIL_SIZE` | string |  |
+    | `ENABLE_MARKDOWN_IMAGE_UPLOAD` | boolean |  |
+    | `MARKDOWN_IMAGE_MAX_SIZE_MB` | integer |  |
     | `ANONYMOUS_USER_CAN_VIEW_OFFERINGS` | boolean |  |
     | `SHOW_OFFERING_COVER_IMAGE` | boolean |  |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |  |
