@@ -16995,6 +16995,12 @@ The quota values are propagated to the backend.</p>
 <li>security_group_rule_count - maximal number of created security groups rules.</li>
 <li>volumes - maximal number of created volumes.</li>
 <li>snapshots - maximal number of created snapshots.</li>
+<li>floating_ip_count - maximal number of floating IPs. Use 0 to deny, -1 for unlimited.</li>
+<li>network_count - maximal number of networks. Use 0 to deny, -1 for unlimited.</li>
+<li>subnet_count - maximal number of subnets. Use 0 to deny, -1 for unlimited.</li>
+<li>port_count - maximal number of ports. Use 0 to deny, -1 for unlimited.</li>
+<li>gigabytes_<volume_type_name> - maximal storage for a specific Cinder volume type, in GB.
+  For example, gigabytes_ssd or gigabytes___DEFAULT__. Use -1 for unlimited.</li>
 </ul>
 <p>It is possible to update quotas by one or by submitting all the fields in one request.
 Waldur will attempt to update the provided quotas. Please note, that if provided quotas are
@@ -17029,29 +17035,20 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.open_stack_tenant_quota_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenStackTenantQuotaRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_tenants</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_tenants_set_quotas</span> <span class="c1"># (2)</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openstack_tenants</span><span class="w"> </span><span class="kn">import</span> <span class="n">openstack_tenants_set_quotas</span> <span class="c1"># (1)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
-
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">OpenStackTenantQuotaRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openstack_tenants_set_quotas</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_tenant_quota_request.py"><code>OpenStackTenantQuotaRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_set_quotas.py"><code>openstack_tenants_set_quotas</code></a></li>
 </ol>
 </div>
@@ -17108,6 +17105,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -17115,41 +17113,73 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <td><code>instances</code></td>
 <td>integer</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>volumes</code></td>
 <td>integer</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>snapshots</code></td>
 <td>integer</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>ram</code></td>
 <td>integer</td>
 <td></td>
+<td>In MiB</td>
 </tr>
 <tr>
 <td><code>vcpu</code></td>
 <td>integer</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>storage</code></td>
 <td>integer</td>
 <td></td>
+<td>In MiB</td>
 </tr>
 <tr>
 <td><code>security_group_count</code></td>
 <td>integer</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td><code>security_group_rule_count</code></td>
 <td>integer</td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>floating_ip_count</code></td>
+<td>integer</td>
+<td></td>
+<td>Use 0 to deny, -1 for unlimited</td>
+</tr>
+<tr>
+<td><code>network_count</code></td>
+<td>integer</td>
+<td></td>
+<td>Use 0 to deny, -1 for unlimited</td>
+</tr>
+<tr>
+<td><code>subnet_count</code></td>
+<td>integer</td>
+<td></td>
+<td>Use 0 to deny, -1 for unlimited</td>
+</tr>
+<tr>
+<td><code>port_count</code></td>
+<td>integer</td>
+<td></td>
+<td>Use 0 to deny, -1 for unlimited</td>
 </tr>
 </tbody>
 </table>
@@ -17194,6 +17224,22 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </tr>
 <tr>
 <td><code>security_group_rule_count</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>floating_ip_count</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>network_count</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>subnet_count</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>port_count</code></td>
 <td>integer</td>
 </tr>
 </tbody>
@@ -20811,7 +20857,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-04-21
+    2026-05-24
   </span>
 
     
