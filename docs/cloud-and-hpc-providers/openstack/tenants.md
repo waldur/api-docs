@@ -852,6 +852,12 @@ The following quotas are supported. All values are expected to be integers:
 - security_group_rule_count - maximal number of created security groups rules.
 - volumes - maximal number of created volumes.
 - snapshots - maximal number of created snapshots.
+- floating_ip_count - maximal number of floating IPs. Use 0 to deny, -1 for unlimited.
+- network_count - maximal number of networks. Use 0 to deny, -1 for unlimited.
+- subnet_count - maximal number of subnets. Use 0 to deny, -1 for unlimited.
+- port_count - maximal number of ports. Use 0 to deny, -1 for unlimited.
+- gigabytes_<volume_type_name> - maximal storage for a specific Cinder volume type, in GB.
+  For example, gigabytes_ssd or gigabytes___DEFAULT__. Use -1 for unlimited.
 
 It is possible to update quotas by one or by submitting all the fields in one request.
 Waldur will attempt to update the provided quotas. Please note, that if provided quotas are
@@ -880,26 +886,21 @@ On successful completion the task will synchronize quotas with the backend.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.open_stack_tenant_quota_request import OpenStackTenantQuotaRequest # (1)
-    from waldur_api_client.api.openstack_tenants import openstack_tenants_set_quotas # (2)
+    from waldur_api_client.api.openstack_tenants import openstack_tenants_set_quotas # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = OpenStackTenantQuotaRequest()
     response = openstack_tenants_set_quotas.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`OpenStackTenantQuotaRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_tenant_quota_request.py)
-    2.  **API Source:** [`openstack_tenants_set_quotas`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_set_quotas.py)
+    1.  **API Source:** [`openstack_tenants_set_quotas`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_set_quotas.py)
 
 === "TypeScript"
 
@@ -929,16 +930,20 @@ On successful completion the task will synchronize quotas with the backend.
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `instances` | integer |  |
-    | `volumes` | integer |  |
-    | `snapshots` | integer |  |
-    | `ram` | integer |  |
-    | `vcpu` | integer |  |
-    | `storage` | integer |  |
-    | `security_group_count` | integer |  |
-    | `security_group_rule_count` | integer |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `instances` | integer |  |  |
+    | `volumes` | integer |  |  |
+    | `snapshots` | integer |  |  |
+    | `ram` | integer |  | In MiB |
+    | `vcpu` | integer |  |  |
+    | `storage` | integer |  | In MiB |
+    | `security_group_count` | integer |  |  |
+    | `security_group_rule_count` | integer |  |  |
+    | `floating_ip_count` | integer |  | Use 0 to deny, -1 for unlimited |
+    | `network_count` | integer |  | Use 0 to deny, -1 for unlimited |
+    | `subnet_count` | integer |  | Use 0 to deny, -1 for unlimited |
+    | `port_count` | integer |  | Use 0 to deny, -1 for unlimited |
 
 
 === "Responses"
@@ -955,6 +960,10 @@ On successful completion the task will synchronize quotas with the backend.
     | `storage` | integer |
     | `security_group_count` | integer |
     | `security_group_rule_count` | integer |
+    | `floating_ip_count` | integer |
+    | `network_count` | integer |
+    | `subnet_count` | integer |
+    | `port_count` | integer |
 
 ---
 

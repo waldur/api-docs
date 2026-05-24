@@ -24,6 +24,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/` | [List resources for a proposal](#list-resources-for-a-proposal) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/workflow_states/` | [List all workflow step instances for this proposal](#list-all-workflow-step-instances-for-this-proposal) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/advance_workflow_step/` | [Manually advance a workflow that is awaiting call-manager confirmation](#manually-advance-a-workflow-that-is-awaiting-call-manager-confirmation) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/approve/` | [Approve a proposal](#approve-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/attach_document/` | [Attach document to proposal](#attach-document-to-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/complete_workflow_step/` | [Complete the current workflow step with an outcome](#complete-the-current-workflow-step-with-an-outcome) |
@@ -178,6 +179,7 @@
     | `created` | string (date-time) |  |
     | `compliance_status` | object (free-form) |  |
     | `can_submit` | object (free-form) |  |
+    | `awaiting_manual_advance` | boolean |  |
 
 ---
 
@@ -306,6 +308,7 @@
     | `created` | string (date-time) |  |
     | `compliance_status` | object (free-form) |  |
     | `can_submit` | object (free-form) |  |
+    | `awaiting_manual_advance` | boolean |  |
 
 ---
 
@@ -452,6 +455,7 @@
     | `created` | string (date-time) |  |
     | `compliance_status` | object (free-form) |  |
     | `can_submit` | object (free-form) |  |
+    | `awaiting_manual_advance` | boolean |  |
 
 ---
 
@@ -1840,6 +1844,78 @@ List all workflow step instances for this proposal.
     | `completed_at` | string (date-time) |  |
     | `completed_by` | string (uuid) |  |
     | `deadline` | string (date-time) | Computed from started_at + step duration_in_days. |
+
+---
+
+### Manually advance a workflow that is awaiting call-manager confirmation
+
+Manually advance a workflow that is awaiting call-manager confirmation.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/advance_workflow_step/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_advance_workflow_step # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_advance_workflow_step.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_advance_workflow_step`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_advance_workflow_step.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsAdvanceWorkflowStep } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsAdvanceWorkflowStep({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `detail` | string |  |
+    | `proposal_state` | string | New proposal state when the workflow terminates. |
+    | `next_step` | string | Identifier of the step that just became active. |
 
 ---
 
