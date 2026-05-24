@@ -40,6 +40,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date/` | [Set end date of the resource](#set-end-date-of-the-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_provider/` | [Set end date by provider](#set-end-date-by-provider) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_staff/` | [Set end date of the resource by staff](#set-end-date-of-the-resource-by-staff) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_endpoints/` | [Set resource access endpoints](#set-resource-access-endpoints) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_limits/` | [Set resource limits](#set-resource-limits) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_paused/` | [Set paused flag for resource](#set-paused-flag-for-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_restrict_member_access/` | [Set restrict member access flag](#set-restrict-member-access-flag) |
@@ -3554,6 +3555,96 @@ Deprecated: Use set_end_date instead. Allows a staff user to set or update the e
 
     **`200`** - No response body
     
+
+---
+
+### Set resource access endpoints
+
+Allows a service provider to replace the set of access endpoints (name + URL) reported for a resource. Used to surface dynamic per-resource endpoints (e.g. an inference API) in the UI.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_endpoints/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      endpoints:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.resource_endpoints_request import ResourceEndpointsRequest # (1)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_set_endpoints # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ResourceEndpointsRequest(
+        endpoints=[]
+    )
+    response = marketplace_provider_resources_set_endpoints.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ResourceEndpointsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_endpoints_request.py)
+    2.  **API Source:** [`marketplace_provider_resources_set_endpoints`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_set_endpoints.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesSetEndpoints } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesSetEndpoints({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "endpoints": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `endpoints` | array of objects | ✓ | Access endpoints to set on the resource |
+    | `endpoints.name` | string | ✓ | Name of the access endpoint |
+    | `endpoints.url` | string | ✓ | URL of the access endpoint |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Status of the resource response |
 
 ---
 
