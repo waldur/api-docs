@@ -62,8 +62,17 @@ Get Celery task status for agent-related tasks. Support users only.
     | Field | Type | Description |
     |---|---|---|
     | `active_tasks` | array of objects | Currently running agent-related tasks |
+    | `active_tasks.id` | string |  |
+    | `active_tasks.name` | string |  |
+    | `active_tasks.args` | array of strings |  |
+    | `active_tasks.worker` | string |  |
     | `scheduled_tasks` | array of objects | Scheduled agent-related tasks |
+    | `scheduled_tasks.id` | string |  |
+    | `scheduled_tasks.name` | string |  |
+    | `scheduled_tasks.eta` | string |  |
     | `reserved_tasks` | array of objects | Reserved agent-related tasks |
+    | `reserved_tasks.id` | string |  |
+    | `reserved_tasks.name` | string |  |
     | `error` | string | Error message if task inspection failed |
 
 ---

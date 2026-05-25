@@ -914,7 +914,10 @@ Update the rules for a specific security group. This overwrites all existing rul
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---

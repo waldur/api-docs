@@ -1307,8 +1307,11 @@ Restart the instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1374,8 +1377,11 @@ Start the instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1441,8 +1447,11 @@ Stop the instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2246,8 +2255,11 @@ Update allowed address pairs of the instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2328,8 +2340,11 @@ Update floating IPs of the instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2423,8 +2438,11 @@ Update ports of the instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2512,8 +2530,11 @@ Update security groups of the instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2683,8 +2704,11 @@ Change flavor of the instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2762,8 +2786,11 @@ Boot the instance from a separate rescue image while keeping the original disk a
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2982,7 +3009,10 @@ Restore the instance from rescue mode.
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---

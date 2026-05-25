@@ -1052,13 +1052,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
     | Field | Type |
     |---|---|
-    | `cpu_limit` | integer |
-    | `gpu_limit` | integer |
-    | `ram_limit` | integer |
+    | `status` | string |
 
 ---
 

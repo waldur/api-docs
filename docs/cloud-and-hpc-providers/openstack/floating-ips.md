@@ -514,8 +514,11 @@ Update description of the floating IP
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -669,8 +672,11 @@ Attach floating IP to port
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -736,8 +742,11 @@ Detach floating IP from port
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

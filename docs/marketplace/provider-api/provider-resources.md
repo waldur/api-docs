@@ -697,9 +697,9 @@ Updates the options of a resource. If the offering is configured to create order
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
     
     ---
     
@@ -792,9 +792,9 @@ Allows a service provider to directly update the options of a resource without c
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2360,9 +2360,9 @@ Updates both the originating order's start_date and the resource's end_date in o
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -3063,9 +3063,9 @@ Allows a service provider to set or update the backend ID for a resource, linkin
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -3151,9 +3151,9 @@ Allows a service provider to set or update the backend-specific metadata for a r
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -3315,9 +3315,9 @@ Allows a service provider to set or update the effective ID for a resource. The 
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -3642,9 +3642,9 @@ Allows a service provider to replace the set of access endpoints (name + URL) re
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -3730,9 +3730,9 @@ Allows a service provider to directly set the limits for a resource. This is typ
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -4052,9 +4052,9 @@ Allows a service provider to manually set the resource state to OK. This is usef
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -4142,9 +4142,9 @@ Allows a service provider to submit a report (e.g., usage or status report) for 
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

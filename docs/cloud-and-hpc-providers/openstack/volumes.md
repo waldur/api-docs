@@ -830,8 +830,11 @@ Attach volume to instance
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -897,8 +900,11 @@ Detach instance from volume
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -982,8 +988,11 @@ Increase volume size
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1067,8 +1076,11 @@ Retype detached volume
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

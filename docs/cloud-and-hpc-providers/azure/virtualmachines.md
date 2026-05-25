@@ -1044,69 +1044,11 @@ Delete resource from the database without scheduling operations on backend
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `start_time` | string (date-time) |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `min_ram` | integer | Minimum memory size in MiB |
-    | `min_disk` | integer | Minimum disk size in MiB |
-    | `user_data` | string | Additional data that will be added to instance on provisioning |
-    | `external_ips` | array of string (ipv4)s |  |
-    | `internal_ips` | array of string (ipv4)s |  |
-    | `latitude` | number (double) |  |
-    | `longitude` | number (double) |  |
-    | `key_name` | string |  |
-    | `key_fingerprint` | string |  |
-    | `image_name` | string |  |
-    | `image` | string (uri) |  |
-    | `size` | string (uri) |  |
-    | `runtime_state` | string |  |
-    | `resource_group` | string (uri) |  |
-    | `username` | string |  |
-    | `password` | string |  |
-    | `resource_group_name` | string |  |
-    | `location_name` | string |  |
-    | `size_name` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1323,69 +1265,11 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `start_time` | string (date-time) |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `min_ram` | integer | Minimum memory size in MiB |
-    | `min_disk` | integer | Minimum disk size in MiB |
-    | `user_data` | string | Additional data that will be added to instance on provisioning |
-    | `external_ips` | array of string (ipv4)s |  |
-    | `internal_ips` | array of string (ipv4)s |  |
-    | `latitude` | number (double) |  |
-    | `longitude` | number (double) |  |
-    | `key_name` | string |  |
-    | `key_fingerprint` | string |  |
-    | `image_name` | string |  |
-    | `image` | string (uri) |  |
-    | `size` | string (uri) |  |
-    | `runtime_state` | string |  |
-    | `resource_group` | string (uri) |  |
-    | `username` | string |  |
-    | `password` | string |  |
-    | `resource_group_name` | string |  |
-    | `location_name` | string |  |
-    | `size_name` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1449,68 +1333,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `start_time` | string (date-time) |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `min_ram` | integer | Minimum memory size in MiB |
-    | `min_disk` | integer | Minimum disk size in MiB |
-    | `user_data` | string | Additional data that will be added to instance on provisioning |
-    | `external_ips` | array of string (ipv4)s |  |
-    | `internal_ips` | array of string (ipv4)s |  |
-    | `latitude` | number (double) |  |
-    | `longitude` | number (double) |  |
-    | `key_name` | string |  |
-    | `key_fingerprint` | string |  |
-    | `image_name` | string |  |
-    | `image` | string (uri) |  |
-    | `size` | string (uri) |  |
-    | `runtime_state` | string |  |
-    | `resource_group` | string (uri) |  |
-    | `username` | string |  |
-    | `password` | string |  |
-    | `resource_group_name` | string |  |
-    | `location_name` | string |  |
-    | `size_name` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---

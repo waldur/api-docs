@@ -1013,6 +1013,8 @@ Update the project digest email configuration for this organization.
     | `day_of_month` | integer | For monthly: day of month (1-28) |
     | `last_sent_at` | string (date-time) |  |
     | `available_sections` | array of objects |  |
+    | `available_sections.key` | string |  |
+    | `available_sections.title` | string |  |
 
 ---
 
@@ -1323,6 +1325,8 @@ Update the project digest email configuration for this organization.
     | `day_of_month` | integer | For monthly: day of month (1-28) |
     | `last_sent_at` | string (date-time) |  |
     | `available_sections` | array of objects |  |
+    | `available_sections.key` | string |  |
+    | `available_sections.title` | string |  |
 
 ---
 
@@ -2806,6 +2810,8 @@ Retrieve the project digest email configuration for this organization.
     | `day_of_month` | integer | For monthly: day of month (1-28) |
     | `last_sent_at` | string (date-time) |  |
     | `available_sections` | array of objects |  |
+    | `available_sections.key` | string |  |
+    | `available_sections.title` | string |  |
 
 ---
 

@@ -993,7 +993,7 @@ Get checklist with questions and existing answers.
     
     | Field | Type | Description |
     |---|---|---|
-    | `checklist` | object (free-form) |  |
+    | `checklist` | any |  |
     | `completion` | object |  |
     | `completion.uuid` | string (uuid) |  |
     | `completion.is_completed` | boolean | Whether all required questions have been answered |
@@ -1010,7 +1010,7 @@ Get checklist with questions and existing answers.
     | `questions.question_type` | any | Type of question and expected answer format |
     | `questions.required` | boolean |  |
     | `questions.order` | integer |  |
-    | `questions.existing_answer` | object (free-form) |  |
+    | `questions.existing_answer` | any |  |
     | `questions.question_options` | array of anys |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
@@ -1024,7 +1024,7 @@ Get checklist with questions and existing answers.
     | `questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
     | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
-    | `questions.dependencies_info` | object (free-form) |  |
+    | `questions.dependencies_info` | any |  |
     
     ---
     
@@ -1104,7 +1104,7 @@ Get checklist with questions and existing answers including review logic (review
     
     | Field | Type | Description |
     |---|---|---|
-    | `checklist` | object (free-form) |  |
+    | `checklist` | any |  |
     | `completion` | object |  |
     | `completion.uuid` | string (uuid) |  |
     | `completion.is_completed` | boolean | Whether all required questions have been answered |
@@ -1127,7 +1127,7 @@ Get checklist with questions and existing answers including review logic (review
     | `questions.question_type` | any | Type of question and expected answer format |
     | `questions.required` | boolean |  |
     | `questions.order` | integer |  |
-    | `questions.existing_answer` | object (free-form) |  |
+    | `questions.existing_answer` | any |  |
     | `questions.question_options` | array of anys |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
@@ -1141,7 +1141,7 @@ Get checklist with questions and existing answers including review logic (review
     | `questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
     | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
-    | `questions.dependencies_info` | object (free-form) |  |
+    | `questions.dependencies_info` | any |  |
     | `questions.operator` | any |  |
     | `questions.review_answer_value` | any | Answer value that trigger review. |
     | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
@@ -1225,7 +1225,7 @@ Get checklist template for creating new objects.
     
     | Field | Type | Description |
     |---|---|---|
-    | `checklist` | object (free-form) |  |
+    | `checklist` | any |  |
     | `questions` | array of objects |  |
     | `questions.uuid` | string (uuid) |  |
     | `questions.required` | boolean |  |

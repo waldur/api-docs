@@ -749,6 +749,9 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `batch_uuid` | string (uuid) |  |
     | `items_created` | integer |  |
     | `skipped_proposals` | array of objects | Proposals that were skipped with reasons |
+    | `skipped_proposals.proposal_uuid` | string (uuid) |  |
+    | `skipped_proposals.proposal_name` | string |  |
+    | `skipped_proposals.reason` | string |  |
 
 ---
 
@@ -1974,8 +1977,14 @@ Get compliance overview for call manager showing all proposals and their complia
     
     | Field | Type |
     |---|---|
-    | `checklist` | object (free-form) |
-    | `proposals` | array of anys |
+    | `checklist` | any |
+    | `proposals` | array of objects |
+    | `proposals.uuid` | string (uuid) |
+    | `proposals.name` | string |
+    | `proposals.state` | string |
+    | `proposals.created_by` | string |
+    | `proposals.created_by_uuid` | string (uuid) |
+    | `proposals.compliance` | any |
 
 ---
 
@@ -4295,6 +4304,9 @@ Generate assignment batches for reviewers. Uses the affinity matrix and COI reco
     | `items_created` | integer |  |
     | `proposals_processed` | integer |  |
     | `skipped_proposals` | array of objects | Proposals that were skipped with reasons |
+    | `skipped_proposals.proposal_uuid` | string (uuid) |  |
+    | `skipped_proposals.proposal_name` | string |  |
+    | `skipped_proposals.reason` | string |  |
 
 ---
 

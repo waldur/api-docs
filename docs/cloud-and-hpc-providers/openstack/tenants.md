@@ -831,8 +831,11 @@ Change password for tenant user
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1890,8 +1893,11 @@ It triggers celery job to pull quotas from remote VPC
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2224,8 +2230,11 @@ Trigger job to pull server groups from remote VPC
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

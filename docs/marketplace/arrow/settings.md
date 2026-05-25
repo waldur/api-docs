@@ -554,12 +554,12 @@ Validate Arrow API credentials without saving them.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `valid` | boolean |
-    | `message` | string |
-    | `error` | string |
-    | `partner_info` | object (free-form) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `valid` | boolean |  |
+    | `message` | string |  |
+    | `error` | string |  |
+    | `partner_info` | object (free-form) | Raw partner info data from Arrow API |
 
 ---
 

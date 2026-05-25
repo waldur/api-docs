@@ -710,7 +710,7 @@ Fetches OIDC discovery metadata from the provider and returns supported claims, 
     |---|---|---|
     | `claims_supported` | array of strings | List of claims supported by the OIDC provider |
     | `scopes_supported` | array of strings | List of scopes supported by the OIDC provider |
-    | `endpoints` | object (free-form) | OIDC endpoints (authorization, token, userinfo, logout) |
+    | `endpoints` | any | OIDC endpoints (authorization, token, userinfo, logout) |
     | `waldur_fields` | array of objects | Waldur User fields with suggested OIDC claim mappings |
     | `waldur_fields.field` | string | Waldur User model field name |
     | `waldur_fields.description` | string | Human-readable field description |

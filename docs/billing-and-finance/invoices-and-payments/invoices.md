@@ -913,6 +913,8 @@ Import component usage items as JSON data for multiple customers. Creates invoic
     | `created` | integer |
     | `skipped` | integer |
     | `errors` | array of objects |
+    | `errors.customer_name` | string |
+    | `errors.reason` | string |
 
 ---
 

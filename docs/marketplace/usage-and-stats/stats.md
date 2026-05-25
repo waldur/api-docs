@@ -2108,8 +2108,16 @@ Return customer statistics for a service provider.
     | `total` | integer | Total number of customers |
     | `new_this_month` | integer | New customers this month |
     | `top_by_revenue` | array of objects | Top customers by revenue |
+    | `top_by_revenue.customer_uuid` | string (uuid) |  |
+    | `top_by_revenue.customer_name` | string |  |
+    | `top_by_revenue.revenue` | string (decimal) |  |
     | `top_by_resources` | array of objects | Top customers by resource count |
+    | `top_by_resources.customer_uuid` | string (uuid) |  |
+    | `top_by_resources.customer_name` | string |  |
+    | `top_by_resources.resource_count` | integer |  |
     | `monthly` | array of objects | Monthly customer counts |
+    | `monthly.month` | string |  |
+    | `monthly.customer_count` | integer |  |
 
 ---
 
@@ -2181,6 +2189,19 @@ Return offering performance statistics for a service provider.
     | Field | Type | Description |
     |---|---|---|
     | `offerings` | array of objects | Offering statistics including resources, revenue, and utilization |
+    | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_name` | string |  |
+    | `offerings.category_name` | string |  |
+    | `offerings.state` | string |  |
+    | `offerings.active_resources` | integer |  |
+    | `offerings.total_resources` | integer |  |
+    | `offerings.revenue` | string (decimal) |  |
+    | `offerings.plans` | array of objects |  |
+    | `offerings.plans.plan_uuid` | string (uuid) |  |
+    | `offerings.plans.plan_name` | string |  |
+    | `offerings.plans.usage` | integer |  |
+    | `offerings.plans.limit` | integer |  |
+    | `offerings.plans.utilization` | number (double) |  |
 
 ---
 
@@ -2254,7 +2275,12 @@ Return resource statistics for a service provider.
     | `total` | integer | Total number of resources |
     | `by_state` | object (free-form) | Resource counts grouped by state |
     | `by_offering` | array of objects | Resource counts grouped by offering |
+    | `by_offering.offering_uuid` | string (uuid) |  |
+    | `by_offering.offering_name` | string |  |
+    | `by_offering.count` | integer |  |
     | `monthly` | array of objects | Monthly resource counts |
+    | `monthly.month` | string |  |
+    | `monthly.count` | integer |  |
 
 ---
 

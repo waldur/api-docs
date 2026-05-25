@@ -110,10 +110,10 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
-    | `module` | object (free-form) |  |
+    | `module` | any |  |
     | `required_modules` | array of anys |  |
     | `extensions` | array of anys |  |
-    | `toolchain` | object (free-form) |  |
+    | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
 ---
@@ -196,10 +196,10 @@ Returns the details of a specific software version, including its release date a
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
-    | `module` | object (free-form) |  |
+    | `module` | any |  |
     | `required_modules` | array of anys |  |
     | `extensions` | array of anys |  |
-    | `toolchain` | object (free-form) |  |
+    | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
 ---
@@ -269,10 +269,10 @@ Creates a new version for a software package. Requires staff permissions.
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
-    | `module` | object (free-form) |  |
+    | `module` | any |  |
     | `required_modules` | array of anys |  |
     | `extensions` | array of anys |  |
-    | `toolchain` | object (free-form) |  |
+    | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
 ---
@@ -355,10 +355,10 @@ Updates an existing software version. Requires staff permissions.
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
-    | `module` | object (free-form) |  |
+    | `module` | any |  |
     | `required_modules` | array of anys |  |
     | `extensions` | array of anys |  |
-    | `toolchain` | object (free-form) |  |
+    | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
 ---
@@ -441,10 +441,10 @@ Partially updates an existing software version. Requires staff permissions.
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
-    | `module` | object (free-form) |  |
+    | `module` | any |  |
     | `required_modules` | array of anys |  |
     | `extensions` | array of anys |  |
-    | `toolchain` | object (free-form) |  |
+    | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
 ---

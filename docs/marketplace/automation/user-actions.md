@@ -366,12 +366,12 @@ Get action summary counts
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `total` | integer |
-    | `by_urgency` | object (free-form) |
-    | `by_type` | object (free-form) |
-    | `overdue` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `total` | integer |  |
+    | `by_urgency` | object (free-form) | Map of urgency level to count of actions |
+    | `by_type` | object (free-form) | Map of action type string to count of actions |
+    | `overdue` | integer |  |
 
 ---
 

@@ -196,29 +196,30 @@ Returns project's secrets.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.rancher_projects import rancher_projects_secrets_retrieve # (1)
+    from waldur_api_client.api.rancher_projects import rancher_projects_secrets_list # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    response = rancher_projects_secrets_retrieve.sync(
+    response = rancher_projects_secrets_list.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client
     )
     
-    print(response)
+    for item in response:
+        print(item)
     ```
     
     
-    1.  **API Source:** [`rancher_projects_secrets_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_projects/rancher_projects_secrets_retrieve.py)
+    1.  **API Source:** [`rancher_projects_secrets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_projects/rancher_projects_secrets_list.py)
 
 === "TypeScript"
 
     ```typescript
-    import { rancherProjectsSecretsRetrieve } from 'waldur-js-client';
+    import { rancherProjectsSecretsList } from 'waldur-js-client';
     
     try {
-      const response = await rancherProjectsSecretsRetrieve({
+      const response = await rancherProjectsSecretsList({
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
@@ -238,23 +239,23 @@ Returns project's secrets.
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
 === "Responses"
 
     **`200`** - 
     
+    The response body is an array of objects, where each object has the following structure:
+    
     | Field | Type |
     |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
     | `name` | string |
-    | `description` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `runtime_state` | string |
-    | `cluster` | string (uri) |
-    | `namespaces` | array of objects |
-    | `namespaces.url` | string (uri) |
-    | `namespaces.uuid` | string (uuid) |
-    | `namespaces.name` | string |
+    | `id` | string |
 
 ---

@@ -334,6 +334,13 @@ Remove agent services that have been inactive for a specified time. Staff only.
     | `deleted_count` | integer | Number of items deleted (or would be deleted in dry run) |
     | `dry_run` | boolean | Whether this was a dry run |
     | `items` | array of objects | List of deleted (or to-be-deleted) items |
+    | `items.uuid` | string (uuid) |  |
+    | `items.name` | string |  |
+    | `items.offering__name` | string |  |
+    | `items.created` | string (date-time) |  |
+    | `items.identity__name` | string |  |
+    | `items.state` | string |  |
+    | `items.modified` | string (date-time) |  |
 
 ---
 

@@ -2042,9 +2042,9 @@ Updates the options of a resource. If the offering is configured to create order
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
     
     ---
     
@@ -3390,9 +3390,9 @@ Updates both the originating order's start_date and the resource's end_date in o
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Status of the resource response |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

@@ -61,8 +61,8 @@ Get aggregated statistics about agent identities, services, and processors. Supp
     
     | Field | Type | Description |
     |---|---|---|
-    | `identities` | object (free-form) | Statistics about agent identities |
-    | `services` | object (free-form) | Statistics about agent services |
-    | `processors` | object (free-form) | Statistics about agent processors |
+    | `identities` | any | Statistics about agent identities |
+    | `services` | any | Statistics about agent services |
+    | `processors` | any | Statistics about agent processors |
 
 ---

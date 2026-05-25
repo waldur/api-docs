@@ -632,6 +632,11 @@ Suggest alternative reviewers for a declined assignment.
     | Field | Type | Description |
     |---|---|---|
     | `suggestions` | array of objects | List of alternative reviewers with affinity scores |
+    | `suggestions.pool_entry_uuid` | string (uuid) |  |
+    | `suggestions.reviewer_name` | string |  |
+    | `suggestions.affinity_score` | number (double) |  |
+    | `suggestions.current_assignments` | integer |  |
+    | `suggestions.max_assignments` | integer |  |
 
 ---
 

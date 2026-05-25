@@ -121,7 +121,12 @@ Retrieves metadata for all available feature flags, including their keys, descri
     
     | Field | Type | Description |
     |---|---|---|
-    | `features` | array of objects | List of feature sections with descriptions |
+    | `features` | array of objects |  |
+    | `features.key` | string |  |
+    | `features.description` | string |  |
+    | `features.items` | array of objects |  |
+    | `features.items.key` | string |  |
+    | `features.items.description` | string |  |
     | `feature_enums` | object (free-form) | Nested feature enum values by section |
 
 ---
@@ -183,6 +188,10 @@ Retrieves metadata about roles, permissions, and their descriptions. This endpoi
     | `permissions` | object (free-form) | Map of permission keys to permission enum values from PermissionEnum |
     | `permission_map` | object (free-form) | Map of resource types to create permission enums |
     | `permission_descriptions` | array of objects | Grouped permission descriptions for UI |
+    | `permission_descriptions.label` | string | Category name |
+    | `permission_descriptions.options` | array of objects | List of permissions in this category |
+    | `permission_descriptions.options.label` | string | Human-readable permission label |
+    | `permission_descriptions.options.value` | any | Permission enum value |
 
 ---
 
@@ -237,8 +246,17 @@ Retrieves metadata for all settings that can be configured via the Constance bac
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `settings` | array of objects | List of settings sections with configuration items |
+    | Field | Type |
+    |---|---|
+    | `settings` | array of objects |
+    | `settings.description` | string |
+    | `settings.items` | array of objects |
+    | `settings.items.key` | string |
+    | `settings.items.description` | string |
+    | `settings.items.default` | any |
+    | `settings.items.type` | string |
+    | `settings.items.options` | array of objects |
+    | `settings.items.options.value` | string |
+    | `settings.items.options.label` | string |
 
 ---

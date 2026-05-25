@@ -630,6 +630,8 @@ Returns aggregate counters and rates for the anonymous chat flow. Filters are ho
     | `hallucination_rate` | number (double) | Share of reviewed sessions flagged as hallucinating. |
     | `review_coverage` | number (double) | Reviewed sessions / total reviewable sessions. Operations health signal — drops below ~90% if the review budget is too tight or the task is failing. |
     | `daily_volume` | array of objects | Per-day query counts across the filter window. |
-    | `severity_by_day` | object (free-form) | Stacked-bar input. Shape: {labels: [iso-date], series: {NONE: [...], LOW: [...], MEDIUM: [...], HIGH: [...], CRITICAL: [...]}} |
+    | `daily_volume.date` | string (date) |  |
+    | `daily_volume.count` | integer |  |
+    | `severity_by_day` | any | Stacked-bar input. Shape: {labels: [iso-date], series: {NONE: [...], LOW: [...], MEDIUM: [...], HIGH: [...], CRITICAL: [...]}} |
 
 ---

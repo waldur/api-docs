@@ -996,13 +996,13 @@ Fetch raw billing export from Arrow API.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `period_from` | string |
-    | `period_to` | string |
-    | `classification` | string |
-    | `row_count` | integer |
-    | `data` | array of objects |
+    | Field | Type | Description |
+    |---|---|---|
+    | `period_from` | string |  |
+    | `period_to` | string |  |
+    | `classification` | string |  |
+    | `row_count` | integer |  |
+    | `data` | array of objects | Raw billing export data from Arrow API |
 
 ---
 
@@ -1081,12 +1081,12 @@ Fetch raw consumption data from Arrow API.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `license_reference` | string |
-    | `period` | string |
-    | `row_count` | integer |
-    | `data` | array of objects |
+    | Field | Type | Description |
+    |---|---|---|
+    | `license_reference` | string |  |
+    | `period` | string |  |
+    | `row_count` | integer |  |
+    | `data` | array of objects | Raw consumption data from Arrow API |
 
 ---
 
@@ -1250,8 +1250,15 @@ Sync historical consumption for a specific resource from Arrow.
     | `periods_skipped` | integer |
     | `periods_no_data` | integer |
     | `errors` | array of objects |
+    | `errors.error` | string |
+    | `errors.period` | string |
+    | `errors.subscription_id` | string |
+    | `errors.customer_id` | string |
     | `dry_run` | boolean |
     | `preview_periods` | array of objects |
+    | `preview_periods.period` | string |
+    | `preview_periods.status` | string |
+    | `preview_periods.row_count` | integer |
 
 ---
 
@@ -1330,13 +1337,6 @@ Sync Arrow IAAS subscriptions to Waldur Resources. Matches subscriptions by Vend
     | `synced` | integer |
     | `created` | integer |
     | `updated` | integer |
-    | `orders_created` | integer |
-    | `customers_created` | integer |
-    | `projects_created` | integer |
-    | `mappings_created` | integer |
-    | `invoices_created` | integer |
-    | `invoice_items_created` | integer |
-    | `errors` | array of objects |
 
 ---
 

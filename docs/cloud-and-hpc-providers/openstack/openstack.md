@@ -1278,6 +1278,9 @@ Get a list of load balancers.
     | `provisioning_status` | string |  |
     | `operating_status` | string |  |
     | `vip_security_groups` | array of objects | Security groups assigned to the VIP port. |
+    | `vip_security_groups.uuid` | string |  |
+    | `vip_security_groups.name` | string |  |
+    | `vip_security_groups.url` | string (uri) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -1403,6 +1406,9 @@ Retrieve details of a specific load balancer.
     | `provisioning_status` | string |  |
     | `operating_status` | string |  |
     | `vip_security_groups` | array of objects | Security groups assigned to the VIP port. |
+    | `vip_security_groups.uuid` | string |  |
+    | `vip_security_groups.name` | string |  |
+    | `vip_security_groups.url` | string (uri) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |

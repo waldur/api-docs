@@ -145,10 +145,10 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
     | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
-    | `versions.module` | object (free-form) |  |
+    | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
-    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
@@ -260,10 +260,10 @@ Returns the details of a specific software package, including its description, h
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
     | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
-    | `versions.module` | object (free-form) |  |
+    | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
-    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
@@ -392,10 +392,10 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
     | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
-    | `versions.module` | object (free-form) |  |
+    | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
-    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
@@ -535,10 +535,10 @@ Updates an existing software package. Requires staff permissions.
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
     | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
-    | `versions.module` | object (free-form) |  |
+    | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
-    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---
@@ -669,10 +669,10 @@ Partially updates an existing software package. Requires staff permissions.
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
     | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
-    | `versions.module` | object (free-form) |  |
+    | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
-    | `versions.toolchain` | object (free-form) |  |
+    | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
 
 ---

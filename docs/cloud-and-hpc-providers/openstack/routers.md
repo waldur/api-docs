@@ -661,6 +661,9 @@ Returns a merged list of external networks available for this router's tenant, f
     | `description` | string |
     | `source` | string |
     | `subnets` | array of objects |
+    | `subnets.backend_id` | string |
+    | `subnets.name` | string |
+    | `subnets.cidr` | string |
 
 ---
 
@@ -739,8 +742,11 @@ Add interface to router. Either subnet or port must be provided.
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -886,8 +892,11 @@ Remove interface from router. Either subnet or port must be provided.
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1052,6 +1061,8 @@ Set an external network as the gateway for this router. Advanced options (SNAT c
     | `external_network_id` | string | ✓ | Backend ID (OpenStack UUID) of the external network. |
     | `enable_snat` | boolean |  | Whether to enable SNAT on the gateway. None means use OpenStack default (True). Requires advanced permissions. |
     | `external_fixed_ips` | array of objects |  | List of fixed IP specifications for the gateway port. Each entry should have 'ip_address' and optionally 'subnet_id'. Requires advanced permissions. |
+    | `external_fixed_ips.ip_address` | string | ✓ | IP address specification for the gateway port. |
+    | `external_fixed_ips.subnet_id` | string |  | Backend ID of the subnet. |
 
 
 === "Responses"
@@ -1213,12 +1224,10 @@ Define or overwrite the static routes for the router.
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `routes` | array of objects |  |
-    | `routes.destination` | string |  |
-    | `routes.nexthop` | any | An IPv4 or IPv6 address. |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
