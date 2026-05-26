@@ -29331,562 +29331,6 @@
 </div>
 <div class="tabbed-block">
 <p><strong><code>200</code></strong> - </p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>start_date</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>end_date</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>slug</code></td>
-<td>string</td>
-<td>URL-friendly identifier. Only editable by staff users.</td>
-</tr>
-<tr>
-<td><code>name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>manager</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>manager_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.offering</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.offering_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.provider_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.category_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.call_managing_organisation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.attributes</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.plan</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.plan_details</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.options</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.offering_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.billing_type</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>fixed</code>, <code>usage</code>, <code>limit</code>, <code>one</code>, <code>few</code></em></td>
-</tr>
-<tr>
-<td><code>offerings.components.type</code></td>
-<td>string</td>
-<td>Unique internal name of the measured unit, for example floating_ip.</td>
-</tr>
-<tr>
-<td><code>offerings.components.name</code></td>
-<td>string</td>
-<td>Display name for the measured unit, for example, Floating IP.</td>
-</tr>
-<tr>
-<td><code>offerings.components.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.measured_unit</code></td>
-<td>string</td>
-<td>Unit of measurement, for example, GB.</td>
-</tr>
-<tr>
-<td><code>offerings.components.unit_factor</code></td>
-<td>integer</td>
-<td>The conversion factor from backend units to measured_unit</td>
-</tr>
-<tr>
-<td><code>offerings.components.limit_period</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.limit_amount</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.article_code</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.max_value</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.min_value</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.max_available_limit</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.is_boolean</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.default_limit</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.factor</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.is_builtin</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.is_prepaid</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.overage_component</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.min_prepaid_duration</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.max_prepaid_duration</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>offerings.components.prepaid_duration_step</code></td>
-<td>integer</td>
-<td>Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max).</td>
-</tr>
-<tr>
-<td><code>offerings.components.min_renewal_duration</code></td>
-<td>integer</td>
-<td>Minimum number of months allowed for a renewal.</td>
-</tr>
-<tr>
-<td><code>offerings.components.max_renewal_duration</code></td>
-<td>integer</td>
-<td>Maximum number of months allowed for a renewal.</td>
-</tr>
-<tr>
-<td><code>offerings.components.renewal_duration_step</code></td>
-<td>integer</td>
-<td>Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1.</td>
-</tr>
-<tr>
-<td><code>offerings.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.slug</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.start_time</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.cutoff_time</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.status</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.review_strategy</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>after_round</code>, <code>after_proposal</code></em></td>
-</tr>
-<tr>
-<td><code>rounds.deciding_entity</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>by_call_manager</code>, <code>automatic</code></em></td>
-</tr>
-<tr>
-<td><code>rounds.allocation_time</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>on_decision</code>, <code>fixed_date</code></em></td>
-</tr>
-<tr>
-<td><code>rounds.allocation_date</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.minimal_average_scoring</code></td>
-<td>string (decimal)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.review_duration_in_days</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rounds.minimum_number_of_reviewers</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>documents</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>documents.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>documents.file</code></td>
-<td>string (uri)</td>
-<td>Documentation for call for proposals.</td>
-</tr>
-<tr>
-<td><code>documents.file_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>documents.file_size</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>documents.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>documents.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.url</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.attributes</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.limits</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.is_required</code></td>
-<td>boolean</td>
-<td>If True, every proposal must include this resource type</td>
-</tr>
-<tr>
-<td><code>resource_templates.requested_offering</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.requested_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.requested_offering_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.requested_offering_plan</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.created_by</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.created_by_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_templates.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>fixed_duration_in_days</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>external_url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>reviewer_identity_visible_to_submitters</code></td>
-<td>boolean</td>
-<td>Whether proposal applicants can see reviewer identities</td>
-</tr>
-<tr>
-<td><code>reviews_visible_to_submitters</code></td>
-<td>boolean</td>
-<td>Whether proposal applicants can see review comments and scores</td>
-</tr>
-<tr>
-<td><code>has_eligibility_restrictions</code></td>
-<td>boolean</td>
-<td>Check if call has any eligibility restrictions configured.</td>
-</tr>
-<tr>
-<td><code>created_by</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>reference_code</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>compliance_checklist</code></td>
-<td>string (uuid)</td>
-<td>Compliance checklist that proposals must complete before submission</td>
-</tr>
-<tr>
-<td><code>compliance_checklist_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>proposal_slug_template</code></td>
-<td>string</td>
-<td>Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded}</td>
-</tr>
-<tr>
-<td><code>user_email_patterns</code></td>
-<td>any</td>
-<td>List of email regex patterns. User must match one.</td>
-</tr>
-<tr>
-<td><code>user_affiliations</code></td>
-<td>any</td>
-<td>List of allowed affiliations. User must have one.</td>
-</tr>
-<tr>
-<td><code>user_identity_sources</code></td>
-<td>any</td>
-<td>List of allowed identity sources (identity providers).</td>
-</tr>
-<tr>
-<td><code>user_nationalities</code></td>
-<td>any</td>
-<td>List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one.</td>
-</tr>
-<tr>
-<td><code>user_organization_types</code></td>
-<td>any</td>
-<td>List of allowed organization type URNs (SCHAC). User must match one.</td>
-</tr>
-<tr>
-<td><code>user_assurance_levels</code></td>
-<td>any</td>
-<td>List of required assurance URIs (REFEDS). User must have ALL of these.</td>
-</tr>
-<tr>
-<td><code>applicant_visibility_config</code></td>
-<td>any</td>
-<td></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
@@ -34069,7 +33513,253 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>204</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>provider_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>category_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>category_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>call_managing_organisation</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>plan</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>plan_details</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.billing_type</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>fixed</code>, <code>usage</code>, <code>limit</code>, <code>one</code>, <code>few</code></em></td>
+</tr>
+<tr>
+<td><code>components.type</code></td>
+<td>string</td>
+<td>Unique internal name of the measured unit, for example floating_ip.</td>
+</tr>
+<tr>
+<td><code>components.name</code></td>
+<td>string</td>
+<td>Display name for the measured unit, for example, Floating IP.</td>
+</tr>
+<tr>
+<td><code>components.description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.measured_unit</code></td>
+<td>string</td>
+<td>Unit of measurement, for example, GB.</td>
+</tr>
+<tr>
+<td><code>components.unit_factor</code></td>
+<td>integer</td>
+<td>The conversion factor from backend units to measured_unit</td>
+</tr>
+<tr>
+<td><code>components.limit_period</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.limit_amount</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.article_code</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.max_value</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.min_value</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.max_available_limit</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.is_boolean</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.default_limit</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.factor</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.is_builtin</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.is_prepaid</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.overage_component</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.min_prepaid_duration</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.max_prepaid_duration</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.prepaid_duration_step</code></td>
+<td>integer</td>
+<td>Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max).</td>
+</tr>
+<tr>
+<td><code>components.min_renewal_duration</code></td>
+<td>integer</td>
+<td>Minimum number of months allowed for a renewal.</td>
+</tr>
+<tr>
+<td><code>components.max_renewal_duration</code></td>
+<td>integer</td>
+<td>Maximum number of months allowed for a renewal.</td>
+</tr>
+<tr>
+<td><code>components.renewal_duration_step</code></td>
+<td>integer</td>
+<td>Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1.</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>approved_by</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created_by</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>approved_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -34172,7 +33862,88 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>204</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>limits</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>is_required</code></td>
+<td>boolean</td>
+<td>If True, every proposal must include this resource type</td>
+</tr>
+<tr>
+<td><code>requested_offering</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requested_offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requested_offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>requested_offering_plan</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created_by</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -34275,7 +34046,133 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>204</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>start_time</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cutoff_time</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>review_strategy</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>after_round</code>, <code>after_proposal</code></em></td>
+</tr>
+<tr>
+<td><code>deciding_entity</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>by_call_manager</code>, <code>automatic</code></em></td>
+</tr>
+<tr>
+<td><code>allocation_time</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>on_decision</code>, <code>fixed_date</code></em></td>
+</tr>
+<tr>
+<td><code>allocation_date</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimal_average_scoring</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>review_duration_in_days</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimum_number_of_reviewers</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>proposals</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>proposals.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>proposals.slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>proposals.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>proposals.state</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>proposals.reviews</code></td>
+<td>array of anys</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+</tr>
+<tr>
+<td><code>proposals.approved_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>proposals.created_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>proposals.created</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -34378,7 +34275,133 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>204</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>modified</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>administrative_check</code>, <code>technical_assessment</code>, <code>expert_review</code>, <code>panel_review</code>, <code>allocation_decision</code>, <code>award_response</code></em></td>
+</tr>
+<tr>
+<td><code>call_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>call_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>is_enabled</code></td>
+<td>boolean</td>
+<td>Whether this step is enabled. Disabled steps are skipped.</td>
+</tr>
+<tr>
+<td><code>duration_in_days</code></td>
+<td>integer</td>
+<td>Duration in days. Used to calculate deadlines.</td>
+</tr>
+<tr>
+<td><code>checklist</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>checklist_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>blind_review</code></td>
+<td>boolean</td>
+<td>Evaluators cannot see each other's assessments.</td>
+</tr>
+<tr>
+<td><code>requires_coi_confirmation</code></td>
+<td>boolean</td>
+<td>Evaluator must confirm absence of conflict of interest.</td>
+</tr>
+<tr>
+<td><code>min_reviewers</code></td>
+<td>integer</td>
+<td>Minimum reviews required before step can complete.</td>
+</tr>
+<tr>
+<td><code>min_score_threshold</code></td>
+<td>string (decimal)</td>
+<td>Minimum average score to pass this step.</td>
+</tr>
+<tr>
+<td><code>applicant_visible</code></td>
+<td>boolean</td>
+<td>Whether the applicant can see step details (not just status).</td>
+</tr>
+<tr>
+<td><code>responsible_role</code></td>
+<td>any</td>
+<td>Role expected to act on this step.</td>
+</tr>
+<tr>
+<td><code>transition_mode</code></td>
+<td>any</td>
+<td>How this step advances to the next.</td>
+</tr>
+<tr>
+<td><code>include_award_response</code></td>
+<td>boolean</td>
+<td>Allocation decision: require applicant award response after decision.</td>
+</tr>
+<tr>
+<td><code>display_order</code></td>
+<td>integer</td>
+<td>Optional override of catalog ordering.</td>
+</tr>
+<tr>
+<td><code>criteria</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>criteria.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>criteria.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>criteria.order</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -34403,7 +34426,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-05-25
+    2026-05-26
   </span>
 
     

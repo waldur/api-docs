@@ -16849,7 +16849,7 @@
 <hr />
 <h2 id="other-actions">Other Actions</h2>
 <h3 id="yaml">Yaml</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:6"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Query Parameters</label><label for="__tabbed_9_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:5"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -16873,10 +16873,8 @@
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.rancher_service_field_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">RancherServiceFieldEnum</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.rancher_services</span><span class="w"> </span><span class="kn">import</span> <span class="n">rancher_services_yaml_retrieve</span> <span class="c1"># (2)</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.rancher_services</span><span class="w"> </span><span class="kn">import</span> <span class="n">rancher_services_yaml_retrieve</span> <span class="c1"># (1)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
@@ -16889,7 +16887,6 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_service_field_enum.py"><code>RancherServiceFieldEnum</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_services/rancher_services_yaml_retrieve.py"><code>rancher_services_yaml_retrieve</code></a></li>
 </ol>
 </div>
@@ -16940,256 +16937,18 @@
 </table>
 </div>
 <div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>field</code></td>
-<td>array</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
 <p><strong><code>200</code></strong> - </p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>name</code></td>
+<td><code>detail</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_native_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>access_url</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>cluster_ip</code></td>
-<td>any</td>
-<td>An IPv4 or IPv6 address.</td>
-</tr>
-<tr>
-<td><code>selector</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>target_workloads</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>target_workloads.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>target_workloads.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>target_workloads.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_plugin_options</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_plan_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_usage_based</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_limit_based</code></td>
-<td>boolean</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -17673,234 +17432,12 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>name</code></td>
+<td><code>detail</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_native_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>access_url</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>cluster_ip</code></td>
-<td>any</td>
-<td>An IPv4 or IPv6 address.</td>
-</tr>
-<tr>
-<td><code>selector</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>target_workloads</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>target_workloads.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>target_workloads.url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>target_workloads.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_plugin_options</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_plan_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_usage_based</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_limit_based</code></td>
-<td>boolean</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -17928,7 +17465,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-04-21
+    2026-05-26
   </span>
 
     

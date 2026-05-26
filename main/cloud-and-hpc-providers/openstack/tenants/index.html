@@ -17199,7 +17199,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - </p>
+<p><strong><code>202</code></strong> - </p>
 <table>
 <thead>
 <tr>
@@ -17209,52 +17209,8 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>instances</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>volumes</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>snapshots</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>ram</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>vcpu</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>storage</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>security_group_count</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>security_group_rule_count</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>floating_ip_count</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>network_count</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>subnet_count</code></td>
-<td>integer</td>
-</tr>
-<tr>
-<td><code>port_count</code></td>
-<td>integer</td>
+<td><code>status</code></td>
+<td>string</td>
 </tr>
 </tbody>
 </table>
@@ -17782,7 +17738,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - </p>
+<p><strong><code>201</code></strong> - </p>
 <table>
 <thead>
 <tr>
@@ -18729,7 +18685,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - </p>
+<p><strong><code>201</code></strong> - </p>
 <table>
 <thead>
 <tr>
@@ -19801,260 +19757,18 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - </p>
+<p><strong><code>202</code></strong> - </p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>name</code></td>
+<td><code>status</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_native_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td>ID of tenant in the OpenStack backend</td>
-</tr>
-<tr>
-<td><code>access_url</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>availability_zone</code></td>
-<td>string</td>
-<td>Optional availability group. Will be used for all instances provisioned in this tenant</td>
-</tr>
-<tr>
-<td><code>internal_network_id</code></td>
-<td>string</td>
-<td>ID of internal network in OpenStack tenant</td>
-</tr>
-<tr>
-<td><code>external_network_id</code></td>
-<td>string</td>
-<td>ID of external network connected to OpenStack tenant</td>
-</tr>
-<tr>
-<td><code>external_network_ref_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>external_network_ref_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>user_username</code></td>
-<td>string</td>
-<td>Username of the tenant user</td>
-</tr>
-<tr>
-<td><code>user_password</code></td>
-<td>string</td>
-<td>Password of the tenant user</td>
-</tr>
-<tr>
-<td><code>quotas</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>quotas.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>quotas.usage</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>quotas.limit</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>default_volume_type_name</code></td>
-<td>string</td>
-<td>Volume type name to use when creating volumes.</td>
-</tr>
-<tr>
-<td><code>skip_creation_of_default_router</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_plugin_options</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_plan_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_usage_based</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_limit_based</code></td>
-<td>boolean</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -20152,260 +19866,18 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - </p>
+<p><strong><code>202</code></strong> - </p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>url</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>name</code></td>
+<td><code>status</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings_error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_native_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>customer_abbreviation</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>resource_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>state</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td>ID of tenant in the OpenStack backend</td>
-</tr>
-<tr>
-<td><code>access_url</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>availability_zone</code></td>
-<td>string</td>
-<td>Optional availability group. Will be used for all instances provisioned in this tenant</td>
-</tr>
-<tr>
-<td><code>internal_network_id</code></td>
-<td>string</td>
-<td>ID of internal network in OpenStack tenant</td>
-</tr>
-<tr>
-<td><code>external_network_id</code></td>
-<td>string</td>
-<td>ID of external network connected to OpenStack tenant</td>
-</tr>
-<tr>
-<td><code>external_network_ref_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>external_network_ref_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>user_username</code></td>
-<td>string</td>
-<td>Username of the tenant user</td>
-</tr>
-<tr>
-<td><code>user_password</code></td>
-<td>string</td>
-<td>Password of the tenant user</td>
-</tr>
-<tr>
-<td><code>quotas</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>quotas.name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>quotas.usage</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>quotas.limit</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>default_volume_type_name</code></td>
-<td>string</td>
-<td>Volume type name to use when creating volumes.</td>
-</tr>
-<tr>
-<td><code>skip_creation_of_default_router</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_type</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_offering_plugin_options</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_category_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_plan_uuid</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marketplace_resource_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_usage_based</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>is_limit_based</code></td>
-<td>boolean</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -20899,7 +20371,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-05-25
+    2026-05-26
   </span>
 
     
