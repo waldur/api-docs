@@ -416,7 +416,7 @@ Create a new subnet within the network.
 
 === "Responses"
 
-    **`200`** - 
+    **`201`** - 
     
     | Field | Type | Description |
     |---|---|---|
@@ -1251,7 +1251,7 @@ Update the Maximum Transmission Unit (MTU) for the network.
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
     | Field | Type |
     |---|---|

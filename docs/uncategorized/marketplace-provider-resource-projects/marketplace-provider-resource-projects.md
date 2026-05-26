@@ -878,7 +878,7 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     
     | Field | Type |
     |---|---|
-    | `backend_id` | string |
+    | `status` | string |
 
 ---
 
@@ -956,9 +956,9 @@ Updates the expiration time for a user's existing role in the current scope. Thi
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `error_message` | string | Free-form description of why the project transitioned to Erred. |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1024,5 +1024,8 @@ Updates the expiration time for a user's existing role in the current scope. Thi
 
     **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---

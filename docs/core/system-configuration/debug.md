@@ -578,8 +578,8 @@ Requires staff permissions.
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Operation status |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---

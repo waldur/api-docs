@@ -1016,11 +1016,11 @@ Delete resource from the database without scheduling operations on backend
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
     | Field | Type |
     |---|---|
-    | `size` | string (uri) |
+    | `status` | string |
 
 ---
 

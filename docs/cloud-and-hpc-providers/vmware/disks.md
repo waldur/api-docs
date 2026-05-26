@@ -559,11 +559,11 @@ Increase disk capacity
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `size` | integer | Size in MiB |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

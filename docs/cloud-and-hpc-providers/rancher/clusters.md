@@ -412,83 +412,11 @@
 
 === "Responses"
 
-    **`200`** - 
+    **`201`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `nodes` | array of objects |  |
-    | `nodes.url` | string (uri) |  |
-    | `nodes.role` | string | <br>_Enum: `agent`, `server`_ |
-    | `nodes.instance` | string |  |
-    | `nodes.created` | string (date-time) |  |
-    | `nodes.modified` | string (date-time) |  |
-    | `nodes.uuid` | string (uuid) |  |
-    | `nodes.error_message` | string |  |
-    | `nodes.error_traceback` | string |  |
-    | `nodes.backend_id` | string |  |
-    | `nodes.initial_data` | any | Initial data for instance creating. |
-    | `nodes.runtime_state` | string |  |
-    | `nodes.k8s_version` | string |  |
-    | `nodes.docker_version` | string |  |
-    | `nodes.cpu_allocated` | number (double) |  |
-    | `nodes.cpu_total` | integer |  |
-    | `nodes.ram_allocated` | integer | Allocated RAM in Mi. |
-    | `nodes.ram_total` | integer | Total RAM in Mi. |
-    | `nodes.pods_allocated` | integer |  |
-    | `nodes.pods_total` | integer |  |
-    | `nodes.labels` | any |  |
-    | `nodes.annotations` | any |  |
-    | `tenant` | string (uri) |  |
-    | `tenant_uuid` | string (uuid) |  |
-    | `vm_project` | string (uri) |  |
-    | `runtime_state` | string |  |
-    | `install_longhorn` | boolean | Longhorn is a distributed block storage deployed on top of Kubernetes cluster |
-    | `management_security_group` | string (uri) |  |
-    | `public_ips` | array of objects |  |
-    | `public_ips.floating_ip` | string (uri) |  |
-    | `public_ips.floating_ip_uuid` | string (uuid) |  |
-    | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
-    | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | any | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | any | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
-    | `kubernetes_version` | string | Kubernetes version used in the cluster. |
-    | `router_ips` | array of anys |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `security_group_uuid` | string |
 
 ---
 
@@ -1040,13 +968,8 @@ Delete resource from the database without scheduling operations on backend
 
 === "Responses"
 
-    **`200`** - 
+    **`200`** - No response body
     
-    | Field | Type |
-    |---|---|
-    | `yaml` | string |
-    | `default_namespace` | string (uri) |
-    | `namespace` | string (uri) |
 
 ---
 

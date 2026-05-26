@@ -812,8 +812,11 @@ Remove the external gateway from this router.
 
 === "Responses"
 
-    **`202`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1067,8 +1070,11 @@ Set an external network as the gateway for this router. Advanced options (SNAT c
 
 === "Responses"
 
-    **`202`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

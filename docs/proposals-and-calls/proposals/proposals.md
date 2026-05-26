@@ -2958,7 +2958,21 @@ Submit checklist answers.
 
 === "Responses"
 
-    **`204`** - No response body
+    **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `url` | string |
+    | `requested_offering` | any |
+    | `resource` | string (uri) |
+    | `resource_name` | string |
+    | `call_resource_template` | string |
+    | `call_resource_template_name` | string |
+    | `attributes` | any |
+    | `limits` | any |
+    | `description` | string |
+    | `created_by` | string (uri) |
+    | `created_by_name` | string |
 
 ---

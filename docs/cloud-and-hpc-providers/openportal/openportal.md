@@ -305,6 +305,9 @@ Map OpenPortal destination strings to Waldur Offering objects. Pass each destina
 
     **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `*` | any |
 
 ---
 
@@ -366,6 +369,9 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
 
     **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `*` | any |
 
 ---
 
@@ -746,5 +752,8 @@ Map OpenPortal UserIdentifier strings (or email addresses) to Waldur User object
 
     **`200`** - 
     
+    | Field | Type |
+    |---|---|
+    | `*` | any |
 
 ---

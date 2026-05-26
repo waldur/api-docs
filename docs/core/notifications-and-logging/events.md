@@ -201,8 +201,7 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.event_field_enum import EventFieldEnum # (1)
-    from waldur_api_client.api.events import events_count_retrieve # (2)
+    from waldur_api_client.api.events import events_count_retrieve # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -213,8 +212,7 @@
     ```
     
     
-    1.  **Model Source:** [`EventFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/event_field_enum.py)
-    2.  **API Source:** [`events_count_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_count_retrieve.py)
+    1.  **API Source:** [`events_count_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_count_retrieve.py)
 
 === "TypeScript"
 
@@ -232,24 +230,13 @@
     ```
 
 
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
-
-
 === "Responses"
 
     **`200`** - 
     
     | Field | Type |
     |---|---|
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `event_type` | string |
-    | `message` | string |
-    | `context` | any |
+    | `count` | integer |
 
 ---
 
@@ -272,8 +259,7 @@ Group is used in exclude_features query param.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.event_field_enum import EventFieldEnum # (1)
-    from waldur_api_client.api.events import events_event_groups_retrieve # (2)
+    from waldur_api_client.api.events import events_event_groups_retrieve # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -284,8 +270,7 @@ Group is used in exclude_features query param.
     ```
     
     
-    1.  **Model Source:** [`EventFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/event_field_enum.py)
-    2.  **API Source:** [`events_event_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_event_groups_retrieve.py)
+    1.  **API Source:** [`events_event_groups_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_event_groups_retrieve.py)
 
 === "TypeScript"
 
@@ -303,24 +288,10 @@ Group is used in exclude_features query param.
     ```
 
 
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
-
-
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `event_type` | string |
-    | `message` | string |
-    | `context` | any |
 
 ---
 
@@ -342,20 +313,19 @@ Returns a list of scope types acceptable by events filter.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.event_field_enum import EventFieldEnum # (1)
-    from waldur_api_client.api.events import events_scope_types_retrieve # (2)
+    from waldur_api_client.api.events import events_scope_types_retrieve # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     response = events_scope_types_retrieve.sync(client=client)
     
-    print(response)
+    for item in response:
+        print(item)
     ```
     
     
-    1.  **Model Source:** [`EventFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/event_field_enum.py)
-    2.  **API Source:** [`events_scope_types_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_scope_types_retrieve.py)
+    1.  **API Source:** [`events_scope_types_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/events/events_scope_types_retrieve.py)
 
 === "TypeScript"
 
@@ -373,23 +343,9 @@ Returns a list of scope types acceptable by events filter.
     ```
 
 
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
-
-
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `event_type` | string |
-    | `message` | string |
-    | `context` | any |
 
 ---

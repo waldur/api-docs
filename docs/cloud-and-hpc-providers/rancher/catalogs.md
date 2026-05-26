@@ -610,21 +610,7 @@
 
 === "Responses"
 
-    **`200`** - 
+    **`200`** - No response body
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `name` | string |
-    | `description` | string |
-    | `catalog_url` | string (uri) |
-    | `branch` | string |
-    | `commit` | string |
-    | `runtime_state` | string |
-    | `scope` | string |
-    | `scope_type` | any |
 
 ---

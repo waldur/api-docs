@@ -816,7 +816,7 @@
 
 === "Responses"
 
-    **`200`** - 
+    **`201`** - 
     
     | Field | Type |
     |---|---|
@@ -898,54 +898,7 @@
 
 === "Responses"
 
-    **`200`** - 
+    **`200`** - No response body
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `type` | string |  |
-    | `key` | string |  |
-    | `backend_id` | string |  |
-    | `backend_name` | string |  |
-    | `remote_id` | string |  |
-    | `link` | string (uri) | Link to issue in support system. |
-    | `summary` | string |  |
-    | `description` | string |  |
-    | `status` | string |  |
-    | `resolution` | string |  |
-    | `priority` | string |  |
-    | `caller` | string (uri) |  |
-    | `caller_uuid` | string (uuid) |  |
-    | `caller_full_name` | string |  |
-    | `reporter` | string (uri) |  |
-    | `reporter_uuid` | string (uuid) |  |
-    | `reporter_name` | string |  |
-    | `assignee` | string (uri) |  |
-    | `assignee_uuid` | string (uuid) |  |
-    | `assignee_name` | string |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `project` | string (uri) |  |
-    | `project_uuid` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `resource` | string |  |
-    | `resource_type` | string |  |
-    | `resource_name` | string |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `template` | string (uri) |  |
-    | `feedback` | any |  |
-    | `resolved` | boolean |  |
-    | `update_is_available` | boolean |  |
-    | `destroy_is_available` | boolean |  |
-    | `add_comment_is_available` | boolean |  |
-    | `add_attachment_is_available` | boolean |  |
-    | `processing_log` | any | Internal processing log for debugging order lifecycle events. Visible only to staff. |
-    | `order_uuid` | string | Return order UUID if the issue's resource is an Order. |
-    | `order_project_uuid` | string | Return order's project UUID if the issue's resource is an Order. |
-    | `order_customer_uuid` | string | Return order's customer UUID if the issue's resource is an Order. |
-    | `order_resource_name` | string | Return order's resource name if the issue's resource is an Order. |
 
 ---

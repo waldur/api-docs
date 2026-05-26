@@ -693,7 +693,8 @@
     )
     response = marketplace_slurm_periodic_usage_policies_actions_retrieve.sync(client=client)
     
-    print(response)
+    for item in response:
+        print(item)
     ```
     
     
@@ -719,37 +720,6 @@
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `scope` | string (uri) |  |
-    | `scope_name` | string |  |
-    | `scope_uuid` | string (uuid) |  |
-    | `actions` | string |  |
-    | `created` | string (date-time) |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `has_fired` | boolean |  |
-    | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
-    | `affected_resources_count` | integer |  |
-    | `organization_groups` | array of string (uri)s |  |
-    | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
-    | `component_limits_set` | array of objects |  |
-    | `component_limits_set.type` | string |  |
-    | `component_limits_set.limit` | integer |  |
-    | `period` | any |  |
-    | `period_name` | string |  |
-    | `limit_type` | any | SLURM limit type to apply |
-    | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
-    | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
-    | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
-    | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
-    | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
-    | `qos_strategy` | any | QoS management strategy |
-    | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
 ---
 

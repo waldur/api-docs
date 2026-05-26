@@ -597,7 +597,8 @@
     )
     response = marketplace_customer_estimated_cost_policies_actions_retrieve.sync(client=client)
     
-    print(response)
+    for item in response:
+        print(item)
     ```
     
     
@@ -623,25 +624,5 @@
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `scope` | string (uri) |  |
-    | `scope_name` | string |  |
-    | `scope_uuid` | string (uuid) |  |
-    | `actions` | string |  |
-    | `created` | string (date-time) |  |
-    | `created_by_full_name` | string |  |
-    | `created_by_username` | string |  |
-    | `has_fired` | boolean |  |
-    | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
-    | `affected_resources_count` | integer |  |
-    | `limit_cost` | integer |  |
-    | `period` | any |  |
-    | `period_name` | string |  |
-    | `customer_credit` | string |  |
-    | `billing_price_estimate` | any |  |
 
 ---

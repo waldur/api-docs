@@ -233,8 +233,7 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.google_credentials_field_enum import GoogleCredentialsFieldEnum # (1)
-    from waldur_api_client.api.google_auth import google_auth_authorize_retrieve # (2)
+    from waldur_api_client.api.google_auth import google_auth_authorize_retrieve # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -248,8 +247,7 @@
     ```
     
     
-    1.  **Model Source:** [`GoogleCredentialsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/google_credentials_field_enum.py)
-    2.  **API Source:** [`google_auth_authorize_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/google_auth/google_auth_authorize_retrieve.py)
+    1.  **API Source:** [`google_auth_authorize_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/google_auth/google_auth_authorize_retrieve.py)
 
 === "TypeScript"
 
@@ -277,46 +275,13 @@
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
-
-
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `created` | string (date-time) |  |
-    | `description` | string |  |
-    | `enable_notifications` | boolean |  |
-    | `customer` | string (uri) |  |
-    | `customer_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_image` | string (uri) |  |
-    | `customer_abbreviation` | string |  |
-    | `customer_slug` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_country` | string |  |
-    | `image` | string (uri) |  |
-    | `organization_groups` | array of objects |  |
-    | `organization_groups.uuid` | string (uuid) |  |
-    | `organization_groups.url` | string (uri) |  |
-    | `organization_groups.name` | string |  |
-    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
-    | `organization_groups.parent_name` | string | Name of the parent organization group |
-    | `organization_groups.parent` | string (uri) |  |
-    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
-    | `offering_count` | integer |  |
-    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
-    | `calendar_token` | string |  |
-    | `calendar_refresh_token` | string |  |
-    | `google_auth_url` | string |  |
+    | Field | Type |
+    |---|---|
+    | `request_url` | string |
 
 ---
 
@@ -387,7 +352,7 @@ Callback endpoint for Google authorization.
 
 === "Responses"
 
-    **`200`** - No response body
+    **`200`** - 
     
 
 ---

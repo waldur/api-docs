@@ -330,16 +330,7 @@ Unlink a payment from an invoice. Remove connection between payment and existing
     
     | Field | Type |
     |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `profile` | string (uri) |
-    | `date_of_payment` | string (date) |
-    | `sum` | string (decimal) |
-    | `proof` | string (uri) |
-    | `invoice` | string (uri) |
-    | `invoice_uuid` | string (uuid) |
-    | `invoice_period` | string |
-    | `customer_uuid` | string (uuid) |
+    | `detail` | string |
 
 ---
 
@@ -688,6 +679,6 @@ Link a payment to an invoice. Payment can be linked to an invoice only if they b
     
     | Field | Type |
     |---|---|
-    | `invoice` | string (uri) |
+    | `detail` | string |
 
 ---

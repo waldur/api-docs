@@ -951,22 +951,11 @@ On successful completion the task will synchronize quotas with the backend.
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
     | Field | Type |
     |---|---|
-    | `instances` | integer |
-    | `volumes` | integer |
-    | `snapshots` | integer |
-    | `ram` | integer |
-    | `vcpu` | integer |
-    | `storage` | integer |
-    | `security_group_count` | integer |
-    | `security_group_rule_count` | integer |
-    | `floating_ip_count` | integer |
-    | `network_count` | integer |
-    | `subnet_count` | integer |
-    | `port_count` | integer |
+    | `status` | string |
 
 ---
 
@@ -1185,7 +1174,7 @@ Create network for tenant
 
 === "Responses"
 
-    **`200`** - 
+    **`201`** - 
     
     | Field | Type | Description |
     |---|---|---|
@@ -1489,7 +1478,7 @@ Create a new server group for the tenant.
 
 === "Responses"
 
-    **`200`** - 
+    **`201`** - 
     
     | Field | Type | Description |
     |---|---|---|
@@ -1963,59 +1952,11 @@ Trigger job to pull security groups from remote VPC
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | any |  |
-    | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
-    | `internal_network_id` | string | ID of internal network in OpenStack tenant |
-    | `external_network_id` | string | ID of external network connected to OpenStack tenant |
-    | `external_network_ref_uuid` | string (uuid) |  |
-    | `external_network_ref_name` | string |  |
-    | `user_username` | string | Username of the tenant user |
-    | `user_password` | string | Password of the tenant user |
-    | `quotas` | array of objects |  |
-    | `quotas.name` | string |  |
-    | `quotas.usage` | integer |  |
-    | `quotas.limit` | integer |  |
-    | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
-    | `skip_creation_of_default_router` | boolean |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2081,59 +2022,11 @@ Trigger job to pull server groups from remote VPC
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string | ID of tenant in the OpenStack backend |
-    | `access_url` | any |  |
-    | `availability_zone` | string | Optional availability group. Will be used for all instances provisioned in this tenant |
-    | `internal_network_id` | string | ID of internal network in OpenStack tenant |
-    | `external_network_id` | string | ID of external network connected to OpenStack tenant |
-    | `external_network_ref_uuid` | string (uuid) |  |
-    | `external_network_ref_name` | string |  |
-    | `user_username` | string | Username of the tenant user |
-    | `user_password` | string | Password of the tenant user |
-    | `quotas` | array of objects |  |
-    | `quotas.name` | string |  |
-    | `quotas.usage` | integer |  |
-    | `quotas.limit` | integer |  |
-    | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
-    | `skip_creation_of_default_router` | boolean |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

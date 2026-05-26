@@ -556,7 +556,7 @@
 
 === "Responses"
 
-    **`200`** - 
+    **`201`** - 
     
     | Field | Type | Description |
     |---|---|---|
@@ -682,7 +682,7 @@
 
 === "Responses"
 
-    **`200`** - 
+    **`201`** - 
     
     | Field | Type |
     |---|---|
@@ -1458,73 +1458,11 @@ This endpoint provides access to HTML Console aka WMKS.
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `guest_os` | any |  |
-    | `guest_os_name` | string |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `cores_per_socket` | integer | Number of cores per socket in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `disks` | array of objects |  |
-    | `disks.url` | string (uri) |  |
-    | `disks.uuid` | string (uuid) |  |
-    | `disks.size` | integer | Size in MiB |
-    | `runtime_state` | string |  |
-    | `cluster` | string (uri) |  |
-    | `datastore` | string (uri) |  |
-    | `folder` | string (uri) |  |
-    | `template_name` | string |  |
-    | `cluster_name` | string |  |
-    | `datastore_name` | string |  |
-    | `folder_name` | string |  |
-    | `ports` | array of objects |  |
-    | `ports.url` | string (uri) |  |
-    | `ports.uuid` | string (uuid) |  |
-    | `ports.name` | string |  |
-    | `ports.mac_address` | string |  |
-    | `ports.network` | string (uri) |  |
-    | `guest_power_state` | any |  |
-    | `tools_state` | string |  |
-    | `tools_installed` | boolean |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1588,73 +1526,11 @@ This endpoint provides access to HTML Console aka WMKS.
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `guest_os` | any |  |
-    | `guest_os_name` | string |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `cores_per_socket` | integer | Number of cores per socket in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `disks` | array of objects |  |
-    | `disks.url` | string (uri) |  |
-    | `disks.uuid` | string (uuid) |  |
-    | `disks.size` | integer | Size in MiB |
-    | `runtime_state` | string |  |
-    | `cluster` | string (uri) |  |
-    | `datastore` | string (uri) |  |
-    | `folder` | string (uri) |  |
-    | `template_name` | string |  |
-    | `cluster_name` | string |  |
-    | `datastore_name` | string |  |
-    | `folder_name` | string |  |
-    | `ports` | array of objects |  |
-    | `ports.url` | string (uri) |  |
-    | `ports.uuid` | string (uuid) |  |
-    | `ports.name` | string |  |
-    | `ports.mac_address` | string |  |
-    | `ports.network` | string (uri) |  |
-    | `guest_power_state` | any |  |
-    | `tools_state` | string |  |
-    | `tools_installed` | boolean |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -1871,73 +1747,11 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `guest_os` | any |  |
-    | `guest_os_name` | string |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `cores_per_socket` | integer | Number of cores per socket in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `disks` | array of objects |  |
-    | `disks.url` | string (uri) |  |
-    | `disks.uuid` | string (uuid) |  |
-    | `disks.size` | integer | Size in MiB |
-    | `runtime_state` | string |  |
-    | `cluster` | string (uri) |  |
-    | `datastore` | string (uri) |  |
-    | `folder` | string (uri) |  |
-    | `template_name` | string |  |
-    | `cluster_name` | string |  |
-    | `datastore_name` | string |  |
-    | `folder_name` | string |  |
-    | `ports` | array of objects |  |
-    | `ports.url` | string (uri) |  |
-    | `ports.uuid` | string (uuid) |  |
-    | `ports.name` | string |  |
-    | `ports.mac_address` | string |  |
-    | `ports.network` | string (uri) |  |
-    | `guest_power_state` | any |  |
-    | `tools_state` | string |  |
-    | `tools_installed` | boolean |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2001,73 +1815,11 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `guest_os` | any |  |
-    | `guest_os_name` | string |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `cores_per_socket` | integer | Number of cores per socket in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `disks` | array of objects |  |
-    | `disks.url` | string (uri) |  |
-    | `disks.uuid` | string (uuid) |  |
-    | `disks.size` | integer | Size in MiB |
-    | `runtime_state` | string |  |
-    | `cluster` | string (uri) |  |
-    | `datastore` | string (uri) |  |
-    | `folder` | string (uri) |  |
-    | `template_name` | string |  |
-    | `cluster_name` | string |  |
-    | `datastore_name` | string |  |
-    | `folder_name` | string |  |
-    | `ports` | array of objects |  |
-    | `ports.url` | string (uri) |  |
-    | `ports.uuid` | string (uuid) |  |
-    | `ports.name` | string |  |
-    | `ports.mac_address` | string |  |
-    | `ports.network` | string (uri) |  |
-    | `guest_power_state` | any |  |
-    | `tools_state` | string |  |
-    | `tools_installed` | boolean |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2131,73 +1883,11 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `guest_os` | any |  |
-    | `guest_os_name` | string |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `cores_per_socket` | integer | Number of cores per socket in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `disks` | array of objects |  |
-    | `disks.url` | string (uri) |  |
-    | `disks.uuid` | string (uuid) |  |
-    | `disks.size` | integer | Size in MiB |
-    | `runtime_state` | string |  |
-    | `cluster` | string (uri) |  |
-    | `datastore` | string (uri) |  |
-    | `folder` | string (uri) |  |
-    | `template_name` | string |  |
-    | `cluster_name` | string |  |
-    | `datastore_name` | string |  |
-    | `folder_name` | string |  |
-    | `ports` | array of objects |  |
-    | `ports.url` | string (uri) |  |
-    | `ports.uuid` | string (uuid) |  |
-    | `ports.name` | string |  |
-    | `ports.mac_address` | string |  |
-    | `ports.network` | string (uri) |  |
-    | `guest_power_state` | any |  |
-    | `tools_state` | string |  |
-    | `tools_installed` | boolean |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -2261,72 +1951,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `guest_os` | any |  |
-    | `guest_os_name` | string |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `cores_per_socket` | integer | Number of cores per socket in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Disk size in MiB |
-    | `disks` | array of objects |  |
-    | `disks.url` | string (uri) |  |
-    | `disks.uuid` | string (uuid) |  |
-    | `disks.size` | integer | Size in MiB |
-    | `runtime_state` | string |  |
-    | `cluster` | string (uri) |  |
-    | `datastore` | string (uri) |  |
-    | `folder` | string (uri) |  |
-    | `template_name` | string |  |
-    | `cluster_name` | string |  |
-    | `datastore_name` | string |  |
-    | `folder_name` | string |  |
-    | `ports` | array of objects |  |
-    | `ports.url` | string (uri) |  |
-    | `ports.uuid` | string (uuid) |  |
-    | `ports.name` | string |  |
-    | `ports.mac_address` | string |  |
-    | `ports.network` | string (uri) |  |
-    | `guest_power_state` | any |  |
-    | `tools_state` | string |  |
-    | `tools_installed` | boolean |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---

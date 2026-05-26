@@ -584,17 +584,9 @@ Activate a request type so it appears in issue creation.
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `issue_type_name` | string |  |
-    | `backend_id` | integer | Backend ID for synced types. Null for manually created types. |
-    | `backend_name` | string |  |
-    | `is_active` | boolean | Whether this request type is available for issue creation. |
-    | `order` | integer | Display order. First type (lowest order) is the default. |
-    | `is_synced` | boolean | Returns True if the request type was synced from a backend. |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -662,17 +654,9 @@ Deactivate a request type so it no longer appears in issue creation.
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `issue_type_name` | string |  |
-    | `backend_id` | integer | Backend ID for synced types. Null for manually created types. |
-    | `backend_name` | string |  |
-    | `is_active` | boolean | Whether this request type is available for issue creation. |
-    | `order` | integer | Display order. First type (lowest order) is the default. |
-    | `is_synced` | boolean | Returns True if the request type was synced from a backend. |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -749,16 +733,8 @@ Bulk update order for multiple request types.
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `issue_type_name` | string |  |
-    | `backend_id` | integer | Backend ID for synced types. Null for manually created types. |
-    | `backend_name` | string |  |
-    | `is_active` | boolean | Whether this request type is available for issue creation. |
-    | `order` | integer | Display order. First type (lowest order) is the default. |
-    | `is_synced` | boolean | Returns True if the request type was synced from a backend. |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---

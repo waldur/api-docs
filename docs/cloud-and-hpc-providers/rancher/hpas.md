@@ -821,30 +821,7 @@ Delete resource from the database without scheduling operations on backend
     
     | Field | Type |
     |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `description` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `runtime_state` | string |
-    | `cluster` | string (uri) |
-    | `cluster_uuid` | string (uuid) |
-    | `cluster_name` | string |
-    | `project` | string (uri) |
-    | `project_uuid` | string (uuid) |
-    | `project_name` | string |
-    | `namespace` | string (uri) |
-    | `namespace_uuid` | string (uuid) |
-    | `namespace_name` | string |
-    | `workload` | string (uri) |
-    | `workload_uuid` | string (uuid) |
-    | `workload_name` | string |
-    | `min_replicas` | integer |
-    | `max_replicas` | integer |
-    | `current_replicas` | integer |
-    | `desired_replicas` | integer |
-    | `metrics` | any |
+    | `detail` | string |
 
 ---
 
@@ -1091,29 +1068,6 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     
     | Field | Type |
     |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `description` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `runtime_state` | string |
-    | `cluster` | string (uri) |
-    | `cluster_uuid` | string (uuid) |
-    | `cluster_name` | string |
-    | `project` | string (uri) |
-    | `project_uuid` | string (uuid) |
-    | `project_name` | string |
-    | `namespace` | string (uri) |
-    | `namespace_uuid` | string (uuid) |
-    | `namespace_name` | string |
-    | `workload` | string (uri) |
-    | `workload_uuid` | string (uuid) |
-    | `workload_name` | string |
-    | `min_replicas` | integer |
-    | `max_replicas` | integer |
-    | `current_replicas` | integer |
-    | `desired_replicas` | integer |
-    | `metrics` | any |
+    | `detail` | string |
 
 ---

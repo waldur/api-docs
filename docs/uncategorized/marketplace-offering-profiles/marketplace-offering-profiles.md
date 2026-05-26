@@ -595,9 +595,19 @@
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `role` | string (uuid) | Role UUID to add or remove. |
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `roles` | array of objects |
+    | `roles.uuid` | string |
+    | `roles.name` | string |
+    | `roles.content_type` | string |
+    | `roles.description` | string |
+    | `offerings_count` | integer |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
 
 ---
 
@@ -681,8 +691,18 @@
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `role` | string (uuid) | Role UUID to add or remove. |
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `roles` | array of objects |
+    | `roles.uuid` | string |
+    | `roles.name` | string |
+    | `roles.content_type` | string |
+    | `roles.description` | string |
+    | `offerings_count` | integer |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
 
 ---

@@ -937,12 +937,8 @@ Delete resource from the database without scheduling operations on backend
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - No response body
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `instance` | string (uri) |  |
-    | `device` | string | The device name for attachment. For example, use /dev/sd[f-p] for Linux instances. |
 
 ---
 

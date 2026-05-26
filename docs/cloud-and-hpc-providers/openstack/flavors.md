@@ -221,8 +221,7 @@ Retrieve usage statistics for VM instance flavors, showing running and created i
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.open_stack_flavor_field_enum import OpenStackFlavorFieldEnum # (1)
-    from waldur_api_client.api.openstack_flavors import openstack_flavors_usage_stats_retrieve # (2)
+    from waldur_api_client.api.openstack_flavors import openstack_flavors_usage_stats_retrieve # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -233,8 +232,7 @@ Retrieve usage statistics for VM instance flavors, showing running and created i
     ```
     
     
-    1.  **Model Source:** [`OpenStackFlavorFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_flavor_field_enum.py)
-    2.  **API Source:** [`openstack_flavors_usage_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_flavors/openstack_flavors_usage_stats_retrieve.py)
+    1.  **API Source:** [`openstack_flavors_usage_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_flavors/openstack_flavors_usage_stats_retrieve.py)
 
 === "TypeScript"
 
@@ -252,27 +250,9 @@ Retrieve usage statistics for VM instance flavors, showing running and created i
     ```
 
 
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
-
-
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `settings` | string (uri) |  |
-    | `cores` | integer | Number of cores in a VM |
-    | `ram` | integer | Memory size in MiB |
-    | `disk` | integer | Root disk size in MiB |
-    | `backend_id` | string |  |
-    | `display_name` | string |  |
 
 ---

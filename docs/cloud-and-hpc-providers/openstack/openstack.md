@@ -3084,9 +3084,9 @@ Attach a floating IP to the load balancer VIP port.
 
     **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Message that execution of the operation was scheduled. |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -3243,9 +3243,9 @@ Detach floating IP from the load balancer VIP port.
 
     **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Message that execution of the operation was scheduled. |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
@@ -3402,9 +3402,9 @@ Set security groups on the load balancer VIP port to control access.
 
     **`202`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `status` | string | Message that execution of the operation was scheduled. |
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

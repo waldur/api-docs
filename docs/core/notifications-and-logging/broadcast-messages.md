@@ -559,8 +559,7 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.broadcast_message_field_enum import BroadcastMessageFieldEnum # (1)
-    from waldur_api_client.api.broadcast_messages import broadcast_messages_recipients_retrieve # (2)
+    from waldur_api_client.api.broadcast_messages import broadcast_messages_recipients_retrieve # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -571,8 +570,7 @@
     ```
     
     
-    1.  **Model Source:** [`BroadcastMessageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_field_enum.py)
-    2.  **API Source:** [`broadcast_messages_recipients_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_recipients_retrieve.py)
+    1.  **API Source:** [`broadcast_messages_recipients_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_recipients_retrieve.py)
 
 === "TypeScript"
 
@@ -590,28 +588,20 @@
     ```
 
 
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
-
-
 === "Responses"
 
     **`200`** - 
     
     | Field | Type |
     |---|---|
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `subject` | string |
-    | `body` | string |
-    | `query` | any |
-    | `author_full_name` | string |
-    | `emails` | any |
-    | `state` | any |
-    | `send_at` | string (date) |
+    | `full_name` | string |
+    | `email` | string (email) |
+    | `offerings` | array of objects |
+    | `offerings.uuid` | string (uuid) |
+    | `offerings.name` | string |
+    | `customers` | array of objects |
+    | `customers.uuid` | string (uuid) |
+    | `customers.name` | string |
 
 ---
 

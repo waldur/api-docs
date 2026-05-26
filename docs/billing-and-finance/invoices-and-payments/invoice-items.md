@@ -284,11 +284,11 @@ Create compensation invoice item for selected invoice item.
 
 === "Responses"
 
-    **`200`** - 
+    **`201`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `offering_component_name` | string | Name of the offering component for compensation |
+    | Field | Type |
+    |---|---|
+    | `invoice_item_uuid` | string (uuid) |
 
 ---
 
@@ -552,29 +552,30 @@ Create compensation invoice item for selected invoice item.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.invoice_items import invoice_items_consumptions_retrieve # (1)
+    from waldur_api_client.api.invoice_items import invoice_items_consumptions_list # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    response = invoice_items_consumptions_retrieve.sync(
+    response = invoice_items_consumptions_list.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client
     )
     
-    print(response)
+    for item in response:
+        print(item)
     ```
     
     
-    1.  **API Source:** [`invoice_items_consumptions_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoice_items/invoice_items_consumptions_retrieve.py)
+    1.  **API Source:** [`invoice_items_consumptions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/invoice_items/invoice_items_consumptions_list.py)
 
 === "TypeScript"
 
     ```typescript
-    import { invoiceItemsConsumptionsRetrieve } from 'waldur-js-client';
+    import { invoiceItemsConsumptionsList } from 'waldur-js-client';
     
     try {
-      const response = await invoiceItemsConsumptionsRetrieve({
+      const response = await invoiceItemsConsumptionsList({
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
@@ -594,32 +595,33 @@ Create compensation invoice item for selected invoice item.
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `credit_uuid` | string (uuid) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `month` | integer |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `project_uuid` | string (uuid) |  |
+    | `resource_uuid` | string (uuid) |  |
+    | `start_month` | number | Start month |
+    | `start_year` | number | Start year |
+    | `year` | integer |  |
+
+
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `invoice` | string (uri) |  |
-    | `resource` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `article_code` | string |  |
-    | `unit_price` | string (decimal) |  |
-    | `unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
-    | `quantity` | string (decimal) |  |
-    | `measured_unit` | string | Unit of measurement, for example, GB. |
-    | `name` | string |  |
-    | `start` | string (date-time) | Date and time when item usage has started. |
-    | `end` | string (date-time) | Date and time when item usage has ended. |
-    | `price` | number (double) |  |
-    | `details` | any | Stores data about scope |
-    | `offering_uuid` | string (uuid) |  |
-    | `offering_name` | string |  |
-    | `offering_component_type` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `project_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `month` | string |
+    | `price` | string (decimal) |
 
 ---
 
@@ -989,6 +991,6 @@ Move invoice item from one invoice to another one.
     
     | Field | Type |
     |---|---|
-    | `invoice` | string (uri) |
+    | `invoice_item_uuid` | string (uuid) |
 
 ---

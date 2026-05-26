@@ -1731,8 +1731,7 @@ Get current user details, including authentication token and profile completenes
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.user_field_enum import UserFieldEnum # (1)
-    from waldur_api_client.api.users import users_me_retrieve # (2)
+    from waldur_api_client.api.users import users_me_retrieve # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1743,8 +1742,7 @@ Get current user details, including authentication token and profile completenes
     ```
     
     
-    1.  **Model Source:** [`UserFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_field_enum.py)
-    2.  **API Source:** [`users_me_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_me_retrieve.py)
+    1.  **API Source:** [`users_me_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_me_retrieve.py)
 
 === "TypeScript"
 
@@ -1760,13 +1758,6 @@ Get current user details, including authentication token and profile completenes
       console.error('Error:', error);
     }
     ```
-
-
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
 
 
 === "Responses"
@@ -1847,6 +1838,7 @@ Get current user details, including authentication token and profile completenes
     | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
     | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
+    | `profile_completeness` | any |  |
 
 ---
 

@@ -723,30 +723,8 @@ Get credit consumption history grouped by month.
 
 === "Responses"
 
-    **`200`** - 
+    **`200`** - No response body
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `value` | string (decimal) |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_slug` | string |
-    | `offerings` | array of objects |
-    | `offerings.uuid` | string (uuid) |
-    | `offerings.url` | string (uri) |
-    | `offerings.type` | string |
-    | `offerings.name` | string |
-    | `end_date` | string (date) |
-    | `expected_consumption` | string (decimal) |
-    | `minimal_consumption` | number (double) |
-    | `minimal_consumption_logic` | string |
-    | `grace_coefficient` | string (decimal) |
-    | `apply_as_minimal_consumption` | boolean |
-    | `allocated_to_projects` | number (double) |
-    | `consumption_last_month` | number (double) |
 
 ---
 
@@ -810,29 +788,7 @@ Get credit consumption history grouped by month.
 
 === "Responses"
 
-    **`200`** - 
+    **`200`** - No response body
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `value` | string (decimal) |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_slug` | string |
-    | `offerings` | array of objects |
-    | `offerings.uuid` | string (uuid) |
-    | `offerings.url` | string (uri) |
-    | `offerings.type` | string |
-    | `offerings.name` | string |
-    | `end_date` | string (date) |
-    | `expected_consumption` | string (decimal) |
-    | `minimal_consumption` | number (double) |
-    | `minimal_consumption_logic` | string |
-    | `grace_coefficient` | string (decimal) |
-    | `apply_as_minimal_consumption` | boolean |
-    | `allocated_to_projects` | number (double) |
-    | `consumption_last_month` | number (double) |
 
 ---

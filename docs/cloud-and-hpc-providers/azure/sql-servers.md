@@ -483,12 +483,12 @@
 
 === "Responses"
 
-    **`200`** - 
+    **`202`** - 
     
     | Field | Type |
     |---|---|
-    | `name` | string |
-    | `description` | string |
+    | `status` | string |
+    | `database_uuid` | string (uuid) |
 
 ---
 

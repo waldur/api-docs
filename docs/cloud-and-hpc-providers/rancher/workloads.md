@@ -633,22 +633,7 @@
     
     | Field | Type |
     |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `runtime_state` | string |
-    | `cluster` | string (uri) |
-    | `cluster_uuid` | string (uuid) |
-    | `cluster_name` | string |
-    | `project` | string (uri) |
-    | `project_uuid` | string (uuid) |
-    | `project_name` | string |
-    | `namespace` | string (uri) |
-    | `namespace_uuid` | string (uuid) |
-    | `namespace_name` | string |
-    | `scale` | integer |
+    | `detail` | string |
 
 ---
 
@@ -807,21 +792,6 @@
     
     | Field | Type |
     |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `runtime_state` | string |
-    | `cluster` | string (uri) |
-    | `cluster_uuid` | string (uuid) |
-    | `cluster_name` | string |
-    | `project` | string (uri) |
-    | `project_uuid` | string (uuid) |
-    | `project_name` | string |
-    | `namespace` | string (uri) |
-    | `namespace_uuid` | string (uuid) |
-    | `namespace_name` | string |
-    | `scale` | integer |
+    | `detail` | string |
 
 ---

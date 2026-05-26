@@ -235,18 +235,10 @@ Retrieve usage statistics for VM instance images, showing running and created in
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `min_disk` | integer | Minimum disk size in MiB |
-    | `min_ram` | integer | Minimum memory size in MiB |
-    | `settings` | string (uri) |  |
-    | `backend_id` | string |  |
-    | `backend_created_at` | string (date-time) |  |
-    | `hw_rescue_device` | string | Glance hw_rescue_device property (cdrom/disk/floppy). |
-    | `hw_rescue_bus` | string | Glance hw_rescue_bus property (scsi/virtio/ide/usb). |
-    | `is_rescue_image` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `name` | string |
+    | `running_instances_count` | integer |
+    | `created_instances_count` | integer |
 
 ---

@@ -999,81 +999,8 @@ Mark invoice as paid and optionally create payment record with proof of payment.
 
 === "Responses"
 
-    **`200`** - 
+    **`200`** - No response body
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `number` | integer |  |
-    | `customer` | string (uri) |  |
-    | `price` | string (decimal) |  |
-    | `tax` | string (decimal) |  |
-    | `total` | string (decimal) |  |
-    | `state` | string | <br>_Enum: `pending`, `pending_finalization`, `created`, `paid`, `canceled`_ |
-    | `year` | integer |  |
-    | `month` | integer |  |
-    | `issuer_details` | any |  |
-    | `invoice_date` | string (date) | Date then invoice moved from state pending to created. |
-    | `due_date` | string (date) |  |
-    | `customer_details` | object |  |
-    | `customer_details.name` | string |  |
-    | `customer_details.address` | string |  |
-    | `customer_details.country` | string |  |
-    | `customer_details.country_name` | string |  |
-    | `customer_details.email` | string (email) |  |
-    | `customer_details.postal` | string |  |
-    | `customer_details.phone_number` | string |  |
-    | `customer_details.bank_name` | string |  |
-    | `customer_details.bank_account` | string |  |
-    | `customer_details.vat_code` | string | VAT number |
-    | `items` | array of objects |  |
-    | `items.uuid` | string (uuid) |  |
-    | `items.url` | string (uri) |  |
-    | `items.name` | string |  |
-    | `items.price` | number (double) |  |
-    | `items.tax` | string (decimal) |  |
-    | `items.total` | string (decimal) |  |
-    | `items.unit_price` | string (decimal) |  |
-    | `items.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
-    | `items.factor` | integer |  |
-    | `items.measured_unit` | string |  |
-    | `items.start` | string (date-time) | Date and time when item usage has started. |
-    | `items.end` | string (date-time) | Date and time when item usage has ended. |
-    | `items.article_code` | string |  |
-    | `items.project_name` | string |  |
-    | `items.project_uuid` | string (uuid) |  |
-    | `items.quantity` | string (decimal) |  |
-    | `items.details` | object |  |
-    | `items.details.resource_name` | string | Name of the marketplace resource |
-    | `items.details.resource_uuid` | string (uuid) | UUID of the marketplace resource |
-    | `items.details.plan_name` | string | Name of the pricing plan |
-    | `items.details.plan_uuid` | string (uuid) | UUID of the pricing plan |
-    | `items.details.offering_type` | string | Type of the offering |
-    | `items.details.offering_name` | string | Name of the offering |
-    | `items.details.offering_uuid` | string (uuid) | UUID of the offering |
-    | `items.details.service_provider_name` | string | Name of the service provider |
-    | `items.details.service_provider_uuid` | string (uuid) | UUID of the service provider |
-    | `items.details.plan_component_id` | integer | ID of the plan component |
-    | `items.details.offering_component_type` | string | Type of the offering component |
-    | `items.details.offering_component_name` | string | Name of the offering component |
-    | `items.details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
-    | `items.details.resource_limit_periods.start` | string | Start date of the resource limit period |
-    | `items.details.resource_limit_periods.end` | string | End date of the resource limit period |
-    | `items.details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
-    | `items.details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
-    | `items.details.resource_limit_periods.total` | string | Total amount for this period |
-    | `items.resource` | string (uri) |  |
-    | `items.resource_uuid` | string (uuid) |  |
-    | `items.resource_name` | string |  |
-    | `items.billing_type` | string |  |
-    | `items.backend_uuid` | string (uuid) |  |
-    | `items.credit` | boolean |  |
-    | `backend_id` | string |  |
-    | `payment_url` | string (uri) | URL for initiating payment via payment gateway. |
-    | `reference_number` | string | Reference number associated with the invoice. |
-    | `compensations` | number (double) |  |
-    | `incurred_costs` | number (double) |  |
 
 ---
 
@@ -1141,79 +1068,9 @@ Schedule sending of a notification for the specified invoice.
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `number` | integer |  |
-    | `customer` | string (uri) |  |
-    | `price` | string (decimal) |  |
-    | `tax` | string (decimal) |  |
-    | `total` | string (decimal) |  |
-    | `state` | string | <br>_Enum: `pending`, `pending_finalization`, `created`, `paid`, `canceled`_ |
-    | `year` | integer |  |
-    | `month` | integer |  |
-    | `issuer_details` | any |  |
-    | `invoice_date` | string (date) | Date then invoice moved from state pending to created. |
-    | `due_date` | string (date) |  |
-    | `customer_details` | object |  |
-    | `customer_details.name` | string |  |
-    | `customer_details.address` | string |  |
-    | `customer_details.country` | string |  |
-    | `customer_details.country_name` | string |  |
-    | `customer_details.email` | string (email) |  |
-    | `customer_details.postal` | string |  |
-    | `customer_details.phone_number` | string |  |
-    | `customer_details.bank_name` | string |  |
-    | `customer_details.bank_account` | string |  |
-    | `customer_details.vat_code` | string | VAT number |
-    | `items` | array of objects |  |
-    | `items.uuid` | string (uuid) |  |
-    | `items.url` | string (uri) |  |
-    | `items.name` | string |  |
-    | `items.price` | number (double) |  |
-    | `items.tax` | string (decimal) |  |
-    | `items.total` | string (decimal) |  |
-    | `items.unit_price` | string (decimal) |  |
-    | `items.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
-    | `items.factor` | integer |  |
-    | `items.measured_unit` | string |  |
-    | `items.start` | string (date-time) | Date and time when item usage has started. |
-    | `items.end` | string (date-time) | Date and time when item usage has ended. |
-    | `items.article_code` | string |  |
-    | `items.project_name` | string |  |
-    | `items.project_uuid` | string (uuid) |  |
-    | `items.quantity` | string (decimal) |  |
-    | `items.details` | object |  |
-    | `items.details.resource_name` | string | Name of the marketplace resource |
-    | `items.details.resource_uuid` | string (uuid) | UUID of the marketplace resource |
-    | `items.details.plan_name` | string | Name of the pricing plan |
-    | `items.details.plan_uuid` | string (uuid) | UUID of the pricing plan |
-    | `items.details.offering_type` | string | Type of the offering |
-    | `items.details.offering_name` | string | Name of the offering |
-    | `items.details.offering_uuid` | string (uuid) | UUID of the offering |
-    | `items.details.service_provider_name` | string | Name of the service provider |
-    | `items.details.service_provider_uuid` | string (uuid) | UUID of the service provider |
-    | `items.details.plan_component_id` | integer | ID of the plan component |
-    | `items.details.offering_component_type` | string | Type of the offering component |
-    | `items.details.offering_component_name` | string | Name of the offering component |
-    | `items.details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
-    | `items.details.resource_limit_periods.start` | string | Start date of the resource limit period |
-    | `items.details.resource_limit_periods.end` | string | End date of the resource limit period |
-    | `items.details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
-    | `items.details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
-    | `items.details.resource_limit_periods.total` | string | Total amount for this period |
-    | `items.resource` | string (uri) |  |
-    | `items.resource_uuid` | string (uuid) |  |
-    | `items.resource_name` | string |  |
-    | `items.billing_type` | string |  |
-    | `items.backend_uuid` | string (uuid) |  |
-    | `items.credit` | boolean |  |
-    | `backend_id` | string |  |
-    | `payment_url` | string (uri) | URL for initiating payment via payment gateway. |
-    | `reference_number` | string | Reference number associated with the invoice. |
-    | `compensations` | number (double) |  |
-    | `incurred_costs` | number (double) |  |
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 

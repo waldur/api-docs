@@ -916,8 +916,7 @@ Delete resource from the database without scheduling operations on backend
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.rancher_ingress_field_enum import RancherIngressFieldEnum # (1)
-    from waldur_api_client.api.rancher_ingresses import rancher_ingresses_yaml_retrieve # (2)
+    from waldur_api_client.api.rancher_ingresses import rancher_ingresses_yaml_retrieve # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -931,8 +930,7 @@ Delete resource from the database without scheduling operations on backend
     ```
     
     
-    1.  **Model Source:** [`RancherIngressFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/rancher_ingress_field_enum.py)
-    2.  **API Source:** [`rancher_ingresses_yaml_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_ingresses/rancher_ingresses_yaml_retrieve.py)
+    1.  **API Source:** [`rancher_ingresses_yaml_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_ingresses/rancher_ingresses_yaml_retrieve.py)
 
 === "TypeScript"
 
@@ -960,61 +958,13 @@ Delete resource from the database without scheduling operations on backend
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
-
-
 === "Responses"
 
     **`200`** - 
     
     | Field | Type |
     |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `description` | string |
-    | `service_name` | string |
-    | `service_settings` | string (uri) |
-    | `service_settings_uuid` | string (uuid) |
-    | `service_settings_state` | string |
-    | `service_settings_error_message` | string |
-    | `project` | string (uri) |
-    | `project_name` | string |
-    | `project_uuid` | string (uuid) |
-    | `customer` | string (uri) |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `customer_native_name` | string |
-    | `customer_abbreviation` | string |
-    | `error_message` | string |
-    | `error_traceback` | string |
-    | `resource_type` | string |
-    | `state` | any |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `backend_id` | string |
-    | `access_url` | any |
-    | `runtime_state` | string |
-    | `rancher_project` | string (uri) |
-    | `rancher_project_name` | string |
-    | `namespace` | string (uri) |
-    | `namespace_name` | string |
-    | `rules` | any |
-    | `marketplace_offering_uuid` | string |
-    | `marketplace_offering_name` | string |
-    | `marketplace_offering_type` | string |
-    | `marketplace_offering_plugin_options` | object (free-form) |
-    | `marketplace_category_uuid` | string |
-    | `marketplace_category_name` | string |
-    | `marketplace_resource_uuid` | string |
-    | `marketplace_plan_uuid` | string |
-    | `marketplace_resource_state` | string |
-    | `is_usage_based` | boolean |
-    | `is_limit_based` | boolean |
+    | `detail` | string |
 
 ---
 
@@ -1272,47 +1222,6 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     
     | Field | Type |
     |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `description` | string |
-    | `service_name` | string |
-    | `service_settings` | string (uri) |
-    | `service_settings_uuid` | string (uuid) |
-    | `service_settings_state` | string |
-    | `service_settings_error_message` | string |
-    | `project` | string (uri) |
-    | `project_name` | string |
-    | `project_uuid` | string (uuid) |
-    | `customer` | string (uri) |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `customer_native_name` | string |
-    | `customer_abbreviation` | string |
-    | `error_message` | string |
-    | `error_traceback` | string |
-    | `resource_type` | string |
-    | `state` | any |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `backend_id` | string |
-    | `access_url` | any |
-    | `runtime_state` | string |
-    | `rancher_project` | string (uri) |
-    | `rancher_project_name` | string |
-    | `namespace` | string (uri) |
-    | `namespace_name` | string |
-    | `rules` | any |
-    | `marketplace_offering_uuid` | string |
-    | `marketplace_offering_name` | string |
-    | `marketplace_offering_type` | string |
-    | `marketplace_offering_plugin_options` | object (free-form) |
-    | `marketplace_category_uuid` | string |
-    | `marketplace_category_name` | string |
-    | `marketplace_resource_uuid` | string |
-    | `marketplace_plan_uuid` | string |
-    | `marketplace_resource_state` | string |
-    | `is_usage_based` | boolean |
-    | `is_limit_based` | boolean |
+    | `detail` | string |
 
 ---
