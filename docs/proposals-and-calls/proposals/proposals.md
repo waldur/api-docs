@@ -1840,10 +1840,15 @@ List all workflow step instances for this proposal.
     | `status` | any |  |
     | `outcome` | string | Step-specific outcome (e.g., eligible, feasible, approved). |
     | `outcome_reason` | string | Explanation for the outcome (e.g., rejection reason). |
+    | `rejection_reason` | string |  |
+    | `internal_notes` | string |  |
     | `started_at` | string (date-time) | When this step became active. |
     | `completed_at` | string (date-time) |  |
     | `completed_by` | string (uuid) |  |
     | `deadline` | string (date-time) | Computed from started_at + step duration_in_days. |
+    | `applicant_visible` | boolean |  |
+    | `duration_in_days` | integer |  |
+    | `is_required` | boolean |  |
 
 ---
 
@@ -2158,6 +2163,7 @@ Complete the current workflow step with an outcome.
     | `step_uuid` | string (uuid) | ✓ | UUID of the workflow step instance the client believes is active. Used to detect concurrent step transitions. |
     | `outcome` | any | ✓ | Step outcome. Must be in the active step's allow-list. 'rejected' and 'expired' are reserved for system transitions. |
     | `outcome_reason` | string |  | Explanation for the outcome.<br>_Constraints: default: ``_ |
+    | `internal_notes` | string |  | Internal notes captured by the call-management team. Stored on the step instance and never returned to applicants.<br>_Constraints: default: ``_ |
 
 
 === "Responses"
@@ -2416,6 +2422,7 @@ Reject the proposal at the current workflow step.
     |---|---|---|---|
     | `step_uuid` | string (uuid) | ✓ | UUID of the workflow step instance the client believes is active. Used to detect concurrent step transitions. |
     | `reason` | string | ✓ | Reason for rejecting the proposal at this step. |
+    | `internal_notes` | string |  | Internal notes captured by the call-management team alongside the rejection. Never returned to applicants.<br>_Constraints: default: ``_ |
 
 
 === "Responses"

@@ -2187,7 +2187,7 @@ Returns a list of active and future plan periods for the resource. Each period i
 
 ### Get resource team
 
-Returns a list of users connected to the project of this resource, including their project roles and offering-specific usernames.
+Returns project users for this resource from the service provider perspective. When ENFORCE_USER_CONSENT_FOR_OFFERINGS is enabled and the offering has active Terms of Service, only users with active consent are returned (staff and support still see the full team).
 
 
 === "HTTPie"
@@ -2250,7 +2250,7 @@ Returns a list of users connected to the project of this resource, including the
 
     | Name | Type | Description |
     |---|---|---|
-    | `has_consent` | boolean | When true, return only users who have active consent for this offering. |
+    | `has_consent` | boolean | When ENFORCE_USER_CONSENT_FOR_OFFERINGS is disabled, passing true returns only users who have active consent for this offering. |
 
 
 === "Responses"

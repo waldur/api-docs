@@ -2648,7 +2648,7 @@ Returns a list of active and future plan periods for the resource. Each period i
 
 ### Get resource team
 
-Returns a list of users connected to the project of this resource, including their project roles and offering-specific usernames.
+Returns project users for this resource, including project roles and offering-specific usernames. Use has_consent=true to list only users with active Terms of Service consent for the offering.
 
 
 === "HTTPie"
