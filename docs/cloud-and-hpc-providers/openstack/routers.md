@@ -11,6 +11,7 @@
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-routers/{uuid}/` | [Delete router](#delete-router) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-routers/{uuid}/available_external_networks/` | [List available external networks](#list-available-external-networks) |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-routers/{uuid}/effective_routes/` | [Effective routes for this router](#effective-routes-for-this-router) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/add_router_interface/` | [Add router interface](#add-router-interface) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/remove_external_gateway/` | [Remove external gateway](#remove-external-gateway) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-routers/{uuid}/remove_router_interface/` | [Remove router interface](#remove-router-interface) |
@@ -664,6 +665,90 @@ Returns a merged list of external networks available for this router's tenant, f
     | `subnets.backend_id` | string |
     | `subnets.name` | string |
     | `subnets.cidr` | string |
+
+---
+
+### Effective routes for this router
+
+Compose the router's routing table from three sources: the default route inherited from the external gateway subnet, the on-link routes implied by each attached interface, and the user-set static routes. SNAT state is reported alongside.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-routers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/effective_routes/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_routers import openstack_routers_effective_routes_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_routers_effective_routes_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_routers_effective_routes_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_routers/openstack_routers_effective_routes_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackRoutersEffectiveRoutesRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackRoutersEffectiveRoutesRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `snat` | boolean |  |
+    | `has_external_gateway` | boolean |  |
+    | `routes` | array of objects |  |
+    | `routes.destination` | string |  |
+    | `routes.nexthop` | any | An IPv4 or IPv6 address. |
+    | `routes.source` | string | <br>_Enum: `default`, `connected`, `static`_ |
+    | `routes.subnet_uuid` | string |  |
+    | `routes.subnet_name` | string |  |
+    | `routes.subnet_cidr` | string |  |
+    | `routes.port_uuid` | string |  |
+    | `routes.port_backend_id` | string |  |
+    | `routes.ip_on_router` | any | An IPv4 or IPv6 address. |
+    | `routes.gateway_ip_on_router` | any | An IPv4 or IPv6 address. |
+    | `routes.external_network_uuid` | string |  |
+    | `routes.external_network_name` | string |  |
 
 ---
 
