@@ -192,7 +192,7 @@ Get a list of VM instances.
     | `security_groups.rules` | array of objects |  |
     | `security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -267,7 +267,7 @@ Get a list of VM instances.
     | `ports.security_groups.rules` | array of objects |  |
     | `ports.security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `ports.security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `ports.security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `ports.security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `ports.security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `ports.security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `ports.security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -448,7 +448,7 @@ Retrieve details of a specific VM instance.
     | `security_groups.rules` | array of objects |  |
     | `security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -523,7 +523,7 @@ Retrieve details of a specific VM instance.
     | `ports.security_groups.rules` | array of objects |  |
     | `ports.security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `ports.security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `ports.security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `ports.security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `ports.security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `ports.security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `ports.security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -861,7 +861,7 @@ Update an existing VM instance.
     | `security_groups.rules` | array of objects |  |
     | `security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -936,7 +936,7 @@ Update an existing VM instance.
     | `ports.security_groups.rules` | array of objects |  |
     | `ports.security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `ports.security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `ports.security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `ports.security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `ports.security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `ports.security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `ports.security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -1121,7 +1121,7 @@ Update specific fields of a VM instance.
     | `security_groups.rules` | array of objects |  |
     | `security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -1196,7 +1196,7 @@ Update specific fields of a VM instance.
     | `ports.security_groups.rules` | array of objects |  |
     | `ports.security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `ports.security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `ports.security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `ports.security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `ports.security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `ports.security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `ports.security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -1817,7 +1817,7 @@ Get a list of instance ports
     | `security_groups.rules` | array of objects |  |
     | `security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -1981,7 +1981,7 @@ Create backup from instance
     | `restorations.security_groups.rules` | array of objects |  |
     | `restorations.security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `restorations.security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `restorations.security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `restorations.security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `restorations.security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `restorations.security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `restorations.security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -2038,7 +2038,7 @@ Create backup from instance
     | `restorations.ports.security_groups.rules` | array of objects |  |
     | `restorations.ports.security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `restorations.ports.security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `restorations.ports.security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `restorations.ports.security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `restorations.ports.security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `restorations.ports.security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `restorations.ports.security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -2064,7 +2064,7 @@ Create backup from instance
     | `instance_security_groups.rules` | array of objects |  |
     | `instance_security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `instance_security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `instance_security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `instance_security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `instance_security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `instance_security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `instance_security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -2121,7 +2121,7 @@ Create backup from instance
     | `instance_ports.security_groups.rules` | array of objects |  |
     | `instance_ports.security_groups.rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `instance_ports.security_groups.rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `instance_ports.security_groups.rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `instance_ports.security_groups.rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `instance_ports.security_groups.rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `instance_ports.security_groups.rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `instance_ports.security_groups.rules.cidr` | string | CIDR notation for the source/destination network address range |

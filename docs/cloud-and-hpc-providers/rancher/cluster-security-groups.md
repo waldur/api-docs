@@ -83,7 +83,7 @@
     | `rules.uuid` | string (uuid) |  |
     | `rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -162,7 +162,7 @@
     | `rules.uuid` | string (uuid) |  |
     | `rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -246,7 +246,7 @@
     | `rules` | array of objects | ✓ |  |
     | `rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string |  | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer |  | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer |  | Ending port number in the range (1-65535) |
     | `rules.cidr` | string |  | CIDR notation for the source/destination network address range |
@@ -266,7 +266,7 @@
     | `rules.uuid` | string (uuid) |  |
     | `rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -344,7 +344,7 @@
     | `rules` | array of objects |  |  |
     | `rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string |  | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer |  | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer |  | Ending port number in the range (1-65535) |
     | `rules.cidr` | string |  | CIDR notation for the source/destination network address range |
@@ -364,7 +364,7 @@
     | `rules.uuid` | string (uuid) |  |
     | `rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |

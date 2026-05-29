@@ -141,7 +141,7 @@ Get a list of security groups.
     | `rules` | array of objects |  |
     | `rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -270,7 +270,7 @@ Retrieve details of a specific security group.
     | `rules` | array of objects |  |
     | `rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -843,7 +843,7 @@ Update the rules for a specific security group. This overwrites all existing rul
 === "HTTPie"
 
     ```bash
-    echo '[{"ethertype": null, "direction": null, "protocol": null, "from_port": 8080, "to_port": 8080, "cidr": "192.168.1.0/24", "description": "A sample description.", "remote_group": "https://api.example.com/api/remote-group/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"}]' | http \
+    echo '[{"ethertype": null, "direction": null, "protocol": "string-value", "from_port": 8080, "to_port": 8080, "cidr": "192.168.1.0/24", "description": "A sample description.", "remote_group": "https://api.example.com/api/remote-group/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"}]' | http \
       POST \
       https://api.example.com/api/openstack-security-groups/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_rules/ \
       Authorization:"Token YOUR_API_TOKEN"
@@ -880,7 +880,7 @@ Update the rules for a specific security group. This overwrites all existing rul
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
-      body: [{"ethertype": null, "direction": null, "protocol": null, "from_port": 8080, "to_port": 8080, "cidr": "192.168.1.0/24", "description": "A sample description.", "remote_group": "https://api.example.com/api/remote-group/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"}]
+      body: [{"ethertype": null, "direction": null, "protocol": "string-value", "from_port": 8080, "to_port": 8080, "cidr": "192.168.1.0/24", "description": "A sample description.", "remote_group": "https://api.example.com/api/remote-group/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"}]
     });
       console.log('Success:', response);
     } catch (error) {
@@ -904,7 +904,7 @@ Update the rules for a specific security group. This overwrites all existing rul
     |---|---|---|---|
     | `ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6'<br>_Constraints: default: `IPv4`_ |
     | `direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing)<br>_Constraints: default: `ingress`_ |
-    | `protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `protocol` | string |  | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `from_port` | integer |  | Starting port number in the range (1-65535) |
     | `to_port` | integer |  | Ending port number in the range (1-65535) |
     | `cidr` | string |  | CIDR notation for the source/destination network address range |

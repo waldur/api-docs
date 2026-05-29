@@ -533,7 +533,7 @@ Update an existing OpenStack tenant.
     | `security_groups.rules` | array of objects |  |  |
     | `security_groups.rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
     | `security_groups.rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `security_groups.rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.protocol` | string |  | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `security_groups.rules.from_port` | integer |  | Starting port number in the range (1-65535) |
     | `security_groups.rules.to_port` | integer |  | Ending port number in the range (1-65535) |
     | `security_groups.rules.cidr` | string |  | CIDR notation for the source/destination network address range |
@@ -680,7 +680,7 @@ Update specific fields of an OpenStack tenant.
     | `security_groups.rules` | array of objects |  |  |
     | `security_groups.rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
     | `security_groups.rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `security_groups.rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `security_groups.rules.protocol` | string |  | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `security_groups.rules.from_port` | integer |  | Starting port number in the range (1-65535) |
     | `security_groups.rules.to_port` | integer |  | Ending port number in the range (1-65535) |
     | `security_groups.rules.cidr` | string |  | CIDR notation for the source/destination network address range |
@@ -1328,7 +1328,7 @@ Create a security group for the tenant.
     | `rules` | array of objects | ✓ |  |
     | `rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string |  | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer |  | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer |  | Ending port number in the range (1-65535) |
     | `rules.cidr` | string |  | CIDR notation for the source/destination network address range |
@@ -1373,7 +1373,7 @@ Create a security group for the tenant.
     | `rules` | array of objects |  |
     | `rules.ethertype` | any | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
@@ -2112,7 +2112,7 @@ Trigger job to pull server groups from remote VPC
     | `rules` | array of objects |  |  |
     | `rules.ethertype` | any |  | IP protocol version - either 'IPv4' or 'IPv6' |
     | `rules.direction` | any |  | Traffic direction - either 'ingress' (incoming) or 'egress' (outgoing) |
-    | `rules.protocol` | any |  | The network protocol (TCP, UDP, ICMP, or empty for any protocol) |
+    | `rules.protocol` | string |  | Network protocol: 'tcp', 'udp', 'icmp', empty (any) or an IANA protocol number 0-255 (e.g. '112' for VRRP). |
     | `rules.from_port` | integer |  | Starting port number in the range (1-65535) |
     | `rules.to_port` | integer |  | Ending port number in the range (1-65535) |
     | `rules.cidr` | string |  | CIDR notation for the source/destination network address range |
