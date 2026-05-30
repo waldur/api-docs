@@ -28,6 +28,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/pull_security_groups/` | [Pull security groups](#pull-security-groups) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/pull_server_groups/` | [Pull server groups](#pull-server-groups) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/openstack-tenants/{uuid}/topology/` | [Tenant network topology](#tenant-network-topology) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/push_security_groups/` | [Batch update security groups for a tenant.](#batch-update-security-groups-for-a-tenant) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-tenants/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
@@ -2032,6 +2033,85 @@ Trigger job to pull server groups from remote VPC
 
 ## Other Actions
 
+
+### Tenant network topology
+
+Compose the tenant's network topology — routers, networks, subnets, ports, instances, floating IPs, external networks, and inbound RBAC shares — as a graph (nodes + edges). Read-only; all data comes from already-pulled state, no Neutron calls.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openstack-tenants/a1b2c3d4-e5f6-7890-abcd-ef1234567890/topology/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_tenants import openstack_tenants_topology_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_tenants_topology_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_tenants_topology_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_tenants/openstack_tenants_topology_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackTenantsTopologyRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackTenantsTopologyRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `nodes` | array of objects |
+    | `nodes.id` | string |
+    | `nodes.type` | string |
+    | `nodes.name` | string |
+    | `nodes.uuid` | string |
+    | `nodes.attrs` | object (free-form) |
+    | `edges` | array of objects |
+    | `edges.source` | string |
+    | `edges.target` | string |
+    | `edges.kind` | string |
+
+---
 
 ### Batch update security groups for a tenant.
 
