@@ -164,8 +164,12 @@ Get a list of networks.
     | `rbac_policies.uuid` | string (uuid) |  |
     | `rbac_policies.network` | string (uri) |  |
     | `rbac_policies.network_name` | string |  |
+    | `rbac_policies.source_tenant_uuid` | string (uuid) |  |
+    | `rbac_policies.source_tenant_name` | string |  |
     | `rbac_policies.target_tenant` | string (uri) |  |
     | `rbac_policies.target_tenant_name` | string |  |
+    | `rbac_policies.target_label` | string |  |
+    | `rbac_policies.direction` | any |  |
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
@@ -306,8 +310,12 @@ Retrieve details of a specific network.
     | `rbac_policies.uuid` | string (uuid) |  |
     | `rbac_policies.network` | string (uri) |  |
     | `rbac_policies.network_name` | string |  |
+    | `rbac_policies.source_tenant_uuid` | string (uuid) |  |
+    | `rbac_policies.source_tenant_name` | string |  |
     | `rbac_policies.target_tenant` | string (uri) |  |
     | `rbac_policies.target_tenant_name` | string |  |
+    | `rbac_policies.target_label` | string |  |
+    | `rbac_policies.direction` | any |  |
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
@@ -756,8 +764,12 @@ Update an existing network.
     | `rbac_policies.uuid` | string (uuid) |  |
     | `rbac_policies.network` | string (uri) |  |
     | `rbac_policies.network_name` | string |  |
+    | `rbac_policies.source_tenant_uuid` | string (uuid) |  |
+    | `rbac_policies.source_tenant_name` | string |  |
     | `rbac_policies.target_tenant` | string (uri) |  |
     | `rbac_policies.target_tenant_name` | string |  |
+    | `rbac_policies.target_label` | string |  |
+    | `rbac_policies.direction` | any |  |
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
@@ -902,8 +914,12 @@ Update specific fields of a network.
     | `rbac_policies.uuid` | string (uuid) |  |
     | `rbac_policies.network` | string (uri) |  |
     | `rbac_policies.network_name` | string |  |
+    | `rbac_policies.source_tenant_uuid` | string (uuid) |  |
+    | `rbac_policies.source_tenant_name` | string |  |
     | `rbac_policies.target_tenant` | string (uri) |  |
     | `rbac_policies.target_tenant_name` | string |  |
+    | `rbac_policies.target_label` | string |  |
+    | `rbac_policies.direction` | any |  |
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
@@ -1080,8 +1096,12 @@ Create RBAC policy for the network. DEPRECATED: please use the dedicated /api/op
     | `uuid` | string (uuid) |  |
     | `network` | string (uri) |  |
     | `network_name` | string |  |
+    | `source_tenant_uuid` | string (uuid) |  |
+    | `source_tenant_name` | string |  |
     | `target_tenant` | string (uri) |  |
     | `target_tenant_name` | string |  |
+    | `target_label` | string |  |
+    | `direction` | any |  |
     | `backend_id` | string |  |
     | `policy_type` | any | Type of access granted - either shared access or external network access |
     | `created` | string (date-time) |  |

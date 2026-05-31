@@ -1227,8 +1227,12 @@ Create network for tenant
     | `rbac_policies.uuid` | string (uuid) |  |
     | `rbac_policies.network` | string (uri) |  |
     | `rbac_policies.network_name` | string |  |
+    | `rbac_policies.source_tenant_uuid` | string (uuid) |  |
+    | `rbac_policies.source_tenant_name` | string |  |
     | `rbac_policies.target_tenant` | string (uri) |  |
     | `rbac_policies.target_tenant_name` | string |  |
+    | `rbac_policies.target_label` | string |  |
+    | `rbac_policies.direction` | any |  |
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |

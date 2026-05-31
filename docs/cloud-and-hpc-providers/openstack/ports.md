@@ -20,6 +20,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/disable_port_security/` | [Disable port security](#disable-port-security) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/enable_port/` | [Enable port](#enable-port) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/enable_port_security/` | [Enable port security](#enable-port-security) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/set_allowed_address_pairs/` | [Set allowed address pairs](#set-allowed-address-pairs) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-ports/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 
@@ -1421,6 +1422,153 @@ Enable port security for the port
 
     **`200`** - No response body
     
+
+---
+
+### Set allowed address pairs
+
+Replace the Port's allowed_address_pairs list. Cluster-VIP workloads (keepalived, MetalLB, OpenShift ingress, OVN router) need ports to permit additional IP/MAC pairs beyond their fixed IPs. Values are validated and pushed to Neutron.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-ports/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_allowed_address_pairs/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      allowed_address_pairs:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_allowed_address_pairs_request import SetAllowedAddressPairsRequest # (1)
+    from waldur_api_client.api.openstack_ports import openstack_ports_set_allowed_address_pairs # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetAllowedAddressPairsRequest(
+        allowed_address_pairs=[]
+    )
+    response = openstack_ports_set_allowed_address_pairs.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetAllowedAddressPairsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_allowed_address_pairs_request.py)
+    2.  **API Source:** [`openstack_ports_set_allowed_address_pairs`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_ports/openstack_ports_set_allowed_address_pairs.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackPortsSetAllowedAddressPairs } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackPortsSetAllowedAddressPairs({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "allowed_address_pairs": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `allowed_address_pairs` | array of objects | ✓ |
+    | `allowed_address_pairs.ip_address` | string | ✓ |
+    | `allowed_address_pairs.mac_address` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `description` | string |  |
+    | `service_name` | string |  |
+    | `service_settings` | string (uri) |  |
+    | `service_settings_uuid` | string (uuid) |  |
+    | `service_settings_state` | string |  |
+    | `service_settings_error_message` | string |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_abbreviation` | string |  |
+    | `error_message` | string |  |
+    | `error_traceback` | string |  |
+    | `resource_type` | string |  |
+    | `state` | any |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `backend_id` | string | Port ID in OpenStack |
+    | `access_url` | any |  |
+    | `fixed_ips` | array of objects |  |
+    | `fixed_ips.ip_address` | any | IP address to assign to the port |
+    | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
+    | `mac_address` | string | MAC address of the port |
+    | `allowed_address_pairs` | array of objects |  |
+    | `allowed_address_pairs.mac_address` | string |  |
+    | `tenant` | string (uri) | OpenStack tenant this port belongs to |
+    | `tenant_name` | string |  |
+    | `tenant_uuid` | string (uuid) |  |
+    | `network` | string (uri) | Network to which this port belongs |
+    | `network_name` | string |  |
+    | `network_uuid` | string (uuid) |  |
+    | `floating_ips` | array of string (uri)s |  |
+    | `device_id` | string | ID of device (instance, router etc) to which this port is connected |
+    | `device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
+    | `port_security_enabled` | boolean | If True, security groups and rules will be applied to this port |
+    | `security_groups` | array of objects |  |
+    | `security_groups.uuid` | string (uuid) |  |
+    | `security_groups.name` | string |  |
+    | `security_groups.url` | string (uri) |  |
+    | `admin_state_up` | boolean | Administrative state of the port. If down, port does not forward packets |
+    | `status` | string | Port status in OpenStack (e.g. ACTIVE, DOWN) |
+    | `marketplace_offering_uuid` | string |  |
+    | `marketplace_offering_name` | string |  |
+    | `marketplace_offering_type` | string |  |
+    | `marketplace_offering_plugin_options` | object (free-form) |  |
+    | `marketplace_category_uuid` | string |  |
+    | `marketplace_category_name` | string |  |
+    | `marketplace_resource_uuid` | string |  |
+    | `marketplace_plan_uuid` | string |  |
+    | `marketplace_resource_state` | string |  |
+    | `is_usage_based` | boolean |  |
+    | `is_limit_based` | boolean |  |
 
 ---
 

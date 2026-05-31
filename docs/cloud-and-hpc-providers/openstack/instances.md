@@ -28,6 +28,7 @@
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-instances/{uuid}/placement_allocations/` | [Get Placement allocations for the instance](#get-placement-allocations-for-the-instance) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/change_flavor/` | [Change instance flavor](#change-instance-flavor) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/diagnose_connectivity/` | [Diagnose connectivity](#diagnose-connectivity) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/rescue/` | [Rescue instance](#rescue-instance) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
@@ -2709,6 +2710,95 @@ Change flavor of the instance
     | Field | Type |
     |---|---|
     | `status` | string |
+
+---
+
+### Diagnose connectivity
+
+Walks the wiring that connects this instance to the requested target (default 'external') and returns a per-check report computed from Waldur's already-pulled state — no live OpenStack call. Use to triage 'VM can't reach the internet' or 'VIP doesn't work' tickets in one click.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-instances/a1b2c3d4-e5f6-7890-abcd-ef1234567890/diagnose_connectivity/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.diagnose_connectivity_request_request import DiagnoseConnectivityRequestRequest # (1)
+    from waldur_api_client.api.openstack_instances import openstack_instances_diagnose_connectivity # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = DiagnoseConnectivityRequestRequest()
+    response = openstack_instances_diagnose_connectivity.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`DiagnoseConnectivityRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/diagnose_connectivity_request_request.py)
+    2.  **API Source:** [`openstack_instances_diagnose_connectivity`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_instances/openstack_instances_diagnose_connectivity.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackInstancesDiagnoseConnectivity } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackInstancesDiagnoseConnectivity({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `target` | string |  | Connectivity target. 'external' (default) checks outbound internet; 'internal:<ip>' checks east-west to another IP; 'fip:<address>' verifies a specific floating-IP mapping.<br>_Constraints: default: `external`_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `target` | string |
+    | `target_address` | string |
+    | `checks` | array of objects |
+    | `checks.check` | string |
+    | `checks.status` | string |
+    | `checks.detail` | string |
+    | `checks.fix_hint` | string |
+    | `root_cause` | string |
 
 ---
 
