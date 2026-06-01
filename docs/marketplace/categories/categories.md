@@ -74,6 +74,7 @@ Returns a paginated list of marketplace categories.
     | `field` | array |  |
     | `group_uuid` | string (uuid) | Category group UUID |
     | `has_shared` | boolean | Has shared |
+    | `o` | string | Which field to use when ordering the results. |
     | `offering_name` | string | Offering name contains |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
