@@ -737,6 +737,7 @@ Ask Placement which compute hosts could currently satisfy a request for the give
     | `settings_uuid` | string (uuid) | Settings UUID |
     | `state` | string |  |
     | `status` | string |  |
+    | `trait` | string | Trait names with AND logic (comma-separated) |
 
 
 === "Responses"
@@ -762,6 +763,7 @@ Ask Placement which compute hosts could currently satisfy a request for the give
     | `running_vms` | integer | Number of running VMs |
     | `state` | string | Hypervisor state, e.g. up or down |
     | `status` | string | Hypervisor status, e.g. enabled or disabled |
+    | `traits` | array of strings |  |
 
 ---
 
@@ -844,6 +846,7 @@ Ask Placement which compute hosts could currently satisfy a request for the give
     | `running_vms` | integer | Number of running VMs |
     | `state` | string | Hypervisor state, e.g. up or down |
     | `status` | string | Hypervisor status, e.g. enabled or disabled |
+    | `traits` | array of strings |  |
 
 ---
 
