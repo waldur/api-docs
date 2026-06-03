@@ -319,6 +319,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `USER_ACTIONS_NOTIFICATION_THRESHOLD` | integer |
     | `USER_ACTIONS_EXECUTION_RETENTION_DAYS` | integer |
     | `USER_ACTIONS_DEFAULT_EXPIRATION_REMINDERS` | array of strings |
+    | `OPENSTACK_LOG_CALLS_ENABLED` | boolean |
+    | `OPENSTACK_LOG_CALLS_THRESHOLD_MS` | integer |
     | `USER_DATA_ACCESS_LOGGING_ENABLED` | boolean |
     | `USER_DATA_ACCESS_LOG_RETENTION_DAYS` | integer |
     | `USER_DATA_ACCESS_LOG_SELF_ACCESS` | boolean |
@@ -657,6 +659,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `USER_ACTIONS_NOTIFICATION_THRESHOLD` | integer |  |
     | `USER_ACTIONS_EXECUTION_RETENTION_DAYS` | integer |  |
     | `USER_ACTIONS_DEFAULT_EXPIRATION_REMINDERS` | array of strings |  |
+    | `OPENSTACK_LOG_CALLS_ENABLED` | boolean |  |
+    | `OPENSTACK_LOG_CALLS_THRESHOLD_MS` | integer |  |
     | `USER_DATA_ACCESS_LOGGING_ENABLED` | boolean |  |
     | `USER_DATA_ACCESS_LOG_RETENTION_DAYS` | integer |  |
     | `USER_DATA_ACCESS_LOG_SELF_ACCESS` | boolean |  |
