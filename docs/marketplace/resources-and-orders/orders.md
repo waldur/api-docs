@@ -1572,7 +1572,8 @@ Returns details of the offering connected to the requested object.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_orders import marketplace_orders_offering_retrieve # (1)
+    from waldur_api_client.models.public_offering_details_field_enum import PublicOfferingDetailsFieldEnum # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_offering_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1586,7 +1587,8 @@ Returns details of the offering connected to the requested object.
     ```
     
     
-    1.  **API Source:** [`marketplace_orders_offering_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_offering_retrieve.py)
+    1.  **Model Source:** [`PublicOfferingDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/public_offering_details_field_enum.py)
+    2.  **API Source:** [`marketplace_orders_offering_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_offering_retrieve.py)
 
 === "TypeScript"
 
@@ -1612,6 +1614,13 @@ Returns details of the offering connected to the requested object.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
 
 
 === "Responses"
@@ -1849,7 +1858,8 @@ Returns details of the resource connected to the requested object.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_orders import marketplace_orders_resource_retrieve # (1)
+    from waldur_api_client.models.resource_field_enum import ResourceFieldEnum # (1)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_resource_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1863,7 +1873,8 @@ Returns details of the resource connected to the requested object.
     ```
     
     
-    1.  **API Source:** [`marketplace_orders_resource_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_resource_retrieve.py)
+    1.  **Model Source:** [`ResourceFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_field_enum.py)
+    2.  **API Source:** [`marketplace_orders_resource_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_resource_retrieve.py)
 
 === "TypeScript"
 
@@ -1889,6 +1900,13 @@ Returns details of the resource connected to the requested object.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
 
 
 === "Responses"

@@ -855,5 +855,7 @@ Creates a permission request based on a group invitation for the currently authe
     | `scope_name` | string | Name of the invitation scope |
     | `scope_uuid` | string | UUID of the invitation scope |
     | `auto_approved` | boolean | Whether the request was automatically approved |
+    | `project_uuid` | string | UUID of the project the user was added to. Present when the invitation has auto_approve and auto_create_project enabled. Null otherwise. |
+    | `project_created` | boolean | True if a new project was created for the user; false if an existing project with the same name was reused. Null when no project workflow ran. |
 
 ---

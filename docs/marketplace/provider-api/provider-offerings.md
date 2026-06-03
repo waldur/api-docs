@@ -6826,7 +6826,8 @@ Returns details of a specific order associated with an offering.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_orders_retrieve # (1)
+    from waldur_api_client.models.order_details_field_enum import OrderDetailsFieldEnum # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_orders_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -6841,7 +6842,8 @@ Returns details of a specific order associated with an offering.
     ```
     
     
-    1.  **API Source:** [`marketplace_provider_offerings_orders_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_orders_retrieve.py)
+    1.  **Model Source:** [`OrderDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_details_field_enum.py)
+    2.  **API Source:** [`marketplace_provider_offerings_orders_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_orders_retrieve.py)
 
 === "TypeScript"
 
@@ -6869,6 +6871,13 @@ Returns details of a specific order associated with an offering.
     |---|---|---|
     | `order_uuid` | string | ✓ |
     | `uuid` | string | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
 
 
 === "Responses"

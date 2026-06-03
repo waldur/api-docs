@@ -2303,7 +2303,8 @@ Returns details of the offering connected to the requested object.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_resources import marketplace_resources_offering_retrieve # (1)
+    from waldur_api_client.models.public_offering_details_field_enum import PublicOfferingDetailsFieldEnum # (1)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_offering_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2317,7 +2318,8 @@ Returns details of the offering connected to the requested object.
     ```
     
     
-    1.  **API Source:** [`marketplace_resources_offering_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_offering_retrieve.py)
+    1.  **Model Source:** [`PublicOfferingDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/public_offering_details_field_enum.py)
+    2.  **API Source:** [`marketplace_resources_offering_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_offering_retrieve.py)
 
 === "TypeScript"
 
@@ -2343,6 +2345,13 @@ Returns details of the offering connected to the requested object.
     | Name | Type | Required |
     |---|---|---|
     | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
 
 
 === "Responses"
@@ -2755,7 +2764,8 @@ One row per user (deduplicated) with their direct Resource role and a nested `re
     from waldur_api_client.models.order_state import OrderState # (1)
     from waldur_api_client.models.resource_o_enum import ResourceOEnum # (2)
     from waldur_api_client.models.resource_state import ResourceState # (3)
-    from waldur_api_client.api.marketplace_resources import marketplace_resources_team_members_list # (4)
+    from waldur_api_client.models.resource_team_member_field_enum import ResourceTeamMemberFieldEnum # (4)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_team_members_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2773,7 +2783,8 @@ One row per user (deduplicated) with their direct Resource role and a nested `re
     1.  **Model Source:** [`OrderState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_state.py)
     2.  **Model Source:** [`ResourceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_o_enum.py)
     3.  **Model Source:** [`ResourceState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_state.py)
-    4.  **API Source:** [`marketplace_resources_team_members_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_team_members_list.py)
+    4.  **Model Source:** [`ResourceTeamMemberFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_team_member_field_enum.py)
+    5.  **API Source:** [`marketplace_resources_team_members_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_team_members_list.py)
 
 === "TypeScript"
 
@@ -2813,6 +2824,7 @@ One row per user (deduplicated) with their direct Resource role and a nested `re
     | `customer` | string (uri) | Customer URL |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `downscaled` | boolean | Downscaled |
+    | `field` | array |  |
     | `flavor_name` | string | Flavor name |
     | `has_terminate_date` | boolean | Has termination date |
     | `image_name` | string | Image name |

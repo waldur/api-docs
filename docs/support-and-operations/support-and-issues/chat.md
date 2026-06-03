@@ -133,7 +133,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.chat_sessions import chat_sessions_current_retrieve # (1)
+    from waldur_api_client.models.chat_session_field_enum import ChatSessionFieldEnum # (1)
+    from waldur_api_client.api.chat_sessions import chat_sessions_current_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -144,7 +145,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     ```
     
     
-    1.  **API Source:** [`chat_sessions_current_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_current_retrieve.py)
+    1.  **Model Source:** [`ChatSessionFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/chat_session_field_enum.py)
+    2.  **API Source:** [`chat_sessions_current_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_sessions/chat_sessions_current_retrieve.py)
 
 === "TypeScript"
 
@@ -160,6 +162,13 @@ Returns the current user's chat session, creating it if it doesn't exist.
       console.error('Error:', error);
     }
     ```
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
 
 
 === "Responses"
