@@ -174,6 +174,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ATLASSIAN_REQUEST_FEEDBACK_FIELD` | string |
     | `ATLASSIAN_TEMPLATE_FIELD` | string |
     | `ATLASSIAN_WALDUR_BACKEND_ID_FIELD` | string |
+    | `JIRA_WEBHOOK_SHARED_SECRET` | string |
     | `ZAMMAD_API_URL` | string (uri) |
     | `ZAMMAD_TOKEN` | string |
     | `ZAMMAD_GROUP` | string |
@@ -181,6 +182,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ZAMMAD_COMMENT_MARKER` | string |
     | `ZAMMAD_COMMENT_PREFIX` | string |
     | `ZAMMAD_COMMENT_COOLDOWN_DURATION` | integer |
+    | `ZAMMAD_WEBHOOK_SHARED_SECRET` | string |
     | `SMAX_API_URL` | string (uri) |
     | `SMAX_TENANT_ID` | string |
     | `SMAX_LOGIN` | string |
@@ -193,6 +195,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SMAX_CREATION_SOURCE_NAME` | string |
     | `SMAX_REQUESTS_OFFERING` | string |
     | `SMAX_VERIFY_SSL` | boolean |
+    | `SMAX_WEBHOOK_SHARED_SECRET` | string |
     | `ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND` | boolean |
     | `ENABLE_MOCK_COURSE_ACCOUNT_BACKEND` | boolean |
     | `PROPOSAL_REVIEW_DURATION` | integer |
@@ -514,6 +517,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ATLASSIAN_REQUEST_FEEDBACK_FIELD` | string |  |
     | `ATLASSIAN_TEMPLATE_FIELD` | string |  |
     | `ATLASSIAN_WALDUR_BACKEND_ID_FIELD` | string |  |
+    | `JIRA_WEBHOOK_SHARED_SECRET` | string |  |
     | `ZAMMAD_API_URL` | string (uri) |  |
     | `ZAMMAD_TOKEN` | string |  |
     | `ZAMMAD_GROUP` | string |  |
@@ -521,6 +525,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ZAMMAD_COMMENT_MARKER` | string |  |
     | `ZAMMAD_COMMENT_PREFIX` | string |  |
     | `ZAMMAD_COMMENT_COOLDOWN_DURATION` | integer |  |
+    | `ZAMMAD_WEBHOOK_SHARED_SECRET` | string |  |
     | `SMAX_API_URL` | string (uri) |  |
     | `SMAX_TENANT_ID` | string |  |
     | `SMAX_LOGIN` | string |  |
@@ -533,6 +538,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SMAX_CREATION_SOURCE_NAME` | string |  |
     | `SMAX_REQUESTS_OFFERING` | string |  |
     | `SMAX_VERIFY_SSL` | boolean |  |
+    | `SMAX_WEBHOOK_SHARED_SECRET` | string |  |
     | `ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND` | boolean |  |
     | `ENABLE_MOCK_COURSE_ACCOUNT_BACKEND` | boolean |  |
     | `PROPOSAL_REVIEW_DURATION` | integer |  |
