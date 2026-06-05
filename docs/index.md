@@ -9,7 +9,7 @@ This section provides a detailed reference for all available API endpoints.
 - [Invitations & permissions](./core/invitations-and-permissions/customer-permissions-reviews.md)
 - [Notifications & Logging](./core/notifications-and-logging/admin-announcements.md)
 - [Structure](./core/structure/customers.md)
-- [System configuration](./core/system-configuration/celery-stats.md)
+- [System configuration](./core/system-configuration/admin.md)
 
 ## Marketplace
 

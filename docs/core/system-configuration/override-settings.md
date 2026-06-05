@@ -341,6 +341,18 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |
     | `ENABLED_REPORTING_SCREENS` | array of anys |
+    | `MATRIX_ENABLED` | boolean |
+    | `MATRIX_HOMESERVER_URL` | string (uri) |
+    | `MATRIX_HOMESERVER_DOMAIN` | string |
+    | `MATRIX_APPSERVICE_AS_TOKEN` | string |
+    | `MATRIX_APPSERVICE_HS_TOKEN` | string |
+    | `MATRIX_APPSERVICE_SENDER_LOCALPART` | string |
+    | `MATRIX_HISTORY_EXPORT_ENABLED` | boolean |
+    | `MATRIX_EXPORT_MEDIA` | boolean |
+    | `MATRIX_USER_REGISTRATION_SECRET` | string |
+    | `MATRIX_USER_ID_FORMAT` | string |
+    | `MATRIX_LOGIN_METHOD` | string |
+    | `MATRIX_OIDC_PROVIDER_URL` | string (uri) |
     | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |
     | `PAT_ENABLED` | boolean |
     | `PAT_MAX_LIFETIME_DAYS` | integer |
@@ -684,6 +696,18 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |  |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |  |
     | `ENABLED_REPORTING_SCREENS` | array of anys |  |
+    | `MATRIX_ENABLED` | boolean |  |
+    | `MATRIX_HOMESERVER_URL` | string (uri) |  |
+    | `MATRIX_HOMESERVER_DOMAIN` | string |  |
+    | `MATRIX_APPSERVICE_AS_TOKEN` | string |  |
+    | `MATRIX_APPSERVICE_HS_TOKEN` | string |  |
+    | `MATRIX_APPSERVICE_SENDER_LOCALPART` | string |  |
+    | `MATRIX_HISTORY_EXPORT_ENABLED` | boolean |  |
+    | `MATRIX_EXPORT_MEDIA` | boolean |  |
+    | `MATRIX_USER_REGISTRATION_SECRET` | string |  |
+    | `MATRIX_USER_ID_FORMAT` | string |  |
+    | `MATRIX_LOGIN_METHOD` | string |  |
+    | `MATRIX_OIDC_PROVIDER_URL` | string (uri) |  |
     | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |  |
     | `PAT_ENABLED` | boolean |  |
     | `PAT_MAX_LIFETIME_DAYS` | integer |  |
