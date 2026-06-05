@@ -876,6 +876,7 @@ Creates a new provider offering.
     | `plugin_options.auto_approve_marketplace_script` | boolean |  | If set to False, all orders require manual provider approval, including for service provider owners and staff<br>_Constraints: default: `True`_ |
     | `plugin_options.highlight_backend_id_display` | boolean |  | Defines if backend_id should be shown more prominently by the UI<br>_Constraints: default: `False`_ |
     | `plugin_options.backend_id_display_label` | string |  | Label used by UI for showing value of the backend_id<br>_Constraints: default: `Backend ID`_ |
+    | `plugin_options.require_effective_id_for_highlighted_display` | boolean |  | If set to True, highlighted backend ID display is only shown when the resource has an effective_id.<br>_Constraints: default: `False`_ |
     | `plugin_options.expose_inference_playground` | boolean |  | Show an in-browser inference playground action for resources of this offering (for offerings whose resources expose an OpenAI-compatible endpoint).<br>_Constraints: default: `False`_ |
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
     | `vendor_details` | string |  |  |
@@ -5531,6 +5532,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.auto_approve_marketplace_script` | boolean |  | If set to False, all orders require manual provider approval, including for service provider owners and staff<br>_Constraints: default: `True`_ |
     | `plugin_options.highlight_backend_id_display` | boolean |  | Defines if backend_id should be shown more prominently by the UI<br>_Constraints: default: `False`_ |
     | `plugin_options.backend_id_display_label` | string |  | Label used by UI for showing value of the backend_id<br>_Constraints: default: `Backend ID`_ |
+    | `plugin_options.require_effective_id_for_highlighted_display` | boolean |  | If set to True, highlighted backend ID display is only shown when the resource has an effective_id.<br>_Constraints: default: `False`_ |
     | `plugin_options.expose_inference_playground` | boolean |  | Show an in-browser inference playground action for resources of this offering (for offerings whose resources expose an OpenAI-compatible endpoint).<br>_Constraints: default: `False`_ |
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
     | `service_attributes` | any |  |  |
