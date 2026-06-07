@@ -199,6 +199,7 @@ Generates fresh appservice tokens (rotating any existing ones), enables the apps
     | `url` | string |  | Waldur URL reachable by the Matrix homeserver (for webhook callbacks) |
     | `sender_localpart` | string |  | Localpart for the appservice bot user, e.g. 'waldur-bot' |
     | `homeserver_url` | string (uri) |  | Matrix homeserver base URL. Only persisted if MATRIX_HOMESERVER_URL is not already configured. |
+    | `homeserver_public_url` | string (uri) |  | Optional. Matrix homeserver URL used by browser clients. Leave blank when the homeserver URL above is reachable from both servers and browsers. Set this for deployments where the two differ (e.g. Docker-internal vs. Caddy-proxied). Only persisted if MATRIX_HOMESERVER_PUBLIC_URL is not already configured. |
     | `homeserver_domain` | string |  | Matrix homeserver server_name domain. Only persisted if MATRIX_HOMESERVER_DOMAIN is not already configured. |
     | `user_registration_secret` | string |  | Shared secret configured in the homeserver for user registration. Only persisted if MATRIX_USER_REGISTRATION_SECRET is not already configured.<br>_Constraints: write-only_ |
 

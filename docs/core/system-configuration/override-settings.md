@@ -343,6 +343,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLED_REPORTING_SCREENS` | array of anys |
     | `MATRIX_ENABLED` | boolean |
     | `MATRIX_HOMESERVER_URL` | string (uri) |
+    | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |
     | `MATRIX_HOMESERVER_DOMAIN` | string |
     | `MATRIX_APPSERVICE_AS_TOKEN` | string |
     | `MATRIX_APPSERVICE_HS_TOKEN` | string |
@@ -698,6 +699,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLED_REPORTING_SCREENS` | array of anys |  |
     | `MATRIX_ENABLED` | boolean |  |
     | `MATRIX_HOMESERVER_URL` | string (uri) |  |
+    | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |  |
     | `MATRIX_HOMESERVER_DOMAIN` | string |  |
     | `MATRIX_APPSERVICE_AS_TOKEN` | string |  |
     | `MATRIX_APPSERVICE_HS_TOKEN` | string |  |
