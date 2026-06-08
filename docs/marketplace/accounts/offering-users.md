@@ -9,6 +9,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/` | [Retrieve an offering user](#retrieve-an-offering-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/` | [Create an offering user](#create-an-offering-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/update_restricted/` | [Update restriction status](#update-restriction-status) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/update_runtime_state/` | [Update runtime state](#update-runtime-state) |
 | <span class="http-badge http-put">PUT</span> | `/api/marketplace-offering-users/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-offering-users/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-offering-users/{uuid}/update_comments/` | [Update service provider comments](#update-service-provider-comments) |
@@ -57,7 +58,8 @@ Returns a paginated list of users associated with offerings. The visibility of u
     from waldur_api_client.models.offering_user_field_enum import OfferingUserFieldEnum # (1)
     from waldur_api_client.models.offering_user_o_enum import OfferingUserOEnum # (2)
     from waldur_api_client.models.offering_user_state import OfferingUserState # (3)
-    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_list # (4)
+    from waldur_api_client.models.runtime_state_enum import RuntimeStateEnum # (4)
+    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -72,7 +74,8 @@ Returns a paginated list of users associated with offerings. The visibility of u
     1.  **Model Source:** [`OfferingUserFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_field_enum.py)
     2.  **Model Source:** [`OfferingUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_o_enum.py)
     3.  **Model Source:** [`OfferingUserState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_state.py)
-    4.  **API Source:** [`marketplace_offering_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_list.py)
+    4.  **Model Source:** [`RuntimeStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/runtime_state_enum.py)
+    5.  **API Source:** [`marketplace_offering_users_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_list.py)
 
 === "TypeScript"
 
@@ -112,6 +115,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `parent_offering_uuid` | string (uuid) |  |
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by offering name, username or user name |
+    | `runtime_state` | array | Offering user runtime state<br><br> |
     | `state` | array | Offering user state<br><br> |
     | `user_username` | string | User username |
     | `user_uuid` | string (uuid) | User UUID |
@@ -163,6 +167,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `customer_name` | string |  |
     | `is_restricted` | boolean | Signal to service if the user account is restricted or not |
     | `state` | any |  |
+    | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
@@ -288,6 +293,7 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `customer_name` | string |  |
     | `is_restricted` | boolean | Signal to service if the user account is restricted or not |
     | `state` | any |  |
+    | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
@@ -409,6 +415,7 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `customer_name` | string |  |
     | `is_restricted` | boolean | Signal to service if the user account is restricted or not |
     | `state` | any |  |
+    | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
@@ -497,6 +504,91 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `is_restricted` | boolean | ✓ | Whether the offering user should be restricted from accessing resources |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+
+---
+
+### Update runtime state
+
+Allows a service provider to set the operational/access state of an offering user. Unlike the lifecycle state, this can be updated at any time (except when the account is Deleted). Use this to signal access blockers such as pending Terms of Use acceptance or pending account linking (e.g. MyAccessID).
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-offering-users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_runtime_state/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      runtime_state=null
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.offering_user_update_runtime_state_request import OfferingUserUpdateRuntimeStateRequest # (1)
+    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_update_runtime_state # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OfferingUserUpdateRuntimeStateRequest(
+        runtime_state=null
+    )
+    response = marketplace_offering_users_update_runtime_state.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OfferingUserUpdateRuntimeStateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_update_runtime_state_request.py)
+    2.  **API Source:** [`marketplace_offering_users_update_runtime_state`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_update_runtime_state.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceOfferingUsersUpdateRuntimeState } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceOfferingUsersUpdateRuntimeState({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "runtime_state": null
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `runtime_state` | any | ✓ | Operational/access state of the user account. |
 
 
 === "Responses"
@@ -624,6 +716,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `customer_name` | string |  |
     | `is_restricted` | boolean | Signal to service if the user account is restricted or not |
     | `state` | any |  |
+    | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
@@ -754,6 +847,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
     | `customer_name` | string |  |
     | `is_restricted` | boolean | Signal to service if the user account is restricted or not |
     | `state` | any |  |
+    | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
