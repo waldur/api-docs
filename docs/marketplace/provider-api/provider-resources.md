@@ -20,6 +20,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/update_user/` | [Update a user's role expiration](#update-a-users-role-expiration) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/details/` | [Get resource details](#get-resource-details) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/glauth_tree/` | [Get structured GLauth tree for a resource](#get-structured-glauth-tree-for-a-resource) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/glauth_users_config/` | [Get GLauth user configuration for a resource](#get-glauth-user-configuration-for-a-resource) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-resources/{uuid}/history/` | [Get version history](#get-version-history) |
@@ -1443,6 +1444,114 @@ Returns the detailed representation of the backend resource associated with the 
     
     **`404`** - 
     
+
+---
+
+### Get structured GLauth tree for a resource
+
+Structured JSON tree (offering, groups, users, robot accounts) scoped to one resource's project. Source of truth for the `glauth_users_config` TOML on this viewset.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/glauth_tree/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_glauth_tree_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_resources_glauth_tree_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_resources_glauth_tree_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_glauth_tree_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesGlauthTreeRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesGlauthTreeRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `offering` | object |
+    | `offering.uuid` | string |
+    | `offering.name` | string |
+    | `offering.slug` | string |
+    | `groups` | array of objects |
+    | `groups.gid` | integer |
+    | `groups.name` | string |
+    | `groups.kind` | string |
+    | `groups.scope` | object |
+    | `groups.scope.type` | string |
+    | `groups.scope.uuid` | string |
+    | `groups.scope.name` | string |
+    | `groups.scope.slug` | string |
+    | `groups.scope.resource_uuid` | string |
+    | `groups.role` | string |
+    | `groups.members` | array of strings |
+    | `users` | array of objects |
+    | `users.username` | string |
+    | `users.uidnumber` | integer |
+    | `users.disabled` | boolean |
+    | `users.personal_group` | integer |
+    | `users.mail` | string |
+    | `users.givenname` | string |
+    | `users.sn` | string |
+    | `users.login_shell` | string |
+    | `users.home_dir` | string |
+    | `users.ssh_keys` | array of strings |
+    | `users.memberships` | array of objects |
+    | `users.memberships.gid` | integer |
+    | `users.memberships.group_name` | string |
+    | `users.memberships.kind` | string |
+    | `users.memberships.role` | string |
+    | `robot_accounts` | array of objects |
+    | `robot_accounts.username` | string |
+    | `robot_accounts.uidnumber` | integer |
+    | `robot_accounts.personal_group` | integer |
+    | `robot_accounts.login_shell` | string |
+    | `robot_accounts.home_dir` | string |
+    | `robot_accounts.ssh_keys` | array of strings |
 
 ---
 

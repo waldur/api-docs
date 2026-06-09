@@ -158,6 +158,7 @@ Get a list of subnets.
     | `host_routes.destination` | string |  |
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
+    | `port_security_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -289,6 +290,7 @@ Retrieve details of a specific subnet.
     | `host_routes.destination` | string |  |
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
+    | `port_security_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -587,6 +589,7 @@ Update an existing subnet.
     | `host_routes.destination` | string |  |
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
+    | `port_security_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -732,6 +735,7 @@ Update specific fields of a subnet.
     | `host_routes.destination` | string |  |
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
+    | `port_security_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |

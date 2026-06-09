@@ -1221,6 +1221,7 @@ Create network for tenant
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
+    | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
     | `rbac_policies` | array of objects |  |
     | `rbac_policies.url` | string (uri) |  |
@@ -1236,6 +1237,7 @@ Create network for tenant
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
+    | `port_security_enabled` | boolean | Default port_security_enabled for ports on this network. When False, ports created on this network inherit disabled port security unless explicitly overridden. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |

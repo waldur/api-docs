@@ -158,6 +158,7 @@ Get a list of networks.
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
+    | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
     | `rbac_policies` | array of objects |  |
     | `rbac_policies.url` | string (uri) |  |
@@ -173,6 +174,7 @@ Get a list of networks.
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
+    | `port_security_enabled` | boolean | Default port_security_enabled for ports on this network. When False, ports created on this network inherit disabled port security unless explicitly overridden. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -304,6 +306,7 @@ Retrieve details of a specific network.
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
+    | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
     | `rbac_policies` | array of objects |  |
     | `rbac_policies.url` | string (uri) |  |
@@ -319,6 +322,7 @@ Retrieve details of a specific network.
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
+    | `port_security_enabled` | boolean | Default port_security_enabled for ports on this network. When False, ports created on this network inherit disabled port security unless explicitly overridden. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -470,6 +474,7 @@ Create a new subnet within the network.
     | `host_routes.destination` | string |  |
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
+    | `port_security_enabled` | boolean |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -758,6 +763,7 @@ Update an existing network.
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
+    | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
     | `rbac_policies` | array of objects |  |
     | `rbac_policies.url` | string (uri) |  |
@@ -773,6 +779,7 @@ Update an existing network.
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
+    | `port_security_enabled` | boolean | Default port_security_enabled for ports on this network. When False, ports created on this network inherit disabled port security unless explicitly overridden. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -908,6 +915,7 @@ Update specific fields of a network.
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
+    | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
     | `rbac_policies` | array of objects |  |
     | `rbac_policies.url` | string (uri) |  |
@@ -923,6 +931,7 @@ Update specific fields of a network.
     | `rbac_policies.backend_id` | string |  |
     | `rbac_policies.policy_type` | any | Type of access granted - either shared access or external network access |
     | `rbac_policies.created` | string (date-time) |  |
+    | `port_security_enabled` | boolean | Default port_security_enabled for ports on this network. When False, ports created on this network inherit disabled port security unless explicitly overridden. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |

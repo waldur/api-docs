@@ -78,6 +78,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/import_resource/` | [Import a resource](#import-a-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync/` | [Synchronize offering service settings](#synchronize-offering-service-settings) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/glauth_tree/` | [Get structured GLauth tree for an offering](#get-structured-glauth-tree-for-an-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/state_counters/` | [Get offering resource and user state counters](#get-offering-resource-and-user-state-counters) |
@@ -849,6 +850,11 @@ Creates a new provider offering.
     | `plugin_options.initial_primarygroup_number` | integer |  | GLAuth initial primary group number<br>_Constraints: default: `5000`_ |
     | `plugin_options.initial_uidnumber` | integer |  | GLAuth initial uidnumber<br>_Constraints: default: `5000`_ |
     | `plugin_options.initial_usergroup_number` | integer |  | GLAuth initial usergroup number<br>_Constraints: default: `6000`_ |
+    | `plugin_options.initial_rolegroup_number` | integer |  | GLAuth initial gid for role-aware groups (one per (resource|resource-project, role) tuple). Must leave at least 50000 gids of headroom above initial_usergroup_number to avoid collisions.<br>_Constraints: default: `60000`_ |
+    | `plugin_options.resource_role_map` | object (free-form) |  | Mapping of Waldur role names (on Resource scope) to emitted role tokens used in group name rendering. Roles outside the map are skipped. Example: {"PI": "admin", "Member": "member"}. |
+    | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
+    | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
+    | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
     | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
     | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
     | `plugin_options.enable_issues_for_membership_changes` | boolean |  | Enable issues for membership changes |
@@ -5505,6 +5511,11 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.initial_primarygroup_number` | integer |  | GLAuth initial primary group number<br>_Constraints: default: `5000`_ |
     | `plugin_options.initial_uidnumber` | integer |  | GLAuth initial uidnumber<br>_Constraints: default: `5000`_ |
     | `plugin_options.initial_usergroup_number` | integer |  | GLAuth initial usergroup number<br>_Constraints: default: `6000`_ |
+    | `plugin_options.initial_rolegroup_number` | integer |  | GLAuth initial gid for role-aware groups (one per (resource|resource-project, role) tuple). Must leave at least 50000 gids of headroom above initial_usergroup_number to avoid collisions.<br>_Constraints: default: `60000`_ |
+    | `plugin_options.resource_role_map` | object (free-form) |  | Mapping of Waldur role names (on Resource scope) to emitted role tokens used in group name rendering. Roles outside the map are skipped. Example: {"PI": "admin", "Member": "member"}. |
+    | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
+    | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
+    | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
     | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
     | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
     | `plugin_options.enable_issues_for_membership_changes` | boolean |  | Enable issues for membership changes |
@@ -7501,6 +7512,114 @@ Schedules a synchronization task to pull the latest data for the offering's serv
 
 ## Other Actions
 
+
+### Get structured GLauth tree for an offering
+
+Returns the same set of users, groups and robot accounts as `glauth_users_config`, but as a structured JSON tree suitable for navigation in admin UIs. Source of truth for the TOML endpoint.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/glauth_tree/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_glauth_tree_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_offerings_glauth_tree_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_offerings_glauth_tree_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_glauth_tree_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsGlauthTreeRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsGlauthTreeRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `offering` | object |
+    | `offering.uuid` | string |
+    | `offering.name` | string |
+    | `offering.slug` | string |
+    | `groups` | array of objects |
+    | `groups.gid` | integer |
+    | `groups.name` | string |
+    | `groups.kind` | string |
+    | `groups.scope` | object |
+    | `groups.scope.type` | string |
+    | `groups.scope.uuid` | string |
+    | `groups.scope.name` | string |
+    | `groups.scope.slug` | string |
+    | `groups.scope.resource_uuid` | string |
+    | `groups.role` | string |
+    | `groups.members` | array of strings |
+    | `users` | array of objects |
+    | `users.username` | string |
+    | `users.uidnumber` | integer |
+    | `users.disabled` | boolean |
+    | `users.personal_group` | integer |
+    | `users.mail` | string |
+    | `users.givenname` | string |
+    | `users.sn` | string |
+    | `users.login_shell` | string |
+    | `users.home_dir` | string |
+    | `users.ssh_keys` | array of strings |
+    | `users.memberships` | array of objects |
+    | `users.memberships.gid` | integer |
+    | `users.memberships.group_name` | string |
+    | `users.memberships.kind` | string |
+    | `users.memberships.role` | string |
+    | `robot_accounts` | array of objects |
+    | `robot_accounts.username` | string |
+    | `robot_accounts.uidnumber` | integer |
+    | `robot_accounts.personal_group` | integer |
+    | `robot_accounts.login_shell` | string |
+    | `robot_accounts.home_dir` | string |
+    | `robot_accounts.ssh_keys` | array of strings |
+
+---
 
 ### Get object state at a specific timestamp
 
