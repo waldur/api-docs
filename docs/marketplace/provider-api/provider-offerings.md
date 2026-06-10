@@ -2083,6 +2083,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
     | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
+    | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
 
 ---
 
