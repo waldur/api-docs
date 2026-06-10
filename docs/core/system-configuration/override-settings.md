@@ -105,6 +105,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `K8S_JOB_TIMEOUT` | integer |
     | `ENABLE_STRICT_CHECK_ACCEPTING_INVITATION` | boolean |
     | `INVITATION_DISABLE_MULTIPLE_ROLES` | boolean |
+    | `ONLY_ONE_PROJECT_MANAGER` | boolean |
     | `DEFAULT_IDP` | any |
     | `DOCS_URL` | string (uri) |
     | `SHORT_PAGE_TITLE` | string |
@@ -461,6 +462,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `K8S_JOB_TIMEOUT` | integer |  |
     | `ENABLE_STRICT_CHECK_ACCEPTING_INVITATION` | boolean |  |
     | `INVITATION_DISABLE_MULTIPLE_ROLES` | boolean |  |
+    | `ONLY_ONE_PROJECT_MANAGER` | boolean |  |
     | `DEFAULT_IDP` | any |  |
     | `DOCS_URL` | string (uri) |  |
     | `SHORT_PAGE_TITLE` | string |  |
