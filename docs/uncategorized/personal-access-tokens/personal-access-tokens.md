@@ -420,6 +420,11 @@ descendants at request time).
 
 Return permissions the current user can delegate to a PAT.
 
+Staff users can delegate any permission (they bypass UserRole checks).
+For other users only the permissions granted by their active roles are
+offered, plus SUPPORT.ACCESS for support users — mirroring what the
+create serializer would accept.
+
 
 === "HTTPie"
 
