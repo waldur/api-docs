@@ -116,7 +116,13 @@
     | `max_replicas` | integer |
     | `current_replicas` | integer |
     | `desired_replicas` | integer |
-    | `metrics` | object (free-form) |
+    | `metrics` | array of objects |
+    | `metrics.name` | string |
+    | `metrics.type` | string |
+    | `metrics.target` | object |
+    | `metrics.target.type` | string |
+    | `metrics.target.utilization` | integer |
+    | `metrics.target.averageValue` | string |
 
 ---
 
@@ -207,7 +213,13 @@
     | `max_replicas` | integer |
     | `current_replicas` | integer |
     | `desired_replicas` | integer |
-    | `metrics` | object (free-form) |
+    | `metrics` | array of objects |
+    | `metrics.name` | string |
+    | `metrics.type` | string |
+    | `metrics.target` | object |
+    | `metrics.target.type` | string |
+    | `metrics.target.utilization` | integer |
+    | `metrics.target.averageValue` | string |
 
 ---
 
@@ -222,7 +234,7 @@
       https://api.example.com/api/rancher-hpas/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-rancher-hpa" \
-      metrics:='{}'
+      metrics:='[]'
     ```
 
 === "Python"
@@ -238,7 +250,7 @@
     
     body_data = RancherHPARequest(
         name="my-awesome-rancher-hpa",
-        metrics={}
+        metrics=[]
     )
     response = rancher_hpas_create.sync(
         client=client,
@@ -262,7 +274,7 @@
       auth: "Token YOUR_API_TOKEN",
       body: {
         "name": "my-awesome-rancher-hpa",
-        "metrics": {}
+        "metrics": []
       }
     });
       console.log('Success:', response);
@@ -281,7 +293,13 @@
     | `workload` | string (uri) |  |
     | `min_replicas` | integer |  |
     | `max_replicas` | integer |  |
-    | `metrics` | object (free-form) | ✓ |
+    | `metrics` | array of objects | ✓ |
+    | `metrics.name` | string | ✓ |
+    | `metrics.type` | string | ✓ |
+    | `metrics.target` | object | ✓ |
+    | `metrics.target.type` | string | ✓ |
+    | `metrics.target.utilization` | integer |  |
+    | `metrics.target.averageValue` | string |  |
 
 
 === "Responses"
@@ -313,7 +331,13 @@
     | `max_replicas` | integer |
     | `current_replicas` | integer |
     | `desired_replicas` | integer |
-    | `metrics` | object (free-form) |
+    | `metrics` | array of objects |
+    | `metrics.name` | string |
+    | `metrics.type` | string |
+    | `metrics.target` | object |
+    | `metrics.target.type` | string |
+    | `metrics.target.utilization` | integer |
+    | `metrics.target.averageValue` | string |
 
 ---
 
@@ -475,7 +499,7 @@ Delete resource from the database without scheduling operations on backend
       https://api.example.com/api/rancher-hpas/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-rancher-hpa" \
-      metrics:='{}'
+      metrics:='[]'
     ```
 
 === "Python"
@@ -491,7 +515,7 @@ Delete resource from the database without scheduling operations on backend
     
     body_data = RancherHPARequest(
         name="my-awesome-rancher-hpa",
-        metrics={}
+        metrics=[]
     )
     response = rancher_hpas_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -519,7 +543,7 @@ Delete resource from the database without scheduling operations on backend
       },
       body: {
         "name": "my-awesome-rancher-hpa",
-        "metrics": {}
+        "metrics": []
       }
     });
       console.log('Success:', response);
@@ -545,7 +569,13 @@ Delete resource from the database without scheduling operations on backend
     | `workload` | string (uri) |  |
     | `min_replicas` | integer |  |
     | `max_replicas` | integer |  |
-    | `metrics` | object (free-form) | ✓ |
+    | `metrics` | array of objects | ✓ |
+    | `metrics.name` | string | ✓ |
+    | `metrics.type` | string | ✓ |
+    | `metrics.target` | object | ✓ |
+    | `metrics.target.type` | string | ✓ |
+    | `metrics.target.utilization` | integer |  |
+    | `metrics.target.averageValue` | string |  |
 
 
 === "Responses"
@@ -577,7 +607,13 @@ Delete resource from the database without scheduling operations on backend
     | `max_replicas` | integer |
     | `current_replicas` | integer |
     | `desired_replicas` | integer |
-    | `metrics` | object (free-form) |
+    | `metrics` | array of objects |
+    | `metrics.name` | string |
+    | `metrics.type` | string |
+    | `metrics.target` | object |
+    | `metrics.target.type` | string |
+    | `metrics.target.utilization` | integer |
+    | `metrics.target.averageValue` | string |
 
 ---
 
@@ -653,7 +689,13 @@ Delete resource from the database without scheduling operations on backend
     | `workload` | string (uri) |  |
     | `min_replicas` | integer |  |
     | `max_replicas` | integer |  |
-    | `metrics` | object (free-form) |  |
+    | `metrics` | array of objects |  |
+    | `metrics.name` | string | ✓ |
+    | `metrics.type` | string | ✓ |
+    | `metrics.target` | object | ✓ |
+    | `metrics.target.type` | string | ✓ |
+    | `metrics.target.utilization` | integer |  |
+    | `metrics.target.averageValue` | string |  |
 
 
 === "Responses"
@@ -685,7 +727,13 @@ Delete resource from the database without scheduling operations on backend
     | `max_replicas` | integer |
     | `current_replicas` | integer |
     | `desired_replicas` | integer |
-    | `metrics` | object (free-form) |
+    | `metrics` | array of objects |
+    | `metrics.name` | string |
+    | `metrics.type` | string |
+    | `metrics.target` | object |
+    | `metrics.target.type` | string |
+    | `metrics.target.utilization` | integer |
+    | `metrics.target.averageValue` | string |
 
 ---
 
@@ -989,7 +1037,7 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
       https://api.example.com/api/rancher-hpas/a1b2c3d4-e5f6-7890-abcd-ef1234567890/yaml/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-rancher-hpa" \
-      metrics:='{}'
+      metrics:='[]'
     ```
 
 === "Python"
@@ -1005,7 +1053,7 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     
     body_data = RancherHPARequest(
         name="my-awesome-rancher-hpa",
-        metrics={}
+        metrics=[]
     )
     response = rancher_hpas_yaml_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -1033,7 +1081,7 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
       },
       body: {
         "name": "my-awesome-rancher-hpa",
-        "metrics": {}
+        "metrics": []
       }
     });
       console.log('Success:', response);
@@ -1059,7 +1107,13 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | `workload` | string (uri) |  |
     | `min_replicas` | integer |  |
     | `max_replicas` | integer |  |
-    | `metrics` | object (free-form) | ✓ |
+    | `metrics` | array of objects | ✓ |
+    | `metrics.name` | string | ✓ |
+    | `metrics.type` | string | ✓ |
+    | `metrics.target` | object | ✓ |
+    | `metrics.target.type` | string | ✓ |
+    | `metrics.target.utilization` | integer |  |
+    | `metrics.target.averageValue` | string |  |
 
 
 === "Responses"

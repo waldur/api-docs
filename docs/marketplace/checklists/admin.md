@@ -603,7 +603,7 @@ Return checklist questions.
     | `rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `operator` | any |  |
-    | `review_answer_value` | object (free-form) | Answer value that trigger review. |
+    | `review_answer_value` | any |  |
     | `always_requires_review` | boolean | This question always requires review regardless of answer |
     | `guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |

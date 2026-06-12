@@ -163,8 +163,8 @@
     | `public_ips.floating_ip_uuid` | string (uuid) |  |
     | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
     | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | object (free-form) | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | object (free-form) | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
+    | `capacity` | object (free-form) |  |
+    | `requested` | object (free-form) |  |
     | `kubernetes_version` | string | Kubernetes version used in the cluster. |
     | `router_ips` | array of anys |  |
     | `marketplace_offering_uuid` | string |  |
@@ -312,8 +312,8 @@
     | `public_ips.floating_ip_uuid` | string (uuid) |  |
     | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
     | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | object (free-form) | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | object (free-form) | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
+    | `capacity` | object (free-form) |  |
+    | `requested` | object (free-form) |  |
     | `kubernetes_version` | string | Kubernetes version used in the cluster. |
     | `router_ips` | array of anys |  |
     | `marketplace_offering_uuid` | string |  |
@@ -711,8 +711,8 @@ Delete resource from the database without scheduling operations on backend
     | `public_ips.floating_ip_uuid` | string (uuid) |  |
     | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
     | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | object (free-form) | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | object (free-form) | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
+    | `capacity` | object (free-form) |  |
+    | `requested` | object (free-form) |  |
     | `kubernetes_version` | string | Kubernetes version used in the cluster. |
     | `router_ips` | array of anys |  |
     | `marketplace_offering_uuid` | string |  |
@@ -867,8 +867,8 @@ Delete resource from the database without scheduling operations on backend
     | `public_ips.floating_ip_uuid` | string (uuid) |  |
     | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
     | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | object (free-form) | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | object (free-form) | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
+    | `capacity` | object (free-form) |  |
+    | `requested` | object (free-form) |  |
     | `kubernetes_version` | string | Kubernetes version used in the cluster. |
     | `router_ips` | array of anys |  |
     | `marketplace_offering_uuid` | string |  |

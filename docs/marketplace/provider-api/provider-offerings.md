@@ -5432,7 +5432,9 @@ Updates the backend integration settings for an offering, including plugin optio
     | `secret_options.shared_user_password` | string |  | GLAuth shared user password |
     | `secret_options.template_confirmation_comment` | string |  | Template confirmation comment |
     | `secret_options.language` | string |  | Script language: Python or Bash |
-    | `secret_options.environ` | object (free-form) |  | Script environment variables |
+    | `secret_options.environ` | array of objects |  | Script environment variables |
+    | `secret_options.environ.name` | string | ✓ |  |
+    | `secret_options.environ.value` | string | ✓ |  |
     | `secret_options.create` | string |  | Script for resource creation |
     | `secret_options.terminate` | string |  | Script for resource termination |
     | `secret_options.update` | string |  | Script for resource update |

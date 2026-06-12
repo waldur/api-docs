@@ -112,9 +112,9 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | object (free-form) | Package maintainers |
+    | `categories` | array of strings |  |
+    | `licenses` | array of strings |  |
+    | `maintainers` | array of strings |  |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -227,9 +227,9 @@ Returns the details of a specific software package, including its description, h
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | object (free-form) | Package maintainers |
+    | `categories` | array of strings |  |
+    | `licenses` | array of strings |  |
+    | `maintainers` | array of strings |  |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -339,9 +339,6 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
     | `homepage` | string (uri) |  |  |
-    | `categories` | object (free-form) |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | object (free-form) |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | object (free-form) |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
 
 
@@ -359,9 +356,9 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | object (free-form) | Package maintainers |
+    | `categories` | array of strings |  |
+    | `licenses` | array of strings |  |
+    | `maintainers` | array of strings |  |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -482,9 +479,6 @@ Updates an existing software package. Requires staff permissions.
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
     | `homepage` | string (uri) |  |  |
-    | `categories` | object (free-form) |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | object (free-form) |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | object (free-form) |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
 
 
@@ -502,9 +496,9 @@ Updates an existing software package. Requires staff permissions.
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | object (free-form) | Package maintainers |
+    | `categories` | array of strings |  |
+    | `licenses` | array of strings |  |
+    | `maintainers` | array of strings |  |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -616,9 +610,6 @@ Partially updates an existing software package. Requires staff permissions.
     | `name` | string |  |  |
     | `description` | string |  |  |
     | `homepage` | string (uri) |  |  |
-    | `categories` | object (free-form) |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | object (free-form) |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | object (free-form) |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
 
 
@@ -636,9 +627,9 @@ Partially updates an existing software package. Requires staff permissions.
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | object (free-form) | Package maintainers |
+    | `categories` | array of strings |  |
+    | `licenses` | array of strings |  |
+    | `maintainers` | array of strings |  |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |

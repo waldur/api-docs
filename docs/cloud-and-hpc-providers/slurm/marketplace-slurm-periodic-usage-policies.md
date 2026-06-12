@@ -899,7 +899,7 @@ List evaluation logs for this policy.
     | `billing_period` | string | Billing period identifier, e.g. '2026-Q1' |
     | `usage_percentage` | number (double) | Resource usage percentage at the time of evaluation |
     | `grace_limit_percentage` | number (double) | Grace limit percentage threshold (e.g. 120 for 20% grace) |
-    | `actions_taken` | object (free-form) | List of actions taken during this evaluation (e.g. ['pause', 'notify']) |
+    | `actions_taken` | array of strings |  |
     | `previous_state` | object (free-form) | Resource state before evaluation: {paused: bool, downscaled: bool} |
     | `new_state` | object (free-form) | Resource state after evaluation: {paused: bool, downscaled: bool} |
     | `stomp_message_sent` | boolean | Whether a STOMP message was sent to the site agent |

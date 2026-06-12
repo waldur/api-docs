@@ -106,8 +106,17 @@
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | array of strings |  |
+    | `top_matching_proposals` | array of objects |  |
+    | `top_matching_proposals.uuid` | string (uuid) |  |
+    | `top_matching_proposals.name` | string |  |
+    | `top_matching_proposals.slug` | string |  |
+    | `top_matching_proposals.affinity` | number (double) |  |
+    | `top_matching_proposals.keyword_score` | number (double) |  |
+    | `top_matching_proposals.text_score` | number (double) |  |
+    | `top_matching_proposals.has_coi` | boolean |  |
+    | `top_matching_proposals.coi_type` | string |  |
+    | `top_matching_proposals.coi_severity` | string |  |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
@@ -197,8 +206,17 @@
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | array of strings |  |
+    | `top_matching_proposals` | array of objects |  |
+    | `top_matching_proposals.uuid` | string (uuid) |  |
+    | `top_matching_proposals.name` | string |  |
+    | `top_matching_proposals.slug` | string |  |
+    | `top_matching_proposals.affinity` | number (double) |  |
+    | `top_matching_proposals.keyword_score` | number (double) |  |
+    | `top_matching_proposals.text_score` | number (double) |  |
+    | `top_matching_proposals.has_coi` | boolean |  |
+    | `top_matching_proposals.coi_type` | string |  |
+    | `top_matching_proposals.coi_severity` | string |  |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
@@ -373,8 +391,17 @@ Confirm a reviewer suggestion. The reviewer will be invited to the call.
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | array of strings |  |
+    | `top_matching_proposals` | array of objects |  |
+    | `top_matching_proposals.uuid` | string (uuid) |  |
+    | `top_matching_proposals.name` | string |  |
+    | `top_matching_proposals.slug` | string |  |
+    | `top_matching_proposals.affinity` | number (double) |  |
+    | `top_matching_proposals.keyword_score` | number (double) |  |
+    | `top_matching_proposals.text_score` | number (double) |  |
+    | `top_matching_proposals.has_coi` | boolean |  |
+    | `top_matching_proposals.coi_type` | string |  |
+    | `top_matching_proposals.coi_severity` | string |  |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
@@ -478,8 +505,17 @@ Reject a reviewer suggestion.
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | array of strings |  |
+    | `top_matching_proposals` | array of objects |  |
+    | `top_matching_proposals.uuid` | string (uuid) |  |
+    | `top_matching_proposals.name` | string |  |
+    | `top_matching_proposals.slug` | string |  |
+    | `top_matching_proposals.affinity` | number (double) |  |
+    | `top_matching_proposals.keyword_score` | number (double) |  |
+    | `top_matching_proposals.text_score` | number (double) |  |
+    | `top_matching_proposals.has_coi` | boolean |  |
+    | `top_matching_proposals.coi_type` | string |  |
+    | `top_matching_proposals.coi_severity` | string |  |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |

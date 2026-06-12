@@ -1146,7 +1146,7 @@ Get checklist template for creating new objects.
     | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `questions.operator` | any |  |
-    | `questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
+    | `questions.review_answer_value` | any |  |
     | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
     | `questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
@@ -1176,7 +1176,7 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `initial_visible_questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `initial_visible_questions.operator` | any |  |
-    | `initial_visible_questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
+    | `initial_visible_questions.review_answer_value` | any |  |
     | `initial_visible_questions.always_requires_review` | boolean | This question always requires review regardless of answer |
     | `initial_visible_questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `initial_visible_questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
@@ -1542,7 +1542,7 @@ Submit answers to checklist questions. Automatically detects which checklist (cu
 === "HTTPie"
 
     ```bash
-    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": {}}]' | http \
+    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]' | http \
       POST \
       https://api.example.com/api/onboarding-verifications/a1b2c3d4-e5f6-7890-abcd-ef1234567890/submit_answers/ \
       Authorization:"Token YOUR_API_TOKEN"
@@ -1579,7 +1579,7 @@ Submit answers to checklist questions. Automatically detects which checklist (cu
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
-      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": {}}]
+      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]
     });
       console.log('Success:', response);
     } catch (error) {
@@ -1602,7 +1602,7 @@ Submit answers to checklist questions. Automatically detects which checklist (cu
     | Field | Type | Required |
     |---|---|---|
     | `question_uuid` | string (uuid) | ✓ |
-    | `answer_data` | object (free-form) | ✓ |
+    | `answer_data` | any | ✓ |
 
 
 === "Responses"
