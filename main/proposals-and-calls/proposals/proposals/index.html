@@ -18106,8 +18106,8 @@
 </tr>
 <tr>
 <td><code>questions.review_answer_value</code></td>
-<td>object (free-form)</td>
-<td>Answer value that trigger review.</td>
+<td>any</td>
+<td></td>
 </tr>
 <tr>
 <td><code>questions.always_requires_review</code></td>
@@ -18355,8 +18355,8 @@
 </tr>
 <tr>
 <td><code>questions.review_answer_value</code></td>
-<td>object (free-form)</td>
-<td>Answer value that trigger review.</td>
+<td>any</td>
+<td></td>
 </tr>
 <tr>
 <td><code>questions.always_requires_review</code></td>
@@ -18505,8 +18505,8 @@
 </tr>
 <tr>
 <td><code>initial_visible_questions.review_answer_value</code></td>
-<td>object (free-form)</td>
-<td>Answer value that trigger review.</td>
+<td>any</td>
+<td></td>
 </tr>
 <tr>
 <td><code>initial_visible_questions.always_requires_review</code></td>
@@ -20770,7 +20770,7 @@
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;question_uuid&quot;: &quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;, &quot;answer_data&quot;: {}}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;question_uuid&quot;: &quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;, &quot;answer_data&quot;: null}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/submit_answers/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
@@ -20827,7 +20827,7 @@
 <span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;question_uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;answer_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}}]</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;question_uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;answer_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">}]</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -20871,7 +20871,7 @@
 </tr>
 <tr>
 <td><code>answer_data</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 <td>✓</td>
 </tr>
 </tbody>

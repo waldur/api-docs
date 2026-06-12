@@ -14678,7 +14678,17 @@
 </tr>
 <tr>
 <td><code>dependencies</code></td>
-<td>object (free-form)</td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dependencies.package</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dependencies.version</code></td>
+<td>string</td>
 <td></td>
 </tr>
 <tr>
@@ -14888,7 +14898,17 @@
 </tr>
 <tr>
 <td><code>dependencies</code></td>
-<td>object (free-form)</td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dependencies.package</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dependencies.version</code></td>
+<td>string</td>
 <td></td>
 </tr>
 <tr>
@@ -15086,12 +15106,6 @@
 <td></td>
 </tr>
 <tr>
-<td><code>dependencies</code></td>
-<td>object (free-form)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td><code>config_file_path</code></td>
 <td>string</td>
 <td></td>
@@ -15155,7 +15169,17 @@
 </tr>
 <tr>
 <td><code>dependencies</code></td>
-<td>object (free-form)</td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dependencies.package</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dependencies.version</code></td>
+<td>string</td>
 <td></td>
 </tr>
 <tr>
@@ -15379,12 +15403,6 @@
 <td></td>
 </tr>
 <tr>
-<td><code>dependencies</code></td>
-<td>object (free-form)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td><code>config_file_path</code></td>
 <td>string</td>
 <td></td>
@@ -15448,7 +15466,17 @@
 </tr>
 <tr>
 <td><code>dependencies</code></td>
-<td>object (free-form)</td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dependencies.package</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dependencies.version</code></td>
+<td>string</td>
 <td></td>
 </tr>
 <tr>
@@ -15971,8 +15999,23 @@
 </tr>
 <tr>
 <td><code>observable_objects</code></td>
-<td>object (free-form)</td>
+<td>array of objects</td>
 <td>List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}]</td>
+</tr>
+<tr>
+<td><code>observable_objects.offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>observable_objects.object_type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>observable_objects.object_id</code></td>
+<td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>created</code></td>
@@ -16039,8 +16082,23 @@
 </tr>
 <tr>
 <td><code>observable_objects</code></td>
-<td>object (free-form)</td>
+<td>array of objects</td>
 <td>List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}]</td>
+</tr>
+<tr>
+<td><code>observable_objects.offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>observable_objects.object_type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>observable_objects.object_id</code></td>
+<td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>created</code></td>

@@ -14506,49 +14506,40 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>object (free-form)</td>
-<td>The answer value(s) that make this question visible</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>operator</code></td>
 <td>string</td>
-<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -14651,49 +14642,40 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>object (free-form)</td>
-<td>The answer value(s) that make this question visible</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>operator</code></td>
 <td>string</td>
-<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -14710,14 +14692,12 @@
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/checklists-admin-question-dependencies/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>required_answer_value:<span class="o">=</span><span class="s1">&#39;{}&#39;</span>
+<span class="w">  </span><span class="nv">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -14738,8 +14718,7 @@
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.question_dependency_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuestionDependencyRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.checklists_admin_question_dependencies</span><span class="w"> </span><span class="kn">import</span> <span class="n">checklists_admin_question_dependencies_create</span> <span class="c1"># (2)</span>
 
@@ -14749,8 +14728,7 @@
 
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">QuestionDependencyRequest</span><span class="p">(</span>
     <span class="n">question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">required_answer_value</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">checklists_admin_question_dependencies_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -14778,16 +14756,14 @@
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">checklistsAdminQuestionDependenciesCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">checklistsAdminQuestionDependenciesCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">checklistsAdminQuestionDependenciesCreate</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;depends_on_question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;required_answer_value&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="s2">&quot;depends_on_question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -14803,7 +14779,6 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -14811,25 +14786,21 @@
 <td><code>question</code></td>
 <td>string (uri)</td>
 <td>✓</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question</code></td>
 <td>string (uri)</td>
 <td>✓</td>
-<td></td>
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>object (free-form)</td>
-<td>✓</td>
-<td>The answer value(s) that make this question visible</td>
+<td>any</td>
+<td></td>
 </tr>
 <tr>
 <td><code>operator</code></td>
 <td>string</td>
 <td></td>
-<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -14841,49 +14812,40 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>object (free-form)</td>
-<td>The answer value(s) that make this question visible</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>operator</code></td>
 <td>string</td>
-<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -14900,14 +14862,12 @@
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>PUT<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/checklists-admin-question-dependencies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>required_answer_value:<span class="o">=</span><span class="s1">&#39;{}&#39;</span>
+<span class="w">  </span><span class="nv">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -14929,8 +14889,7 @@
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.question_dependency_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuestionDependencyRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.checklists_admin_question_dependencies</span><span class="w"> </span><span class="kn">import</span> <span class="n">checklists_admin_question_dependencies_update</span> <span class="c1"># (2)</span>
 
@@ -14940,8 +14899,7 @@
 
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">QuestionDependencyRequest</span><span class="p">(</span>
     <span class="n">question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">required_answer_value</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">checklists_admin_question_dependencies_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
@@ -14973,8 +14931,7 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">checklistsAdminQuestionDependenciesUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">checklistsAdminQuestionDependenciesUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">checklistsAdminQuestionDependenciesUpdate</span><span class="p">({</span>
@@ -14984,8 +14941,7 @@
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;depends_on_question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;required_answer_value&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="s2">&quot;depends_on_question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -15019,7 +14975,6 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -15027,25 +14982,21 @@
 <td><code>question</code></td>
 <td>string (uri)</td>
 <td>✓</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question</code></td>
 <td>string (uri)</td>
 <td>✓</td>
-<td></td>
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>object (free-form)</td>
-<td>✓</td>
-<td>The answer value(s) that make this question visible</td>
+<td>any</td>
+<td></td>
 </tr>
 <tr>
 <td><code>operator</code></td>
 <td>string</td>
 <td></td>
-<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -15057,49 +15008,40 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>object (free-form)</td>
-<td>The answer value(s) that make this question visible</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>operator</code></td>
 <td>string</td>
-<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -15211,7 +15153,6 @@
 <th>Field</th>
 <th>Type</th>
 <th>Required</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -15219,25 +15160,21 @@
 <td><code>question</code></td>
 <td>string (uri)</td>
 <td></td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question</code></td>
 <td>string (uri)</td>
 <td></td>
-<td></td>
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 <td></td>
-<td>The answer value(s) that make this question visible</td>
 </tr>
 <tr>
 <td><code>operator</code></td>
 <td>string</td>
 <td></td>
-<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -15249,49 +15186,40 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
-<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question</code></td>
 <td>string (uri)</td>
-<td></td>
 </tr>
 <tr>
 <td><code>depends_on_question_name</code></td>
 <td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>object (free-form)</td>
-<td>The answer value(s) that make this question visible</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>operator</code></td>
 <td>string</td>
-<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
 </tr>
 </tbody>
 </table>
