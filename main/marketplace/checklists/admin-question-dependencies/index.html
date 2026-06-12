@@ -14542,7 +14542,7 @@
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>any</td>
+<td>object (free-form)</td>
 <td>The answer value(s) that make this question visible</td>
 </tr>
 <tr>
@@ -14687,7 +14687,7 @@
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>any</td>
+<td>object (free-form)</td>
 <td>The answer value(s) that make this question visible</td>
 </tr>
 <tr>
@@ -14717,7 +14717,7 @@
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">required_answer_value</span><span class="o">=</span>null
+<span class="w">  </span>required_answer_value:<span class="o">=</span><span class="s1">&#39;{}&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -14750,7 +14750,7 @@
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">QuestionDependencyRequest</span><span class="p">(</span>
     <span class="n">question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
     <span class="n">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">required_answer_value</span><span class="o">=</span><span class="n">null</span>
+    <span class="n">required_answer_value</span><span class="o">=</span><span class="p">{}</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">checklists_admin_question_dependencies_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -14787,7 +14787,7 @@
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;depends_on_question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;required_answer_value&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="s2">&quot;required_answer_value&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -14821,7 +14821,7 @@
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>any</td>
+<td>object (free-form)</td>
 <td>✓</td>
 <td>The answer value(s) that make this question visible</td>
 </tr>
@@ -14877,7 +14877,7 @@
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>any</td>
+<td>object (free-form)</td>
 <td>The answer value(s) that make this question visible</td>
 </tr>
 <tr>
@@ -14907,7 +14907,7 @@
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">required_answer_value</span><span class="o">=</span>null
+<span class="w">  </span>required_answer_value:<span class="o">=</span><span class="s1">&#39;{}&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -14941,7 +14941,7 @@
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">QuestionDependencyRequest</span><span class="p">(</span>
     <span class="n">question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
     <span class="n">depends_on_question</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">required_answer_value</span><span class="o">=</span><span class="n">null</span>
+    <span class="n">required_answer_value</span><span class="o">=</span><span class="p">{}</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">checklists_admin_question_dependencies_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
@@ -14985,7 +14985,7 @@
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;depends_on_question&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;required_answer_value&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="s2">&quot;required_answer_value&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -15037,7 +15037,7 @@
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>any</td>
+<td>object (free-form)</td>
 <td>✓</td>
 <td>The answer value(s) that make this question visible</td>
 </tr>
@@ -15093,7 +15093,7 @@
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>any</td>
+<td>object (free-form)</td>
 <td>The answer value(s) that make this question visible</td>
 </tr>
 <tr>
@@ -15229,7 +15229,7 @@
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>any</td>
+<td>object (free-form)</td>
 <td></td>
 <td>The answer value(s) that make this question visible</td>
 </tr>
@@ -15285,7 +15285,7 @@
 </tr>
 <tr>
 <td><code>required_answer_value</code></td>
-<td>any</td>
+<td>object (free-form)</td>
 <td>The answer value(s) that make this question visible</td>
 </tr>
 <tr>
@@ -15413,7 +15413,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-01-27
+    2026-06-12
   </span>
 
     
