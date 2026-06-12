@@ -100,7 +100,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
@@ -111,7 +111,7 @@
     | `period_name` | string |  |
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
+    | `tres_billing_weights` | object (free-form) | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
     | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
@@ -196,7 +196,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
@@ -207,7 +207,7 @@
     | `period_name` | string |  |
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
+    | `tres_billing_weights` | object (free-form) | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
     | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
@@ -287,7 +287,7 @@
     |---|---|---|---|
     | `scope` | string (uri) | ✓ |  |
     | `actions` | string | ✓ |  |
-    | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |  |
     | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects | ✓ |  |
@@ -296,7 +296,7 @@
     | `period` | any |  |  |
     | `limit_type` | any |  | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean |  | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
+    | `tres_billing_weights` | object (free-form) |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
     | `carryover_factor` | integer |  | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) |  | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean |  | Enable unused allocation carryover to next period |
@@ -321,7 +321,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
@@ -332,7 +332,7 @@
     | `period_name` | string |  |
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
+    | `tres_billing_weights` | object (free-form) | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
     | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
@@ -423,7 +423,7 @@
     |---|---|---|---|
     | `scope` | string (uri) | ✓ |  |
     | `actions` | string | ✓ |  |
-    | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |  |
     | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects | ✓ |  |
@@ -432,7 +432,7 @@
     | `period` | any |  |  |
     | `limit_type` | any |  | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean |  | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
+    | `tres_billing_weights` | object (free-form) |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
     | `carryover_factor` | integer |  | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) |  | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean |  | Enable unused allocation carryover to next period |
@@ -457,7 +457,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
@@ -468,7 +468,7 @@
     | `period_name` | string |  |
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
+    | `tres_billing_weights` | object (free-form) | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
     | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
@@ -547,7 +547,7 @@
     |---|---|---|---|
     | `scope` | string (uri) |  |  |
     | `actions` | string |  |  |
-    | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `organization_groups` | array of string (uri)s |  |  |
     | `apply_to_all` | boolean |  | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
     | `component_limits_set` | array of objects |  |  |
@@ -556,7 +556,7 @@
     | `period` | any |  |  |
     | `limit_type` | any |  | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean |  | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
+    | `tres_billing_weights` | object (free-form) |  | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
     | `carryover_factor` | integer |  | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) |  | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean |  | Enable unused allocation carryover to next period |
@@ -581,7 +581,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `organization_groups` | array of string (uri)s |  |
     | `apply_to_all` | boolean | If True, policy applies to all customers. Mutually exclusive with organization_groups. |
@@ -592,7 +592,7 @@
     | `period_name` | string |  |
     | `limit_type` | any | SLURM limit type to apply |
     | `tres_billing_enabled` | boolean | Use TRES billing units instead of raw TRES values |
-    | `tres_billing_weights` | any | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
+    | `tres_billing_weights` | object (free-form) | TRES billing weights (e.g., {"CPU": 0.015625, "Mem": 0.001953125, "GRES/gpu": 0.25}) |
     | `carryover_factor` | integer | Maximum percentage of base allocation that can carry over from unused previous period (0-100) |
     | `grace_ratio` | number (double) | Grace period ratio (0.2 = 20% overconsumption allowed) |
     | `carryover_enabled` | boolean | Enable unused allocation carryover to next period |
@@ -806,7 +806,7 @@ List command history for this policy.
     | `command_type` | string | Type of command: fairshare, limits, qos, reset_usage |
     | `description` | string | Human-readable description of what the command does |
     | `shell_command` | string | Actual shell command that was/would be executed |
-    | `parameters` | any | Command parameters as key-value pairs |
+    | `parameters` | object (free-form) | Command parameters as key-value pairs |
     | `executed_at` | string (date-time) |  |
     | `execution_mode` | any | Whether command was executed in production or emulator mode |
     | `success` | boolean | Whether the command execution was successful |
@@ -899,12 +899,12 @@ List evaluation logs for this policy.
     | `billing_period` | string | Billing period identifier, e.g. '2026-Q1' |
     | `usage_percentage` | number (double) | Resource usage percentage at the time of evaluation |
     | `grace_limit_percentage` | number (double) | Grace limit percentage threshold (e.g. 120 for 20% grace) |
-    | `actions_taken` | any | List of actions taken during this evaluation (e.g. ['pause', 'notify']) |
-    | `previous_state` | any | Resource state before evaluation: {paused: bool, downscaled: bool} |
-    | `new_state` | any | Resource state after evaluation: {paused: bool, downscaled: bool} |
+    | `actions_taken` | object (free-form) | List of actions taken during this evaluation (e.g. ['pause', 'notify']) |
+    | `previous_state` | object (free-form) | Resource state before evaluation: {paused: bool, downscaled: bool} |
+    | `new_state` | object (free-form) | Resource state after evaluation: {paused: bool, downscaled: bool} |
     | `stomp_message_sent` | boolean | Whether a STOMP message was sent to the site agent |
     | `site_agent_confirmed` | boolean | Whether the site agent confirmed command execution (null = no response yet) |
-    | `site_agent_response` | any | Response payload from the site agent |
+    | `site_agent_response` | object (free-form) | Response payload from the site agent |
     | `evaluated_at` | string (date-time) | When this evaluation was performed |
 
 ---
@@ -1294,7 +1294,7 @@ Preview policy impact without saving. Returns threshold calculations, carryover 
     | `command_history.command_type` | string | Type of command: fairshare, limits, qos, reset_usage |
     | `command_history.description` | string | Human-readable description of what the command does |
     | `command_history.shell_command` | string | Actual shell command that was/would be executed |
-    | `command_history.parameters` | any | Command parameters as key-value pairs |
+    | `command_history.parameters` | object (free-form) | Command parameters as key-value pairs |
     | `command_history.executed_at` | string (date-time) |  |
     | `command_history.execution_mode` | any | Whether command was executed in production or emulator mode |
     | `command_history.success` | boolean | Whether the command execution was successful |

@@ -73,7 +73,7 @@ Execute a tool and return the result.
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `tool` | string | ✓ | Name of the tool to execute. |
-    | `arguments` | any |  | Tool arguments. |
+    | `arguments` | object (free-form) |  | Tool arguments. |
 
 
 === "Responses"

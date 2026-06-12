@@ -168,9 +168,9 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -339,9 +339,9 @@ Fetch the details of a specific customer by its UUID.
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -484,9 +484,9 @@ A new customer can only be created by users with staff privilege.
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) |  | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |  |
-    | `user_affiliations` | any |  |  |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |  |
+    | `user_affiliations` | object (free-form) |  |  |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
     | `name` | string | ✓ |  |
     | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
@@ -551,9 +551,9 @@ A new customer can only be created by users with staff privilege.
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -786,9 +786,9 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) |  | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |  |
-    | `user_affiliations` | any |  |  |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |  |
+    | `user_affiliations` | object (free-form) |  |  |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
     | `name` | string | ✓ |  |
     | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
@@ -853,9 +853,9 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -1098,9 +1098,9 @@ Partially update the details of an existing customer. Requires customer owner or
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) |  | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |  |
-    | `user_affiliations` | any |  |  |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |  |
+    | `user_affiliations` | object (free-form) |  |  |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
     | `name` | string |  |  |
     | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
@@ -1165,9 +1165,9 @@ Partially update the details of an existing customer. Requires customer owner or
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |

@@ -96,9 +96,9 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | any |
+    | `query` | object (free-form) |
     | `author_full_name` | string |
-    | `emails` | any |
+    | `emails` | object (free-form) |
     | `state` | any |
     | `send_at` | string (date) |
 
@@ -181,9 +181,9 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | any |
+    | `query` | object (free-form) |
     | `author_full_name` | string |
-    | `emails` | any |
+    | `emails` | object (free-form) |
     | `state` | any |
     | `send_at` | string (date) |
 
@@ -201,7 +201,7 @@
       Authorization:"Token YOUR_API_TOKEN" \
       subject="string-value" \
       body="string-value" \
-      query=null
+      query:='{}'
     ```
 
 === "Python"
@@ -218,7 +218,7 @@
     body_data = BroadcastMessageRequest(
         subject="string-value",
         body="string-value",
-        query=null
+        query={}
     )
     response = broadcast_messages_create.sync(
         client=client,
@@ -243,7 +243,7 @@
       body: {
         "subject": "string-value",
         "body": "string-value",
-        "query": null
+        "query": {}
       }
     });
       console.log('Success:', response);
@@ -259,7 +259,7 @@
     |---|---|---|
     | `subject` | string | ✓ |
     | `body` | string | ✓ |
-    | `query` | any | ✓ |
+    | `query` | object (free-form) | ✓ |
     | `send_at` | string (date) |  |
 
 
@@ -273,9 +273,9 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | any |
+    | `query` | object (free-form) |
     | `author_full_name` | string |
-    | `emails` | any |
+    | `emails` | object (free-form) |
     | `state` | any |
     | `send_at` | string (date) |
 
@@ -293,7 +293,7 @@
       Authorization:"Token YOUR_API_TOKEN" \
       subject="string-value" \
       body="string-value" \
-      query=null
+      query:='{}'
     ```
 
 === "Python"
@@ -310,7 +310,7 @@
     body_data = BroadcastMessageRequest(
         subject="string-value",
         body="string-value",
-        query=null
+        query={}
     )
     response = broadcast_messages_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -339,7 +339,7 @@
       body: {
         "subject": "string-value",
         "body": "string-value",
-        "query": null
+        "query": {}
       }
     });
       console.log('Success:', response);
@@ -362,7 +362,7 @@
     |---|---|---|
     | `subject` | string | ✓ |
     | `body` | string | ✓ |
-    | `query` | any | ✓ |
+    | `query` | object (free-form) | ✓ |
     | `send_at` | string (date) |  |
 
 
@@ -376,9 +376,9 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | any |
+    | `query` | object (free-form) |
     | `author_full_name` | string |
-    | `emails` | any |
+    | `emails` | object (free-form) |
     | `state` | any |
     | `send_at` | string (date) |
 
@@ -453,7 +453,7 @@
     |---|---|---|
     | `subject` | string |  |
     | `body` | string |  |
-    | `query` | any |  |
+    | `query` | object (free-form) |  |
     | `send_at` | string (date) |  |
 
 
@@ -467,9 +467,9 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | any |
+    | `query` | object (free-form) |
     | `author_full_name` | string |
-    | `emails` | any |
+    | `emails` | object (free-form) |
     | `state` | any |
     | `send_at` | string (date) |
 

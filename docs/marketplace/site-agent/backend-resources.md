@@ -104,7 +104,7 @@ Returns a paginated list of backend resources that are available for import. Thi
     | `offering_name` | string |
     | `offering_url` | string (uri) |
     | `backend_id` | string |
-    | `backend_metadata` | any |
+    | `backend_metadata` | object (free-form) |
 
 ---
 
@@ -186,7 +186,7 @@ Returns the details of a specific backend resource.
     | `offering_name` | string |
     | `offering_url` | string (uri) |
     | `backend_id` | string |
-    | `backend_metadata` | any |
+    | `backend_metadata` | object (free-form) |
 
 ---
 
@@ -264,7 +264,7 @@ Creates a new backend resource record. This is typically done by a site agent to
     | `project` | string (uuid) | ✓ |
     | `offering` | string (uuid) | ✓ |
     | `backend_id` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
 
 
 === "Responses"
@@ -285,7 +285,7 @@ Creates a new backend resource record. This is typically done by a site agent to
     | `offering_name` | string |
     | `offering_url` | string (uri) |
     | `backend_id` | string |
-    | `backend_metadata` | any |
+    | `backend_metadata` | object (free-form) |
 
 ---
 
@@ -450,7 +450,7 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -517,7 +517,7 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |

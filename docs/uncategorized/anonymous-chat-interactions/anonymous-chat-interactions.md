@@ -95,13 +95,13 @@
     | `uuid` | string (uuid) |  |
     | `user_slug` | string |  |
     | `user_input` | string |  |
-    | `assistant_blocks` | any |  |
-    | `offering_uuids` | any |  |
+    | `assistant_blocks` | object (free-form) |  |
+    | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
     | `severity` | string |  |
-    | `injection_categories` | any |  |
-    | `pii_categories` | any |  |
+    | `injection_categories` | object (free-form) |  |
+    | `pii_categories` | object (free-form) |  |
     | `action_taken` | string |  |
     | `warning` | string |  |
     | `ip_address` | any | An IPv4 or IPv6 address. |
@@ -179,13 +179,13 @@
     | `uuid` | string (uuid) |  |
     | `user_slug` | string |  |
     | `user_input` | string |  |
-    | `assistant_blocks` | any |  |
-    | `offering_uuids` | any |  |
+    | `assistant_blocks` | object (free-form) |  |
+    | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
     | `severity` | string |  |
-    | `injection_categories` | any |  |
-    | `pii_categories` | any |  |
+    | `injection_categories` | object (free-form) |  |
+    | `pii_categories` | object (free-form) |  |
     | `action_taken` | string |  |
     | `warning` | string |  |
     | `ip_address` | any | An IPv4 or IPv6 address. |
@@ -350,13 +350,13 @@ Returns the ordered list of interactions belonging to the given ``session_id``. 
     | `uuid` | string (uuid) |  |
     | `user_slug` | string |  |
     | `user_input` | string |  |
-    | `assistant_blocks` | any |  |
-    | `offering_uuids` | any |  |
+    | `assistant_blocks` | object (free-form) |  |
+    | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
     | `severity` | string |  |
-    | `injection_categories` | any |  |
-    | `pii_categories` | any |  |
+    | `injection_categories` | object (free-form) |  |
+    | `pii_categories` | object (free-form) |  |
     | `action_taken` | string |  |
     | `warning` | string |  |
     | `ip_address` | any | An IPv4 or IPv6 address. |
@@ -546,13 +546,13 @@ Returns interactions sharing a ``user_slug`` (Scrypt of originating IP) — acro
     | `uuid` | string (uuid) |  |
     | `user_slug` | string |  |
     | `user_input` | string |  |
-    | `assistant_blocks` | any |  |
-    | `offering_uuids` | any |  |
+    | `assistant_blocks` | object (free-form) |  |
+    | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
     | `severity` | string |  |
-    | `injection_categories` | any |  |
-    | `pii_categories` | any |  |
+    | `injection_categories` | object (free-form) |  |
+    | `pii_categories` | object (free-form) |  |
     | `action_taken` | string |  |
     | `warning` | string |  |
     | `ip_address` | any | An IPv4 or IPv6 address. |

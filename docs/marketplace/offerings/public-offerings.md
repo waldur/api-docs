@@ -144,8 +144,8 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -305,7 +305,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `parent_description` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
@@ -427,8 +427,8 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -588,7 +588,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `parent_description` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |

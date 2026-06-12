@@ -106,7 +106,7 @@
     | `start` | string (date-time) | Date and time when item usage has started. |
     | `end` | string (date-time) | Date and time when item usage has ended. |
     | `price` | number (double) |  |
-    | `details` | any | Stores data about scope |
+    | `details` | object (free-form) | Stores data about scope |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
     | `offering_component_type` | string |  |
@@ -193,7 +193,7 @@
     | `start` | string (date-time) | Date and time when item usage has started. |
     | `end` | string (date-time) | Date and time when item usage has ended. |
     | `price` | number (double) |  |
-    | `details` | any | Stores data about scope |
+    | `details` | object (free-form) | Stores data about scope |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
     | `offering_component_type` | string |  |

@@ -95,8 +95,8 @@
     | `backend_id` | string |  |
     | `state` | string |  |
     | `error_message` | string |  |
-    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
+    | `limits` | object (free-form) | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
@@ -105,7 +105,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `termination_metadata` | any |  |
+    | `termination_metadata` | object (free-form) |  |
 
 ---
 
@@ -180,8 +180,8 @@
     | `backend_id` | string |  |
     | `state` | string |  |
     | `error_message` | string |  |
-    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
+    | `limits` | object (free-form) | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
@@ -190,7 +190,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `termination_metadata` | any |  |
+    | `termination_metadata` | object (free-form) |  |
 
 ---
 
@@ -262,7 +262,7 @@
     | `resource` | string (uuid) | ✓ |  |
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `limits` | any |  | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `limits` | object (free-form) |  | Dictionary mapping component types to quota values. Same format as Resource.limits. |
 
 
 === "Responses"
@@ -278,8 +278,8 @@
     | `backend_id` | string |  |
     | `state` | string |  |
     | `error_message` | string |  |
-    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
+    | `limits` | object (free-form) | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
@@ -288,7 +288,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `termination_metadata` | any |  |
+    | `termination_metadata` | object (free-form) |  |
 
 ---
 
@@ -371,7 +371,7 @@
     | `resource` | string (uuid) | ✓ |  |
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `limits` | any |  | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `limits` | object (free-form) |  | Dictionary mapping component types to quota values. Same format as Resource.limits. |
 
 
 === "Responses"
@@ -387,8 +387,8 @@
     | `backend_id` | string |  |
     | `state` | string |  |
     | `error_message` | string |  |
-    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
+    | `limits` | object (free-form) | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
@@ -397,7 +397,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `termination_metadata` | any |  |
+    | `termination_metadata` | object (free-form) |  |
 
 ---
 
@@ -471,7 +471,7 @@
     | `resource` | string (uuid) |  |  |
     | `name` | string |  |  |
     | `description` | string |  |  |
-    | `limits` | any |  | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `limits` | object (free-form) |  | Dictionary mapping component types to quota values. Same format as Resource.limits. |
 
 
 === "Responses"
@@ -487,8 +487,8 @@
     | `backend_id` | string |  |
     | `state` | string |  |
     | `error_message` | string |  |
-    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
+    | `limits` | object (free-form) | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
@@ -497,7 +497,7 @@
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `termination_metadata` | any |  |
+    | `termination_metadata` | object (free-form) |  |
 
 ---
 
@@ -1052,8 +1052,8 @@ Flips is_removed back to False on a previously soft-deleted resource project. Op
     | `backend_id` | string |  |
     | `state` | string |  |
     | `error_message` | string |  |
-    | `limits` | any | Dictionary mapping component types to quota values. Same format as Resource.limits. |
-    | `current_usages` | any | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
+    | `limits` | object (free-form) | Dictionary mapping component types to quota values. Same format as Resource.limits. |
+    | `current_usages` | object (free-form) | Dictionary mapping component types to current usage amounts. Populated by backend synchronization. |
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
     | `created` | string (date-time) |  |
@@ -1062,6 +1062,6 @@ Flips is_removed back to False on a previously soft-deleted resource project. Op
     | `removed_date` | string (date-time) |  |
     | `removed_by` | integer |  |
     | `removed_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `termination_metadata` | any |  |
+    | `termination_metadata` | object (free-form) |  |
 
 ---

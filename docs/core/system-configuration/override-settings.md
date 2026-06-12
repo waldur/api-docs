@@ -196,6 +196,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SMAX_CREATION_SOURCE_NAME` | string |
     | `SMAX_REQUESTS_OFFERING` | string |
     | `SMAX_VERIFY_SSL` | boolean |
+    | `SMAX_CERTIFICATE` | string |
     | `SMAX_WEBHOOK_SHARED_SECRET` | string |
     | `ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND` | boolean |
     | `ENABLE_MOCK_COURSE_ACCOUNT_BACKEND` | boolean |
@@ -553,6 +554,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SMAX_CREATION_SOURCE_NAME` | string |  |
     | `SMAX_REQUESTS_OFFERING` | string |  |
     | `SMAX_VERIFY_SSL` | boolean |  |
+    | `SMAX_CERTIFICATE` | string |  |
     | `SMAX_WEBHOOK_SHARED_SECRET` | string |  |
     | `ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND` | boolean |  |
     | `ENABLE_MOCK_COURSE_ACCOUNT_BACKEND` | boolean |  |

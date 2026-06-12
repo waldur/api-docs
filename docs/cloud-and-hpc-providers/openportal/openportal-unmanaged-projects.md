@@ -156,15 +156,15 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -285,15 +285,15 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -391,9 +391,9 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `kind` | any |  |  |
     | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
-    | `user_email_patterns` | any |  |  |
-    | `user_affiliations` | any |  |  |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |  |
+    | `user_affiliations` | object (free-form) |  |  |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -433,15 +433,15 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -629,9 +629,9 @@ Update the details of a project. Requires project administrator or customer owne
     | `kind` | any |  |  |
     | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
-    | `user_email_patterns` | any |  |  |
-    | `user_affiliations` | any |  |  |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |  |
+    | `user_affiliations` | object (free-form) |  |  |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -671,15 +671,15 @@ Update the details of a project. Requires project administrator or customer owne
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -779,9 +779,9 @@ Partially update the details of a project. Requires project administrator or cus
     | `kind` | any |  |  |
     | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
-    | `user_email_patterns` | any |  |  |
-    | `user_affiliations` | any |  |  |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |  |
+    | `user_affiliations` | object (free-form) |  |  |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -821,15 +821,15 @@ Partially update the details of a project. Requires project administrator or cus
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -1400,8 +1400,8 @@ Get checklist with questions and existing answers.
     | `questions.question_options` | array of anys |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1505,8 +1505,8 @@ Get checklist template for creating new objects.
     | `questions.order` | integer |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1516,9 +1516,9 @@ Get checklist template for creating new objects.
     | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `questions.operator` | any |  |
-    | `questions.review_answer_value` | any | Answer value that trigger review. |
+    | `questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
     | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `questions.guidance_answer_value` | any | Answer value that triggers display of user guidance. |
+    | `questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
     | `questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
     | `questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
@@ -1535,8 +1535,8 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.order` | integer |  |
     | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `initial_visible_questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `initial_visible_questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `initial_visible_questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `initial_visible_questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `initial_visible_questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `initial_visible_questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1546,9 +1546,9 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `initial_visible_questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `initial_visible_questions.operator` | any |  |
-    | `initial_visible_questions.review_answer_value` | any | Answer value that trigger review. |
+    | `initial_visible_questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
     | `initial_visible_questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `initial_visible_questions.guidance_answer_value` | any | Answer value that triggers display of user guidance. |
+    | `initial_visible_questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `initial_visible_questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
     | `initial_visible_questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
     | `initial_visible_questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
@@ -1856,15 +1856,15 @@ Moves a project and its associated resources to a different customer. You can ch
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -1990,15 +1990,15 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -2023,7 +2023,7 @@ Submit checklist answers.
 === "HTTPie"
 
     ```bash
-    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]' | http \
+    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": {}}]' | http \
       POST \
       https://api.example.com/api/openportal-unmanaged-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/submit_answers/ \
       Authorization:"Token YOUR_API_TOKEN"
@@ -2060,7 +2060,7 @@ Submit checklist answers.
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
-      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]
+      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": {}}]
     });
       console.log('Success:', response);
     } catch (error) {
@@ -2083,7 +2083,7 @@ Submit checklist answers.
     | Field | Type | Required |
     |---|---|---|
     | `question_uuid` | string (uuid) | ✓ |
-    | `answer_data` | any | ✓ |
+    | `answer_data` | object (free-form) | ✓ |
 
 
 === "Responses"

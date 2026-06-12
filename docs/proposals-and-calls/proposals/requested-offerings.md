@@ -98,7 +98,7 @@
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
     | `call_managing_organisation` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `plan_details` | any |  |
     | `options` | any |  |
@@ -212,7 +212,7 @@
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
     | `call_managing_organisation` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `plan_details` | any |  |
     | `options` | any |  |

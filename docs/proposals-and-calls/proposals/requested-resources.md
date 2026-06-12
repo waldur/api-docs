@@ -88,8 +88,8 @@
     | `resource_name` | string |
     | `call_resource_template` | string |
     | `call_resource_template_name` | string |
-    | `attributes` | any |
-    | `limits` | any |
+    | `attributes` | object (free-form) |
+    | `limits` | object (free-form) |
     | `description` | string |
     | `created_by` | string (uri) |
     | `created_by_name` | string |
@@ -169,8 +169,8 @@
     | `resource_name` | string |
     | `call_resource_template` | string |
     | `call_resource_template_name` | string |
-    | `attributes` | any |
-    | `limits` | any |
+    | `attributes` | object (free-form) |
+    | `limits` | object (free-form) |
     | `description` | string |
     | `created_by` | string (uri) |
     | `created_by_name` | string |

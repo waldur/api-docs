@@ -182,7 +182,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -249,7 +249,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |
@@ -374,7 +374,7 @@ Returns details of a specific resource from a provider's perspective.
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -441,7 +441,7 @@ Returns details of a specific resource from a provider's perspective.
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |
@@ -693,7 +693,7 @@ Updates the options of a resource. If the offering is configured to create order
 
     | Field | Type | Required |
     |---|---|---|
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
 
 
 === "Responses"
@@ -788,7 +788,7 @@ Allows a service provider to directly update the options of a resource without c
 
     | Field | Type | Required |
     |---|---|---|
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
 
 
 === "Responses"
@@ -2028,8 +2028,8 @@ Returns details of the offering connected to the requested object.
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -2189,7 +2189,7 @@ Returns details of the offering connected to the requested object.
     | `parent_description` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
@@ -2579,7 +2579,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -2646,7 +2646,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |
@@ -3090,7 +3090,7 @@ Allows a service provider to set or update the backend-specific metadata for a r
       POST \
       https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_backend_metadata/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      backend_metadata=null
+      backend_metadata:='{}'
     ```
 
 === "Python"
@@ -3105,7 +3105,7 @@ Allows a service provider to set or update the backend-specific metadata for a r
     )
     
     body_data = ResourceBackendMetadataRequest(
-        backend_metadata=null
+        backend_metadata={}
     )
     response = marketplace_provider_resources_set_backend_metadata.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -3132,7 +3132,7 @@ Allows a service provider to set or update the backend-specific metadata for a r
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
       body: {
-        "backend_metadata": null
+        "backend_metadata": {}
       }
     });
       console.log('Success:', response);
@@ -3153,7 +3153,7 @@ Allows a service provider to set or update the backend-specific metadata for a r
 
     | Field | Type | Required |
     |---|---|---|
-    | `backend_metadata` | any | ✓ |
+    | `backend_metadata` | object (free-form) | ✓ |
 
 
 === "Responses"
@@ -3669,7 +3669,7 @@ Allows a service provider to directly set the limits for a resource. This is typ
       POST \
       https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_limits/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      limits=null
+      limits:='{}'
     ```
 
 === "Python"
@@ -3684,7 +3684,7 @@ Allows a service provider to directly set the limits for a resource. This is typ
     )
     
     body_data = ResourceSetLimitsRequest(
-        limits=null
+        limits={}
     )
     response = marketplace_provider_resources_set_limits.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -3711,7 +3711,7 @@ Allows a service provider to directly set the limits for a resource. This is typ
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
       body: {
-        "limits": null
+        "limits": {}
       }
     });
       console.log('Success:', response);
@@ -3732,7 +3732,7 @@ Allows a service provider to directly set the limits for a resource. This is typ
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `limits` | any | ✓ | Dictionary mapping component types to their new limit values |
+    | `limits` | object (free-form) | ✓ | Dictionary mapping component types to their new limit values |
 
 
 === "Responses"
@@ -4226,7 +4226,7 @@ Creates a marketplace order to terminate the resource. This action is asynchrono
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `attributes` | any |  | Optional attributes/parameters to pass to the termination operation |
+    | `attributes` | object (free-form) |  | Optional attributes/parameters to pass to the termination operation |
 
 
 === "Responses"

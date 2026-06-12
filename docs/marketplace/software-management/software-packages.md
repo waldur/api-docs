@@ -112,9 +112,9 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | any | Package maintainers |
+    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | object (free-form) | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -143,8 +143,8 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
@@ -227,9 +227,9 @@ Returns the details of a specific software package, including its description, h
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | any | Package maintainers |
+    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | object (free-form) | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -258,8 +258,8 @@ Returns the details of a specific software package, including its description, h
     | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
@@ -339,9 +339,9 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
     | `homepage` | string (uri) |  |  |
-    | `categories` | any |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | any |  | Package maintainers |
+    | `categories` | object (free-form) |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | object (free-form) |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | object (free-form) |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
 
 
@@ -359,9 +359,9 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | any | Package maintainers |
+    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | object (free-form) | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -390,8 +390,8 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
@@ -482,9 +482,9 @@ Updates an existing software package. Requires staff permissions.
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
     | `homepage` | string (uri) |  |  |
-    | `categories` | any |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | any |  | Package maintainers |
+    | `categories` | object (free-form) |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | object (free-form) |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | object (free-form) |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
 
 
@@ -502,9 +502,9 @@ Updates an existing software package. Requires staff permissions.
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | any | Package maintainers |
+    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | object (free-form) | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -533,8 +533,8 @@ Updates an existing software package. Requires staff permissions.
     | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
@@ -616,9 +616,9 @@ Partially updates an existing software package. Requires staff permissions.
     | `name` | string |  |  |
     | `description` | string |  |  |
     | `homepage` | string (uri) |  |  |
-    | `categories` | any |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | any |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | any |  | Package maintainers |
+    | `categories` | object (free-form) |  | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | object (free-form) |  | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | object (free-form) |  | Package maintainers |
     | `is_extension` | boolean |  | Whether this package is an extension of another package |
 
 
@@ -636,9 +636,9 @@ Partially updates an existing software package. Requires staff permissions.
     | `name` | string |  |
     | `description` | string |  |
     | `homepage` | string (uri) |  |
-    | `categories` | any | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
-    | `licenses` | any | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
-    | `maintainers` | any | Package maintainers |
+    | `categories` | object (free-form) | Package categories (e.g., ['bio', 'hpc', 'build-tools']) |
+    | `licenses` | object (free-form) | Software licenses (e.g., ['GPL-3.0', 'MIT']) |
+    | `maintainers` | object (free-form) | Package maintainers |
     | `is_extension` | boolean | Whether this package is an extension of another package |
     | `parent_softwares` | array of objects |  |
     | `parent_softwares.uuid` | string (uuid) |  |
@@ -667,8 +667,8 @@ Partially updates an existing software package. Requires staff permissions.
     | `versions.targets.target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `versions.targets.metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |

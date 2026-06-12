@@ -100,7 +100,7 @@
     | `level_number` | integer |  |
     | `logger_name` | string |  |
     | `message` | string |  |
-    | `context` | any |  |
+    | `context` | object (free-form) |  |
 
 ---
 
@@ -176,7 +176,7 @@
     | `level_number` | integer |  |
     | `logger_name` | string |  |
     | `message` | string |  |
-    | `context` | any |  |
+    | `context` | object (free-form) |  |
 
 ---
 

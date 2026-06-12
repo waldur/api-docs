@@ -243,7 +243,7 @@ Allows staff users to create a new custom role with a specific set of permission
       https://api.example.com/api/roles/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-role" \
-      permissions=null \
+      permissions:='{}' \
       content_type="string-value"
     ```
 
@@ -260,7 +260,7 @@ Allows staff users to create a new custom role with a specific set of permission
     
     body_data = RoleModifyRequest(
         name="my-awesome-role",
-        permissions=null,
+        permissions={},
         content_type="string-value"
     )
     response = roles_create.sync(
@@ -285,7 +285,7 @@ Allows staff users to create a new custom role with a specific set of permission
       auth: "Token YOUR_API_TOKEN",
       body: {
         "name": "my-awesome-role",
-        "permissions": null,
+        "permissions": {},
         "content_type": "string-value"
       }
     });
@@ -316,7 +316,7 @@ Allows staff users to create a new custom role with a specific set of permission
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
-    | `permissions` | any | ✓ |
+    | `permissions` | object (free-form) | ✓ |
     | `is_active` | boolean |  |
     | `content_type` | string | ✓ |
 
@@ -365,7 +365,7 @@ Allows staff users to update an existing role's name, description, content type,
       https://api.example.com/api/roles/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-role" \
-      permissions=null \
+      permissions:='{}' \
       content_type="string-value"
     ```
 
@@ -382,7 +382,7 @@ Allows staff users to update an existing role's name, description, content type,
     
     body_data = RoleModifyRequest(
         name="my-awesome-role",
-        permissions=null,
+        permissions={},
         content_type="string-value"
     )
     response = roles_update.sync(
@@ -411,7 +411,7 @@ Allows staff users to update an existing role's name, description, content type,
       },
       body: {
         "name": "my-awesome-role",
-        "permissions": null,
+        "permissions": {},
         "content_type": "string-value"
       }
     });
@@ -449,7 +449,7 @@ Allows staff users to update an existing role's name, description, content type,
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
-    | `permissions` | any | ✓ |
+    | `permissions` | object (free-form) | ✓ |
     | `is_active` | boolean |  |
     | `content_type` | string | ✓ |
 

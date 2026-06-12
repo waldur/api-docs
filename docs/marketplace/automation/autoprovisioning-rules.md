@@ -692,8 +692,8 @@ Evaluate this rule against the given user without provisioning. Returns per-filt
     | `filter_results.name` | string |
     | `filter_results.configured` | boolean |
     | `filter_results.matched` | boolean |
-    | `filter_results.user_value` | any |
-    | `filter_results.rule_value` | any |
+    | `filter_results.user_value` | object (free-form) |
+    | `filter_results.rule_value` | object (free-form) |
     | `filter_results.reason` | string |
     | `customer_lookup_performed` | boolean |
     | `customer_candidates` | array of objects |

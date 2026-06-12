@@ -100,8 +100,8 @@ Returns a paginated list of software targets, which represent specific builds of
     | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
 ---
 
@@ -179,8 +179,8 @@ Returns the details of a specific software target, including its CPU family, mic
     | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
 ---
 
@@ -245,8 +245,8 @@ Creates a new target for a software version. Requires staff permissions.
     | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
 ---
 
@@ -324,8 +324,8 @@ Updates an existing software target. Requires staff permissions.
     | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
 ---
 
@@ -403,8 +403,8 @@ Partially updates an existing software target. Requires staff permissions.
     | `target_name` | string | Target identifier (x86_64/generic, linux, variant_name, etc.) |
     | `target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `location` | string | Target location (CVMFS path, download URL, etc.) |
-    | `metadata` | any | Target-specific metadata (build options, system requirements, etc.) |
-    | `gpu_architectures` | any | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
+    | `gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
 ---
 

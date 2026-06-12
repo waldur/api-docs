@@ -116,7 +116,7 @@
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
     | `offerings.call_managing_organisation` | string |  |
-    | `offerings.attributes` | any |  |
+    | `offerings.attributes` | object (free-form) |  |
     | `offerings.plan` | string (uri) |  |
     | `offerings.plan_details` | any |  |
     | `offerings.options` | any |  |
@@ -174,8 +174,8 @@
     | `resource_templates.url` | string |  |
     | `resource_templates.name` | string |  |
     | `resource_templates.description` | string |  |
-    | `resource_templates.attributes` | any |  |
-    | `resource_templates.limits` | any |  |
+    | `resource_templates.attributes` | object (free-form) |  |
+    | `resource_templates.limits` | object (free-form) |  |
     | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
     | `resource_templates.requested_offering` | string (uri) |  |
     | `resource_templates.requested_offering_name` | string |  |
@@ -289,7 +289,7 @@
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
     | `offerings.call_managing_organisation` | string |  |
-    | `offerings.attributes` | any |  |
+    | `offerings.attributes` | object (free-form) |  |
     | `offerings.plan` | string (uri) |  |
     | `offerings.plan_details` | any |  |
     | `offerings.options` | any |  |
@@ -347,8 +347,8 @@
     | `resource_templates.url` | string |  |
     | `resource_templates.name` | string |  |
     | `resource_templates.description` | string |  |
-    | `resource_templates.attributes` | any |  |
-    | `resource_templates.limits` | any |  |
+    | `resource_templates.attributes` | object (free-form) |  |
+    | `resource_templates.limits` | object (free-form) |  |
     | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
     | `resource_templates.requested_offering` | string (uri) |  |
     | `resource_templates.requested_offering_name` | string |  |

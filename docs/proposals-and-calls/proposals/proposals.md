@@ -150,19 +150,19 @@
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `applicant_job_title` | string |  |
-    | `applicant_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |
     | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `applicant_place_of_birth` | string |  |
     | `applicant_address` | string |  |
     | `applicant_country_of_residence` | string |  |
     | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `applicant_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
-    | `applicant_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `applicant_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `applicant_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
     | `applicant_identity_source` | string | Indicates what identity provider was used. |
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
-    | `applicant_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `applicant_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
@@ -279,19 +279,19 @@
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `applicant_job_title` | string |  |
-    | `applicant_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |
     | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `applicant_place_of_birth` | string |  |
     | `applicant_address` | string |  |
     | `applicant_country_of_residence` | string |  |
     | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `applicant_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
-    | `applicant_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `applicant_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `applicant_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
     | `applicant_identity_source` | string | Indicates what identity provider was used. |
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
-    | `applicant_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `applicant_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
@@ -426,19 +426,19 @@
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `applicant_job_title` | string |  |
-    | `applicant_affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |
     | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `applicant_place_of_birth` | string |  |
     | `applicant_address` | string |  |
     | `applicant_country_of_residence` | string |  |
     | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `applicant_nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
-    | `applicant_eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `applicant_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `applicant_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
     | `applicant_identity_source` | string | Indicates what identity provider was used. |
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
-    | `applicant_active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `applicant_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
@@ -1102,8 +1102,8 @@ Get checklist with questions and existing answers.
     | `questions.question_options` | array of anys |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1219,8 +1219,8 @@ Get checklist with questions and existing answers including review logic (review
     | `questions.question_options` | array of anys |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1231,7 +1231,7 @@ Get checklist with questions and existing answers including review logic (review
     | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `questions.dependencies_info` | any |  |
     | `questions.operator` | any |  |
-    | `questions.review_answer_value` | any | Answer value that trigger review. |
+    | `questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
     | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
     
     ---
@@ -1327,8 +1327,8 @@ Get checklist template for creating new objects.
     | `questions.order` | integer |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1338,9 +1338,9 @@ Get checklist template for creating new objects.
     | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `questions.operator` | any |  |
-    | `questions.review_answer_value` | any | Answer value that trigger review. |
+    | `questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
     | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `questions.guidance_answer_value` | any | Answer value that triggers display of user guidance. |
+    | `questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
     | `questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
     | `questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
@@ -1357,8 +1357,8 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.order` | integer |  |
     | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `initial_visible_questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `initial_visible_questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `initial_visible_questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `initial_visible_questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `initial_visible_questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `initial_visible_questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1368,9 +1368,9 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `initial_visible_questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `initial_visible_questions.operator` | any |  |
-    | `initial_visible_questions.review_answer_value` | any | Answer value that trigger review. |
+    | `initial_visible_questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
     | `initial_visible_questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `initial_visible_questions.guidance_answer_value` | any | Answer value that triggers display of user guidance. |
+    | `initial_visible_questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `initial_visible_questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
     | `initial_visible_questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
     | `initial_visible_questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
@@ -1651,8 +1651,8 @@ List resources for a proposal.
     | `resource_name` | string |
     | `call_resource_template` | string |
     | `call_resource_template_name` | string |
-    | `attributes` | any |
-    | `limits` | any |
+    | `attributes` | object (free-form) |
+    | `limits` | object (free-form) |
     | `description` | string |
     | `created_by` | string (uri) |
     | `created_by_name` | string |
@@ -1733,8 +1733,8 @@ List resources for a proposal.
     | `resource_name` | string |
     | `call_resource_template` | string |
     | `call_resource_template_name` | string |
-    | `attributes` | any |
-    | `limits` | any |
+    | `attributes` | object (free-form) |
+    | `limits` | object (free-form) |
     | `description` | string |
     | `created_by` | string (uri) |
     | `created_by_name` | string |
@@ -2505,8 +2505,8 @@ Create resource for a proposal.
 
     | Field | Type | Required |
     |---|---|---|
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `description` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `call_resource_template_uuid` | string (uuid) |  |
@@ -2525,8 +2525,8 @@ Create resource for a proposal.
     | `resource_name` | string |
     | `call_resource_template` | string |
     | `call_resource_template_name` | string |
-    | `attributes` | any |
-    | `limits` | any |
+    | `attributes` | object (free-form) |
+    | `limits` | object (free-form) |
     | `description` | string |
     | `created_by` | string (uri) |
     | `created_by_name` | string |
@@ -2608,7 +2608,7 @@ Submit checklist answers.
 === "HTTPie"
 
     ```bash
-    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]' | http \
+    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": {}}]' | http \
       POST \
       https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/submit_answers/ \
       Authorization:"Token YOUR_API_TOKEN"
@@ -2645,7 +2645,7 @@ Submit checklist answers.
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
-      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]
+      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": {}}]
     });
       console.log('Success:', response);
     } catch (error) {
@@ -2668,7 +2668,7 @@ Submit checklist answers.
     | Field | Type | Required |
     |---|---|---|
     | `question_uuid` | string (uuid) | ✓ |
-    | `answer_data` | any | ✓ |
+    | `answer_data` | object (free-form) | ✓ |
 
 
 === "Responses"
@@ -2776,8 +2776,8 @@ Submit checklist answers.
 
     | Field | Type | Required |
     |---|---|---|
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `description` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `call_resource_template_uuid` | string (uuid) |  |
@@ -2796,8 +2796,8 @@ Submit checklist answers.
     | `resource_name` | string |
     | `call_resource_template` | string |
     | `call_resource_template_name` | string |
-    | `attributes` | any |
-    | `limits` | any |
+    | `attributes` | object (free-form) |
+    | `limits` | object (free-form) |
     | `description` | string |
     | `created_by` | string (uri) |
     | `created_by_name` | string |
@@ -2874,8 +2874,8 @@ Submit checklist answers.
 
     | Field | Type | Required |
     |---|---|---|
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `description` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `call_resource_template_uuid` | string (uuid) |  |
@@ -2894,8 +2894,8 @@ Submit checklist answers.
     | `resource_name` | string |
     | `call_resource_template` | string |
     | `call_resource_template_name` | string |
-    | `attributes` | any |
-    | `limits` | any |
+    | `attributes` | object (free-form) |
+    | `limits` | object (free-form) |
     | `description` | string |
     | `created_by` | string (uri) |
     | `created_by_name` | string |
@@ -2976,8 +2976,8 @@ Submit checklist answers.
     | `resource_name` | string |
     | `call_resource_template` | string |
     | `call_resource_template_name` | string |
-    | `attributes` | any |
-    | `limits` | any |
+    | `attributes` | object (free-form) |
+    | `limits` | object (free-form) |
     | `description` | string |
     | `created_by` | string (uri) |
     | `created_by_name` | string |

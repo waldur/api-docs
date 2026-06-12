@@ -180,7 +180,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -247,7 +247,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |
@@ -478,7 +478,7 @@ Returns details of a specific resource accessible to the consumer.
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -545,7 +545,7 @@ Returns details of a specific resource accessible to the consumer.
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |
@@ -1235,7 +1235,7 @@ Creates a marketplace order to terminate the resource. This action is asynchrono
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `attributes` | any |  | Optional attributes/parameters to pass to the termination operation |
+    | `attributes` | object (free-form) |  | Optional attributes/parameters to pass to the termination operation |
 
 
 === "Responses"
@@ -1344,7 +1344,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -1411,7 +1411,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |
@@ -2039,7 +2039,7 @@ Updates the options of a resource. If the offering is configured to create order
 
     | Field | Type | Required |
     |---|---|---|
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
 
 
 === "Responses"
@@ -2382,8 +2382,8 @@ Returns details of the offering connected to the requested object.
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -2543,7 +2543,7 @@ Returns details of the offering connected to the requested object.
     | `parent_description` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
@@ -2971,7 +2971,7 @@ Generates a suggested name for a new resource based on the project and offering.
     | `project` | string (uuid) | ✓ |
     | `offering` | string (uuid) | ✓ |
     | `plan` | string (uuid) |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
 
 
 === "Responses"

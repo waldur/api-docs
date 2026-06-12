@@ -140,7 +140,7 @@
     | `nodes.error_message` | string |  |
     | `nodes.error_traceback` | string |  |
     | `nodes.backend_id` | string |  |
-    | `nodes.initial_data` | any | Initial data for instance creating. |
+    | `nodes.initial_data` | object (free-form) | Initial data for instance creating. |
     | `nodes.runtime_state` | string |  |
     | `nodes.k8s_version` | string |  |
     | `nodes.docker_version` | string |  |
@@ -150,8 +150,8 @@
     | `nodes.ram_total` | integer | Total RAM in Mi. |
     | `nodes.pods_allocated` | integer |  |
     | `nodes.pods_total` | integer |  |
-    | `nodes.labels` | any |  |
-    | `nodes.annotations` | any |  |
+    | `nodes.labels` | object (free-form) |  |
+    | `nodes.annotations` | object (free-form) |  |
     | `tenant` | string (uri) |  |
     | `tenant_uuid` | string (uuid) |  |
     | `vm_project` | string (uri) |  |
@@ -163,8 +163,8 @@
     | `public_ips.floating_ip_uuid` | string (uuid) |  |
     | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
     | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | any | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | any | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
+    | `capacity` | object (free-form) | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
+    | `requested` | object (free-form) | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
     | `kubernetes_version` | string | Kubernetes version used in the cluster. |
     | `router_ips` | array of anys |  |
     | `marketplace_offering_uuid` | string |  |
@@ -289,7 +289,7 @@
     | `nodes.error_message` | string |  |
     | `nodes.error_traceback` | string |  |
     | `nodes.backend_id` | string |  |
-    | `nodes.initial_data` | any | Initial data for instance creating. |
+    | `nodes.initial_data` | object (free-form) | Initial data for instance creating. |
     | `nodes.runtime_state` | string |  |
     | `nodes.k8s_version` | string |  |
     | `nodes.docker_version` | string |  |
@@ -299,8 +299,8 @@
     | `nodes.ram_total` | integer | Total RAM in Mi. |
     | `nodes.pods_allocated` | integer |  |
     | `nodes.pods_total` | integer |  |
-    | `nodes.labels` | any |  |
-    | `nodes.annotations` | any |  |
+    | `nodes.labels` | object (free-form) |  |
+    | `nodes.annotations` | object (free-form) |  |
     | `tenant` | string (uri) |  |
     | `tenant_uuid` | string (uuid) |  |
     | `vm_project` | string (uri) |  |
@@ -312,8 +312,8 @@
     | `public_ips.floating_ip_uuid` | string (uuid) |  |
     | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
     | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | any | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | any | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
+    | `capacity` | object (free-form) | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
+    | `requested` | object (free-form) | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
     | `kubernetes_version` | string | Kubernetes version used in the cluster. |
     | `router_ips` | array of anys |  |
     | `marketplace_offering_uuid` | string |  |
@@ -688,7 +688,7 @@ Delete resource from the database without scheduling operations on backend
     | `nodes.error_message` | string |  |
     | `nodes.error_traceback` | string |  |
     | `nodes.backend_id` | string |  |
-    | `nodes.initial_data` | any | Initial data for instance creating. |
+    | `nodes.initial_data` | object (free-form) | Initial data for instance creating. |
     | `nodes.runtime_state` | string |  |
     | `nodes.k8s_version` | string |  |
     | `nodes.docker_version` | string |  |
@@ -698,8 +698,8 @@ Delete resource from the database without scheduling operations on backend
     | `nodes.ram_total` | integer | Total RAM in Mi. |
     | `nodes.pods_allocated` | integer |  |
     | `nodes.pods_total` | integer |  |
-    | `nodes.labels` | any |  |
-    | `nodes.annotations` | any |  |
+    | `nodes.labels` | object (free-form) |  |
+    | `nodes.annotations` | object (free-form) |  |
     | `tenant` | string (uri) |  |
     | `tenant_uuid` | string (uuid) |  |
     | `vm_project` | string (uri) |  |
@@ -711,8 +711,8 @@ Delete resource from the database without scheduling operations on backend
     | `public_ips.floating_ip_uuid` | string (uuid) |  |
     | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
     | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | any | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | any | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
+    | `capacity` | object (free-form) | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
+    | `requested` | object (free-form) | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
     | `kubernetes_version` | string | Kubernetes version used in the cluster. |
     | `router_ips` | array of anys |  |
     | `marketplace_offering_uuid` | string |  |
@@ -844,7 +844,7 @@ Delete resource from the database without scheduling operations on backend
     | `nodes.error_message` | string |  |
     | `nodes.error_traceback` | string |  |
     | `nodes.backend_id` | string |  |
-    | `nodes.initial_data` | any | Initial data for instance creating. |
+    | `nodes.initial_data` | object (free-form) | Initial data for instance creating. |
     | `nodes.runtime_state` | string |  |
     | `nodes.k8s_version` | string |  |
     | `nodes.docker_version` | string |  |
@@ -854,8 +854,8 @@ Delete resource from the database without scheduling operations on backend
     | `nodes.ram_total` | integer | Total RAM in Mi. |
     | `nodes.pods_allocated` | integer |  |
     | `nodes.pods_total` | integer |  |
-    | `nodes.labels` | any |  |
-    | `nodes.annotations` | any |  |
+    | `nodes.labels` | object (free-form) |  |
+    | `nodes.annotations` | object (free-form) |  |
     | `tenant` | string (uri) |  |
     | `tenant_uuid` | string (uuid) |  |
     | `vm_project` | string (uri) |  |
@@ -867,8 +867,8 @@ Delete resource from the database without scheduling operations on backend
     | `public_ips.floating_ip_uuid` | string (uuid) |  |
     | `public_ips.ip_address` | any | An IPv4 or IPv6 address. |
     | `public_ips.external_ip_address` | any | An IPv4 or IPv6 address. |
-    | `capacity` | any | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
-    | `requested` | any | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
+    | `capacity` | object (free-form) | Cluster capacity in the format {'cpu': '10', 'ram': '49125240Ki', 'pods': '330'} |
+    | `requested` | object (free-form) | Cluster requested resources in the format {'cpu': '1450m', 'memory': '884Mi', 'pods': '13'} |
     | `kubernetes_version` | string | Kubernetes version used in the cluster. |
     | `router_ips` | array of anys |  |
     | `marketplace_offering_uuid` | string |  |

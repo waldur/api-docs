@@ -120,7 +120,7 @@
     | `detection_method` | any |  |
     | `detected_at` | string (date-time) |  |
     | `evidence_description` | string |  |
-    | `evidence_data` | any | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
+    | `evidence_data` | object (free-form) | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
     | `status` | string | <br>_Enum: `pending`, `dismissed`, `waived`, `recused`_ |
     | `status_display` | string |  |
     | `reviewed_by` | string (uri) |  |
@@ -220,7 +220,7 @@
     | `detection_method` | any |  |
     | `detected_at` | string (date-time) |  |
     | `evidence_description` | string |  |
-    | `evidence_data` | any | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
+    | `evidence_data` | object (free-form) | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
     | `status` | string | <br>_Enum: `pending`, `dismissed`, `waived`, `recused`_ |
     | `status_display` | string |  |
     | `reviewed_by` | string (uri) |  |
@@ -334,7 +334,7 @@
     | `detection_method` | any |  |
     | `detected_at` | string (date-time) |  |
     | `evidence_description` | string |  |
-    | `evidence_data` | any | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
+    | `evidence_data` | object (free-form) | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
     | `status` | string | <br>_Enum: `pending`, `dismissed`, `waived`, `recused`_ |
     | `status_display` | string |  |
     | `reviewed_by` | string (uri) |  |
@@ -448,7 +448,7 @@
     | `detection_method` | any |  |
     | `detected_at` | string (date-time) |  |
     | `evidence_description` | string |  |
-    | `evidence_data` | any | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
+    | `evidence_data` | object (free-form) | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
     | `status` | string | <br>_Enum: `pending`, `dismissed`, `waived`, `recused`_ |
     | `status_display` | string |  |
     | `reviewed_by` | string (uri) |  |
@@ -573,7 +573,7 @@ Dismiss a conflict of interest (not a real conflict).
     | `detection_method` | any |  |
     | `detected_at` | string (date-time) |  |
     | `evidence_description` | string |  |
-    | `evidence_data` | any | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
+    | `evidence_data` | object (free-form) | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
     | `status` | string | <br>_Enum: `pending`, `dismissed`, `waived`, `recused`_ |
     | `status_display` | string |  |
     | `reviewed_by` | string (uri) |  |
@@ -695,7 +695,7 @@ Recuse reviewer from the proposal.
     | `detection_method` | any |  |
     | `detected_at` | string (date-time) |  |
     | `evidence_description` | string |  |
-    | `evidence_data` | any | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
+    | `evidence_data` | object (free-form) | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
     | `status` | string | <br>_Enum: `pending`, `dismissed`, `waived`, `recused`_ |
     | `status_display` | string |  |
     | `reviewed_by` | string (uri) |  |
@@ -817,7 +817,7 @@ Waive a conflict with a management plan.
     | `detection_method` | any |  |
     | `detected_at` | string (date-time) |  |
     | `evidence_description` | string |  |
-    | `evidence_data` | any | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
+    | `evidence_data` | object (free-form) | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
     | `status` | string | <br>_Enum: `pending`, `dismissed`, `waived`, `recused`_ |
     | `status_display` | string |  |
     | `reviewed_by` | string (uri) |  |

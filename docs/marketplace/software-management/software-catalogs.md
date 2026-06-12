@@ -104,7 +104,7 @@ Returns a paginated list of available software catalogs, such as EESSI or Spack.
     | `catalog_type_display` | string |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
-    | `metadata` | any | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
+    | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
     | `auto_update_enabled` | boolean | Whether to automatically update this catalog via scheduled tasks |
     | `last_update_attempt` | string (date-time) |  |
     | `last_successful_update` | string (date-time) |  |
@@ -191,7 +191,7 @@ Returns the details of a specific software catalog, including its name, version,
     | `catalog_type_display` | string |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
-    | `metadata` | any | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
+    | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
     | `auto_update_enabled` | boolean | Whether to automatically update this catalog via scheduled tasks |
     | `last_update_attempt` | string (date-time) |  |
     | `last_successful_update` | string (date-time) |  |
@@ -274,7 +274,7 @@ Creates a new software catalog. Requires staff permissions.
     | `catalog_type` | any |  | Type of software catalog<br>_Constraints: default: `binary_runtime`_ |
     | `source_url` | string (uri) |  | Catalog source URL |
     | `description` | string |  |  |
-    | `metadata` | any |  | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
+    | `metadata` | object (free-form) |  | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
     | `auto_update_enabled` | boolean |  | Whether to automatically update this catalog via scheduled tasks |
     | `update_errors` | string |  |  |
 
@@ -295,7 +295,7 @@ Creates a new software catalog. Requires staff permissions.
     | `catalog_type_display` | string |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
-    | `metadata` | any | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
+    | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
     | `auto_update_enabled` | boolean | Whether to automatically update this catalog via scheduled tasks |
     | `last_update_attempt` | string (date-time) |  |
     | `last_successful_update` | string (date-time) |  |
@@ -456,7 +456,7 @@ Updates an existing software catalog. Requires staff permissions.
     | `catalog_type` | any |  | Type of software catalog<br>_Constraints: default: `binary_runtime`_ |
     | `source_url` | string (uri) |  | Catalog source URL |
     | `description` | string |  |  |
-    | `metadata` | any |  | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
+    | `metadata` | object (free-form) |  | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
     | `auto_update_enabled` | boolean |  | Whether to automatically update this catalog via scheduled tasks |
     | `update_errors` | string |  |  |
 
@@ -477,7 +477,7 @@ Updates an existing software catalog. Requires staff permissions.
     | `catalog_type_display` | string |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
-    | `metadata` | any | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
+    | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
     | `auto_update_enabled` | boolean | Whether to automatically update this catalog via scheduled tasks |
     | `last_update_attempt` | string (date-time) |  |
     | `last_successful_update` | string (date-time) |  |
@@ -562,7 +562,7 @@ Partially updates an existing software catalog. Requires staff permissions.
     | `catalog_type` | any |  | Type of software catalog<br>_Constraints: default: `binary_runtime`_ |
     | `source_url` | string (uri) |  | Catalog source URL |
     | `description` | string |  |  |
-    | `metadata` | any |  | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
+    | `metadata` | object (free-form) |  | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
     | `auto_update_enabled` | boolean |  | Whether to automatically update this catalog via scheduled tasks |
     | `update_errors` | string |  |  |
 
@@ -583,7 +583,7 @@ Partially updates an existing software catalog. Requires staff permissions.
     | `catalog_type_display` | string |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
-    | `metadata` | any | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
+    | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
     | `auto_update_enabled` | boolean | Whether to automatically update this catalog via scheduled tasks |
     | `last_update_attempt` | string (date-time) |  |
     | `last_successful_update` | string (date-time) |  |

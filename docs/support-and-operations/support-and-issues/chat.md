@@ -105,8 +105,8 @@
     | `output_tokens` | integer |  |
     | `is_flagged` | boolean |  |
     | `severity` | any |  |
-    | `injection_categories` | any |  |
-    | `pii_categories` | any |  |
+    | `injection_categories` | object (free-form) |  |
+    | `pii_categories` | object (free-form) |  |
     | `action_taken` | any |  |
     | `feedback_score` | boolean | User feedback: True=thumbs up, False=thumbs down, None=no feedback. |
     | `feedback_comment` | string | Optional user comment accompanying feedback. |
@@ -578,7 +578,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `uuid` | string (uuid) |
     | `name` | string |
     | `chat_session` | string (uuid) |
-    | `flags` | any |
+    | `flags` | object (free-form) |
     | `is_archived` | boolean |
     | `message_count` | integer |
     | `input_tokens` | integer |
@@ -672,7 +672,7 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `uuid` | string (uuid) |
     | `name` | string |
     | `chat_session` | string (uuid) |
-    | `flags` | any |
+    | `flags` | object (free-form) |
     | `is_archived` | boolean |
     | `message_count` | integer |
     | `input_tokens` | integer |
@@ -789,8 +789,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `output_tokens` | integer |  |
     | `is_flagged` | boolean |  |
     | `severity` | any |  |
-    | `injection_categories` | any |  |
-    | `pii_categories` | any |  |
+    | `injection_categories` | object (free-form) |  |
+    | `pii_categories` | object (free-form) |  |
     | `action_taken` | any |  |
     | `feedback_score` | boolean | User feedback: True=thumbs up, False=thumbs down, None=no feedback. |
     | `feedback_comment` | string | Optional user comment accompanying feedback. |

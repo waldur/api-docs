@@ -105,8 +105,8 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     | `version` | string |  |
     | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
-    | `dependencies` | any | Package dependencies (format varies by catalog type) |
-    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `dependencies` | object (free-form) | Package dependencies (format varies by catalog type) |
+    | `metadata` | object (free-form) | Version-specific metadata (toolchains, build info, modules, etc.) |
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
@@ -191,8 +191,8 @@ Returns the details of a specific software version, including its release date a
     | `version` | string |  |
     | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
-    | `dependencies` | any | Package dependencies (format varies by catalog type) |
-    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `dependencies` | object (free-form) | Package dependencies (format varies by catalog type) |
+    | `metadata` | object (free-form) | Version-specific metadata (toolchains, build info, modules, etc.) |
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
@@ -264,8 +264,8 @@ Creates a new version for a software package. Requires staff permissions.
     | `version` | string |  |
     | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
-    | `dependencies` | any | Package dependencies (format varies by catalog type) |
-    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `dependencies` | object (free-form) | Package dependencies (format varies by catalog type) |
+    | `metadata` | object (free-form) | Version-specific metadata (toolchains, build info, modules, etc.) |
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
@@ -350,8 +350,8 @@ Updates an existing software version. Requires staff permissions.
     | `version` | string |  |
     | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
-    | `dependencies` | any | Package dependencies (format varies by catalog type) |
-    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `dependencies` | object (free-form) | Package dependencies (format varies by catalog type) |
+    | `metadata` | object (free-form) | Version-specific metadata (toolchains, build info, modules, etc.) |
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |
@@ -436,8 +436,8 @@ Partially updates an existing software version. Requires staff permissions.
     | `version` | string |  |
     | `module_version` | string | EESSI EasyBuild module version |
     | `release_date` | string (date) |  |
-    | `dependencies` | any | Package dependencies (format varies by catalog type) |
-    | `metadata` | any | Version-specific metadata (toolchains, build info, modules, etc.) |
+    | `dependencies` | object (free-form) | Package dependencies (format varies by catalog type) |
+    | `metadata` | object (free-form) | Version-specific metadata (toolchains, build info, modules, etc.) |
     | `package_name` | string |  |
     | `catalog_type` | string |  |
     | `target_count` | integer |  |

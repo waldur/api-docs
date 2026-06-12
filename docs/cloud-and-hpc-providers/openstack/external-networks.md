@@ -97,8 +97,8 @@ Get a list of provider-level external networks discovered from OpenStack.
     | `subnets.gateway_ip` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer |  |
     | `subnets.enable_dhcp` | boolean |  |
-    | `subnets.allocation_pools` | any |  |
-    | `subnets.dns_nameservers` | any |  |
+    | `subnets.allocation_pools` | object (free-form) |  |
+    | `subnets.dns_nameservers` | object (free-form) |  |
     | `subnets.public_ip_range` | string | Public CIDR mapped to this subnet (for carrier-grade NAT overlay) |
     | `subnets.description` | string |  |
 
@@ -196,8 +196,8 @@ Retrieve details of a specific external network, including its subnets.
     | `subnets.gateway_ip` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer |  |
     | `subnets.enable_dhcp` | boolean |  |
-    | `subnets.allocation_pools` | any |  |
-    | `subnets.dns_nameservers` | any |  |
+    | `subnets.allocation_pools` | object (free-form) |  |
+    | `subnets.dns_nameservers` | object (free-form) |  |
     | `subnets.public_ip_range` | string | Public CIDR mapped to this subnet (for carrier-grade NAT overlay) |
     | `subnets.description` | string |  |
 

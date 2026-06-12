@@ -82,7 +82,7 @@
     | `questions.description` | string |
     | `questions.variable` | string |
     | `questions.required` | boolean |
-    | `questions.validate_` | any |
+    | `questions.validate_` | object (free-form) |
     | `questions.type` | string |
     | `questions.default` | string |
     | `questions.group` | string |
@@ -92,7 +92,7 @@
     | `questions.subquestions.description` | string |
     | `questions.subquestions.variable` | string |
     | `questions.subquestions.required` | boolean |
-    | `questions.subquestions.validate_` | any |
+    | `questions.subquestions.validate_` | object (free-form) |
     | `questions.subquestions.type` | string |
     | `questions.subquestions.default` | string |
     | `questions.subquestions.group` | string |

@@ -253,7 +253,7 @@ Retrieves metadata for all settings that can be configured via the Constance bac
     | `settings.items` | array of objects |
     | `settings.items.key` | string |
     | `settings.items.description` | string |
-    | `settings.items.default` | any |
+    | `settings.items.default` | object (free-form) |
     | `settings.items.type` | string |
     | `settings.items.options` | array of objects |
     | `settings.items.options.value` | string |

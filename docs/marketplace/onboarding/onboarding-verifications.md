@@ -135,9 +135,9 @@
     | `justifications.created` | string (date-time) |  |
     | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | any | Roles the user has in the company |
-    | `verified_company_data` | any | Company information retrieved during validation |
-    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
+    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
+    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
     | `error_traceback` | string |  |
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
@@ -250,9 +250,9 @@
     | `justifications.created` | string (date-time) |  |
     | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | any | Roles the user has in the company |
-    | `verified_company_data` | any | Company information retrieved during validation |
-    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
+    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
+    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
     | `error_traceback` | string |  |
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
@@ -369,9 +369,9 @@
     | `justifications.created` | string (date-time) |  |
     | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | any | Roles the user has in the company |
-    | `verified_company_data` | any | Company information retrieved during validation |
-    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
+    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
+    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
     | `error_traceback` | string |  |
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
@@ -478,9 +478,9 @@ Create customer from successful verification.
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -661,9 +661,9 @@ Create customer from successful verification.
     | `justifications.created` | string (date-time) |  |
     | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | any | Roles the user has in the company |
-    | `verified_company_data` | any | Company information retrieved during validation |
-    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
+    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
+    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
     | `error_traceback` | string |  |
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
@@ -791,9 +791,9 @@ Create customer from successful verification.
     | `justifications.created` | string (date-time) |  |
     | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | any | Roles the user has in the company |
-    | `verified_company_data` | any | Company information retrieved during validation |
-    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
+    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
+    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
     | `error_traceback` | string |  |
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
@@ -1040,8 +1040,8 @@ Get checklist with questions and existing answers. Supports both customer and in
     | `questions.question_options` | array of anys |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1135,8 +1135,8 @@ Get checklist template for creating new objects.
     | `questions.order` | integer |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1146,9 +1146,9 @@ Get checklist template for creating new objects.
     | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `questions.operator` | any |  |
-    | `questions.review_answer_value` | any | Answer value that trigger review. |
+    | `questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
     | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `questions.guidance_answer_value` | any | Answer value that triggers display of user guidance. |
+    | `questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
     | `questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
     | `questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
@@ -1165,8 +1165,8 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.order` | integer |  |
     | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `initial_visible_questions.allowed_file_types` | any | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `initial_visible_questions.allowed_mime_types` | any | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `initial_visible_questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `initial_visible_questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
     | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `initial_visible_questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `initial_visible_questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1176,9 +1176,9 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
     | `initial_visible_questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `initial_visible_questions.operator` | any |  |
-    | `initial_visible_questions.review_answer_value` | any | Answer value that trigger review. |
+    | `initial_visible_questions.review_answer_value` | object (free-form) | Answer value that trigger review. |
     | `initial_visible_questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `initial_visible_questions.guidance_answer_value` | any | Answer value that triggers display of user guidance. |
+    | `initial_visible_questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
     | `initial_visible_questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
     | `initial_visible_questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
     | `initial_visible_questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
@@ -1396,9 +1396,9 @@ Run automatic validation using the required fields provided during verification 
     | `justifications.created` | string (date-time) |  |
     | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | any | Roles the user has in the company |
-    | `verified_company_data` | any | Company information retrieved during validation |
-    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
+    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
+    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
     | `error_traceback` | string |  |
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
@@ -1517,9 +1517,9 @@ Start company validation process by creating a verification record. User selects
     | `justifications.created` | string (date-time) |  |
     | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | any | Roles the user has in the company |
-    | `verified_company_data` | any | Company information retrieved during validation |
-    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
+    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
+    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
     | `error_traceback` | string |  |
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |
@@ -1542,7 +1542,7 @@ Submit answers to checklist questions. Automatically detects which checklist (cu
 === "HTTPie"
 
     ```bash
-    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]' | http \
+    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": {}}]' | http \
       POST \
       https://api.example.com/api/onboarding-verifications/a1b2c3d4-e5f6-7890-abcd-ef1234567890/submit_answers/ \
       Authorization:"Token YOUR_API_TOKEN"
@@ -1579,7 +1579,7 @@ Submit answers to checklist questions. Automatically detects which checklist (cu
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
-      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]
+      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": {}}]
     });
       console.log('Success:', response);
     } catch (error) {
@@ -1602,7 +1602,7 @@ Submit answers to checklist questions. Automatically detects which checklist (cu
     | Field | Type | Required |
     |---|---|---|
     | `question_uuid` | string (uuid) | ✓ |
-    | `answer_data` | any | ✓ |
+    | `answer_data` | object (free-form) | ✓ |
 
 
 === "Responses"
@@ -1645,9 +1645,9 @@ Submit answers to checklist questions. Automatically detects which checklist (cu
     | `justifications.created` | string (date-time) |  |
     | `justifications.modified` | string (date-time) |  |
     | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | any | Roles the user has in the company |
-    | `verified_company_data` | any | Company information retrieved during validation |
-    | `raw_response` | any | Raw API response for debugging and auditing |
+    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
+    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
+    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
     | `error_traceback` | string |  |
     | `error_message` | string |  |
     | `validated_at` | string (date-time) | When validation was completed |

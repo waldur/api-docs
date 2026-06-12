@@ -83,7 +83,7 @@
     | `question_name` | string |  |
     | `depends_on_question` | string (uri) |  |
     | `depends_on_question_name` | string |  |
-    | `required_answer_value` | any | The answer value(s) that make this question visible |
+    | `required_answer_value` | object (free-form) | The answer value(s) that make this question visible |
     | `operator` | string | <br>_Enum: `equals`, `not_equals`, `contains`, `in`, `not_in`_ |
 
 ---
@@ -158,7 +158,7 @@
     | `question_name` | string |  |
     | `depends_on_question` | string (uri) |  |
     | `depends_on_question_name` | string |  |
-    | `required_answer_value` | any | The answer value(s) that make this question visible |
+    | `required_answer_value` | object (free-form) | The answer value(s) that make this question visible |
     | `operator` | string | <br>_Enum: `equals`, `not_equals`, `contains`, `in`, `not_in`_ |
 
 ---
@@ -175,7 +175,7 @@
       Authorization:"Token YOUR_API_TOKEN" \
       question="https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       depends_on_question="https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      required_answer_value=null
+      required_answer_value:='{}'
     ```
 
 === "Python"
@@ -192,7 +192,7 @@
     body_data = QuestionDependencyRequest(
         question="https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         depends_on_question="https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        required_answer_value=null
+        required_answer_value={}
     )
     response = checklists_admin_question_dependencies_create.sync(
         client=client,
@@ -217,7 +217,7 @@
       body: {
         "question": "https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "depends_on_question": "https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "required_answer_value": null
+        "required_answer_value": {}
       }
     });
       console.log('Success:', response);
@@ -233,7 +233,7 @@
     |---|---|---|---|
     | `question` | string (uri) | ✓ |  |
     | `depends_on_question` | string (uri) | ✓ |  |
-    | `required_answer_value` | any | ✓ | The answer value(s) that make this question visible |
+    | `required_answer_value` | object (free-form) | ✓ | The answer value(s) that make this question visible |
     | `operator` | string |  | <br>_Enum: `equals`, `not_equals`, `contains`, `in`, `not_in`_ |
 
 
@@ -249,7 +249,7 @@
     | `question_name` | string |  |
     | `depends_on_question` | string (uri) |  |
     | `depends_on_question_name` | string |  |
-    | `required_answer_value` | any | The answer value(s) that make this question visible |
+    | `required_answer_value` | object (free-form) | The answer value(s) that make this question visible |
     | `operator` | string | <br>_Enum: `equals`, `not_equals`, `contains`, `in`, `not_in`_ |
 
 ---
@@ -266,7 +266,7 @@
       Authorization:"Token YOUR_API_TOKEN" \
       question="https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       depends_on_question="https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      required_answer_value=null
+      required_answer_value:='{}'
     ```
 
 === "Python"
@@ -283,7 +283,7 @@
     body_data = QuestionDependencyRequest(
         question="https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         depends_on_question="https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        required_answer_value=null
+        required_answer_value={}
     )
     response = checklists_admin_question_dependencies_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -312,7 +312,7 @@
       body: {
         "question": "https://api.example.com/api/question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "depends_on_question": "https://api.example.com/api/depends-on-question/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "required_answer_value": null
+        "required_answer_value": {}
       }
     });
       console.log('Success:', response);
@@ -335,7 +335,7 @@
     |---|---|---|---|
     | `question` | string (uri) | ✓ |  |
     | `depends_on_question` | string (uri) | ✓ |  |
-    | `required_answer_value` | any | ✓ | The answer value(s) that make this question visible |
+    | `required_answer_value` | object (free-form) | ✓ | The answer value(s) that make this question visible |
     | `operator` | string |  | <br>_Enum: `equals`, `not_equals`, `contains`, `in`, `not_in`_ |
 
 
@@ -351,7 +351,7 @@
     | `question_name` | string |  |
     | `depends_on_question` | string (uri) |  |
     | `depends_on_question_name` | string |  |
-    | `required_answer_value` | any | The answer value(s) that make this question visible |
+    | `required_answer_value` | object (free-form) | The answer value(s) that make this question visible |
     | `operator` | string | <br>_Enum: `equals`, `not_equals`, `contains`, `in`, `not_in`_ |
 
 ---
@@ -425,7 +425,7 @@
     |---|---|---|---|
     | `question` | string (uri) |  |  |
     | `depends_on_question` | string (uri) |  |  |
-    | `required_answer_value` | any |  | The answer value(s) that make this question visible |
+    | `required_answer_value` | object (free-form) |  | The answer value(s) that make this question visible |
     | `operator` | string |  | <br>_Enum: `equals`, `not_equals`, `contains`, `in`, `not_in`_ |
 
 
@@ -441,7 +441,7 @@
     | `question_name` | string |  |
     | `depends_on_question` | string (uri) |  |
     | `depends_on_question_name` | string |  |
-    | `required_answer_value` | any | The answer value(s) that make this question visible |
+    | `required_answer_value` | object (free-form) | The answer value(s) that make this question visible |
     | `operator` | string | <br>_Enum: `equals`, `not_equals`, `contains`, `in`, `not_in`_ |
 
 ---

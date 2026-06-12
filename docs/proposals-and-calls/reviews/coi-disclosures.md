@@ -100,7 +100,7 @@
     | `financial_interests.is_ongoing` | boolean |  |
     | `financial_interests.description` | string |  |
     | `has_personal_relationships` | boolean |  |
-    | `personal_relationships` | any |  |
+    | `personal_relationships` | object (free-form) |  |
     | `has_other_conflicts` | boolean |  |
     | `other_conflicts_description` | string |  |
     | `valid_until` | string (date) | Typically 1 year from certification |
@@ -194,7 +194,7 @@
     | `financial_interests.is_ongoing` | boolean |  |
     | `financial_interests.description` | string |  |
     | `has_personal_relationships` | boolean |  |
-    | `personal_relationships` | any |  |
+    | `personal_relationships` | object (free-form) |  |
     | `has_other_conflicts` | boolean |  |
     | `other_conflicts_description` | string |  |
     | `valid_until` | string (date) | Typically 1 year from certification |
@@ -270,7 +270,7 @@
     | `certification_statement` | string |  | Legal text they agreed to |
     | `has_financial_interests` | boolean |  |  |
     | `has_personal_relationships` | boolean |  |  |
-    | `personal_relationships` | any |  |  |
+    | `personal_relationships` | object (free-form) |  |  |
     | `has_other_conflicts` | boolean |  |  |
     | `other_conflicts_description` | string |  |  |
     | `valid_until` | string (date) | ✓ | Typically 1 year from certification |
@@ -303,7 +303,7 @@
     | `financial_interests.is_ongoing` | boolean |  |
     | `financial_interests.description` | string |  |
     | `has_personal_relationships` | boolean |  |
-    | `personal_relationships` | any |  |
+    | `personal_relationships` | object (free-form) |  |
     | `has_other_conflicts` | boolean |  |
     | `other_conflicts_description` | string |  |
     | `valid_until` | string (date) | Typically 1 year from certification |

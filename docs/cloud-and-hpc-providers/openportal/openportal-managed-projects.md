@@ -101,7 +101,7 @@ List all managed projects
     | `review_comment` | string | Optional comment provided during review |
     | `identifier` | string |  |
     | `destination` | string | The destination used to send instructions from the remote portal. |
-    | `details` | any | Details of the project as provided by the remote OpenPortal. |
+    | `details` | object (free-form) | Details of the project as provided by the remote OpenPortal. |
     | `project` | string (uri) |  |
     | `project_data` | any |  |
     | `project_template` | string (uri) |  |
@@ -187,7 +187,7 @@ Retrieve a managed project
     | `review_comment` | string | Optional comment provided during review |
     | `identifier` | string |  |
     | `destination` | string | The destination used to send instructions from the remote portal. |
-    | `details` | any | Details of the project as provided by the remote OpenPortal. |
+    | `details` | object (free-form) | Details of the project as provided by the remote OpenPortal. |
     | `project` | string (uri) |  |
     | `project_data` | any |  |
     | `project_template` | string (uri) |  |

@@ -141,7 +141,7 @@
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -208,7 +208,7 @@
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |
@@ -341,7 +341,7 @@
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -408,7 +408,7 @@
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |

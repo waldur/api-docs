@@ -113,8 +113,8 @@
     | `ram_total` | integer | Total RAM in Mi. |
     | `pods_allocated` | integer |  |
     | `pods_total` | integer |  |
-    | `labels` | any |  |
-    | `annotations` | any |  |
+    | `labels` | object (free-form) |  |
+    | `annotations` | object (free-form) |  |
     | `runtime_state` | string |  |
 
 ---
@@ -210,8 +210,8 @@
     | `ram_total` | integer | Total RAM in Mi. |
     | `pods_allocated` | integer |  |
     | `pods_total` | integer |  |
-    | `labels` | any |  |
-    | `annotations` | any |  |
+    | `labels` | object (free-form) |  |
+    | `annotations` | object (free-form) |  |
     | `runtime_state` | string |  |
 
 ---

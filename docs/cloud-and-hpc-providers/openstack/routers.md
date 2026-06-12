@@ -204,7 +204,7 @@ Get a list of routers.
     | `external_network_name` | string |  |
     | `has_external_gateway` | boolean |  |
     | `enable_snat` | boolean | Whether SNAT is enabled on the external gateway. None means OpenStack default (True). |
-    | `external_fixed_ips` | any |  |
+    | `external_fixed_ips` | object (free-form) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -401,7 +401,7 @@ Retrieve details of a specific router.
     | `external_network_name` | string |  |
     | `has_external_gateway` | boolean |  |
     | `enable_snat` | boolean | Whether SNAT is enabled on the external gateway. None means OpenStack default (True). |
-    | `external_fixed_ips` | any |  |
+    | `external_fixed_ips` | object (free-form) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |

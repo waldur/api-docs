@@ -97,7 +97,7 @@
     | `created` | string (date-time) |
     | `event_type` | string |
     | `message` | string |
-    | `context` | any |
+    | `context` | object (free-form) |
 
 ---
 
@@ -178,7 +178,7 @@
     | `created` | string (date-time) |
     | `event_type` | string |
     | `message` | string |
-    | `context` | any |
+    | `context` | object (free-form) |
 
 ---
 

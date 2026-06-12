@@ -99,8 +99,8 @@
     | `offerings_data.uuid` | string (uuid) |  |
     | `approval_limit` | string (decimal) | The credit limit beyond which requests need to be approved by a local admin. If this is None, then no local approval is required. If this is set to 0, then all requests (including creating the project) need to be approved. |
     | `max_credit_limit` | string (decimal) | The maximum credit limit for any projects created in this class. Any requests beyond this limit are automatically rejected. If this is None, then no maximum limit is set. If this is set to 0, then no projects can be created in this class. |
-    | `allocation_units_mapping` | any | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
-    | `role_mapping` | any | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
+    | `allocation_units_mapping` | object (free-form) | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
+    | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
 
 ---
@@ -185,8 +185,8 @@
     | `offerings_data.uuid` | string (uuid) |  |
     | `approval_limit` | string (decimal) | The credit limit beyond which requests need to be approved by a local admin. If this is None, then no local approval is required. If this is set to 0, then all requests (including creating the project) need to be approved. |
     | `max_credit_limit` | string (decimal) | The maximum credit limit for any projects created in this class. Any requests beyond this limit are automatically rejected. If this is None, then no maximum limit is set. If this is set to 0, then no projects can be created in this class. |
-    | `allocation_units_mapping` | any | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
-    | `role_mapping` | any | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
+    | `allocation_units_mapping` | object (free-form) | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
+    | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
 
 ---
@@ -277,8 +277,8 @@ Create ProjectTemplate object
     | `offerings` | array of string (uri)s | ✓ |  |
     | `approval_limit` | string (decimal) |  | The credit limit beyond which requests need to be approved by a local admin. If this is None, then no local approval is required. If this is set to 0, then all requests (including creating the project) need to be approved. |
     | `max_credit_limit` | string (decimal) |  | The maximum credit limit for any projects created in this class. Any requests beyond this limit are automatically rejected. If this is None, then no maximum limit is set. If this is set to 0, then no projects can be created in this class. |
-    | `allocation_units_mapping` | any |  | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
-    | `role_mapping` | any |  | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
+    | `allocation_units_mapping` | object (free-form) |  | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
+    | `role_mapping` | object (free-form) |  | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
 
 
 === "Responses"
@@ -303,8 +303,8 @@ Create ProjectTemplate object
     | `offerings_data.uuid` | string (uuid) |  |
     | `approval_limit` | string (decimal) | The credit limit beyond which requests need to be approved by a local admin. If this is None, then no local approval is required. If this is set to 0, then all requests (including creating the project) need to be approved. |
     | `max_credit_limit` | string (decimal) | The maximum credit limit for any projects created in this class. Any requests beyond this limit are automatically rejected. If this is None, then no maximum limit is set. If this is set to 0, then no projects can be created in this class. |
-    | `allocation_units_mapping` | any | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
-    | `role_mapping` | any | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
+    | `allocation_units_mapping` | object (free-form) | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
+    | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
 
 ---
@@ -406,8 +406,8 @@ Update ProjectTemplate object (full update)
     | `offerings` | array of string (uri)s | ✓ |  |
     | `approval_limit` | string (decimal) |  | The credit limit beyond which requests need to be approved by a local admin. If this is None, then no local approval is required. If this is set to 0, then all requests (including creating the project) need to be approved. |
     | `max_credit_limit` | string (decimal) |  | The maximum credit limit for any projects created in this class. Any requests beyond this limit are automatically rejected. If this is None, then no maximum limit is set. If this is set to 0, then no projects can be created in this class. |
-    | `allocation_units_mapping` | any |  | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
-    | `role_mapping` | any |  | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
+    | `allocation_units_mapping` | object (free-form) |  | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
+    | `role_mapping` | object (free-form) |  | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
 
 
 === "Responses"
@@ -432,8 +432,8 @@ Update ProjectTemplate object (full update)
     | `offerings_data.uuid` | string (uuid) |  |
     | `approval_limit` | string (decimal) | The credit limit beyond which requests need to be approved by a local admin. If this is None, then no local approval is required. If this is set to 0, then all requests (including creating the project) need to be approved. |
     | `max_credit_limit` | string (decimal) | The maximum credit limit for any projects created in this class. Any requests beyond this limit are automatically rejected. If this is None, then no maximum limit is set. If this is set to 0, then no projects can be created in this class. |
-    | `allocation_units_mapping` | any | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
-    | `role_mapping` | any | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
+    | `allocation_units_mapping` | object (free-form) | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
+    | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
 
 ---
@@ -517,8 +517,8 @@ Partially update ProjectTemplate object
     | `offerings` | array of string (uri)s |  |  |
     | `approval_limit` | string (decimal) |  | The credit limit beyond which requests need to be approved by a local admin. If this is None, then no local approval is required. If this is set to 0, then all requests (including creating the project) need to be approved. |
     | `max_credit_limit` | string (decimal) |  | The maximum credit limit for any projects created in this class. Any requests beyond this limit are automatically rejected. If this is None, then no maximum limit is set. If this is set to 0, then no projects can be created in this class. |
-    | `allocation_units_mapping` | any |  | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
-    | `role_mapping` | any |  | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
+    | `allocation_units_mapping` | object (free-form) |  | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
+    | `role_mapping` | object (free-form) |  | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
 
 
 === "Responses"
@@ -543,8 +543,8 @@ Partially update ProjectTemplate object
     | `offerings_data.uuid` | string (uuid) |  |
     | `approval_limit` | string (decimal) | The credit limit beyond which requests need to be approved by a local admin. If this is None, then no local approval is required. If this is set to 0, then all requests (including creating the project) need to be approved. |
     | `max_credit_limit` | string (decimal) | The maximum credit limit for any projects created in this class. Any requests beyond this limit are automatically rejected. If this is None, then no maximum limit is set. If this is set to 0, then no projects can be created in this class. |
-    | `allocation_units_mapping` | any | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
-    | `role_mapping` | any | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
+    | `allocation_units_mapping` | object (free-form) | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
+    | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
 
 ---

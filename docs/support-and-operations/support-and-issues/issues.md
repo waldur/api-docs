@@ -145,7 +145,7 @@
     | `destroy_is_available` | boolean |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
-    | `processing_log` | any | Internal processing log for debugging order lifecycle events. Visible only to staff. |
+    | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
     | `order_uuid` | string | Return order UUID if the issue's resource is an Order. |
     | `order_project_uuid` | string | Return order's project UUID if the issue's resource is an Order. |
     | `order_customer_uuid` | string | Return order's customer UUID if the issue's resource is an Order. |
@@ -257,7 +257,7 @@
     | `destroy_is_available` | boolean |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
-    | `processing_log` | any | Internal processing log for debugging order lifecycle events. Visible only to staff. |
+    | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
     | `order_uuid` | string | Return order UUID if the issue's resource is an Order. |
     | `order_project_uuid` | string | Return order's project UUID if the issue's resource is an Order. |
     | `order_customer_uuid` | string | Return order's customer UUID if the issue's resource is an Order. |
@@ -390,7 +390,7 @@
     | `destroy_is_available` | boolean |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
-    | `processing_log` | any | Internal processing log for debugging order lifecycle events. Visible only to staff. |
+    | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
     | `order_uuid` | string | Return order UUID if the issue's resource is an Order. |
     | `order_project_uuid` | string | Return order's project UUID if the issue's resource is an Order. |
     | `order_customer_uuid` | string | Return order's customer UUID if the issue's resource is an Order. |
@@ -534,7 +534,7 @@
     | `destroy_is_available` | boolean |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
-    | `processing_log` | any | Internal processing log for debugging order lifecycle events. Visible only to staff. |
+    | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
     | `order_uuid` | string | Return order UUID if the issue's resource is an Order. |
     | `order_project_uuid` | string | Return order's project UUID if the issue's resource is an Order. |
     | `order_customer_uuid` | string | Return order's customer UUID if the issue's resource is an Order. |
@@ -661,7 +661,7 @@
     | `destroy_is_available` | boolean |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
-    | `processing_log` | any | Internal processing log for debugging order lifecycle events. Visible only to staff. |
+    | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
     | `order_uuid` | string | Return order UUID if the issue's resource is an Order. |
     | `order_project_uuid` | string | Return order's project UUID if the issue's resource is an Order. |
     | `order_customer_uuid` | string | Return order's customer UUID if the issue's resource is an Order. |

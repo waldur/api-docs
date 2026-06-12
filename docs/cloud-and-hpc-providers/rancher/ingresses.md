@@ -140,7 +140,7 @@
     | `rancher_project_name` | string |
     | `namespace` | string (uri) |
     | `namespace_name` | string |
-    | `rules` | any |
+    | `rules` | object (free-form) |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
     | `marketplace_offering_type` | string |
@@ -258,7 +258,7 @@
     | `rancher_project_name` | string |
     | `namespace` | string (uri) |
     | `namespace_name` | string |
-    | `rules` | any |
+    | `rules` | object (free-form) |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
     | `marketplace_offering_type` | string |
@@ -354,7 +354,7 @@
     | `runtime_state` | string |  |
     | `rancher_project` | string (uri) | ✓ |
     | `namespace` | string (uri) |  |
-    | `rules` | any |  |
+    | `rules` | object (free-form) |  |
 
 
 === "Responses"
@@ -393,7 +393,7 @@
     | `rancher_project_name` | string |
     | `namespace` | string (uri) |
     | `namespace_name` | string |
-    | `rules` | any |
+    | `rules` | object (free-form) |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
     | `marketplace_offering_type` | string |
@@ -647,7 +647,7 @@ Delete resource from the database without scheduling operations on backend
     | `runtime_state` | string |  |
     | `rancher_project` | string (uri) | ✓ |
     | `namespace` | string (uri) |  |
-    | `rules` | any |  |
+    | `rules` | object (free-form) |  |
 
 
 === "Responses"
@@ -686,7 +686,7 @@ Delete resource from the database without scheduling operations on backend
     | `rancher_project_name` | string |
     | `namespace` | string (uri) |
     | `namespace_name` | string |
-    | `rules` | any |
+    | `rules` | object (free-form) |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
     | `marketplace_offering_type` | string |
@@ -778,7 +778,7 @@ Delete resource from the database without scheduling operations on backend
     | `runtime_state` | string |  |
     | `rancher_project` | string (uri) |  |
     | `namespace` | string (uri) |  |
-    | `rules` | any |  |
+    | `rules` | object (free-form) |  |
 
 
 === "Responses"
@@ -817,7 +817,7 @@ Delete resource from the database without scheduling operations on backend
     | `rancher_project_name` | string |
     | `namespace` | string (uri) |
     | `namespace_name` | string |
-    | `rules` | any |
+    | `rules` | object (free-form) |
     | `marketplace_offering_uuid` | string |
     | `marketplace_offering_name` | string |
     | `marketplace_offering_type` | string |
@@ -1213,7 +1213,7 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | `runtime_state` | string |  |
     | `rancher_project` | string (uri) | ✓ |
     | `namespace` | string (uri) |  |
-    | `rules` | any |  |
+    | `rules` | object (free-form) |  |
 
 
 === "Responses"

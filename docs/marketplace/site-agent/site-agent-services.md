@@ -94,7 +94,7 @@
     | `name` | string |  |
     | `mode` | string |  |
     | `state` | any |  |
-    | `statistics` | any |  |
+    | `statistics` | object (free-form) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `processors` | array of objects |  |
@@ -180,7 +180,7 @@
     | `name` | string |  |
     | `mode` | string |  |
     | `state` | any |  |
-    | `statistics` | any |  |
+    | `statistics` | object (free-form) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `processors` | array of objects |  |
@@ -475,7 +475,7 @@ Update statistics for the agent service
       POST \
       https://api.example.com/api/marketplace-site-agent-services/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_statistics/ \
       Authorization:"Token YOUR_API_TOKEN" \
-      statistics=null
+      statistics:='{}'
     ```
 
 === "Python"
@@ -490,7 +490,7 @@ Update statistics for the agent service
     )
     
     body_data = AgentServiceStatisticsRequest(
-        statistics=null
+        statistics={}
     )
     response = marketplace_site_agent_services_set_statistics.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -517,7 +517,7 @@ Update statistics for the agent service
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
       body: {
-        "statistics": null
+        "statistics": {}
       }
     });
       console.log('Success:', response);
@@ -538,7 +538,7 @@ Update statistics for the agent service
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `statistics` | any | ✓ | Statistics data to be stored for the service |
+    | `statistics` | object (free-form) | ✓ | Statistics data to be stored for the service |
 
 
 === "Responses"
@@ -554,7 +554,7 @@ Update statistics for the agent service
     | `name` | string |  |
     | `mode` | string |  |
     | `state` | any |  |
-    | `statistics` | any |  |
+    | `statistics` | object (free-form) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `processors` | array of objects |  |

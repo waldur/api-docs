@@ -92,7 +92,7 @@
     | `created_by` | string (uuid) |  |
     | `name` | string |  |
     | `version` | string |  |
-    | `dependencies` | any |  |
+    | `dependencies` | object (free-form) |  |
     | `config_file_path` | string | Example: '/etc/waldur/agent.yaml' |
     | `config_file_content` | string |  |
     | `last_restarted` | string (date-time) |  |
@@ -104,7 +104,7 @@
     | `services.name` | string |  |
     | `services.mode` | string |  |
     | `services.state` | any |  |
-    | `services.statistics` | any |  |
+    | `services.statistics` | object (free-form) |  |
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
 
@@ -180,7 +180,7 @@
     | `created_by` | string (uuid) |  |
     | `name` | string |  |
     | `version` | string |  |
-    | `dependencies` | any |  |
+    | `dependencies` | object (free-form) |  |
     | `config_file_path` | string | Example: '/etc/waldur/agent.yaml' |
     | `config_file_content` | string |  |
     | `last_restarted` | string (date-time) |  |
@@ -192,7 +192,7 @@
     | `services.name` | string |  |
     | `services.mode` | string |  |
     | `services.state` | any |  |
-    | `services.statistics` | any |  |
+    | `services.statistics` | object (free-form) |  |
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
 
@@ -266,7 +266,7 @@
     | `offering` | string (uuid) | ✓ | UUID of an offering with a site-agent compatible type. |
     | `name` | string | ✓ |  |
     | `version` | string |  |  |
-    | `dependencies` | any |  |  |
+    | `dependencies` | object (free-form) |  |  |
     | `config_file_path` | string |  | Example: '/etc/waldur/agent.yaml' |
     | `config_file_content` | string |  |  |
     | `last_restarted` | string (date-time) |  |  |
@@ -284,7 +284,7 @@
     | `created_by` | string (uuid) |  |
     | `name` | string |  |
     | `version` | string |  |
-    | `dependencies` | any |  |
+    | `dependencies` | object (free-form) |  |
     | `config_file_path` | string | Example: '/etc/waldur/agent.yaml' |
     | `config_file_content` | string |  |
     | `last_restarted` | string (date-time) |  |
@@ -296,7 +296,7 @@
     | `services.name` | string |  |
     | `services.mode` | string |  |
     | `services.state` | any |  |
-    | `services.statistics` | any |  |
+    | `services.statistics` | object (free-form) |  |
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
 
@@ -381,7 +381,7 @@
     | `offering` | string (uuid) | ✓ | UUID of an offering with a site-agent compatible type. |
     | `name` | string | ✓ |  |
     | `version` | string |  |  |
-    | `dependencies` | any |  |  |
+    | `dependencies` | object (free-form) |  |  |
     | `config_file_path` | string |  | Example: '/etc/waldur/agent.yaml' |
     | `config_file_content` | string |  |  |
     | `last_restarted` | string (date-time) |  |  |
@@ -399,7 +399,7 @@
     | `created_by` | string (uuid) |  |
     | `name` | string |  |
     | `version` | string |  |
-    | `dependencies` | any |  |
+    | `dependencies` | object (free-form) |  |
     | `config_file_path` | string | Example: '/etc/waldur/agent.yaml' |
     | `config_file_content` | string |  |
     | `last_restarted` | string (date-time) |  |
@@ -411,7 +411,7 @@
     | `services.name` | string |  |
     | `services.mode` | string |  |
     | `services.state` | any |  |
-    | `services.statistics` | any |  |
+    | `services.statistics` | object (free-form) |  |
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
 
@@ -658,7 +658,7 @@ Register an event subscription for the specified agent identity and observable o
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
-    | `observable_objects` | any | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
+    | `observable_objects` | object (free-form) | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `source_ip` | any | An IPv4 or IPv6 address. |
@@ -676,7 +676,7 @@ Register an event subscription for the specified agent identity and observable o
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
-    | `observable_objects` | any | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
+    | `observable_objects` | object (free-form) | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `source_ip` | any | An IPv4 or IPv6 address. |
@@ -775,7 +775,7 @@ Register a new processor or get the existing one for the agent service
     | `name` | string |  |
     | `mode` | string |  |
     | `state` | any |  |
-    | `statistics` | any |  |
+    | `statistics` | object (free-form) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `processors` | array of objects |  |
@@ -801,7 +801,7 @@ Register a new processor or get the existing one for the agent service
     | `name` | string |  |
     | `mode` | string |  |
     | `state` | any |  |
-    | `statistics` | any |  |
+    | `statistics` | object (free-form) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `processors` | array of objects |  |

@@ -124,7 +124,7 @@ Returns a paginated list of robot accounts accessible to the current user.
     | `users.native_name` | string |  |
     | `users.email` | string (email) |  |
     | `users.image` | string (uri) |  |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -248,7 +248,7 @@ Returns the details of a specific robot account.
     | `users.native_name` | string |  |
     | `users.email` | string (email) |  |
     | `users.image` | string (uri) |  |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -350,7 +350,7 @@ Creates a new robot account for a specific resource. This is typically used for 
     | `resource` | string (uri) | ✓ |  |
     | `type` | string | ✓ | Type of the robot account. |
     | `users` | array of string (uri)s |  | Users who have access to this robot account. |
-    | `keys` | any |  |  |
+    | `keys` | object (free-form) |  |  |
     | `responsible_user` | string (uri) |  |  |
 
 
@@ -372,7 +372,7 @@ Creates a new robot account for a specific resource. This is typically used for 
     | `resource` | string (uri) |  |
     | `type` | string | Type of the robot account. |
     | `users` | array of string (uri)s | Users who have access to this robot account. |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -465,7 +465,7 @@ Updates the properties of a robot account, such as its username or associated us
     | `resource` | string (uri) | ✓ |  |
     | `type` | string | ✓ | Type of the robot account. |
     | `users` | array of string (uri)s |  | Users who have access to this robot account. |
-    | `keys` | any |  |  |
+    | `keys` | object (free-form) |  |  |
     | `responsible_user` | string (uri) |  |  |
 
 
@@ -487,7 +487,7 @@ Updates the properties of a robot account, such as its username or associated us
     | `resource` | string (uri) |  |
     | `type` | string | Type of the robot account. |
     | `users` | array of string (uri)s | Users who have access to this robot account. |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -571,7 +571,7 @@ Partially updates the properties of a robot account. Not allowed for synchronize
     | `resource` | string (uri) |  |  |
     | `type` | string |  | Type of the robot account. |
     | `users` | array of string (uri)s |  | Users who have access to this robot account. |
-    | `keys` | any |  |  |
+    | `keys` | object (free-form) |  |  |
     | `responsible_user` | string (uri) |  |  |
 
 
@@ -593,7 +593,7 @@ Partially updates the properties of a robot account. Not allowed for synchronize
     | `resource` | string (uri) |  |
     | `type` | string | Type of the robot account. |
     | `users` | array of string (uri)s | Users who have access to this robot account. |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -758,7 +758,7 @@ Transitions the robot account state from 'Requested' to 'Creating'. This is typi
     | `users.native_name` | string |  |
     | `users.email` | string (email) |  |
     | `users.image` | string (uri) |  |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -881,7 +881,7 @@ Transitions the robot account state from 'Requested deletion' to 'Deleted', mark
     | `users.native_name` | string |  |
     | `users.email` | string (email) |  |
     | `users.image` | string (uri) |  |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -1016,7 +1016,7 @@ Manually moves the robot account into the 'Error' state. An optional error messa
     | `users.native_name` | string |  |
     | `users.email` | string (email) |  |
     | `users.image` | string (uri) |  |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -1139,7 +1139,7 @@ Manually sets the robot account state to 'OK', indicating that it is fully opera
     | `users.native_name` | string |  |
     | `users.email` | string (email) |  |
     | `users.image` | string (uri) |  |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |
@@ -1262,7 +1262,7 @@ Transitions the robot account state from 'OK' to 'Requested deletion', initiatin
     | `users.native_name` | string |  |
     | `users.email` | string (email) |  |
     | `users.image` | string (uri) |  |
-    | `keys` | any |  |
+    | `keys` | object (free-form) |  |
     | `backend_id` | string |  |
     | `fingerprints` | array of objects |  |
     | `fingerprints.md5` | string | MD5 fingerprint of SSH key |

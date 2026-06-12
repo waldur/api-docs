@@ -73,7 +73,7 @@
     |---|---|
     | `url` | string (uri) |
     | `uuid` | string (uuid) |
-    | `order_attributes` | any |
+    | `order_attributes` | object (free-form) |
     | `order_type` | string |
     | `order_offering` | string (uri) |
     | `state` | any |
@@ -149,7 +149,7 @@
     |---|---|
     | `url` | string (uri) |
     | `uuid` | string (uuid) |
-    | `order_attributes` | any |
+    | `order_attributes` | object (free-form) |
     | `order_type` | string |
     | `order_offering` | string (uri) |
     | `state` | any |

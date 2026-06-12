@@ -178,7 +178,7 @@
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
     | `offerings.call_managing_organisation` | string |  |
-    | `offerings.attributes` | any |  |
+    | `offerings.attributes` | object (free-form) |  |
     | `offerings.plan` | string (uri) |  |
     | `offerings.plan_details` | any |  |
     | `offerings.options` | any |  |
@@ -236,8 +236,8 @@
     | `resource_templates.url` | string |  |
     | `resource_templates.name` | string |  |
     | `resource_templates.description` | string |  |
-    | `resource_templates.attributes` | any |  |
-    | `resource_templates.limits` | any |  |
+    | `resource_templates.attributes` | object (free-form) |  |
+    | `resource_templates.limits` | object (free-form) |  |
     | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
     | `resource_templates.requested_offering` | string (uri) |  |
     | `resource_templates.requested_offering_name` | string |  |
@@ -257,12 +257,12 @@
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
 
 ---
@@ -363,7 +363,7 @@
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
     | `offerings.call_managing_organisation` | string |  |
-    | `offerings.attributes` | any |  |
+    | `offerings.attributes` | object (free-form) |  |
     | `offerings.plan` | string (uri) |  |
     | `offerings.plan_details` | any |  |
     | `offerings.options` | any |  |
@@ -421,8 +421,8 @@
     | `resource_templates.url` | string |  |
     | `resource_templates.name` | string |  |
     | `resource_templates.description` | string |  |
-    | `resource_templates.attributes` | any |  |
-    | `resource_templates.limits` | any |  |
+    | `resource_templates.attributes` | object (free-form) |  |
+    | `resource_templates.limits` | object (free-form) |  |
     | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
     | `resource_templates.requested_offering` | string (uri) |  |
     | `resource_templates.requested_offering_name` | string |  |
@@ -442,12 +442,12 @@
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
 
 ---
@@ -530,12 +530,12 @@
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
     | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) |  | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) |  | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) |  | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
 
 
@@ -568,7 +568,7 @@
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
     | `offerings.call_managing_organisation` | string |  |
-    | `offerings.attributes` | any |  |
+    | `offerings.attributes` | object (free-form) |  |
     | `offerings.plan` | string (uri) |  |
     | `offerings.plan_details` | any |  |
     | `offerings.options` | any |  |
@@ -626,8 +626,8 @@
     | `resource_templates.url` | string |  |
     | `resource_templates.name` | string |  |
     | `resource_templates.description` | string |  |
-    | `resource_templates.attributes` | any |  |
-    | `resource_templates.limits` | any |  |
+    | `resource_templates.attributes` | object (free-form) |  |
+    | `resource_templates.limits` | object (free-form) |  |
     | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
     | `resource_templates.requested_offering` | string (uri) |  |
     | `resource_templates.requested_offering_name` | string |  |
@@ -647,12 +647,12 @@
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
 
 ---
@@ -844,12 +844,12 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
     | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) |  | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) |  | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) |  | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
 
 
@@ -882,7 +882,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
     | `offerings.call_managing_organisation` | string |  |
-    | `offerings.attributes` | any |  |
+    | `offerings.attributes` | object (free-form) |  |
     | `offerings.plan` | string (uri) |  |
     | `offerings.plan_details` | any |  |
     | `offerings.options` | any |  |
@@ -940,8 +940,8 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `resource_templates.url` | string |  |
     | `resource_templates.name` | string |  |
     | `resource_templates.description` | string |  |
-    | `resource_templates.attributes` | any |  |
-    | `resource_templates.limits` | any |  |
+    | `resource_templates.attributes` | object (free-form) |  |
+    | `resource_templates.limits` | object (free-form) |  |
     | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
     | `resource_templates.requested_offering` | string (uri) |  |
     | `resource_templates.requested_offering_name` | string |  |
@@ -961,12 +961,12 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
 
 ---
@@ -1050,12 +1050,12 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
     | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) |  | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) |  | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) |  | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
 
 
@@ -1088,7 +1088,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
     | `offerings.call_managing_organisation` | string |  |
-    | `offerings.attributes` | any |  |
+    | `offerings.attributes` | object (free-form) |  |
     | `offerings.plan` | string (uri) |  |
     | `offerings.plan_details` | any |  |
     | `offerings.options` | any |  |
@@ -1146,8 +1146,8 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `resource_templates.url` | string |  |
     | `resource_templates.name` | string |  |
     | `resource_templates.description` | string |  |
-    | `resource_templates.attributes` | any |  |
-    | `resource_templates.limits` | any |  |
+    | `resource_templates.attributes` | object (free-form) |  |
+    | `resource_templates.limits` | object (free-form) |  |
     | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
     | `resource_templates.requested_offering` | string (uri) |  |
     | `resource_templates.requested_offering_name` | string |  |
@@ -1167,12 +1167,12 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
 
 ---
@@ -2172,7 +2172,7 @@ List all conflicts of interest detected for this call.
     | `detection_method` | any |  |
     | `detected_at` | string (date-time) |  |
     | `evidence_description` | string |  |
-    | `evidence_data` | any | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
+    | `evidence_data` | object (free-form) | Structured evidence: {"papers": [...], "affiliation_overlap": {...}} |
     | `status` | string | <br>_Enum: `pending`, `dismissed`, `waived`, `recused`_ |
     | `status_display` | string |  |
     | `reviewed_by` | string (uri) |  |
@@ -2360,7 +2360,7 @@ List offerings for a call.
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
     | `call_managing_organisation` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `plan_details` | any |  |
     | `options` | any |  |
@@ -2477,7 +2477,7 @@ List offerings for a call.
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
     | `call_managing_organisation` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `plan_details` | any |  |
     | `options` | any |  |
@@ -2616,7 +2616,7 @@ Get detailed compliance answers for a specific proposal (call managers only).
     | `question_description` | string |  |
     | `question_type` | string |  |
     | `question_required` | boolean |  |
-    | `answer_data` | any | Flexible answer storage for different question types |
+    | `answer_data` | object (free-form) | Flexible answer storage for different question types |
     | `requires_review` | boolean | Internal flag - this answer requires additional review |
     | `user` | integer |  |
     | `user_name` | string |  |
@@ -2817,8 +2817,8 @@ List resource templates for a call.
     | `url` | string |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `is_required` | boolean | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) |  |
     | `requested_offering_name` | string |  |
@@ -2901,8 +2901,8 @@ List resource templates for a call.
     | `url` | string |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `is_required` | boolean | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) |  |
     | `requested_offering_name` | string |  |
@@ -3333,8 +3333,8 @@ List all reviewer suggestions for this call with affinity scores.
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | any | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | any | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
+    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
@@ -4132,7 +4132,7 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
     | `offerings.call_managing_organisation` | string |  |
-    | `offerings.attributes` | any |  |
+    | `offerings.attributes` | object (free-form) |  |
     | `offerings.plan` | string (uri) |  |
     | `offerings.plan_details` | any |  |
     | `offerings.options` | any |  |
@@ -4190,8 +4190,8 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `resource_templates.url` | string |  |
     | `resource_templates.name` | string |  |
     | `resource_templates.description` | string |  |
-    | `resource_templates.attributes` | any |  |
-    | `resource_templates.limits` | any |  |
+    | `resource_templates.attributes` | object (free-form) |  |
+    | `resource_templates.limits` | object (free-form) |  |
     | `resource_templates.is_required` | boolean | If True, every proposal must include this resource type |
     | `resource_templates.requested_offering` | string (uri) |  |
     | `resource_templates.requested_offering_name` | string |  |
@@ -4211,12 +4211,12 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
 
 ---
@@ -4744,7 +4744,7 @@ Create offering for a call.
     | Field | Type | Required |
     |---|---|---|
     | `offering` | string (uri) | ✓ |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `description` | string |  |
 
@@ -4764,7 +4764,7 @@ Create offering for a call.
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
     | `call_managing_organisation` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `plan_details` | any |  |
     | `options` | any |  |
@@ -4885,8 +4885,8 @@ Create resource template for a call.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `attributes` | any |  |  |
-    | `limits` | any |  |  |
+    | `attributes` | object (free-form) |  |  |
+    | `limits` | object (free-form) |  |  |
     | `is_required` | boolean |  | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) | ✓ |  |
 
@@ -4901,8 +4901,8 @@ Create resource template for a call.
     | `url` | string |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `is_required` | boolean | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) |  |
     | `requested_offering_name` | string |  |
@@ -5246,12 +5246,12 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
     | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | any |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | any |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | any |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | any |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | any |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | any |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | object (free-form) |  | List of email regex patterns. User must match one. |
+    | `user_affiliations` | object (free-form) |  | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | object (free-form) |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | object (free-form) |  | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | object (free-form) |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
 
 
@@ -5738,7 +5738,7 @@ Create or update a workflow step for a call.
     | Field | Type | Required |
     |---|---|---|
     | `offering` | string (uri) | ✓ |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `description` | string |  |
 
@@ -5758,7 +5758,7 @@ Create or update a workflow step for a call.
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
     | `call_managing_organisation` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `plan_details` | any |  |
     | `options` | any |  |
@@ -5880,8 +5880,8 @@ Create or update a workflow step for a call.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `attributes` | any |  |  |
-    | `limits` | any |  |  |
+    | `attributes` | object (free-form) |  |  |
+    | `limits` | object (free-form) |  |  |
     | `is_required` | boolean |  | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) | ✓ |  |
 
@@ -5896,8 +5896,8 @@ Create or update a workflow step for a call.
     | `url` | string |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `is_required` | boolean | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) |  |
     | `requested_offering_name` | string |  |
@@ -6444,7 +6444,7 @@ Get or update matching configuration for this call.
 
     | Field | Type | Required |
     |---|---|---|
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `description` | string |  |
 
@@ -6464,7 +6464,7 @@ Get or update matching configuration for this call.
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
     | `call_managing_organisation` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `plan_details` | any |  |
     | `options` | any |  |
@@ -6577,8 +6577,8 @@ Get or update matching configuration for this call.
     |---|---|---|---|
     | `name` | string |  |  |
     | `description` | string |  |  |
-    | `attributes` | any |  |  |
-    | `limits` | any |  |  |
+    | `attributes` | object (free-form) |  |  |
+    | `limits` | object (free-form) |  |  |
     | `is_required` | boolean |  | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) |  |  |
 
@@ -6593,8 +6593,8 @@ Get or update matching configuration for this call.
     | `url` | string |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `is_required` | boolean | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) |  |
     | `requested_offering_name` | string |  |
@@ -6914,7 +6914,7 @@ Get or update matching configuration for this call.
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
     | `call_managing_organisation` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `plan` | string (uri) |  |
     | `plan_details` | any |  |
     | `options` | any |  |
@@ -7026,8 +7026,8 @@ Get or update matching configuration for this call.
     | `url` | string |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `attributes` | any |  |
-    | `limits` | any |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
     | `is_required` | boolean | If True, every proposal must include this resource type |
     | `requested_offering` | string (uri) |  |
     | `requested_offering_name` | string |  |

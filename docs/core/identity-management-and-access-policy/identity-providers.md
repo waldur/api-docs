@@ -95,13 +95,13 @@
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
-    | `protected_fields` | any |  |
+    | `protected_fields` | object (free-form) |  |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
     | `user_field` | string | The field in Waldur User model to be used for looking up the user |
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
-    | `attribute_mapping` | any | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
+    | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
-    | `allowed_redirects` | any | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
+    | `allowed_redirects` | object (free-form) | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
 
 ---
 
@@ -183,13 +183,13 @@
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
-    | `protected_fields` | any |  |
+    | `protected_fields` | object (free-form) |  |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
     | `user_field` | string | The field in Waldur User model to be used for looking up the user |
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
-    | `attribute_mapping` | any | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
+    | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
-    | `allowed_redirects` | any | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
+    | `allowed_redirects` | object (free-form) | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
 
 ---
 
@@ -277,13 +277,13 @@
     | `discovery_url` | string | ✓ | The endpoint for endpoint discovery. |
     | `label` | string | ✓ | Human-readable identity provider is label. |
     | `management_url` | string |  | The endpoint for user details management. |
-    | `protected_fields` | any |  |  |
+    | `protected_fields` | object (free-form) |  |  |
     | `extra_scope` | string |  | Space-separated list of scopes to request during authentication. |
     | `user_field` | string |  | The field in Waldur User model to be used for looking up the user |
     | `user_claim` | string |  | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
-    | `attribute_mapping` | any |  | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
+    | `attribute_mapping` | object (free-form) |  | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string |  | Space-separated list of extra fields to persist. |
-    | `allowed_redirects` | any |  | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
+    | `allowed_redirects` | object (free-form) |  | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
 
 
 === "Responses"
@@ -306,13 +306,13 @@
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
-    | `protected_fields` | any |  |
+    | `protected_fields` | object (free-form) |  |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
     | `user_field` | string | The field in Waldur User model to be used for looking up the user |
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
-    | `attribute_mapping` | any | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
+    | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
-    | `allowed_redirects` | any | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
+    | `allowed_redirects` | object (free-form) | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
 
 ---
 
@@ -411,13 +411,13 @@
     | `discovery_url` | string | ✓ | The endpoint for endpoint discovery. |
     | `label` | string | ✓ | Human-readable identity provider is label. |
     | `management_url` | string |  | The endpoint for user details management. |
-    | `protected_fields` | any |  |  |
+    | `protected_fields` | object (free-form) |  |  |
     | `extra_scope` | string |  | Space-separated list of scopes to request during authentication. |
     | `user_field` | string |  | The field in Waldur User model to be used for looking up the user |
     | `user_claim` | string |  | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
-    | `attribute_mapping` | any |  | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
+    | `attribute_mapping` | object (free-form) |  | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string |  | Space-separated list of extra fields to persist. |
-    | `allowed_redirects` | any |  | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
+    | `allowed_redirects` | object (free-form) |  | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
 
 
 === "Responses"
@@ -440,13 +440,13 @@
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
-    | `protected_fields` | any |  |
+    | `protected_fields` | object (free-form) |  |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
     | `user_field` | string | The field in Waldur User model to be used for looking up the user |
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
-    | `attribute_mapping` | any | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
+    | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
-    | `allowed_redirects` | any | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
+    | `allowed_redirects` | object (free-form) | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
 
 ---
 
@@ -527,13 +527,13 @@
     | `discovery_url` | string |  | The endpoint for endpoint discovery. |
     | `label` | string |  | Human-readable identity provider is label. |
     | `management_url` | string |  | The endpoint for user details management. |
-    | `protected_fields` | any |  |  |
+    | `protected_fields` | object (free-form) |  |  |
     | `extra_scope` | string |  | Space-separated list of scopes to request during authentication. |
     | `user_field` | string |  | The field in Waldur User model to be used for looking up the user |
     | `user_claim` | string |  | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
-    | `attribute_mapping` | any |  | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
+    | `attribute_mapping` | object (free-form) |  | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string |  | Space-separated list of extra fields to persist. |
-    | `allowed_redirects` | any |  | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
+    | `allowed_redirects` | object (free-form) |  | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
 
 
 === "Responses"
@@ -556,13 +556,13 @@
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
-    | `protected_fields` | any |  |
+    | `protected_fields` | object (free-form) |  |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
     | `user_field` | string | The field in Waldur User model to be used for looking up the user |
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
-    | `attribute_mapping` | any | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
+    | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
-    | `allowed_redirects` | any | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
+    | `allowed_redirects` | object (free-form) | List of allowed redirect URLs for OAuth authentication. URLs must be exact matches (origin only: scheme + domain + port). HTTPS required except for localhost. No wildcards, paths, query params, or fragments. Example: ["https://portal1.example.com", "https://portal2.example.com:8443"]. If empty, falls back to HOMEPORT_URL setting. |
 
 ---
 

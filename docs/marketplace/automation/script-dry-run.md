@@ -78,7 +78,7 @@
     |---|---|---|
     | `plan` | string (uri) |  |
     | `type` | any |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `order_offering` | string (uri) |  |
 
 
@@ -161,7 +161,7 @@
     |---|---|---|
     | `plan` | string (uri) |  |
     | `type` | any |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `order_offering` | string (uri) |  |
 
 

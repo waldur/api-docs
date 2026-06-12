@@ -231,8 +231,8 @@ Returns a paginated list of offerings for the provider.
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -376,7 +376,7 @@ Returns a paginated list of offerings for the provider.
     | `longitude` | number (double) |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
-    | `backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
+    | `backend_id_rules` | object (free-form) | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
@@ -395,7 +395,7 @@ Returns a paginated list of offerings for the provider.
     | `parent_description` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
@@ -508,8 +508,8 @@ Returns details of a specific provider offering.
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -653,7 +653,7 @@ Returns details of a specific provider offering.
     | `longitude` | number (double) |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
-    | `backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
+    | `backend_id_rules` | object (free-form) | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
@@ -672,7 +672,7 @@ Returns details of a specific provider offering.
     | `parent_description` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
@@ -772,7 +772,7 @@ Creates a new provider offering.
     | `access_url` | string (uri) |  | Publicly accessible offering access URL |
     | `customer` | string (uri) |  |  |
     | `category` | string (uri) | ✓ |  |
-    | `attributes` | any |  |  |
+    | `attributes` | object (free-form) |  |  |
     | `options` | object |  |  |
     | `options.order` | array of strings | ✓ |  |
     | `options.options` | object (free-form) | ✓ |  |
@@ -906,9 +906,9 @@ Creates a new provider offering.
     | `longitude` | number (double) |  |  |
     | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |  |
-    | `backend_id_rules` | any |  | Validation rules for resource backend_id: format regex and uniqueness scope. |
+    | `backend_id_rules` | object (free-form) |  | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `image` | string (binary) |  |  |
-    | `backend_metadata` | any |  |  |
+    | `backend_metadata` | object (free-form) |  |  |
     | `compliance_checklist` | string (uri) |  |  |
     | `offering_group` | string (uuid) |  |  |
     | `limits` | object (free-form) |  | <br>_Constraints: write-only_ |
@@ -938,8 +938,8 @@ Creates a new provider offering.
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -1083,7 +1083,7 @@ Creates a new provider offering.
     | `longitude` | number (double) |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `backend_id` | string |  |
-    | `backend_id_rules` | any | Validation rules for resource backend_id: format regex and uniqueness scope. |
+    | `backend_id_rules` | object (free-form) | Validation rules for resource backend_id: format regex and uniqueness scope. |
     | `organization_groups` | array of objects |  |
     | `organization_groups.uuid` | string (uuid) |  |
     | `organization_groups.url` | string (uri) |  |
@@ -1102,7 +1102,7 @@ Creates a new provider offering.
     | `parent_description` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
@@ -2052,7 +2052,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `permissions.resource_uuid` | string (uuid) |  |
     | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
-    | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
     | `first_name` | string |  |
     | `last_name` | string |  |
     | `birth_date` | string (date) |  |
@@ -2072,16 +2072,16 @@ Returns a paginated list of users who have access to resources of this offering.
     | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
-    | `attribute_sources` | any | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
-    | `managed_isds` | any | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
-    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
+    | `managed_isds` | object (free-form) | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
+    | `active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
 
@@ -3777,8 +3777,8 @@ Associates a software catalog with an offering and configures enabled CPU archit
     |---|---|---|---|
     | `offering` | string (uuid) | ✓ |  |
     | `catalog` | string (uuid) | ✓ |  |
-    | `enabled_cpu_family` | any |  | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `enabled_cpu_microarchitectures` | any |  | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `enabled_cpu_family` | object (free-form) |  | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `enabled_cpu_microarchitectures` | object (free-form) |  | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `partition` | string (uuid) |  |  |
 
 
@@ -4163,8 +4163,8 @@ Updates the configuration of a software catalog associated with an offering, suc
     |---|---|---|---|
     | `offering_catalog_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
     | `catalog` | string (uuid) |  |  |
-    | `enabled_cpu_family` | any |  | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `enabled_cpu_microarchitectures` | any |  | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `enabled_cpu_family` | object (free-form) |  | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `enabled_cpu_microarchitectures` | object (free-form) |  | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `partition` | string (uuid) |  |  |
 
 
@@ -4182,8 +4182,8 @@ Updates the configuration of a software catalog associated with an offering, suc
     | `offering_name` | string |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
-    | `enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `partition` | string (uuid) |  |
     | `partition_name` | string |  |
 
@@ -4852,8 +4852,8 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | any | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | any | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -5013,7 +5013,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `parent_description` | string |  |
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
     | `has_compliance_requirements` | boolean |  |
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
@@ -5111,7 +5111,7 @@ Updates the backend-specific metadata for an offering.
 
     | Field | Type | Required |
     |---|---|---|
-    | `backend_metadata` | any |  |
+    | `backend_metadata` | object (free-form) |  |
 
 
 === "Responses"
@@ -5432,7 +5432,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `secret_options.shared_user_password` | string |  | GLAuth shared user password |
     | `secret_options.template_confirmation_comment` | string |  | Template confirmation comment |
     | `secret_options.language` | string |  | Script language: Python or Bash |
-    | `secret_options.environ` | any |  | Script environment variables |
+    | `secret_options.environ` | object (free-form) |  | Script environment variables |
     | `secret_options.create` | string |  | Script for resource creation |
     | `secret_options.terminate` | string |  | Script for resource termination |
     | `secret_options.update` | string |  | Script for resource update |
@@ -5547,7 +5547,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.require_effective_id_for_highlighted_display` | boolean |  | If set to True, highlighted backend ID display is only shown when the resource has an effective_id.<br>_Constraints: default: `False`_ |
     | `plugin_options.expose_inference_playground` | boolean |  | Show an in-browser inference playground action for resources of this offering (for offerings whose resources expose an OpenAI-compatible endpoint).<br>_Constraints: default: `False`_ |
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
-    | `service_attributes` | any |  |  |
+    | `service_attributes` | object (free-form) |  |  |
     | `backend_id` | string |  |  |
 
 
@@ -6624,15 +6624,15 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -6738,7 +6738,7 @@ Returns a paginated list of orders associated with a specific offering.
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -6751,7 +6751,7 @@ Returns a paginated list of orders associated with a specific offering.
     | `plan_name` | string |  |
     | `plan_uuid` | string (uuid) |  |
     | `plan_description` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `limits` | object (free-form) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
@@ -6909,7 +6909,7 @@ Returns details of a specific order associated with an offering.
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -6922,7 +6922,7 @@ Returns details of a specific order associated with an offering.
     | `plan_name` | string |  |
     | `plan_uuid` | string (uuid) |  |
     | `plan_description` | string |  |
-    | `attributes` | any |  |
+    | `attributes` | object (free-form) |  |
     | `limits` | object (free-form) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
@@ -7319,7 +7319,7 @@ Imports a backend resource into the marketplace.
     | `backend_id` | string | ✓ | Backend identifier of the resource |
     | `project` | string (uuid) | ✓ | Target project for the resource |
     | `plan` | string (uuid) |  |  |
-    | `additional_details` | any |  | <br>_Constraints: write-only, default: `{}`_ |
+    | `additional_details` | object (free-form) |  | <br>_Constraints: write-only, default: `{}`_ |
 
 
 === "Responses"
@@ -7337,7 +7337,7 @@ Imports a backend resource into the marketplace.
     | `offering_type` | string |  |
     | `offering_shared` | boolean | Accessible to all customers. |
     | `offering_billable` | boolean | Purchase and usage is invoiced. |
-    | `offering_plugin_options` | any | Public data used by specific plugin, such as storage mode for OpenStack. |
+    | `offering_plugin_options` | object (free-form) | Public data used by specific plugin, such as storage mode for OpenStack. |
     | `provider_name` | string |  |
     | `provider_uuid` | string (uuid) |  |
     | `provider_slug` | string |  |
@@ -7404,7 +7404,7 @@ Imports a backend resource into the marketplace.
     | `endpoints.url` | string | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
-    | `options` | any |  |
+    | `options` | object (free-form) |  |
     | `available_actions` | array of strings |  |
     | `last_sync` | string (date-time) |  |
     | `order_in_progress` | any |  |
@@ -8834,7 +8834,7 @@ Configure validation rules for resource backend_id: format regex and uniqueness 
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `backend_id_rules` | any |  | Validation rules for resource backend_id: format regex and uniqueness scope. |
+    | `backend_id_rules` | object (free-form) |  | Validation rules for resource backend_id: format regex and uniqueness scope. |
 
 
 === "Responses"

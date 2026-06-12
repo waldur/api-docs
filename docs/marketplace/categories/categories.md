@@ -115,7 +115,7 @@ Returns a paginated list of marketplace categories.
     | `sections.attributes.options.title` | string |  |
     | `sections.attributes.options.is_default` | boolean | Return True if this option is the default for its attribute. |
     | `sections.attributes.required` | boolean | A value must be provided for the attribute. |
-    | `sections.attributes.default` | any |  |
+    | `sections.attributes.default` | object (free-form) |  |
     | `sections.is_standalone` | boolean | Whether section is rendered as a separate tab. |
     | `columns` | array of objects |  |
     | `columns.uuid` | string (uuid) |  |
@@ -234,7 +234,7 @@ Returns details of a specific marketplace category.
     | `sections.attributes.options.title` | string |  |
     | `sections.attributes.options.is_default` | boolean | Return True if this option is the default for its attribute. |
     | `sections.attributes.required` | boolean | A value must be provided for the attribute. |
-    | `sections.attributes.default` | any |  |
+    | `sections.attributes.default` | object (free-form) |  |
     | `sections.is_standalone` | boolean | Whether section is rendered as a separate tab. |
     | `columns` | array of objects |  |
     | `columns.uuid` | string (uuid) |  |
@@ -357,7 +357,7 @@ Creates a new marketplace category. Requires staff permissions.
     | `sections.attributes.options.title` | string |  |
     | `sections.attributes.options.is_default` | boolean | Return True if this option is the default for its attribute. |
     | `sections.attributes.required` | boolean | A value must be provided for the attribute. |
-    | `sections.attributes.default` | any |  |
+    | `sections.attributes.default` | object (free-form) |  |
     | `sections.is_standalone` | boolean | Whether section is rendered as a separate tab. |
     | `columns` | array of objects |  |
     | `columns.uuid` | string (uuid) |  |
@@ -491,7 +491,7 @@ Updates an existing marketplace category. Requires staff permissions.
     | `sections.attributes.options.title` | string |  |
     | `sections.attributes.options.is_default` | boolean | Return True if this option is the default for its attribute. |
     | `sections.attributes.required` | boolean | A value must be provided for the attribute. |
-    | `sections.attributes.default` | any |  |
+    | `sections.attributes.default` | object (free-form) |  |
     | `sections.is_standalone` | boolean | Whether section is rendered as a separate tab. |
     | `columns` | array of objects |  |
     | `columns.uuid` | string (uuid) |  |
@@ -619,7 +619,7 @@ Partially updates an existing marketplace category. Requires staff permissions.
     | `sections.attributes.options.title` | string |  |
     | `sections.attributes.options.is_default` | boolean | Return True if this option is the default for its attribute. |
     | `sections.attributes.required` | boolean | A value must be provided for the attribute. |
-    | `sections.attributes.default` | any |  |
+    | `sections.attributes.default` | object (free-form) |  |
     | `sections.is_standalone` | boolean | Whether section is rendered as a separate tab. |
     | `columns` | array of objects |  |
     | `columns.uuid` | string (uuid) |  |

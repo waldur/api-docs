@@ -139,7 +139,7 @@
     | `namespace` | string (uri) |  |
     | `namespace_name` | string |  |
     | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | any |  |
+    | `selector` | object (free-form) |  |
     | `target_workloads` | array of objects |  |
     | `target_workloads.uuid` | string (uuid) |  |
     | `target_workloads.url` | string (uri) |  |
@@ -260,7 +260,7 @@
     | `namespace` | string (uri) |  |
     | `namespace_name` | string |  |
     | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | any |  |
+    | `selector` | object (free-form) |  |
     | `target_workloads` | array of objects |  |
     | `target_workloads.uuid` | string (uuid) |  |
     | `target_workloads.url` | string (uri) |  |
@@ -357,7 +357,7 @@
     | `runtime_state` | string |  |  |
     | `namespace` | string (uri) |  |  |
     | `cluster_ip` | any |  | An IPv4 or IPv6 address. |
-    | `selector` | any |  |  |
+    | `selector` | object (free-form) |  |  |
     | `target_workloads` | array of objects |  |  |
     | `target_workloads.url` | string (uri) | ✓ |  |
 
@@ -397,7 +397,7 @@
     | `namespace` | string (uri) |  |
     | `namespace_name` | string |  |
     | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | any |  |
+    | `selector` | object (free-form) |  |
     | `target_workloads` | array of objects |  |
     | `target_workloads.url` | string (uri) |  |
     | `marketplace_offering_uuid` | string |  |
@@ -653,7 +653,7 @@ Delete resource from the database without scheduling operations on backend
     | `runtime_state` | string |  |  |
     | `namespace` | string (uri) |  |  |
     | `cluster_ip` | any |  | An IPv4 or IPv6 address. |
-    | `selector` | any |  |  |
+    | `selector` | object (free-form) |  |  |
     | `target_workloads` | array of objects | ✓ |  |
     | `target_workloads.name` | string | ✓ |  |
 
@@ -693,7 +693,7 @@ Delete resource from the database without scheduling operations on backend
     | `namespace` | string (uri) |  |
     | `namespace_name` | string |  |
     | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | any |  |
+    | `selector` | object (free-form) |  |
     | `target_workloads` | array of objects |  |
     | `target_workloads.uuid` | string (uuid) |  |
     | `target_workloads.url` | string (uri) |  |
@@ -789,7 +789,7 @@ Delete resource from the database without scheduling operations on backend
     | `runtime_state` | string |  |  |
     | `namespace` | string (uri) |  |  |
     | `cluster_ip` | any |  | An IPv4 or IPv6 address. |
-    | `selector` | any |  |  |
+    | `selector` | object (free-form) |  |  |
     | `target_workloads` | array of objects |  |  |
     | `target_workloads.name` | string | ✓ |  |
 
@@ -829,7 +829,7 @@ Delete resource from the database without scheduling operations on backend
     | `namespace` | string (uri) |  |
     | `namespace_name` | string |  |
     | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | any |  |
+    | `selector` | object (free-form) |  |
     | `target_workloads` | array of objects |  |
     | `target_workloads.uuid` | string (uuid) |  |
     | `target_workloads.url` | string (uri) |  |
@@ -1229,7 +1229,7 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | `runtime_state` | string |  |  |
     | `namespace` | string (uri) |  |  |
     | `cluster_ip` | any |  | An IPv4 or IPv6 address. |
-    | `selector` | any |  |  |
+    | `selector` | object (free-form) |  |  |
     | `target_workloads` | array of objects | ✓ |  |
     | `target_workloads.name` | string | ✓ |  |
 

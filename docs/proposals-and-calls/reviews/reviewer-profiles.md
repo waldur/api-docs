@@ -459,8 +459,8 @@
     | `venue` | string | Journal or conference name |
     | `venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `abstract` | string |  |
-    | `coauthors` | any | List of co-author names and identifiers |
-    | `external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
 
@@ -540,8 +540,8 @@
     | `venue` | string | Journal or conference name |
     | `venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `abstract` | string |  |
-    | `coauthors` | any | List of co-author names and identifiers |
-    | `external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
 
@@ -699,7 +699,7 @@ Get ORCID OAuth authorization URL.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -730,8 +730,8 @@ Get ORCID OAuth authorization URL.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |
@@ -807,7 +807,7 @@ Get or create reviewer profile for the current user.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -838,8 +838,8 @@ Get or create reviewer profile for the current user.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |
@@ -926,7 +926,7 @@ Get or create reviewer profile for the current user.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -957,8 +957,8 @@ Get or create reviewer profile for the current user.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |
@@ -1258,8 +1258,8 @@ Get or create reviewer profile for the current user.
     | `venue` | string | ✓ | Journal or conference name |
     | `venue_type` | string |  | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `abstract` | string |  |  |
-    | `coauthors` | any |  | List of co-author names and identifiers |
-    | `external_ids` | any |  | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `coauthors` | object (free-form) |  | List of co-author names and identifiers |
+    | `external_ids` | object (free-form) |  | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean |  | User can exclude old papers from expertise matching |
 
 
@@ -1276,8 +1276,8 @@ Get or create reviewer profile for the current user.
     | `venue` | string | Journal or conference name |
     | `venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `abstract` | string |  |
-    | `coauthors` | any | List of co-author names and identifiers |
-    | `external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
 
@@ -1378,7 +1378,7 @@ Complete ORCID OAuth connection with authorization code.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -1409,8 +1409,8 @@ Complete ORCID OAuth connection with authorization code.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |
@@ -1481,7 +1481,7 @@ Complete ORCID OAuth connection with authorization code.
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -1501,7 +1501,7 @@ Complete ORCID OAuth connection with authorization code.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -1532,8 +1532,8 @@ Complete ORCID OAuth connection with authorization code.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |
@@ -1617,7 +1617,7 @@ Disconnect ORCID from profile.
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -1774,7 +1774,7 @@ Get or create reviewer profile for the current user.
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -1794,7 +1794,7 @@ Get or create reviewer profile for the current user.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -1825,8 +1825,8 @@ Get or create reviewer profile for the current user.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |
@@ -1899,7 +1899,7 @@ Publish reviewer profile for discovery by call managers. Warning: Publishing mak
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -1986,7 +1986,7 @@ Sync profile data from ORCID.
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -2061,7 +2061,7 @@ Unpublish reviewer profile to remove it from discovery.
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -2372,8 +2372,8 @@ Unpublish reviewer profile to remove it from discovery.
     | `venue` | string | ✓ | Journal or conference name |
     | `venue_type` | string |  | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `abstract` | string |  |  |
-    | `coauthors` | any |  | List of co-author names and identifiers |
-    | `external_ids` | any |  | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `coauthors` | object (free-form) |  | List of co-author names and identifiers |
+    | `external_ids` | object (free-form) |  | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean |  | User can exclude old papers from expertise matching |
 
 
@@ -2390,8 +2390,8 @@ Unpublish reviewer profile to remove it from discovery.
     | `venue` | string | Journal or conference name |
     | `venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `abstract` | string |  |
-    | `coauthors` | any | List of co-author names and identifiers |
-    | `external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
 
@@ -2466,7 +2466,7 @@ Unpublish reviewer profile to remove it from discovery.
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -2486,7 +2486,7 @@ Unpublish reviewer profile to remove it from discovery.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -2517,8 +2517,8 @@ Unpublish reviewer profile to remove it from discovery.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |
@@ -2803,8 +2803,8 @@ Unpublish reviewer profile to remove it from discovery.
     | `venue` | string |  | Journal or conference name |
     | `venue_type` | string |  | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `abstract` | string |  |  |
-    | `coauthors` | any |  | List of co-author names and identifiers |
-    | `external_ids` | any |  | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `coauthors` | object (free-form) |  | List of co-author names and identifiers |
+    | `external_ids` | object (free-form) |  | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean |  | User can exclude old papers from expertise matching |
 
 
@@ -2821,8 +2821,8 @@ Unpublish reviewer profile to remove it from discovery.
     | `venue` | string | Journal or conference name |
     | `venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `abstract` | string |  |
-    | `coauthors` | any | List of co-author names and identifiers |
-    | `external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
 
@@ -2888,7 +2888,7 @@ Get or create reviewer profile for the current user.
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -2908,7 +2908,7 @@ Get or create reviewer profile for the current user.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -2939,8 +2939,8 @@ Get or create reviewer profile for the current user.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |
@@ -3022,7 +3022,7 @@ Get or create reviewer profile for the current user.
     |---|---|---|---|
     | `orcid_id` | string |  | ORCID identifier (format: 0000-0000-0000-0000) |
     | `biography` | string |  | Professional biography / summary |
-    | `alternative_names` | any |  | List of name variants used in publications |
+    | `alternative_names` | object (free-form) |  | List of name variants used in publications |
     | `available_for_reviews` | boolean |  | Whether reviewer is currently accepting review requests |
 
 
@@ -3042,7 +3042,7 @@ Get or create reviewer profile for the current user.
     | `orcid_connected` | boolean | Check if ORCID is connected (has access token). |
     | `orcid_last_sync` | string (date-time) |  |
     | `biography` | string | Professional biography / summary |
-    | `alternative_names` | any | List of name variants used in publications |
+    | `alternative_names` | object (free-form) | List of name variants used in publications |
     | `affiliations` | array of objects |  |
     | `affiliations.uuid` | string (uuid) |  |
     | `affiliations.organization` | string (uuid) |  |
@@ -3073,8 +3073,8 @@ Get or create reviewer profile for the current user.
     | `publications.venue` | string | Journal or conference name |
     | `publications.venue_type` | string | <br>_Enum: `journal`, `conference`, `preprint`, `book`, `thesis`, `report`, `other`_ |
     | `publications.abstract` | string |  |
-    | `publications.coauthors` | any | List of co-author names and identifiers |
-    | `publications.external_ids` | any | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
+    | `publications.coauthors` | object (free-form) | List of co-author names and identifiers |
+    | `publications.external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `publications.is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `publications.created` | string (date-time) |  |
     | `stats` | any |  |

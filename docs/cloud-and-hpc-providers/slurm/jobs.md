@@ -116,7 +116,7 @@
     | `user` | string (uri) | Reference to user which submitted job |
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `report` | any |  |
+    | `report` | object (free-form) |  |
 
 ---
 
@@ -223,7 +223,7 @@
     | `user` | string (uri) | Reference to user which submitted job |
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `report` | any |  |
+    | `report` | object (free-form) |  |
 
 ---
 
@@ -342,7 +342,7 @@
     | `user` | string (uri) | Reference to user which submitted job |
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `report` | any |  |
+    | `report` | object (free-form) |  |
 
 ---
 
@@ -619,7 +619,7 @@ Delete resource from the database without scheduling operations on backend
     | `user` | string (uri) | Reference to user which submitted job |
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `report` | any |  |
+    | `report` | object (free-form) |  |
 
 ---
 
@@ -731,7 +731,7 @@ Delete resource from the database without scheduling operations on backend
     | `user` | string (uri) | Reference to user which submitted job |
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `report` | any |  |
+    | `report` | object (free-form) |  |
 
 ---
 

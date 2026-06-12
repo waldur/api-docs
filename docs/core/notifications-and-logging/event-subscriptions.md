@@ -86,7 +86,7 @@
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
-    | `observable_objects` | any | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
+    | `observable_objects` | object (free-form) | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `source_ip` | any | An IPv4 or IPv6 address. |
@@ -164,7 +164,7 @@
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
-    | `observable_objects` | any | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
+    | `observable_objects` | object (free-form) | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `source_ip` | any | An IPv4 or IPv6 address. |
@@ -228,7 +228,7 @@
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `description` | string |  |  |
-    | `observable_objects` | any |  | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
+    | `observable_objects` | object (free-form) |  | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
 
 
 === "Responses"
@@ -244,7 +244,7 @@
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
-    | `observable_objects` | any | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
+    | `observable_objects` | object (free-form) | List of objects to observe. Each item must have 'object_type' (one of: order, user_role, resource, offering_user, importable_resources, service_account, course_account, resource_periodic_limits) and optionally 'object_id' (integer). Example: [{"object_type": "resource"}, {"object_type": "order", "object_id": 123}] |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `source_ip` | any | An IPv4 or IPv6 address. |

@@ -147,7 +147,7 @@ Get a list of volumes.
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |
-    | `metadata` | any |  |
+    | `metadata` | object (free-form) |  |
     | `image` | string (uri) | Image that this volume was created from, if any |
     | `image_metadata` | string | Metadata of the image this volume was created from |
     | `image_name` | string | Name of the image this volume was created from |
@@ -158,7 +158,7 @@ Get a list of volumes.
     | `availability_zone_name` | string |  |
     | `device` | string | Name of volume as instance device e.g. /dev/vdb. |
     | `action` | string |  |
-    | `action_details` | any |  |
+    | `action_details` | object (free-form) |  |
     | `instance` | string (uri) | Instance that this volume is attached to, if any |
     | `instance_name` | string |  |
     | `instance_marketplace_uuid` | string (uuid) |  |
@@ -282,7 +282,7 @@ Retrieve details of a specific volume.
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |
-    | `metadata` | any |  |
+    | `metadata` | object (free-form) |  |
     | `image` | string (uri) | Image that this volume was created from, if any |
     | `image_metadata` | string | Metadata of the image this volume was created from |
     | `image_name` | string | Name of the image this volume was created from |
@@ -293,7 +293,7 @@ Retrieve details of a specific volume.
     | `availability_zone_name` | string |  |
     | `device` | string | Name of volume as instance device e.g. /dev/vdb. |
     | `action` | string |  |
-    | `action_details` | any |  |
+    | `action_details` | object (free-form) |  |
     | `instance` | string (uri) | Instance that this volume is attached to, if any |
     | `instance_name` | string |  |
     | `instance_marketplace_uuid` | string (uuid) |  |
@@ -575,7 +575,7 @@ Update an existing volume.
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |
-    | `metadata` | any |  |
+    | `metadata` | object (free-form) |  |
     | `image` | string (uri) | Image that this volume was created from, if any |
     | `image_metadata` | string | Metadata of the image this volume was created from |
     | `image_name` | string | Name of the image this volume was created from |
@@ -586,7 +586,7 @@ Update an existing volume.
     | `availability_zone_name` | string |  |
     | `device` | string | Name of volume as instance device e.g. /dev/vdb. |
     | `action` | string |  |
-    | `action_details` | any |  |
+    | `action_details` | object (free-form) |  |
     | `instance` | string (uri) | Instance that this volume is attached to, if any |
     | `instance_name` | string |  |
     | `instance_marketplace_uuid` | string (uuid) |  |
@@ -715,7 +715,7 @@ Update specific fields of a volume.
     | `source_snapshot` | string (uri) | Snapshot that this volume was created from, if any |
     | `size` | integer | Size in MiB |
     | `bootable` | boolean | Indicates if this volume can be used to boot an instance |
-    | `metadata` | any |  |
+    | `metadata` | object (free-form) |  |
     | `image` | string (uri) | Image that this volume was created from, if any |
     | `image_metadata` | string | Metadata of the image this volume was created from |
     | `image_name` | string | Name of the image this volume was created from |
@@ -726,7 +726,7 @@ Update specific fields of a volume.
     | `availability_zone_name` | string |  |
     | `device` | string | Name of volume as instance device e.g. /dev/vdb. |
     | `action` | string |  |
-    | `action_details` | any |  |
+    | `action_details` | object (free-form) |  |
     | `instance` | string (uri) | Instance that this volume is attached to, if any |
     | `instance_name` | string |  |
     | `instance_marketplace_uuid` | string (uuid) |  |
@@ -1314,7 +1314,7 @@ Create snapshot from volume
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `metadata` | any |  |  |
+    | `metadata` | object (free-form) |  |  |
     | `kept_until` | string (date-time) |  | Guaranteed time of snapshot retention. If null - keep forever. |
 
 
@@ -1351,12 +1351,12 @@ Create snapshot from volume
     | `access_url` | any |  |
     | `source_volume` | string (uri) | Volume from which this snapshot was created |
     | `size` | integer | Size in MiB |
-    | `metadata` | any |  |
+    | `metadata` | object (free-form) |  |
     | `runtime_state` | string |  |
     | `source_volume_name` | string |  |
     | `source_volume_marketplace_uuid` | string (uuid) |  |
     | `action` | string |  |
-    | `action_details` | any |  |
+    | `action_details` | object (free-form) |  |
     | `restorations` | array of objects |  |
     | `restorations.uuid` | string (uuid) |  |
     | `restorations.created` | string (date-time) |  |

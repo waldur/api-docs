@@ -98,7 +98,7 @@
     | `customer_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
-    | `requested_limits` | any |  |
+    | `requested_limits` | object (free-form) |  |
     | `current_limits` | object (free-form) |  |
     | `created` | string (date-time) |  |
     | `created_by_uuid` | string (uuid) |  |
@@ -186,7 +186,7 @@
     | `customer_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
-    | `requested_limits` | any |  |
+    | `requested_limits` | object (free-form) |  |
     | `current_limits` | object (free-form) |  |
     | `created` | string (date-time) |  |
     | `created_by_uuid` | string (uuid) |  |
@@ -209,7 +209,7 @@
       https://api.example.com/api/marketplace-resource-limit-change-requests/ \
       Authorization:"Token YOUR_API_TOKEN" \
       resource="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
-      requested_limits=null
+      requested_limits:='{}'
     ```
 
 === "Python"
@@ -225,7 +225,7 @@
     
     body_data = ResourceLimitChangeRequestCreateRequest(
         resource="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        requested_limits=null
+        requested_limits={}
     )
     response = marketplace_resource_limit_change_requests_create.sync(
         client=client,
@@ -249,7 +249,7 @@
       auth: "Token YOUR_API_TOKEN",
       body: {
         "resource": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "requested_limits": null
+        "requested_limits": {}
       }
     });
       console.log('Success:', response);
@@ -264,7 +264,7 @@
     | Field | Type | Required |
     |---|---|---|
     | `resource` | string (uuid) | ✓ |
-    | `requested_limits` | any | ✓ |
+    | `requested_limits` | object (free-form) | ✓ |
 
 
 === "Responses"
@@ -274,7 +274,7 @@
     | Field | Type |
     |---|---|
     | `resource` | string (uuid) |
-    | `requested_limits` | any |
+    | `requested_limits` | object (free-form) |
     | `uuid` | string (uuid) |
     | `state` | string |
 
@@ -378,7 +378,7 @@ Cancel resource limit change request. Only the creator can cancel.
       https://api.example.com/api/marketplace-resource-limit-change-requests/a1b2c3d4-e5f6-7890-abcd-ef1234567890/cancel/ \
       Authorization:"Token YOUR_API_TOKEN" \
       resource="https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      requested_limits=null
+      requested_limits:='{}'
     ```
 
 === "Python"
@@ -394,7 +394,7 @@ Cancel resource limit change request. Only the creator can cancel.
     
     body_data = ResourceLimitChangeRequestRequest(
         resource="https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        requested_limits=null
+        requested_limits={}
     )
     response = marketplace_resource_limit_change_requests_cancel.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -422,7 +422,7 @@ Cancel resource limit change request. Only the creator can cancel.
       },
       body: {
         "resource": "https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "requested_limits": null
+        "requested_limits": {}
       }
     });
       console.log('Success:', response);
@@ -444,7 +444,7 @@ Cancel resource limit change request. Only the creator can cancel.
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `resource` | string (uri) | ✓ |  |
-    | `requested_limits` | any | ✓ |  |
+    | `requested_limits` | object (free-form) | ✓ |  |
     | `review_comment` | string |  | Optional comment provided during review |
 
 

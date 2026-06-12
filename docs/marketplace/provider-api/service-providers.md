@@ -611,7 +611,7 @@ Returns a paginated list of service providers.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -920,8 +920,8 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `plans.resources_count` | integer |  |
     | `plans.plan_type` | string |  |
     | `plans.minimal_price` | string |  |
-    | `options` | any | Fields describing resource provision form. |
-    | `resource_options` | any | Fields describing resource report form. |
+    | `options` | object (free-form) | Fields describing resource provision form. |
+    | `resource_options` | object (free-form) | Fields describing resource report form. |
     | `secret_options` | any |  |
     | `thumbnail` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
@@ -1416,15 +1416,15 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
-    | `termination_metadata` | any | Metadata about project termination (read-only) |
+    | `termination_metadata` | object (free-form) | Metadata about project termination (read-only) |
     | `staff_notes` | string | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | any |  |
-    | `user_affiliations` | any |  |
-    | `user_identity_sources` | any | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | object (free-form) |  |
+    | `user_affiliations` | object (free-form) |  |
+    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -1539,7 +1539,7 @@ Returns details of a specific service provider.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -2127,7 +2127,7 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `phone_number` | string |  |
     | `projects_count` | integer |  |
     | `registration_method` | string | Indicates what registration method was used. |
-    | `affiliations` | any | Person's affiliation within organization such as student, faculty, staff. |
+    | `affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
     | `is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `job_title` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
@@ -2136,15 +2136,15 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `nationalities` | any | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `eduperson_assurance` | any | REFEDS assurance profile URIs from identity provider |
+    | `eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
     | `civil_number` | string |  |
     | `birth_date` | string (date) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
-    | `active_isds` | any | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 
@@ -2649,7 +2649,7 @@ Creates a new service provider profile for a customer.
     | `enable_notifications` | boolean |  |  |
     | `customer` | string (uri) | ✓ |  |
     | `image` | string (binary) |  |  |
-    | `allowed_domains` | any |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | object (free-form) |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -2681,7 +2681,7 @@ Creates a new service provider profile for a customer.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -3194,7 +3194,7 @@ Updates an existing service provider profile.
     | `enable_notifications` | boolean |  |  |
     | `customer` | string (uri) | ✓ |  |
     | `image` | string (binary) |  |  |
-    | `allowed_domains` | any |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | object (free-form) |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -3226,7 +3226,7 @@ Updates an existing service provider profile.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -3302,7 +3302,7 @@ Partially updates an existing service provider profile.
     | `description` | string |  |  |
     | `enable_notifications` | boolean |  |  |
     | `image` | string (binary) |  |  |
-    | `allowed_domains` | any |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | object (free-form) |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -3334,7 +3334,7 @@ Partially updates an existing service provider profile.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | any | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 

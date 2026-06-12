@@ -89,7 +89,7 @@ Requires support user permissions.
     | `agents.event_subscriptions` | array of objects | Event subscriptions with connection status |
     | `agents.event_subscriptions.uuid` | string (uuid) | Event subscription UUID |
     | `agents.event_subscriptions.created` | string (date-time) | When the subscription was created |
-    | `agents.event_subscriptions.observable_objects` | any | List of observable object configurations |
+    | `agents.event_subscriptions.observable_objects` | object (free-form) | List of observable object configurations |
     | `agents.event_subscriptions.rmq_connection` | any | RabbitMQ connection status for this subscription |
     | `agents.queues` | array of objects | RabbitMQ queues for this agent's offering |
     | `agents.queues.name` | string | Queue name |

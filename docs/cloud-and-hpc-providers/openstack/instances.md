@@ -294,7 +294,7 @@ Get a list of VM instances.
     | `config_drive` | boolean | Force config drive on or off for this instance. If null, the tenant-wide default from service settings is used. |
     | `runtime_state` | string |  |
     | `action` | string |  |
-    | `action_details` | any | Details about ongoing or completed actions |
+    | `action_details` | object (free-form) | Details about ongoing or completed actions |
     | `tenant_uuid` | string (uuid) | UUID of the OpenStack tenant |
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
@@ -550,7 +550,7 @@ Retrieve details of a specific VM instance.
     | `config_drive` | boolean | Force config drive on or off for this instance. If null, the tenant-wide default from service settings is used. |
     | `runtime_state` | string |  |
     | `action` | string |  |
-    | `action_details` | any | Details about ongoing or completed actions |
+    | `action_details` | object (free-form) | Details about ongoing or completed actions |
     | `tenant_uuid` | string (uuid) | UUID of the OpenStack tenant |
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
@@ -963,7 +963,7 @@ Update an existing VM instance.
     | `config_drive` | boolean | Force config drive on or off for this instance. If null, the tenant-wide default from service settings is used. |
     | `runtime_state` | string |  |
     | `action` | string |  |
-    | `action_details` | any | Details about ongoing or completed actions |
+    | `action_details` | object (free-form) | Details about ongoing or completed actions |
     | `tenant_uuid` | string (uuid) | UUID of the OpenStack tenant |
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
@@ -1223,7 +1223,7 @@ Update specific fields of a VM instance.
     | `config_drive` | boolean | Force config drive on or off for this instance. If null, the tenant-wide default from service settings is used. |
     | `runtime_state` | string |  |
     | `action` | string |  |
-    | `action_details` | any | Details about ongoing or completed actions |
+    | `action_details` | object (free-form) | Details about ongoing or completed actions |
     | `tenant_uuid` | string (uuid) | UUID of the OpenStack tenant |
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
@@ -1953,7 +1953,7 @@ Create backup from instance
     | `backend_id` | string |  |
     | `access_url` | any |  |
     | `kept_until` | string (date-time) | Guaranteed time of backup retention. If null - keep forever. |
-    | `metadata` | any |  |
+    | `metadata` | object (free-form) |  |
     | `instance` | string (uri) | Instance that this backup is created from |
     | `instance_name` | string |  |
     | `instance_marketplace_uuid` | string (uuid) |  |

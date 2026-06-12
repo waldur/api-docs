@@ -106,8 +106,8 @@
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | any | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | any | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
+    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
@@ -197,8 +197,8 @@
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | any | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | any | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
+    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
@@ -373,8 +373,8 @@ Confirm a reviewer suggestion. The reviewer will be invited to the call.
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | any | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | any | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
+    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
@@ -478,8 +478,8 @@ Reject a reviewer suggestion.
     | `reviewed_by_name` | string |  |
     | `reviewed_at` | string (date-time) |  |
     | `rejection_reason` | string |  |
-    | `matched_keywords` | any | Keywords from reviewer's expertise that matched the source text |
-    | `top_matching_proposals` | any | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
+    | `matched_keywords` | object (free-form) | Keywords from reviewer's expertise that matched the source text |
+    | `top_matching_proposals` | object (free-form) | Top proposals with highest affinity: [{uuid, name, slug, affinity}, ...] |
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |

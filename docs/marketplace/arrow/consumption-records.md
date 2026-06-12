@@ -104,7 +104,7 @@
     | `is_finalized` | boolean |  |
     | `is_reconciled` | boolean |  |
     | `adjustment_amount` | string (decimal) |  |
-    | `raw_data` | any | Raw consumption data for debugging |
+    | `raw_data` | object (free-form) | Raw consumption data for debugging |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -197,7 +197,7 @@
     | `is_finalized` | boolean |  |
     | `is_reconciled` | boolean |  |
     | `adjustment_amount` | string (decimal) |  |
-    | `raw_data` | any | Raw consumption data for debugging |
+    | `raw_data` | object (free-form) | Raw consumption data for debugging |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 

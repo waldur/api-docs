@@ -87,7 +87,7 @@ Returns a paginated list of all attributes. Attributes define form fields within
     | `section_title` | string |  |
     | `type` | string | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean | A value must be provided for the attribute. |
-    | `default` | any |  |
+    | `default` | object (free-form) |  |
 
 ---
 
@@ -166,7 +166,7 @@ Returns the details of a specific attribute, identified by its UUID.
     | `section_title` | string |  |
     | `type` | string | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean | A value must be provided for the attribute. |
-    | `default` | any |  |
+    | `default` | object (free-form) |  |
 
 ---
 
@@ -248,7 +248,7 @@ Creates a new attribute within a section. Requires staff permissions.
     | `section` | string (uri) | ✓ |  |
     | `type` | string | ✓ | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean |  | A value must be provided for the attribute. |
-    | `default` | any |  |  |
+    | `default` | object (free-form) |  |  |
 
 
 === "Responses"
@@ -266,7 +266,7 @@ Creates a new attribute within a section. Requires staff permissions.
     | `section_title` | string |  |
     | `type` | string | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean | A value must be provided for the attribute. |
-    | `default` | any |  |
+    | `default` | object (free-form) |  |
 
 ---
 
@@ -359,7 +359,7 @@ Updates an existing attribute. Requires staff permissions.
     | `section` | string (uri) | ✓ |  |
     | `type` | string | ✓ | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean |  | A value must be provided for the attribute. |
-    | `default` | any |  |  |
+    | `default` | object (free-form) |  |  |
 
 
 === "Responses"
@@ -377,7 +377,7 @@ Updates an existing attribute. Requires staff permissions.
     | `section_title` | string |  |
     | `type` | string | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean | A value must be provided for the attribute. |
-    | `default` | any |  |
+    | `default` | object (free-form) |  |
 
 ---
 
@@ -455,7 +455,7 @@ Partially updates an existing attribute. Requires staff permissions.
     | `section` | string (uri) |  |  |
     | `type` | string |  | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean |  | A value must be provided for the attribute. |
-    | `default` | any |  |  |
+    | `default` | object (free-form) |  |  |
 
 
 === "Responses"
@@ -473,7 +473,7 @@ Partially updates an existing attribute. Requires staff permissions.
     | `section_title` | string |  |
     | `type` | string | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean | A value must be provided for the attribute. |
-    | `default` | any |  |
+    | `default` | object (free-form) |  |
 
 ---
 

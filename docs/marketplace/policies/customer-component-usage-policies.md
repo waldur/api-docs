@@ -95,7 +95,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
@@ -181,7 +181,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
@@ -262,7 +262,7 @@
     |---|---|---|---|
     | `scope` | string (uri) | ✓ |  |
     | `actions` | string | ✓ |  |
-    | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `component_limits_set` | array of objects | ✓ |  |
     | `component_limits_set.limit` | integer | ✓ |  |
     | `component_limits_set.period` | any |  |  |
@@ -286,7 +286,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
@@ -378,7 +378,7 @@
     |---|---|---|---|
     | `scope` | string (uri) | ✓ |  |
     | `actions` | string | ✓ |  |
-    | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `component_limits_set` | array of objects | ✓ |  |
     | `component_limits_set.limit` | integer | ✓ |  |
     | `component_limits_set.period` | any |  |  |
@@ -402,7 +402,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
@@ -482,7 +482,7 @@
     |---|---|---|---|
     | `scope` | string (uri) |  |  |
     | `actions` | string |  |  |
-    | `options` | any |  | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `component_limits_set` | array of objects |  |  |
     | `component_limits_set.limit` | integer | ✓ |  |
     | `component_limits_set.period` | any |  |  |
@@ -506,7 +506,7 @@
     | `created_by_username` | string |  |
     | `has_fired` | boolean |  |
     | `fired_datetime` | string (date-time) |  |
-    | `options` | any | Fields for saving actions extra data. Keys are name of actions. |
+    | `options` | object (free-form) | Fields for saving actions extra data. Keys are name of actions. |
     | `affected_resources_count` | integer |  |
     | `component_limits_set` | array of objects |  |
     | `component_limits_set.type` | string |  |
