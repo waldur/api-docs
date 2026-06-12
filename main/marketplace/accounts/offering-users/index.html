@@ -16335,7 +16335,7 @@
 </div>
 <hr />
 <h3 id="update-runtime-state">Update runtime state</h3>
-<p>Allows a service provider to set the operational/access state of an offering user. Unlike the lifecycle state, this can be updated at any time (except when the account is Deleted). Use this to signal access blockers such as pending Terms of Use acceptance or pending account linking (e.g. MyAccessID).</p>
+<p>Allows a service provider to set the operational/access state of an offering user. Unlike the lifecycle state, this can be updated at any time (except when the account is Deleted). Use this to signal access blockers such as pending Terms of Use acceptance or pending account linking (e.g. MyAccessID). Optionally include service_provider_comment and service_provider_comment_url to explain the change to the user in the same request.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:6"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Request Body (required)</label><label for="__tabbed_5_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -16460,6 +16460,18 @@
 <td>any</td>
 <td>✓</td>
 <td>Operational/access state of the user account.</td>
+</tr>
+<tr>
+<td><code>service_provider_comment</code></td>
+<td>string</td>
+<td></td>
+<td>Optional comment explaining the runtime state change.</td>
+</tr>
+<tr>
+<td><code>service_provider_comment_url</code></td>
+<td>string (uri)</td>
+<td></td>
+<td>Optional URL with additional information for the user.</td>
 </tr>
 </tbody>
 </table>
@@ -20144,7 +20156,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-06-08
+    2026-06-12
   </span>
 
     
