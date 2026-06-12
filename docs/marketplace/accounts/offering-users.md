@@ -515,7 +515,7 @@ Allows a service provider to mark an offering user as restricted or unrestricted
 
 ### Update runtime state
 
-Allows a service provider to set the operational/access state of an offering user. Unlike the lifecycle state, this can be updated at any time (except when the account is Deleted). Use this to signal access blockers such as pending Terms of Use acceptance or pending account linking (e.g. MyAccessID).
+Allows a service provider to set the operational/access state of an offering user. Unlike the lifecycle state, this can be updated at any time (except when the account is Deleted). Use this to signal access blockers such as pending Terms of Use acceptance or pending account linking (e.g. MyAccessID). Optionally include service_provider_comment and service_provider_comment_url to explain the change to the user in the same request.
 
 
 === "HTTPie"
@@ -589,6 +589,8 @@ Allows a service provider to set the operational/access state of an offering use
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `runtime_state` | any | ✓ | Operational/access state of the user account. |
+    | `service_provider_comment` | string |  | Optional comment explaining the runtime state change. |
+    | `service_provider_comment_url` | string (uri) |  | Optional URL with additional information for the user. |
 
 
 === "Responses"
