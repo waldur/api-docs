@@ -14694,7 +14694,7 @@
 </tr>
 <tr>
 <td><code>query</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>author_full_name</code></td>
@@ -14853,7 +14853,7 @@
 </tr>
 <tr>
 <td><code>query</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>author_full_name</code></td>
@@ -14893,7 +14893,7 @@
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">subject</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">body</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>query:<span class="o">=</span><span class="s1">&#39;{}&#39;</span>
+<span class="w">  </span><span class="nv">query</span><span class="o">=</span>null
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -14916,17 +14916,17 @@
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.broadcast_message_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">BroadcastMessageRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.broadcast_message_create_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">BroadcastMessageCreateRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.broadcast_messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast_messages_create</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">BroadcastMessageRequest</span><span class="p">(</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">BroadcastMessageCreateRequest</span><span class="p">(</span>
     <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
     <span class="n">body</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
-    <span class="n">query</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">query</span><span class="o">=</span><span class="n">null</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">broadcast_messages_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -14936,7 +14936,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_request.py"><code>BroadcastMessageRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_create_request.py"><code>BroadcastMessageCreateRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_create.py"><code>broadcast_messages_create</code></a></li>
 </ol>
 </div>
@@ -14963,7 +14963,7 @@
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;subject&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;body&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;query&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="s2">&quot;query&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -14994,7 +14994,7 @@
 </tr>
 <tr>
 <td><code>query</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 <td>✓</td>
 </tr>
 <tr>
@@ -15033,7 +15033,7 @@
 </tr>
 <tr>
 <td><code>query</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>author_full_name</code></td>
@@ -15073,7 +15073,7 @@
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">subject</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">body</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>query:<span class="o">=</span><span class="s1">&#39;{}&#39;</span>
+<span class="w">  </span><span class="nv">query</span><span class="o">=</span>null
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -15097,17 +15097,17 @@
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.broadcast_message_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">BroadcastMessageRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.broadcast_message_create_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">BroadcastMessageCreateRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.broadcast_messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast_messages_update</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">BroadcastMessageRequest</span><span class="p">(</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">BroadcastMessageCreateRequest</span><span class="p">(</span>
     <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
     <span class="n">body</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
-    <span class="n">query</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">query</span><span class="o">=</span><span class="n">null</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">broadcast_messages_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
@@ -15118,7 +15118,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_request.py"><code>BroadcastMessageRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_create_request.py"><code>BroadcastMessageCreateRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_update.py"><code>broadcast_messages_update</code></a></li>
 </ol>
 </div>
@@ -15151,7 +15151,7 @@
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;subject&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;body&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;query&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="s2">&quot;query&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -15200,7 +15200,7 @@
 </tr>
 <tr>
 <td><code>query</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 <td>✓</td>
 </tr>
 <tr>
@@ -15239,7 +15239,7 @@
 </tr>
 <tr>
 <td><code>query</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>author_full_name</code></td>
@@ -15381,11 +15381,6 @@
 <td></td>
 </tr>
 <tr>
-<td><code>query</code></td>
-<td>object (free-form)</td>
-<td></td>
-</tr>
-<tr>
 <td><code>send_at</code></td>
 <td>string (date)</td>
 <td></td>
@@ -15421,7 +15416,7 @@
 </tr>
 <tr>
 <td><code>query</code></td>
-<td>object (free-form)</td>
+<td>any</td>
 </tr>
 <tr>
 <td><code>author_full_name</code></td>

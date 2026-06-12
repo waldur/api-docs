@@ -15510,8 +15510,8 @@
 </tr>
 <tr>
 <td><code>affiliations</code></td>
-<td>object (free-form)</td>
-<td>Person's affiliation within organization such as student, faculty, staff.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>first_name</code></td>
@@ -15610,8 +15610,8 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -15630,8 +15630,8 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -15650,13 +15650,13 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>active_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
@@ -16004,8 +16004,8 @@
 </tr>
 <tr>
 <td><code>affiliations</code></td>
-<td>object (free-form)</td>
-<td>Person's affiliation within organization such as student, faculty, staff.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>first_name</code></td>
@@ -16104,8 +16104,8 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -16124,8 +16124,8 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -16144,13 +16144,13 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>active_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
@@ -16359,6 +16359,12 @@
 <td></td>
 </tr>
 <tr>
+<td><code>affiliations</code></td>
+<td>array of strings</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>first_name</code></td>
 <td>string</td>
 <td></td>
@@ -16420,9 +16426,9 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -16444,9 +16450,9 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -16462,9 +16468,15 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>array of strings</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
@@ -16698,8 +16710,8 @@
 </tr>
 <tr>
 <td><code>affiliations</code></td>
-<td>object (free-form)</td>
-<td>Person's affiliation within organization such as student, faculty, staff.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>first_name</code></td>
@@ -16798,8 +16810,8 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -16818,8 +16830,8 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -16838,13 +16850,13 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>active_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
@@ -17432,6 +17444,12 @@
 <td></td>
 </tr>
 <tr>
+<td><code>affiliations</code></td>
+<td>array of strings</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>first_name</code></td>
 <td>string</td>
 <td></td>
@@ -17493,9 +17511,9 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -17517,9 +17535,9 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -17535,9 +17553,15 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>array of strings</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
@@ -17771,8 +17795,8 @@
 </tr>
 <tr>
 <td><code>affiliations</code></td>
-<td>object (free-form)</td>
-<td>Person's affiliation within organization such as student, faculty, staff.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>first_name</code></td>
@@ -17871,8 +17895,8 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -17891,8 +17915,8 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -17911,13 +17935,13 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>active_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
@@ -18128,6 +18152,12 @@
 <td></td>
 </tr>
 <tr>
+<td><code>affiliations</code></td>
+<td>array of strings</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>first_name</code></td>
 <td>string</td>
 <td></td>
@@ -18189,9 +18219,9 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -18213,9 +18243,9 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -18231,9 +18261,15 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
+<td>array of strings</td>
 <td></td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>active_isds</code></td>
+<td>array of strings</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
@@ -18467,8 +18503,8 @@
 </tr>
 <tr>
 <td><code>affiliations</code></td>
-<td>object (free-form)</td>
-<td>Person's affiliation within organization such as student, faculty, staff.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>first_name</code></td>
@@ -18567,8 +18603,8 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -18587,8 +18623,8 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -18607,13 +18643,13 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>active_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
@@ -20181,8 +20217,8 @@
 </tr>
 <tr>
 <td><code>affiliations</code></td>
-<td>object (free-form)</td>
-<td>Person's affiliation within organization such as student, faculty, staff.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>first_name</code></td>
@@ -20281,8 +20317,8 @@
 </tr>
 <tr>
 <td><code>nationalities</code></td>
-<td>object (free-form)</td>
-<td>List of all citizenships (ISO 3166-1 alpha-2 codes)</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>organization_country</code></td>
@@ -20301,8 +20337,8 @@
 </tr>
 <tr>
 <td><code>eduperson_assurance</code></td>
-<td>object (free-form)</td>
-<td>REFEDS assurance profile URIs from identity provider</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>is_identity_manager</code></td>
@@ -20321,13 +20357,13 @@
 </tr>
 <tr>
 <td><code>managed_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>active_isds</code></td>
-<td>object (free-form)</td>
-<td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+<td>array of strings</td>
+<td></td>
 </tr>
 <tr>
 <td><code>deactivation_reason</code></td>
