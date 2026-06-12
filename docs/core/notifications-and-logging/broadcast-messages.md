@@ -96,7 +96,7 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | object (free-form) |
+    | `query` | any |
     | `author_full_name` | string |
     | `emails` | object (free-form) |
     | `state` | any |
@@ -181,7 +181,7 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | object (free-form) |
+    | `query` | any |
     | `author_full_name` | string |
     | `emails` | object (free-form) |
     | `state` | any |
@@ -201,24 +201,24 @@
       Authorization:"Token YOUR_API_TOKEN" \
       subject="string-value" \
       body="string-value" \
-      query:='{}'
+      query=null
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.broadcast_message_request import BroadcastMessageRequest # (1)
+    from waldur_api_client.models.broadcast_message_create_request import BroadcastMessageCreateRequest # (1)
     from waldur_api_client.api.broadcast_messages import broadcast_messages_create # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = BroadcastMessageRequest(
+    body_data = BroadcastMessageCreateRequest(
         subject="string-value",
         body="string-value",
-        query={}
+        query=null
     )
     response = broadcast_messages_create.sync(
         client=client,
@@ -229,7 +229,7 @@
     ```
     
     
-    1.  **Model Source:** [`BroadcastMessageRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_request.py)
+    1.  **Model Source:** [`BroadcastMessageCreateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_create_request.py)
     2.  **API Source:** [`broadcast_messages_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_create.py)
 
 === "TypeScript"
@@ -243,7 +243,7 @@
       body: {
         "subject": "string-value",
         "body": "string-value",
-        "query": {}
+        "query": null
       }
     });
       console.log('Success:', response);
@@ -259,7 +259,7 @@
     |---|---|---|
     | `subject` | string | ✓ |
     | `body` | string | ✓ |
-    | `query` | object (free-form) | ✓ |
+    | `query` | any | ✓ |
     | `send_at` | string (date) |  |
 
 
@@ -273,7 +273,7 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | object (free-form) |
+    | `query` | any |
     | `author_full_name` | string |
     | `emails` | object (free-form) |
     | `state` | any |
@@ -293,24 +293,24 @@
       Authorization:"Token YOUR_API_TOKEN" \
       subject="string-value" \
       body="string-value" \
-      query:='{}'
+      query=null
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.broadcast_message_request import BroadcastMessageRequest # (1)
+    from waldur_api_client.models.broadcast_message_create_request import BroadcastMessageCreateRequest # (1)
     from waldur_api_client.api.broadcast_messages import broadcast_messages_update # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = BroadcastMessageRequest(
+    body_data = BroadcastMessageCreateRequest(
         subject="string-value",
         body="string-value",
-        query={}
+        query=null
     )
     response = broadcast_messages_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -322,7 +322,7 @@
     ```
     
     
-    1.  **Model Source:** [`BroadcastMessageRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_request.py)
+    1.  **Model Source:** [`BroadcastMessageCreateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/broadcast_message_create_request.py)
     2.  **API Source:** [`broadcast_messages_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/broadcast_messages/broadcast_messages_update.py)
 
 === "TypeScript"
@@ -339,7 +339,7 @@
       body: {
         "subject": "string-value",
         "body": "string-value",
-        "query": {}
+        "query": null
       }
     });
       console.log('Success:', response);
@@ -362,7 +362,7 @@
     |---|---|---|
     | `subject` | string | ✓ |
     | `body` | string | ✓ |
-    | `query` | object (free-form) | ✓ |
+    | `query` | any | ✓ |
     | `send_at` | string (date) |  |
 
 
@@ -376,7 +376,7 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | object (free-form) |
+    | `query` | any |
     | `author_full_name` | string |
     | `emails` | object (free-form) |
     | `state` | any |
@@ -453,7 +453,6 @@
     |---|---|---|
     | `subject` | string |  |
     | `body` | string |  |
-    | `query` | object (free-form) |  |
     | `send_at` | string (date) |  |
 
 
@@ -467,7 +466,7 @@
     | `created` | string (date-time) |
     | `subject` | string |
     | `body` | string |
-    | `query` | object (free-form) |
+    | `query` | any |
     | `author_full_name` | string |
     | `emails` | object (free-form) |
     | `state` | any |

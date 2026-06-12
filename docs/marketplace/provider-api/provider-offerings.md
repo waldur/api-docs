@@ -2052,7 +2052,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `permissions.resource_uuid` | string (uuid) |  |
     | `permissions.project_uuid` | string (uuid) |  |
     | `requested_email` | string |  |
-    | `affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `affiliations` | array of strings |  |
     | `first_name` | string |  |
     | `last_name` | string |  |
     | `birth_date` | string (date) |  |
@@ -2072,16 +2072,16 @@ Returns a paginated list of users who have access to resources of this offering.
     | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `nationalities` | array of strings |  |
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `eduperson_assurance` | array of strings |  |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
-    | `managed_isds` | object (free-form) | List of ISD source identifiers this user can manage via Identity Bridge. E.g., ['isd:puhuri', 'isd:fenix']. Non-empty list implies identity manager role. |
-    | `active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `managed_isds` | array of strings |  |
+    | `active_isds` | array of strings |  |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
 

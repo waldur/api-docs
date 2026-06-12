@@ -115,9 +115,9 @@ Retrieve a list of group invitations. Unauthenticated users can only see public 
     | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
     | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
@@ -212,9 +212,9 @@ Retrieve details of a specific group invitation. Unauthenticated users can only 
     | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
     | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
@@ -296,9 +296,9 @@ Create a new group invitation, which acts as a template for users to request per
     | `auto_approve` | boolean |  | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
     | `project_role` | string (uuid) |  | UUID of the project role to grant if auto_create_project is enabled |
-    | `user_affiliations` | object (free-form) |  |  |
-    | `user_email_patterns` | object (free-form) |  |  |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
     | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean |  | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean |  | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
@@ -331,9 +331,9 @@ Create a new group invitation, which acts as a template for users to request per
     | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
     | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `scope_image` | string (uri) | Image URL of the invitation scope (Customer or Project) |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
@@ -417,9 +417,9 @@ Update an active group invitation. Only active invitations can be edited.
     | `auto_approve` | boolean |  | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
     | `project_role` | string (uuid) |  | UUID of the project role to grant if auto_create_project is enabled |
-    | `user_affiliations` | object (free-form) |  |  |
-    | `user_email_patterns` | object (free-form) |  |  |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
     | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean |  | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean |  | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
@@ -438,9 +438,9 @@ Update an active group invitation. Only active invitations can be edited.
     | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
     | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
@@ -523,9 +523,9 @@ Partially update an active group invitation. Only active invitations can be edit
     | `auto_approve` | boolean |  | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
     | `project_role` | string (uuid) |  | UUID of the project role to grant if auto_create_project is enabled |
-    | `user_affiliations` | object (free-form) |  |  |
-    | `user_email_patterns` | object (free-form) |  |  |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
     | `custom_text` | string |  | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean |  | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean |  | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
@@ -544,9 +544,9 @@ Partially update an active group invitation. Only active invitations can be edit
     | `auto_approve` | boolean | Automatically approve permission requests from users matching email patterns or affiliations |
     | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
     | `project_role` | string (uuid) | UUID of the project role to grant if auto_create_project is enabled |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |

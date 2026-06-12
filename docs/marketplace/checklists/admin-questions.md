@@ -95,8 +95,8 @@
     | `order` | integer |  |
     | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `allowed_file_types` | array of strings |  |
+    | `allowed_mime_types` | array of strings |  |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -199,8 +199,8 @@
     | `order` | integer |  |
     | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `allowed_file_types` | array of strings |  |
+    | `allowed_mime_types` | array of strings |  |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -293,8 +293,8 @@
     | `order` | integer |  |  |
     | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `allowed_file_types` | object (free-form) |  | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `allowed_mime_types` | object (free-form) |  | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `allowed_file_types` | array of strings |  |  |
+    | `allowed_mime_types` | array of strings |  |  |
     | `max_file_size_mb` | integer |  | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `max_files_count` | integer |  | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `likert_scale_length` | any |  | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -334,8 +334,8 @@
     | `order` | integer |  |
     | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `allowed_file_types` | array of strings |  |
+    | `allowed_mime_types` | array of strings |  |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -439,8 +439,8 @@
     | `order` | integer |  |  |
     | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `allowed_file_types` | object (free-form) |  | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `allowed_mime_types` | object (free-form) |  | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `allowed_file_types` | array of strings |  |  |
+    | `allowed_mime_types` | array of strings |  |  |
     | `max_file_size_mb` | integer |  | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `max_files_count` | integer |  | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `likert_scale_length` | any |  | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -480,8 +480,8 @@
     | `order` | integer |  |
     | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `allowed_file_types` | array of strings |  |
+    | `allowed_mime_types` | array of strings |  |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -579,8 +579,8 @@
     | `order` | integer |  |  |
     | `min_value` | string (decimal) |  | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `max_value` | string (decimal) |  | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `allowed_file_types` | object (free-form) |  | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `allowed_mime_types` | object (free-form) |  | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `allowed_file_types` | array of strings |  |  |
+    | `allowed_mime_types` | array of strings |  |  |
     | `max_file_size_mb` | integer |  | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `max_files_count` | integer |  | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `likert_scale_length` | any |  | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -620,8 +620,8 @@
     | `order` | integer |  |
     | `min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `allowed_file_types` | array of strings |  |
+    | `allowed_mime_types` | array of strings |  |
     | `max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |

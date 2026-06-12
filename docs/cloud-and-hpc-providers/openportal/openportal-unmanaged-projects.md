@@ -1505,8 +1505,8 @@ Get checklist template for creating new objects.
     | `questions.order` | integer |  |
     | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.allowed_file_types` | array of strings |  |
+    | `questions.allowed_mime_types` | array of strings |  |
     | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
@@ -1535,8 +1535,8 @@ Get checklist template for creating new objects.
     | `initial_visible_questions.order` | integer |  |
     | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
     | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `initial_visible_questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
-    | `initial_visible_questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `initial_visible_questions.allowed_file_types` | array of strings |  |
+    | `initial_visible_questions.allowed_mime_types` | array of strings |  |
     | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
     | `initial_visible_questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
     | `initial_visible_questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
