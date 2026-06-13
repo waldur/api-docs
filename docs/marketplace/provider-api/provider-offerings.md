@@ -77,6 +77,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/importable_resources/` | [List importable resources](#list-importable-resources) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/import_resource/` | [Import a resource](#import-a-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync/` | [Synchronize offering service settings](#synchronize-offering-service-settings) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync_resources/` | [Synchronize offering resources](#synchronize-offering-resources) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/glauth_tree/` | [Get structured GLauth tree for an offering](#get-structured-glauth-tree-for-an-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
@@ -7511,6 +7512,76 @@ Schedules a synchronization task to pull the latest data for the offering's serv
 
     **`202`** - No response body
     
+
+---
+
+### Synchronize offering resources
+
+Requests connected site agents to run a full reconciliation of all resources belonging to this offering: recreate missing backend accounts, restore user associations and re-apply resource limits. Useful when the provider backend has lost state, e.g. a wiped SLURM database.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/sync_resources/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_sync_resources # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_offerings_sync_resources.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_offerings_sync_resources`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_sync_resources.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsSyncResources } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsSyncResources({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 
