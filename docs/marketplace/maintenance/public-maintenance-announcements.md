@@ -107,19 +107,6 @@ Returns a paginated list of public maintenance announcements. Only announcements
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
-    | `description` | string |  |
-    | `type` | any |  |
-    | `maintenance_uuid` | string (uuid) |  |
-    | `maintenance_name` | string |  |
-    | `maintenance_service_provider` | string |  |
-    | `maintenance_scheduled_start` | string (date-time) |  |
-    | `maintenance_scheduled_end` | string (date-time) |  |
-    | `maintenance_affected_offerings` | array of objects |  |
-    | `maintenance_affected_offerings.uuid` | string (uuid) |  |
-    | `maintenance_affected_offerings.name` | string |  |
-    | `maintenance_affected_offerings.impact_level` | string |  |
-    | `maintenance_affected_offerings.impact_level_display` | string |  |
-    | `maintenance_affected_offerings.impact_description` | string |  |
 
 ---
 
@@ -211,18 +198,5 @@ Returns the details of a specific public maintenance announcement.
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
-    | `description` | string |  |
-    | `type` | any |  |
-    | `maintenance_uuid` | string (uuid) |  |
-    | `maintenance_name` | string |  |
-    | `maintenance_service_provider` | string |  |
-    | `maintenance_scheduled_start` | string (date-time) |  |
-    | `maintenance_scheduled_end` | string (date-time) |  |
-    | `maintenance_affected_offerings` | array of objects |  |
-    | `maintenance_affected_offerings.uuid` | string (uuid) |  |
-    | `maintenance_affected_offerings.name` | string |  |
-    | `maintenance_affected_offerings.impact_level` | string |  |
-    | `maintenance_affected_offerings.impact_level_display` | string |  |
-    | `maintenance_affected_offerings.impact_description` | string |  |
 
 ---
