@@ -19839,6 +19839,18 @@
 <td>Python format string for generating resource names. Available variables: {customer_name}, {customer_slug}, {project_name}, {project_slug}, {offering_name}, {offering_slug}, {plan_name}, {counter}, {attributes[KEY]}.</td>
 </tr>
 <tr>
+<td><code>plugin_options.resource_slug_template</code></td>
+<td>string</td>
+<td></td>
+<td>Template for resource slugs, overriding the default 10-character slugified name. Available variables: {customer_slug}, {project_slug}, {project_name}, {offering_slug}, {year}, {month}, {counter}, {counter_padded}. Default: slugified resource name (max 10 characters).</td>
+</tr>
+<tr>
+<td><code>plugin_options.resource_slug_max_length</code></td>
+<td>integer</td>
+<td></td>
+<td>Maximum length of auto-generated resource slugs derived from the resource name, overriding the default of 10 characters (up to 40). Ignored when a resource slug template is set.</td>
+</tr>
+<tr>
 <td><code>plugin_options.default_internal_network_mtu</code></td>
 <td>integer</td>
 <td></td>
@@ -31427,6 +31439,18 @@
 <td>Python format string for generating resource names. Available variables: {customer_name}, {customer_slug}, {project_name}, {project_slug}, {offering_name}, {offering_slug}, {plan_name}, {counter}, {attributes[KEY]}.</td>
 </tr>
 <tr>
+<td><code>plugin_options.resource_slug_template</code></td>
+<td>string</td>
+<td></td>
+<td>Template for resource slugs, overriding the default 10-character slugified name. Available variables: {customer_slug}, {project_slug}, {project_name}, {offering_slug}, {year}, {month}, {counter}, {counter_padded}. Default: slugified resource name (max 10 characters).</td>
+</tr>
+<tr>
+<td><code>plugin_options.resource_slug_max_length</code></td>
+<td>integer</td>
+<td></td>
+<td>Maximum length of auto-generated resource slugs derived from the resource name, overriding the default of 10 characters (up to 40). Ignored when a resource slug template is set.</td>
+</tr>
+<tr>
 <td><code>plugin_options.default_internal_network_mtu</code></td>
 <td>integer</td>
 <td></td>
@@ -40038,7 +40062,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-06-13
+    2026-06-15
   </span>
 
     
