@@ -270,6 +270,9 @@
     | `offering` | string (uuid) | ✓ | UUID of an offering with a site-agent compatible type. |
     | `name` | string | ✓ |  |
     | `version` | string |  |  |
+    | `dependencies` | array of objects |  |  |
+    | `dependencies.package` | string | ✓ |  |
+    | `dependencies.version` | string | ✓ |  |
     | `config_file_path` | string |  | Example: '/etc/waldur/agent.yaml' |
     | `config_file_content` | string |  |  |
     | `last_restarted` | string (date-time) |  |  |
@@ -386,6 +389,9 @@
     | `offering` | string (uuid) | ✓ | UUID of an offering with a site-agent compatible type. |
     | `name` | string | ✓ |  |
     | `version` | string |  |  |
+    | `dependencies` | array of objects |  |  |
+    | `dependencies.package` | string | ✓ |  |
+    | `dependencies.version` | string | ✓ |  |
     | `config_file_path` | string |  | Example: '/etc/waldur/agent.yaml' |
     | `config_file_content` | string |  |  |
     | `last_restarted` | string (date-time) |  |  |
