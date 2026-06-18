@@ -145,22 +145,22 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
-    | `user_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_affiliations` | array of strings | Person's affiliation within organization such as student, faculty, staff. |
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `user_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_nationalities` | array of strings | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -271,22 +271,22 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
-    | `user_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_affiliations` | array of strings | Person's affiliation within organization such as student, faculty, staff. |
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `user_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_nationalities` | array of strings | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -393,22 +393,22 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
-    | `user_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_affiliations` | array of strings | Person's affiliation within organization such as student, faculty, staff. |
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `user_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_nationalities` | array of strings | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -696,22 +696,22 @@ Allows a service provider to set the operational/access state of an offering use
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
-    | `user_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_affiliations` | array of strings | Person's affiliation within organization such as student, faculty, staff. |
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `user_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_nationalities` | array of strings | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -827,22 +827,22 @@ Allows a service provider to set the operational/access state of an offering use
     | `user_phone_number` | string |  |
     | `user_organization` | string |  |
     | `user_job_title` | string |  |
-    | `user_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_affiliations` | array of strings | Person's affiliation within organization such as student, faculty, staff. |
     | `user_gender` | any | User's gender (male, female, or unknown) |
     | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `user_place_of_birth` | string |  |
     | `user_address` | string |  |
     | `user_country_of_residence` | string |  |
     | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `user_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_nationalities` | array of strings | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `customer_uuid` | string (uuid) |  |
