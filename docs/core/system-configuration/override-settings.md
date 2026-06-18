@@ -356,6 +356,9 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `MATRIX_USER_ID_FORMAT` | string |
     | `MATRIX_LOGIN_METHOD` | string |
     | `MATRIX_OIDC_PROVIDER_URL` | string (uri) |
+    | `MATRIX_LIVEKIT_KEY` | string |
+    | `MATRIX_LIVEKIT_SECRET` | string |
+    | `MATRIX_LIVEKIT_URL` | string (uri) |
     | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |
     | `PAT_ENABLED` | boolean |
     | `PAT_MAX_LIFETIME_DAYS` | integer |
@@ -714,6 +717,9 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `MATRIX_USER_ID_FORMAT` | string |  |
     | `MATRIX_LOGIN_METHOD` | string |  |
     | `MATRIX_OIDC_PROVIDER_URL` | string (uri) |  |
+    | `MATRIX_LIVEKIT_KEY` | string |  |
+    | `MATRIX_LIVEKIT_SECRET` | string |  |
+    | `MATRIX_LIVEKIT_URL` | string (uri) |  |
     | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |  |
     | `PAT_ENABLED` | boolean |  |
     | `PAT_MAX_LIFETIME_DAYS` | integer |  |

@@ -6,6 +6,8 @@
 |:--- |:--- |:--- |
 | <span class="http-badge http-get">GET</span> | `/api/admin/matrix-appservice/status/` | [Get Matrix appservice status](#get-matrix-appservice-status) |
 | <span class="http-badge http-get">GET</span> | `/api/admin/matrix/diagnostics/` | [Run Matrix connectivity diagnostics](#run-matrix-connectivity-diagnostics) |
+| <span class="http-badge http-get">GET</span> | `/api/admin/matrix/livekit/overview/` | [Get LiveKit calls overview](#get-livekit-calls-overview) |
+| <span class="http-badge http-get">GET</span> | `/api/admin/matrix/livekit/participants/` | [List participants in a LiveKit room](#list-participants-in-a-livekit-room) |
 | <span class="http-badge http-post">POST</span> | `/api/admin/matrix-appservice/setup/` | [Setup Matrix appservice registration](#setup-matrix-appservice-registration) |
 | <span class="http-badge http-post">POST</span> | `/api/admin/matrix/reprovision/` | [Reprovision all active Matrix rooms on a new homeserver](#reprovision-all-active-matrix-rooms-on-a-new-homeserver) |
 
@@ -135,6 +137,160 @@ Performs live connectivity checks against the configured Matrix homeserver and r
     | `checks.label` | string |
     | `checks.ok` | boolean |
     | `checks.detail` | string |
+
+---
+
+### Get LiveKit calls overview
+
+Point-in-time snapshot of active LiveKit rooms with participant/publisher totals. Staff only. Returns 503 when LiveKit credentials are not configured and 502 when LiveKit is unreachable or rejects the configured credentials.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/admin/matrix/livekit/overview/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.admin import admin_matrix_livekit_overview_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = admin_matrix_livekit_overview_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`admin_matrix_livekit_overview_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/admin/admin_matrix_livekit_overview_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { adminMatrixLivekitOverviewRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await adminMatrixLivekitOverviewRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `rooms` | array of objects |
+    | `rooms.sid` | string |
+    | `rooms.name` | string |
+    | `rooms.num_participants` | integer |
+    | `rooms.num_publishers` | integer |
+    | `rooms.creation_time` | integer |
+    | `rooms.max_participants` | integer |
+    | `rooms.metadata` | string |
+    | `totals` | object |
+    | `totals.room_count` | integer |
+    | `totals.participant_count` | integer |
+    | `totals.publisher_count` | integer |
+    | `livekit_url` | string |
+
+---
+
+### List participants in a LiveKit room
+
+Participants and their tracks for a single LiveKit room. Staff only. An unknown or empty room returns 200 with an empty list. Returns 503 when LiveKit credentials are not configured and 502 when LiveKit is unreachable or rejects the configured credentials.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/admin/matrix/livekit/participants/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      room=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.admin import admin_matrix_livekit_participants_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = admin_matrix_livekit_participants_list.sync(
+        client=client,
+        room="string-value"
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`admin_matrix_livekit_participants_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/admin/admin_matrix_livekit_participants_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { adminMatrixLivekitParticipantsList } from 'waldur-js-client';
+    
+    try {
+      const response = await adminMatrixLivekitParticipantsList({
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "room": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `room` | string | ✓ | LiveKit room name. A query parameter rather than a path segment because Element Call room names are base64 and routinely contain '/'. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `sid` | string |
+    | `identity` | string |
+    | `state` | string |
+    | `is_publisher` | boolean |
+    | `joined_at` | integer |
+    | `tracks` | array of objects |
+    | `tracks.sid` | string |
+    | `tracks.name` | string |
+    | `tracks.type` | string |
+    | `tracks.muted` | boolean |
+    | `tracks.width` | integer |
+    | `tracks.height` | integer |
 
 ---
 
