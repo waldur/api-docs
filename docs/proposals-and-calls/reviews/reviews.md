@@ -103,6 +103,7 @@
     | `reviewer` | string (uri) |  |
     | `reviewer_full_name` | string |  |
     | `reviewer_uuid` | string (uuid) |  |
+    | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
     | `review_end_date` | string (date-time) |  |
@@ -205,6 +206,7 @@
     | `reviewer` | string (uri) |  |
     | `reviewer_full_name` | string |  |
     | `reviewer_uuid` | string (uuid) |  |
+    | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
     | `review_end_date` | string (date-time) |  |
@@ -327,6 +329,7 @@
     | `reviewer` | string (uri) |  |
     | `reviewer_full_name` | string |  |
     | `reviewer_uuid` | string (uuid) |  |
+    | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
     | `review_end_date` | string (date-time) |  |
@@ -460,6 +463,7 @@
     | `reviewer` | string (uri) |  |
     | `reviewer_full_name` | string |  |
     | `reviewer_uuid` | string (uuid) |  |
+    | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
     | `review_end_date` | string (date-time) |  |
@@ -585,6 +589,7 @@
     | `reviewer` | string (uri) |  |
     | `reviewer_full_name` | string |  |
     | `reviewer_uuid` | string (uuid) |  |
+    | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
     | `review_end_date` | string (date-time) |  |

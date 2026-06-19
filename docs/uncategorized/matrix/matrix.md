@@ -573,6 +573,7 @@ Returns projects where the caller is customer owner (staff sees all) and no Matr
     | `uuid` | string (uuid) |
     | `user_uuid` | string (uuid) |
     | `user_full_name` | string |
+    | `user_image` | string (uri) |
     | `matrix_user_id` | string |
     | `power_level` | integer |
     | `membership_state` | any |

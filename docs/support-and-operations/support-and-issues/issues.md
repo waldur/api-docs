@@ -830,6 +830,7 @@
     | `author_uuid` | string (uuid) |
     | `author_user` | string (uri) |
     | `author_email` | string (email) |
+    | `author_image` | string (uri) |
     | `backend_id` | string |
     | `remote_id` | string |
     | `created` | string (date-time) |

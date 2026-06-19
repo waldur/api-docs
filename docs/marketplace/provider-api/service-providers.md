@@ -1413,6 +1413,11 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata.question_uuid` | string |  |
+    | `project_metadata.question` | string | Question description. |
+    | `project_metadata.question_type` | string |  |
+    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |

@@ -171,6 +171,11 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata.question_uuid` | string |  |
+    | `project_metadata.question` | string | Question description. |
+    | `project_metadata.question_type` | string |  |
+    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -300,6 +305,11 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata.question_uuid` | string |  |
+    | `project_metadata.question` | string | Question description. |
+    | `project_metadata.question_type` | string |  |
+    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -448,6 +458,11 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata.question_uuid` | string |  |
+    | `project_metadata.question` | string | Question description. |
+    | `project_metadata.question_type` | string |  |
+    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -686,6 +701,11 @@ Update the details of a project. Requires project administrator or customer owne
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata.question_uuid` | string |  |
+    | `project_metadata.question` | string | Question description. |
+    | `project_metadata.question_type` | string |  |
+    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -836,6 +856,11 @@ Partially update the details of a project. Requires project administrator or cus
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata.question_uuid` | string |  |
+    | `project_metadata.question` | string | Question description. |
+    | `project_metadata.question_type` | string |  |
+    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -1040,6 +1065,11 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata.question_uuid` | string |  |
+    | `project_metadata.question` | string | Question description. |
+    | `project_metadata.question_type` | string |  |
+    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -1680,6 +1710,11 @@ Moves a project and its associated resources to a different customer. You can ch
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata.question_uuid` | string |  |
+    | `project_metadata.question` | string | Question description. |
+    | `project_metadata.question_type` | string |  |
+    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |

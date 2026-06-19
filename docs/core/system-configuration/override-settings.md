@@ -260,6 +260,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `MANDATORY_USER_ATTRIBUTES` | array of anys |
     | `ENFORCE_MANDATORY_USER_ATTRIBUTES` | boolean |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_BEFORE_MINUTES` | integer |
+    | `MAINTENANCE_ANNOUNCEMENT_TRAILING_BUFFER_MINUTES` | integer |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of anys |
     | `ENFORCE_USER_CONSENT_FOR_OFFERINGS` | boolean |
     | `ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS` | boolean |
@@ -621,6 +622,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `MANDATORY_USER_ATTRIBUTES` | array of anys |  |
     | `ENFORCE_MANDATORY_USER_ATTRIBUTES` | boolean |  |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_BEFORE_MINUTES` | integer |  |
+    | `MAINTENANCE_ANNOUNCEMENT_TRAILING_BUFFER_MINUTES` | integer |  |
     | `MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM` | array of anys |  |
     | `ENFORCE_USER_CONSENT_FOR_OFFERINGS` | boolean |  |
     | `ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS` | boolean |  |
