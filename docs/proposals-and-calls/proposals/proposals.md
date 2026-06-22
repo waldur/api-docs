@@ -149,6 +149,7 @@
     | `applicant_organization_country` | string |  |
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_organization_vat_code` | string | VAT code of the user's organization |
     | `applicant_job_title` | string |  |
     | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |
@@ -278,6 +279,7 @@
     | `applicant_organization_country` | string |  |
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_organization_vat_code` | string | VAT code of the user's organization |
     | `applicant_job_title` | string |  |
     | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |
@@ -425,6 +427,7 @@
     | `applicant_organization_country` | string |  |
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_organization_vat_code` | string | VAT code of the user's organization |
     | `applicant_job_title` | string |  |
     | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |

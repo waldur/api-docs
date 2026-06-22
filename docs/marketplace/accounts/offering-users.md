@@ -156,6 +156,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `user_organization_vat_code` | string | VAT code of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
@@ -282,6 +283,7 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `user_organization_vat_code` | string | VAT code of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
@@ -404,6 +406,7 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `user_organization_vat_code` | string | VAT code of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
@@ -707,6 +710,7 @@ Allows a service provider to set the operational/access state of an offering use
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `user_organization_vat_code` | string | VAT code of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
@@ -838,6 +842,7 @@ Allows a service provider to set the operational/access state of an offering use
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `user_organization_vat_code` | string | VAT code of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
