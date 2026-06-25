@@ -2146,6 +2146,7 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
     | `civil_number` | string |  |
     | `birth_date` | string (date) |  |

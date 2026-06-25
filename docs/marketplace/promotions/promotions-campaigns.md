@@ -666,6 +666,7 @@ Return a list of orders for which the campaign is applied.
     | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |

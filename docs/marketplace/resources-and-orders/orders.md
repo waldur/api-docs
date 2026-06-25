@@ -197,6 +197,7 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -367,6 +368,7 @@ Returns the details of a specific order.
     | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -548,6 +550,7 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |

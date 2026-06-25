@@ -2080,6 +2080,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
@@ -2852,6 +2853,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
     | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -2888,6 +2890,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
     | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -2988,6 +2991,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
     | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3024,6 +3028,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
     | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3124,6 +3129,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
     | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3160,6 +3166,7 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
     | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -6810,6 +6817,7 @@ Returns a paginated list of orders associated with a specific offering.
     | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -6983,6 +6991,7 @@ Returns details of a specific order associated with an offering.
     | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -8096,6 +8105,7 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
     | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |

@@ -206,6 +206,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
@@ -357,6 +358,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
@@ -464,6 +466,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string |  | VAT code of the user's organization |
+    | `organization_address` | string |  | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |  |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean |  | Designates whether the user is allowed to create and use personal access tokens. |
@@ -545,6 +548,7 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
@@ -883,6 +887,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string |  | VAT code of the user's organization |
+    | `organization_address` | string |  | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |  |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean |  | Designates whether the user is allowed to create and use personal access tokens. |
@@ -964,6 +969,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
@@ -1072,6 +1078,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string |  | VAT code of the user's organization |
+    | `organization_address` | string |  | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |  |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean |  | Designates whether the user is allowed to create and use personal access tokens. |
@@ -1153,6 +1160,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
@@ -1869,6 +1877,7 @@ Get current user details, including authentication token and profile completenes
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
     | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
