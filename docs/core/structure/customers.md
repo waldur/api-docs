@@ -114,6 +114,7 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `field` | array |  |
     | `has_resources` | string | Filter by customers with resources. |
     | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
@@ -2409,6 +2410,7 @@ Returns a list of countries that can be used when creating or updating a custome
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `has_resources` | string | Filter by customers with resources. |
     | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
     | `is_service_provider` | boolean | Filter by customers that are service providers. |
@@ -2701,6 +2703,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
     | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `has_resources` | string | Filter by customers with resources. |
     | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
     | `is_service_provider` | boolean | Filter by customers that are service providers. |

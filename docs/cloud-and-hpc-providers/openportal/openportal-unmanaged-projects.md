@@ -95,6 +95,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `customer` | array | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string | Customer abbreviation |
     | `customer_name` | string | Customer name |

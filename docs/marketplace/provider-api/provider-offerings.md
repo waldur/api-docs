@@ -820,6 +820,7 @@ Creates a new provider offering.
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
     | `plugin_options.unique_resource_per_attribute` | string |  | Attribute name to enforce uniqueness per value. E.g., 'storage_data_type' ensures only one resource per storage type per project. |
     | `plugin_options.required_team_role_for_provisioning` | string |  | Required user role in a project for provisioning of resources |
+    | `plugin_options.restricted_to_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') allowed to view and order this offering. When set, the offering is hidden from the catalog for other users and they cannot create orders for it. Whether their orders skip consumer review still depends on the role having the order-approval permission. |
     | `plugin_options.enable_purchase_order_upload` | boolean |  | If set to True, users will be able to upload purchase orders. |
     | `plugin_options.require_purchase_order_upload` | boolean |  | If set to True, users will be required to upload purchase orders. |
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
@@ -5500,6 +5501,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
     | `plugin_options.unique_resource_per_attribute` | string |  | Attribute name to enforce uniqueness per value. E.g., 'storage_data_type' ensures only one resource per storage type per project. |
     | `plugin_options.required_team_role_for_provisioning` | string |  | Required user role in a project for provisioning of resources |
+    | `plugin_options.restricted_to_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') allowed to view and order this offering. When set, the offering is hidden from the catalog for other users and they cannot create orders for it. Whether their orders skip consumer review still depends on the role having the order-approval permission. |
     | `plugin_options.enable_purchase_order_upload` | boolean |  | If set to True, users will be able to upload purchase orders. |
     | `plugin_options.require_purchase_order_upload` | boolean |  | If set to True, users will be required to upload purchase orders. |
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |

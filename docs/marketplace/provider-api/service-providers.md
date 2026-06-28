@@ -238,6 +238,7 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `conceal_finished_projects` | boolean |  | Conceal finished projects |
     | `created` | string (date-time) |  | Created after |
     | `created_before` | string (date-time) |  | Created before |
+    | `current_user_has_role` | array |  | Multiple values may be separated by commas. |
     | `customer` | array |  | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string |  | Customer abbreviation |
     | `customer_name` | string |  | Customer name |
@@ -352,6 +353,7 @@ Returns a paginated list of customers who have consumed resources from the speci
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `field` | array |  |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
@@ -1357,6 +1359,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `customer` | array | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string | Customer abbreviation |
     | `customer_name` | string | Customer name |
@@ -1959,6 +1962,7 @@ Returns a paginated list of customers that a specified user has access to within
     | `backend_id` | string |  |  |
     | `contact_details` | string |  | Contact details |
     | `current_user_has_project_create_permission` | boolean |  | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array |  | Multiple values may be separated by commas. |
     | `field` | array |  |  |
     | `name` | string |  | Name |
     | `name_exact` | string |  | Name (exact) |
