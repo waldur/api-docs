@@ -233,6 +233,7 @@ Get a list of VM instances.
     | `ports.subnet_description` | string |  |
     | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `ports.allowed_address_pairs` | array of objects |  |
+    | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
     | `ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -489,6 +490,7 @@ Retrieve details of a specific VM instance.
     | `ports.subnet_description` | string |  |
     | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `ports.allowed_address_pairs` | array of objects |  |
+    | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
     | `ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -902,6 +904,7 @@ Update an existing VM instance.
     | `ports.subnet_description` | string |  |
     | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `ports.allowed_address_pairs` | array of objects |  |
+    | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
     | `ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -1162,6 +1165,7 @@ Update specific fields of a VM instance.
     | `ports.subnet_description` | string |  |
     | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `ports.allowed_address_pairs` | array of objects |  |
+    | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
     | `ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -1783,6 +1787,7 @@ Get a list of instance ports
     | `subnet_description` | string |  |
     | `subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `allowed_address_pairs` | array of objects |  |
+    | `allowed_address_pairs.ip_address` | string |  |
     | `allowed_address_pairs.mac_address` | string |  |
     | `device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -2004,6 +2009,7 @@ Create backup from instance
     | `restorations.ports.subnet_description` | string |  |
     | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
+    | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
     | `restorations.ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `restorations.ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -2087,6 +2093,7 @@ Create backup from instance
     | `instance_ports.subnet_description` | string |  |
     | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
+    | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
     | `instance_ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `instance_ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -2250,7 +2257,7 @@ Update allowed address pairs of the instance
     |---|---|---|---|
     | `subnet` | string (uri) | ✓ | The subnet to update allowed address pairs for.<br>_Constraints: write-only_ |
     | `allowed_address_pairs` | array of objects | ✓ | List of allowed address pairs to set on the port. Each pair should contain 'ip_address' and optional 'mac_address'. |
-    | `allowed_address_pairs.ip_address` | string |  | <br>_Constraints: write-only, default: `192.168.42.0/24`_ |
+    | `allowed_address_pairs.ip_address` | string |  | <br>_Constraints: default: `192.168.42.0/24`_ |
     | `allowed_address_pairs.mac_address` | string |  |  |
 
 
