@@ -65,6 +65,7 @@
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uuid) |  |
     | `full_name` | string | User full name contains |
+    | `is_active` | boolean |  |
     | `modified` | string (date-time) | Modified after |
     | `modified_before` | string (date-time) | Modified before |
     | `native_name` | string |  |

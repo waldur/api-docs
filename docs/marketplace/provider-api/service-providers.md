@@ -1123,6 +1123,7 @@ Returns a paginated list of project permissions for all projects that have consu
     | `expiration_time` | string (date-time) |  |
     | `field` | array |  |
     | `full_name` | string | User full name contains |
+    | `is_active` | boolean |  |
     | `modified` | string (date-time) | Modified after |
     | `modified_before` | string (date-time) | Modified before |
     | `native_name` | string |  |

@@ -163,19 +163,25 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -315,19 +321,25 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -505,19 +517,25 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -926,19 +944,25 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -1117,19 +1141,25 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -1834,19 +1864,25 @@ Get current user details, including authentication token and profile completenes
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
