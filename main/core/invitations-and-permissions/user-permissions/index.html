@@ -4558,7 +4558,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Operations Summary">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core CRUD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core CRUD">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4577,6 +4588,45 @@
     <span class="md-ellipsis">
       
         Get permission details
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Actions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restore-a-revoked-user-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restore a revoked user role
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#revoke-a-user-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revoke a user role
       
     </span>
   </a>
@@ -14254,7 +14304,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Operations Summary">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core CRUD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core CRUD">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -14273,6 +14334,45 @@
     <span class="md-ellipsis">
       
         Get permission details
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Actions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restore-a-revoked-user-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restore a revoked user role
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#revoke-a-user-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revoke a user role
       
     </span>
   </a>
@@ -14313,6 +14413,11 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: left;"><strong>Core CRUD</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/user-permissions/</code></td>
 <td style="text-align: left;"><a href="#list-user-permissions">List user permissions</a></td>
@@ -14322,11 +14427,27 @@
 <td style="text-align: left;"><code>/api/user-permissions/{uuid}/</code></td>
 <td style="text-align: left;"><a href="#get-permission-details">Get permission details</a></td>
 </tr>
+<tr>
+<td style="text-align: left;"><strong>Other Actions</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/user-permissions/{uuid}/restore/</code></td>
+<td style="text-align: left;"><a href="#restore-a-revoked-user-role">Restore a revoked user role</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/user-permissions/{uuid}/revoke/</code></td>
+<td style="text-align: left;"><a href="#revoke-a-user-role">Revoke a user role</a></td>
+</tr>
 </tbody>
 </table>
 <hr />
+<h2 id="core-crud">Core CRUD</h2>
 <h3 id="list-user-permissions">List user permissions</h3>
-<p>Get a list of all permissions for the current user. Staff and support users can view all user permissions. The list can be filtered by user, scope, role, etc.</p>
+<p>Get a list of all permissions for the current user. Staff and support users can view all user permissions. The list can be filtered by user, scope, role, etc. By default only active grants are returned; staff and support can pass show_inactive=true to include revoked grants (the full history).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTTPie</label><label for="__tabbed_1_2">Python</label><label for="__tabbed_1_3">TypeScript</label><label for="__tabbed_1_4">Query Parameters</label><label for="__tabbed_1_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -14420,6 +14541,11 @@
 <td>User full name contains</td>
 </tr>
 <tr>
+<td><code>is_active</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
 <td><code>modified</code></td>
 <td>string (date-time)</td>
 <td>Modified after</td>
@@ -14475,6 +14601,11 @@
 <td>Scope UUID</td>
 </tr>
 <tr>
+<td><code>show_inactive</code></td>
+<td>boolean</td>
+<td>Staff/support only. Include revoked (inactive) role grants in addition to active ones. Ignored for other users, who only ever see their own active roles.</td>
+</tr>
+<tr>
 <td><code>user</code></td>
 <td>string (uuid)</td>
 <td></td>
@@ -14509,6 +14640,10 @@
 </thead>
 <tbody>
 <tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
 <td><code>user_uuid</code></td>
 <td>string (uuid)</td>
 </tr>
@@ -14529,11 +14664,27 @@
 <td>string (date-time)</td>
 </tr>
 <tr>
+<td><code>is_active</code></td>
+<td>boolean</td>
+</tr>
+<tr>
 <td><code>created_by_full_name</code></td>
 <td>string</td>
 </tr>
 <tr>
 <td><code>created_by_username</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>revoked_by_full_name</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>revoked_by_username</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>revoke_reason</code></td>
 <td>string</td>
 </tr>
 <tr>
@@ -14559,6 +14710,10 @@
 <tr>
 <td><code>scope_name</code></td>
 <td>string</td>
+</tr>
+<tr>
+<td><code>scope_is_removed</code></td>
+<td>boolean</td>
 </tr>
 <tr>
 <td><code>customer_uuid</code></td>
@@ -14682,6 +14837,10 @@
 </thead>
 <tbody>
 <tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
 <td><code>user_uuid</code></td>
 <td>string (uuid)</td>
 </tr>
@@ -14702,11 +14861,27 @@
 <td>string (date-time)</td>
 </tr>
 <tr>
+<td><code>is_active</code></td>
+<td>boolean</td>
+</tr>
+<tr>
 <td><code>created_by_full_name</code></td>
 <td>string</td>
 </tr>
 <tr>
 <td><code>created_by_username</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>revoked_by_full_name</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>revoked_by_username</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>revoke_reason</code></td>
 <td>string</td>
 </tr>
 <tr>
@@ -14734,6 +14909,10 @@
 <td>string</td>
 </tr>
 <tr>
+<td><code>scope_is_removed</code></td>
+<td>boolean</td>
+</tr>
+<tr>
 <td><code>customer_uuid</code></td>
 <td>string (uuid)</td>
 </tr>
@@ -14751,6 +14930,251 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="other-actions">Other Actions</h2>
+<h3 id="restore-a-revoked-user-role">Restore a revoked user role</h3>
+<p>Restores a previously revoked user role grant, reinstating the associated permissions immediately. Restoring a role whose scope (e.g. a project) has been soft-deleted is not allowed.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Path Parameters</label><label for="__tabbed_3_5">Request Body</label><label for="__tabbed_3_6">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/user-permissions/a1b2c3d4-e5f6-7890-abcd-ef1234567890/restore/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.user_role_permission_action_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserRolePermissionActionRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.user_permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">user_permissions_restore</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">UserRolePermissionActionRequest</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">user_permissions_restore</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_permission_action_request.py"><code>UserRolePermissionActionRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_permissions/user_permissions_restore.py"><code>user_permissions_restore</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">userPermissionsRestore</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">userPermissionsRestore</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reason</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - Role restored successfully.</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="revoke-a-user-role">Revoke a user role</h3>
+<p>Revokes a specific user role grant, deactivating the associated permissions immediately.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Request Body</label><label for="__tabbed_4_6">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/user-permissions/a1b2c3d4-e5f6-7890-abcd-ef1234567890/revoke/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.user_role_permission_action_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserRolePermissionActionRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.user_permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">user_permissions_revoke</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">UserRolePermissionActionRequest</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">user_permissions_revoke</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_role_permission_action_request.py"><code>UserRolePermissionActionRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_permissions/user_permissions_revoke.py"><code>user_permissions_revoke</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">userPermissionsRevoke</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">userPermissionsRevoke</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reason</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - Role revoked successfully.</p>
 </div>
 </div>
 </div>
@@ -14775,7 +15199,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-05-16
+    2026-06-30
   </span>
 
     
