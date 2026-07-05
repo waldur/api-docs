@@ -344,6 +344,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |
     | `ENABLED_REPORTING_SCREENS` | array of anys |
+    | `AFFILIATES_ENABLED` | boolean |
     | `MATRIX_ENABLED` | boolean |
     | `MATRIX_HOMESERVER_URL` | string (uri) |
     | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |
@@ -706,6 +707,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |  |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |  |
     | `ENABLED_REPORTING_SCREENS` | array of anys |  |
+    | `AFFILIATES_ENABLED` | boolean |  |
     | `MATRIX_ENABLED` | boolean |  |
     | `MATRIX_HOMESERVER_URL` | string (uri) |  |
     | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |  |

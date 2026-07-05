@@ -231,6 +231,7 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
+    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -402,6 +403,7 @@ Fetch the details of a specific customer by its UUID.
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
+    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -614,6 +616,7 @@ A new customer can only be created by users with staff privilege.
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
+    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -916,6 +919,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
+    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -1228,6 +1232,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
+    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |

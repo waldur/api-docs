@@ -540,6 +540,7 @@ Create customer from successful verification.
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
+    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
