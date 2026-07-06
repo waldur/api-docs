@@ -843,6 +843,7 @@ Creates a new provider offering.
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
+    | `plugin_options.billing_source` | any |  | Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes). |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
@@ -5529,6 +5530,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
+    | `plugin_options.billing_source` | any |  | Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes). |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
