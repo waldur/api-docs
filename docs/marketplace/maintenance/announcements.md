@@ -89,6 +89,7 @@ Returns a paginated list of maintenance announcements.
     | `scheduled_start_before` | string (date-time) | Scheduled start before |
     | `service_provider_uuid` | string (uuid) | Service provider UUID |
     | `state` | array | Maintenance state<br><br> |
+    | `timing_bucket` | string | Timing bucket (comma-separated: on_time, late_start, overrun, early, pending) |
 
 
 === "Responses"
@@ -111,6 +112,9 @@ Returns a paginated list of maintenance announcements.
     | `scheduled_end` | string (date-time) | When the maintenance is scheduled to complete |
     | `actual_start` | string (date-time) | When the maintenance actually began |
     | `actual_end` | string (date-time) | When the maintenance actually completed |
+    | `overrun_minutes` | integer |  |
+    | `start_delta_minutes` | integer |  |
+    | `timing_bucket` | any |  |
     | `service_provider` | string (uri) | Service provider announcing the maintenance |
     | `created_by` | string (uri) |  |
     | `affected_offerings` | array of objects |  |
@@ -205,6 +209,9 @@ Returns the details of a specific maintenance announcement.
     | `scheduled_end` | string (date-time) | When the maintenance is scheduled to complete |
     | `actual_start` | string (date-time) | When the maintenance actually began |
     | `actual_end` | string (date-time) | When the maintenance actually completed |
+    | `overrun_minutes` | integer |  |
+    | `start_delta_minutes` | integer |  |
+    | `timing_bucket` | any |  |
     | `service_provider` | string (uri) | Service provider announcing the maintenance |
     | `created_by` | string (uri) |  |
     | `affected_offerings` | array of objects |  |
@@ -322,6 +329,9 @@ Creates a new maintenance announcement in the 'Draft' state.
     | `scheduled_end` | string (date-time) | When the maintenance is scheduled to complete |
     | `actual_start` | string (date-time) | When the maintenance actually began |
     | `actual_end` | string (date-time) | When the maintenance actually completed |
+    | `overrun_minutes` | integer |  |
+    | `start_delta_minutes` | integer |  |
+    | `timing_bucket` | any |  |
     | `service_provider` | string (uri) | Service provider announcing the maintenance |
     | `created_by` | string (uri) |  |
     | `affected_offerings` | array of objects |  |
@@ -450,6 +460,9 @@ Updates an existing maintenance announcement.
     | `scheduled_end` | string (date-time) | When the maintenance is scheduled to complete |
     | `actual_start` | string (date-time) | When the maintenance actually began |
     | `actual_end` | string (date-time) | When the maintenance actually completed |
+    | `overrun_minutes` | integer |  |
+    | `start_delta_minutes` | integer |  |
+    | `timing_bucket` | any |  |
     | `service_provider` | string (uri) | Service provider announcing the maintenance |
     | `created_by` | string (uri) |  |
     | `affected_offerings` | array of objects |  |
@@ -563,6 +576,9 @@ Partially updates an existing maintenance announcement.
     | `scheduled_end` | string (date-time) | When the maintenance is scheduled to complete |
     | `actual_start` | string (date-time) | When the maintenance actually began |
     | `actual_end` | string (date-time) | When the maintenance actually completed |
+    | `overrun_minutes` | integer |  |
+    | `start_delta_minutes` | integer |  |
+    | `timing_bucket` | any |  |
     | `service_provider` | string (uri) | Service provider announcing the maintenance |
     | `created_by` | string (uri) |  |
     | `affected_offerings` | array of objects |  |

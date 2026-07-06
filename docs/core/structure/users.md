@@ -214,6 +214,8 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_vat_code` | string | VAT code of the user's organization |
     | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -372,6 +374,8 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_vat_code` | string | VAT code of the user's organization |
     | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -568,6 +572,8 @@ A User object on its own has limited capabilities beyond logging in and managing
     | `organization_vat_code` | string | VAT code of the user's organization |
     | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -995,6 +1001,8 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_vat_code` | string | VAT code of the user's organization |
     | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -1192,6 +1200,8 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_vat_code` | string | VAT code of the user's organization |
     | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -1915,6 +1925,8 @@ Get current user details, including authentication token and profile completenes
     | `organization_vat_code` | string | VAT code of the user's organization |
     | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |

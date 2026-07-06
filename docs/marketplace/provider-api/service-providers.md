@@ -927,6 +927,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `thumbnail` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
+    | `service_provider_can_create_offering_user` | boolean |  |
 
 ---
 

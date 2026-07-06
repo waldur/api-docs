@@ -79,6 +79,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync/` | [Synchronize offering service settings](#synchronize-offering-service-settings) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync_resources/` | [Synchronize offering resources](#synchronize-offering-resources) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/effective_posix_id_pool/` | [Effective POSIX ID pool](#effective-posix-id-pool) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/glauth_tree/` | [Get structured GLauth tree for an offering](#get-structured-glauth-tree-for-an-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/` | [Get version history](#get-version-history) |
@@ -851,16 +852,18 @@ Creates a new provider offering.
     | `plugin_options.homedir_prefix` | string |  | GLAuth homedir prefix<br>_Constraints: default: `/home/`_ |
     | `plugin_options.scratch_project_directory` | string |  | HEAppE scratch project directory |
     | `plugin_options.project_permanent_directory` | string |  | HEAppE project permanent directory |
-    | `plugin_options.initial_primarygroup_number` | integer |  | GLAuth initial primary group number<br>_Constraints: default: `5000`_ |
-    | `plugin_options.initial_uidnumber` | integer |  | GLAuth initial uidnumber<br>_Constraints: default: `5000`_ |
-    | `plugin_options.initial_usergroup_number` | integer |  | GLAuth initial usergroup number<br>_Constraints: default: `6000`_ |
-    | `plugin_options.initial_rolegroup_number` | integer |  | GLAuth initial gid for role-aware groups (one per (resource|resource-project, role) tuple). Must leave at least 50000 gids of headroom above initial_usergroup_number to avoid collisions.<br>_Constraints: default: `60000`_ |
+    | `plugin_options.enable_posix_account` | boolean |  | Manage a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for this offering's users. Disable for offerings that only need a username.<br>_Constraints: default: `True`_ |
     | `plugin_options.resource_role_map` | object (free-form) |  | Mapping of Waldur role names (on Resource scope) to emitted role tokens used in group name rendering. Roles outside the map are skipped. Example: {"PI": "admin", "Member": "member"}. |
     | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
     | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
     | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
     | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
     | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
+    | `plugin_options.login_shell` | string |  | Default login shell assigned to GLAuth/LDAP accounts.<br>_Constraints: default: `/bin/bash`_ |
+    | `plugin_options.uid_source` | any |  | Where each offering user's UID comes from: allocated from the POSIX ID pool (default), or taken from the user's uid_number attribute (e.g. an OIDC claim). Pair 'user_attribute' with a GID-only pool to avoid UID collisions.<br>_Constraints: default: `pool`_ |
+    | `plugin_options.gid_source` | any |  | Where each offering user's primary GID comes from: the POSIX ID pool (default), or the user's primary_gid attribute.<br>_Constraints: default: `pool`_ |
+    | `plugin_options.emit_display_name` | boolean |  | Emit the user's full name as a GLAuth displayName custom attribute (rendered to LDAP displayName).<br>_Constraints: default: `False`_ |
+    | `plugin_options.emit_waldur_username` | boolean |  | Emit the Waldur username as a GLAuth waldurUsername custom attribute, alongside the generated POSIX login name.<br>_Constraints: default: `False`_ |
     | `plugin_options.enable_issues_for_membership_changes` | boolean |  | Enable issues for membership changes |
     | `plugin_options.deployment_mode` | any |  | Rancher deployment mode |
     | `plugin_options.flavors_regex` | string |  | Regular expression to limit flavors list |
@@ -2088,6 +2091,8 @@ Returns a paginated list of users who have access to resources of this offering.
     | `organization_vat_code` | string | VAT code of the user's organization |
     | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -2875,6 +2880,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -2912,6 +2919,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -3013,6 +3022,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -3050,6 +3061,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -3151,6 +3164,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -3188,6 +3203,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -5538,16 +5555,18 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.homedir_prefix` | string |  | GLAuth homedir prefix<br>_Constraints: default: `/home/`_ |
     | `plugin_options.scratch_project_directory` | string |  | HEAppE scratch project directory |
     | `plugin_options.project_permanent_directory` | string |  | HEAppE project permanent directory |
-    | `plugin_options.initial_primarygroup_number` | integer |  | GLAuth initial primary group number<br>_Constraints: default: `5000`_ |
-    | `plugin_options.initial_uidnumber` | integer |  | GLAuth initial uidnumber<br>_Constraints: default: `5000`_ |
-    | `plugin_options.initial_usergroup_number` | integer |  | GLAuth initial usergroup number<br>_Constraints: default: `6000`_ |
-    | `plugin_options.initial_rolegroup_number` | integer |  | GLAuth initial gid for role-aware groups (one per (resource|resource-project, role) tuple). Must leave at least 50000 gids of headroom above initial_usergroup_number to avoid collisions.<br>_Constraints: default: `60000`_ |
+    | `plugin_options.enable_posix_account` | boolean |  | Manage a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for this offering's users. Disable for offerings that only need a username.<br>_Constraints: default: `True`_ |
     | `plugin_options.resource_role_map` | object (free-form) |  | Mapping of Waldur role names (on Resource scope) to emitted role tokens used in group name rendering. Roles outside the map are skipped. Example: {"PI": "admin", "Member": "member"}. |
     | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
     | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
     | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
     | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
     | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
+    | `plugin_options.login_shell` | string |  | Default login shell assigned to GLAuth/LDAP accounts.<br>_Constraints: default: `/bin/bash`_ |
+    | `plugin_options.uid_source` | any |  | Where each offering user's UID comes from: allocated from the POSIX ID pool (default), or taken from the user's uid_number attribute (e.g. an OIDC claim). Pair 'user_attribute' with a GID-only pool to avoid UID collisions.<br>_Constraints: default: `pool`_ |
+    | `plugin_options.gid_source` | any |  | Where each offering user's primary GID comes from: the POSIX ID pool (default), or the user's primary_gid attribute.<br>_Constraints: default: `pool`_ |
+    | `plugin_options.emit_display_name` | boolean |  | Emit the user's full name as a GLAuth displayName custom attribute (rendered to LDAP displayName).<br>_Constraints: default: `False`_ |
+    | `plugin_options.emit_waldur_username` | boolean |  | Emit the Waldur username as a GLAuth waldurUsername custom attribute, alongside the generated POSIX login name.<br>_Constraints: default: `False`_ |
     | `plugin_options.enable_issues_for_membership_changes` | boolean |  | Enable issues for membership changes |
     | `plugin_options.deployment_mode` | any |  | Rancher deployment mode |
     | `plugin_options.flavors_regex` | string |  | Regular expression to limit flavors list |
@@ -7625,6 +7644,103 @@ Requests connected site agents to run a full reconciliation of all resources bel
 ## Other Actions
 
 
+### Effective POSIX ID pool
+
+The POSIX ID pool that governs this offering: its own override pool if present, otherwise the service provider's default pool. Returns null when no pool is configured.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/effective_posix_id_pool/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.posix_id_pool_field_enum import PosixIdPoolFieldEnum # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_effective_posix_id_pool_retrieve # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_offerings_effective_posix_id_pool_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PosixIdPoolFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/posix_id_pool_field_enum.py)
+    2.  **API Source:** [`marketplace_provider_offerings_effective_posix_id_pool_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_effective_posix_id_pool_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsEffectivePosixIdPoolRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsEffectivePosixIdPoolRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `created` | string (date-time) |
+    | `description` | string |
+    | `service_provider` | string (uuid) |
+    | `offering` | string (uuid) |
+    | `min_uid` | integer (int64) |
+    | `max_uid` | integer (int64) |
+    | `next_uid` | integer |
+    | `min_gid` | integer (int64) |
+    | `max_gid` | integer (int64) |
+    | `next_gid` | integer |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `scope` | string |
+    | `uid_used` | integer |
+    | `gid_used` | integer |
+    | `uid_utilization` | number (double) |
+    | `gid_utilization` | number (double) |
+
+---
+
 ### Get structured GLauth tree for an offering
 
 Returns the same set of users, groups and robot accounts as `glauth_users_config`, but as a structured JSON tree suitable for navigation in admin UIs. Source of truth for the TOML endpoint.
@@ -8129,6 +8245,8 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
