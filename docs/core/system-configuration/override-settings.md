@@ -234,6 +234,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SCIM_INBOUND_ENABLED` | boolean |
     | `SCIM_INBOUND_SOURCE_NAME` | string |
     | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |
+    | `SCIM_INBOUND_SSH_KEYS_ENABLED` | boolean |
     | `SCIM_PULL_API_URL` | string |
     | `SCIM_PULL_API_KEY` | string |
     | `SCIM_PULL_SOURCE_NAME` | string |
@@ -598,6 +599,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SCIM_INBOUND_ENABLED` | boolean |  |
     | `SCIM_INBOUND_SOURCE_NAME` | string |  |
     | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |  |
+    | `SCIM_INBOUND_SSH_KEYS_ENABLED` | boolean |  |
     | `SCIM_PULL_API_URL` | string |  |
     | `SCIM_PULL_API_KEY` | string |  |
     | `SCIM_PULL_SOURCE_NAME` | string |  |
