@@ -93,6 +93,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |
     | `TELEMETRY_URL` | string |
     | `TELEMETRY_VERSION` | integer |
+    | `CHECK_FOR_UPDATES` | boolean |
     | `SCRIPT_RUN_MODE` | string |
     | `DOCKER_CLIENT` | string |
     | `DOCKER_RUN_OPTIONS` | string |
@@ -458,6 +459,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |  |
     | `TELEMETRY_URL` | string |  |
     | `TELEMETRY_VERSION` | integer |  |
+    | `CHECK_FOR_UPDATES` | boolean |  |
     | `SCRIPT_RUN_MODE` | string |  |
     | `DOCKER_CLIENT` | string |  |
     | `DOCKER_RUN_OPTIONS` | string |  |
