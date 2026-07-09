@@ -815,6 +815,7 @@ Creates a new provider offering.
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
+    | `plugin_options.disable_grace_period` | boolean |  | If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option. |
     | `plugin_options.action_on_usage_limit` | any |  | If set to 'pause' or 'downscale', resources are automatically paused or downscaled when reported usage in the current period reaches a component's limit_amount, and the restriction is lifted when usage drops below the limit again (e.g. a new billing period or a raised limit). |
     | `plugin_options.minimal_team_count_for_provisioning` | integer |  | Minimal team count required for provisioning of resources |
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
@@ -5519,6 +5520,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
+    | `plugin_options.disable_grace_period` | boolean |  | If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option. |
     | `plugin_options.action_on_usage_limit` | any |  | If set to 'pause' or 'downscale', resources are automatically paused or downscaled when reported usage in the current period reaches a component's limit_amount, and the restriction is lifted when usage drops below the limit again (e.g. a new billing period or a raised limit). |
     | `plugin_options.minimal_team_count_for_provisioning` | integer |  | Minimal team count required for provisioning of resources |
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
@@ -7429,7 +7431,8 @@ Imports a backend resource into the marketplace.
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
