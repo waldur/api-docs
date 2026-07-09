@@ -217,13 +217,8 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -402,13 +397,8 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -607,13 +597,8 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -921,13 +906,8 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -1127,13 +1107,8 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -3110,13 +3085,8 @@ List rounds for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -3203,13 +3173,8 @@ List rounds for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -3445,6 +3410,7 @@ List workflow steps for a call.
     | `responsible_role` | any | Role expected to act on this step. |
     | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -3538,6 +3504,7 @@ List workflow steps for a call.
     | `responsible_role` | any | Role expected to act on this step. |
     | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -4180,13 +4147,8 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -5117,12 +5079,7 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | Field | Type | Required |
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
-    | `review_strategy` | string |  |
-    | `deciding_entity` | string |  |
-    | `allocation_time` | string |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `cadence` | string | ✓ |
     | `custom_interval_months` | integer |  |
     | `submission_window_days` | integer | ✓ |
@@ -5143,13 +5100,8 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -5351,13 +5303,8 @@ Create a round for a call.
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
     | `cutoff_time` | string (date-time) | ✓ |
-    | `review_strategy` | string |  |
-    | `deciding_entity` | string |  |
-    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -5372,13 +5319,8 @@ Create a round for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -5632,6 +5574,7 @@ Create or update a workflow step for a call.
     | `responsible_role` | any |  | Role expected to act on this step. |
     | `transition_mode` | any |  | How this step advances to the next. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -5662,6 +5605,7 @@ Create or update a workflow step for a call.
     | `responsible_role` | any | Role expected to act on this step. |
     | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -5999,13 +5943,8 @@ Create or update a workflow step for a call.
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
     | `cutoff_time` | string (date-time) | ✓ |
-    | `review_strategy` | string |  |
-    | `deciding_entity` | string |  |
-    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -6020,13 +5959,8 @@ Create or update a workflow step for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -6128,6 +6062,7 @@ Create or update a workflow step for a call.
     | `responsible_role` | any |  | Role expected to act on this step. |
     | `transition_mode` | any |  | How this step advances to the next. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -6158,6 +6093,7 @@ Create or update a workflow step for a call.
     | `responsible_role` | any | Role expected to act on this step. |
     | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -6687,13 +6623,8 @@ Get or update matching configuration for this call.
     |---|---|---|
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
-    | `review_strategy` | string |  |
-    | `deciding_entity` | string |  |
-    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -6708,13 +6639,8 @@ Get or update matching configuration for this call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -6809,6 +6735,7 @@ Get or update matching configuration for this call.
     | `responsible_role` | any |  | Role expected to act on this step. |
     | `transition_mode` | any |  | How this step advances to the next. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -6839,6 +6766,7 @@ Get or update matching configuration for this call.
     | `responsible_role` | any | Role expected to act on this step. |
     | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -7121,13 +7049,8 @@ Get or update matching configuration for this call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -7226,6 +7149,7 @@ Get or update matching configuration for this call.
     | `responsible_role` | any | Role expected to act on this step. |
     | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
