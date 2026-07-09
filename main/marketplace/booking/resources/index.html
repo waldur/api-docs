@@ -15507,7 +15507,12 @@
 <tr>
 <td><code>project_effective_end_date</code></td>
 <td>string (date)</td>
-<td>Effective project end date including grace period. After this date, resources will be terminated.</td>
+<td>Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date.</td>
+</tr>
+<tr>
+<td><code>resource_effective_end_date</code></td>
+<td>string (date)</td>
+<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date).</td>
 </tr>
 <tr>
 <td><code>project_is_in_grace_period</code></td>
@@ -16256,7 +16261,12 @@
 <tr>
 <td><code>project_effective_end_date</code></td>
 <td>string (date)</td>
-<td>Effective project end date including grace period. After this date, resources will be terminated.</td>
+<td>Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date.</td>
+</tr>
+<tr>
+<td><code>resource_effective_end_date</code></td>
+<td>string (date)</td>
+<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date).</td>
 </tr>
 <tr>
 <td><code>project_is_in_grace_period</code></td>
