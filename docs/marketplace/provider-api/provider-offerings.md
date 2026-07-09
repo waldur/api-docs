@@ -815,6 +815,7 @@ Creates a new provider offering.
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
+    | `plugin_options.action_on_usage_limit` | any |  | If set to 'pause' or 'downscale', resources are automatically paused or downscaled when reported usage in the current period reaches a component's limit_amount, and the restriction is lifted when usage drops below the limit again (e.g. a new billing period or a raised limit). |
     | `plugin_options.minimal_team_count_for_provisioning` | integer |  | Minimal team count required for provisioning of resources |
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
     | `plugin_options.unique_resource_per_attribute` | string |  | Attribute name to enforce uniqueness per value. E.g., 'storage_data_type' ensures only one resource per storage type per project. |
@@ -5518,6 +5519,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
+    | `plugin_options.action_on_usage_limit` | any |  | If set to 'pause' or 'downscale', resources are automatically paused or downscaled when reported usage in the current period reaches a component's limit_amount, and the restriction is lifted when usage drops below the limit again (e.g. a new billing period or a raised limit). |
     | `plugin_options.minimal_team_count_for_provisioning` | integer |  | Minimal team count required for provisioning of resources |
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
     | `plugin_options.unique_resource_per_attribute` | string |  | Attribute name to enforce uniqueness per value. E.g., 'storage_data_type' ensures only one resource per storage type per project. |
@@ -7457,6 +7459,7 @@ Imports a backend resource into the marketplace.
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
