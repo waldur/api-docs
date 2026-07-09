@@ -821,6 +821,7 @@ Get resource cost breakdown for a project over a specified period.
     |---|---|---|
     | `period` | integer | Period for which statistics should be calculated (1, 3 or 12 months). |
     | `project_uuid` | string (uuid) | UUID of the project for which statistics should be calculated. |
+    | `resource_uuid` | string (uuid) | Optional marketplace resource UUID. When provided, costs are limited to this resource only. |
 
 
 === "Responses"
