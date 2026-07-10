@@ -25,11 +25,9 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/workflow_states/` | [List all workflow step instances for this proposal](#list-all-workflow-step-instances-for-this-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/advance_workflow_step/` | [Manually advance a workflow that is awaiting call-manager confirmation](#manually-advance-a-workflow-that-is-awaiting-call-manager-confirmation) |
-| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/approve/` | [Approve a proposal](#approve-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/attach_document/` | [Attach document to proposal](#attach-document-to-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/complete_workflow_step/` | [Complete the current workflow step with an outcome](#complete-the-current-workflow-step-with-an-outcome) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/detach_documents/` | [Detach documents from proposal](#detach-documents-from-proposal) |
-| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/reject/` | [Reject a proposal](#reject-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/reject_workflow_step/` | [Reject the proposal at the current workflow step](#reject-the-proposal-at-the-current-workflow-step) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/resources/` | [Create resource for a proposal](#create-resource-for-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit/` | [Submit a proposal](#submit-a-proposal) |
@@ -1930,85 +1928,6 @@ Manually advance a workflow that is awaiting call-manager confirmation.
 
 ---
 
-### Approve a proposal
-
-Approve a proposal.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/approve/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.proposal_approve_request import ProposalApproveRequest # (1)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_approve # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = ProposalApproveRequest()
-    response = proposal_proposals_approve.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`ProposalApproveRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_approve_request.py)
-    2.  **API Source:** [`proposal_proposals_approve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_approve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProposalsApprove } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProposalsApprove({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `allocation_comment` | string |  |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
 ### Attach document to proposal
 
 Attach document to proposal.
@@ -2260,85 +2179,6 @@ Detach documents from proposal.
     | Field | Type | Required |
     |---|---|---|
     | `documents` | array of string (uuid)s | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
-### Reject a proposal
-
-Reject a proposal.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reject/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.proposal_approve_request import ProposalApproveRequest # (1)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_reject # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = ProposalApproveRequest()
-    response = proposal_proposals_reject.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`ProposalApproveRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_approve_request.py)
-    2.  **API Source:** [`proposal_proposals_reject`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_reject.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProposalsReject } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProposalsReject({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `allocation_comment` | string |  |
 
 
 === "Responses"

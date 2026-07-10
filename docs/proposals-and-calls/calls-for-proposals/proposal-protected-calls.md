@@ -3399,16 +3399,17 @@ List workflow steps for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
@@ -3493,16 +3494,17 @@ List workflow steps for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
@@ -5569,10 +5571,10 @@ Create or update a workflow step for a call.
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances to the next. |
+    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
@@ -5594,16 +5596,17 @@ Create or update a workflow step for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
@@ -6057,10 +6060,10 @@ Create or update a workflow step for a call.
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances to the next. |
+    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
@@ -6082,16 +6085,17 @@ Create or update a workflow step for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
@@ -6730,10 +6734,10 @@ Get or update matching configuration for this call.
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances to the next. |
+    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
@@ -6755,16 +6759,17 @@ Get or update matching configuration for this call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
@@ -7138,16 +7143,17 @@ Get or update matching configuration for this call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
     | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
