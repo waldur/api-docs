@@ -23,6 +23,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/` | [List resources for a proposal](#list-resources-for-a-proposal) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/step-checklist-responses/` | [Step checklist responses](#step-checklist-responses) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/step-checklist/` | [Get a workflow step's checklist with questions and answers](#get-a-workflow-steps-checklist-with-questions-and-answers) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/workflow_states/` | [List all workflow step instances for this proposal](#list-all-workflow-step-instances-for-this-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/advance_workflow_step/` | [Manually advance a workflow that is awaiting call-manager confirmation](#manually-advance-a-workflow-that-is-awaiting-call-manager-confirmation) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/attach_document/` | [Attach document to proposal](#attach-document-to-proposal) |
@@ -32,6 +34,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/resources/` | [Create resource for a proposal](#create-resource-for-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit/` | [Submit a proposal](#submit-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit_answers/` | [Submit checklist answers](#submit-checklist-answers) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit-step-checklist-answers/` | [Submit answers to a workflow step's checklist](#submit-answers-to-a-workflow-steps-checklist) |
 | <span class="http-badge http-put">PUT</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Delete](#delete) |
@@ -1745,6 +1748,240 @@ List resources for a proposal.
 
 ---
 
+### Step checklist responses
+
+List a workflow step's checklist answers grouped by reviewer, for the threaded technical-assessment view. Each technical reviewer (offering manager) answers the same checklist; this returns every reviewer's decision and comment.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/step-checklist-responses/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
+    from waldur_api_client.models.proposal_states import ProposalStates # (2)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_step_checklist_responses_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_step_checklist_responses_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        step="string-value"
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
+    2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
+    3.  **API Source:** [`proposal_proposals_step_checklist_responses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_responses_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsStepChecklistResponsesList } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsStepChecklistResponsesList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "step": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `call_uuid` | string (uuid) |  |  |
+    | `created_by_uuid` | string (uuid) |  |  |
+    | `my_proposals` | boolean |  |  |
+    | `name` | string |  |  |
+    | `o` | array |  | Ordering<br><br> |
+    | `organization_uuid` | string (uuid) |  |  |
+    | `page` | integer |  | A page number within the paginated result set. |
+    | `page_size` | integer |  | Number of results to return per page. |
+    | `round` | string (uuid) |  |  |
+    | `round_uuid` | string (uuid) |  |  |
+    | `slug` | string |  | Slug |
+    | `state` | array |  |  |
+    | `step` | string | ✓ | Workflow step key (e.g. technical_assessment). |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `user_uuid` | string (uuid) |
+    | `user_full_name` | string |
+    | `user_image` | string |
+    | `submitted_at` | string (date-time) |
+    | `answers` | array of objects |
+    | `answers.question_uuid` | string (uuid) |
+    | `answers.question_description` | string |
+    | `answers.question_type` | string |
+    | `answers.answer_data` | object (free-form) |
+    | `answers.answer_display` | string |
+    
+    ---
+    
+    **`400`** - 
+    
+
+---
+
+### Get a workflow step's checklist with questions and answers
+
+Get a workflow step's checklist with questions and answers.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/step-checklist/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_step_checklist_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_step_checklist_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        step="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_step_checklist_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsStepChecklistRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsStepChecklistRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "step": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `include_all` | string |  | Return all questions ignoring dynamic visibility. |
+    | `step` | string | ✓ | Workflow step key (e.g. technical_assessment). |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `checklist` | any |  |
+    | `completion` | object |  |
+    | `completion.uuid` | string (uuid) |  |
+    | `completion.is_completed` | boolean | Whether all required questions have been answered |
+    | `completion.completion_percentage` | number (double) |  |
+    | `completion.unanswered_required_questions` | array of anys |  |
+    | `completion.checklist_name` | string |  |
+    | `completion.checklist_description` | string |  |
+    | `completion.created` | string (date-time) |  |
+    | `completion.modified` | string (date-time) |  |
+    | `questions` | array of objects |  |
+    | `questions.uuid` | string (uuid) |  |
+    | `questions.description` | string |  |
+    | `questions.user_guidance` | string |  |
+    | `questions.question_type` | any | Type of question and expected answer format |
+    | `questions.required` | boolean |  |
+    | `questions.order` | integer |  |
+    | `questions.existing_answer` | any |  |
+    | `questions.question_options` | array of anys |  |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
+    | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
+    | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
+    | `questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
+    | `questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
+    | `questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
+    | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
+    | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
+    | `questions.dependencies_info` | any |  |
+    
+    ---
+    
+    **`400`** - 
+    
+
+---
+
 ### List all workflow step instances for this proposal
 
 List all workflow step instances for this proposal.
@@ -1853,6 +2090,7 @@ List all workflow step instances for this proposal.
     | `applicant_visible` | boolean |  |
     | `duration_in_days` | integer |  |
     | `is_required` | boolean |  |
+    | `checklist_status` | any |  |
 
 ---
 
@@ -2548,6 +2786,119 @@ Submit checklist answers.
     ---
     
     **`404`** - 
+    
+
+---
+
+### Submit answers to a workflow step's checklist
+
+Submit answers to a workflow step's checklist.
+
+
+=== "HTTPie"
+
+    ```bash
+    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]' | http \
+      POST \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/submit-step-checklist-answers/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_submit_step_checklist_answers # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_submit_step_checklist_answers.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        step="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_submit_step_checklist_answers`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_submit_step_checklist_answers.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsSubmitStepChecklistAnswers } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsSubmitStepChecklistAnswers({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "step": "string-value"
+      },
+      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `step` | string | ✓ | Workflow step key (e.g. technical_assessment). |
+
+
+=== "Request Body (required)"
+
+    The request body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Required |
+    |---|---|---|
+    | `question_uuid` | string (uuid) | ✓ |
+    | `answer_data` | any | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `detail` | string |  |
+    | `completion` | object |  |
+    | `completion.uuid` | string (uuid) |  |
+    | `completion.is_completed` | boolean | Whether all required questions have been answered |
+    | `completion.completion_percentage` | number (double) |  |
+    | `completion.unanswered_required_questions` | array of anys |  |
+    | `completion.checklist_name` | string |  |
+    | `completion.checklist_description` | string |  |
+    | `completion.created` | string (date-time) |  |
+    | `completion.modified` | string (date-time) |  |
+    | `completion.requires_review` | boolean | Whether any answers triggered review requirements |
+    | `completion.reviewed_by` | integer | User who reviewed the checklist completion |
+    | `completion.reviewed_by_name` | string |  |
+    | `completion.reviewed_at` | string (date-time) |  |
+    | `completion.review_notes` | string | Notes from the reviewer |
+    | `completion.review_trigger_summary` | array of anys |  |
+    
+    ---
+    
+    **`400`** - 
     
 
 ---

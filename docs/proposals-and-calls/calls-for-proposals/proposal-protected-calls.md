@@ -34,6 +34,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/reviewer-pool/` | [List reviewer pool members for a call](#list-reviewer-pool-members-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/` | [List rounds for a call](#list-rounds-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/step_checklists/` | [Step checklists](#step-checklists) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/suggestions/` | [List all reviewer suggestions for this call with affinity scores](#list-all-reviewer-suggestions-for-this-call-with-affinity-scores) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/` | [List workflow steps for a call](#list-workflow-steps-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/{obj_uuid}/` | [Retrieve](#retrieve) |
@@ -3188,6 +3189,91 @@ List rounds for a call.
 
 ---
 
+### Step checklists
+
+List checklists that can be attached to a workflow step (WORKFLOW_STEP-typed). Available to call managers so the workflow config UI can populate its checklist picker without staff-only access to the checklist admin API.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-protected-calls/step_checklists/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_step_checklists_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_protected_calls_step_checklists_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **API Source:** [`proposal_protected_calls_step_checklists_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_step_checklists_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsStepChecklistsList } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsStepChecklistsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `customer` | string (uri) |  |
+    | `customer_keyword` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `has_active_round` | boolean |  |
+    | `name` | string |  |
+    | `o` | array | Ordering<br><br> |
+    | `offering_uuid` | string (uuid) |  |
+    | `offerings_provider_uuid` | string (uuid) |  |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
+    | `state` | array |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `checklist_type` | string |
+
+---
+
 ### List all reviewer suggestions for this call with affinity scores
 
 List all reviewer suggestions for this call with affinity scores.
@@ -3403,6 +3489,7 @@ List workflow steps for a call.
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
@@ -3498,6 +3585,7 @@ List workflow steps for a call.
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
@@ -5568,6 +5656,7 @@ Create or update a workflow step for a call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
+    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
@@ -5600,6 +5689,7 @@ Create or update a workflow step for a call.
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
@@ -6057,6 +6147,7 @@ Create or update a workflow step for a call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
+    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
@@ -6089,6 +6180,7 @@ Create or update a workflow step for a call.
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
@@ -6731,6 +6823,7 @@ Get or update matching configuration for this call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
+    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
@@ -6763,6 +6856,7 @@ Get or update matching configuration for this call.
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
@@ -7147,6 +7241,7 @@ Get or update matching configuration for this call.
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
