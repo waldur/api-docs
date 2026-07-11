@@ -10826,6 +10826,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#step-checklist-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step checklist responses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-a-workflow-steps-checklist-with-questions-and-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get a workflow step's checklist with questions and answers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-all-workflow-step-instances-for-this-proposal" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10918,6 +10940,17 @@
     <span class="md-ellipsis">
       
         Submit checklist answers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submit-answers-to-a-workflow-steps-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Submit answers to a workflow step's checklist
       
     </span>
   </a>
@@ -15326,6 +15359,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#step-checklist-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step checklist responses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-a-workflow-steps-checklist-with-questions-and-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get a workflow step's checklist with questions and answers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-all-workflow-step-instances-for-this-proposal" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -15418,6 +15473,17 @@
     <span class="md-ellipsis">
       
         Submit checklist answers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submit-answers-to-a-workflow-steps-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Submit answers to a workflow step's checklist
       
     </span>
   </a>
@@ -15587,6 +15653,16 @@
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/proposal-proposals/{uuid}/step-checklist-responses/</code></td>
+<td style="text-align: left;"><a href="#step-checklist-responses">Step checklist responses</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/proposal-proposals/{uuid}/step-checklist/</code></td>
+<td style="text-align: left;"><a href="#get-a-workflow-steps-checklist-with-questions-and-answers">Get a workflow step's checklist with questions and answers</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/proposal-proposals/{uuid}/workflow_states/</code></td>
 <td style="text-align: left;"><a href="#list-all-workflow-step-instances-for-this-proposal">List all workflow step instances for this proposal</a></td>
 </tr>
@@ -15629,6 +15705,11 @@
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/proposal-proposals/{uuid}/submit_answers/</code></td>
 <td style="text-align: left;"><a href="#submit-checklist-answers">Submit checklist answers</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/proposal-proposals/{uuid}/submit-step-checklist-answers/</code></td>
+<td style="text-align: left;"><a href="#submit-answers-to-a-workflow-steps-checklist">Submit answers to a workflow step's checklist</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-put">PUT</span></td>
@@ -19733,9 +19814,571 @@
 </div>
 </div>
 <hr />
+<h3 id="step-checklist-responses">Step checklist responses</h3>
+<p>List a workflow step's checklist answers grouped by reviewer, for the threaded technical-assessment view. Each technical reviewer (offering manager) answers the same checklist; this returns every reviewer's decision and comment.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:6"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><input id="__tabbed_17_4" name="__tabbed_17" type="radio" /><input id="__tabbed_17_5" name="__tabbed_17" type="radio" /><input id="__tabbed_17_6" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HTTPie</label><label for="__tabbed_17_2">Python</label><label for="__tabbed_17_3">TypeScript</label><label for="__tabbed_17_4">Path Parameters</label><label for="__tabbed_17_5">Query Parameters</label><label for="__tabbed_17_6">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/step-checklist-responses/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">step</span><span class="o">==</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.proposal_o_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProposalOEnum</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.proposal_states</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProposalStates</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_proposals</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_proposals_step_checklist_responses_list</span> <span class="c1"># (3)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">proposal_proposals_step_checklist_responses_list</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py"><code>ProposalOEnum</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py"><code>ProposalStates</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_responses_list.py"><code>proposal_proposals_step_checklist_responses_list</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">proposalProposalsStepChecklistResponsesList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">proposalProposalsStepChecklistResponsesList</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;step&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>call_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>created_by_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>my_proposals</code></td>
+<td>boolean</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>array</td>
+<td></td>
+<td>Ordering<br><br></td>
+</tr>
+<tr>
+<td><code>organization_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>integer</td>
+<td></td>
+<td>A page number within the paginated result set.</td>
+</tr>
+<tr>
+<td><code>page_size</code></td>
+<td>integer</td>
+<td></td>
+<td>Number of results to return per page.</td>
+</tr>
+<tr>
+<td><code>round</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>round_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>slug</code></td>
+<td>string</td>
+<td></td>
+<td>Slug</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>array</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Workflow step key (e.g. technical_assessment).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<p>The response body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user_uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
+<td><code>user_full_name</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>user_image</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>submitted_at</code></td>
+<td>string (date-time)</td>
+</tr>
+<tr>
+<td><code>answers</code></td>
+<td>array of objects</td>
+</tr>
+<tr>
+<td><code>answers.question_uuid</code></td>
+<td>string (uuid)</td>
+</tr>
+<tr>
+<td><code>answers.question_description</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>answers.question_type</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>answers.answer_data</code></td>
+<td>object (free-form)</td>
+</tr>
+<tr>
+<td><code>answers.answer_display</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong><code>400</code></strong> - </p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="get-a-workflow-steps-checklist-with-questions-and-answers">Get a workflow step's checklist with questions and answers</h3>
+<p>Get a workflow step's checklist with questions and answers.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:6"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><input id="__tabbed_18_4" name="__tabbed_18" type="radio" /><input id="__tabbed_18_5" name="__tabbed_18" type="radio" /><input id="__tabbed_18_6" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HTTPie</label><label for="__tabbed_18_2">Python</label><label for="__tabbed_18_3">TypeScript</label><label for="__tabbed_18_4">Path Parameters</label><label for="__tabbed_18_5">Query Parameters</label><label for="__tabbed_18_6">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/step-checklist/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">step</span><span class="o">==</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_proposals</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_proposals_step_checklist_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">proposal_proposals_step_checklist_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_retrieve.py"><code>proposal_proposals_step_checklist_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">proposalProposalsStepChecklistRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">proposalProposalsStepChecklistRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;step&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>include_all</code></td>
+<td>string</td>
+<td></td>
+<td>Return all questions ignoring dynamic visibility.</td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Workflow step key (e.g. technical_assessment).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>checklist</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion</code></td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.is_completed</code></td>
+<td>boolean</td>
+<td>Whether all required questions have been answered</td>
+</tr>
+<tr>
+<td><code>completion.completion_percentage</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.unanswered_required_questions</code></td>
+<td>array of anys</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.checklist_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.checklist_description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.created</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.modified</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.user_guidance</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_type</code></td>
+<td>any</td>
+<td>Type of question and expected answer format</td>
+</tr>
+<tr>
+<td><code>questions.required</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.order</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.existing_answer</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_options</code></td>
+<td>array of anys</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.min_value</code></td>
+<td>string (decimal)</td>
+<td>Minimum value allowed for NUMBER, YEAR, and RATING type questions</td>
+</tr>
+<tr>
+<td><code>questions.max_value</code></td>
+<td>string (decimal)</td>
+<td>Maximum value allowed for NUMBER, YEAR, and RATING type questions</td>
+</tr>
+<tr>
+<td><code>questions.allowed_file_types</code></td>
+<td>object (free-form)</td>
+<td>List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed.</td>
+</tr>
+<tr>
+<td><code>questions.allowed_mime_types</code></td>
+<td>object (free-form)</td>
+<td>List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security.</td>
+</tr>
+<tr>
+<td><code>questions.max_file_size_mb</code></td>
+<td>integer</td>
+<td>Maximum file size in megabytes. If not set, no size limit is enforced.</td>
+</tr>
+<tr>
+<td><code>questions.max_files_count</code></td>
+<td>integer</td>
+<td>Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced.</td>
+</tr>
+<tr>
+<td><code>questions.likert_scale_length</code></td>
+<td>any</td>
+<td>Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions.</td>
+</tr>
+<tr>
+<td><code>questions.likert_low_label</code></td>
+<td>string</td>
+<td>Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional.</td>
+</tr>
+<tr>
+<td><code>questions.likert_high_label</code></td>
+<td>string</td>
+<td>Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional.</td>
+</tr>
+<tr>
+<td><code>questions.likert_allow_na</code></td>
+<td>boolean</td>
+<td>Allow respondents to choose 'N/A' as an answer for LIKERT type questions.</td>
+</tr>
+<tr>
+<td><code>questions.rich_text_char_limit</code></td>
+<td>integer</td>
+<td>Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced.</td>
+</tr>
+<tr>
+<td><code>questions.rich_text_toolbar_level</code></td>
+<td>any</td>
+<td>Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'.</td>
+</tr>
+<tr>
+<td><code>questions.dependencies_info</code></td>
+<td>any</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong><code>400</code></strong> - </p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="list-all-workflow-step-instances-for-this-proposal">List all workflow step instances for this proposal</h3>
 <p>List all workflow step instances for this proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:6"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><input id="__tabbed_17_4" name="__tabbed_17" type="radio" /><input id="__tabbed_17_5" name="__tabbed_17" type="radio" /><input id="__tabbed_17_6" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HTTPie</label><label for="__tabbed_17_2">Python</label><label for="__tabbed_17_3">TypeScript</label><label for="__tabbed_17_4">Path Parameters</label><label for="__tabbed_17_5">Query Parameters</label><label for="__tabbed_17_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:6"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><input id="__tabbed_19_6" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Path Parameters</label><label for="__tabbed_19_5">Query Parameters</label><label for="__tabbed_19_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20000,6 +20643,11 @@
 <td>boolean</td>
 <td></td>
 </tr>
+<tr>
+<td><code>checklist_status</code></td>
+<td>any</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -20008,7 +20656,7 @@
 <hr />
 <h3 id="manually-advance-a-workflow-that-is-awaiting-call-manager-confirmation">Manually advance a workflow that is awaiting call-manager confirmation</h3>
 <p>Manually advance a workflow that is awaiting call-manager confirmation.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:5"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><input id="__tabbed_18_4" name="__tabbed_18" type="radio" /><input id="__tabbed_18_5" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HTTPie</label><label for="__tabbed_18_2">Python</label><label for="__tabbed_18_3">TypeScript</label><label for="__tabbed_18_4">Path Parameters</label><label for="__tabbed_18_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:5"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Path Parameters</label><label for="__tabbed_20_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20129,7 +20777,7 @@
 <hr />
 <h3 id="attach-document-to-proposal">Attach document to proposal</h3>
 <p>Attach document to proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:6"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><input id="__tabbed_19_6" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Path Parameters</label><label for="__tabbed_19_5">Request Body</label><label for="__tabbed_19_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:6"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Request Body</label><label for="__tabbed_21_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20253,7 +20901,7 @@
 <hr />
 <h3 id="complete-the-current-workflow-step-with-an-outcome">Complete the current workflow step with an outcome</h3>
 <p>Complete the current workflow step with an outcome.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:6"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><input id="__tabbed_20_6" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Path Parameters</label><label for="__tabbed_20_5">Request Body (required)</label><label for="__tabbed_20_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:6"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><input id="__tabbed_22_6" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Path Parameters</label><label for="__tabbed_22_5">Request Body (required)</label><label for="__tabbed_22_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20439,7 +21087,7 @@
 <hr />
 <h3 id="detach-documents-from-proposal">Detach documents from proposal</h3>
 <p>Detach documents from proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:6"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Request Body (required)</label><label for="__tabbed_21_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:6"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><input id="__tabbed_23_6" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Path Parameters</label><label for="__tabbed_23_5">Request Body (required)</label><label for="__tabbed_23_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20573,7 +21221,7 @@
 <hr />
 <h3 id="reject-the-proposal-at-the-current-workflow-step">Reject the proposal at the current workflow step</h3>
 <p>Reject the proposal at the current workflow step.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:6"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><input id="__tabbed_22_6" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Path Parameters</label><label for="__tabbed_22_5">Request Body (required)</label><label for="__tabbed_22_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:6"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><input id="__tabbed_24_6" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Path Parameters</label><label for="__tabbed_24_5">Request Body (required)</label><label for="__tabbed_24_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20745,7 +21393,7 @@
 <hr />
 <h3 id="create-resource-for-a-proposal">Create resource for a proposal</h3>
 <p>Create resource for a proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="23:6"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><input id="__tabbed_23_6" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Path Parameters</label><label for="__tabbed_23_5">Request Body</label><label for="__tabbed_23_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:6"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><input id="__tabbed_25_6" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Request Body</label><label for="__tabbed_25_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20945,7 +21593,7 @@
 <hr />
 <h3 id="submit-a-proposal">Submit a proposal</h3>
 <p>Submit a proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="24:5"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Path Parameters</label><label for="__tabbed_24_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:5"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21040,7 +21688,7 @@
 <hr />
 <h3 id="submit-checklist-answers">Submit checklist answers</h3>
 <p>Submit checklist answers.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="25:6"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><input id="__tabbed_25_6" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Request Body (required)</label><label for="__tabbed_25_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="27:6"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><input id="__tabbed_27_2" name="__tabbed_27" type="radio" /><input id="__tabbed_27_3" name="__tabbed_27" type="radio" /><input id="__tabbed_27_4" name="__tabbed_27" type="radio" /><input id="__tabbed_27_5" name="__tabbed_27" type="radio" /><input id="__tabbed_27_6" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">HTTPie</label><label for="__tabbed_27_2">Python</label><label for="__tabbed_27_3">TypeScript</label><label for="__tabbed_27_4">Path Parameters</label><label for="__tabbed_27_5">Request Body (required)</label><label for="__tabbed_27_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21254,8 +21902,252 @@
 </div>
 </div>
 <hr />
+<h3 id="submit-answers-to-a-workflow-steps-checklist">Submit answers to a workflow step's checklist</h3>
+<p>Submit answers to a workflow step's checklist.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="28:7"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><input id="__tabbed_28_2" name="__tabbed_28" type="radio" /><input id="__tabbed_28_3" name="__tabbed_28" type="radio" /><input id="__tabbed_28_4" name="__tabbed_28" type="radio" /><input id="__tabbed_28_5" name="__tabbed_28" type="radio" /><input id="__tabbed_28_6" name="__tabbed_28" type="radio" /><input id="__tabbed_28_7" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">HTTPie</label><label for="__tabbed_28_2">Python</label><label for="__tabbed_28_3">TypeScript</label><label for="__tabbed_28_4">Path Parameters</label><label for="__tabbed_28_5">Query Parameters</label><label for="__tabbed_28_6">Request Body (required)</label><label for="__tabbed_28_7">Responses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[{&quot;question_uuid&quot;: &quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;, &quot;answer_data&quot;: null}]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/submit-step-checklist-answers/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">step</span><span class="o">==</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_proposals</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_proposals_submit_step_checklist_answers</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">proposal_proposals_submit_step_checklist_answers</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_submit_step_checklist_answers.py"><code>proposal_proposals_submit_step_checklist_answers</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">proposalProposalsSubmitStepChecklistAnswers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">proposalProposalsSubmitStepChecklistAnswers</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;step&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;question_uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;answer_data&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">}]</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>step</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Workflow step key (e.g. technical_assessment).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>The request body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>question_uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code>answer_data</code></td>
+<td>any</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion</code></td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.is_completed</code></td>
+<td>boolean</td>
+<td>Whether all required questions have been answered</td>
+</tr>
+<tr>
+<td><code>completion.completion_percentage</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.unanswered_required_questions</code></td>
+<td>array of anys</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.checklist_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.checklist_description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.created</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.modified</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.requires_review</code></td>
+<td>boolean</td>
+<td>Whether any answers triggered review requirements</td>
+</tr>
+<tr>
+<td><code>completion.reviewed_by</code></td>
+<td>integer</td>
+<td>User who reviewed the checklist completion</td>
+</tr>
+<tr>
+<td><code>completion.reviewed_by_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.reviewed_at</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completion.review_notes</code></td>
+<td>string</td>
+<td>Notes from the reviewer</td>
+</tr>
+<tr>
+<td><code>completion.review_trigger_summary</code></td>
+<td>array of anys</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong><code>400</code></strong> - </p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="update">Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="26:6"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><input id="__tabbed_26_6" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Request Body</label><label for="__tabbed_26_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="29:6"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><input id="__tabbed_29_6" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Path Parameters</label><label for="__tabbed_29_5">Request Body</label><label for="__tabbed_29_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21463,7 +22355,7 @@
 </div>
 <hr />
 <h3 id="partial-update">Partial Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="27:6"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><input id="__tabbed_27_2" name="__tabbed_27" type="radio" /><input id="__tabbed_27_3" name="__tabbed_27" type="radio" /><input id="__tabbed_27_4" name="__tabbed_27" type="radio" /><input id="__tabbed_27_5" name="__tabbed_27" type="radio" /><input id="__tabbed_27_6" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">HTTPie</label><label for="__tabbed_27_2">Python</label><label for="__tabbed_27_3">TypeScript</label><label for="__tabbed_27_4">Path Parameters</label><label for="__tabbed_27_5">Request Body</label><label for="__tabbed_27_6">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="30:6"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><input id="__tabbed_30_2" name="__tabbed_30" type="radio" /><input id="__tabbed_30_3" name="__tabbed_30" type="radio" /><input id="__tabbed_30_4" name="__tabbed_30" type="radio" /><input id="__tabbed_30_5" name="__tabbed_30" type="radio" /><input id="__tabbed_30_6" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">HTTPie</label><label for="__tabbed_30_2">Python</label><label for="__tabbed_30_3">TypeScript</label><label for="__tabbed_30_4">Path Parameters</label><label for="__tabbed_30_5">Request Body</label><label for="__tabbed_30_6">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21671,7 +22563,7 @@
 </div>
 <hr />
 <h3 id="delete_1">Delete</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="28:5"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><input id="__tabbed_28_2" name="__tabbed_28" type="radio" /><input id="__tabbed_28_3" name="__tabbed_28" type="radio" /><input id="__tabbed_28_4" name="__tabbed_28" type="radio" /><input id="__tabbed_28_5" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">HTTPie</label><label for="__tabbed_28_2">Python</label><label for="__tabbed_28_3">TypeScript</label><label for="__tabbed_28_4">Path Parameters</label><label for="__tabbed_28_5">Responses</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="31:5"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><input id="__tabbed_31_2" name="__tabbed_31" type="radio" /><input id="__tabbed_31_3" name="__tabbed_31" type="radio" /><input id="__tabbed_31_4" name="__tabbed_31" type="radio" /><input id="__tabbed_31_5" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">HTTPie</label><label for="__tabbed_31_2">Python</label><label for="__tabbed_31_3">TypeScript</label><label for="__tabbed_31_4">Path Parameters</label><label for="__tabbed_31_5">Responses</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21851,7 +22743,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-07-10
+    2026-07-11
   </span>
 
     
