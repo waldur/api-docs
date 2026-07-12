@@ -260,6 +260,7 @@
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -440,6 +441,7 @@
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -640,6 +642,7 @@
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -949,6 +952,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -1150,6 +1154,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -4279,6 +4284,7 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
