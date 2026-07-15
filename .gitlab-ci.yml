@@ -1,0 +1,159 @@
+variables:
+  GIT_DEPTH: 0
+  UV_CACHE_DIR: "$CI_PROJECT_DIR/.uv-cache"
+
+cache:
+  key:
+    files:
+      - uv.lock
+  paths:
+    - .uv-cache/
+
+stages:
+  - build
+  - deploy
+
+Generate OpenAPI schema diff:
+  stage: build
+  image:
+    name: registry.hpc.ut.ee/mirror/tufin/oasdiff:latest
+    entrypoint: [""]
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+    - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+  needs:
+    - pipeline: $CI_PARENT_PIPELINE_ID
+      job: Generate OpenAPI schema
+  before_script:
+    - apk update
+    - apk add --no-cache git nodejs npm
+    - npm install -g markdownlint-cli
+  script:
+    - |
+      # Find previous schema from local docs/API/
+      PREV_SCHEMA=$(ls docs/API/waldur-openapi-schema-*.yaml 2>/dev/null | sort -V | tail -n1 || echo "")
+      echo "Previous schema found: $PREV_SCHEMA"
+    - |
+      if [ -z "$PREV_SCHEMA" ]; then
+        echo "No previous schema found. Skipping diff generation."
+        echo "No previous schema found. Skipping diff generation." > openapi-diff.md
+      else
+        /usr/bin/oasdiff diff -f markup $PREV_SCHEMA waldur-openapi-schema.yaml > openapi-diff.md
+        sed -i "1i # OpenAPI schema diff - ${RELEASE_VERSION}\n\n## For version ${RELEASE_VERSION}" openapi-diff.md
+        markdownlint --disable MD041 MD035 --fix openapi-diff.md || true
+      fi
+  artifacts:
+    paths:
+      - openapi-diff.md
+      - waldur-openapi-schema.yaml
+    expire_in: 1 day
+
+Upload OpenAPI schema and schema diff to docs:
+  stage: build
+  image: registry.hpc.ut.ee/mirror/library/python:3.13-bookworm
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+    - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+  needs:
+    - job: Generate OpenAPI schema diff
+      artifacts: true
+  before_script:
+    - git config --global user.name "$GITLAB_USER_NAME"
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    # Authenticate remote origin using the GitLab CI token
+    - git remote set-url origin "https://gitlab-ci-token:${GITLAB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+  script:
+    # 1. Install dependencies
+    - pip install uv
+
+    # 2. Clone the generator to access its config and install it
+    - git clone "https://gitlab-ci-token:${GITLAB_TOKEN}@${CI_SERVER_HOST}/waldur/waldur-sdk-docs-generator.git" /tmp/generator
+    - uv pip install --system /tmp/generator
+
+    # 3. Preserve directories that should not be cleaned
+    - |
+      for dir in "docs/API" "docs/integrator-guide/APIs/api-changes"; do
+        if [ -d "$dir" ]; then
+          echo "Preserving $dir..."
+          mkdir -p "/tmp/preserve/$(dirname $dir)"
+          cp -r "$dir" "/tmp/preserve/$dir"
+        fi
+      done
+
+    # 4. Generate the SDK docs
+    - echo "Generating API reference documentation..."
+    - waldur-sdk-docs-generator waldur-openapi-schema.yaml -c /tmp/generator/input/config.yml --clean -o docs/
+
+    # 5. Restore preserved directories
+    - |
+      for dir in "docs/API" "docs/integrator-guide/APIs/api-changes"; do
+        if [ -d "/tmp/preserve/$dir" ]; then
+          echo "Restoring $dir..."
+          mkdir -p "$dir"
+          cp -r "/tmp/preserve/$dir/." "$dir/"
+        fi
+      done
+
+    # 6. Copy new schema and diffs
+    - mkdir -p docs/API
+    - cp waldur-openapi-schema.yaml docs/API/waldur-openapi-schema-${RELEASE_VERSION}.yaml
+    - mkdir -p docs/integrator-guide/APIs/api-changes
+    - |
+      if [ -s "openapi-diff.md" ]; then
+        cp openapi-diff.md docs/integrator-guide/APIs/api-changes/waldur-openapi-schema-${RELEASE_VERSION}-diff.md
+      else
+        echo "No API changes detected, skipping diff file upload"
+      fi
+
+    # 7. Commit and push changes
+    - git add docs/
+    - git commit -m "Add Waldur OpenAPI schema, diff, and SDK docs for ${RELEASE_VERSION}" || exit 0
+    - git pull --rebase origin main
+    - git push -o ci.skip origin HEAD:main
+  artifacts:
+    paths:
+      - docs/API/
+      - docs/integrator-guide/APIs/api-changes/
+    expire_in: 1 day
+
+.deploy_base:
+  stage: deploy
+  image: registry.hpc.ut.ee/mirror/library/python:3.13-bookworm
+  before_script:
+    - git config --global user.name "$GITLAB_USER_NAME"
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    # Authenticate remote origin using the GitLab CI token
+    - git remote set-url origin "https://gitlab-ci-token:${GITLAB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+    # Fetch all branches to ensure mike can access the gh-pages branch
+    - git fetch origin
+  script:
+    - pip install uv
+    - uv sync --all-extras --dev
+
+Build latest pages:
+  extends: .deploy_base
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG == "" && $RELEASE_VERSION == ""'
+    - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION == ""'
+    - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION == ""'
+  script:
+    - !reference [.deploy_base, script]
+    - uv run mike deploy --push --update-aliases main latest
+    - uv run mike set-default --push latest
+
+Build tagged pages:
+  extends: .deploy_base
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
+    - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+    - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+  needs:
+    - job: Upload OpenAPI schema and schema diff to docs
+      artifacts: true
+      optional: true
+  script:
+    - !reference [.deploy_base, script]
+    - TARGET_VERSION="${CI_COMMIT_TAG:-$RELEASE_VERSION}"
+    - echo "Deploying documentation version $TARGET_VERSION"
+    - uv run mike deploy --push --update-aliases $TARGET_VERSION latest
+    - uv run mike set-default --push latest
