@@ -23,6 +23,7 @@ Fetch OpenAPI schema:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
 
 Generate OpenAPI schema diff:
   stage: build
@@ -32,6 +33,7 @@ Generate OpenAPI schema diff:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
   needs:
     - job: Fetch OpenAPI schema
       artifacts: true
@@ -65,6 +67,7 @@ Upload OpenAPI schema and schema diff to docs:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
   needs:
     - job: Generate OpenAPI schema diff
       artifacts: true
@@ -147,6 +150,7 @@ Build latest pages:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_COMMIT_TAG == "" && $RELEASE_VERSION == ""'
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION == ""'
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION == ""'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $RELEASE_VERSION == ""'
   script:
     - !reference [.deploy_base, script]
     - uv run mike deploy --push --update-aliases main latest
@@ -158,6 +162,7 @@ Build tagged pages:
     - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
   needs:
     - job: Upload OpenAPI schema and schema diff to docs
       artifacts: true
