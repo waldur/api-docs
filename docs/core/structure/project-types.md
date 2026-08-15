@@ -1,11 +1,5 @@
 # Project Types
 
-Simple model for categorizing projects.
-Provides project type classification with name, description,
-and UUID identification. Used to categorize projects into
-different types for organizational purposes.
-
-
 ## Operations Summary
 
 | Method | Endpoint | Description |

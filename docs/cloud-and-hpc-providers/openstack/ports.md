@@ -144,7 +144,6 @@ Get a list of network ports.
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
     | `mac_address` | string | MAC address of the port |
     | `allowed_address_pairs` | array of objects |  |
-    | `allowed_address_pairs.ip_address` | string |  |
     | `allowed_address_pairs.mac_address` | string |  |
     | `tenant` | string (uri) | OpenStack tenant this port belongs to |
     | `tenant_name` | string |  |
@@ -281,7 +280,6 @@ Retrieve details of a specific network port.
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
     | `mac_address` | string | MAC address of the port |
     | `allowed_address_pairs` | array of objects |  |
-    | `allowed_address_pairs.ip_address` | string |  |
     | `allowed_address_pairs.mac_address` | string |  |
     | `tenant` | string (uri) | OpenStack tenant this port belongs to |
     | `tenant_name` | string |  |
@@ -384,7 +382,7 @@ Create a new network port.
     | `fixed_ips.subnet_id` | string | ✓ | ID of the subnet in which to assign the IP address |
     | `mac_address` | string |  | MAC address of the port |
     | `allowed_address_pairs` | array of objects |  |  |
-    | `allowed_address_pairs.ip_address` | string |  | <br>_Constraints: default: `192.168.42.0/24`_ |
+    | `allowed_address_pairs.ip_address` | string |  | <br>_Constraints: write-only, default: `192.168.42.0/24`_ |
     | `allowed_address_pairs.mac_address` | string |  |  |
     | `target_tenant` | string (uri) |  | Target tenant for shared network port creation. If not specified, defaults to network's tenant.<br>_Constraints: write-only_ |
     | `network` | string (uri) |  | Network to which this port belongs |
@@ -429,7 +427,6 @@ Create a new network port.
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
     | `mac_address` | string | MAC address of the port |
     | `allowed_address_pairs` | array of objects |  |
-    | `allowed_address_pairs.ip_address` | string |  |
     | `allowed_address_pairs.mac_address` | string |  |
     | `tenant` | string (uri) | OpenStack tenant this port belongs to |
     | `tenant_name` | string |  |
@@ -871,7 +868,7 @@ Update an existing network port.
     | `fixed_ips.subnet_id` | string | ✓ | ID of the subnet in which to assign the IP address |
     | `mac_address` | string |  | MAC address of the port |
     | `allowed_address_pairs` | array of objects |  |  |
-    | `allowed_address_pairs.ip_address` | string |  | <br>_Constraints: default: `192.168.42.0/24`_ |
+    | `allowed_address_pairs.ip_address` | string |  | <br>_Constraints: write-only, default: `192.168.42.0/24`_ |
     | `allowed_address_pairs.mac_address` | string |  |  |
     | `target_tenant` | string (uri) |  | Target tenant for shared network port creation. If not specified, defaults to network's tenant.<br>_Constraints: write-only_ |
     | `network` | string (uri) |  | Network to which this port belongs |
@@ -916,7 +913,6 @@ Update an existing network port.
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
     | `mac_address` | string | MAC address of the port |
     | `allowed_address_pairs` | array of objects |  |
-    | `allowed_address_pairs.ip_address` | string |  |
     | `allowed_address_pairs.mac_address` | string |  |
     | `tenant` | string (uri) | OpenStack tenant this port belongs to |
     | `tenant_name` | string |  |
@@ -1060,7 +1056,6 @@ Update specific fields of a network port.
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
     | `mac_address` | string | MAC address of the port |
     | `allowed_address_pairs` | array of objects |  |
-    | `allowed_address_pairs.ip_address` | string |  |
     | `allowed_address_pairs.mac_address` | string |  |
     | `tenant` | string (uri) | OpenStack tenant this port belongs to |
     | `tenant_name` | string |  |
@@ -1546,7 +1541,6 @@ Replace the Port's allowed_address_pairs list. Cluster-VIP workloads (keepalived
     | `fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
     | `mac_address` | string | MAC address of the port |
     | `allowed_address_pairs` | array of objects |  |
-    | `allowed_address_pairs.ip_address` | string |  |
     | `allowed_address_pairs.mac_address` | string |  |
     | `tenant` | string (uri) | OpenStack tenant this port belongs to |
     | `tenant_name` | string |  |

@@ -93,7 +93,6 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |
     | `TELEMETRY_URL` | string |
     | `TELEMETRY_VERSION` | integer |
-    | `CHECK_FOR_UPDATES` | boolean |
     | `SCRIPT_RUN_MODE` | string |
     | `DOCKER_CLIENT` | string |
     | `DOCKER_RUN_OPTIONS` | string |
@@ -235,7 +234,6 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SCIM_INBOUND_ENABLED` | boolean |
     | `SCIM_INBOUND_SOURCE_NAME` | string |
     | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |
-    | `SCIM_INBOUND_SSH_KEYS_ENABLED` | boolean |
     | `SCIM_PULL_API_URL` | string |
     | `SCIM_PULL_API_KEY` | string |
     | `SCIM_PULL_SOURCE_NAME` | string |
@@ -346,8 +344,6 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |
     | `ENABLED_REPORTING_SCREENS` | array of anys |
-    | `POSIX_ID_POOL_UTILIZATION_THRESHOLD` | integer |
-    | `AFFILIATES_ENABLED` | boolean |
     | `MATRIX_ENABLED` | boolean |
     | `MATRIX_HOMESERVER_URL` | string (uri) |
     | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |
@@ -459,7 +455,6 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |  |
     | `TELEMETRY_URL` | string |  |
     | `TELEMETRY_VERSION` | integer |  |
-    | `CHECK_FOR_UPDATES` | boolean |  |
     | `SCRIPT_RUN_MODE` | string |  |
     | `DOCKER_CLIENT` | string |  |
     | `DOCKER_RUN_OPTIONS` | string |  |
@@ -601,7 +596,6 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SCIM_INBOUND_ENABLED` | boolean |  |
     | `SCIM_INBOUND_SOURCE_NAME` | string |  |
     | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |  |
-    | `SCIM_INBOUND_SSH_KEYS_ENABLED` | boolean |  |
     | `SCIM_PULL_API_URL` | string |  |
     | `SCIM_PULL_API_KEY` | string |  |
     | `SCIM_PULL_SOURCE_NAME` | string |  |
@@ -712,8 +706,6 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |  |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |  |
     | `ENABLED_REPORTING_SCREENS` | array of anys |  |
-    | `POSIX_ID_POOL_UTILIZATION_THRESHOLD` | integer |  |
-    | `AFFILIATES_ENABLED` | boolean |  |
     | `MATRIX_ENABLED` | boolean |  |
     | `MATRIX_HOMESERVER_URL` | string (uri) |  |
     | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |  |

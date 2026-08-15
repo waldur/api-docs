@@ -88,8 +88,8 @@ Returns a paginated list of all plan components. A plan component defines the pr
     | `amount` | integer |  |
     | `price` | string (decimal) |  |
     | `future_price` | string (decimal) |  |
-    | `discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
-    | `discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+    | `discount_threshold` | integer | Minimum amount to be eligible for discount. |
+    | `discount_rate` | integer | Discount rate in percentage. |
 
 ---
 
@@ -170,7 +170,7 @@ Returns the details of a specific plan component, including its pricing, quotas,
     | `amount` | integer |  |
     | `price` | string (decimal) |  |
     | `future_price` | string (decimal) |  |
-    | `discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
-    | `discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+    | `discount_threshold` | integer | Minimum amount to be eligible for discount. |
+    | `discount_rate` | integer | Discount rate in percentage. |
 
 ---

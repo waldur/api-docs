@@ -79,7 +79,6 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync/` | [Synchronize offering service settings](#synchronize-offering-service-settings) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync_resources/` | [Synchronize offering resources](#synchronize-offering-resources) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/effective_posix_id_pool/` | [Effective POSIX ID pool](#effective-posix-id-pool) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/glauth_tree/` | [Get structured GLauth tree for an offering](#get-structured-glauth-tree-for-an-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/` | [Get version history](#get-version-history) |
@@ -338,8 +337,9 @@ Returns a paginated list of offerings for the provider.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
-    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
+    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -614,8 +614,9 @@ Returns details of a specific provider offering.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
-    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
+    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -815,14 +816,10 @@ Creates a new provider offering.
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
-    | `plugin_options.disable_grace_period` | boolean |  | If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option. |
-    | `plugin_options.action_on_usage_limit` | any |  | If set to 'pause' or 'downscale', resources are automatically paused or downscaled when reported usage in the current period reaches a component's limit_amount, and the restriction is lifted when usage drops below the limit again (e.g. a new billing period or a raised limit). |
     | `plugin_options.minimal_team_count_for_provisioning` | integer |  | Minimal team count required for provisioning of resources |
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
     | `plugin_options.unique_resource_per_attribute` | string |  | Attribute name to enforce uniqueness per value. E.g., 'storage_data_type' ensures only one resource per storage type per project. |
     | `plugin_options.required_team_role_for_provisioning` | string |  | Required user role in a project for provisioning of resources |
-    | `plugin_options.restricted_to_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') allowed to view and order this offering. When set, the offering is hidden from the catalog for other users and they cannot create orders for it. Whether their orders skip consumer review still depends on the role having the order-approval permission. |
-    | `plugin_options.auto_approve_for_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') whose orders skip consumer review for this offering. The creator must hold the role on the target project or its organization. Independent of restricted_to_roles (which governs visibility/ordering) and of the ORDER.APPROVE permission. Provider review and purchase-order requirements still apply. Only staff can change this option. |
     | `plugin_options.enable_purchase_order_upload` | boolean |  | If set to True, users will be able to upload purchase orders. |
     | `plugin_options.require_purchase_order_upload` | boolean |  | If set to True, users will be required to upload purchase orders. |
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
@@ -846,7 +843,6 @@ Creates a new provider offering.
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
-    | `plugin_options.billing_source` | any |  | Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes). |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
@@ -854,18 +850,16 @@ Creates a new provider offering.
     | `plugin_options.homedir_prefix` | string |  | GLAuth homedir prefix<br>_Constraints: default: `/home/`_ |
     | `plugin_options.scratch_project_directory` | string |  | HEAppE scratch project directory |
     | `plugin_options.project_permanent_directory` | string |  | HEAppE project permanent directory |
-    | `plugin_options.enable_posix_account` | boolean |  | Manage a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for this offering's users. Disable for offerings that only need a username.<br>_Constraints: default: `True`_ |
+    | `plugin_options.initial_primarygroup_number` | integer |  | GLAuth initial primary group number<br>_Constraints: default: `5000`_ |
+    | `plugin_options.initial_uidnumber` | integer |  | GLAuth initial uidnumber<br>_Constraints: default: `5000`_ |
+    | `plugin_options.initial_usergroup_number` | integer |  | GLAuth initial usergroup number<br>_Constraints: default: `6000`_ |
+    | `plugin_options.initial_rolegroup_number` | integer |  | GLAuth initial gid for role-aware groups (one per (resource|resource-project, role) tuple). Must leave at least 50000 gids of headroom above initial_usergroup_number to avoid collisions.<br>_Constraints: default: `60000`_ |
     | `plugin_options.resource_role_map` | object (free-form) |  | Mapping of Waldur role names (on Resource scope) to emitted role tokens used in group name rendering. Roles outside the map are skipped. Example: {"PI": "admin", "Member": "member"}. |
     | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
     | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
     | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
     | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
     | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
-    | `plugin_options.login_shell` | string |  | Default login shell assigned to GLAuth/LDAP accounts.<br>_Constraints: default: `/bin/bash`_ |
-    | `plugin_options.uid_source` | any |  | Where each offering user's UID comes from: allocated from the POSIX ID pool (default), or taken from the user's uid_number attribute (e.g. an OIDC claim). Pair 'user_attribute' with a GID-only pool to avoid UID collisions.<br>_Constraints: default: `pool`_ |
-    | `plugin_options.gid_source` | any |  | Where each offering user's primary GID comes from: the POSIX ID pool (default), or the user's primary_gid attribute.<br>_Constraints: default: `pool`_ |
-    | `plugin_options.emit_display_name` | boolean |  | Emit the user's full name as a GLAuth displayName custom attribute (rendered to LDAP displayName).<br>_Constraints: default: `False`_ |
-    | `plugin_options.emit_waldur_username` | boolean |  | Emit the Waldur username as a GLAuth waldurUsername custom attribute, alongside the generated POSIX login name.<br>_Constraints: default: `False`_ |
     | `plugin_options.enable_issues_for_membership_changes` | boolean |  | Enable issues for membership changes |
     | `plugin_options.deployment_mode` | any |  | Rancher deployment mode |
     | `plugin_options.flavors_regex` | string |  | Regular expression to limit flavors list |
@@ -1052,8 +1046,9 @@ Creates a new provider offering.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
-    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
+    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -2042,25 +2037,19 @@ Returns a paginated list of users who have access to resources of this offering.
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
-    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
-    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
-    | `permissions.revoked_by_full_name` | string |  |
-    | `permissions.revoked_by_username` | string |  |
-    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
-    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -2090,11 +2079,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `organization_vat_code` | string | VAT code of the user's organization |
-    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
-    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
-    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -2865,8 +2850,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
-    | `expose_organization_vat_code` | boolean |  |
-    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -2882,8 +2865,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `expose_uid_number` | boolean |  |
-    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -2904,8 +2885,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
-    | `expose_organization_vat_code` | boolean |  |
-    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -2921,8 +2900,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `expose_uid_number` | boolean |  |
-    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -3007,8 +2984,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
-    | `expose_organization_vat_code` | boolean |  |
-    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3024,8 +2999,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `expose_uid_number` | boolean |  |
-    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -3046,8 +3019,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
-    | `expose_organization_vat_code` | boolean |  |
-    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3063,8 +3034,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `expose_uid_number` | boolean |  |
-    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -3149,8 +3118,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
-    | `expose_organization_vat_code` | boolean |  |
-    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3166,8 +3133,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `expose_uid_number` | boolean |  |
-    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -3188,8 +3153,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
-    | `expose_organization_vat_code` | boolean |  |
-    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3205,8 +3168,6 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `expose_uid_number` | boolean |  |
-    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -4997,8 +4958,9 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
-    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
+    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -5520,14 +5482,10 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
-    | `plugin_options.disable_grace_period` | boolean |  | If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option. |
-    | `plugin_options.action_on_usage_limit` | any |  | If set to 'pause' or 'downscale', resources are automatically paused or downscaled when reported usage in the current period reaches a component's limit_amount, and the restriction is lifted when usage drops below the limit again (e.g. a new billing period or a raised limit). |
     | `plugin_options.minimal_team_count_for_provisioning` | integer |  | Minimal team count required for provisioning of resources |
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
     | `plugin_options.unique_resource_per_attribute` | string |  | Attribute name to enforce uniqueness per value. E.g., 'storage_data_type' ensures only one resource per storage type per project. |
     | `plugin_options.required_team_role_for_provisioning` | string |  | Required user role in a project for provisioning of resources |
-    | `plugin_options.restricted_to_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') allowed to view and order this offering. When set, the offering is hidden from the catalog for other users and they cannot create orders for it. Whether their orders skip consumer review still depends on the role having the order-approval permission. |
-    | `plugin_options.auto_approve_for_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') whose orders skip consumer review for this offering. The creator must hold the role on the target project or its organization. Independent of restricted_to_roles (which governs visibility/ordering) and of the ORDER.APPROVE permission. Provider review and purchase-order requirements still apply. Only staff can change this option. |
     | `plugin_options.enable_purchase_order_upload` | boolean |  | If set to True, users will be able to upload purchase orders. |
     | `plugin_options.require_purchase_order_upload` | boolean |  | If set to True, users will be required to upload purchase orders. |
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
@@ -5551,7 +5509,6 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
-    | `plugin_options.billing_source` | any |  | Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes). |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
@@ -5559,18 +5516,16 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.homedir_prefix` | string |  | GLAuth homedir prefix<br>_Constraints: default: `/home/`_ |
     | `plugin_options.scratch_project_directory` | string |  | HEAppE scratch project directory |
     | `plugin_options.project_permanent_directory` | string |  | HEAppE project permanent directory |
-    | `plugin_options.enable_posix_account` | boolean |  | Manage a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for this offering's users. Disable for offerings that only need a username.<br>_Constraints: default: `True`_ |
+    | `plugin_options.initial_primarygroup_number` | integer |  | GLAuth initial primary group number<br>_Constraints: default: `5000`_ |
+    | `plugin_options.initial_uidnumber` | integer |  | GLAuth initial uidnumber<br>_Constraints: default: `5000`_ |
+    | `plugin_options.initial_usergroup_number` | integer |  | GLAuth initial usergroup number<br>_Constraints: default: `6000`_ |
+    | `plugin_options.initial_rolegroup_number` | integer |  | GLAuth initial gid for role-aware groups (one per (resource|resource-project, role) tuple). Must leave at least 50000 gids of headroom above initial_usergroup_number to avoid collisions.<br>_Constraints: default: `60000`_ |
     | `plugin_options.resource_role_map` | object (free-form) |  | Mapping of Waldur role names (on Resource scope) to emitted role tokens used in group name rendering. Roles outside the map are skipped. Example: {"PI": "admin", "Member": "member"}. |
     | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
     | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
     | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
     | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
     | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
-    | `plugin_options.login_shell` | string |  | Default login shell assigned to GLAuth/LDAP accounts.<br>_Constraints: default: `/bin/bash`_ |
-    | `plugin_options.uid_source` | any |  | Where each offering user's UID comes from: allocated from the POSIX ID pool (default), or taken from the user's uid_number attribute (e.g. an OIDC claim). Pair 'user_attribute' with a GID-only pool to avoid UID collisions.<br>_Constraints: default: `pool`_ |
-    | `plugin_options.gid_source` | any |  | Where each offering user's primary GID comes from: the POSIX ID pool (default), or the user's primary_gid attribute.<br>_Constraints: default: `pool`_ |
-    | `plugin_options.emit_display_name` | boolean |  | Emit the user's full name as a GLAuth displayName custom attribute (rendered to LDAP displayName).<br>_Constraints: default: `False`_ |
-    | `plugin_options.emit_waldur_username` | boolean |  | Emit the Waldur username as a GLAuth waldurUsername custom attribute, alongside the generated POSIX login name.<br>_Constraints: default: `False`_ |
     | `plugin_options.enable_issues_for_membership_changes` | boolean |  | Enable issues for membership changes |
     | `plugin_options.deployment_mode` | any |  | Rancher deployment mode |
     | `plugin_options.flavors_regex` | string |  | Regular expression to limit flavors list |
@@ -6845,10 +6800,7 @@ Returns a paginated list of orders associated with a specific offering.
     | `created_by_civil_number` | string |  |
     | `created_by_email` | string (email) |  |
     | `created_by_organization` | string |  |
-    | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `created_by_organization_vat_code` | string | VAT code of the user's organization |
-    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -7019,10 +6971,7 @@ Returns details of a specific order associated with an offering.
     | `created_by_civil_number` | string |  |
     | `created_by_email` | string (email) |  |
     | `created_by_organization` | string |  |
-    | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `created_by_organization_vat_code` | string | VAT code of the user's organization |
-    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -7431,8 +7380,7 @@ Imports a backend resource into the marketplace.
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
-    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -7458,11 +7406,10 @@ Imports a backend resource into the marketplace.
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
-    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -7649,103 +7596,6 @@ Requests connected site agents to run a full reconciliation of all resources bel
 
 ## Other Actions
 
-
-### Effective POSIX ID pool
-
-The POSIX ID pool that governs this offering: its own override pool if present, otherwise the service provider's default pool. Returns null when no pool is configured.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/effective_posix_id_pool/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.posix_id_pool_field_enum import PosixIdPoolFieldEnum # (1)
-    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_effective_posix_id_pool_retrieve # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = marketplace_provider_offerings_effective_posix_id_pool_retrieve.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`PosixIdPoolFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/posix_id_pool_field_enum.py)
-    2.  **API Source:** [`marketplace_provider_offerings_effective_posix_id_pool_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_effective_posix_id_pool_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceProviderOfferingsEffectivePosixIdPoolRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceProviderOfferingsEffectivePosixIdPoolRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Query Parameters"
-
-    | Name | Type |
-    |---|---|
-    | `field` | array |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `service_provider` | string (uuid) |
-    | `offering` | string (uuid) |
-    | `min_uid` | integer (int64) |
-    | `max_uid` | integer (int64) |
-    | `next_uid` | integer |
-    | `min_gid` | integer (int64) |
-    | `max_gid` | integer (int64) |
-    | `next_gid` | integer |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `scope` | string |
-    | `uid_used` | integer |
-    | `gid_used` | integer |
-    | `uid_utilization` | number (double) |
-    | `gid_utilization` | number (double) |
-
----
 
 ### Get structured GLauth tree for an offering
 
@@ -8234,8 +8084,6 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
-    | `expose_organization_vat_code` | boolean |  |
-    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -8251,8 +8099,6 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
-    | `expose_uid_number` | boolean |  |
-    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |

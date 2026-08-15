@@ -128,9 +128,6 @@
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
-    | `coi_confirmed` | boolean | Reviewer confirmed absence of conflict of interest with this proposal. |
-    | `coi_confirmed_at` | string (date-time) |  |
-    | `coi_confirmation_required` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -234,9 +231,6 @@
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
-    | `coi_confirmed` | boolean | Reviewer confirmed absence of conflict of interest with this proposal. |
-    | `coi_confirmed_at` | string (date-time) |  |
-    | `coi_confirmation_required` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -360,9 +354,6 @@
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
-    | `coi_confirmed` | boolean | Reviewer confirmed absence of conflict of interest with this proposal. |
-    | `coi_confirmed_at` | string (date-time) |  |
-    | `coi_confirmation_required` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -497,9 +488,6 @@
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
-    | `coi_confirmed` | boolean | Reviewer confirmed absence of conflict of interest with this proposal. |
-    | `coi_confirmed_at` | string (date-time) |  |
-    | `coi_confirmation_required` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -626,9 +614,6 @@
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
-    | `coi_confirmed` | boolean | Reviewer confirmed absence of conflict of interest with this proposal. |
-    | `coi_confirmed_at` | string (date-time) |  |
-    | `coi_confirmation_required` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
@@ -836,12 +821,11 @@ Submit a review, changing its state to SUBMITTED.
 
 === "Request Body"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `summary_score` | integer |  |  |
-    | `summary_public_comment` | string |  |  |
-    | `summary_private_comment` | string |  |  |
-    | `coi_confirmed` | boolean |  | Reviewer confirmed absence of conflict of interest with this proposal. |
+    | Field | Type | Required |
+    |---|---|---|
+    | `summary_score` | integer |  |
+    | `summary_public_comment` | string |  |
+    | `summary_private_comment` | string |  |
 
 
 === "Responses"

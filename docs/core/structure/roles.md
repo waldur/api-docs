@@ -1,20 +1,5 @@
 # Roles
 
-**Roles** are named collections of permissions that define what a user is allowed to do within a specific scope (either a Customer or a Project). They are the cornerstone of the platform's Role-Based Access Control (RBAC) system.
-
-A user's effective permissions are determined by the combination of their assigned role and the scope to which it applies.
-
-!!! info "The Permission Triplet"
-
-    Access control is defined by a triplet: **(User, Role, Scope)**.
-
-    *   **User:** Who is performing the action?
-
-    *   **Role:** What can they do? (e.g., `Project Administrator`, `Customer Owner`)
-
-    *   **Scope:** Where can they do it? (e.g., on "Project Alpha" or across the entire "Customer Inc.")
-
-
 ## Operations Summary
 
 | Method | Endpoint | Description |

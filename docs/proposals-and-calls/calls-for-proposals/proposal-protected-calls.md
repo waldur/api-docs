@@ -34,7 +34,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/reviewer-pool/` | [List reviewer pool members for a call](#list-reviewer-pool-members-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/` | [List rounds for a call](#list-rounds-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/step_checklists/` | [Step checklists](#step-checklists) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/suggestions/` | [List all reviewer suggestions for this call with affinity scores](#list-all-reviewer-suggestions-for-this-call-with-affinity-scores) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/` | [List workflow steps for a call](#list-workflow-steps-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/{obj_uuid}/` | [Retrieve](#retrieve) |
@@ -218,8 +217,13 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -260,7 +264,6 @@
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
-    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -399,8 +402,13 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -441,7 +449,6 @@
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
-    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -600,8 +607,13 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -642,7 +654,6 @@
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
-    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -910,8 +921,13 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -952,7 +968,6 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
-    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -1112,8 +1127,13 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -1154,7 +1174,6 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
-    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -3091,8 +3110,13 @@ List rounds for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
+    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -3179,8 +3203,13 @@ List rounds for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
+    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -3191,91 +3220,6 @@ List rounds for a call.
     | `proposals.approved_by_name` | string |  |
     | `proposals.created_by_name` | string |  |
     | `proposals.created` | string (date-time) |  |
-
----
-
-### Step checklists
-
-List checklists that can be attached to a workflow step (WORKFLOW_STEP-typed). Available to call managers so the workflow config UI can populate its checklist picker without staff-only access to the checklist admin API.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/proposal-protected-calls/step_checklists/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.call_states import CallStates # (1)
-    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
-    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_step_checklists_list # (3)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = proposal_protected_calls_step_checklists_list.sync(client=client)
-    
-    for item in response:
-        print(item)
-    ```
-    
-    
-    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
-    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
-    3.  **API Source:** [`proposal_protected_calls_step_checklists_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_step_checklists_list.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProtectedCallsStepChecklistsList } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProtectedCallsStepChecklistsList({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Query Parameters"
-
-    | Name | Type | Description |
-    |---|---|---|
-    | `customer` | string (uri) |  |
-    | `customer_keyword` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `has_active_round` | boolean |  |
-    | `name` | string |  |
-    | `o` | array | Ordering<br><br> |
-    | `offering_uuid` | string (uuid) |  |
-    | `offerings_provider_uuid` | string (uuid) |  |
-    | `page` | integer | A page number within the paginated result set. |
-    | `page_size` | integer | Number of results to return per page. |
-    | `slug` | string | Slug |
-    | `state` | array |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    The response body is an array of objects, where each object has the following structure:
-    
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `description` | string |
-    | `checklist_type` | string |
 
 ---
 
@@ -3490,20 +3434,17 @@ List workflow steps for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
-    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
-    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -3586,20 +3527,17 @@ List workflow steps for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
-    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
-    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -4242,8 +4180,13 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -4284,7 +4227,6 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
     | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
-    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -5175,7 +5117,12 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | Field | Type | Required |
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
+    | `review_strategy` | string |  |
+    | `deciding_entity` | string |  |
+    | `allocation_time` | string |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `cadence` | string | ✓ |
     | `custom_interval_months` | integer |  |
     | `submission_window_days` | integer | ✓ |
@@ -5196,8 +5143,13 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
+    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -5399,8 +5351,13 @@ Create a round for a call.
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
     | `cutoff_time` | string (date-time) | ✓ |
+    | `review_strategy` | string |  |
+    | `deciding_entity` | string |  |
+    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -5415,8 +5372,13 @@ Create a round for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
+    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -5662,16 +5624,14 @@ Create or update a workflow step for a call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
-    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any |  | How this step advances to the next. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -5691,20 +5651,17 @@ Create or update a workflow step for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
-    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
-    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -6042,8 +5999,13 @@ Create or update a workflow step for a call.
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
     | `cutoff_time` | string (date-time) | ✓ |
+    | `review_strategy` | string |  |
+    | `deciding_entity` | string |  |
+    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -6058,8 +6020,13 @@ Create or update a workflow step for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
+    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -6153,16 +6120,14 @@ Create or update a workflow step for a call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
-    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any |  | How this step advances to the next. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -6182,20 +6147,17 @@ Create or update a workflow step for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
-    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
-    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -6725,8 +6687,13 @@ Get or update matching configuration for this call.
     |---|---|---|
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
+    | `review_strategy` | string |  |
+    | `deciding_entity` | string |  |
+    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -6741,8 +6708,13 @@ Get or update matching configuration for this call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
+    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -6829,16 +6801,14 @@ Get or update matching configuration for this call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
-    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any |  | How this step advances to the next. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -6858,20 +6828,17 @@ Get or update matching configuration for this call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
-    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
-    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -7154,8 +7121,13 @@ Get or update matching configuration for this call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
+    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
+    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
+    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -7243,20 +7215,17 @@ Get or update matching configuration for this call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
-    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
-    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
+    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
+    | `transition_mode` | any | How this step advances to the next. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
-    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |

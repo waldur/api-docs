@@ -20,9 +20,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/checklist-template/` | [Get checklist template for creating new objects](#get-checklist-template-for-creating-new-objects) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/completion_review_status/` | [Get checklist completion status with review triggers (reviewers only)](#get-checklist-completion-status-with-review-triggers-reviewers-only) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/posix_allocations/` | [List POSIX UID/GID allocations of an offering user](#list-posix-uidgid-allocations-of-an-offering-user) |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/posix_groups/` | [List project group GIDs an offering user belongs to](#list-project-group-gids-an-offering-user-belongs-to) |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/posix_identities/` | [List a user's POSIX identities across all their offerings](#list-a-users-posix-identities-across-all-their-offerings) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/profile_field_warnings/` | [Get profile field warnings](#get-profile-field-warnings) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/begin_creating/` | [Begin creation process](#begin-creation-process) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/request_deletion/` | [Request deletion of an offering user](#request-deletion-of-an-offering-user) |
@@ -33,7 +30,6 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/set_ok/` | [Set state to OK](#set-state-to-ok) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/set_pending_account_linking/` | [Set state to Pending Account Linking](#set-state-to-pending-account-linking) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/set_pending_additional_validation/` | [Set state to Pending Additional Validation](#set-state-to-pending-additional-validation) |
-| <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/set_posix_attributes/` | [Set POSIX attributes for an offering user](#set-posix-attributes-for-an-offering-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/set_validation_complete/` | [Set state to Validation Complete](#set-state-to-validation-complete) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-offering-users/{uuid}/submit_answers/` | [Submit checklist answers](#submit-checklist-answers) |
 
@@ -118,7 +114,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `page_size` | integer | Number of results to return per page. |
     | `parent_offering_uuid` | string (uuid) |  |
     | `provider_uuid` | string (uuid) | Provider UUID |
-    | `query` | string | Search by offering name, username, user name, UID or primary GID |
+    | `query` | string | Search by offering name, username or user name |
     | `runtime_state` | array | Offering user runtime state<br><br> |
     | `state` | array | Offering user state<br><br> |
     | `user_username` | string | User username |
@@ -160,14 +156,10 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_organization_vat_code` | string | VAT code of the user's organization |
-    | `user_organization_address` | string | Postal address of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_uid_number` | integer (int64) | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
-    | `user_primary_gid` | integer (int64) | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -185,10 +177,6 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
     | `missing_profile_attributes` | array of strings |  |
-    | `uidnumber` | integer |  |
-    | `primarygroup` | integer |  |
-    | `login_shell` | string |  |
-    | `home_directory` | string |  |
 
 ---
 
@@ -294,14 +282,10 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_organization_vat_code` | string | VAT code of the user's organization |
-    | `user_organization_address` | string | Postal address of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_uid_number` | integer (int64) | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
-    | `user_primary_gid` | integer (int64) | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -319,10 +303,6 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
     | `missing_profile_attributes` | array of strings |  |
-    | `uidnumber` | integer |  |
-    | `primarygroup` | integer |  |
-    | `login_shell` | string |  |
-    | `home_directory` | string |  |
 
 ---
 
@@ -424,14 +404,10 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_organization_vat_code` | string | VAT code of the user's organization |
-    | `user_organization_address` | string | Postal address of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_uid_number` | integer (int64) | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
-    | `user_primary_gid` | integer (int64) | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -449,10 +425,6 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
     | `missing_profile_attributes` | array of strings |  |
-    | `uidnumber` | integer |  |
-    | `primarygroup` | integer |  |
-    | `login_shell` | string |  |
-    | `home_directory` | string |  |
 
 ---
 
@@ -735,14 +707,10 @@ Allows a service provider to set the operational/access state of an offering use
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_organization_vat_code` | string | VAT code of the user's organization |
-    | `user_organization_address` | string | Postal address of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_uid_number` | integer (int64) | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
-    | `user_primary_gid` | integer (int64) | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -760,10 +728,6 @@ Allows a service provider to set the operational/access state of an offering use
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
     | `missing_profile_attributes` | array of strings |  |
-    | `uidnumber` | integer |  |
-    | `primarygroup` | integer |  |
-    | `login_shell` | string |  |
-    | `home_directory` | string |  |
 
 ---
 
@@ -874,14 +838,10 @@ Allows a service provider to set the operational/access state of an offering use
     | `user_organization_country` | string |  |
     | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `user_organization_vat_code` | string | VAT code of the user's organization |
-    | `user_organization_address` | string | Postal address of the user's organization |
     | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `user_civil_number` | string |  |
     | `user_birth_date` | string (date) |  |
     | `user_identity_source` | string | Indicates what identity provider was used. |
-    | `user_uid_number` | integer (int64) | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
-    | `user_primary_gid` | integer (int64) | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -899,10 +859,6 @@ Allows a service provider to set the operational/access state of an offering use
     | `consent_data` | object (free-form) | User consent data including uuid, version, and agreement_date |
     | `is_profile_complete` | boolean |  |
     | `missing_profile_attributes` | array of strings |  |
-    | `uidnumber` | integer |  |
-    | `primarygroup` | integer |  |
-    | `login_shell` | string |  |
-    | `home_directory` | string |  |
 
 ---
 
@@ -1619,334 +1575,6 @@ Get checklist completion status.
 
 ---
 
-### List POSIX UID/GID allocations of an offering user
-
-Returns the user's POSIX identifiers (UID, primary GID) and, for each, the POSIX ID pool that tracks it. The pool fields are null when the value is not tracked by a pool.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/marketplace-offering-users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/posix_allocations/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.offering_user_o_enum import OfferingUserOEnum # (1)
-    from waldur_api_client.models.offering_user_state import OfferingUserState # (2)
-    from waldur_api_client.models.runtime_state_enum import RuntimeStateEnum # (3)
-    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_posix_allocations_list # (4)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = marketplace_offering_users_posix_allocations_list.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    for item in response:
-        print(item)
-    ```
-    
-    
-    1.  **Model Source:** [`OfferingUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_o_enum.py)
-    2.  **Model Source:** [`OfferingUserState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_state.py)
-    3.  **Model Source:** [`RuntimeStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/runtime_state_enum.py)
-    4.  **API Source:** [`marketplace_offering_users_posix_allocations_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_posix_allocations_list.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceOfferingUsersPosixAllocationsList } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceOfferingUsersPosixAllocationsList({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Query Parameters"
-
-    | Name | Type | Description |
-    |---|---|---|
-    | `created` | string (date-time) | Created after |
-    | `created_before` | string (date-time) | Created before |
-    | `has_complete_profile` | boolean | User has complete profile for the offering |
-    | `has_consent` | boolean | User Has Consent |
-    | `is_restricted` | boolean | Is restricted |
-    | `modified` | string (date-time) | Modified after |
-    | `modified_before` | string (date-time) | Modified before |
-    | `o` | array | Ordering<br><br> |
-    | `offering` | string (uri) |  |
-    | `offering_has_active_tos` | boolean | Offering has active Terms of Service |
-    | `offering_slug` | array | Multiple values may be separated by commas. |
-    | `offering_uuid` | array | Multiple values may be separated by commas. |
-    | `page` | integer | A page number within the paginated result set. |
-    | `page_size` | integer | Number of results to return per page. |
-    | `parent_offering_uuid` | string (uuid) |  |
-    | `provider_uuid` | string (uuid) | Provider UUID |
-    | `query` | string | Search by offering name, username, user name, UID or primary GID |
-    | `runtime_state` | array | Offering user runtime state<br><br> |
-    | `state` | array | Offering user state<br><br> |
-    | `user_username` | string | User username |
-    | `user_uuid` | string (uuid) | User UUID |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    The response body is an array of objects, where each object has the following structure:
-    
-    | Field | Type |
-    |---|---|
-    | `namespace` | string |
-    | `value` | integer |
-    | `pool_uuid` | string |
-    | `scope` | string |
-    | `scope_name` | string |
-
----
-
-### List project group GIDs an offering user belongs to
-
-Returns the project group GIDs (shared GIDs that appear in the user's GLAuth otherGroups) for this offering user.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/marketplace-offering-users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/posix_groups/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.offering_user_o_enum import OfferingUserOEnum # (1)
-    from waldur_api_client.models.offering_user_state import OfferingUserState # (2)
-    from waldur_api_client.models.runtime_state_enum import RuntimeStateEnum # (3)
-    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_posix_groups_list # (4)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = marketplace_offering_users_posix_groups_list.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    for item in response:
-        print(item)
-    ```
-    
-    
-    1.  **Model Source:** [`OfferingUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_o_enum.py)
-    2.  **Model Source:** [`OfferingUserState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_state.py)
-    3.  **Model Source:** [`RuntimeStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/runtime_state_enum.py)
-    4.  **API Source:** [`marketplace_offering_users_posix_groups_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_posix_groups_list.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceOfferingUsersPosixGroupsList } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceOfferingUsersPosixGroupsList({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Query Parameters"
-
-    | Name | Type | Description |
-    |---|---|---|
-    | `created` | string (date-time) | Created after |
-    | `created_before` | string (date-time) | Created before |
-    | `has_complete_profile` | boolean | User has complete profile for the offering |
-    | `has_consent` | boolean | User Has Consent |
-    | `is_restricted` | boolean | Is restricted |
-    | `modified` | string (date-time) | Modified after |
-    | `modified_before` | string (date-time) | Modified before |
-    | `o` | array | Ordering<br><br> |
-    | `offering` | string (uri) |  |
-    | `offering_has_active_tos` | boolean | Offering has active Terms of Service |
-    | `offering_slug` | array | Multiple values may be separated by commas. |
-    | `offering_uuid` | array | Multiple values may be separated by commas. |
-    | `page` | integer | A page number within the paginated result set. |
-    | `page_size` | integer | Number of results to return per page. |
-    | `parent_offering_uuid` | string (uuid) |  |
-    | `provider_uuid` | string (uuid) | Provider UUID |
-    | `query` | string | Search by offering name, username, user name, UID or primary GID |
-    | `runtime_state` | array | Offering user runtime state<br><br> |
-    | `state` | array | Offering user state<br><br> |
-    | `user_username` | string | User username |
-    | `user_uuid` | string (uuid) | User UUID |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    The response body is an array of objects, where each object has the following structure:
-    
-    | Field | Type |
-    |---|---|
-    | `gid` | integer |
-    | `offering_name` | string |
-    | `project_name` | string |
-    | `project_uuid` | string |
-    | `customer_name` | string |
-    | `customer_uuid` | string |
-    | `project_accessible` | boolean |
-    | `pool_uuid` | string |
-
----
-
-### List a user's POSIX identities across all their offerings
-
-Consolidated view of one user's POSIX identifiers (UID, primary GID and project group GIDs) across every offering they have an account on, each with the range it was allocated from. Scoped to the offering users the requester is allowed to see.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/marketplace-offering-users/posix_identities/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      user_uuid=="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.offering_user_o_enum import OfferingUserOEnum # (1)
-    from waldur_api_client.models.offering_user_state import OfferingUserState # (2)
-    from waldur_api_client.models.runtime_state_enum import RuntimeStateEnum # (3)
-    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_posix_identities_list # (4)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = marketplace_offering_users_posix_identities_list.sync(
-        client=client,
-        user_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-    )
-    
-    for item in response:
-        print(item)
-    ```
-    
-    
-    1.  **Model Source:** [`OfferingUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_o_enum.py)
-    2.  **Model Source:** [`OfferingUserState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_state.py)
-    3.  **Model Source:** [`RuntimeStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/runtime_state_enum.py)
-    4.  **API Source:** [`marketplace_offering_users_posix_identities_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_posix_identities_list.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceOfferingUsersPosixIdentitiesList } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceOfferingUsersPosixIdentitiesList({
-      auth: "Token YOUR_API_TOKEN",
-      query: {
-        "user_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Query Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `created` | string (date-time) |  | Created after |
-    | `created_before` | string (date-time) |  | Created before |
-    | `has_complete_profile` | boolean |  | User has complete profile for the offering |
-    | `has_consent` | boolean |  | User Has Consent |
-    | `is_restricted` | boolean |  | Is restricted |
-    | `modified` | string (date-time) |  | Modified after |
-    | `modified_before` | string (date-time) |  | Modified before |
-    | `o` | array |  | Ordering<br><br> |
-    | `offering` | string (uri) |  |  |
-    | `offering_has_active_tos` | boolean |  | Offering has active Terms of Service |
-    | `offering_slug` | array |  | Multiple values may be separated by commas. |
-    | `offering_uuid` | array |  | Multiple values may be separated by commas. |
-    | `page` | integer |  | A page number within the paginated result set. |
-    | `page_size` | integer |  | Number of results to return per page. |
-    | `parent_offering_uuid` | string (uuid) |  |  |
-    | `provider_uuid` | string (uuid) |  | Provider UUID |
-    | `query` | string |  | Search by offering name, username, user name, UID or primary GID |
-    | `runtime_state` | array |  | Offering user runtime state<br><br> |
-    | `state` | array |  | Offering user state<br><br> |
-    | `user_username` | string |  | User username |
-    | `user_uuid` | string (uuid) | ✓ |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    The response body is an array of objects, where each object has the following structure:
-    
-    | Field | Type |
-    |---|---|
-    | `offering_name` | string |
-    | `offering_uuid` | string |
-    | `namespace` | string |
-    | `value` | integer |
-    | `context` | string |
-    | `pool_uuid` | string |
-
----
-
 ### Get profile field warnings
 
 Returns a mapping of user profile field names to offerings that expose those fields. When ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS is enabled, clearing a field listed here would make the user invisible to the service provider for the associated offerings.
@@ -2627,93 +2255,6 @@ Transitions the state to 'Pending Additional Validation' and allows a service pr
 
     **`200`** - No response body
     
-
----
-
-### Set POSIX attributes for an offering user
-
-Override the login shell, home directory, UID and/or primary GID for a single offering user, taking precedence over the offering-level defaults / the range allocator. UID and primary GID re-point the allocation ledger; values outside every active range are accepted but reported in the response 'warnings'.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/marketplace-offering-users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_posix_attributes/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.offering_user_posix_attributes_request import OfferingUserPosixAttributesRequest # (1)
-    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_set_posix_attributes # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = OfferingUserPosixAttributesRequest()
-    response = marketplace_offering_users_set_posix_attributes.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`OfferingUserPosixAttributesRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_posix_attributes_request.py)
-    2.  **API Source:** [`marketplace_offering_users_set_posix_attributes`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_set_posix_attributes.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceOfferingUsersSetPosixAttributes } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceOfferingUsersSetPosixAttributes({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `login_shell` | string |  | Login shell for this account (LDAP loginShell). |
-    | `home_directory` | string |  | Home directory for this account (LDAP homeDirectory). |
-    | `uidnumber` | integer (int64) |  | Override the account's UID. The value must fall within the offering's POSIX ID pool and is rejected if already allocated. |
-    | `primarygroup` | integer (int64) |  | Override the account's primary GID (see uidnumber). |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `uidnumber` | integer |
-    | `primarygroup` | integer |
-    | `warnings` | array of strings |
 
 ---
 

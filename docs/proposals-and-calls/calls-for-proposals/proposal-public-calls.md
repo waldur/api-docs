@@ -155,8 +155,13 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -323,8 +328,13 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
+    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
+    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
+    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
+    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |

@@ -1,17 +1,5 @@
 # Projects
 
-A **Project** is a workspace within a Customer used to organize cloud resources, manage team access, and track costs for a specific initiative or department. Every resource, such as a virtual machine or a database, must belong to a Project.
-
-This entity acts as a scope for collaboration, allowing a subset of users from the parent Customer to work together with specific permissions.
-
-!!! info "Key Concepts"
-
-    *   **Hierarchical Structure:** Every Project must belong to exactly one Customer. It cannot exist independently.
-    *   **Resource Container:** Projects are the direct parents of all provisioned resources in the cloud.
-    *   **Team Collaboration:** A Project has its own team of members with roles (e.g., Project Manager, Administrator) that are scoped only to that project.
-    *   **Cost Tracking:** While billing is handled by the parent Customer, costs are tracked on a per-project basis, enabling fine-grained financial reporting.
-
-
 ## Operations Summary
 
 | Method | Endpoint | Description |
@@ -113,7 +101,6 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
-    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `customer` | array | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string | Customer abbreviation |
     | `customer_name` | string | Customer name |

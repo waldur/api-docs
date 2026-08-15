@@ -13,7 +13,6 @@
 | <span class="http-badge http-delete">DELETE</span> | `/api/customer-credits/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/customer-credits/{uuid}/consumptions/` | [Get credit consumption history grouped by month](#get-credit-consumption-history-grouped-by-month) |
-| <span class="http-badge http-post">POST</span> | `/api/customer-credits/{uuid}/adjust_withdrawable/` | [Adjust withdrawable](#adjust-withdrawable) |
 | <span class="http-badge http-post">POST</span> | `/api/customer-credits/{uuid}/apply_compensations/` | [Apply compensations](#apply-compensations) |
 | <span class="http-badge http-post">POST</span> | `/api/customer-credits/{uuid}/clear_compensations/` | [Clear compensations](#clear-compensations) |
 
@@ -88,29 +87,28 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) |  |
-    | `customer_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_slug` | string |  |
-    | `offerings` | array of objects |  |
-    | `offerings.uuid` | string (uuid) |  |
-    | `offerings.url` | string (uri) |  |
-    | `offerings.type` | string |  |
-    | `offerings.name` | string |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption` | number (double) |  |
-    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
-    | `allocated_to_projects` | number (double) |  |
-    | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `url` | string (uri) |
+    | `value` | string (decimal) |
+    | `customer` | string (uri) |
+    | `customer_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_slug` | string |
+    | `offerings` | array of objects |
+    | `offerings.uuid` | string (uuid) |
+    | `offerings.url` | string (uri) |
+    | `offerings.type` | string |
+    | `offerings.name` | string |
+    | `end_date` | string (date) |
+    | `expected_consumption` | string (decimal) |
+    | `minimal_consumption` | number (double) |
+    | `minimal_consumption_logic` | string |
+    | `grace_coefficient` | string (decimal) |
+    | `apply_as_minimal_consumption` | boolean |
+    | `allocated_to_projects` | number (double) |
+    | `consumption_last_month` | number (double) |
 
 ---
 
@@ -176,29 +174,28 @@
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) |  |
-    | `customer_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_slug` | string |  |
-    | `offerings` | array of objects |  |
-    | `offerings.uuid` | string (uuid) |  |
-    | `offerings.url` | string (uri) |  |
-    | `offerings.type` | string |  |
-    | `offerings.name` | string |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption` | number (double) |  |
-    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
-    | `allocated_to_projects` | number (double) |  |
-    | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `url` | string (uri) |
+    | `value` | string (decimal) |
+    | `customer` | string (uri) |
+    | `customer_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_slug` | string |
+    | `offerings` | array of objects |
+    | `offerings.uuid` | string (uuid) |
+    | `offerings.url` | string (uri) |
+    | `offerings.type` | string |
+    | `offerings.name` | string |
+    | `end_date` | string (date) |
+    | `expected_consumption` | string (decimal) |
+    | `minimal_consumption` | number (double) |
+    | `minimal_consumption_logic` | string |
+    | `grace_coefficient` | string (decimal) |
+    | `apply_as_minimal_consumption` | boolean |
+    | `allocated_to_projects` | number (double) |
+    | `consumption_last_month` | number (double) |
 
 ---
 
@@ -278,25 +275,24 @@
 
     **`201`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) |  |
-    | `customer_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_slug` | string |  |
-    | `offerings` | array of string (uri)s |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption` | number (double) |  |
-    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
-    | `allocated_to_projects` | number (double) |  |
-    | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `url` | string (uri) |
+    | `value` | string (decimal) |
+    | `customer` | string (uri) |
+    | `customer_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_slug` | string |
+    | `offerings` | array of string (uri)s |
+    | `end_date` | string (date) |
+    | `expected_consumption` | string (decimal) |
+    | `minimal_consumption` | number (double) |
+    | `minimal_consumption_logic` | string |
+    | `grace_coefficient` | string (decimal) |
+    | `apply_as_minimal_consumption` | boolean |
+    | `allocated_to_projects` | number (double) |
+    | `consumption_last_month` | number (double) |
 
 ---
 
@@ -387,25 +383,24 @@
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) |  |
-    | `customer_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_slug` | string |  |
-    | `offerings` | array of string (uri)s |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption` | number (double) |  |
-    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
-    | `allocated_to_projects` | number (double) |  |
-    | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `url` | string (uri) |
+    | `value` | string (decimal) |
+    | `customer` | string (uri) |
+    | `customer_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_slug` | string |
+    | `offerings` | array of string (uri)s |
+    | `end_date` | string (date) |
+    | `expected_consumption` | string (decimal) |
+    | `minimal_consumption` | number (double) |
+    | `minimal_consumption_logic` | string |
+    | `grace_coefficient` | string (decimal) |
+    | `apply_as_minimal_consumption` | boolean |
+    | `allocated_to_projects` | number (double) |
+    | `consumption_last_month` | number (double) |
 
 ---
 
@@ -490,25 +485,24 @@
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) |  |
-    | `customer_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_slug` | string |  |
-    | `offerings` | array of string (uri)s |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption` | number (double) |  |
-    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
-    | `allocated_to_projects` | number (double) |  |
-    | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `url` | string (uri) |
+    | `value` | string (decimal) |
+    | `customer` | string (uri) |
+    | `customer_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_slug` | string |
+    | `offerings` | array of string (uri)s |
+    | `end_date` | string (date) |
+    | `expected_consumption` | string (decimal) |
+    | `minimal_consumption` | number (double) |
+    | `minimal_consumption_logic` | string |
+    | `grace_coefficient` | string (decimal) |
+    | `apply_as_minimal_consumption` | boolean |
+    | `allocated_to_projects` | number (double) |
+    | `consumption_last_month` | number (double) |
 
 ---
 
@@ -666,118 +660,6 @@ Get credit consumption history grouped by month.
     |---|---|
     | `date` | string (date) |
     | `price` | string (decimal) |
-
----
-
-### Adjust withdrawable
-
-Staff adjustment of the withdrawable part of the credit. Records a signed ledger entry with a comment and changes the credit value by the same amount.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/customer-credits/a1b2c3d4-e5f6-7890-abcd-ef1234567890/adjust_withdrawable/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      amount="12.34" \
-      comment="string-value"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.withdrawable_adjustment_request import WithdrawableAdjustmentRequest # (1)
-    from waldur_api_client.api.customer_credits import customer_credits_adjust_withdrawable # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = WithdrawableAdjustmentRequest(
-        amount="12.34",
-        comment="string-value"
-    )
-    response = customer_credits_adjust_withdrawable.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`WithdrawableAdjustmentRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/withdrawable_adjustment_request.py)
-    2.  **API Source:** [`customer_credits_adjust_withdrawable`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_adjust_withdrawable.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { customerCreditsAdjustWithdrawable } from 'waldur-js-client';
-    
-    try {
-      const response = await customerCreditsAdjustWithdrawable({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "amount": "12.34",
-        "comment": "string-value"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `amount` | string (decimal) | ✓ |
-    | `comment` | string | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) |  |
-    | `customer_name` | string |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_slug` | string |  |
-    | `offerings` | array of objects |  |
-    | `offerings.uuid` | string (uuid) |  |
-    | `offerings.url` | string (uri) |  |
-    | `offerings.type` | string |  |
-    | `offerings.name` | string |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption` | number (double) |  |
-    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
-    | `allocated_to_projects` | number (double) |  |
-    | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
 
 ---
 

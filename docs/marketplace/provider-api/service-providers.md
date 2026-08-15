@@ -238,7 +238,6 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `conceal_finished_projects` | boolean |  | Conceal finished projects |
     | `created` | string (date-time) |  | Created after |
     | `created_before` | string (date-time) |  | Created before |
-    | `current_user_has_role` | array |  | Multiple values may be separated by commas. |
     | `customer` | array |  | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string |  | Customer abbreviation |
     | `customer_name` | string |  | Customer name |
@@ -353,7 +352,6 @@ Returns a paginated list of customers who have consumed resources from the speci
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
-    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `field` | array |  |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
@@ -912,8 +910,9 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
-    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
+    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
+    | `plans.components.discounted_price` | string (decimal) |  |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -927,7 +926,6 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `thumbnail` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
-    | `service_provider_can_create_offering_user` | boolean |  |
 
 ---
 
@@ -1123,7 +1121,6 @@ Returns a paginated list of project permissions for all projects that have consu
     | `expiration_time` | string (date-time) |  |
     | `field` | array |  |
     | `full_name` | string | User full name contains |
-    | `is_active` | boolean |  |
     | `modified` | string (date-time) | Modified after |
     | `modified_before` | string (date-time) | Modified before |
     | `native_name` | string |  |
@@ -1360,7 +1357,6 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
-    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `customer` | array | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string | Customer abbreviation |
     | `customer_name` | string | Customer name |
@@ -1963,7 +1959,6 @@ Returns a paginated list of customers that a specified user has access to within
     | `backend_id` | string |  |  |
     | `contact_details` | string |  | Contact details |
     | `current_user_has_project_create_permission` | boolean |  | Return a list of customers where current user has project create permission. |
-    | `current_user_has_role` | array |  | Multiple values may be separated by commas. |
     | `field` | array |  |  |
     | `name` | string |  | Name |
     | `name_exact` | string |  | Name (exact) |
@@ -2150,8 +2145,6 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `organization_vat_code` | string | VAT code of the user's organization |
-    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
     | `civil_number` | string |  |
     | `birth_date` | string (date) |  |

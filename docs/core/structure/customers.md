@@ -1,16 +1,5 @@
 # Customers
 
-A **Customer** (often referred to as an "Organization") is the top-level entity in the platform that represents a legal body or an independent division. It serves as the primary container for billing, user management, and resource ownership.
-
-All projects, resources, and costs are ultimately tied to a Customer. Users are granted permissions within the scope of a Customer or one of its child Projects.
-
-!!! info "Key Concepts"
-
-    *   **Billing Root:** Invoices are generated at the Customer level, aggregating costs from all its projects.
-    *   **Ownership:** A Customer is owned by one or more users who have full administrative control over its properties, team, and projects.
-    *   **Team Management:** Users can be added as team members to a Customer with specific roles (e.g., Owner, Manager), granting them permissions across the entire organization.
-
-
 ## Operations Summary
 
 | Method | Endpoint | Description |
@@ -114,7 +103,6 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
-    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `field` | array |  |
     | `has_resources` | string | Filter by customers with resources. |
     | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
@@ -231,7 +219,6 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
-    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -403,7 +390,6 @@ Fetch the details of a specific customer by its UUID.
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
-    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -616,7 +602,6 @@ A new customer can only be created by users with staff privilege.
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
-    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -919,7 +904,6 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
-    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -1232,7 +1216,6 @@ Partially update the details of an existing customer. Requires customer owner or
     | `payment_profiles.is_active` | boolean |  |
     | `customer_credit` | number (double) |  |
     | `customer_unallocated_credit` | number (double) |  |
-    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
@@ -2415,7 +2398,6 @@ Returns a list of countries that can be used when creating or updating a custome
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
-    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `has_resources` | string | Filter by customers with resources. |
     | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
     | `is_service_provider` | boolean | Filter by customers that are service providers. |
@@ -2708,7 +2690,6 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
     | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
-    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `has_resources` | string | Filter by customers with resources. |
     | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
     | `is_service_provider` | boolean | Filter by customers that are service providers. |

@@ -1,29 +1,5 @@
 # Organization Groups
 
-An **Organization group** is a high-level classification used to group multiple Customers (Organizations) together. It provides an additional layer of administrative structure above the Customer level, allowing for a tree-like, hierarchical organization of customers into groups and sub-groups.
-
-In practice, Organization Groups are a powerful tool for managing access control, applying policies, and generating aggregated reports across specific cohorts of customers.
-
-## Key Functions
-
-* **Control Offering and Plan Visibility**:
-  * **Offerings** can be associated with one or more Organization Groups, making them exclusively available for ordering by Customers within those groups.
-  * Similarly, pricing **Plans** can be restricted to specific Organization Groups. This allows service providers to create custom pricing tiers for different customer segments (e.g., educational institutions, commercial partners).
-
-* **Apply Policies at Scale**:
-  * **Policies**, such as usage limits, can be targeted at an entire Organization Group. This allows for setting and enforcing aggregate consumption limits across all customers belonging to a group, rather than managing them individually.
-
-* **Enable Aggregated Reporting and Analytics**:
-  * The API uses Organization Groups as a key dimension for statistical reporting. You can retrieve aggregated data, such as:
-    * Active resource counts
-    * Component usage metrics
-    * User and project counts for service providers
-  * This provides a high-level overview of usage and activity segmented by customer groups.
-
-* **Manage Service Provider Data Visibility**:
-  * Permissions for service providers can be influenced by Organization Groups. For instance, a provider might gain visibility into user data or other resources related to offerings that are available to the organization groups their customers belong to.
-
-
 ## Operations Summary
 
 | Method | Endpoint | Description |
