@@ -144,7 +144,7 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
@@ -259,7 +259,7 @@ Returns the details of a specific software package, including its description, h
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
@@ -388,7 +388,7 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
@@ -528,7 +528,7 @@ Updates an existing software package. Requires staff permissions.
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |
@@ -659,7 +659,7 @@ Partially updates an existing software package. Requires staff permissions.
     | `versions.targets.target_subtype` | string | Target subtype (microarchitecture, distribution, etc.) |
     | `versions.targets.location` | string | Target location (CVMFS path, download URL, etc.) |
     | `versions.targets.metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
-    | `versions.targets.gpu_architectures` | object (free-form) | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+    | `versions.targets.gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
     | `versions.module` | any |  |
     | `versions.required_modules` | array of anys |  |
     | `versions.extensions` | array of anys |  |

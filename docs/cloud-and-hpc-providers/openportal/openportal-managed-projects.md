@@ -8,6 +8,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/openportal-managed-projects/` | [List all managed projects](#list-all-managed-projects) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-managed-projects/{identifier}/{destination}/` | [Retrieve a managed project](#retrieve-a-managed-project) |
 | **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/openportal-managed-projects/{identifier}/{destination}/add-note/` | [Add note](#add-note) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-managed-projects/{identifier}/{destination}/approve/` | [Approve managed project request](#approve-managed-project-request) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-managed-projects/{identifier}/{destination}/attach/` | [Attach a project to this managed project](#attach-a-project-to-this-managed-project) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-managed-projects/{identifier}/{destination}/detach/` | [Detach the project from this managed project](#detach-the-project-from-this-managed-project) |
@@ -72,6 +73,7 @@ List all managed projects
 
     | Name | Type | Description |
     |---|---|---|
+    | `hide_embargoed` | boolean |  |
     | `identifier` | string |  |
     | `local_identifier` | string |  |
     | `o` | string | Which field to use when ordering the results. |
@@ -101,7 +103,7 @@ List all managed projects
     | `review_comment` | string | Optional comment provided during review |
     | `identifier` | string |  |
     | `destination` | string | The destination used to send instructions from the remote portal. |
-    | `details` | any |  |
+    | `details` | any | Details of the project as provided by the remote OpenPortal. |
     | `project` | string (uri) |  |
     | `project_data` | any |  |
     | `project_template` | string (uri) |  |
@@ -187,7 +189,7 @@ Retrieve a managed project
     | `review_comment` | string | Optional comment provided during review |
     | `identifier` | string |  |
     | `destination` | string | The destination used to send instructions from the remote portal. |
-    | `details` | any |  |
+    | `details` | any | Details of the project as provided by the remote OpenPortal. |
     | `project` | string (uri) |  |
     | `project_data` | any |  |
     | `project_template` | string (uri) |  |
@@ -198,6 +200,110 @@ Retrieve a managed project
 
 ## Other Actions
 
+
+### Add note
+
+Append a note to the managed project. Author and timestamp are set automatically.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openportal-managed-projects/string-value/string-value/add-note/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      text="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.add_managed_project_note_request import AddManagedProjectNoteRequest # (1)
+    from waldur_api_client.api.openportal_managed_projects import openportal_managed_projects_add_note # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = AddManagedProjectNoteRequest(
+        text="string-value"
+    )
+    response = openportal_managed_projects_add_note.sync(
+        destination="string-value",
+        identifier="string-value",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`AddManagedProjectNoteRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/add_managed_project_note_request.py)
+    2.  **API Source:** [`openportal_managed_projects_add_note`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_managed_projects/openportal_managed_projects_add_note.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openportalManagedProjectsAddNote } from 'waldur-js-client';
+    
+    try {
+      const response = await openportalManagedProjectsAddNote({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "destination": "string-value",
+        "identifier": "string-value"
+      },
+      body: {
+        "text": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `destination` | string | ✓ | The destination of the managed project |
+    | `identifier` | string | ✓ | The identifier of the managed project |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `text` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `state` | string |  |
+    | `created` | string (date-time) |  |
+    | `reviewed_at` | string (date-time) | Timestamp when the review was completed |
+    | `reviewed_by_full_name` | string |  |
+    | `reviewed_by_uuid` | string (uuid) |  |
+    | `review_comment` | string | Optional comment provided during review |
+    | `identifier` | string |  |
+    | `destination` | string | The destination used to send instructions from the remote portal. |
+    | `details` | any | Details of the project as provided by the remote OpenPortal. |
+    | `project` | string (uri) |  |
+    | `project_data` | any |  |
+    | `project_template` | string (uri) |  |
+    | `project_template_data` | any |  |
+    | `local_identifier` | string | The local project identifier in this portal. |
+
+---
 
 ### Approve managed project request
 

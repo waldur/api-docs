@@ -64,7 +64,9 @@
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uuid) |  |
+    | `customer_uuid` | string (uuid) | Grants within a customer (uuid): the customer scope plus its projects |
     | `full_name` | string | User full name contains |
+    | `is_active` | boolean |  |
     | `modified` | string (date-time) | Modified after |
     | `modified_before` | string (date-time) | Modified before |
     | `native_name` | string |  |

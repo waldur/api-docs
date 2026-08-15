@@ -82,6 +82,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SHOW_OFFERING_COVER_IMAGE` | boolean |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |
     | `RESTRICTED_OFFERING_VISIBILITY_MODE` | string |
+    | `SERVICE_ACCESS_MODE` | string |
+    | `OPENPORTAL_MEMBERSHIP_SYNC_MODE` | string |
     | `ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT` | boolean |
     | `NOTIFY_STAFF_ABOUT_APPROVALS` | boolean |
     | `NOTIFY_ABOUT_RESOURCE_CHANGE` | boolean |
@@ -93,6 +95,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |
     | `TELEMETRY_URL` | string |
     | `TELEMETRY_VERSION` | integer |
+    | `CHECK_FOR_UPDATES` | boolean |
     | `SCRIPT_RUN_MODE` | string |
     | `DOCKER_CLIENT` | string |
     | `DOCKER_RUN_OPTIONS` | string |
@@ -112,6 +115,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `FULL_PAGE_TITLE` | string |
     | `PROJECT_END_DATE_MANDATORY` | boolean |
     | `AFFILIATION_REQUIRED_AT_PROJECT_CREATION` | boolean |
+    | `PROJECT_NAME_REGEX` | string |
+    | `PROJECT_NAME_REGEX_ERROR_MESSAGE` | string |
     | `ENABLE_ORDER_START_DATE` | boolean |
     | `BRAND_COLOR` | string |
     | `HERO_LINK_LABEL` | string |
@@ -143,6 +148,12 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `WALDUR_SUPPORT_ENABLED` | boolean |
     | `WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE` | string |
     | `WALDUR_SUPPORT_DISPLAY_REQUEST_TYPE` | boolean |
+    | `WALDUR_SUPPORT_PROVIDER_ROUTING_ENABLED` | boolean |
+    | `WALDUR_SUPPORT_AUTO_ASSIGN` | boolean |
+    | `WALDUR_SUPPORT_AUTO_ASSIGN_STRATEGY` | string |
+    | `WALDUR_SUPPORT_SLA_ENABLED` | boolean |
+    | `WALDUR_SUPPORT_SLA_RESPONSE_HOURS` | integer |
+    | `WALDUR_SUPPORT_SLA_RESOLUTION_HOURS` | integer |
     | `ATLASSIAN_MAP_WALDUR_USERS_TO_SERVICEDESK_AGENTS` | boolean |
     | `ATLASSIAN_API_URL` | string (uri) |
     | `ATLASSIAN_USERNAME` | string |
@@ -234,6 +245,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SCIM_INBOUND_ENABLED` | boolean |
     | `SCIM_INBOUND_SOURCE_NAME` | string |
     | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |
+    | `SCIM_INBOUND_SSH_KEYS_ENABLED` | boolean |
     | `SCIM_PULL_API_URL` | string |
     | `SCIM_PULL_API_KEY` | string |
     | `SCIM_PULL_SOURCE_NAME` | string |
@@ -248,6 +260,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `OIDC_ACCESS_TOKEN_ENABLED` | boolean |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS_RESPONSE_MESSAGE` | string |
+    | `OIDC_BLOCKED_LOGIN_RESPONSE_MESSAGE` | string |
+    | `OIDC_ALLOWED_USER_EMAIL_PATTERNS` | array of strings |
     | `OIDC_MATCHMAKING_BY_EMAIL` | boolean |
     | `OIDC_DEFAULT_LOGOUT_URL` | string (uri) |
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |
@@ -278,6 +292,11 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ONBOARDING_BOLAGSVERKET_CLIENT_ID` | string |
     | `ONBOARDING_BOLAGSVERKET_CLIENT_SECRET` | string |
     | `ONBOARDING_BREG_API_URL` | string (uri) |
+    | `ONBOARDING_DNB_API_URL` | string (uri) |
+    | `ONBOARDING_DNB_RTS_API_URL` | string (uri) |
+    | `ONBOARDING_DNB_TOKEN_URL` | string (uri) |
+    | `ONBOARDING_DNB_CLIENT_ID` | string |
+    | `ONBOARDING_DNB_CLIENT_SECRET` | string |
     | `AI_ASSISTANT_ENABLED` | boolean |
     | `AI_ASSISTANT_ENABLED_ROLES` | string |
     | `AI_ASSISTANT_BACKEND_TYPE` | string |
@@ -319,6 +338,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `TABLE_GROWTH_MONTHLY_THRESHOLD_PERCENT` | integer |
     | `TABLE_GROWTH_RETENTION_DAYS` | integer |
     | `TABLE_GROWTH_MIN_SIZE_BYTES` | integer |
+    | `USER_REVISION_RETENTION_DAYS` | integer |
+    | `USER_REVISION_KEEP_MINIMUM` | integer |
     | `USER_ACTIONS_ENABLED` | boolean |
     | `USER_ACTIONS_PENDING_ORDER_HOURS` | integer |
     | `USER_ACTIONS_HIGH_URGENCY_NOTIFICATION` | boolean |
@@ -339,11 +360,15 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |
     | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of anys |
+    | `FEDERATED_IDENTITY_AUTHORITATIVE_ISD` | string |
+    | `FEDERATED_IDENTITY_LOCKED_FIELDS` | array of anys |
     | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |
     | `ENABLE_PROJECT_DIGEST` | boolean |
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |
     | `ENABLED_REPORTING_SCREENS` | array of anys |
+    | `POSIX_ID_POOL_UTILIZATION_THRESHOLD` | integer |
+    | `AFFILIATES_ENABLED` | boolean |
     | `MATRIX_ENABLED` | boolean |
     | `MATRIX_HOMESERVER_URL` | string (uri) |
     | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |
@@ -364,6 +389,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `PAT_ENABLED` | boolean |
     | `PAT_MAX_LIFETIME_DAYS` | integer |
     | `PAT_MAX_TOKENS_PER_USER` | integer |
+    | `PAT_MAX_ACL_ENTRIES` | integer |
+    | `PAT_MAX_AUDIT_EVENTS_PER_HOUR` | integer |
 
 ---
 
@@ -444,6 +471,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SHOW_OFFERING_COVER_IMAGE` | boolean |  |
     | `ANONYMOUS_USER_CAN_VIEW_PLANS` | boolean |  |
     | `RESTRICTED_OFFERING_VISIBILITY_MODE` | string |  |
+    | `SERVICE_ACCESS_MODE` | string |  |
+    | `OPENPORTAL_MEMBERSHIP_SYNC_MODE` | string |  |
     | `ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT` | boolean |  |
     | `NOTIFY_STAFF_ABOUT_APPROVALS` | boolean |  |
     | `NOTIFY_ABOUT_RESOURCE_CHANGE` | boolean |  |
@@ -455,6 +484,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |  |
     | `TELEMETRY_URL` | string |  |
     | `TELEMETRY_VERSION` | integer |  |
+    | `CHECK_FOR_UPDATES` | boolean |  |
     | `SCRIPT_RUN_MODE` | string |  |
     | `DOCKER_CLIENT` | string |  |
     | `DOCKER_RUN_OPTIONS` | string |  |
@@ -474,6 +504,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `FULL_PAGE_TITLE` | string |  |
     | `PROJECT_END_DATE_MANDATORY` | boolean |  |
     | `AFFILIATION_REQUIRED_AT_PROJECT_CREATION` | boolean |  |
+    | `PROJECT_NAME_REGEX` | string |  |
+    | `PROJECT_NAME_REGEX_ERROR_MESSAGE` | string |  |
     | `ENABLE_ORDER_START_DATE` | boolean |  |
     | `BRAND_COLOR` | string |  |
     | `HERO_LINK_LABEL` | string |  |
@@ -505,6 +537,12 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `WALDUR_SUPPORT_ENABLED` | boolean |  |
     | `WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE` | string |  |
     | `WALDUR_SUPPORT_DISPLAY_REQUEST_TYPE` | boolean |  |
+    | `WALDUR_SUPPORT_PROVIDER_ROUTING_ENABLED` | boolean |  |
+    | `WALDUR_SUPPORT_AUTO_ASSIGN` | boolean |  |
+    | `WALDUR_SUPPORT_AUTO_ASSIGN_STRATEGY` | string |  |
+    | `WALDUR_SUPPORT_SLA_ENABLED` | boolean |  |
+    | `WALDUR_SUPPORT_SLA_RESPONSE_HOURS` | integer |  |
+    | `WALDUR_SUPPORT_SLA_RESOLUTION_HOURS` | integer |  |
     | `ATLASSIAN_MAP_WALDUR_USERS_TO_SERVICEDESK_AGENTS` | boolean |  |
     | `ATLASSIAN_API_URL` | string (uri) |  |
     | `ATLASSIAN_USERNAME` | string |  |
@@ -596,6 +634,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SCIM_INBOUND_ENABLED` | boolean |  |
     | `SCIM_INBOUND_SOURCE_NAME` | string |  |
     | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |  |
+    | `SCIM_INBOUND_SSH_KEYS_ENABLED` | boolean |  |
     | `SCIM_PULL_API_URL` | string |  |
     | `SCIM_PULL_API_KEY` | string |  |
     | `SCIM_PULL_SOURCE_NAME` | string |  |
@@ -610,6 +649,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `OIDC_ACCESS_TOKEN_ENABLED` | boolean |  |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |  |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS_RESPONSE_MESSAGE` | string |  |
+    | `OIDC_BLOCKED_LOGIN_RESPONSE_MESSAGE` | string |  |
+    | `OIDC_ALLOWED_USER_EMAIL_PATTERNS` | array of strings |  |
     | `OIDC_MATCHMAKING_BY_EMAIL` | boolean |  |
     | `OIDC_DEFAULT_LOGOUT_URL` | string (uri) |  |
     | `DEACTIVATE_USER_IF_NO_ROLES` | boolean |  |
@@ -640,6 +681,11 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ONBOARDING_BOLAGSVERKET_CLIENT_ID` | string |  |
     | `ONBOARDING_BOLAGSVERKET_CLIENT_SECRET` | string |  |
     | `ONBOARDING_BREG_API_URL` | string (uri) |  |
+    | `ONBOARDING_DNB_API_URL` | string (uri) |  |
+    | `ONBOARDING_DNB_RTS_API_URL` | string (uri) |  |
+    | `ONBOARDING_DNB_TOKEN_URL` | string (uri) |  |
+    | `ONBOARDING_DNB_CLIENT_ID` | string |  |
+    | `ONBOARDING_DNB_CLIENT_SECRET` | string |  |
     | `AI_ASSISTANT_ENABLED` | boolean |  |
     | `AI_ASSISTANT_ENABLED_ROLES` | string |  |
     | `AI_ASSISTANT_BACKEND_TYPE` | string |  |
@@ -681,6 +727,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `TABLE_GROWTH_MONTHLY_THRESHOLD_PERCENT` | integer |  |
     | `TABLE_GROWTH_RETENTION_DAYS` | integer |  |
     | `TABLE_GROWTH_MIN_SIZE_BYTES` | integer |  |
+    | `USER_REVISION_RETENTION_DAYS` | integer |  |
+    | `USER_REVISION_KEEP_MINIMUM` | integer |  |
     | `USER_ACTIONS_ENABLED` | boolean |  |
     | `USER_ACTIONS_PENDING_ORDER_HOURS` | integer |  |
     | `USER_ACTIONS_HIGH_URGENCY_NOTIFICATION` | boolean |  |
@@ -701,11 +749,15 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |  |
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |  |
     | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of anys |  |
+    | `FEDERATED_IDENTITY_AUTHORITATIVE_ISD` | string |  |
+    | `FEDERATED_IDENTITY_LOCKED_FIELDS` | array of anys |  |
     | `FEDERATED_IDENTITY_DEACTIVATION_POLICY` | string |  |
     | `ENABLE_PROJECT_DIGEST` | boolean |  |
     | `SSH_KEY_ALLOWED_TYPES` | array of anys |  |
     | `SSH_KEY_MIN_RSA_KEY_SIZE` | integer |  |
     | `ENABLED_REPORTING_SCREENS` | array of anys |  |
+    | `POSIX_ID_POOL_UTILIZATION_THRESHOLD` | integer |  |
+    | `AFFILIATES_ENABLED` | boolean |  |
     | `MATRIX_ENABLED` | boolean |  |
     | `MATRIX_HOMESERVER_URL` | string (uri) |  |
     | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |  |
@@ -726,6 +778,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `PAT_ENABLED` | boolean |  |
     | `PAT_MAX_LIFETIME_DAYS` | integer |  |
     | `PAT_MAX_TOKENS_PER_USER` | integer |  |
+    | `PAT_MAX_ACL_ENTRIES` | integer |  |
+    | `PAT_MAX_AUDIT_EVENTS_PER_HOUR` | integer |  |
 
 
 === "Responses"

@@ -79,24 +79,31 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync/` | [Synchronize offering service settings](#synchronize-offering-service-settings) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/sync_resources/` | [Synchronize offering resources](#synchronize-offering-resources) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/access_subnets/` | [List access subnets for an offering](#list-access-subnets-for-an-offering) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/aggregated_access_subnets/` | [Aggregate access subnets across offerings](#aggregate-access-subnets-across-offerings) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/effective_posix_id_pool/` | [Effective POSIX ID pool](#effective-posix-id-pool) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/glauth_tree/` | [Get structured GLauth tree for an offering](#get-structured-glauth-tree-for-an-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/state_counters/` | [Get offering resource and user state counters](#get-offering-resource-and-user-state-counters) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/user-attribute-config/` | [Get user attribute config](#get-user-attribute-config) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/add_qos/` | [Add a QoS profile to an offering](#add-a-qos-profile-to-an-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/check_unique_backend_id/` | [Check if backend_id is unique](#check-if-backend_id-is-unique) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/delete_tags/` | [Delete tags for offering](#delete-tags-for-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/export_offering/` | [Export offering data](#export-offering-data) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/import_offering/` | [Import offering data](#import-offering-data) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_available/` | [Mark an offering as available](#mark-an-offering-as-available) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_unavailable/` | [Mark an offering as unavailable](#mark-an-offering-as-unavailable) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/remove_qos/` | [Remove a QoS profile from an offering](#remove-a-qos-profile-from-an-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/set_offering_group/` | [Assign or clear the offering group](#assign-or-clear-the-offering-group) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/set_partition_qos/` | [Set the QoS allow-list of a partition](#set-the-qos-allow-list-of-a-partition) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/set_profile/` | [Bind / unbind offering to a service profile](#bind--unbind-offering-to-a-service-profile) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/switch_billing_mode/` | [Switch billing mode for builtin components](#switch-billing-mode-for-builtin-components) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/` | [Update offering backend_id rules](#update-offering-backend_id-rules) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_tags/` | [Update tags for offering](#update-tags-for-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_type/` | [Swap offering type](#swap-offering-type) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/upload_markdown_image/` | [Upload markdown image](#upload-markdown-image) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-provider-offerings/{uuid}/update_qos/` | [Update a QoS profile of an offering](#update-a-qos-profile-of-an-offering) |
 
 ---
 ## Core CRUD
@@ -160,13 +167,15 @@ Returns a paginated list of offerings for the provider.
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -183,6 +192,7 @@ Returns a paginated list of offerings for the provider.
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -229,11 +239,15 @@ Returns a paginated list of offerings for the provider.
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
     | `endpoints.url` | string | URL of the access endpoint |
+    | `default_access_subnets` | array of objects |  |
+    | `default_access_subnets.uuid` | string (uuid) |  |
+    | `default_access_subnets.inet` | string |  |
+    | `default_access_subnets.description` | string |  |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -259,7 +273,28 @@ Returns a paginated list of offerings for the provider.
     | `partitions.exclusive_user` | boolean | Exclusive user access required |
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
+    | `partitions.qos_options` | array of objects |  |
+    | `partitions.qos_options.uuid` | string (uuid) |  |
+    | `partitions.qos_options.qos` | string (uuid) |  |
+    | `partitions.qos_options.qos_name` | string |  |
+    | `partitions.qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
+    | `qos_profiles` | array of objects |  |
+    | `qos_profiles.uuid` | string (uuid) |  |
+    | `qos_profiles.name` | string | Name of the SLURM QOS. |
+    | `qos_profiles.description` | string |  |
+    | `qos_profiles.max_nodes` | integer | Maximum nodes per job |
+    | `qos_profiles.min_nodes` | integer | Minimum nodes per job |
+    | `qos_profiles.default_time` | integer | Default time limit in minutes |
+    | `qos_profiles.max_time` | integer | Maximum wall time in minutes |
+    | `qos_profiles.grace_time` | integer | Preemption grace time in seconds |
+    | `qos_profiles.priority` | integer | Scheduling priority |
+    | `qos_profiles.grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `qos_profiles.max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -337,9 +372,8 @@ Returns a paginated list of offerings for the provider.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -506,11 +540,15 @@ Returns details of a specific provider offering.
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
     | `endpoints.url` | string | URL of the access endpoint |
+    | `default_access_subnets` | array of objects |  |
+    | `default_access_subnets.uuid` | string (uuid) |  |
+    | `default_access_subnets.inet` | string |  |
+    | `default_access_subnets.description` | string |  |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -536,7 +574,28 @@ Returns details of a specific provider offering.
     | `partitions.exclusive_user` | boolean | Exclusive user access required |
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
+    | `partitions.qos_options` | array of objects |  |
+    | `partitions.qos_options.uuid` | string (uuid) |  |
+    | `partitions.qos_options.qos` | string (uuid) |  |
+    | `partitions.qos_options.qos_name` | string |  |
+    | `partitions.qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
+    | `qos_profiles` | array of objects |  |
+    | `qos_profiles.uuid` | string (uuid) |  |
+    | `qos_profiles.name` | string | Name of the SLURM QOS. |
+    | `qos_profiles.description` | string |  |
+    | `qos_profiles.max_nodes` | integer | Maximum nodes per job |
+    | `qos_profiles.min_nodes` | integer | Minimum nodes per job |
+    | `qos_profiles.default_time` | integer | Default time limit in minutes |
+    | `qos_profiles.max_time` | integer | Maximum wall time in minutes |
+    | `qos_profiles.grace_time` | integer | Preemption grace time in seconds |
+    | `qos_profiles.priority` | integer | Scheduling priority |
+    | `qos_profiles.grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `qos_profiles.max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -614,9 +673,8 @@ Returns details of a specific provider offering.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -816,15 +874,24 @@ Creates a new provider offering.
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
+    | `plugin_options.disable_grace_period` | boolean |  | If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option. |
+    | `plugin_options.action_on_usage_limit` | any |  | If set to 'pause' or 'downscale', resources are automatically paused or downscaled when reported usage in the current period reaches a component's limit_amount, and the restriction is lifted when usage drops below the limit again (e.g. a new billing period or a raised limit). |
     | `plugin_options.minimal_team_count_for_provisioning` | integer |  | Minimal team count required for provisioning of resources |
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
     | `plugin_options.unique_resource_per_attribute` | string |  | Attribute name to enforce uniqueness per value. E.g., 'storage_data_type' ensures only one resource per storage type per project. |
     | `plugin_options.required_team_role_for_provisioning` | string |  | Required user role in a project for provisioning of resources |
+    | `plugin_options.restricted_to_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') allowed to view and order this offering. When set, the offering is hidden from the catalog for other users and they cannot create orders for it. Whether their orders skip consumer review still depends on the role having the order-approval permission. |
+    | `plugin_options.auto_approve_for_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') whose orders skip consumer review for this offering. The creator must hold the role on the target project or its organization. Independent of restricted_to_roles (which governs visibility/ordering) and of the ORDER.APPROVE permission. Provider review and purchase-order requirements still apply. Only staff can change this option. |
     | `plugin_options.enable_purchase_order_upload` | boolean |  | If set to True, users will be able to upload purchase orders. |
     | `plugin_options.require_purchase_order_upload` | boolean |  | If set to True, users will be required to upload purchase orders. |
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
+    | `plugin_options.enable_resource_end_date_change_requests` | boolean |  | If set to True, users without RESOURCE.SET_END_DATE can request an end date change, and holders of that permission approve or reject. Approval writes the date directly; no order is created. Requests are published as events so an external approval system can decide instead. Not applicable to prepaid offerings, which extend through renewal instead. |
     | `plugin_options.enable_resource_projects` | boolean |  | Enable sub-project management within resources. |
+    | `plugin_options.enable_membership_sync_status` | boolean |  | Enable per-member sync status reporting by the site agent: team views show whether each role grant has propagated to the provider backend, and providers can trigger a resync. |
+    | `plugin_options.enable_resource_access_subnets` | boolean |  | If set to True, an Access subnets tab is shown on resource detail pages, letting consumers curate the IPs allowed to reach the backend entity. The list is advisory data for external firewalls. |
+    | `plugin_options.conceal_subnet_restricted_resources` | boolean |  | If set to True, a resource of this offering that has access subnets is hidden from the consumer API unless the caller's IP is in the resource's allow-list. Staff and support are exempt; resources without any subnet stay visible. |
+    | `plugin_options.resource_projects_limit_policy` | any |  | How parent resource limits are enforced on child resource projects: 'none' (accepted as-is, default), 'per_project' (each resource project limit must be within the parent resource limit), or 'aggregate' (the sum of all resource project limits must be within the parent limit). |
     | `plugin_options.auto_ok_resource_projects` | boolean |  | If set to True, newly-created resource projects are immediately transitioned from CREATING to OK on save, bypassing the provider/site-agent reconciliation callback. Use for offerings that have no external backend to reconcile against. |
     | `plugin_options.resource_projects_limits_required` | boolean |  | If set to True, every limit-billing component declared by the offering must have a value when creating or updating a resource project. Use this for backends that reject projects without resource quotas (e.g. the rancher-keycloak-operator's project-level resourceQuota.limit cap). |
     | `plugin_options.create_orders_on_resource_project_change` | boolean |  | If set to True, create orders when resource projects are created, updated or deleted. |
@@ -843,6 +910,7 @@ Creates a new provider offering.
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
+    | `plugin_options.billing_source` | any |  | Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes). |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
@@ -850,16 +918,18 @@ Creates a new provider offering.
     | `plugin_options.homedir_prefix` | string |  | GLAuth homedir prefix<br>_Constraints: default: `/home/`_ |
     | `plugin_options.scratch_project_directory` | string |  | HEAppE scratch project directory |
     | `plugin_options.project_permanent_directory` | string |  | HEAppE project permanent directory |
-    | `plugin_options.initial_primarygroup_number` | integer |  | GLAuth initial primary group number<br>_Constraints: default: `5000`_ |
-    | `plugin_options.initial_uidnumber` | integer |  | GLAuth initial uidnumber<br>_Constraints: default: `5000`_ |
-    | `plugin_options.initial_usergroup_number` | integer |  | GLAuth initial usergroup number<br>_Constraints: default: `6000`_ |
-    | `plugin_options.initial_rolegroup_number` | integer |  | GLAuth initial gid for role-aware groups (one per (resource|resource-project, role) tuple). Must leave at least 50000 gids of headroom above initial_usergroup_number to avoid collisions.<br>_Constraints: default: `60000`_ |
+    | `plugin_options.enable_posix_account` | boolean |  | Manage a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for this offering's users. Disable for offerings that only need a username.<br>_Constraints: default: `True`_ |
     | `plugin_options.resource_role_map` | object (free-form) |  | Mapping of Waldur role names (on Resource scope) to emitted role tokens used in group name rendering. Roles outside the map are skipped. Example: {"PI": "admin", "Member": "member"}. |
     | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
     | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
     | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
     | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
     | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
+    | `plugin_options.login_shell` | string |  | Default login shell assigned to GLAuth/LDAP accounts.<br>_Constraints: default: `/bin/bash`_ |
+    | `plugin_options.uid_source` | any |  | Where each offering user's UID comes from: allocated from the POSIX ID pool (default), or taken from the user's uid_number attribute (e.g. an OIDC claim). Pair 'user_attribute' with a GID-only pool to avoid UID collisions.<br>_Constraints: default: `pool`_ |
+    | `plugin_options.gid_source` | any |  | Where each offering user's primary GID comes from: the POSIX ID pool (default), or the user's primary_gid attribute.<br>_Constraints: default: `pool`_ |
+    | `plugin_options.emit_display_name` | boolean |  | Emit the user's full name as a GLAuth displayName custom attribute (rendered to LDAP displayName).<br>_Constraints: default: `False`_ |
+    | `plugin_options.emit_waldur_username` | boolean |  | Emit the Waldur username as a GLAuth waldurUsername custom attribute, alongside the generated POSIX login name.<br>_Constraints: default: `False`_ |
     | `plugin_options.enable_issues_for_membership_changes` | boolean |  | Enable issues for membership changes |
     | `plugin_options.deployment_mode` | any |  | Rancher deployment mode |
     | `plugin_options.flavors_regex` | string |  | Regular expression to limit flavors list |
@@ -882,12 +952,14 @@ Creates a new provider offering.
     | `plugin_options.account_name_generation_policy` | any |  | Slurm account name generation policy |
     | `plugin_options.enable_display_of_order_actions_for_service_provider` | boolean |  | Enable display of order actions for service provider<br>_Constraints: default: `True`_ |
     | `plugin_options.slurm_periodic_policy_enabled` | boolean |  | Enable SLURM periodic usage policy configuration. When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.<br>_Constraints: default: `False`_ |
+    | `plugin_options.enforce_qos` | boolean |  | When enabled, the site agent enforces the offering's QoS selection by granting the chosen QoS on the SLURM association (QosLevel/DefaultQOS). When disabled (default), QoS is informational only — profiles are shown and the selection is recorded on the resource, but the agent does not touch SLURM QoS. The agent config may override this per deployment.<br>_Constraints: default: `False`_ |
     | `plugin_options.auto_approve_marketplace_script` | boolean |  | If set to False, all orders require manual provider approval, including for service provider owners and staff<br>_Constraints: default: `True`_ |
     | `plugin_options.highlight_backend_id_display` | boolean |  | Defines if backend_id should be shown more prominently by the UI<br>_Constraints: default: `False`_ |
     | `plugin_options.backend_id_display_label` | string |  | Label used by UI for showing value of the backend_id<br>_Constraints: default: `Backend ID`_ |
     | `plugin_options.require_effective_id_for_highlighted_display` | boolean |  | If set to True, highlighted backend ID display is only shown when the resource has an effective_id.<br>_Constraints: default: `False`_ |
     | `plugin_options.expose_inference_playground` | boolean |  | Show an in-browser inference playground action for resources of this offering (for offerings whose resources expose an OpenAI-compatible endpoint).<br>_Constraints: default: `False`_ |
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
+    | `plugin_options.show_ssh_key_loss_warning` | boolean |  | Show a warning about unrecoverable loss of the SSH private key on the OpenStack instance order form.<br>_Constraints: default: `False`_ |
     | `vendor_details` | string |  |  |
     | `getting_started` | string |  |  |
     | `integration_guide` | string |  |  |
@@ -938,11 +1010,15 @@ Creates a new provider offering.
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
     | `endpoints.url` | string | URL of the access endpoint |
+    | `default_access_subnets` | array of objects |  |
+    | `default_access_subnets.uuid` | string (uuid) |  |
+    | `default_access_subnets.inet` | string |  |
+    | `default_access_subnets.description` | string |  |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -968,7 +1044,28 @@ Creates a new provider offering.
     | `partitions.exclusive_user` | boolean | Exclusive user access required |
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
+    | `partitions.qos_options` | array of objects |  |
+    | `partitions.qos_options.uuid` | string (uuid) |  |
+    | `partitions.qos_options.qos` | string (uuid) |  |
+    | `partitions.qos_options.qos_name` | string |  |
+    | `partitions.qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
+    | `qos_profiles` | array of objects |  |
+    | `qos_profiles.uuid` | string (uuid) |  |
+    | `qos_profiles.name` | string | Name of the SLURM QOS. |
+    | `qos_profiles.description` | string |  |
+    | `qos_profiles.max_nodes` | integer | Maximum nodes per job |
+    | `qos_profiles.min_nodes` | integer | Minimum nodes per job |
+    | `qos_profiles.default_time` | integer | Default time limit in minutes |
+    | `qos_profiles.max_time` | integer | Maximum wall time in minutes |
+    | `qos_profiles.grace_time` | integer | Preemption grace time in seconds |
+    | `qos_profiles.priority` | integer | Scheduling priority |
+    | `qos_profiles.grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `qos_profiles.max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -1046,9 +1143,8 @@ Creates a new provider offering.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -1717,13 +1813,15 @@ Returns a paginated list of course accounts for projects that have resources of 
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -1739,6 +1837,7 @@ Returns a paginated list of course accounts for projects that have resources of 
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -1861,13 +1960,15 @@ Returns a paginated list of customer-level service accounts for customers who ha
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -1883,6 +1984,7 @@ Returns a paginated list of customer-level service accounts for customers who ha
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -2037,19 +2139,27 @@ Returns a paginated list of users who have access to resources of this offering.
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
+    | `permissions.user_username` | string |  |
+    | `permissions.user_email` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -2079,7 +2189,11 @@ Returns a paginated list of users who have access to resources of this offering.
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -2159,13 +2273,15 @@ Returns a paginated list of project-level service accounts for projects that hav
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -2181,6 +2297,7 @@ Returns a paginated list of project-level service accounts for projects that hav
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -2309,7 +2426,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `o` | array | Ordering fields |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `role` | string (uuid) | Role UUID or name |
+    | `role` | array | Role UUID or name. Repeat to filter by several roles. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -2850,6 +2967,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
+    | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -2865,6 +2984,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -2885,6 +3006,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
+    | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -2900,6 +3023,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -2984,6 +3109,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
+    | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -2999,6 +3126,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -3019,6 +3148,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
+    | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3034,6 +3165,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -3118,6 +3251,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
+    | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3133,6 +3268,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `offering` | string (uuid) |  |
 
 
@@ -3153,6 +3290,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
+    | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -3168,6 +3307,8 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
@@ -3696,6 +3837,11 @@ Adds a new partition configuration to an offering.
     | `exclusive_user` | boolean | Exclusive user access required |
     | `priority_tier` | integer | Priority tier for scheduling and preemption |
     | `qos` | string | Quality of Service (QOS) name |
+    | `qos_options` | array of objects |  |
+    | `qos_options.uuid` | string (uuid) |  |
+    | `qos_options.qos` | string (uuid) |  |
+    | `qos_options.qos_name` | string |  |
+    | `qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `req_resv` | boolean | Require reservation for job allocation |
 
 ---
@@ -3780,8 +3926,8 @@ Associates a software catalog with an offering and configures enabled CPU archit
     |---|---|---|---|
     | `offering` | string (uuid) | ✓ |  |
     | `catalog` | string (uuid) | ✓ |  |
-    | `enabled_cpu_family` | object (free-form) |  | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `enabled_cpu_microarchitectures` | object (free-form) |  | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `enabled_cpu_family` | array of strings |  | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `enabled_cpu_microarchitectures` | array of strings |  | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `partition` | string (uuid) |  |  |
 
 
@@ -4091,6 +4237,11 @@ Updates the configuration of an existing partition associated with an offering.
     | `exclusive_user` | boolean | Exclusive user access required |
     | `priority_tier` | integer | Priority tier for scheduling and preemption |
     | `qos` | string | Quality of Service (QOS) name |
+    | `qos_options` | array of objects |  |
+    | `qos_options.uuid` | string (uuid) |  |
+    | `qos_options.qos` | string (uuid) |  |
+    | `qos_options.qos_name` | string |  |
+    | `qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `req_resv` | boolean | Require reservation for job allocation |
 
 ---
@@ -4166,8 +4317,8 @@ Updates the configuration of a software catalog associated with an offering, suc
     |---|---|---|---|
     | `offering_catalog_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
     | `catalog` | string (uuid) |  |  |
-    | `enabled_cpu_family` | object (free-form) |  | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `enabled_cpu_microarchitectures` | object (free-form) |  | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `enabled_cpu_family` | array of strings |  | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `enabled_cpu_microarchitectures` | array of strings |  | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `partition` | string (uuid) |  |  |
 
 
@@ -4185,8 +4336,8 @@ Updates the configuration of a software catalog associated with an offering, suc
     | `offering_name` | string |  |
     | `catalog_name` | string |  |
     | `catalog_version` | string |  |
-    | `enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `partition` | string (uuid) |  |
     | `partition_name` | string |  |
 
@@ -4852,11 +5003,15 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
     | `endpoints.url` | string | URL of the access endpoint |
+    | `default_access_subnets` | array of objects |  |
+    | `default_access_subnets.uuid` | string (uuid) |  |
+    | `default_access_subnets.inet` | string |  |
+    | `default_access_subnets.description` | string |  |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -4882,7 +5037,28 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `partitions.exclusive_user` | boolean | Exclusive user access required |
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
+    | `partitions.qos_options` | array of objects |  |
+    | `partitions.qos_options.uuid` | string (uuid) |  |
+    | `partitions.qos_options.qos` | string (uuid) |  |
+    | `partitions.qos_options.qos_name` | string |  |
+    | `partitions.qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
+    | `qos_profiles` | array of objects |  |
+    | `qos_profiles.uuid` | string (uuid) |  |
+    | `qos_profiles.name` | string | Name of the SLURM QOS. |
+    | `qos_profiles.description` | string |  |
+    | `qos_profiles.max_nodes` | integer | Maximum nodes per job |
+    | `qos_profiles.min_nodes` | integer | Minimum nodes per job |
+    | `qos_profiles.default_time` | integer | Default time limit in minutes |
+    | `qos_profiles.max_time` | integer | Maximum wall time in minutes |
+    | `qos_profiles.grace_time` | integer | Preemption grace time in seconds |
+    | `qos_profiles.priority` | integer | Scheduling priority |
+    | `qos_profiles.grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `qos_profiles.max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -4958,9 +5134,8 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -5028,6 +5203,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
+    | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
     | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
@@ -5482,15 +5658,24 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
+    | `plugin_options.disable_grace_period` | boolean |  | If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option. |
+    | `plugin_options.action_on_usage_limit` | any |  | If set to 'pause' or 'downscale', resources are automatically paused or downscaled when reported usage in the current period reaches a component's limit_amount, and the restriction is lifted when usage drops below the limit again (e.g. a new billing period or a raised limit). |
     | `plugin_options.minimal_team_count_for_provisioning` | integer |  | Minimal team count required for provisioning of resources |
     | `plugin_options.maximal_resource_count_per_project` | integer |  | Maximal number of offering resources allowed per project |
     | `plugin_options.unique_resource_per_attribute` | string |  | Attribute name to enforce uniqueness per value. E.g., 'storage_data_type' ensures only one resource per storage type per project. |
     | `plugin_options.required_team_role_for_provisioning` | string |  | Required user role in a project for provisioning of resources |
+    | `plugin_options.restricted_to_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') allowed to view and order this offering. When set, the offering is hidden from the catalog for other users and they cannot create orders for it. Whether their orders skip consumer review still depends on the role having the order-approval permission. |
+    | `plugin_options.auto_approve_for_roles` | array of strings |  | List of project or organization role names (e.g. 'PROJECT.MANAGER') whose orders skip consumer review for this offering. The creator must hold the role on the target project or its organization. Independent of restricted_to_roles (which governs visibility/ordering) and of the ORDER.APPROVE permission. Provider review and purchase-order requirements still apply. Only staff can change this option. |
     | `plugin_options.enable_purchase_order_upload` | boolean |  | If set to True, users will be able to upload purchase orders. |
     | `plugin_options.require_purchase_order_upload` | boolean |  | If set to True, users will be required to upload purchase orders. |
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
+    | `plugin_options.enable_resource_end_date_change_requests` | boolean |  | If set to True, users without RESOURCE.SET_END_DATE can request an end date change, and holders of that permission approve or reject. Approval writes the date directly; no order is created. Requests are published as events so an external approval system can decide instead. Not applicable to prepaid offerings, which extend through renewal instead. |
     | `plugin_options.enable_resource_projects` | boolean |  | Enable sub-project management within resources. |
+    | `plugin_options.enable_membership_sync_status` | boolean |  | Enable per-member sync status reporting by the site agent: team views show whether each role grant has propagated to the provider backend, and providers can trigger a resync. |
+    | `plugin_options.enable_resource_access_subnets` | boolean |  | If set to True, an Access subnets tab is shown on resource detail pages, letting consumers curate the IPs allowed to reach the backend entity. The list is advisory data for external firewalls. |
+    | `plugin_options.conceal_subnet_restricted_resources` | boolean |  | If set to True, a resource of this offering that has access subnets is hidden from the consumer API unless the caller's IP is in the resource's allow-list. Staff and support are exempt; resources without any subnet stay visible. |
+    | `plugin_options.resource_projects_limit_policy` | any |  | How parent resource limits are enforced on child resource projects: 'none' (accepted as-is, default), 'per_project' (each resource project limit must be within the parent resource limit), or 'aggregate' (the sum of all resource project limits must be within the parent limit). |
     | `plugin_options.auto_ok_resource_projects` | boolean |  | If set to True, newly-created resource projects are immediately transitioned from CREATING to OK on save, bypassing the provider/site-agent reconciliation callback. Use for offerings that have no external backend to reconcile against. |
     | `plugin_options.resource_projects_limits_required` | boolean |  | If set to True, every limit-billing component declared by the offering must have a value when creating or updating a resource project. Use this for backends that reject projects without resource quotas (e.g. the rancher-keycloak-operator's project-level resourceQuota.limit cap). |
     | `plugin_options.create_orders_on_resource_project_change` | boolean |  | If set to True, create orders when resource projects are created, updated or deleted. |
@@ -5509,6 +5694,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
+    | `plugin_options.billing_source` | any |  | Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes). |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
@@ -5516,16 +5702,18 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.homedir_prefix` | string |  | GLAuth homedir prefix<br>_Constraints: default: `/home/`_ |
     | `plugin_options.scratch_project_directory` | string |  | HEAppE scratch project directory |
     | `plugin_options.project_permanent_directory` | string |  | HEAppE project permanent directory |
-    | `plugin_options.initial_primarygroup_number` | integer |  | GLAuth initial primary group number<br>_Constraints: default: `5000`_ |
-    | `plugin_options.initial_uidnumber` | integer |  | GLAuth initial uidnumber<br>_Constraints: default: `5000`_ |
-    | `plugin_options.initial_usergroup_number` | integer |  | GLAuth initial usergroup number<br>_Constraints: default: `6000`_ |
-    | `plugin_options.initial_rolegroup_number` | integer |  | GLAuth initial gid for role-aware groups (one per (resource|resource-project, role) tuple). Must leave at least 50000 gids of headroom above initial_usergroup_number to avoid collisions.<br>_Constraints: default: `60000`_ |
+    | `plugin_options.enable_posix_account` | boolean |  | Manage a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for this offering's users. Disable for offerings that only need a username.<br>_Constraints: default: `True`_ |
     | `plugin_options.resource_role_map` | object (free-form) |  | Mapping of Waldur role names (on Resource scope) to emitted role tokens used in group name rendering. Roles outside the map are skipped. Example: {"PI": "admin", "Member": "member"}. |
     | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
     | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
     | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
     | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
     | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
+    | `plugin_options.login_shell` | string |  | Default login shell assigned to GLAuth/LDAP accounts.<br>_Constraints: default: `/bin/bash`_ |
+    | `plugin_options.uid_source` | any |  | Where each offering user's UID comes from: allocated from the POSIX ID pool (default), or taken from the user's uid_number attribute (e.g. an OIDC claim). Pair 'user_attribute' with a GID-only pool to avoid UID collisions.<br>_Constraints: default: `pool`_ |
+    | `plugin_options.gid_source` | any |  | Where each offering user's primary GID comes from: the POSIX ID pool (default), or the user's primary_gid attribute.<br>_Constraints: default: `pool`_ |
+    | `plugin_options.emit_display_name` | boolean |  | Emit the user's full name as a GLAuth displayName custom attribute (rendered to LDAP displayName).<br>_Constraints: default: `False`_ |
+    | `plugin_options.emit_waldur_username` | boolean |  | Emit the Waldur username as a GLAuth waldurUsername custom attribute, alongside the generated POSIX login name.<br>_Constraints: default: `False`_ |
     | `plugin_options.enable_issues_for_membership_changes` | boolean |  | Enable issues for membership changes |
     | `plugin_options.deployment_mode` | any |  | Rancher deployment mode |
     | `plugin_options.flavors_regex` | string |  | Regular expression to limit flavors list |
@@ -5548,12 +5736,14 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.account_name_generation_policy` | any |  | Slurm account name generation policy |
     | `plugin_options.enable_display_of_order_actions_for_service_provider` | boolean |  | Enable display of order actions for service provider<br>_Constraints: default: `True`_ |
     | `plugin_options.slurm_periodic_policy_enabled` | boolean |  | Enable SLURM periodic usage policy configuration. When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.<br>_Constraints: default: `False`_ |
+    | `plugin_options.enforce_qos` | boolean |  | When enabled, the site agent enforces the offering's QoS selection by granting the chosen QoS on the SLURM association (QosLevel/DefaultQOS). When disabled (default), QoS is informational only — profiles are shown and the selection is recorded on the resource, but the agent does not touch SLURM QoS. The agent config may override this per deployment.<br>_Constraints: default: `False`_ |
     | `plugin_options.auto_approve_marketplace_script` | boolean |  | If set to False, all orders require manual provider approval, including for service provider owners and staff<br>_Constraints: default: `True`_ |
     | `plugin_options.highlight_backend_id_display` | boolean |  | Defines if backend_id should be shown more prominently by the UI<br>_Constraints: default: `False`_ |
     | `plugin_options.backend_id_display_label` | string |  | Label used by UI for showing value of the backend_id<br>_Constraints: default: `Backend ID`_ |
     | `plugin_options.require_effective_id_for_highlighted_display` | boolean |  | If set to True, highlighted backend ID display is only shown when the resource has an effective_id.<br>_Constraints: default: `False`_ |
     | `plugin_options.expose_inference_playground` | boolean |  | Show an in-browser inference playground action for resources of this offering (for offerings whose resources expose an OpenAI-compatible endpoint).<br>_Constraints: default: `False`_ |
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
+    | `plugin_options.show_ssh_key_loss_warning` | boolean |  | Show a warning about unrecoverable loss of the SSH private key on the OpenStack instance order form.<br>_Constraints: default: `False`_ |
     | `service_attributes` | object (free-form) |  |  |
     | `backend_id` | string |  |  |
 
@@ -6074,13 +6264,15 @@ Returns monthly usage statistics for the components of an offering within a spec
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -6097,6 +6289,7 @@ Returns monthly usage statistics for the components of an offering within a spec
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -6209,7 +6402,8 @@ Returns monthly cost data for an offering within a specified date range.
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `accounting_is_running` | boolean |  |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
@@ -6217,6 +6411,7 @@ Returns monthly cost data for an offering within a specified date range.
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -6233,6 +6428,7 @@ Returns monthly cost data for an offering within a specified date range.
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -6343,13 +6539,15 @@ Returns a paginated list of customers who have resources for this offering.
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -6366,6 +6564,7 @@ Returns a paginated list of customers who have resources for this offering.
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -6462,13 +6661,15 @@ Returns a paginated list of active, shared offerings grouped by their service pr
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -6483,6 +6684,7 @@ Returns a paginated list of active, shared offerings grouped by their service pr
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -6632,7 +6834,7 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -6642,9 +6844,9 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -6800,7 +7002,10 @@ Returns a paginated list of orders associated with a specific offering.
     | `created_by_civil_number` | string |  |
     | `created_by_email` | string (email) |  |
     | `created_by_organization` | string |  |
+    | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -6823,8 +7028,10 @@ Returns a paginated list of orders associated with a specific offering.
     | `provider_message` | string |  |
     | `provider_message_url` | string (uri) |  |
     | `provider_message_attachment` | string (uri) |  |
+    | `provider_message_updated_at` | string (date-time) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_message_updated_at` | string (date-time) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
     | `auto_approved` | boolean |  |
@@ -6971,7 +7178,10 @@ Returns details of a specific order associated with an offering.
     | `created_by_civil_number` | string |  |
     | `created_by_email` | string (email) |  |
     | `created_by_organization` | string |  |
+    | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -6994,8 +7204,10 @@ Returns details of a specific order associated with an offering.
     | `provider_message` | string |  |
     | `provider_message_url` | string (uri) |  |
     | `provider_message_attachment` | string (uri) |  |
+    | `provider_message_updated_at` | string (date-time) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_message_updated_at` | string (date-time) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
     | `auto_approved` | boolean |  |
@@ -7380,7 +7592,8 @@ Imports a backend resource into the marketplace.
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -7406,10 +7619,11 @@ Imports a backend resource into the marketplace.
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -7454,6 +7668,7 @@ Imports a backend resource into the marketplace.
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
 
 ---
 
@@ -7596,6 +7811,272 @@ Requests connected site agents to run a full reconciliation of all resources bel
 
 ## Other Actions
 
+
+### List access subnets for an offering
+
+Returns the access subnets consumers defined for the offering, in two forms: 'expanded' — every subnet with its customer and offering context; and 'packed' — the same subnets collapsed into the minimal set of CIDRs (adjacent/overlapping networks merged). Consumer subnets are defined per (customer, offering) pair and apply to all of that customer's resources of the offering. Intended for service providers building an external firewall allow-list. Available to staff, support, the offering's service manager and the offering customer owner.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/access_subnets/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_access_subnets_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_offerings_access_subnets_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_offerings_access_subnets_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_access_subnets_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsAccessSubnetsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsAccessSubnetsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `expanded` | array of objects |
+    | `expanded.inet` | string |
+    | `expanded.description` | string |
+    | `expanded.is_staff_managed` | boolean |
+    | `expanded.customer_uuid` | string |
+    | `expanded.customer_name` | string |
+    | `expanded.offering_uuid` | string |
+    | `expanded.offering_name` | string |
+    | `packed` | array of strings |
+    | `defaults` | array of strings |
+
+---
+
+### Aggregate access subnets across offerings
+
+Returns the combined access-subnet allow-list of the given offerings: 'expanded' — every consumer subnet with its customer and offering context; 'defaults' — the provider-default subnets of each offering; 'organization_subnets' — organization-level access subnets of customers owning non-terminated resources of the offerings (populated only when include_organization_subnets is true); and 'packed' — all of the above collapsed into the minimal set of CIDRs. Intended for service providers building an external firewall allow-list spanning several offerings. The caller must be staff, support, a service manager of every requested offering or an owner of its customer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-offerings/aggregated_access_subnets/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      offering_uuid==[]
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_aggregated_access_subnets_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_offerings_aggregated_access_subnets_retrieve.sync(
+        client=client,
+        offering_uuid=[]
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_offerings_aggregated_access_subnets_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_aggregated_access_subnets_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsAggregatedAccessSubnetsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsAggregatedAccessSubnetsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "offering_uuid": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `include_organization_subnets` | boolean |  | Also merge in the organization-level access subnets of customers owning non-terminated resources of the offerings. |
+    | `offering_uuid` | array | ✓ | UUID of an offering to include. May be repeated. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `expanded` | array of objects |
+    | `expanded.inet` | string |
+    | `expanded.description` | string |
+    | `expanded.is_staff_managed` | boolean |
+    | `expanded.customer_uuid` | string |
+    | `expanded.customer_name` | string |
+    | `expanded.offering_uuid` | string |
+    | `expanded.offering_name` | string |
+    | `packed` | array of strings |
+    | `defaults` | array of objects |
+    | `defaults.inet` | string |
+    | `defaults.description` | string |
+    | `defaults.offering_uuid` | string |
+    | `defaults.offering_name` | string |
+    | `organization_subnets` | array of objects |
+    | `organization_subnets.inet` | string |
+    | `organization_subnets.description` | string |
+    | `organization_subnets.customer_uuid` | string |
+    | `organization_subnets.customer_name` | string |
+
+---
+
+### Effective POSIX ID pool
+
+The POSIX ID pool that governs this offering: its own override pool if present, otherwise the service provider's default pool. Returns null when no pool is configured.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/effective_posix_id_pool/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.posix_id_pool_field_enum import PosixIdPoolFieldEnum # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_effective_posix_id_pool_retrieve # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_offerings_effective_posix_id_pool_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PosixIdPoolFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/posix_id_pool_field_enum.py)
+    2.  **API Source:** [`marketplace_provider_offerings_effective_posix_id_pool_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_effective_posix_id_pool_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsEffectivePosixIdPoolRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsEffectivePosixIdPoolRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `created` | string (date-time) |
+    | `description` | string |
+    | `service_provider` | string (uuid) |
+    | `offering` | string (uuid) |
+    | `min_uid` | integer (int64) |
+    | `max_uid` | integer (int64) |
+    | `next_uid` | integer |
+    | `min_gid` | integer (int64) |
+    | `max_gid` | integer (int64) |
+    | `next_gid` | integer |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `scope` | string |
+    | `uid_used` | integer |
+    | `gid_used` | integer |
+    | `uid_utilization` | number (double) |
+    | `gid_utilization` | number (double) |
+
+---
 
 ### Get structured GLauth tree for an offering
 
@@ -7870,13 +8351,15 @@ Returns the version history for this object. Only accessible by staff and suppor
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
     | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
@@ -7893,6 +8376,7 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -8084,6 +8568,8 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_organization_country` | boolean |  |
     | `expose_organization_type` | boolean |  |
     | `expose_organization_registry_code` | boolean |  |
+    | `expose_organization_vat_code` | boolean |  |
+    | `expose_organization_address` | boolean |  |
     | `expose_affiliations` | boolean |  |
     | `expose_phone_number` | boolean |  |
     | `expose_job_title` | boolean |  |
@@ -8099,10 +8585,135 @@ Returns the user attribute configuration for this offering, which determines whi
     | `expose_civil_number` | boolean |  |
     | `expose_birth_date` | boolean |  |
     | `expose_active_isds` | boolean |  |
+    | `expose_uid_number` | boolean |  |
+    | `expose_primary_gid` | boolean |  |
     | `exposed_fields` | array of strings |  |
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
+
+---
+
+### Add a QoS profile to an offering
+
+Adds a new Quality of Service profile to an offering.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/add_qos/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      offering="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
+      name="my-awesome-marketplace-provider-offering"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.offering_qo_s_request import OfferingQoSRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_add_qos # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OfferingQoSRequest(
+        offering="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        name="my-awesome-marketplace-provider-offering"
+    )
+    response = marketplace_provider_offerings_add_qos.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OfferingQoSRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_qo_s_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_add_qos`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_add_qos.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsAddQos } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsAddQos({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "offering": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "my-awesome-marketplace-provider-offering"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `offering` | string (uuid) | ✓ |  |
+    | `name` | string | ✓ | Name of the SLURM QOS. |
+    | `description` | string |  |  |
+    | `max_nodes` | integer |  | Maximum nodes per job |
+    | `min_nodes` | integer |  | Minimum nodes per job |
+    | `default_time` | integer |  | Default time limit in minutes |
+    | `max_time` | integer |  | Maximum wall time in minutes |
+    | `grace_time` | integer |  | Preemption grace time in seconds |
+    | `priority` | integer |  | Scheduling priority |
+    | `grp_tres` | string |  | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `max_tres_per_job` | string |  | Max TRES per job (MaxTRESPerJob) |
+    | `max_tres_per_node` | string |  | Max TRES per node (MaxTRESPerNode) |
+    | `max_tres_per_user` | string |  | Max TRES per user (MaxTRESPerUser) |
+    | `min_tres_per_job` | string |  | Min TRES per job (MinTRESPerJob) |
+    | `flags` | string |  | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `offering` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `name` | string | Name of the SLURM QOS. |
+    | `description` | string |  |
+    | `max_nodes` | integer | Maximum nodes per job |
+    | `min_nodes` | integer | Minimum nodes per job |
+    | `default_time` | integer | Default time limit in minutes |
+    | `max_time` | integer | Maximum wall time in minutes |
+    | `grace_time` | integer | Preemption grace time in seconds |
+    | `priority` | integer | Scheduling priority |
+    | `grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
 
 ---
 
@@ -8598,6 +9209,91 @@ Marks an active offering as unavailable, blocking all operations on its resource
 
 ---
 
+### Remove a QoS profile from an offering
+
+Removes a Quality of Service profile from an offering.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/remove_qos/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      qos_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.remove_qo_s_request import RemoveQoSRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_remove_qos # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = RemoveQoSRequest(
+        qos_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = marketplace_provider_offerings_remove_qos.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`RemoveQoSRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/remove_qo_s_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_remove_qos`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_remove_qos.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsRemoveQos } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsRemoveQos({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "qos_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `qos_uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+---
+
 ### Assign or clear the offering group
 
 Sets the offering's ``offering_group`` FK. Pass ``offering_group: <uuid>`` to assign a group, or ``offering_group: null`` to clear it. The group must belong to the same customer as the offering.
@@ -8680,6 +9376,131 @@ Sets the offering's ``offering_group`` FK. Pass ``offering_group: <uuid>`` to as
 
     **`200`** - No response body
     
+
+---
+
+### Set the QoS allow-list of a partition
+
+Replaces the QoS allow-list (SLURM AllowQos gate) of a partition. An empty list permits all of the offering's QoS.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_partition_qos/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      partition_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
+      qos_options:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_partition_qo_s_request import SetPartitionQoSRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_set_partition_qos # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetPartitionQoSRequest(
+        partition_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        qos_options=[]
+    )
+    response = marketplace_provider_offerings_set_partition_qos.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetPartitionQoSRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_partition_qo_s_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_set_partition_qos`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_set_partition_qos.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsSetPartitionQos } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsSetPartitionQos({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "partition_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "qos_options": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `partition_uuid` | string (uuid) | ✓ |
+    | `qos_options` | array of objects | ✓ |
+    | `qos_options.qos_uuid` | string (uuid) | ✓ |
+    | `qos_options.is_default` | boolean |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `offering` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `partition_name` | string | Name of the SLURM partition |
+    | `cpu_arch` | string | CPU architecture of the partition (e.g., x86_64/amd/zen3) |
+    | `gpu_arch` | string | GPU architecture of the partition (e.g., nvidia/cc90, amd/gfx90a) |
+    | `cpu_bind` | integer | Default task binding policy (SLURM cpu_bind) |
+    | `def_cpu_per_gpu` | integer | Default CPUs allocated per GPU |
+    | `max_cpus_per_node` | integer | Maximum allocated CPUs per node |
+    | `max_cpus_per_socket` | integer | Maximum allocated CPUs per socket |
+    | `def_mem_per_cpu` | integer (int64) | Default memory per CPU in MB |
+    | `def_mem_per_gpu` | integer (int64) | Default memory per GPU in MB |
+    | `def_mem_per_node` | integer (int64) | Default memory per node in MB |
+    | `max_mem_per_cpu` | integer (int64) | Maximum memory per CPU in MB |
+    | `max_mem_per_node` | integer (int64) | Maximum memory per node in MB |
+    | `default_time` | integer | Default time limit in minutes |
+    | `max_time` | integer | Maximum time limit in minutes |
+    | `grace_time` | integer | Preemption grace time in seconds |
+    | `max_nodes` | integer | Maximum nodes per job |
+    | `min_nodes` | integer | Minimum nodes per job |
+    | `exclusive_topo` | boolean | Exclusive topology access required |
+    | `exclusive_user` | boolean | Exclusive user access required |
+    | `priority_tier` | integer | Priority tier for scheduling and preemption |
+    | `qos` | string | Quality of Service (QOS) name |
+    | `qos_options` | array of objects |  |
+    | `qos_options.uuid` | string (uuid) |  |
+    | `qos_options.qos` | string (uuid) |  |
+    | `qos_options.qos_name` | string |  |
+    | `qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
+    | `req_resv` | boolean | Require reservation for job allocation |
 
 ---
 
@@ -9175,5 +9996,119 @@ Uploads an image for embedding in offering markdown descriptions. Requires ENABL
     | Field | Type | Description |
     |---|---|---|
     | `url` | string (uri) | Absolute URL of the uploaded image for markdown embedding. |
+
+---
+
+### Update a QoS profile of an offering
+
+Updates an existing Quality of Service profile of an offering.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_qos/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_offering_qo_s_update_request import PatchedOfferingQoSUpdateRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_update_qos_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedOfferingQoSUpdateRequest()
+    response = marketplace_provider_offerings_update_qos_partial_update.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedOfferingQoSUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_offering_qo_s_update_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_update_qos_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_update_qos_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsUpdateQosPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsUpdateQosPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `qos_uuid` | string (uuid) |  | <br>_Constraints: write-only_ |
+    | `name` | string |  | Name of the SLURM QOS. |
+    | `description` | string |  |  |
+    | `max_nodes` | integer |  | Maximum nodes per job |
+    | `min_nodes` | integer |  | Minimum nodes per job |
+    | `default_time` | integer |  | Default time limit in minutes |
+    | `max_time` | integer |  | Maximum wall time in minutes |
+    | `grace_time` | integer |  | Preemption grace time in seconds |
+    | `priority` | integer |  | Scheduling priority |
+    | `grp_tres` | string |  | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `max_tres_per_job` | string |  | Max TRES per job (MaxTRESPerJob) |
+    | `max_tres_per_node` | string |  | Max TRES per node (MaxTRESPerNode) |
+    | `max_tres_per_user` | string |  | Max TRES per user (MaxTRESPerUser) |
+    | `min_tres_per_job` | string |  | Min TRES per job (MinTRESPerJob) |
+    | `flags` | string |  | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `offering` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `name` | string | Name of the SLURM QOS. |
+    | `description` | string |  |
+    | `max_nodes` | integer | Maximum nodes per job |
+    | `min_nodes` | integer | Minimum nodes per job |
+    | `default_time` | integer | Default time limit in minutes |
+    | `max_time` | integer | Maximum wall time in minutes |
+    | `grace_time` | integer | Preemption grace time in seconds |
+    | `priority` | integer | Scheduling priority |
+    | `grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
 
 ---

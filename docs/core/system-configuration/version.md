@@ -10,7 +10,7 @@
 
 ### Get application version
 
-Retrieves the current installed version of the application and the latest available version from GitHub (if available). Requires staff or support user permissions.
+Retrieves the current installed version of the application. Staff and support users additionally receive the latest available version from GitHub when update checks are enabled.
 
 
 === "HTTPie"
@@ -62,6 +62,6 @@ Retrieves the current installed version of the application and the latest availa
     | Field | Type | Description |
     |---|---|---|
     | `version` | string | Current installed version of the application |
-    | `latest_version` | string | Latest available version from GitHub, if available. |
+    | `latest_version` | string | Latest available version from GitHub. Only included for staff or support users when update checks are enabled. |
 
 ---

@@ -610,7 +610,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `o` | array | Ordering fields |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `role` | string (uuid) | Role UUID or name |
+    | `role` | array | Role UUID or name. Repeat to filter by several roles. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |

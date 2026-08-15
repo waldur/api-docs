@@ -70,6 +70,7 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `auth_method` | string | Authentication method |
     | `created_from` | number |  |
     | `created_to` | number |  |
     | `customer_uuid` | string (uuid) | Customer UUID |
@@ -80,7 +81,9 @@
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `pat_uuid` | string | Personal access token UUID |
     | `project_uuid` | string (uuid) | Project UUID |
+    | `related_user_uuid` | string (uuid) | Filter events related to a user: Feed scope, actor (context.user_uuid), or affected user (context.affected_user_uuid). Combined with OR. Staff/support may target any user; others only themselves. |
     | `scope` | string (uri) | Filter by scope URL. |
     | `user_uuid` | string (uuid) | User UUID |
 

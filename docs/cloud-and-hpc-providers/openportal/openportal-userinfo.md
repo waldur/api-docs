@@ -12,8 +12,8 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/openportal-userinfo/{user}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openportal-userinfo/{user}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/openportal-userinfo/me/` | [List Openportal Userinfo Me](#list-openportal-userinfo-me) |
-| <span class="http-badge http-put">PUT</span> | `/api/openportal-userinfo/{user}/set_shortname/` | [Set shortname](#set-shortname) |
+| <span class="http-badge http-get">GET</span> | `/api/openportal-userinfo/me/` | [Retrieve UserInfo for current user](#retrieve-userinfo-for-current-user) |
+| <span class="http-badge http-put">PUT</span> | `/api/openportal-userinfo/{user}/set_shortname/` | [Set shortname for user](#set-shortname-for-user) |
 
 ---
 ## Core CRUD
@@ -472,7 +472,9 @@
 ## Other Actions
 
 
-### List Openportal Userinfo Me
+### Retrieve UserInfo for current user
+
+Retrieve UserInfo for current user
 
 
 === "HTTPie"
@@ -528,7 +530,9 @@
 
 ---
 
-### Set shortname
+### Set shortname for user
+
+Set shortname for user
 
 
 === "HTTPie"

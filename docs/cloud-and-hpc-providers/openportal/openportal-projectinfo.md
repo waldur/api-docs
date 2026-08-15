@@ -12,8 +12,8 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/openportal-projectinfo/{project}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openportal-projectinfo/{project}/` | [Delete](#delete) |
 | **Other Actions** | | |
-| <span class="http-badge http-put">PUT</span> | `/api/openportal-projectinfo/{project}/set_allowed_destinations/` | [Set allowed destinations](#set-allowed-destinations) |
-| <span class="http-badge http-put">PUT</span> | `/api/openportal-projectinfo/{project}/set_shortname/` | [Set shortname](#set-shortname) |
+| <span class="http-badge http-put">PUT</span> | `/api/openportal-projectinfo/{project}/set_allowed_destinations/` | [Set allowed destinations for project](#set-allowed-destinations-for-project) |
+| <span class="http-badge http-put">PUT</span> | `/api/openportal-projectinfo/{project}/set_shortname/` | [Set shortname for project](#set-shortname-for-project) |
 
 ---
 ## Core CRUD
@@ -480,7 +480,9 @@
 ## Other Actions
 
 
-### Set allowed destinations
+### Set allowed destinations for project
+
+Set allowed destinations for project
 
 
 === "HTTPie"
@@ -570,7 +572,9 @@
 
 ---
 
-### Set shortname
+### Set shortname for project
+
+Set shortname for project
 
 
 === "HTTPie"

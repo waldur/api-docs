@@ -15,7 +15,7 @@
 | <span class="http-badge http-delete">DELETE</span> | `/api/openportal-allocations/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-allocations/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
-| <span class="http-badge http-post">POST</span> | `/api/openportal-allocations/{uuid}/set_limits/` | [Set limits](#set-limits) |
+| <span class="http-badge http-post">POST</span> | `/api/openportal-allocations/{uuid}/set_limits/` | [Set limits for allocation](#set-limits-for-allocation) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-allocations/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 
 ---
@@ -947,7 +947,9 @@ Manually transition the resource to ERRED state. This is useful for resources st
 
 ---
 
-### Set limits
+### Set limits for allocation
+
+Set limits for allocation
 
 
 === "HTTPie"
@@ -1025,11 +1027,8 @@ Manually transition the resource to ERRED state. This is useful for resources st
 
 === "Responses"
 
-    **`202`** - 
+    **`202`** - No response body
     
-    | Field | Type |
-    |---|---|
-    | `status` | string |
 
 ---
 

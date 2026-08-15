@@ -43,11 +43,13 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_end_date_by_staff/` | [Set end date of the resource by staff](#set-end-date-of-the-resource-by-staff) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_endpoints/` | [Set resource access endpoints](#set-resource-access-endpoints) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_limits/` | [Set resource limits](#set-resource-limits) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_membership_sync_statuses/` | [Report per-member sync statuses for a resource](#report-per-member-sync-statuses-for-a-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_paused/` | [Set paused flag for resource](#set-paused-flag-for-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_restrict_member_access/` | [Set restrict member access flag](#set-restrict-member-access-flag) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_slug/` | [Set resource slug](#set-resource-slug) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/set_state_ok/` | [Set resource state to OK](#set-resource-state-to-ok) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/submit_report/` | [Submit a report for a resource](#submit-a-report-for-a-resource) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/sync_user_roles/` | [Sync user roles](#sync-user-roles) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-resources/{uuid}/terminate/` | [Terminate a resource](#terminate-a-resource) |
 
 ---
@@ -213,7 +215,8 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -239,10 +242,11 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -287,6 +291,7 @@ Returns a paginated list of resources for offerings managed by the current user 
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
 
 ---
 
@@ -405,7 +410,8 @@ Returns details of a specific resource from a provider's perspective.
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -431,10 +437,11 @@ Returns details of a specific resource from a provider's perspective.
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -479,6 +486,7 @@ Returns details of a specific resource from a provider's perspective.
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
 
 ---
 
@@ -1057,7 +1065,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `o` | array | Ordering fields |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `role` | string (uuid) | Role UUID or name |
+    | `role` | array | Role UUID or name. Repeat to filter by several roles. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -2025,11 +2033,15 @@ Returns details of the offering connected to the requested object.
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
     | `endpoints.url` | string | URL of the access endpoint |
+    | `default_access_subnets` | array of objects |  |
+    | `default_access_subnets.uuid` | string (uuid) |  |
+    | `default_access_subnets.inet` | string |  |
+    | `default_access_subnets.description` | string |  |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -2055,7 +2067,28 @@ Returns details of the offering connected to the requested object.
     | `partitions.exclusive_user` | boolean | Exclusive user access required |
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
+    | `partitions.qos_options` | array of objects |  |
+    | `partitions.qos_options.uuid` | string (uuid) |  |
+    | `partitions.qos_options.qos` | string (uuid) |  |
+    | `partitions.qos_options.qos_name` | string |  |
+    | `partitions.qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
+    | `qos_profiles` | array of objects |  |
+    | `qos_profiles.uuid` | string (uuid) |  |
+    | `qos_profiles.name` | string | Name of the SLURM QOS. |
+    | `qos_profiles.description` | string |  |
+    | `qos_profiles.max_nodes` | integer | Maximum nodes per job |
+    | `qos_profiles.min_nodes` | integer | Minimum nodes per job |
+    | `qos_profiles.default_time` | integer | Default time limit in minutes |
+    | `qos_profiles.max_time` | integer | Maximum wall time in minutes |
+    | `qos_profiles.grace_time` | integer | Preemption grace time in seconds |
+    | `qos_profiles.priority` | integer | Scheduling priority |
+    | `qos_profiles.grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `qos_profiles.max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -2131,9 +2164,8 @@ Returns details of the offering connected to the requested object.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -2201,6 +2233,7 @@ Returns details of the offering connected to the requested object.
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
+    | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
     | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
@@ -2610,7 +2643,8 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -2636,10 +2670,11 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -2684,6 +2719,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
 
 ---
 
@@ -3745,6 +3781,110 @@ Allows a service provider to directly set the limits for a resource. This is typ
 
 ---
 
+### Report per-member sync statuses for a resource
+
+Full-replace report from the site agent: replaces every previously stored member sync status of this resource with the submitted set. Requires the offering to opt in via the enable_membership_sync_status plugin option. Entries whose user cannot be resolved are skipped and echoed back in the response instead of failing the whole report.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_membership_sync_statuses/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      statuses:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.member_sync_status_report_request import MemberSyncStatusReportRequest # (1)
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_set_membership_sync_statuses # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = MemberSyncStatusReportRequest(
+        statuses=[]
+    )
+    response = marketplace_provider_resources_set_membership_sync_statuses.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`MemberSyncStatusReportRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/member_sync_status_report_request.py)
+    2.  **API Source:** [`marketplace_provider_resources_set_membership_sync_statuses`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_set_membership_sync_statuses.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesSetMembershipSyncStatuses } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesSetMembershipSyncStatuses({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "statuses": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `statuses` | array of objects | ✓ |
+    | `statuses.username` | string |  |
+    | `statuses.user_uuid` | string (uuid) |  |
+    | `statuses.scope_type` | string | ✓ |
+    | `statuses.resource_project_uuid` | string (uuid) |  |
+    | `statuses.role_name` | string | ✓ |
+    | `statuses.state` | string | ✓ |
+    | `statuses.message` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `stored` | integer |
+    | `skipped` | array of strings |
+    
+    ---
+    
+    **`409`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+
+---
+
 ### Set paused flag for resource
 
 Sets the 'paused' flag for a resource. Requires staff permissions.
@@ -4154,6 +4294,89 @@ Allows a service provider to submit a report (e.g., usage or status report) for 
     | Field | Type |
     |---|---|
     | `status` | string |
+
+---
+
+### Sync user roles
+
+Trigger user role sync for this resource. Sends a notification to RabbitMQ that this resource needs user role synchronization; agents without event subscriptions apply the change on their next polling cycle.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-resources/string-value/sync_user_roles/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_resources import marketplace_provider_resources_sync_user_roles # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_resources_sync_user_roles.sync(
+        uuid="string-value",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_resources_sync_user_roles`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_sync_user_roles.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderResourcesSyncUserRoles } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderResourcesSyncUserRoles({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - No response body
+    
+    
+    ---
+    
+    **`409`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
+    
+    ---
+    
+    **`429`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `detail` | string |
 
 ---
 

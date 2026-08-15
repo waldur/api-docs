@@ -154,19 +154,27 @@
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
+    | `permissions.user_username` | string |  |
+    | `permissions.user_email` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -196,7 +204,11 @@
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -304,19 +316,27 @@
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
+    | `permissions.user_username` | string |  |
+    | `permissions.user_email` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -346,7 +366,11 @@
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -452,6 +476,8 @@
     | `organization_country` | string |  |  |
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string |  | VAT code of the user's organization |
+    | `organization_address` | string |  | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |  |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean |  | Designates whether the user is allowed to create and use personal access tokens. |
@@ -490,19 +516,27 @@
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
+    | `permissions.user_username` | string |  |
+    | `permissions.user_email` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -532,7 +566,11 @@
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -869,6 +907,8 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_country` | string |  |  |
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string |  | VAT code of the user's organization |
+    | `organization_address` | string |  | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |  |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean |  | Designates whether the user is allowed to create and use personal access tokens. |
@@ -907,19 +947,27 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
+    | `permissions.user_username` | string |  |
+    | `permissions.user_email` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -949,7 +997,11 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -1056,6 +1108,8 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_country` | string |  |  |
     | `organization_type` | string |  | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string |  | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string |  | VAT code of the user's organization |
+    | `organization_address` | string |  | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |  |
     | `is_identity_manager` | boolean |  | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean |  | Designates whether the user is allowed to create and use personal access tokens. |
@@ -1094,19 +1148,27 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
+    | `permissions.uuid` | string (uuid) |  |
     | `permissions.user_uuid` | string (uuid) |  |
     | `permissions.user_name` | string |  |
     | `permissions.user_slug` | string |  |
+    | `permissions.user_username` | string |  |
+    | `permissions.user_email` | string |  |
     | `permissions.created` | string (date-time) |  |
     | `permissions.expiration_time` | string (date-time) |  |
+    | `permissions.is_active` | boolean |  |
     | `permissions.created_by_full_name` | string |  |
     | `permissions.created_by_username` | string |  |
+    | `permissions.revoked_by_full_name` | string |  |
+    | `permissions.revoked_by_username` | string |  |
+    | `permissions.revoke_reason` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
+    | `permissions.scope_is_removed` | boolean |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
     | `permissions.resource_uuid` | string (uuid) |  |
@@ -1136,7 +1198,11 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |
@@ -1809,23 +1875,16 @@ Get current user details, including authentication token and profile completenes
     | `notifications_enabled` | boolean | Designates whether the user is allowed to receive email notifications. |
     | `preferred_language` | string |  |
     | `permissions` | array of objects |  |
-    | `permissions.user_uuid` | string (uuid) |  |
-    | `permissions.user_name` | string |  |
-    | `permissions.user_slug` | string |  |
-    | `permissions.created` | string (date-time) |  |
-    | `permissions.expiration_time` | string (date-time) |  |
-    | `permissions.created_by_full_name` | string |  |
-    | `permissions.created_by_username` | string |  |
     | `permissions.role_name` | string |  |
-    | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
     | `permissions.scope_type` | string |  |
     | `permissions.scope_uuid` | string (uuid) |  |
     | `permissions.scope_name` | string |  |
     | `permissions.customer_uuid` | string (uuid) |  |
     | `permissions.customer_name` | string |  |
-    | `permissions.resource_uuid` | string (uuid) |  |
     | `permissions.project_uuid` | string (uuid) |  |
+    | `permissions.resource_uuid` | string (uuid) |  |
+    | `permissions.expiration_time` | string (date-time) |  |
     | `requested_email` | string |  |
     | `affiliations` | array of strings |  |
     | `first_name` | string |  |
@@ -1851,7 +1910,11 @@ Get current user details, including authentication token and profile completenes
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
     | `eduperson_assurance` | array of strings |  |
+    | `uid_number` | integer | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `primary_gid` | integer | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
     | `is_identity_manager` | boolean | Designates whether the user is allowed to manage remote user identities. |
     | `can_use_personal_access_tokens` | boolean | Designates whether the user is allowed to create and use personal access tokens. |
     | `attribute_sources` | object (free-form) | Per-attribute source and freshness tracking. Format: {'field_name': {'source': 'isd:<name>', 'timestamp': 'ISO8601'}}. |

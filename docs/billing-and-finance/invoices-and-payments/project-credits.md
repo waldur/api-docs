@@ -82,33 +82,35 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `value` | string (decimal) |
-    | `project` | string (uri) |
-    | `project_name` | string |
-    | `project_uuid` | string (uuid) |
-    | `project_slug` | string |
-    | `customer_name` | string |
-    | `customer_slug` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_credit` | string (decimal) |
-    | `allocated_customer_credit` | number (double) |
-    | `consumption_last_month` | number (double) |
-    | `offerings` | array of objects |
-    | `offerings.uuid` | string (uuid) |
-    | `offerings.url` | string (uri) |
-    | `offerings.type` | string |
-    | `offerings.name` | string |
-    | `end_date` | string (date) |
-    | `expected_consumption` | string (decimal) |
-    | `minimal_consumption` | number (double) |
-    | `minimal_consumption_logic` | string |
-    | `grace_coefficient` | string (decimal) |
-    | `apply_as_minimal_consumption` | boolean |
-    | `mark_unused_credit_as_spent_on_project_termination` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `value` | string (decimal) |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_slug` | string |  |
+    | `customer_name` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_credit` | string (decimal) |  |
+    | `allocated_customer_credit` | string |  |
+    | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `spendable_value` | string (decimal) |  |
+    | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string (uuid) |  |
+    | `offerings.url` | string (uri) |  |
+    | `offerings.type` | string |  |
+    | `offerings.name` | string |  |
+    | `end_date` | string (date) |  |
+    | `expected_consumption` | string (decimal) |  |
+    | `minimal_consumption` | number (double) |  |
+    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |
+    | `apply_as_minimal_consumption` | boolean |  |
+    | `mark_unused_credit_as_spent_on_project_termination` | boolean |  |
 
 ---
 
@@ -174,33 +176,35 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `value` | string (decimal) |
-    | `project` | string (uri) |
-    | `project_name` | string |
-    | `project_uuid` | string (uuid) |
-    | `project_slug` | string |
-    | `customer_name` | string |
-    | `customer_slug` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_credit` | string (decimal) |
-    | `allocated_customer_credit` | number (double) |
-    | `consumption_last_month` | number (double) |
-    | `offerings` | array of objects |
-    | `offerings.uuid` | string (uuid) |
-    | `offerings.url` | string (uri) |
-    | `offerings.type` | string |
-    | `offerings.name` | string |
-    | `end_date` | string (date) |
-    | `expected_consumption` | string (decimal) |
-    | `minimal_consumption` | number (double) |
-    | `minimal_consumption_logic` | string |
-    | `grace_coefficient` | string (decimal) |
-    | `apply_as_minimal_consumption` | boolean |
-    | `mark_unused_credit_as_spent_on_project_termination` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `value` | string (decimal) |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_slug` | string |  |
+    | `customer_name` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_credit` | string (decimal) |  |
+    | `allocated_customer_credit` | string |  |
+    | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `spendable_value` | string (decimal) |  |
+    | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string (uuid) |  |
+    | `offerings.url` | string (uri) |  |
+    | `offerings.type` | string |  |
+    | `offerings.name` | string |  |
+    | `end_date` | string (date) |  |
+    | `expected_consumption` | string (decimal) |  |
+    | `minimal_consumption` | number (double) |  |
+    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |
+    | `apply_as_minimal_consumption` | boolean |  |
+    | `mark_unused_credit_as_spent_on_project_termination` | boolean |  |
 
 ---
 
@@ -280,33 +284,35 @@
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `value` | string (decimal) |
-    | `project` | string (uri) |
-    | `project_name` | string |
-    | `project_uuid` | string (uuid) |
-    | `project_slug` | string |
-    | `customer_name` | string |
-    | `customer_slug` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_credit` | string (decimal) |
-    | `allocated_customer_credit` | number (double) |
-    | `consumption_last_month` | number (double) |
-    | `offerings` | array of objects |
-    | `offerings.uuid` | string (uuid) |
-    | `offerings.url` | string (uri) |
-    | `offerings.type` | string |
-    | `offerings.name` | string |
-    | `end_date` | string (date) |
-    | `expected_consumption` | string (decimal) |
-    | `minimal_consumption` | number (double) |
-    | `minimal_consumption_logic` | string |
-    | `grace_coefficient` | string (decimal) |
-    | `apply_as_minimal_consumption` | boolean |
-    | `mark_unused_credit_as_spent_on_project_termination` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `value` | string (decimal) |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_slug` | string |  |
+    | `customer_name` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_credit` | string (decimal) |  |
+    | `allocated_customer_credit` | string |  |
+    | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `spendable_value` | string (decimal) |  |
+    | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string (uuid) |  |
+    | `offerings.url` | string (uri) |  |
+    | `offerings.type` | string |  |
+    | `offerings.name` | string |  |
+    | `end_date` | string (date) |  |
+    | `expected_consumption` | string (decimal) |  |
+    | `minimal_consumption` | number (double) |  |
+    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |
+    | `apply_as_minimal_consumption` | boolean |  |
+    | `mark_unused_credit_as_spent_on_project_termination` | boolean |  |
 
 ---
 
@@ -397,33 +403,35 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `value` | string (decimal) |
-    | `project` | string (uri) |
-    | `project_name` | string |
-    | `project_uuid` | string (uuid) |
-    | `project_slug` | string |
-    | `customer_name` | string |
-    | `customer_slug` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_credit` | string (decimal) |
-    | `allocated_customer_credit` | number (double) |
-    | `consumption_last_month` | number (double) |
-    | `offerings` | array of objects |
-    | `offerings.uuid` | string (uuid) |
-    | `offerings.url` | string (uri) |
-    | `offerings.type` | string |
-    | `offerings.name` | string |
-    | `end_date` | string (date) |
-    | `expected_consumption` | string (decimal) |
-    | `minimal_consumption` | number (double) |
-    | `minimal_consumption_logic` | string |
-    | `grace_coefficient` | string (decimal) |
-    | `apply_as_minimal_consumption` | boolean |
-    | `mark_unused_credit_as_spent_on_project_termination` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `value` | string (decimal) |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_slug` | string |  |
+    | `customer_name` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_credit` | string (decimal) |  |
+    | `allocated_customer_credit` | string |  |
+    | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `spendable_value` | string (decimal) |  |
+    | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string (uuid) |  |
+    | `offerings.url` | string (uri) |  |
+    | `offerings.type` | string |  |
+    | `offerings.name` | string |  |
+    | `end_date` | string (date) |  |
+    | `expected_consumption` | string (decimal) |  |
+    | `minimal_consumption` | number (double) |  |
+    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |
+    | `apply_as_minimal_consumption` | boolean |  |
+    | `mark_unused_credit_as_spent_on_project_termination` | boolean |  |
 
 ---
 
@@ -508,33 +516,35 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `value` | string (decimal) |
-    | `project` | string (uri) |
-    | `project_name` | string |
-    | `project_uuid` | string (uuid) |
-    | `project_slug` | string |
-    | `customer_name` | string |
-    | `customer_slug` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_credit` | string (decimal) |
-    | `allocated_customer_credit` | number (double) |
-    | `consumption_last_month` | number (double) |
-    | `offerings` | array of objects |
-    | `offerings.uuid` | string (uuid) |
-    | `offerings.url` | string (uri) |
-    | `offerings.type` | string |
-    | `offerings.name` | string |
-    | `end_date` | string (date) |
-    | `expected_consumption` | string (decimal) |
-    | `minimal_consumption` | number (double) |
-    | `minimal_consumption_logic` | string |
-    | `grace_coefficient` | string (decimal) |
-    | `apply_as_minimal_consumption` | boolean |
-    | `mark_unused_credit_as_spent_on_project_termination` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `value` | string (decimal) |  |
+    | `project` | string (uri) |  |
+    | `project_name` | string |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_slug` | string |  |
+    | `customer_name` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_credit` | string (decimal) |  |
+    | `allocated_customer_credit` | string |  |
+    | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `spendable_value` | string (decimal) |  |
+    | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string (uuid) |  |
+    | `offerings.url` | string (uri) |  |
+    | `offerings.type` | string |  |
+    | `offerings.name` | string |  |
+    | `end_date` | string (date) |  |
+    | `expected_consumption` | string (decimal) |  |
+    | `minimal_consumption` | number (double) |  |
+    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |
+    | `apply_as_minimal_consumption` | boolean |  |
+    | `mark_unused_credit_as_spent_on_project_termination` | boolean |  |
 
 ---
 

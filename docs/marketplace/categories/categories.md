@@ -69,6 +69,7 @@ Returns a paginated list of marketplace categories.
 
     | Name | Type | Description |
     |---|---|---|
+    | `accessible` | boolean | Only categories with offerings the current user can order |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `customers_offerings_state` | array | Customers offerings state<br><br> |
     | `field` | array |  |
@@ -98,7 +99,6 @@ Returns a paginated list of marketplace categories.
     | `icon` | string (uri) |  |
     | `default_vm_category` | boolean | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `offering_count` | integer |  |
     | `available_offerings_count` | integer |  |
     | `sections` | array of objects |  |
@@ -217,7 +217,6 @@ Returns details of a specific marketplace category.
     | `icon` | string (uri) |  |
     | `default_vm_category` | boolean | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `offering_count` | integer |  |
     | `available_offerings_count` | integer |  |
     | `sections` | array of objects |  |
@@ -323,7 +322,6 @@ Creates a new marketplace category. Requires staff permissions.
     | `icon` | string (binary) |  |  |
     | `default_vm_category` | boolean |  | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean |  | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean |  | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `group` | string (uri) |  |  |
 
 
@@ -340,7 +338,6 @@ Creates a new marketplace category. Requires staff permissions.
     | `icon` | string (uri) |  |
     | `default_vm_category` | boolean | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `offering_count` | integer |  |
     | `available_offerings_count` | integer |  |
     | `sections` | array of objects |  |
@@ -457,7 +454,6 @@ Updates an existing marketplace category. Requires staff permissions.
     | `icon` | string (binary) |  |  |
     | `default_vm_category` | boolean |  | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean |  | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean |  | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `group` | string (uri) |  |  |
 
 
@@ -474,7 +470,6 @@ Updates an existing marketplace category. Requires staff permissions.
     | `icon` | string (uri) |  |
     | `default_vm_category` | boolean | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `offering_count` | integer |  |
     | `available_offerings_count` | integer |  |
     | `sections` | array of objects |  |
@@ -585,7 +580,6 @@ Partially updates an existing marketplace category. Requires staff permissions.
     | `icon` | string (binary) |  |  |
     | `default_vm_category` | boolean |  | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean |  | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean |  | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `group` | string (uri) |  |  |
 
 
@@ -602,7 +596,6 @@ Partially updates an existing marketplace category. Requires staff permissions.
     | `icon` | string (uri) |  |
     | `default_vm_category` | boolean | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `offering_count` | integer |  |
     | `available_offerings_count` | integer |  |
     | `sections` | array of objects |  |

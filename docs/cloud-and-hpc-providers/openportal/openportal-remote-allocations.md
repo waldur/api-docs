@@ -15,7 +15,7 @@
 | <span class="http-badge http-delete">DELETE</span> | `/api/openportal-remote-allocations/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-remote-allocations/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
-| <span class="http-badge http-post">POST</span> | `/api/openportal-remote-allocations/{uuid}/set_limits/` | [Set limits](#set-limits) |
+| <span class="http-badge http-post">POST</span> | `/api/openportal-remote-allocations/{uuid}/set_limits/` | [Set limits for allocation](#set-limits-for-allocation) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-remote-allocations/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 
 ---
@@ -947,7 +947,9 @@ Manually transition the resource to ERRED state. This is useful for resources st
 
 ---
 
-### Set limits
+### Set limits for allocation
+
+Set limits for allocation
 
 
 === "HTTPie"
@@ -964,14 +966,14 @@ Manually transition the resource to ERRED state. This is useful for resources st
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.remote_allocation_set_limits_request import RemoteAllocationSetLimitsRequest # (1)
+    from waldur_api_client.models.allocation_set_limits_request import AllocationSetLimitsRequest # (1)
     from waldur_api_client.api.openportal_remote_allocations import openportal_remote_allocations_set_limits # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = RemoteAllocationSetLimitsRequest(
+    body_data = AllocationSetLimitsRequest(
         node_limit=123
     )
     response = openportal_remote_allocations_set_limits.sync(
@@ -984,7 +986,7 @@ Manually transition the resource to ERRED state. This is useful for resources st
     ```
     
     
-    1.  **Model Source:** [`RemoteAllocationSetLimitsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/remote_allocation_set_limits_request.py)
+    1.  **Model Source:** [`AllocationSetLimitsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/allocation_set_limits_request.py)
     2.  **API Source:** [`openportal_remote_allocations_set_limits`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_remote_allocations/openportal_remote_allocations_set_limits.py)
 
 === "TypeScript"
@@ -1025,11 +1027,8 @@ Manually transition the resource to ERRED state. This is useful for resources st
 
 === "Responses"
 
-    **`202`** - 
+    **`202`** - No response body
     
-    | Field | Type |
-    |---|---|
-    | `status` | string |
 
 ---
 

@@ -96,11 +96,15 @@
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
     | `endpoints.url` | string | URL of the access endpoint |
+    | `default_access_subnets` | array of objects |  |
+    | `default_access_subnets.uuid` | string (uuid) |  |
+    | `default_access_subnets.inet` | string |  |
+    | `default_access_subnets.description` | string |  |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -126,7 +130,28 @@
     | `partitions.exclusive_user` | boolean | Exclusive user access required |
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
+    | `partitions.qos_options` | array of objects |  |
+    | `partitions.qos_options.uuid` | string (uuid) |  |
+    | `partitions.qos_options.qos` | string (uuid) |  |
+    | `partitions.qos_options.qos_name` | string |  |
+    | `partitions.qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
+    | `qos_profiles` | array of objects |  |
+    | `qos_profiles.uuid` | string (uuid) |  |
+    | `qos_profiles.name` | string | Name of the SLURM QOS. |
+    | `qos_profiles.description` | string |  |
+    | `qos_profiles.max_nodes` | integer | Maximum nodes per job |
+    | `qos_profiles.min_nodes` | integer | Minimum nodes per job |
+    | `qos_profiles.default_time` | integer | Default time limit in minutes |
+    | `qos_profiles.max_time` | integer | Maximum wall time in minutes |
+    | `qos_profiles.grace_time` | integer | Preemption grace time in seconds |
+    | `qos_profiles.priority` | integer | Scheduling priority |
+    | `qos_profiles.grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `qos_profiles.max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -202,9 +227,8 @@
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -272,6 +296,7 @@
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
+    | `open_for_proposals` | boolean |  |
     | `googlecalendar` | object |  |
     | `googlecalendar.backend_id` | string |  |
     | `googlecalendar.public` | boolean |  |
@@ -367,11 +392,15 @@
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
     | `endpoints.url` | string | URL of the access endpoint |
+    | `default_access_subnets` | array of objects |  |
+    | `default_access_subnets.uuid` | string (uuid) |  |
+    | `default_access_subnets.inet` | string |  |
+    | `default_access_subnets.description` | string |  |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -397,7 +426,28 @@
     | `partitions.exclusive_user` | boolean | Exclusive user access required |
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
+    | `partitions.qos_options` | array of objects |  |
+    | `partitions.qos_options.uuid` | string (uuid) |  |
+    | `partitions.qos_options.qos` | string (uuid) |  |
+    | `partitions.qos_options.qos_name` | string |  |
+    | `partitions.qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
+    | `qos_profiles` | array of objects |  |
+    | `qos_profiles.uuid` | string (uuid) |  |
+    | `qos_profiles.name` | string | Name of the SLURM QOS. |
+    | `qos_profiles.description` | string |  |
+    | `qos_profiles.max_nodes` | integer | Maximum nodes per job |
+    | `qos_profiles.min_nodes` | integer | Minimum nodes per job |
+    | `qos_profiles.default_time` | integer | Default time limit in minutes |
+    | `qos_profiles.max_time` | integer | Maximum wall time in minutes |
+    | `qos_profiles.grace_time` | integer | Preemption grace time in seconds |
+    | `qos_profiles.priority` | integer | Scheduling priority |
+    | `qos_profiles.grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `qos_profiles.max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -473,9 +523,8 @@
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -543,6 +592,7 @@
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
+    | `open_for_proposals` | boolean |  |
     | `googlecalendar` | object |  |
     | `googlecalendar.backend_id` | string |  |
     | `googlecalendar.public` | boolean |  |

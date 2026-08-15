@@ -66,6 +66,7 @@
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `customer_uuid` | string (uuid) | Filter by customer UUID. |
     | `month` | integer | Filter by month. |
     | `name` | string | Name |
@@ -107,7 +108,7 @@
     | `payment_profiles.attributes` | object |
     | `payment_profiles.attributes.end_date` | string |
     | `payment_profiles.attributes.agreement_number` | string |
-    | `payment_profiles.attributes.contract_sum` | integer |
+    | `payment_profiles.attributes.contract_sum` | string |
     | `payment_profiles.payment_type` | string |
     | `payment_profiles.payment_type_display` | string |
     | `payment_profiles.is_active` | boolean |
@@ -195,7 +196,7 @@
     | `payment_profiles.attributes` | object |
     | `payment_profiles.attributes.end_date` | string |
     | `payment_profiles.attributes.agreement_number` | string |
-    | `payment_profiles.attributes.contract_sum` | integer |
+    | `payment_profiles.attributes.contract_sum` | string |
     | `payment_profiles.payment_type` | string |
     | `payment_profiles.payment_type_display` | string |
     | `payment_profiles.is_active` | boolean |

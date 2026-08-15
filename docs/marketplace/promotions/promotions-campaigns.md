@@ -663,7 +663,10 @@ Return a list of orders for which the campaign is applied.
     | `created_by_civil_number` | string |  |
     | `created_by_email` | string (email) |  |
     | `created_by_organization` | string |  |
+    | `created_by_organization_country` | string |  |
     | `created_by_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `created_by_organization_vat_code` | string | VAT code of the user's organization |
+    | `created_by_organization_address` | string | Postal address of the user's organization |
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
@@ -686,8 +689,10 @@ Return a list of orders for which the campaign is applied.
     | `provider_message` | string |  |
     | `provider_message_url` | string (uri) |  |
     | `provider_message_attachment` | string (uri) |  |
+    | `provider_message_updated_at` | string (date-time) |  |
     | `consumer_message` | string |  |
     | `consumer_message_attachment` | string (uri) |  |
+    | `consumer_message_updated_at` | string (date-time) |  |
     | `consumer_rejection_comment` | string |  |
     | `provider_rejection_comment` | string |  |
     | `auto_approved` | boolean |  |
@@ -817,7 +822,8 @@ Return a list of resources for which the campaign is applied.
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -843,10 +849,11 @@ Return a list of resources for which the campaign is applied.
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -891,6 +898,7 @@ Return a list of resources for which the campaign is applied.
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
 
 ---
 

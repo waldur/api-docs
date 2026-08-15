@@ -144,6 +144,7 @@ Get a list of routers.
     | `ports.subnet_description` | string |  |
     | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `ports.allowed_address_pairs` | array of objects |  |
+    | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
     | `ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -341,6 +342,7 @@ Retrieve details of a specific router.
     | `ports.subnet_description` | string |  |
     | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `ports.allowed_address_pairs` | array of objects |  |
+    | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
     | `ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |

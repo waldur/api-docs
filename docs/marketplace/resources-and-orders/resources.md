@@ -211,7 +211,8 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -237,10 +238,11 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -285,6 +287,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
 
 ---
 
@@ -363,7 +366,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `o` | array | Ordering fields |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `role` | string (uuid) | Role UUID or name |
+    | `role` | array | Role UUID or name. Repeat to filter by several roles. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -509,7 +512,8 @@ Returns details of a specific resource accessible to the consumer.
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -535,10 +539,11 @@ Returns details of a specific resource accessible to the consumer.
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -583,6 +588,7 @@ Returns details of a specific resource accessible to the consumer.
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
 
 ---
 
@@ -1375,7 +1381,8 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `project_name` | string |  |
     | `project_description` | string |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
-    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources will be terminated. |
+    | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
+    | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
     | `project_is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
     | `project_end_date_requested_by` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -1401,10 +1408,11 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
     | `username` | string |  |
-    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. For monthly periods, maps from current_usages; for longer periods, aggregates historical usage. |
+    | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
+    | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
@@ -1449,6 +1457,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
 
 ---
 
@@ -2379,11 +2388,15 @@ Returns details of the offering connected to the requested object.
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
     | `endpoints.url` | string | URL of the access endpoint |
+    | `default_access_subnets` | array of objects |  |
+    | `default_access_subnets.uuid` | string (uuid) |  |
+    | `default_access_subnets.inet` | string |  |
+    | `default_access_subnets.description` | string |  |
     | `software_catalogs` | array of objects |  |
     | `software_catalogs.uuid` | string (uuid) |  |
     | `software_catalogs.catalog` | any |  |
-    | `software_catalogs.enabled_cpu_family` | object (free-form) | List of enabled CPU families: ['x86_64', 'aarch64'] |
-    | `software_catalogs.enabled_cpu_microarchitectures` | object (free-form) | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
+    | `software_catalogs.enabled_cpu_family` | array of strings | List of enabled CPU families: ['x86_64', 'aarch64'] |
+    | `software_catalogs.enabled_cpu_microarchitectures` | array of strings | List of enabled CPU microarchitectures: ['generic', 'zen3'] |
     | `software_catalogs.package_count` | integer |  |
     | `software_catalogs.partition` | any |  |
     | `partitions` | array of objects |  |
@@ -2409,7 +2422,28 @@ Returns details of the offering connected to the requested object.
     | `partitions.exclusive_user` | boolean | Exclusive user access required |
     | `partitions.priority_tier` | integer | Priority tier for scheduling and preemption |
     | `partitions.qos` | string | Quality of Service (QOS) name |
+    | `partitions.qos_options` | array of objects |  |
+    | `partitions.qos_options.uuid` | string (uuid) |  |
+    | `partitions.qos_options.qos` | string (uuid) |  |
+    | `partitions.qos_options.qos_name` | string |  |
+    | `partitions.qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `partitions.req_resv` | boolean | Require reservation for job allocation |
+    | `qos_profiles` | array of objects |  |
+    | `qos_profiles.uuid` | string (uuid) |  |
+    | `qos_profiles.name` | string | Name of the SLURM QOS. |
+    | `qos_profiles.description` | string |  |
+    | `qos_profiles.max_nodes` | integer | Maximum nodes per job |
+    | `qos_profiles.min_nodes` | integer | Minimum nodes per job |
+    | `qos_profiles.default_time` | integer | Default time limit in minutes |
+    | `qos_profiles.max_time` | integer | Maximum wall time in minutes |
+    | `qos_profiles.grace_time` | integer | Preemption grace time in seconds |
+    | `qos_profiles.priority` | integer | Scheduling priority |
+    | `qos_profiles.grp_tres` | string | Aggregate TRES the QOS may allocate at once (GrpTRES) |
+    | `qos_profiles.max_tres_per_job` | string | Max TRES per job (MaxTRESPerJob) |
+    | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
+    | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
+    | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -2485,9 +2519,8 @@ Returns details of the offering connected to the requested object.
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -2555,6 +2588,7 @@ Returns details of the offering connected to the requested object.
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
     | `is_accessible` | boolean |  |
+    | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
     | `google_calendar_is_public` | boolean |  |
     | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
@@ -2887,6 +2921,13 @@ One row per user (deduplicated) with their direct Resource role and a nested `re
     | `image` | string (uri) |  |
     | `role_name` | string |  |
     | `role_uuid` | string |  |
+    | `roles` | array of objects |  |
+    | `roles.role_name` | string |  |
+    | `roles.role_uuid` | string (uuid) |  |
+    | `roles.expiration_time` | string (date-time) |  |
+    | `roles.sync_state` | string |  |
+    | `roles.sync_message` | string |  |
+    | `roles.sync_reported_at` | string (date-time) |  |
     | `expiration_time` | string (date-time) |  |
     | `resource_projects` | array of objects |  |
     | `resource_projects.url` | string (uri) |  |
@@ -2895,6 +2936,9 @@ One row per user (deduplicated) with their direct Resource role and a nested `re
     | `resource_projects.role_name` | string |  |
     | `resource_projects.role_uuid` | string (uuid) |  |
     | `resource_projects.expiration_time` | string (date-time) |  |
+    | `resource_projects.sync_state` | string |  |
+    | `resource_projects.sync_message` | string |  |
+    | `resource_projects.sync_reported_at` | string (date-time) |  |
 
 ---
 

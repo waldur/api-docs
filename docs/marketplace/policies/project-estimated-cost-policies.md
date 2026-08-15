@@ -70,11 +70,14 @@
     |---|---|---|
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
+    | `has_resource` | boolean |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `project` | string (uri) |  |
     | `project_uuid` | string (uuid) |  |
     | `query` | string |  |
+    | `resource` | string (uri) |  |
+    | `resource_uuid` | string (uuid) |  |
     | `scope` | string (uri) |  |
     | `scope_uuid` | string (uuid) |  |
 
@@ -105,6 +108,9 @@
     | `period_name` | string |  |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `use_credit` | boolean |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -191,6 +197,9 @@
     | `period_name` | string |  |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `use_credit` | boolean |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -268,6 +277,8 @@
     | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `limit_cost` | integer | ✓ |  |
     | `period` | any |  |  |
+    | `resource` | string (uuid) |  |  |
+    | `use_credit` | boolean |  |  |
 
 
 === "Responses"
@@ -294,6 +305,9 @@
     | `period_name` | string |  |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `use_credit` | boolean |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -382,6 +396,8 @@
     | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `limit_cost` | integer | ✓ |  |
     | `period` | any |  |  |
+    | `resource` | string (uuid) |  |  |
+    | `use_credit` | boolean |  |  |
 
 
 === "Responses"
@@ -408,6 +424,9 @@
     | `period_name` | string |  |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `use_credit` | boolean |  |
     | `billing_price_estimate` | any |  |
 
 ---
@@ -484,6 +503,8 @@
     | `options` | object (free-form) |  | Fields for saving actions extra data. Keys are name of actions. |
     | `limit_cost` | integer |  |  |
     | `period` | any |  |  |
+    | `resource` | string (uuid) |  |  |
+    | `use_credit` | boolean |  |  |
 
 
 === "Responses"
@@ -510,6 +531,9 @@
     | `period_name` | string |  |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `use_credit` | boolean |  |
     | `billing_price_estimate` | any |  |
 
 ---

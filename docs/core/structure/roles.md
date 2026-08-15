@@ -13,6 +13,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/roles/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/roles/{uuid}/` | [Delete a role](#delete-a-role) |
 | **Other Actions** | | |
+| <span class="http-badge http-post">POST</span> | `/api/roles/{uuid}/clone_to_customer/` | [Clone a role into an organization](#clone-a-role-into-an-organization) |
 | <span class="http-badge http-post">POST</span> | `/api/roles/{uuid}/disable/` | [Disable a role](#disable-a-role) |
 | <span class="http-badge http-post">POST</span> | `/api/roles/{uuid}/enable/` | [Enable a role](#enable-a-role) |
 
@@ -39,7 +40,8 @@ Get a list of all available roles.
     ```python
     from waldur_api_client.client import AuthenticatedClient
     from waldur_api_client.models.role_details_field_enum import RoleDetailsFieldEnum # (1)
-    from waldur_api_client.api.roles import roles_list # (2)
+    from waldur_api_client.models.role_details_o_enum import RoleDetailsOEnum # (2)
+    from waldur_api_client.api.roles import roles_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -52,7 +54,8 @@ Get a list of all available roles.
     
     
     1.  **Model Source:** [`RoleDetailsFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/role_details_field_enum.py)
-    2.  **API Source:** [`roles_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/roles/roles_list.py)
+    2.  **Model Source:** [`RoleDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/role_details_o_enum.py)
+    3.  **API Source:** [`roles_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/roles/roles_list.py)
 
 === "TypeScript"
 
@@ -74,12 +77,18 @@ Get a list of all available roles.
 
     | Name | Type | Description |
     |---|---|---|
+    | `available_for_customer` | string (uuid) | Roles usable within a customer (uuid): system roles + org-private, minus concealed |
+    | `content_type` | string | Comma-separated scope types (e.g. 'customer,project') to keep. |
     | `description` | string |  |
     | `field` | array |  |
+    | `include_concealed` | boolean | Keep roles concealed for the customer in the available_for_customer result (staff management view). |
     | `is_active` | boolean |  |
+    | `is_system_role` | boolean |  |
     | `name` | string |  |
+    | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string | Search by role name or description. |
 
 
 === "Responses"
@@ -107,11 +116,16 @@ Get a list of all available roles.
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
     | `users_count` | integer |
     | `content_type` | any |
+    | `template_uuid` | string |
+    | `template_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
 
 ---
 
@@ -207,11 +221,16 @@ Retrieve the details of a specific role by its UUID.
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
     | `users_count` | integer |
     | `content_type` | any |
+    | `template_uuid` | string |
+    | `template_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
 
 ---
 
@@ -301,6 +320,7 @@ Allows staff users to create a new custom role with a specific set of permission
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
+    | `description_km` | string |  |
     | `permissions` | object (free-form) | ✓ |
     | `is_active` | boolean |  |
     | `content_type` | string | ✓ |
@@ -329,11 +349,16 @@ Allows staff users to create a new custom role with a specific set of permission
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
     | `users_count` | integer |
     | `content_type` | any |
+    | `template_uuid` | string |
+    | `template_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
 
 ---
 
@@ -434,6 +459,7 @@ Allows staff users to update an existing role's name, description, content type,
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
+    | `description_km` | string |  |
     | `permissions` | object (free-form) | ✓ |
     | `is_active` | boolean |  |
     | `content_type` | string | ✓ |
@@ -462,11 +488,16 @@ Allows staff users to update an existing role's name, description, content type,
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
     | `users_count` | integer |
     | `content_type` | any |
+    | `template_uuid` | string |
+    | `template_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
 
 ---
 
@@ -554,6 +585,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
+    | `description_km` | string |  |
 
 
 === "Responses"
@@ -577,6 +609,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_km` | string |
 
 ---
 
@@ -663,6 +696,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
+    | `description_km` | string |  |
     | `is_active` | boolean |  |
 
 
@@ -689,11 +723,16 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
     | `users_count` | integer |
     | `content_type` | any |
+    | `template_uuid` | string |
+    | `template_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
 
 ---
 
@@ -766,6 +805,122 @@ Allows staff users to delete a custom role. System roles and roles that are curr
 
 ## Other Actions
 
+
+### Clone a role into an organization
+
+Staff-only. Creates an organization-private copy of this role (customer or project scope), bound to the given customer and usable only within that organization and its projects. Cloning the same template into the same organization twice is rejected.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/roles/a1b2c3d4-e5f6-7890-abcd-ef1234567890/clone_to_customer/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      customer="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.role_clone_request import RoleCloneRequest # (1)
+    from waldur_api_client.api.roles import roles_clone_to_customer # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = RoleCloneRequest(
+        customer="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = roles_clone_to_customer.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`RoleCloneRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/role_clone_request.py)
+    2.  **API Source:** [`roles_clone_to_customer`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/roles/roles_clone_to_customer.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { rolesCloneToCustomer } from 'waldur-js-client';
+    
+    try {
+      const response = await rolesCloneToCustomer({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "customer": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `customer` | string (uuid) | ✓ |
+    | `description` | string |  |
+    | `conceal_template` | boolean |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `description_en` | string |
+    | `description_et` | string |
+    | `description_lt` | string |
+    | `description_lv` | string |
+    | `description_ru` | string |
+    | `description_it` | string |
+    | `description_de` | string |
+    | `description_da` | string |
+    | `description_sv` | string |
+    | `description_es` | string |
+    | `description_fr` | string |
+    | `description_nb` | string |
+    | `description_ar` | string |
+    | `description_cs` | string |
+    | `description_km` | string |
+    | `permissions` | array of strings |
+    | `is_system_role` | boolean |
+    | `is_active` | boolean |
+    | `users_count` | integer |
+    | `content_type` | any |
+    | `template_uuid` | string |
+    | `template_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+
+---
 
 ### Disable a role
 

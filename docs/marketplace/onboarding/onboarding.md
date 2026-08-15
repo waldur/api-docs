@@ -69,7 +69,7 @@ Return person identifier field specification for a specific validation method. T
 
     | Name | Type | Required | Description |
     |---|---|---|---|
-    | `validation_method` | string | ✓ | Validation method identifier<br>_Enum: `ariregister`, `wirtschaftscompass`, `bolagsverket`, `breg`_ |
+    | `validation_method` | string | ✓ | Validation method identifier<br>_Enum: `ariregister`, `wirtschaftscompass`, `bolagsverket`, `breg`, `dnb_se`, `dnb_no`, `dnb_dk`, `dnb_fi`_ |
 
 
 === "Responses"

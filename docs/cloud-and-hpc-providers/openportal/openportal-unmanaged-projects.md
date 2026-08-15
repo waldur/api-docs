@@ -95,6 +95,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `customer` | array | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string | Customer abbreviation |
     | `customer_name` | string | Customer name |
@@ -157,7 +158,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -167,9 +168,9 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -291,7 +292,7 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -301,9 +302,9 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -401,9 +402,9 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `kind` | any |  |  |
     | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
-    | `user_email_patterns` | object (free-form) |  |  |
-    | `user_affiliations` | object (free-form) |  |  |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -444,7 +445,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -454,9 +455,9 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -644,9 +645,9 @@ Update the details of a project. Requires project administrator or customer owne
     | `kind` | any |  |  |
     | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
-    | `user_email_patterns` | object (free-form) |  |  |
-    | `user_affiliations` | object (free-form) |  |  |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -687,7 +688,7 @@ Update the details of a project. Requires project administrator or customer owne
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -697,9 +698,9 @@ Update the details of a project. Requires project administrator or customer owne
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -799,9 +800,9 @@ Partially update the details of a project. Requires project administrator or cus
     | `kind` | any |  |  |
     | `staff_notes` | string |  | Internal notes visible only to staff and support users (HTML content will be sanitized) |
     | `grace_period_days` | integer |  | Number of extra days after project end date before resources are terminated. Overrides customer-level setting. |
-    | `user_email_patterns` | object (free-form) |  |  |
-    | `user_affiliations` | object (free-form) |  |  |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -842,7 +843,7 @@ Partially update the details of a project. Requires project administrator or cus
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -852,9 +853,9 @@ Partially update the details of a project. Requires project administrator or cus
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -1016,7 +1017,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `o` | array | Ordering fields |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `role` | string (uuid) | Role UUID or name |
+    | `role` | array | Role UUID or name. Repeat to filter by several roles. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -1882,7 +1883,7 @@ Moves a project and its associated resources to a different customer. You can ch
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -1892,9 +1893,9 @@ Moves a project and its associated resources to a different customer. You can ch
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -2021,7 +2022,7 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -2031,9 +2032,9 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |

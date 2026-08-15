@@ -79,6 +79,7 @@
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `slug` | string | Slug |
@@ -112,6 +113,7 @@
     | `offerings.offering` | string (uri) |  |
     | `offerings.offering_name` | string |  |
     | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_type` | string |  |
     | `offerings.provider_name` | string |  |
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
@@ -147,6 +149,7 @@
     | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -155,13 +158,8 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -181,6 +179,34 @@
     | `resource_templates.requested_offering_name` | string |  |
     | `resource_templates.requested_offering_uuid` | string (uuid) |  |
     | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.requested_offering_type` | string |  |
+    | `resource_templates.requested_offering_components` | array of objects |  |
+    | `resource_templates.requested_offering_components.uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `resource_templates.requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `resource_templates.requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `resource_templates.requested_offering_components.description` | string |  |
+    | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `resource_templates.requested_offering_components.limit_period` | any |  |
+    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.article_code` | string |  |
+    | `resource_templates.requested_offering_components.max_value` | integer |  |
+    | `resource_templates.requested_offering_components.min_value` | integer |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
+    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.factor` | integer |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
+    | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.max_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `resource_templates.requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `resource_templates.created_by` | string (uri) |  |
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
@@ -285,6 +311,7 @@
     | `offerings.offering` | string (uri) |  |
     | `offerings.offering_name` | string |  |
     | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_type` | string |  |
     | `offerings.provider_name` | string |  |
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
@@ -320,6 +347,7 @@
     | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -328,13 +356,8 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -354,6 +377,34 @@
     | `resource_templates.requested_offering_name` | string |  |
     | `resource_templates.requested_offering_uuid` | string (uuid) |  |
     | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.requested_offering_type` | string |  |
+    | `resource_templates.requested_offering_components` | array of objects |  |
+    | `resource_templates.requested_offering_components.uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `resource_templates.requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `resource_templates.requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `resource_templates.requested_offering_components.description` | string |  |
+    | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `resource_templates.requested_offering_components.limit_period` | any |  |
+    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.article_code` | string |  |
+    | `resource_templates.requested_offering_components.max_value` | integer |  |
+    | `resource_templates.requested_offering_components.min_value` | integer |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
+    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.factor` | integer |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
+    | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.max_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `resource_templates.requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `resource_templates.created_by` | string (uri) |  |
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |

@@ -188,6 +188,7 @@ Get a list of instance backups.
     | `restorations.ports.subnet_description` | string |  |
     | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
+    | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
     | `restorations.ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `restorations.ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -271,6 +272,7 @@ Get a list of instance backups.
     | `instance_ports.subnet_description` | string |  |
     | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
+    | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
     | `instance_ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `instance_ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -506,6 +508,7 @@ Retrieve details of a specific instance backup.
     | `restorations.ports.subnet_description` | string |  |
     | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
+    | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
     | `restorations.ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `restorations.ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -589,6 +592,7 @@ Retrieve details of a specific instance backup.
     | `instance_ports.subnet_description` | string |  |
     | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
+    | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
     | `instance_ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `instance_ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -982,6 +986,7 @@ Update an existing instance backup.
     | `restorations.ports.subnet_description` | string |  |
     | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
+    | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
     | `restorations.ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `restorations.ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -1065,6 +1070,7 @@ Update an existing instance backup.
     | `instance_ports.subnet_description` | string |  |
     | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
+    | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
     | `instance_ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `instance_ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -1305,6 +1311,7 @@ Update specific fields of an instance backup.
     | `restorations.ports.subnet_description` | string |  |
     | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
+    | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
     | `restorations.ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `restorations.ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -1388,6 +1395,7 @@ Update specific fields of an instance backup.
     | `instance_ports.subnet_description` | string |  |
     | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
+    | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
     | `instance_ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `instance_ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |
@@ -1670,7 +1678,7 @@ Restore instance from backup
     | `disk` | integer | Disk size in MiB |
     | `min_ram` | integer | Minimum memory size in MiB |
     | `min_disk` | integer | Minimum disk size in MiB |
-    | `user_data` | string | Additional data that will be added to instance on provisioning |
+    | `user_data` | string | Cloud-init user data passed to the instance on provisioning. SECURITY: this value is stored and transmitted in plain text — it is kept unencrypted in Waldur's database, forwarded to OpenStack where any process on the instance can read it via the metadata service, and it may appear in logs. Do NOT put unencrypted secrets (passwords, private keys, API tokens) here; reference a secrets manager or inject them through an encrypted channel instead. |
     | `external_ips` | array of string (ipv4)s |  |
     | `internal_ips` | array of string (ipv4)s |  |
     | `latitude` | number (double) |  |
@@ -1739,6 +1747,7 @@ Restore instance from backup
     | `ports.subnet_description` | string |  |
     | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
     | `ports.allowed_address_pairs` | array of objects |  |
+    | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
     | `ports.device_id` | string | ID of device (instance, router etc) to which this port is connected |
     | `ports.device_owner` | string | Entity that uses this port (e.g. network:router_interface) |

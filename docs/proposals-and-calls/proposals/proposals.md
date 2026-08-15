@@ -23,19 +23,22 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/` | [List resources for a proposal](#list-resources-for-a-proposal) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/step-checklist-responses/` | [Step checklist responses](#step-checklist-responses) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/step-checklist/` | [Get a workflow step's checklist with questions and answers](#get-a-workflow-steps-checklist-with-questions-and-answers) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/workflow_states/` | [List all workflow step instances for this proposal](#list-all-workflow-step-instances-for-this-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/advance_workflow_step/` | [Manually advance a workflow that is awaiting call-manager confirmation](#manually-advance-a-workflow-that-is-awaiting-call-manager-confirmation) |
-| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/approve/` | [Approve a proposal](#approve-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/attach_document/` | [Attach document to proposal](#attach-document-to-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/complete_workflow_step/` | [Complete the current workflow step with an outcome](#complete-the-current-workflow-step-with-an-outcome) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/detach_documents/` | [Detach documents from proposal](#detach-documents-from-proposal) |
-| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/reject/` | [Reject a proposal](#reject-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/reject_workflow_step/` | [Reject the proposal at the current workflow step](#reject-the-proposal-at-the-current-workflow-step) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/purchase_order/` | [Upload or replace the purchase order of a requested resource](#upload-or-replace-the-purchase-order-of-a-requested-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/resources/` | [Create resource for a proposal](#create-resource-for-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit/` | [Submit a proposal](#submit-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit_answers/` | [Submit checklist answers](#submit-checklist-answers) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit-step-checklist-answers/` | [Submit answers to a workflow step's checklist](#submit-answers-to-a-workflow-steps-checklist) |
 | <span class="http-badge http-put">PUT</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Partial Update](#partial-update) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/purchase_order/` | [Remove the purchase order of a requested resource](#remove-the-purchase-order-of-a-requested-resource) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Delete](#delete) |
 
 ---
@@ -149,20 +152,22 @@
     | `applicant_organization_country` | string |  |
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_organization_vat_code` | string | VAT code of the user's organization |
+    | `applicant_organization_address` | string | Postal address of the user's organization |
     | `applicant_job_title` | string |  |
-    | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_affiliations` | array of strings |  |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |
     | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `applicant_place_of_birth` | string |  |
     | `applicant_address` | string |  |
     | `applicant_country_of_residence` | string |  |
     | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `applicant_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
-    | `applicant_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `applicant_nationalities` | array of strings |  |
+    | `applicant_eduperson_assurance` | array of strings |  |
     | `applicant_identity_source` | string | Indicates what identity provider was used. |
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
-    | `applicant_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `applicant_active_isds` | array of strings |  |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
@@ -180,6 +185,7 @@
     | `compliance_status` | any |  |
     | `can_submit` | any |  |
     | `awaiting_manual_advance` | boolean |  |
+    | `workflow_step` | any | Current active workflow step for this proposal. |
 
 ---
 
@@ -278,20 +284,22 @@
     | `applicant_organization_country` | string |  |
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_organization_vat_code` | string | VAT code of the user's organization |
+    | `applicant_organization_address` | string | Postal address of the user's organization |
     | `applicant_job_title` | string |  |
-    | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_affiliations` | array of strings |  |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |
     | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `applicant_place_of_birth` | string |  |
     | `applicant_address` | string |  |
     | `applicant_country_of_residence` | string |  |
     | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `applicant_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
-    | `applicant_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `applicant_nationalities` | array of strings |  |
+    | `applicant_eduperson_assurance` | array of strings |  |
     | `applicant_identity_source` | string | Indicates what identity provider was used. |
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
-    | `applicant_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `applicant_active_isds` | array of strings |  |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
@@ -309,6 +317,7 @@
     | `compliance_status` | any |  |
     | `can_submit` | any |  |
     | `awaiting_manual_advance` | boolean |  |
+    | `workflow_step` | any | Current active workflow step for this proposal. |
 
 ---
 
@@ -425,20 +434,22 @@
     | `applicant_organization_country` | string |  |
     | `applicant_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `applicant_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `applicant_organization_vat_code` | string | VAT code of the user's organization |
+    | `applicant_organization_address` | string | Postal address of the user's organization |
     | `applicant_job_title` | string |  |
-    | `applicant_affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `applicant_affiliations` | array of strings |  |
     | `applicant_gender` | any | User's gender (male, female, or unknown) |
     | `applicant_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
     | `applicant_place_of_birth` | string |  |
     | `applicant_address` | string |  |
     | `applicant_country_of_residence` | string |  |
     | `applicant_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `applicant_nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
-    | `applicant_eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `applicant_nationalities` | array of strings |  |
+    | `applicant_eduperson_assurance` | array of strings |  |
     | `applicant_identity_source` | string | Indicates what identity provider was used. |
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
-    | `applicant_active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `applicant_active_isds` | array of strings |  |
     | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
@@ -456,6 +467,7 @@
     | `compliance_status` | any |  |
     | `can_submit` | any |  |
     | `awaiting_manual_advance` | boolean |  |
+    | `workflow_step` | any | Current active workflow step for this proposal. |
 
 ---
 
@@ -693,7 +705,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `o` | array | Ordering fields |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `role` | string (uuid) | Role UUID or name |
+    | `role` | array | Role UUID or name. Repeat to filter by several roles. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -1642,20 +1654,24 @@ List resources for a proposal.
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string |
-    | `requested_offering` | any |
-    | `resource` | string (uri) |
-    | `resource_name` | string |
-    | `call_resource_template` | string |
-    | `call_resource_template_name` | string |
-    | `attributes` | object (free-form) |
-    | `limits` | object (free-form) |
-    | `description` | string |
-    | `created_by` | string (uri) |
-    | `created_by_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_offering` | any |  |
+    | `resource` | string (uri) |  |
+    | `resource_name` | string |  |
+    | `call_resource_template` | string |  |
+    | `call_resource_template_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
+    | `attachment` | string (uri) |  |
+    | `purchase_order_required` | boolean |  |
+    | `has_purchase_order` | boolean | Either half satisfies the requirement.  Some providers want the document, others only need the reference from the customer's finance system; demanding both would block the second group for no gain. |
+    | `description` | string |  |
+    | `created_by` | string (uri) |  |
+    | `created_by_name` | string |  |
 
 ---
 
@@ -1724,20 +1740,258 @@ List resources for a proposal.
 
     **`200`** - 
     
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_offering` | any |  |
+    | `resource` | string (uri) |  |
+    | `resource_name` | string |  |
+    | `call_resource_template` | string |  |
+    | `call_resource_template_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
+    | `attachment` | string (uri) |  |
+    | `purchase_order_required` | boolean |  |
+    | `has_purchase_order` | boolean | Either half satisfies the requirement.  Some providers want the document, others only need the reference from the customer's finance system; demanding both would block the second group for no gain. |
+    | `description` | string |  |
+    | `created_by` | string (uri) |  |
+    | `created_by_name` | string |  |
+
+---
+
+### Step checklist responses
+
+List a workflow step's checklist answers grouped by reviewer, for the threaded technical-assessment view. Each technical reviewer (offering manager) answers the same checklist; this returns every reviewer's decision and comment.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/step-checklist-responses/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
+    from waldur_api_client.models.proposal_states import ProposalStates # (2)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_step_checklist_responses_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_step_checklist_responses_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        step="string-value"
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
+    2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
+    3.  **API Source:** [`proposal_proposals_step_checklist_responses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_responses_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsStepChecklistResponsesList } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsStepChecklistResponsesList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "step": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `call_uuid` | string (uuid) |  |  |
+    | `created_by_uuid` | string (uuid) |  |  |
+    | `my_proposals` | boolean |  |  |
+    | `name` | string |  |  |
+    | `o` | array |  | Ordering<br><br> |
+    | `organization_uuid` | string (uuid) |  |  |
+    | `page` | integer |  | A page number within the paginated result set. |
+    | `page_size` | integer |  | Number of results to return per page. |
+    | `round` | string (uuid) |  |  |
+    | `round_uuid` | string (uuid) |  |  |
+    | `slug` | string |  | Slug |
+    | `state` | array |  |  |
+    | `step` | string | ✓ | Workflow step key (e.g. technical_assessment). |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
     | Field | Type |
     |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string |
-    | `requested_offering` | any |
-    | `resource` | string (uri) |
-    | `resource_name` | string |
-    | `call_resource_template` | string |
-    | `call_resource_template_name` | string |
-    | `attributes` | object (free-form) |
-    | `limits` | object (free-form) |
-    | `description` | string |
-    | `created_by` | string (uri) |
-    | `created_by_name` | string |
+    | `user_uuid` | string (uuid) |
+    | `user_full_name` | string |
+    | `user_image` | string |
+    | `submitted_at` | string (date-time) |
+    | `answers` | array of objects |
+    | `answers.question_uuid` | string (uuid) |
+    | `answers.question_description` | string |
+    | `answers.question_type` | string |
+    | `answers.answer_data` | object (free-form) |
+    | `answers.answer_display` | string |
+    
+    ---
+    
+    **`400`** - 
+    
+
+---
+
+### Get a workflow step's checklist with questions and answers
+
+Get a workflow step's checklist with questions and answers.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/step-checklist/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_step_checklist_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_step_checklist_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        step="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_step_checklist_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsStepChecklistRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsStepChecklistRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "step": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `include_all` | string |  | Return all questions ignoring dynamic visibility. |
+    | `step` | string | ✓ | Workflow step key (e.g. technical_assessment). |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `checklist` | any |  |
+    | `completion` | object |  |
+    | `completion.uuid` | string (uuid) |  |
+    | `completion.is_completed` | boolean | Whether all required questions have been answered |
+    | `completion.completion_percentage` | number (double) |  |
+    | `completion.unanswered_required_questions` | array of anys |  |
+    | `completion.checklist_name` | string |  |
+    | `completion.checklist_description` | string |  |
+    | `completion.created` | string (date-time) |  |
+    | `completion.modified` | string (date-time) |  |
+    | `questions` | array of objects |  |
+    | `questions.uuid` | string (uuid) |  |
+    | `questions.description` | string |  |
+    | `questions.user_guidance` | string |  |
+    | `questions.question_type` | any | Type of question and expected answer format |
+    | `questions.required` | boolean |  |
+    | `questions.order` | integer |  |
+    | `questions.existing_answer` | any |  |
+    | `questions.question_options` | array of anys |  |
+    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
+    | `questions.allowed_file_types` | object (free-form) | List of allowed file extensions (e.g., ['.pdf', '.doc', '.docx']). If empty, all file types are allowed. |
+    | `questions.allowed_mime_types` | object (free-form) | List of allowed MIME types (e.g., ['application/pdf', 'application/msword']). If empty, MIME type validation is not enforced. When both extensions and MIME types are specified, files must match both criteria for security. |
+    | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
+    | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
+    | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
+    | `questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
+    | `questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
+    | `questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
+    | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
+    | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
+    | `questions.dependencies_info` | any |  |
+    
+    ---
+    
+    **`400`** - 
+    
 
 ---
 
@@ -1849,6 +2103,7 @@ List all workflow step instances for this proposal.
     | `applicant_visible` | boolean |  |
     | `duration_in_days` | integer |  |
     | `is_required` | boolean |  |
+    | `checklist_status` | any |  |
 
 ---
 
@@ -1921,85 +2176,6 @@ Manually advance a workflow that is awaiting call-manager confirmation.
     | `detail` | string |  |
     | `proposal_state` | string | New proposal state when the workflow terminates. |
     | `next_step` | string | Identifier of the step that just became active. |
-
----
-
-### Approve a proposal
-
-Approve a proposal.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/approve/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.proposal_approve_request import ProposalApproveRequest # (1)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_approve # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = ProposalApproveRequest()
-    response = proposal_proposals_approve.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`ProposalApproveRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_approve_request.py)
-    2.  **API Source:** [`proposal_proposals_approve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_approve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProposalsApprove } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProposalsApprove({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `allocation_comment` | string |  |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
 
 ---
 
@@ -2263,85 +2439,6 @@ Detach documents from proposal.
 
 ---
 
-### Reject a proposal
-
-Reject a proposal.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reject/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.proposal_approve_request import ProposalApproveRequest # (1)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_reject # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = ProposalApproveRequest()
-    response = proposal_proposals_reject.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`ProposalApproveRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_approve_request.py)
-    2.  **API Source:** [`proposal_proposals_reject`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_reject.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { proposalProposalsReject } from 'waldur-js-client';
-    
-    try {
-      const response = await proposalProposalsReject({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `allocation_comment` | string |  |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
 ### Reject the proposal at the current workflow step
 
 Reject the proposal at the current workflow step.
@@ -2436,6 +2533,93 @@ Reject the proposal at the current workflow step.
 
 ---
 
+### Upload or replace the purchase order of a requested resource
+
+Upload or replace the purchase order of a requested resource.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-proposals/string-value/resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/purchase_order/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.requested_resource_purchase_order_request import RequestedResourcePurchaseOrderRequest # (1)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_resource_purchase_order_set # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = RequestedResourcePurchaseOrderRequest()
+    response = proposal_proposals_resource_purchase_order_set.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`RequestedResourcePurchaseOrderRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/requested_resource_purchase_order_request.py)
+    2.  **API Source:** [`proposal_proposals_resource_purchase_order_set`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_resource_purchase_order_set.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsResourcePurchaseOrderSet } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsResourcePurchaseOrderSet({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `attachment` | string (binary) |  |
+    | `purchase_order_reference` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `attachment` | string (uri) |
+    | `purchase_order_reference` | string |
+
+---
+
 ### Create resource for a proposal
 
 Create resource for a proposal.
@@ -2507,6 +2691,7 @@ Create resource for a proposal.
     |---|---|---|
     | `attributes` | object (free-form) |  |
     | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
     | `description` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `call_resource_template_uuid` | string (uuid) |  |
@@ -2516,20 +2701,24 @@ Create resource for a proposal.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string |
-    | `requested_offering` | any |
-    | `resource` | string (uri) |
-    | `resource_name` | string |
-    | `call_resource_template` | string |
-    | `call_resource_template_name` | string |
-    | `attributes` | object (free-form) |
-    | `limits` | object (free-form) |
-    | `description` | string |
-    | `created_by` | string (uri) |
-    | `created_by_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_offering` | any |  |
+    | `resource` | string (uri) |  |
+    | `resource_name` | string |  |
+    | `call_resource_template` | string |  |
+    | `call_resource_template_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
+    | `attachment` | string (uri) |  |
+    | `purchase_order_required` | boolean |  |
+    | `has_purchase_order` | boolean | Either half satisfies the requirement.  Some providers want the document, others only need the reference from the customer's finance system; demanding both would block the second group for no gain. |
+    | `description` | string |  |
+    | `created_by` | string (uri) |  |
+    | `created_by_name` | string |  |
 
 ---
 
@@ -2706,6 +2895,119 @@ Submit checklist answers.
 
 ---
 
+### Submit answers to a workflow step's checklist
+
+Submit answers to a workflow step's checklist.
+
+
+=== "HTTPie"
+
+    ```bash
+    echo '[{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]' | http \
+      POST \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/submit-step-checklist-answers/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      step=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_submit_step_checklist_answers # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_submit_step_checklist_answers.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        step="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_submit_step_checklist_answers`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_submit_step_checklist_answers.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsSubmitStepChecklistAnswers } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsSubmitStepChecklistAnswers({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "step": "string-value"
+      },
+      body: [{"question_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "answer_data": null}]
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `step` | string | ✓ | Workflow step key (e.g. technical_assessment). |
+
+
+=== "Request Body (required)"
+
+    The request body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Required |
+    |---|---|---|
+    | `question_uuid` | string (uuid) | ✓ |
+    | `answer_data` | any | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `detail` | string |  |
+    | `completion` | object |  |
+    | `completion.uuid` | string (uuid) |  |
+    | `completion.is_completed` | boolean | Whether all required questions have been answered |
+    | `completion.completion_percentage` | number (double) |  |
+    | `completion.unanswered_required_questions` | array of anys |  |
+    | `completion.checklist_name` | string |  |
+    | `completion.checklist_description` | string |  |
+    | `completion.created` | string (date-time) |  |
+    | `completion.modified` | string (date-time) |  |
+    | `completion.requires_review` | boolean | Whether any answers triggered review requirements |
+    | `completion.reviewed_by` | integer | User who reviewed the checklist completion |
+    | `completion.reviewed_by_name` | string |  |
+    | `completion.reviewed_at` | string (date-time) |  |
+    | `completion.review_notes` | string | Notes from the reviewer |
+    | `completion.review_trigger_summary` | array of anys |  |
+    
+    ---
+    
+    **`400`** - 
+    
+
+---
+
 ### Update
 
 
@@ -2778,6 +3080,7 @@ Submit checklist answers.
     |---|---|---|
     | `attributes` | object (free-form) |  |
     | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
     | `description` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `call_resource_template_uuid` | string (uuid) |  |
@@ -2787,20 +3090,24 @@ Submit checklist answers.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string |
-    | `requested_offering` | any |
-    | `resource` | string (uri) |
-    | `resource_name` | string |
-    | `call_resource_template` | string |
-    | `call_resource_template_name` | string |
-    | `attributes` | object (free-form) |
-    | `limits` | object (free-form) |
-    | `description` | string |
-    | `created_by` | string (uri) |
-    | `created_by_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_offering` | any |  |
+    | `resource` | string (uri) |  |
+    | `resource_name` | string |  |
+    | `call_resource_template` | string |  |
+    | `call_resource_template_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
+    | `attachment` | string (uri) |  |
+    | `purchase_order_required` | boolean |  |
+    | `has_purchase_order` | boolean | Either half satisfies the requirement.  Some providers want the document, others only need the reference from the customer's finance system; demanding both would block the second group for no gain. |
+    | `description` | string |  |
+    | `created_by` | string (uri) |  |
+    | `created_by_name` | string |  |
 
 ---
 
@@ -2876,6 +3183,7 @@ Submit checklist answers.
     |---|---|---|
     | `attributes` | object (free-form) |  |
     | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
     | `description` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `call_resource_template_uuid` | string (uuid) |  |
@@ -2885,20 +3193,94 @@ Submit checklist answers.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string |
-    | `requested_offering` | any |
-    | `resource` | string (uri) |
-    | `resource_name` | string |
-    | `call_resource_template` | string |
-    | `call_resource_template_name` | string |
-    | `attributes` | object (free-form) |
-    | `limits` | object (free-form) |
-    | `description` | string |
-    | `created_by` | string (uri) |
-    | `created_by_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_offering` | any |  |
+    | `resource` | string (uri) |  |
+    | `resource_name` | string |  |
+    | `call_resource_template` | string |  |
+    | `call_resource_template_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
+    | `attachment` | string (uri) |  |
+    | `purchase_order_required` | boolean |  |
+    | `has_purchase_order` | boolean | Either half satisfies the requirement.  Some providers want the document, others only need the reference from the customer's finance system; demanding both would block the second group for no gain. |
+    | `description` | string |  |
+    | `created_by` | string (uri) |  |
+    | `created_by_name` | string |  |
+
+---
+
+### Remove the purchase order of a requested resource
+
+Remove the purchase order of a requested resource.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/proposal-proposals/string-value/resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/purchase_order/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_resource_purchase_order_delete # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_resource_purchase_order_delete.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_resource_purchase_order_delete`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_resource_purchase_order_delete.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsResourcePurchaseOrderDelete } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsResourcePurchaseOrderDelete({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
 
 ---
 
@@ -2967,19 +3349,23 @@ Submit checklist answers.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string |
-    | `requested_offering` | any |
-    | `resource` | string (uri) |
-    | `resource_name` | string |
-    | `call_resource_template` | string |
-    | `call_resource_template_name` | string |
-    | `attributes` | object (free-form) |
-    | `limits` | object (free-form) |
-    | `description` | string |
-    | `created_by` | string (uri) |
-    | `created_by_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_offering` | any |  |
+    | `resource` | string (uri) |  |
+    | `resource_name` | string |  |
+    | `call_resource_template` | string |  |
+    | `call_resource_template_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
+    | `attachment` | string (uri) |  |
+    | `purchase_order_required` | boolean |  |
+    | `has_purchase_order` | boolean | Either half satisfies the requirement.  Some providers want the document, others only need the reference from the customer's finance system; demanding both would block the second group for no gain. |
+    | `description` | string |  |
+    | `created_by` | string (uri) |  |
+    | `created_by_name` | string |  |
 
 ---

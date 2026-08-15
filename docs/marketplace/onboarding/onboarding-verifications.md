@@ -478,9 +478,9 @@ Create customer from successful verification.
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `project_metadata_checklist` | string (uuid) | Checklist to be used for project metadata validation in this organization |
     | `grace_period_days` | integer | Number of extra days after project end date before resources are terminated |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -534,17 +534,19 @@ Create customer from successful verification.
     | `payment_profiles.attributes` | object |  |
     | `payment_profiles.attributes.end_date` | string |  |
     | `payment_profiles.attributes.agreement_number` | string |  |
-    | `payment_profiles.attributes.contract_sum` | integer |  |
+    | `payment_profiles.attributes.contract_sum` | string |  |
     | `payment_profiles.payment_type` | string | <br>_Enum: `fixed_price`, `invoices`, `payment_gw_monthly`_ |
     | `payment_profiles.payment_type_display` | string |  |
     | `payment_profiles.is_active` | boolean |  |
-    | `customer_credit` | number (double) |  |
-    | `customer_unallocated_credit` | number (double) |  |
+    | `customer_credit` | string |  |
+    | `customer_unallocated_credit` | string |  |
+    | `has_affiliate_links` | boolean |  |
     | `is_service_provider` | boolean |  |
     | `service_provider` | string (uri) |  |
     | `service_provider_uuid` | string (uuid) |  |
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
+    | `has_active_helpdesk` | boolean |  |
 
 ---
 

@@ -13,6 +13,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/personal-access-tokens/available_binding_targets/` | [List entity types the caller can bind each permission to](#list-entity-types-the-caller-can-bind-each-permission-to) |
 | <span class="http-badge http-get">GET</span> | `/api/personal-access-tokens/available_scopes/` | [List available scopes for PAT creation](#list-available-scopes-for-pat-creation) |
 | <span class="http-badge http-post">POST</span> | `/api/personal-access-tokens/{uuid}/rotate/` | [Rotate a personal access token](#rotate-a-personal-access-token) |
+| <span class="http-badge http-post">POST</span> | `/api/personal-access-tokens/{uuid}/set_network_acl/` | [Replace the network ACL of a personal access token](#replace-the-network-acl-of-a-personal-access-token) |
 
 ---
 ## Core CRUD
@@ -88,6 +89,7 @@
     | `allowed_scopes.type` | string |  |
     | `allowed_scopes.uuid` | string (uuid) |  |
     | `allowed_scopes.name` | string |  |
+    | `allowed_networks` | array of strings |  |
     | `expires_at` | string (date-time) |  |
     | `is_active` | boolean |  |
     | `last_used_at` | string (date-time) |  |
@@ -169,6 +171,7 @@
     | `allowed_scopes.type` | string |  |
     | `allowed_scopes.uuid` | string (uuid) |  |
     | `allowed_scopes.name` | string |  |
+    | `allowed_networks` | array of strings |  |
     | `expires_at` | string (date-time) |  |
     | `is_active` | boolean |  |
     | `last_used_at` | string (date-time) |  |
@@ -251,6 +254,7 @@
     | `allowed_scopes` | array of objects |  | Optional list of entity bindings restricting where this token can act. Empty list = no entity restriction. |
     | `allowed_scopes.type` | string | ✓ |  |
     | `allowed_scopes.uuid` | string (uuid) | ✓ |  |
+    | `allowed_networks` | array of strings |  | Optional list of CIDR networks the token may be used from. Bare addresses are widened to /32 or /128. Empty list = no network restriction. |
     | `expires_at` | string (date-time) | ✓ |  |
 
 
@@ -268,6 +272,7 @@
     | `allowed_scopes.type` | string |  |
     | `allowed_scopes.uuid` | string (uuid) |  |
     | `allowed_scopes.name` | string |  |
+    | `allowed_networks` | array of strings |  |
     | `expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
@@ -564,7 +569,113 @@ Atomically revoke the old token and create a new one with the same scopes and bi
     | `allowed_scopes.type` | string |  |
     | `allowed_scopes.uuid` | string (uuid) |  |
     | `allowed_scopes.name` | string |  |
+    | `allowed_networks` | array of strings |  |
     | `expires_at` | string (date-time) |  |
+    | `created` | string (date-time) |  |
+
+---
+
+### Replace the network ACL of a personal access token
+
+Replace the token's source-network allowlist.
+
+A dedicated action rather than PATCH: update/partial_update stay
+disabled on this viewset, and the change gets its own audit event.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/personal-access-tokens/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_network_acl/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      allowed_networks:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.personal_access_token_network_acl_request import PersonalAccessTokenNetworkAclRequest # (1)
+    from waldur_api_client.api.personal_access_tokens import personal_access_tokens_set_network_acl # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PersonalAccessTokenNetworkAclRequest(
+        allowed_networks=[]
+    )
+    response = personal_access_tokens_set_network_acl.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PersonalAccessTokenNetworkAclRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/personal_access_token_network_acl_request.py)
+    2.  **API Source:** [`personal_access_tokens_set_network_acl`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/personal_access_tokens/personal_access_tokens_set_network_acl.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { personalAccessTokensSetNetworkAcl } from 'waldur-js-client';
+    
+    try {
+      const response = await personalAccessTokensSetNetworkAcl({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "allowed_networks": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `allowed_networks` | array of strings | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `token_prefix` | string |  |
+    | `scopes` | array of strings |  |
+    | `allowed_scopes` | array of objects |  |
+    | `allowed_scopes.type` | string |  |
+    | `allowed_scopes.uuid` | string (uuid) |  |
+    | `allowed_scopes.name` | string |  |
+    | `allowed_networks` | array of strings |  |
+    | `expires_at` | string (date-time) |  |
+    | `is_active` | boolean |  |
+    | `last_used_at` | string (date-time) |  |
+    | `last_used_ip` | any | An IPv4 or IPv6 address. |
+    | `use_count` | integer |  |
     | `created` | string (date-time) |  |
 
 ---

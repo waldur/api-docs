@@ -12,6 +12,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/chat-system-prompts/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/` | [List Chat Threads](#list-chat-threads) |
 | <span class="http-badge http-get">GET</span> | `/api/chat-threads/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/chat-threads/stats/` | [Get statistics for visible chat threads](#get-statistics-for-visible-chat-threads) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-messages/{uuid}/feedback/` | [Submit or update feedback for an assistant message](#submit-or-update-feedback-for-an-assistant-message) |
 | <span class="http-badge http-post">POST</span> | `/api/chat/stream/` | [Stream](#stream) |
 | <span class="http-badge http-post">POST</span> | `/api/chat-system-prompts/{uuid}/activate/` | [Activate a system prompt](#activate-a-system-prompt) |
@@ -546,7 +547,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
     | Name | Type | Description |
     |---|---|---|
-    | `created` | string (date) |  |
+    | `created_after` | string (date) |  |
+    | `created_before` | string (date) |  |
     | `field` | array |  |
     | `has_feedback` | boolean |  |
     | `input_tokens_max` | number |  |
@@ -554,7 +556,8 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `is_archived` | boolean |  |
     | `is_flagged` | boolean |  |
     | `max_severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
-    | `modified` | string (date) |  |
+    | `modified_after` | string (date) |  |
+    | `modified_before` | string (date) |  |
     | `o` | array | Ordering<br><br> |
     | `output_tokens_max` | number |  |
     | `output_tokens_min` | number |  |
@@ -573,26 +576,27 @@ Returns the current user's chat session, creating it if it doesn't exist.
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `chat_session` | string (uuid) |
-    | `flags` | object (free-form) |
-    | `is_archived` | boolean |
-    | `message_count` | integer |
-    | `input_tokens` | integer |
-    | `output_tokens` | integer |
-    | `total_tokens` | integer |
-    | `title_gen_input_tokens` | integer |
-    | `title_gen_output_tokens` | integer |
-    | `is_flagged` | boolean |
-    | `max_severity` | any |
-    | `has_feedback` | boolean |
-    | `user_username` | string |
-    | `user_full_name` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `chat_session` | string (uuid) |  |
+    | `flags` | object (free-form) |  |
+    | `is_archived` | boolean |  |
+    | `message_count` | integer |  |
+    | `input_tokens` | integer |  |
+    | `output_tokens` | integer |  |
+    | `total_tokens` | integer |  |
+    | `title_gen_input_tokens` | integer |  |
+    | `title_gen_output_tokens` | integer |  |
+    | `models_used` | string | Comma-separated distinct LLM models across the thread's messages. More than one when an admin switched AI_ASSISTANT_MODEL mid-thread; blank for threads written before model tracking existed. |
+    | `is_flagged` | boolean |  |
+    | `max_severity` | any |  |
+    | `has_feedback` | boolean |  |
+    | `user_username` | string |  |
+    | `user_full_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 
@@ -667,26 +671,131 @@ Returns the current user's chat session, creating it if it doesn't exist.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `name` | string |
-    | `chat_session` | string (uuid) |
-    | `flags` | object (free-form) |
-    | `is_archived` | boolean |
-    | `message_count` | integer |
-    | `input_tokens` | integer |
-    | `output_tokens` | integer |
-    | `total_tokens` | integer |
-    | `title_gen_input_tokens` | integer |
-    | `title_gen_output_tokens` | integer |
-    | `is_flagged` | boolean |
-    | `max_severity` | any |
-    | `has_feedback` | boolean |
-    | `user_username` | string |
-    | `user_full_name` | string |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `chat_session` | string (uuid) |  |
+    | `flags` | object (free-form) |  |
+    | `is_archived` | boolean |  |
+    | `message_count` | integer |  |
+    | `input_tokens` | integer |  |
+    | `output_tokens` | integer |  |
+    | `total_tokens` | integer |  |
+    | `title_gen_input_tokens` | integer |  |
+    | `title_gen_output_tokens` | integer |  |
+    | `models_used` | string | Comma-separated distinct LLM models across the thread's messages. More than one when an admin switched AI_ASSISTANT_MODEL mid-thread; blank for threads written before model tracking existed. |
+    | `is_flagged` | boolean |  |
+    | `max_severity` | any |  |
+    | `has_feedback` | boolean |  |
+    | `user_username` | string |  |
+    | `user_full_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Get statistics for visible chat threads
+
+Summary statistics for the visible chat threads.
+
+Filters run against the annotated list queryset, then the matched
+threads are re-read as a plain queryset. Both halves are load-bearing:
+``has_feedback`` and the token ranges resolve against annotations that
+exist only on ``get_queryset``, while the per-row annotations there
+would collide with the aggregates below. Visibility comes from
+``get_queryset`` — staff/support see all, other users only their own.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/chat-threads/stats/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.injection_severity_enum import InjectionSeverityEnum # (1)
+    from waldur_api_client.models.thread_session_o_enum import ThreadSessionOEnum # (2)
+    from waldur_api_client.models.thread_session_scope_enum import ThreadSessionScopeEnum # (3)
+    from waldur_api_client.api.chat_threads import chat_threads_stats_retrieve # (4)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = chat_threads_stats_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`InjectionSeverityEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/injection_severity_enum.py)
+    2.  **Model Source:** [`ThreadSessionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_o_enum.py)
+    3.  **Model Source:** [`ThreadSessionScopeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/thread_session_scope_enum.py)
+    4.  **API Source:** [`chat_threads_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/chat_threads/chat_threads_stats_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { chatThreadsStatsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await chatThreadsStatsRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `created_after` | string (date) |  |
+    | `created_before` | string (date) |  |
+    | `has_feedback` | boolean |  |
+    | `input_tokens_max` | number |  |
+    | `input_tokens_min` | number |  |
+    | `is_archived` | boolean |  |
+    | `is_flagged` | boolean |  |
+    | `max_severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
+    | `modified_after` | string (date) |  |
+    | `modified_before` | string (date) |  |
+    | `o` | array | Ordering<br><br> |
+    | `output_tokens_max` | number |  |
+    | `output_tokens_min` | number |  |
+    | `query` | string |  |
+    | `scope` | string | _Enum: `own`_ |
+    | `total_tokens_max` | number |  |
+    | `total_tokens_min` | number |  |
+    | `user` | string (uuid) |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `threads_total` | integer |  |
+    | `sessions_total` | integer |  |
+    | `users_total` | integer | Distinct owners of the threads in the filtered window. |
+    | `messages_total` | integer |  |
+    | `input_tokens_total` | integer |  |
+    | `output_tokens_total` | integer |  |
+    | `total_tokens` | integer |  |
+    | `flagged_total` | integer | Threads carrying at least one flagged message. |
+    | `feedback_positive` | integer |  |
+    | `feedback_negative` | integer |  |
+    | `satisfaction_rate` | number (double) | positive / (positive + negative); null when no human feedback. |
 
 ---
 

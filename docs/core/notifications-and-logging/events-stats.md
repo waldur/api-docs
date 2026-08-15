@@ -62,6 +62,7 @@
     | `feature` | array | Filter by feature (event group). Can be specified multiple times. |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `related_user_uuid` | string (uuid) | Filter events related to a user: Feed scope, actor (context.user_uuid), or affected user (context.affected_user_uuid). Combined with OR. Staff/support may target any user; others only themselves. |
     | `scope` | string (uri) | Filter by scope URL. |
 
 

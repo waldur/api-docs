@@ -94,6 +94,7 @@
     | `offering` | string (uri) |  |
     | `offering_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | string |  |
     | `provider_name` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
@@ -129,6 +130,7 @@
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `created` | string (date-time) |  |
     | `url` | string (uri) |  |
     | `call_name` | string |  |
@@ -208,6 +210,7 @@
     | `offering` | string (uri) |  |
     | `offering_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | string |  |
     | `provider_name` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
@@ -243,6 +246,7 @@
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `created` | string (date-time) |  |
     | `url` | string (uri) |  |
     | `call_name` | string |  |

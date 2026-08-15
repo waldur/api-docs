@@ -179,6 +179,8 @@
 
 ### Create
 
+DEPRECATED: superseded by the unified EventConsumer path (POST /api/event-consumers/register/). Removal tracked in WAL-10111.
+
 
 === "HTTPie"
 

@@ -66,6 +66,7 @@
     | Name | Type | Description |
     |---|---|---|
     | `category_uuid` | string (uuid) | Filter runtime states by resources belonging to a specific category. |
+    | `offering_uuid` | string (uuid) | Filter runtime states by resources of a specific offering. |
     | `project_uuid` | string (uuid) | Filter runtime states by resources within a specific project. |
 
 

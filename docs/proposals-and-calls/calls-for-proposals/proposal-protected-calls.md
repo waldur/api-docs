@@ -34,6 +34,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/reviewer-pool/` | [List reviewer pool members for a call](#list-reviewer-pool-members-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/` | [List rounds for a call](#list-rounds-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/step_checklists/` | [Step checklists](#step-checklists) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/suggestions/` | [List all reviewer suggestions for this call with affinity scores](#list-all-reviewer-suggestions-for-this-call-with-affinity-scores) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/` | [List workflow steps for a call](#list-workflow-steps-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/{obj_uuid}/` | [Retrieve](#retrieve) |
@@ -141,6 +142,7 @@
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `slug` | string | Slug |
@@ -174,6 +176,7 @@
     | `offerings.offering` | string (uri) |  |
     | `offerings.offering_name` | string |  |
     | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_type` | string |  |
     | `offerings.provider_name` | string |  |
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
@@ -209,6 +212,7 @@
     | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -217,13 +221,8 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -243,6 +242,34 @@
     | `resource_templates.requested_offering_name` | string |  |
     | `resource_templates.requested_offering_uuid` | string (uuid) |  |
     | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.requested_offering_type` | string |  |
+    | `resource_templates.requested_offering_components` | array of objects |  |
+    | `resource_templates.requested_offering_components.uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `resource_templates.requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `resource_templates.requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `resource_templates.requested_offering_components.description` | string |  |
+    | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `resource_templates.requested_offering_components.limit_period` | any |  |
+    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.article_code` | string |  |
+    | `resource_templates.requested_offering_components.max_value` | integer |  |
+    | `resource_templates.requested_offering_components.min_value` | integer |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
+    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.factor` | integer |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
+    | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.max_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `resource_templates.requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `resource_templates.created_by` | string (uri) |  |
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
@@ -257,13 +284,14 @@
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -359,6 +387,7 @@
     | `offerings.offering` | string (uri) |  |
     | `offerings.offering_name` | string |  |
     | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_type` | string |  |
     | `offerings.provider_name` | string |  |
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
@@ -394,6 +423,7 @@
     | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -402,13 +432,8 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -428,6 +453,34 @@
     | `resource_templates.requested_offering_name` | string |  |
     | `resource_templates.requested_offering_uuid` | string (uuid) |  |
     | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.requested_offering_type` | string |  |
+    | `resource_templates.requested_offering_components` | array of objects |  |
+    | `resource_templates.requested_offering_components.uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `resource_templates.requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `resource_templates.requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `resource_templates.requested_offering_components.description` | string |  |
+    | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `resource_templates.requested_offering_components.limit_period` | any |  |
+    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.article_code` | string |  |
+    | `resource_templates.requested_offering_components.max_value` | integer |  |
+    | `resource_templates.requested_offering_components.min_value` | integer |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
+    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.factor` | integer |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
+    | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.max_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `resource_templates.requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `resource_templates.created_by` | string (uri) |  |
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
@@ -442,13 +495,14 @@
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -530,12 +584,12 @@
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
     | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings |  | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings |  | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings |  | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
 
 
@@ -564,6 +618,7 @@
     | `offerings.offering` | string (uri) |  |
     | `offerings.offering_name` | string |  |
     | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_type` | string |  |
     | `offerings.provider_name` | string |  |
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
@@ -599,6 +654,7 @@
     | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -607,13 +663,8 @@
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -633,6 +684,34 @@
     | `resource_templates.requested_offering_name` | string |  |
     | `resource_templates.requested_offering_uuid` | string (uuid) |  |
     | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.requested_offering_type` | string |  |
+    | `resource_templates.requested_offering_components` | array of objects |  |
+    | `resource_templates.requested_offering_components.uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `resource_templates.requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `resource_templates.requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `resource_templates.requested_offering_components.description` | string |  |
+    | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `resource_templates.requested_offering_components.limit_period` | any |  |
+    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.article_code` | string |  |
+    | `resource_templates.requested_offering_components.max_value` | integer |  |
+    | `resource_templates.requested_offering_components.min_value` | integer |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
+    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.factor` | integer |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
+    | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.max_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `resource_templates.requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `resource_templates.created_by` | string (uri) |  |
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
@@ -647,13 +726,14 @@
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -844,12 +924,12 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
     | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings |  | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings |  | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings |  | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
 
 
@@ -878,6 +958,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `offerings.offering` | string (uri) |  |
     | `offerings.offering_name` | string |  |
     | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_type` | string |  |
     | `offerings.provider_name` | string |  |
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
@@ -913,6 +994,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -921,13 +1003,8 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -947,6 +1024,34 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `resource_templates.requested_offering_name` | string |  |
     | `resource_templates.requested_offering_uuid` | string (uuid) |  |
     | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.requested_offering_type` | string |  |
+    | `resource_templates.requested_offering_components` | array of objects |  |
+    | `resource_templates.requested_offering_components.uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `resource_templates.requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `resource_templates.requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `resource_templates.requested_offering_components.description` | string |  |
+    | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `resource_templates.requested_offering_components.limit_period` | any |  |
+    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.article_code` | string |  |
+    | `resource_templates.requested_offering_components.max_value` | integer |  |
+    | `resource_templates.requested_offering_components.min_value` | integer |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
+    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.factor` | integer |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
+    | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.max_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `resource_templates.requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `resource_templates.created_by` | string (uri) |  |
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
@@ -961,13 +1066,14 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -1050,12 +1156,12 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
     | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings |  | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings |  | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings |  | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
 
 
@@ -1084,6 +1190,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `offerings.offering` | string (uri) |  |
     | `offerings.offering_name` | string |  |
     | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_type` | string |  |
     | `offerings.provider_name` | string |  |
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
@@ -1119,6 +1226,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -1127,13 +1235,8 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -1153,6 +1256,34 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `resource_templates.requested_offering_name` | string |  |
     | `resource_templates.requested_offering_uuid` | string (uuid) |  |
     | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.requested_offering_type` | string |  |
+    | `resource_templates.requested_offering_components` | array of objects |  |
+    | `resource_templates.requested_offering_components.uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `resource_templates.requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `resource_templates.requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `resource_templates.requested_offering_components.description` | string |  |
+    | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `resource_templates.requested_offering_components.limit_period` | any |  |
+    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.article_code` | string |  |
+    | `resource_templates.requested_offering_components.max_value` | integer |  |
+    | `resource_templates.requested_offering_components.min_value` | integer |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
+    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.factor` | integer |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
+    | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.max_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `resource_templates.requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `resource_templates.created_by` | string (uri) |  |
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
@@ -1167,13 +1298,14 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -1320,7 +1452,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `o` | array | Ordering fields |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `role` | string (uuid) | Role UUID or name |
+    | `role` | array | Role UUID or name. Repeat to filter by several roles. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -1800,6 +1932,7 @@ Get available compliance checklists for call creation/editing.
     | `o` | array |  | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |  |
     | `offerings_provider_uuid` | string (uuid) |  |  |
+    | `open_for_offering_uuid` | string (uuid) |  | Calls the offering can be requested through right now |
     | `page` | integer |  | A page number within the paginated result set. |
     | `page_size` | integer |  | Number of results to return per page. |
     | `slug` | string |  | Slug |
@@ -2138,6 +2271,7 @@ List all conflicts of interest detected for this call.
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `slug` | string | Slug |
@@ -2356,6 +2490,7 @@ List offerings for a call.
     | `offering` | string (uri) |  |
     | `offering_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | string |  |
     | `provider_name` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
@@ -2391,6 +2526,7 @@ List offerings for a call.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `created` | string (date-time) |  |
     | `url` | string |  |
     | `approved_by` | string (uri) |  |
@@ -2473,6 +2609,7 @@ List offerings for a call.
     | `offering` | string (uri) |  |
     | `offering_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | string |  |
     | `provider_name` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
@@ -2508,6 +2645,7 @@ List offerings for a call.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `created` | string (date-time) |  |
     | `url` | string |  |
     | `approved_by` | string (uri) |  |
@@ -2598,6 +2736,7 @@ Get detailed compliance answers for a specific proposal (call managers only).
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `slug` | string | Slug |
@@ -2702,6 +2841,7 @@ Get proposed reviewer-proposal assignments.
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `slug` | string | Slug |
@@ -2824,6 +2964,34 @@ List resource templates for a call.
     | `requested_offering_name` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `requested_offering_plan` | any |  |
+    | `requested_offering_type` | string |  |
+    | `requested_offering_components` | array of objects |  |
+    | `requested_offering_components.uuid` | string (uuid) |  |
+    | `requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `requested_offering_components.description` | string |  |
+    | `requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `requested_offering_components.limit_period` | any |  |
+    | `requested_offering_components.limit_amount` | integer |  |
+    | `requested_offering_components.article_code` | string |  |
+    | `requested_offering_components.max_value` | integer |  |
+    | `requested_offering_components.min_value` | integer |  |
+    | `requested_offering_components.max_available_limit` | integer |  |
+    | `requested_offering_components.is_boolean` | boolean |  |
+    | `requested_offering_components.default_limit` | integer |  |
+    | `requested_offering_components.factor` | integer |  |
+    | `requested_offering_components.is_builtin` | boolean |  |
+    | `requested_offering_components.is_prepaid` | boolean |  |
+    | `requested_offering_components.overage_component` | string (uuid) |  |
+    | `requested_offering_components.min_prepaid_duration` | integer |  |
+    | `requested_offering_components.max_prepaid_duration` | integer |  |
+    | `requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
@@ -2908,6 +3076,34 @@ List resource templates for a call.
     | `requested_offering_name` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `requested_offering_plan` | any |  |
+    | `requested_offering_type` | string |  |
+    | `requested_offering_components` | array of objects |  |
+    | `requested_offering_components.uuid` | string (uuid) |  |
+    | `requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `requested_offering_components.description` | string |  |
+    | `requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `requested_offering_components.limit_period` | any |  |
+    | `requested_offering_components.limit_amount` | integer |  |
+    | `requested_offering_components.article_code` | string |  |
+    | `requested_offering_components.max_value` | integer |  |
+    | `requested_offering_components.min_value` | integer |  |
+    | `requested_offering_components.max_available_limit` | integer |  |
+    | `requested_offering_components.is_boolean` | boolean |  |
+    | `requested_offering_components.default_limit` | integer |  |
+    | `requested_offering_components.factor` | integer |  |
+    | `requested_offering_components.is_builtin` | boolean |  |
+    | `requested_offering_components.is_prepaid` | boolean |  |
+    | `requested_offering_components.overage_component` | string (uuid) |  |
+    | `requested_offering_components.min_prepaid_duration` | integer |  |
+    | `requested_offering_components.max_prepaid_duration` | integer |  |
+    | `requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
@@ -3110,13 +3306,8 @@ List rounds for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -3203,13 +3394,8 @@ List rounds for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -3220,6 +3406,92 @@ List rounds for a call.
     | `proposals.approved_by_name` | string |  |
     | `proposals.created_by_name` | string |  |
     | `proposals.created` | string (date-time) |  |
+
+---
+
+### Step checklists
+
+List checklists that can be attached to a workflow step (WORKFLOW_STEP-typed). Available to call managers so the workflow config UI can populate its checklist picker without staff-only access to the checklist admin API.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-protected-calls/step_checklists/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.call_states import CallStates # (1)
+    from waldur_api_client.models.protected_call_o_enum import ProtectedCallOEnum # (2)
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_step_checklists_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_protected_calls_step_checklists_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CallStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_states.py)
+    2.  **Model Source:** [`ProtectedCallOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/protected_call_o_enum.py)
+    3.  **API Source:** [`proposal_protected_calls_step_checklists_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_step_checklists_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsStepChecklistsList } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsStepChecklistsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `customer` | string (uri) |  |
+    | `customer_keyword` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `has_active_round` | boolean |  |
+    | `name` | string |  |
+    | `o` | array | Ordering<br><br> |
+    | `offering_uuid` | string (uuid) |  |
+    | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `slug` | string | Slug |
+    | `state` | array |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `checklist_type` | string |
 
 ---
 
@@ -3300,6 +3572,7 @@ List all reviewer suggestions for this call with affinity scores.
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `slug` | string | Slug |
@@ -3434,17 +3707,20 @@ List workflow steps for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -3527,17 +3803,20 @@ List workflow steps for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -4137,6 +4416,7 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `offerings.offering` | string (uri) |  |
     | `offerings.offering_name` | string |  |
     | `offerings.offering_uuid` | string (uuid) |  |
+    | `offerings.offering_type` | string |  |
     | `offerings.provider_name` | string |  |
     | `offerings.category_uuid` | string (uuid) |  |
     | `offerings.category_name` | string |  |
@@ -4172,6 +4452,7 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `offerings.components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `offerings.components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offerings.components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `offerings.require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `offerings.created` | string (date-time) |  |
     | `rounds` | array of objects |  |
     | `rounds.uuid` | string (uuid) |  |
@@ -4180,13 +4461,8 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `rounds.start_time` | string (date-time) |  |
     | `rounds.cutoff_time` | string (date-time) |  |
     | `rounds.status` | any |  |
-    | `rounds.review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `rounds.deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `rounds.allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `rounds.allocation_date` | string (date-time) |  |
-    | `rounds.minimal_average_scoring` | string (decimal) |  |
     | `rounds.review_duration_in_days` | integer |  |
-    | `rounds.minimum_number_of_reviewers` | integer |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -4206,6 +4482,34 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `resource_templates.requested_offering_name` | string |  |
     | `resource_templates.requested_offering_uuid` | string (uuid) |  |
     | `resource_templates.requested_offering_plan` | any |  |
+    | `resource_templates.requested_offering_type` | string |  |
+    | `resource_templates.requested_offering_components` | array of objects |  |
+    | `resource_templates.requested_offering_components.uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `resource_templates.requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `resource_templates.requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `resource_templates.requested_offering_components.description` | string |  |
+    | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `resource_templates.requested_offering_components.limit_period` | any |  |
+    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.article_code` | string |  |
+    | `resource_templates.requested_offering_components.max_value` | integer |  |
+    | `resource_templates.requested_offering_components.min_value` | integer |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
+    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.factor` | integer |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
+    | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
+    | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.max_prepaid_duration` | integer |  |
+    | `resource_templates.requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `resource_templates.requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `resource_templates.requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `resource_templates.created_by` | string (uri) |  |
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
@@ -4220,13 +4524,14 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
     | `compliance_checklist_name` | string |  |
     | `proposal_slug_template` | string | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |
+    | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
 
 ---
 
@@ -4618,6 +4923,7 @@ Invite reviewers to join the call's reviewer pool.
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `slug` | string | Slug |
@@ -4769,6 +5075,7 @@ Create offering for a call.
     | `offering` | string (uri) |  |
     | `offering_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | string |  |
     | `provider_name` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
@@ -4804,6 +5111,7 @@ Create offering for a call.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `created` | string (date-time) |  |
     | `url` | string |  |
     | `approved_by` | string (uri) |  |
@@ -4917,6 +5225,34 @@ Create resource template for a call.
     | `requested_offering_name` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `requested_offering_plan` | any |  |
+    | `requested_offering_type` | string |  |
+    | `requested_offering_components` | array of objects |  |
+    | `requested_offering_components.uuid` | string (uuid) |  |
+    | `requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `requested_offering_components.description` | string |  |
+    | `requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `requested_offering_components.limit_period` | any |  |
+    | `requested_offering_components.limit_amount` | integer |  |
+    | `requested_offering_components.article_code` | string |  |
+    | `requested_offering_components.max_value` | integer |  |
+    | `requested_offering_components.min_value` | integer |  |
+    | `requested_offering_components.max_available_limit` | integer |  |
+    | `requested_offering_components.is_boolean` | boolean |  |
+    | `requested_offering_components.default_limit` | integer |  |
+    | `requested_offering_components.factor` | integer |  |
+    | `requested_offering_components.is_builtin` | boolean |  |
+    | `requested_offering_components.is_prepaid` | boolean |  |
+    | `requested_offering_components.overage_component` | string (uuid) |  |
+    | `requested_offering_components.min_prepaid_duration` | integer |  |
+    | `requested_offering_components.max_prepaid_duration` | integer |  |
+    | `requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
@@ -5106,6 +5442,7 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) |  |
     | `offerings_provider_uuid` | string (uuid) |  |
+    | `open_for_offering_uuid` | string (uuid) | Calls the offering can be requested through right now |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `slug` | string | Slug |
@@ -5117,12 +5454,7 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | Field | Type | Required |
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
-    | `review_strategy` | string |  |
-    | `deciding_entity` | string |  |
-    | `allocation_time` | string |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `cadence` | string | ✓ |
     | `custom_interval_months` | integer |  |
     | `submission_window_days` | integer | ✓ |
@@ -5143,13 +5475,8 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -5255,12 +5582,12 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
     | `proposal_slug_template` | string |  | Template for proposal slugs. Supports: {call_slug}, {round_slug}, {org_slug}, {year}, {month}, {counter}, {counter_padded}. Default: {round_slug}-{counter_padded} |
-    | `user_email_patterns` | object (free-form) |  | List of email regex patterns. User must match one. |
-    | `user_affiliations` | object (free-form) |  | List of allowed affiliations. User must have one. |
-    | `user_identity_sources` | object (free-form) |  | List of allowed identity sources (identity providers). |
-    | `user_nationalities` | object (free-form) |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
-    | `user_organization_types` | object (free-form) |  | List of allowed organization type URNs (SCHAC). User must match one. |
-    | `user_assurance_levels` | object (free-form) |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
+    | `user_email_patterns` | array of strings |  | List of email regex patterns. User must match one. |
+    | `user_affiliations` | array of strings |  | List of allowed affiliations. User must have one. |
+    | `user_identity_sources` | array of strings |  | List of allowed identity sources (identity providers). |
+    | `user_nationalities` | array of strings |  | List of allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | List of allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
 
 
@@ -5351,13 +5678,8 @@ Create a round for a call.
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
     | `cutoff_time` | string (date-time) | ✓ |
-    | `review_strategy` | string |  |
-    | `deciding_entity` | string |  |
-    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -5372,13 +5694,8 @@ Create a round for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -5624,14 +5941,16 @@ Create or update a workflow step for a call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
+    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances to the next. |
+    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -5651,17 +5970,20 @@ Create or update a workflow step for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -5763,6 +6085,7 @@ Create or update a workflow step for a call.
     | `offering` | string (uri) |  |
     | `offering_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | string |  |
     | `provider_name` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
@@ -5798,6 +6121,7 @@ Create or update a workflow step for a call.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `created` | string (date-time) |  |
     | `url` | string |  |
     | `approved_by` | string (uri) |  |
@@ -5912,6 +6236,34 @@ Create or update a workflow step for a call.
     | `requested_offering_name` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `requested_offering_plan` | any |  |
+    | `requested_offering_type` | string |  |
+    | `requested_offering_components` | array of objects |  |
+    | `requested_offering_components.uuid` | string (uuid) |  |
+    | `requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `requested_offering_components.description` | string |  |
+    | `requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `requested_offering_components.limit_period` | any |  |
+    | `requested_offering_components.limit_amount` | integer |  |
+    | `requested_offering_components.article_code` | string |  |
+    | `requested_offering_components.max_value` | integer |  |
+    | `requested_offering_components.min_value` | integer |  |
+    | `requested_offering_components.max_available_limit` | integer |  |
+    | `requested_offering_components.is_boolean` | boolean |  |
+    | `requested_offering_components.default_limit` | integer |  |
+    | `requested_offering_components.factor` | integer |  |
+    | `requested_offering_components.is_builtin` | boolean |  |
+    | `requested_offering_components.is_prepaid` | boolean |  |
+    | `requested_offering_components.overage_component` | string (uuid) |  |
+    | `requested_offering_components.min_prepaid_duration` | integer |  |
+    | `requested_offering_components.max_prepaid_duration` | integer |  |
+    | `requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
@@ -5999,13 +6351,8 @@ Create or update a workflow step for a call.
     |---|---|---|
     | `start_time` | string (date-time) | ✓ |
     | `cutoff_time` | string (date-time) | ✓ |
-    | `review_strategy` | string |  |
-    | `deciding_entity` | string |  |
-    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -6020,13 +6367,8 @@ Create or update a workflow step for a call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -6120,14 +6462,16 @@ Create or update a workflow step for a call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
+    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances to the next. |
+    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -6147,17 +6491,20 @@ Create or update a workflow step for a call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -6469,6 +6816,7 @@ Get or update matching configuration for this call.
     | `offering` | string (uri) |  |
     | `offering_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | string |  |
     | `provider_name` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
@@ -6504,6 +6852,7 @@ Get or update matching configuration for this call.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `created` | string (date-time) |  |
     | `url` | string |  |
     | `approved_by` | string (uri) |  |
@@ -6609,6 +6958,34 @@ Get or update matching configuration for this call.
     | `requested_offering_name` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `requested_offering_plan` | any |  |
+    | `requested_offering_type` | string |  |
+    | `requested_offering_components` | array of objects |  |
+    | `requested_offering_components.uuid` | string (uuid) |  |
+    | `requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `requested_offering_components.description` | string |  |
+    | `requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `requested_offering_components.limit_period` | any |  |
+    | `requested_offering_components.limit_amount` | integer |  |
+    | `requested_offering_components.article_code` | string |  |
+    | `requested_offering_components.max_value` | integer |  |
+    | `requested_offering_components.min_value` | integer |  |
+    | `requested_offering_components.max_available_limit` | integer |  |
+    | `requested_offering_components.is_boolean` | boolean |  |
+    | `requested_offering_components.default_limit` | integer |  |
+    | `requested_offering_components.factor` | integer |  |
+    | `requested_offering_components.is_builtin` | boolean |  |
+    | `requested_offering_components.is_prepaid` | boolean |  |
+    | `requested_offering_components.overage_component` | string (uuid) |  |
+    | `requested_offering_components.min_prepaid_duration` | integer |  |
+    | `requested_offering_components.max_prepaid_duration` | integer |  |
+    | `requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
@@ -6687,13 +7064,8 @@ Get or update matching configuration for this call.
     |---|---|---|
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
-    | `review_strategy` | string |  |
-    | `deciding_entity` | string |  |
-    | `allocation_time` | string |  |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
 
 
 === "Responses"
@@ -6708,13 +7080,8 @@ Get or update matching configuration for this call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -6801,14 +7168,16 @@ Get or update matching configuration for this call.
     | `is_enabled` | boolean |  | Whether this step is enabled. Disabled steps are skipped. |
     | `duration_in_days` | integer |  | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |  |
+    | `checklist_required` | boolean |  | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean |  | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean |  | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer |  | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) |  | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) |  | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean |  | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any |  | Role expected to act on this step. |
-    | `transition_mode` | any |  | How this step advances to the next. |
+    | `transition_mode` | any |  | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean |  | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any |  | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer |  | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |  |
     | `criteria.name` | string | ✓ |  |
@@ -6828,17 +7197,20 @@ Get or update matching configuration for this call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |
@@ -6919,6 +7291,7 @@ Get or update matching configuration for this call.
     | `offering` | string (uri) |  |
     | `offering_name` | string |  |
     | `offering_uuid` | string (uuid) |  |
+    | `offering_type` | string |  |
     | `provider_name` | string |  |
     | `category_uuid` | string (uuid) |  |
     | `category_name` | string |  |
@@ -6954,6 +7327,7 @@ Get or update matching configuration for this call.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `require_purchase_order` | boolean | Whether a purchase order must accompany a resource request for this offering before the proposal can be submitted. Defaults to the offering's require_purchase_order_upload, and stays under the call manager's control afterwards. |
     | `created` | string (date-time) |  |
     | `url` | string |  |
     | `approved_by` | string (uri) |  |
@@ -7042,6 +7416,34 @@ Get or update matching configuration for this call.
     | `requested_offering_name` | string |  |
     | `requested_offering_uuid` | string (uuid) |  |
     | `requested_offering_plan` | any |  |
+    | `requested_offering_type` | string |  |
+    | `requested_offering_components` | array of objects |  |
+    | `requested_offering_components.uuid` | string (uuid) |  |
+    | `requested_offering_components.offering_uuid` | string (uuid) |  |
+    | `requested_offering_components.billing_type` | string | <br>_Enum: `fixed`, `usage`, `limit`, `one`, `few`_ |
+    | `requested_offering_components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
+    | `requested_offering_components.name` | string | Display name for the measured unit, for example, Floating IP. |
+    | `requested_offering_components.description` | string |  |
+    | `requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
+    | `requested_offering_components.limit_period` | any |  |
+    | `requested_offering_components.limit_amount` | integer |  |
+    | `requested_offering_components.article_code` | string |  |
+    | `requested_offering_components.max_value` | integer |  |
+    | `requested_offering_components.min_value` | integer |  |
+    | `requested_offering_components.max_available_limit` | integer |  |
+    | `requested_offering_components.is_boolean` | boolean |  |
+    | `requested_offering_components.default_limit` | integer |  |
+    | `requested_offering_components.factor` | integer |  |
+    | `requested_offering_components.is_builtin` | boolean |  |
+    | `requested_offering_components.is_prepaid` | boolean |  |
+    | `requested_offering_components.overage_component` | string (uuid) |  |
+    | `requested_offering_components.min_prepaid_duration` | integer |  |
+    | `requested_offering_components.max_prepaid_duration` | integer |  |
+    | `requested_offering_components.prepaid_duration_step` | integer | Step size in months for the initial prepaid duration at order creation. If set, only multiples of this value (starting from min_prepaid_duration) are valid. Defaults to 1 (any value between min and max). |
+    | `requested_offering_components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
+    | `requested_offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
+    | `requested_offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
@@ -7121,13 +7523,8 @@ Get or update matching configuration for this call.
     | `start_time` | string (date-time) |  |
     | `cutoff_time` | string (date-time) |  |
     | `status` | any |  |
-    | `review_strategy` | string | <br>_Enum: `after_round`, `after_proposal`_ |
-    | `deciding_entity` | string | <br>_Enum: `by_call_manager`, `automatic`_ |
-    | `allocation_time` | string | <br>_Enum: `on_decision`, `fixed_date`_ |
     | `allocation_date` | string (date-time) |  |
-    | `minimal_average_scoring` | string (decimal) |  |
     | `review_duration_in_days` | integer |  |
-    | `minimum_number_of_reviewers` | integer |  |
     | `url` | string |  |
     | `proposals` | array of objects |  |
     | `proposals.uuid` | string (uuid) |  |
@@ -7215,17 +7612,20 @@ Get or update matching configuration for this call.
     | `call_uuid` | string (uuid) |  |
     | `call_name` | string |  |
     | `is_enabled` | boolean | Whether this step is enabled. Disabled steps are skipped. |
+    | `is_mandatory` | boolean |  |
     | `duration_in_days` | integer | Duration in days. Used to calculate deadlines. |
     | `checklist` | string (uuid) |  |
     | `checklist_name` | string |  |
+    | `checklist_required` | boolean | When the step has a checklist, block completion until its required questions are answered. Set False to make the checklist advisory. |
     | `blind_review` | boolean | Evaluators cannot see each other's assessments. |
     | `requires_coi_confirmation` | boolean | Evaluator must confirm absence of conflict of interest. |
     | `min_reviewers` | integer | Minimum reviews required before step can complete. |
-    | `min_score_threshold` | string (decimal) | Minimum average score to pass this step. |
+    | `min_score_threshold` | string (decimal) | Minimum average score required before this step can complete (a completion gate; it does not auto-reject lower scores). |
     | `applicant_visible` | boolean | Whether the applicant can see step details (not just status). |
     | `responsible_role` | any | Role expected to act on this step. |
-    | `transition_mode` | any | How this step advances to the next. |
+    | `transition_mode` | any | How this step advances once a human completes it. 'Automatic' advances to the next step immediately; 'Manual' waits for a separate advance action. Neither auto-decides from review scores. |
     | `include_award_response` | boolean | Allocation decision: require applicant award response after decision. |
+    | `allocation_time` | any | Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date). |
     | `display_order` | integer | Optional override of catalog ordering. |
     | `criteria` | array of objects |  |
     | `criteria.uuid` | string (uuid) |  |

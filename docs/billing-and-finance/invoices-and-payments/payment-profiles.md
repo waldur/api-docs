@@ -97,7 +97,7 @@
     | `attributes` | object |
     | `attributes.end_date` | string |
     | `attributes.agreement_number` | string |
-    | `attributes.contract_sum` | integer |
+    | `attributes.contract_sum` | string |
     | `payment_type` | string |
     | `payment_type_display` | string |
     | `is_active` | boolean |
@@ -176,7 +176,7 @@
     | `attributes` | object |
     | `attributes.end_date` | string |
     | `attributes.agreement_number` | string |
-    | `attributes.contract_sum` | integer |
+    | `attributes.contract_sum` | string |
     | `payment_type` | string |
     | `payment_type_display` | string |
     | `is_active` | boolean |
@@ -256,7 +256,7 @@
     | `attributes` | object |  |
     | `attributes.end_date` | string |  |
     | `attributes.agreement_number` | string |  |
-    | `attributes.contract_sum` | integer |  |
+    | `attributes.contract_sum` | string |  |
     | `payment_type` | string | ✓ |
     | `is_active` | boolean |  |
 
@@ -275,7 +275,7 @@
     | `attributes` | object |
     | `attributes.end_date` | string |
     | `attributes.agreement_number` | string |
-    | `attributes.contract_sum` | integer |
+    | `attributes.contract_sum` | string |
     | `payment_type` | string |
     | `payment_type_display` | string |
     | `is_active` | boolean |
@@ -366,7 +366,7 @@
     | `attributes` | object |  |
     | `attributes.end_date` | string |  |
     | `attributes.agreement_number` | string |  |
-    | `attributes.contract_sum` | integer |  |
+    | `attributes.contract_sum` | string |  |
     | `payment_type` | string | ✓ |
     | `is_active` | boolean |  |
 
@@ -385,7 +385,7 @@
     | `attributes` | object |
     | `attributes.end_date` | string |
     | `attributes.agreement_number` | string |
-    | `attributes.contract_sum` | integer |
+    | `attributes.contract_sum` | string |
     | `payment_type` | string |
     | `payment_type_display` | string |
     | `is_active` | boolean |
@@ -464,7 +464,7 @@
     | `attributes` | object |  |
     | `attributes.end_date` | string |  |
     | `attributes.agreement_number` | string |  |
-    | `attributes.contract_sum` | integer |  |
+    | `attributes.contract_sum` | string |  |
     | `payment_type` | string |  |
     | `is_active` | boolean |  |
 
@@ -483,7 +483,7 @@
     | `attributes` | object |
     | `attributes.end_date` | string |
     | `attributes.agreement_number` | string |
-    | `attributes.contract_sum` | integer |
+    | `attributes.contract_sum` | string |
     | `payment_type` | string |
     | `payment_type_display` | string |
     | `is_active` | boolean |

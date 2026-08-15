@@ -12,6 +12,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/anonymous-chat-interactions/by-session/{session_id}/` | [Full transcript for one anonymous session](#full-transcript-for-one-anonymous-session) |
 | <span class="http-badge http-get">GET</span> | `/api/anonymous-chat-interactions/by-user/` | [Aggregate user list (no slug)](#aggregate-user-list-no-slug) |
 | <span class="http-badge http-get">GET</span> | `/api/anonymous-chat-interactions/by-user/{user_slug}/` | [All sessions for one pseudonymous user](#all-sessions-for-one-pseudonymous-user) |
+| <span class="http-badge http-get">GET</span> | `/api/anonymous-chat-interactions/conversations/` | [Conversations grouped by session](#conversations-grouped-by-session) |
 | <span class="http-badge http-get">GET</span> | `/api/anonymous-chat-interactions/kpi/` | [Aggregate KPI roll-up](#aggregate-kpi-roll-up) |
 
 ---
@@ -72,13 +73,14 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `created_from` | string (date) |  |
-    | `created_to` | string (date) |  |
-    | `has_negative_feedback` | boolean |  |
+    | `created_after` | string (date) |  |
+    | `created_before` | string (date) |  |
+    | `has_feedback` | boolean |  |
     | `is_flagged` | boolean |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string |  |
     | `session_id` | string |  |
     | `severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
     | `user_slug` | string |  |
@@ -96,6 +98,9 @@
     | `user_slug` | string |  |
     | `user_input` | string |  |
     | `assistant_blocks` | object (free-form) |  |
+    | `click_count` | integer | Offering click-throughs on this interaction. Populated by the by-session transcript, which annotates it; 0 elsewhere. |
+    | `input_tokens` | integer |  |
+    | `output_tokens` | integer |  |
     | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
@@ -180,6 +185,9 @@
     | `user_slug` | string |  |
     | `user_input` | string |  |
     | `assistant_blocks` | object (free-form) |  |
+    | `click_count` | integer | Offering click-throughs on this interaction. Populated by the by-session transcript, which annotates it; 0 elsewhere. |
+    | `input_tokens` | integer |  |
+    | `output_tokens` | integer |  |
     | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
@@ -327,13 +335,14 @@ Returns the ordered list of interactions belonging to the given ``session_id``. 
 
     | Name | Type | Description |
     |---|---|---|
-    | `created_from` | string (date) |  |
-    | `created_to` | string (date) |  |
-    | `has_negative_feedback` | boolean |  |
+    | `created_after` | string (date) |  |
+    | `created_before` | string (date) |  |
+    | `has_feedback` | boolean |  |
     | `is_flagged` | boolean |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string |  |
     | `session_id` | string |  |
     | `severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
     | `user_slug` | string |  |
@@ -351,6 +360,9 @@ Returns the ordered list of interactions belonging to the given ``session_id``. 
     | `user_slug` | string |  |
     | `user_input` | string |  |
     | `assistant_blocks` | object (free-form) |  |
+    | `click_count` | integer | Offering click-throughs on this interaction. Populated by the by-session transcript, which annotates it; 0 elsewhere. |
+    | `input_tokens` | integer |  |
+    | `output_tokens` | integer |  |
     | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
@@ -423,13 +435,14 @@ Returns one row per user_slug with aggregate counters. Powers the staff Users pa
 
     | Name | Type | Description |
     |---|---|---|
-    | `created_from` | string (date) |  |
-    | `created_to` | string (date) |  |
-    | `has_negative_feedback` | boolean |  |
+    | `created_after` | string (date) |  |
+    | `created_before` | string (date) |  |
+    | `has_feedback` | boolean |  |
     | `is_flagged` | boolean |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string |  |
     | `session_id` | string |  |
     | `severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
     | `user_slug` | string |  |
@@ -523,13 +536,14 @@ Returns interactions sharing a ``user_slug`` (Scrypt of originating IP) — acro
 
     | Name | Type | Description |
     |---|---|---|
-    | `created_from` | string (date) |  |
-    | `created_to` | string (date) |  |
-    | `has_negative_feedback` | boolean |  |
+    | `created_after` | string (date) |  |
+    | `created_before` | string (date) |  |
+    | `has_feedback` | boolean |  |
     | `is_flagged` | boolean |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `query` | string |  |
     | `session_id` | string |  |
     | `severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
     | `user_slug` | string |  |
@@ -547,6 +561,9 @@ Returns interactions sharing a ``user_slug`` (Scrypt of originating IP) — acro
     | `user_slug` | string |  |
     | `user_input` | string |  |
     | `assistant_blocks` | object (free-form) |  |
+    | `click_count` | integer | Offering click-throughs on this interaction. Populated by the by-session transcript, which annotates it; 0 elsewhere. |
+    | `input_tokens` | integer |  |
+    | `output_tokens` | integer |  |
     | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
@@ -560,6 +577,110 @@ Returns interactions sharing a ``user_slug`` (Scrypt of originating IP) — acro
     | `last_active_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `feedback` | any |  |
+
+---
+
+### Conversations grouped by session
+
+One row per anonymous conversation (``session_id``) with aggregate counters, mirroring the authenticated threads table. Honours the same filters as the list endpoint. Read a conversation's transcript via ``by-session/{session_id}``.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/anonymous-chat-interactions/conversations/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.anonymous_chat_interaction_o_enum import AnonymousChatInteractionOEnum # (1)
+    from waldur_api_client.models.injection_severity_enum import InjectionSeverityEnum # (2)
+    from waldur_api_client.api.anonymous_chat_interactions import anonymous_chat_interactions_conversations_list # (3)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = anonymous_chat_interactions_conversations_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`AnonymousChatInteractionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/anonymous_chat_interaction_o_enum.py)
+    2.  **Model Source:** [`InjectionSeverityEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/injection_severity_enum.py)
+    3.  **API Source:** [`anonymous_chat_interactions_conversations_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/anonymous_chat_interactions/anonymous_chat_interactions_conversations_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { anonymousChatInteractionsConversationsList } from 'waldur-js-client';
+    
+    try {
+      const response = await anonymousChatInteractionsConversationsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `created_after` | string (date) |  |
+    | `created_before` | string (date) |  |
+    | `has_feedback` | boolean |  |
+    | `input_tokens_max` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `input_tokens_min` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `is_flagged` | boolean |  |
+    | `is_reviewed` | boolean | Whether the nightly LLM judge has scored the conversation. |
+    | `last_active_after` | string (date) | Bound on the conversation's most recent turn. Inclusive of the boundary day. |
+    | `last_active_before` | string (date) | Bound on the conversation's most recent turn. Inclusive of the boundary day. |
+    | `o` | array | Ordering<br><br> |
+    | `output_tokens_max` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `output_tokens_min` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `query` | string |  |
+    | `session_id` | string |  |
+    | `severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
+    | `total_tokens_max` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `total_tokens_min` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `user_slug` | string |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `session_id` | string |  |
+    | `user_slug` | string |  |
+    | `message_count` | integer |  |
+    | `is_flagged` | boolean |  |
+    | `max_severity` | string |  |
+    | `has_feedback` | boolean |  |
+    | `offerings_shown` | integer |  |
+    | `offerings_clicked` | integer | Click-throughs on recommended offerings; repeat clicks count separately. |
+    | `models_used` | string | Comma-separated distinct LLM models across the conversation. More than one when AI_ASSISTANT_MODEL was switched partway through; blank for conversations predating model tracking. |
+    | `is_reviewed` | boolean | True once the nightly LLM judge has scored this conversation. One verdict per conversation, recorded on its last turn; a conversation is never re-judged. |
+    | `input_tokens` | integer | Prompt tokens summed over the conversation; 0 for turns predating token tracking. |
+    | `output_tokens` | integer | Completion tokens summed over the conversation. |
+    | `total_tokens` | integer | input_tokens + output_tokens. Excludes LLM judge spend, which runs on its own budget. |
+    | `started` | string (date-time) |  |
+    | `last_active` | string (date-time) |  |
 
 ---
 
@@ -581,7 +702,9 @@ Returns aggregate counters and rates for the anonymous chat flow. Filters are ho
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.anonymous_chat_interactions import anonymous_chat_interactions_kpi_retrieve # (1)
+    from waldur_api_client.models.anonymous_chat_interaction_o_enum import AnonymousChatInteractionOEnum # (1)
+    from waldur_api_client.models.injection_severity_enum import InjectionSeverityEnum # (2)
+    from waldur_api_client.api.anonymous_chat_interactions import anonymous_chat_interactions_kpi_retrieve # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -592,7 +715,9 @@ Returns aggregate counters and rates for the anonymous chat flow. Filters are ho
     ```
     
     
-    1.  **API Source:** [`anonymous_chat_interactions_kpi_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/anonymous_chat_interactions/anonymous_chat_interactions_kpi_retrieve.py)
+    1.  **Model Source:** [`AnonymousChatInteractionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/anonymous_chat_interaction_o_enum.py)
+    2.  **Model Source:** [`InjectionSeverityEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/injection_severity_enum.py)
+    3.  **API Source:** [`anonymous_chat_interactions_kpi_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/anonymous_chat_interactions/anonymous_chat_interactions_kpi_retrieve.py)
 
 === "TypeScript"
 
@@ -610,6 +735,30 @@ Returns aggregate counters and rates for the anonymous chat flow. Filters are ho
     ```
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `created_after` | string (date) |  |
+    | `created_before` | string (date) |  |
+    | `has_feedback` | boolean |  |
+    | `input_tokens_max` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `input_tokens_min` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `is_flagged` | boolean |  |
+    | `is_reviewed` | boolean | Whether the nightly LLM judge has scored the conversation. |
+    | `last_active_after` | string (date) | Bound on the conversation's most recent turn. Inclusive of the boundary day. |
+    | `last_active_before` | string (date) | Bound on the conversation's most recent turn. Inclusive of the boundary day. |
+    | `o` | array | Ordering<br><br> |
+    | `output_tokens_max` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `output_tokens_min` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `query` | string |  |
+    | `session_id` | string |  |
+    | `severity` | string | _Enum: `none`, `low`, `medium`, `high`, `critical`_ |
+    | `total_tokens_max` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `total_tokens_min` | number | Conversation-level bound: selects whole conversations by their summed spend, never individual turns. |
+    | `user_slug` | string |  |
+
+
 === "Responses"
 
     **`200`** - 
@@ -625,6 +774,11 @@ Returns aggregate counters and rates for the anonymous chat flow. Filters are ho
     | `satisfaction_rate` | number (double) | positive / (positive + negative); null when no human feedback. |
     | `clicks_total` | integer |  |
     | `click_through_rate` | number (double) | clicks / interactions; null when no interactions. |
+    | `input_tokens_total` | integer | Prompt tokens summed over the filtered turns. Turns recorded before per-interaction token capture contribute nothing, so this understates spend on historical data. |
+    | `output_tokens_total` | integer | Completion tokens summed over the filtered turns. |
+    | `reviewed_total` | integer | Threads carrying a judge verdict. Always present, unlike the review rates below — zero here is the signal that the nightly pass is off or stalled, so consumers can keep showing the row. |
+    | `review_input_tokens_total` | integer | Prompt tokens spent by the LLM judge. Tracked apart from ``input_tokens_total`` because review runs on its own budget. |
+    | `review_output_tokens_total` | integer | Completion tokens spent by the LLM judge. |
     | `avg_llm_resolution_score` | number (double) | Mean of llm_resolution_score across reviewed sessions (1-5). |
     | `llm_intent_distribution` | object (free-form) | Counts keyed by llm_intent_category. |
     | `hallucination_rate` | number (double) | Share of reviewed sessions flagged as hallucinating. |

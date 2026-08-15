@@ -13,6 +13,7 @@
 | **Other Actions** | | |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-site-agent-identities/cleanup_orphaned/` | [Remove agent identities that have no active services. Staff only](#remove-agent-identities-that-have-no-active-services-staff-only) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-site-agent-identities/{uuid}/register_event_subscription/` | [Register event subscription](#register-event-subscription) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-site-agent-identities/{uuid}/register_queue/` | [Register queue](#register-queue) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-site-agent-identities/{uuid}/register_service/` | [Register a new processor or get the existing one for the agent service](#register-a-new-processor-or-get-the-existing-one-for-the-agent-service) |
 
 ---
@@ -580,7 +581,7 @@ Remove agent identities that have no active services. Staff only.
 
 ### Register event subscription
 
-Register an event subscription for the specified agent identity and observable object type. Returns existing subscription if already exists.
+DEPRECATED: use register_queue instead, which creates a single unified consumer queue. This per-object-type subscription path is kept only for the deprecation window; removal is tracked in WAL-10111. Register an event subscription for the specified agent identity and observable object type. Returns existing subscription if already exists.
 
 
 === "HTTPie"
@@ -698,6 +699,102 @@ Register an event subscription for the specified agent identity and observable o
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `source_ip` | any | An IPv4 or IPv6 address. |
+
+---
+
+### Register queue
+
+Register a unified event-consumer queue for this agent identity. Creates a single RabbitMQ queue that receives all event types. Returns the existing queue if already registered.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-site-agent-identities/a1b2c3d4-e5f6-7890-abcd-ef1234567890/register_queue/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.agent_queue_registration_request import AgentQueueRegistrationRequest # (1)
+    from waldur_api_client.api.marketplace_site_agent_identities import marketplace_site_agent_identities_register_queue # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = AgentQueueRegistrationRequest()
+    response = marketplace_site_agent_identities_register_queue.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`AgentQueueRegistrationRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/agent_queue_registration_request.py)
+    2.  **API Source:** [`marketplace_site_agent_identities_register_queue`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_site_agent_identities/marketplace_site_agent_identities_register_queue.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSiteAgentIdentitiesRegisterQueue } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSiteAgentIdentitiesRegisterQueue({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `object_types` | array of strings |  | List of observable object types to receive. An explicit empty list means all types; omitting the field leaves the current filter unchanged. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `rmq_username` | string | RabbitMQ username (UUID hex) for STOMP authentication |
+    | `queue_name` | string | RabbitMQ queue name (consumer_{consumer_uuid}) |
+    | `vhost` | string | RabbitMQ virtual host (user UUID) |
+    | `observable_object_types` | array of strings | List of observable object types routed to this queue |
+    
+    ---
+    
+    **`201`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `rmq_username` | string | RabbitMQ username (UUID hex) for STOMP authentication |
+    | `queue_name` | string | RabbitMQ queue name (consumer_{consumer_uuid}) |
+    | `vhost` | string | RabbitMQ virtual host (user UUID) |
+    | `observable_object_types` | array of strings | List of observable object types routed to this queue |
 
 ---
 

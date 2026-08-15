@@ -25,8 +25,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.provider_requested_resource_o_enum import ProviderRequestedResourceOEnum # (1)
-    from waldur_api_client.api.proposal_requested_resources import proposal_requested_resources_list # (2)
+    from waldur_api_client.models.proposal_states import ProposalStates # (1)
+    from waldur_api_client.models.user_requested_resource_o_enum import UserRequestedResourceOEnum # (2)
+    from waldur_api_client.api.proposal_requested_resources import proposal_requested_resources_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -38,8 +39,9 @@
     ```
     
     
-    1.  **Model Source:** [`ProviderRequestedResourceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_requested_resource_o_enum.py)
-    2.  **API Source:** [`proposal_requested_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_requested_resources/proposal_requested_resources_list.py)
+    1.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
+    2.  **Model Source:** [`UserRequestedResourceOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_requested_resource_o_enum.py)
+    3.  **API Source:** [`proposal_requested_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_requested_resources/proposal_requested_resources_list.py)
 
 === "TypeScript"
 
@@ -68,7 +70,9 @@
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `proposal` | string (uri) | Proposal |
+    | `proposal_state` | array | Proposal state<br><br> |
     | `proposal_uuid` | string (uuid) |  |
+    | `query` | string | Search by offering, proposal, call or resource name |
     | `resource` | string (uri) | Resource |
     | `resource_uuid` | string (uuid) |  |
 
@@ -79,22 +83,26 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string |
-    | `requested_offering` | any |
-    | `resource` | string (uri) |
-    | `resource_name` | string |
-    | `call_resource_template` | string |
-    | `call_resource_template_name` | string |
-    | `attributes` | object (free-form) |
-    | `limits` | object (free-form) |
-    | `description` | string |
-    | `created_by` | string (uri) |
-    | `created_by_name` | string |
-    | `proposal_name` | string |
-    | `proposal` | string (uri) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_offering` | any |  |
+    | `resource` | string (uri) |  |
+    | `resource_name` | string |  |
+    | `call_resource_template` | string |  |
+    | `call_resource_template_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
+    | `attachment` | string (uri) |  |
+    | `purchase_order_required` | boolean |  |
+    | `has_purchase_order` | boolean | Either half satisfies the requirement.  Some providers want the document, others only need the reference from the customer's finance system; demanding both would block the second group for no gain. |
+    | `description` | string |  |
+    | `created_by` | string (uri) |  |
+    | `created_by_name` | string |  |
+    | `proposal_name` | string |  |
+    | `proposal` | string (uri) |  |
 
 ---
 
@@ -160,21 +168,25 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `url` | string |
-    | `requested_offering` | any |
-    | `resource` | string (uri) |
-    | `resource_name` | string |
-    | `call_resource_template` | string |
-    | `call_resource_template_name` | string |
-    | `attributes` | object (free-form) |
-    | `limits` | object (free-form) |
-    | `description` | string |
-    | `created_by` | string (uri) |
-    | `created_by_name` | string |
-    | `proposal_name` | string |
-    | `proposal` | string (uri) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_offering` | any |  |
+    | `resource` | string (uri) |  |
+    | `resource_name` | string |  |
+    | `call_resource_template` | string |  |
+    | `call_resource_template_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `purchase_order_reference` | string |  |
+    | `attachment` | string (uri) |  |
+    | `purchase_order_required` | boolean |  |
+    | `has_purchase_order` | boolean | Either half satisfies the requirement.  Some providers want the document, others only need the reference from the customer's finance system; demanding both would block the second group for no gain. |
+    | `description` | string |  |
+    | `created_by` | string (uri) |  |
+    | `created_by_name` | string |  |
+    | `proposal_name` | string |  |
+    | `proposal` | string (uri) |  |
 
 ---

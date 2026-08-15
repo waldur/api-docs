@@ -75,6 +75,7 @@ Returns a paginated list of public maintenance announcements. Only announcements
     | `scheduled_start_before` | string (date-time) | Scheduled start before |
     | `service_provider_uuid` | string (uuid) | Service provider UUID |
     | `state` | array | Maintenance state<br><br> |
+    | `timing_bucket` | string | Timing bucket (comma-separated: on_time, late_start, overrun, early, pending) |
 
 
 === "Responses"

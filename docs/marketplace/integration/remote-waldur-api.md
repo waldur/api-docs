@@ -1109,7 +1109,6 @@ List remote marketplace categories
     | `icon` | string (uri) |  |
     | `default_vm_category` | boolean | Set to "true" if this category is for OpenStack VM. Only one category can have "true" value. |
     | `default_volume_category` | boolean | Set to true if this category is for OpenStack Volume. Only one category can have "true" value. |
-    | `default_tenant_category` | boolean | Set to true if this category is for OpenStack Tenant. Only one category can have "true" value. |
     | `offering_count` | integer |  |
     | `available_offerings_count` | integer |  |
     | `sections` | array of objects |  |

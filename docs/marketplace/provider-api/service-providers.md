@@ -238,6 +238,7 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `conceal_finished_projects` | boolean |  | Conceal finished projects |
     | `created` | string (date-time) |  | Created after |
     | `created_before` | string (date-time) |  | Created before |
+    | `current_user_has_role` | array |  | Multiple values may be separated by commas. |
     | `customer` | array |  | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string |  | Customer abbreviation |
     | `customer_name` | string |  | Customer name |
@@ -352,6 +353,7 @@ Returns a paginated list of customers who have consumed resources from the speci
     | `backend_id` | string |  |
     | `contact_details` | string | Contact details |
     | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `field` | array |  |
     | `name` | string | Name |
     | `name_exact` | string | Name (exact) |
@@ -389,7 +391,7 @@ Returns a paginated list of customers who have consumed resources from the speci
     | `payment_profiles.attributes` | object |
     | `payment_profiles.attributes.end_date` | string |
     | `payment_profiles.attributes.agreement_number` | string |
-    | `payment_profiles.attributes.contract_sum` | integer |
+    | `payment_profiles.attributes.contract_sum` | string |
     | `payment_profiles.payment_type` | string |
     | `payment_profiles.payment_type_display` | string |
     | `payment_profiles.is_active` | boolean |
@@ -611,7 +613,7 @@ Returns a paginated list of service providers.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -690,7 +692,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `o` | array | Ordering fields |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
-    | `role` | string (uuid) | Role UUID or name |
+    | `role` | array | Role UUID or name. Repeat to filter by several roles. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -792,13 +794,15 @@ Returns a paginated list of all billable, shared offerings provided by the speci
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -814,6 +818,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -910,9 +915,8 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
-    | `plans.components.discount_threshold` | integer | Minimum amount to be eligible for discount. |
-    | `plans.components.discount_rate` | integer | Discount rate in percentage. |
-    | `plans.components.discounted_price` | string (decimal) |  |
+    | `plans.components.discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
+    | `plans.components.discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
     | `plans.components.discount_description` | string |  |
     | `plans.prices` | object (free-form) |  |
     | `plans.future_prices` | object (free-form) |  |
@@ -926,6 +930,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `thumbnail` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
+    | `service_provider_can_create_offering_user` | boolean |  |
 
 ---
 
@@ -996,13 +1001,15 @@ Returns a paginated list of all billable, shared offerings provided by the speci
 
     | Name | Type | Description |
     |---|---|---|
-    | `accessible_via_calls` | boolean | Accessible via calls |
+    | `accessible` | boolean | Only offerings the current user can order |
+    | `accessible_via_calls` | boolean | Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead. |
     | `allowed_customer_uuid` | string (uuid) | Allowed customer UUID |
     | `attributes` | string | Offering attributes (JSON) |
     | `billable` | boolean | Billable |
     | `can_create_offering_user` | boolean |  |
     | `category_group_uuid` | string (uuid) | Category group UUID |
     | `category_uuid` | string (uuid) | Category UUID |
+    | `consumer_customer_uuid` | string (uuid) | Consumer customer UUID |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
@@ -1017,6 +1024,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `name_exact` | string | Name (exact) |
     | `o` | array | Ordering<br><br> |
     | `offering_group_uuid` | string (uuid) | Offering group UUID |
+    | `open_for_proposals` | boolean | Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any. |
     | `organization_group_uuid` | string (uuid) | Organization group UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -1118,9 +1126,11 @@ Returns a paginated list of project permissions for all projects that have consu
     |---|---|---|
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
+    | `customer_uuid` | string (uuid) | Grants within a customer (uuid): the customer scope plus its projects |
     | `expiration_time` | string (date-time) |  |
     | `field` | array |  |
     | `full_name` | string | User full name contains |
+    | `is_active` | boolean |  |
     | `modified` | string (date-time) | Modified after |
     | `modified_before` | string (date-time) | Modified before |
     | `native_name` | string |  |
@@ -1357,6 +1367,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `conceal_finished_projects` | boolean | Conceal finished projects |
     | `created` | string (date-time) | Created after |
     | `created_before` | string (date-time) | Created before |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
     | `customer` | array | Multiple values may be separated by commas. |
     | `customer_abbreviation` | string | Customer abbreviation |
     | `customer_name` | string | Customer name |
@@ -1417,7 +1428,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
-    | `project_metadata.answer` | object (free-form) | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -1427,9 +1438,9 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `customer_grace_period_days` | integer | Grace period days set at the customer (organization) level. Used as default when project-level is not set. |
     | `effective_end_date` | string (date) | Effective end date including grace period. After this date, project resources will be terminated. |
     | `is_in_grace_period` | boolean | True if the project is past its end date but still within the grace period. |
-    | `user_email_patterns` | object (free-form) |  |
-    | `user_affiliations` | object (free-form) |  |
-    | `user_identity_sources` | object (free-form) | List of allowed identity sources (identity providers). |
+    | `user_email_patterns` | array of strings |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -1544,7 +1555,7 @@ Returns details of a specific service provider.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -1959,6 +1970,7 @@ Returns a paginated list of customers that a specified user has access to within
     | `backend_id` | string |  |  |
     | `contact_details` | string |  | Contact details |
     | `current_user_has_project_create_permission` | boolean |  | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array |  | Multiple values may be separated by commas. |
     | `field` | array |  |  |
     | `name` | string |  | Name |
     | `name_exact` | string |  | Name (exact) |
@@ -1997,7 +2009,7 @@ Returns a paginated list of customers that a specified user has access to within
     | `payment_profiles.attributes` | object |
     | `payment_profiles.attributes.end_date` | string |
     | `payment_profiles.attributes.agreement_number` | string |
-    | `payment_profiles.attributes.contract_sum` | integer |
+    | `payment_profiles.attributes.contract_sum` | string |
     | `payment_profiles.payment_type` | string |
     | `payment_profiles.payment_type_display` | string |
     | `payment_profiles.is_active` | boolean |
@@ -2132,7 +2144,7 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `phone_number` | string |  |
     | `projects_count` | integer |  |
     | `registration_method` | string | Indicates what registration method was used. |
-    | `affiliations` | object (free-form) | Person's affiliation within organization such as student, faculty, staff. |
+    | `affiliations` | array of strings | Person's affiliation within organization such as student, faculty, staff. |
     | `is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `job_title` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
@@ -2141,15 +2153,17 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `address` | string |  |
     | `country_of_residence` | string |  |
     | `nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
-    | `nationalities` | object (free-form) | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `nationalities` | array of strings | List of all citizenships (ISO 3166-1 alpha-2 codes) |
     | `organization_country` | string |  |
     | `organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
     | `organization_registry_code` | string | Company registration code of the user's organization, if known |
-    | `eduperson_assurance` | object (free-form) | REFEDS assurance profile URIs from identity provider |
+    | `organization_vat_code` | string | VAT code of the user's organization |
+    | `organization_address` | string | Postal address of the user's organization |
+    | `eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
     | `civil_number` | string |  |
     | `birth_date` | string (date) |  |
     | `identity_source` | string | Indicates what identity provider was used. |
-    | `active_isds` | object (free-form) | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
+    | `active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 
@@ -2654,7 +2668,7 @@ Creates a new service provider profile for a customer.
     | `enable_notifications` | boolean |  |  |
     | `customer` | string (uri) | ✓ |  |
     | `image` | string (binary) |  |  |
-    | `allowed_domains` | object (free-form) |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | array of strings |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -2686,7 +2700,7 @@ Creates a new service provider profile for a customer.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -3199,7 +3213,7 @@ Updates an existing service provider profile.
     | `enable_notifications` | boolean |  |  |
     | `customer` | string (uri) | ✓ |  |
     | `image` | string (binary) |  |  |
-    | `allowed_domains` | object (free-form) |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | array of strings |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -3231,7 +3245,7 @@ Updates an existing service provider profile.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
@@ -3307,7 +3321,7 @@ Partially updates an existing service provider profile.
     | `description` | string |  |  |
     | `enable_notifications` | boolean |  |  |
     | `image` | string (binary) |  |  |
-    | `allowed_domains` | object (free-form) |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | array of strings |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 
 === "Responses"
@@ -3339,7 +3353,7 @@ Partially updates an existing service provider profile.
     | `organization_groups.parent` | string (uri) |  |
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
-    | `allowed_domains` | object (free-form) | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
 
 ---
 
