@@ -144,6 +144,7 @@ Get a list of networks.
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
+    | `tenant_is_managed` | boolean | False when the network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `is_external` | boolean | Defines whether this network is external (public) or internal (private) |
     | `type` | string | Network type, such as local, flat, vlan, vxlan, or gre |
     | `segmentation_id` | integer | VLAN ID for VLAN networks or tunnel ID for VXLAN/GRE networks |
@@ -151,12 +152,14 @@ Get a list of networks.
     | `subnets.uuid` | string (uuid) |  |
     | `subnets.name` | string |  |
     | `subnets.description` | string |  |
-    | `subnets.cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `subnets.cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `subnets.gateway_ip` | any | IP address of the gateway for this subnet |
     | `subnets.allocation_pools` | array of objects |  |
     | `subnets.allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
+    | `subnets.ipv6_ra_mode` | any |  |
+    | `subnets.ipv6_address_mode` | any |  |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
@@ -292,6 +295,7 @@ Retrieve details of a specific network.
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
+    | `tenant_is_managed` | boolean | False when the network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `is_external` | boolean | Defines whether this network is external (public) or internal (private) |
     | `type` | string | Network type, such as local, flat, vlan, vxlan, or gre |
     | `segmentation_id` | integer | VLAN ID for VLAN networks or tunnel ID for VXLAN/GRE networks |
@@ -299,12 +303,14 @@ Retrieve details of a specific network.
     | `subnets.uuid` | string (uuid) |  |
     | `subnets.name` | string |  |
     | `subnets.description` | string |  |
-    | `subnets.cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `subnets.cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `subnets.gateway_ip` | any | IP address of the gateway for this subnet |
     | `subnets.allocation_pools` | array of objects |  |
     | `subnets.allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
+    | `subnets.ipv6_ra_mode` | any |  |
+    | `subnets.ipv6_address_mode` | any |  |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
@@ -420,10 +426,14 @@ Create a new subnet within the network.
     | `allocation_pools` | array of objects |  |  |
     | `allocation_pools.start` | any | ✓ | An IPv4 or IPv6 address. |
     | `allocation_pools.end` | any | ✓ | An IPv4 or IPv6 address. |
+    | `ipv6_ra_mode` | any |  | How the router advertises an IPv6 subnet. Set at creation only; null for an IPv4 subnet. |
+    | `ipv6_address_mode` | any |  | How instances on an IPv6 subnet get their address. Set at creation only; null for an IPv4 subnet. |
     | `dns_nameservers` | array of anys |  |  |
     | `host_routes` | array of objects |  |  |
     | `host_routes.destination` | string | ✓ |  |
     | `host_routes.nexthop` | any | ✓ | An IPv4 or IPv6 address. |
+    | `router` | string (uri) |  | Router to attach the subnet to. Optional: when omitted Waldur picks a router of the tenant itself. Cannot be changed here afterwards -- use the router's add/remove interface actions. |
+    | `skip_router_connection` | boolean |  | Create the subnet without attaching it to a router. Off by default, so an omitted field behaves exactly as before: Waldur attaches the subnet to a router of the tenant.<br>_Constraints: write-only, default: `False`_ |
 
 
 === "Responses"
@@ -459,6 +469,7 @@ Create a new subnet within the network.
     | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
+    | `tenant_is_managed` | boolean | False when the subnet's network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `network` | string (uri) | Network to which this subnet belongs |
     | `network_name` | string |  |
     | `cidr` | string |  |
@@ -468,6 +479,8 @@ Create a new subnet within the network.
     | `allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `ip_version` | integer | IP protocol version (4 or 6) |
+    | `ipv6_ra_mode` | any | How the router advertises an IPv6 subnet. Set at creation only; null for an IPv4 subnet. |
+    | `ipv6_address_mode` | any | How instances on an IPv6 subnet get their address. Set at creation only; null for an IPv4 subnet. |
     | `enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `dns_nameservers` | array of anys |  |
     | `host_routes` | array of objects |  |
@@ -475,6 +488,9 @@ Create a new subnet within the network.
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `port_security_enabled` | boolean |  |
+    | `router` | string (uri) | Router to attach the subnet to. Optional: when omitted Waldur picks a router of the tenant itself. Cannot be changed here afterwards -- use the router's add/remove interface actions. |
+    | `router_name` | string |  |
+    | `router_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -749,6 +765,7 @@ Update an existing network.
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
+    | `tenant_is_managed` | boolean | False when the network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `is_external` | boolean | Defines whether this network is external (public) or internal (private) |
     | `type` | string | Network type, such as local, flat, vlan, vxlan, or gre |
     | `segmentation_id` | integer | VLAN ID for VLAN networks or tunnel ID for VXLAN/GRE networks |
@@ -756,12 +773,14 @@ Update an existing network.
     | `subnets.uuid` | string (uuid) |  |
     | `subnets.name` | string |  |
     | `subnets.description` | string |  |
-    | `subnets.cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `subnets.cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `subnets.gateway_ip` | any | IP address of the gateway for this subnet |
     | `subnets.allocation_pools` | array of objects |  |
     | `subnets.allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
+    | `subnets.ipv6_ra_mode` | any |  |
+    | `subnets.ipv6_address_mode` | any |  |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
@@ -901,6 +920,7 @@ Update specific fields of a network.
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
+    | `tenant_is_managed` | boolean | False when the network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `is_external` | boolean | Defines whether this network is external (public) or internal (private) |
     | `type` | string | Network type, such as local, flat, vlan, vxlan, or gre |
     | `segmentation_id` | integer | VLAN ID for VLAN networks or tunnel ID for VXLAN/GRE networks |
@@ -908,12 +928,14 @@ Update specific fields of a network.
     | `subnets.uuid` | string (uuid) |  |
     | `subnets.name` | string |  |
     | `subnets.description` | string |  |
-    | `subnets.cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `subnets.cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `subnets.gateway_ip` | any | IP address of the gateway for this subnet |
     | `subnets.allocation_pools` | array of objects |  |
     | `subnets.allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
+    | `subnets.ipv6_ra_mode` | any |  |
+    | `subnets.ipv6_address_mode` | any |  |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |

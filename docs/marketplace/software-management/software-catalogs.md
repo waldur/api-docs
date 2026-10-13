@@ -13,6 +13,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-software-catalogs/{uuid}/` | [Partially update a software catalog](#partially-update-a-software-catalog) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-software-catalogs/{uuid}/` | [Delete a software catalog](#delete-a-software-catalog) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-software-catalogs/{uuid}/cpu_targets/` | [List CPU targets for a software catalog](#list-cpu-targets-for-a-software-catalog) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-software-catalogs/discover/` | [Discover available software catalog versions](#discover-available-software-catalog-versions) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-software-catalogs/import_catalog/` | [Import a new software catalog](#import-a-new-software-catalog) |
 
@@ -102,6 +103,7 @@ Returns a paginated list of available software catalogs, such as EESSI or Spack.
     | `version` | string | Catalog version (e.g., 2023.06, 0.21.0) |
     | `catalog_type` | any | Type of software catalog |
     | `catalog_type_display` | string |  |
+    | `supports_cpu_target_restrictions` | boolean |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
     | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
@@ -189,6 +191,7 @@ Returns the details of a specific software catalog, including its name, version,
     | `version` | string | Catalog version (e.g., 2023.06, 0.21.0) |
     | `catalog_type` | any | Type of software catalog |
     | `catalog_type_display` | string |  |
+    | `supports_cpu_target_restrictions` | boolean |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
     | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
@@ -293,6 +296,7 @@ Creates a new software catalog. Requires staff permissions.
     | `version` | string | Catalog version (e.g., 2023.06, 0.21.0) |
     | `catalog_type` | any | Type of software catalog |
     | `catalog_type_display` | string |  |
+    | `supports_cpu_target_restrictions` | boolean |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
     | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
@@ -475,6 +479,7 @@ Updates an existing software catalog. Requires staff permissions.
     | `version` | string | Catalog version (e.g., 2023.06, 0.21.0) |
     | `catalog_type` | any | Type of software catalog |
     | `catalog_type_display` | string |  |
+    | `supports_cpu_target_restrictions` | boolean |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
     | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
@@ -581,6 +586,7 @@ Partially updates an existing software catalog. Requires staff permissions.
     | `version` | string | Catalog version (e.g., 2023.06, 0.21.0) |
     | `catalog_type` | any | Type of software catalog |
     | `catalog_type_display` | string |  |
+    | `supports_cpu_target_restrictions` | boolean |  |
     | `source_url` | string (uri) | Catalog source URL |
     | `description` | string |  |
     | `metadata` | object (free-form) | Catalog-specific metadata (architecture maps, API endpoints, etc.) |
@@ -663,6 +669,81 @@ Deletes a software catalog. Requires staff permissions.
 
 ## Other Actions
 
+
+### List CPU targets for a software catalog
+
+Returns CPU family and microarchitecture choices for this catalog's version, taken from metadata.architectures_map. cpu_microarchitecture matches SoftwareTarget.target_subtype and the cpu_microarchitecture package filter, including vendor-prefixed paths such as intel/sapphirerapids. Does not scan package targets. Catalogs without an architectures map (for example Spack) return an empty list.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-software-catalogs/a1b2c3d4-e5f6-7890-abcd-ef1234567890/cpu_targets/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_software_catalogs import marketplace_software_catalogs_cpu_targets_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_software_catalogs_cpu_targets_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_software_catalogs_cpu_targets_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_catalogs/marketplace_software_catalogs_cpu_targets_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceSoftwareCatalogsCpuTargetsList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceSoftwareCatalogsCpuTargetsList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `cpu_family` | string |
+    | `cpu_microarchitecture` | string |
+    | `full_arch` | string |
+
+---
 
 ### Discover available software catalog versions
 

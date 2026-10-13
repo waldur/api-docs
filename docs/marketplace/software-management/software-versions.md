@@ -71,8 +71,8 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     |---|---|---|
     | `catalog_type` | string | Filter versions by catalog type (binary_runtime, source_package, package_manager)<br><br><br>_Enum: `binary_runtime`, `source_package`, `package_manager`_ |
     | `catalog_uuid` | string (uuid) |  |
-    | `cpu_family` | string |  |
-    | `cpu_microarchitecture` | string |  |
+    | `cpu_family` | array |  |
+    | `cpu_microarchitecture` | array |  |
     | `gpu_arch` | string | Filter versions by GPU architecture (e.g., nvidia/cc90) |
     | `has_gpu` | boolean | Filter versions that have GPU-enabled builds |
     | `o` | array | Ordering<br><br> |

@@ -12,6 +12,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-reviews/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-reviews/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-reviews/dashboard-stats/` | [Get reviewer dashboard stats and deadlines](#get-reviewer-dashboard-stats-and-deadlines) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-reviews/{uuid}/reject/` | [Reject a review, changing its state to REJECTED](#reject-a-review-changing-its-state-to-rejected) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-reviews/{uuid}/submit/` | [Submit a review, changing its state to SUBMITTED](#submit-a-review-changing-its-state-to-submitted) |
 
@@ -74,6 +75,8 @@
     | Name | Type | Description |
     |---|---|---|
     | `call_uuid` | string (uuid) |  |
+    | `due_within_days` | number | Only reviews in progress whose deadline is at most this many days away, including ones already past it. Implies state=in_review. |
+    | `managed_calls_only` | boolean | Only reviews on calls where the current user is call manager, the same scope as the call manager dashboard. |
     | `o` | array | Ordering<br><br> |
     | `organization_uuid` | string (uuid) |  |
     | `page` | integer | A page number within the paginated result set. |
@@ -106,7 +109,7 @@
     | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
-    | `review_end_date` | string (date-time) |  |
+    | `review_end_date` | string (date-time) | When the review is due, or None if the round sets no review duration.  A review created by accepting an assignment is also due no earlier than its assignment batch's deadline, so extending the batch deadline moves the deadline of the reviews accepted from it. |
     | `summary_score` | integer |  |
     | `summary_public_comment` | string |  |
     | `summary_private_comment` | string |  |
@@ -121,10 +124,7 @@
     | `call_managing_organisation_uuid` | string (uuid) |  |
     | `comment_project_title` | string |  |
     | `comment_project_summary` | string |  |
-    | `comment_project_is_confidential` | string |  |
-    | `comment_project_has_civilian_purpose` | string |  |
     | `comment_project_description` | string |  |
-    | `comment_project_duration` | string |  |
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
@@ -212,7 +212,7 @@
     | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
-    | `review_end_date` | string (date-time) |  |
+    | `review_end_date` | string (date-time) | When the review is due, or None if the round sets no review duration.  A review created by accepting an assignment is also due no earlier than its assignment batch's deadline, so extending the batch deadline moves the deadline of the reviews accepted from it. |
     | `summary_score` | integer |  |
     | `summary_public_comment` | string |  |
     | `summary_private_comment` | string |  |
@@ -227,10 +227,7 @@
     | `call_managing_organisation_uuid` | string (uuid) |  |
     | `comment_project_title` | string |  |
     | `comment_project_summary` | string |  |
-    | `comment_project_is_confidential` | string |  |
-    | `comment_project_has_civilian_purpose` | string |  |
     | `comment_project_description` | string |  |
-    | `comment_project_duration` | string |  |
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
@@ -302,22 +299,20 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `proposal` | string (uri) | ✓ |
-    | `reviewer` | string (uri) |  |
-    | `summary_score` | integer |  |
-    | `summary_public_comment` | string |  |
-    | `summary_private_comment` | string |  |
-    | `comment_project_title` | string |  |
-    | `comment_project_summary` | string |  |
-    | `comment_project_is_confidential` | string |  |
-    | `comment_project_has_civilian_purpose` | string |  |
-    | `comment_project_description` | string |  |
-    | `comment_project_duration` | string |  |
-    | `comment_project_supporting_documentation` | string |  |
-    | `comment_resource_requests` | string |  |
-    | `comment_team` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `proposal` | string (uri) | ✓ |  |
+    | `reviewer` | string (uri) |  |  |
+    | `summary_score` | integer |  |  |
+    | `summary_public_comment` | string |  |  |
+    | `summary_private_comment` | string |  |  |
+    | `comment_project_title` | string |  |  |
+    | `comment_project_summary` | string |  |  |
+    | `comment_project_description` | string |  |  |
+    | `comment_project_supporting_documentation` | string |  |  |
+    | `comment_resource_requests` | string |  |  |
+    | `comment_team` | string |  |  |
+    | `override_workload_limit` | boolean |  | Create the review even if this takes the reviewer above their maximum number of open assignments in the call's reviewer pool. The override is logged.<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -338,7 +333,7 @@
     | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
-    | `review_end_date` | string (date-time) |  |
+    | `review_end_date` | string (date-time) | When the review is due, or None if the round sets no review duration.  A review created by accepting an assignment is also due no earlier than its assignment batch's deadline, so extending the batch deadline moves the deadline of the reviews accepted from it. |
     | `summary_score` | integer |  |
     | `summary_public_comment` | string |  |
     | `summary_private_comment` | string |  |
@@ -353,10 +348,7 @@
     | `call_managing_organisation_uuid` | string (uuid) |  |
     | `comment_project_title` | string |  |
     | `comment_project_summary` | string |  |
-    | `comment_project_is_confidential` | string |  |
-    | `comment_project_has_civilian_purpose` | string |  |
     | `comment_project_description` | string |  |
-    | `comment_project_duration` | string |  |
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
@@ -439,22 +431,20 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `proposal` | string (uri) | ✓ |
-    | `reviewer` | string (uri) |  |
-    | `summary_score` | integer |  |
-    | `summary_public_comment` | string |  |
-    | `summary_private_comment` | string |  |
-    | `comment_project_title` | string |  |
-    | `comment_project_summary` | string |  |
-    | `comment_project_is_confidential` | string |  |
-    | `comment_project_has_civilian_purpose` | string |  |
-    | `comment_project_description` | string |  |
-    | `comment_project_duration` | string |  |
-    | `comment_project_supporting_documentation` | string |  |
-    | `comment_resource_requests` | string |  |
-    | `comment_team` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `proposal` | string (uri) | ✓ |  |
+    | `reviewer` | string (uri) |  |  |
+    | `summary_score` | integer |  |  |
+    | `summary_public_comment` | string |  |  |
+    | `summary_private_comment` | string |  |  |
+    | `comment_project_title` | string |  |  |
+    | `comment_project_summary` | string |  |  |
+    | `comment_project_description` | string |  |  |
+    | `comment_project_supporting_documentation` | string |  |  |
+    | `comment_resource_requests` | string |  |  |
+    | `comment_team` | string |  |  |
+    | `override_workload_limit` | boolean |  | Create the review even if this takes the reviewer above their maximum number of open assignments in the call's reviewer pool. The override is logged.<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -475,7 +465,7 @@
     | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
-    | `review_end_date` | string (date-time) |  |
+    | `review_end_date` | string (date-time) | When the review is due, or None if the round sets no review duration.  A review created by accepting an assignment is also due no earlier than its assignment batch's deadline, so extending the batch deadline moves the deadline of the reviews accepted from it. |
     | `summary_score` | integer |  |
     | `summary_public_comment` | string |  |
     | `summary_private_comment` | string |  |
@@ -490,10 +480,7 @@
     | `call_managing_organisation_uuid` | string (uuid) |  |
     | `comment_project_title` | string |  |
     | `comment_project_summary` | string |  |
-    | `comment_project_is_confidential` | string |  |
-    | `comment_project_has_civilian_purpose` | string |  |
     | `comment_project_description` | string |  |
-    | `comment_project_duration` | string |  |
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
@@ -570,20 +557,18 @@
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `summary_score` | integer |  |
-    | `summary_public_comment` | string |  |
-    | `summary_private_comment` | string |  |
-    | `comment_project_title` | string |  |
-    | `comment_project_summary` | string |  |
-    | `comment_project_is_confidential` | string |  |
-    | `comment_project_has_civilian_purpose` | string |  |
-    | `comment_project_description` | string |  |
-    | `comment_project_duration` | string |  |
-    | `comment_project_supporting_documentation` | string |  |
-    | `comment_resource_requests` | string |  |
-    | `comment_team` | string |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `summary_score` | integer |  |  |
+    | `summary_public_comment` | string |  |  |
+    | `summary_private_comment` | string |  |  |
+    | `comment_project_title` | string |  |  |
+    | `comment_project_summary` | string |  |  |
+    | `comment_project_description` | string |  |  |
+    | `comment_project_supporting_documentation` | string |  |  |
+    | `comment_resource_requests` | string |  |  |
+    | `comment_team` | string |  |  |
+    | `override_workload_limit` | boolean |  | Create the review even if this takes the reviewer above their maximum number of open assignments in the call's reviewer pool. The override is logged.<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -604,7 +589,7 @@
     | `reviewer_image` | string (uri) |  |
     | `anonymous_reviewer_name` | string | Generate an anonymous reviewer identifier like 'Reviewer 1', 'Reviewer 2'. Returns None if the review is not associated with a proposal. |
     | `state` | any |  |
-    | `review_end_date` | string (date-time) |  |
+    | `review_end_date` | string (date-time) | When the review is due, or None if the round sets no review duration.  A review created by accepting an assignment is also due no earlier than its assignment batch's deadline, so extending the batch deadline moves the deadline of the reviews accepted from it. |
     | `summary_score` | integer |  |
     | `summary_public_comment` | string |  |
     | `summary_private_comment` | string |  |
@@ -619,10 +604,7 @@
     | `call_managing_organisation_uuid` | string (uuid) |  |
     | `comment_project_title` | string |  |
     | `comment_project_summary` | string |  |
-    | `comment_project_is_confidential` | string |  |
-    | `comment_project_has_civilian_purpose` | string |  |
     | `comment_project_description` | string |  |
-    | `comment_project_duration` | string |  |
     | `comment_project_supporting_documentation` | string |  |
     | `comment_resource_requests` | string |  |
     | `comment_team` | string |  |
@@ -701,6 +683,73 @@
 
 ## Other Actions
 
+
+### Get reviewer dashboard stats and deadlines
+
+Returns counts (assigned, pending, completed) for every review assigned to the current user, plus their nearest review deadlines ordered by due date. Overdue reviews sort first and are included; the counts cover all reviews, the deadline list is capped and deadlines_total gives its true length.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-reviews/dashboard-stats/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_reviews import proposal_reviews_dashboard_stats_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_reviews_dashboard_stats_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_reviews_dashboard_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_reviews/proposal_reviews_dashboard_stats_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalReviewsDashboardStatsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalReviewsDashboardStatsRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `assigned` | integer |
+    | `pending` | integer |
+    | `completed` | integer |
+    | `deadlines` | array of objects |
+    | `deadlines.uuid` | string (uuid) |
+    | `deadlines.proposal_uuid` | string (uuid) |
+    | `deadlines.proposal_name` | string |
+    | `deadlines.call_uuid` | string (uuid) |
+    | `deadlines.call_name` | string |
+    | `deadlines.due_date` | string (date-time) |
+    | `deadlines_total` | integer |
+
+---
 
 ### Reject a review, changing its state to REJECTED
 

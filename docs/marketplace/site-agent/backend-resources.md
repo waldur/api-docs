@@ -480,6 +480,7 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
     | `project_description` | string |  |
+    | `project_start_date` | string (date) |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
     | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
@@ -495,8 +496,8 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
-    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
+    | `is_usage_based` | boolean | Returns True if the resource bills any component by usage under its plan. |
+    | `is_limit_based` | boolean | Returns True if the resource bills any component on user-adjustable limits under its plan. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
@@ -540,15 +541,16 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `offering_components.limit_period` | any |  |
-    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.limit_amount` | number (double) |  |
+    | `offering_components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `offering_components.article_code` | string |  |
-    | `offering_components.max_value` | integer |  |
-    | `offering_components.min_value` | integer |  |
-    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.max_value` | number (double) |  |
+    | `offering_components.min_value` | number (double) |  |
+    | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
-    | `offering_components.default_limit` | integer |  |
+    | `offering_components.default_limit` | number (double) |  |
     | `offering_components.factor` | integer |  |
-    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
@@ -558,5 +560,6 @@ Deletes a backend resource record. This is typically done when the resource is n
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
+    | `offering_account_settings` | any |  |
 
 ---

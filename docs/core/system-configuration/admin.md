@@ -70,6 +70,7 @@ Returns the current appservice configuration state.
     | `as_token_configured` | boolean |
     | `hs_token_configured` | boolean |
     | `sender_localpart` | string |
+    | `tokens_managed_by` | string |
     | `bot_user_id` | string |
     | `webhook_path` | string |
     | `homeserver_url` | string |
@@ -129,14 +130,15 @@ Performs live connectivity checks against the configured Matrix homeserver and r
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `ok` | boolean |
-    | `checks` | array of objects |
-    | `checks.name` | string |
-    | `checks.label` | string |
-    | `checks.ok` | boolean |
-    | `checks.detail` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `ok` | boolean |  |
+    | `checks` | array of objects |  |
+    | `checks.name` | string |  |
+    | `checks.label` | string |  |
+    | `checks.ok` | boolean |  |
+    | `checks.detail` | string |  |
+    | `checks.metrics` | object (free-form) | The check's numbers, for monitoring: {"round_trip_ms": 12} for appservice_ping, {"failed": 2} for history_exports and {"4xx": 3, "5xx": 0} for webhook_errors. Absent on other checks, and on appservice_ping when the ping failed. |
 
 ---
 
@@ -277,26 +279,28 @@ Participants and their tracks for a single LiveKit room. Staff only. An unknown 
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `sid` | string |
-    | `identity` | string |
-    | `state` | string |
-    | `is_publisher` | boolean |
-    | `joined_at` | integer |
-    | `tracks` | array of objects |
-    | `tracks.sid` | string |
-    | `tracks.name` | string |
-    | `tracks.type` | string |
-    | `tracks.muted` | boolean |
-    | `tracks.width` | integer |
-    | `tracks.height` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `sid` | string |  |
+    | `identity` | string |  |
+    | `state` | string |  |
+    | `is_publisher` | boolean |  |
+    | `joined_at` | integer |  |
+    | `tracks` | array of objects |  |
+    | `tracks.sid` | string |  |
+    | `tracks.name` | string |  |
+    | `tracks.type` | string |  |
+    | `tracks.muted` | boolean |  |
+    | `tracks.width` | integer |  |
+    | `tracks.height` | integer |  |
+    | `tracks.source` | string | What the track carries, as LiveKit names it: CAMERA, MICROPHONE, SCREEN_SHARE, SCREEN_SHARE_AUDIO or UNKNOWN. |
+    | `tracks.encryption` | string | How the publisher encrypts the track's media end to end, as LiveKit names it: GCM (LiveKit's end-to-end encryption, which Matrix calls in encrypted rooms use), CUSTOM (another scheme) or NONE (only encrypted between the browser and LiveKit). |
 
 ---
 
 ### Setup Matrix appservice registration
 
-Generates fresh appservice tokens (rotating any existing ones), enables the appservice, and returns registration YAML.
+Generates fresh appservice tokens (rotating any existing ones), enables the appservice, and returns registration YAML. Returns 409 when the deployment owns the tokens; see MATRIX_TOKENS_MANAGED_BY.
 
 
 === "HTTPie"
@@ -354,10 +358,10 @@ Generates fresh appservice tokens (rotating any existing ones), enables the apps
     |---|---|---|---|
     | `url` | string |  | Waldur URL reachable by the Matrix homeserver (for webhook callbacks) |
     | `sender_localpart` | string |  | Localpart for the appservice bot user, e.g. 'waldur-bot' |
-    | `homeserver_url` | string (uri) |  | Matrix homeserver base URL. Only persisted if MATRIX_HOMESERVER_URL is not already configured. |
-    | `homeserver_public_url` | string (uri) |  | Optional. Matrix homeserver URL used by browser clients. Leave blank when the homeserver URL above is reachable from both servers and browsers. Set this for deployments where the two differ (e.g. Docker-internal vs. Caddy-proxied). Only persisted if MATRIX_HOMESERVER_PUBLIC_URL is not already configured. |
-    | `homeserver_domain` | string |  | Matrix homeserver server_name domain. Only persisted if MATRIX_HOMESERVER_DOMAIN is not already configured. |
-    | `user_registration_secret` | string |  | Shared secret configured in the homeserver for user registration. Only persisted if MATRIX_USER_REGISTRATION_SECRET is not already configured.<br>_Constraints: write-only_ |
+    | `homeserver_url` | string (uri) |  | Matrix homeserver base URL. Only persisted if MATRIX_HOMESERVER_URL is not already configured; a different value is refused. |
+    | `homeserver_public_url` | string (uri) |  | Optional. Matrix homeserver URL used by browser clients. Leave blank when the homeserver URL above is reachable from both servers and browsers. Set this for deployments where the two differ (e.g. Docker-internal vs. Caddy-proxied). Only persisted if MATRIX_HOMESERVER_PUBLIC_URL is not already configured; a different value is refused. |
+    | `homeserver_domain` | string |  | Matrix homeserver server_name domain. Only persisted if MATRIX_HOMESERVER_DOMAIN is not already configured; a different value is refused. |
+    | `user_registration_secret` | string |  | Registration token the homeserver requires for sign-up (its registration_token). Only persisted if MATRIX_USER_REGISTRATION_SECRET is not already configured; a different value is refused.<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -372,12 +376,17 @@ Generates fresh appservice tokens (rotating any existing ones), enables the apps
     | `sender_localpart` | string |
     | `webhook_url` | string |
     | `bot_provision_status` | string |
+    
+    ---
+    
+    **`409`** - The deployment owns the appservice tokens and re-seeds them on every sync. Rotate its Matrix secret and redeploy instead, or clear MATRIX_TOKENS_MANAGED_BY if the deployment no longer manages Matrix.
+    
 
 ---
 
 ### Reprovision all active Matrix rooms on a new homeserver
 
-Resets all active rooms to 'creating' state and re-queues them for provisioning. Also resets all user profiles. Staff only.
+Resets all active rooms to 'creating' state and re-queues them for provisioning. Also resets all user profiles. Only for moving to a new homeserver: on the same homeserver, every old room stays behind with its history next to a new, empty one. Staff only.
 
 
 === "HTTPie"

@@ -513,6 +513,30 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `user_image` | string (uri) |  |
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `source` | string |  |
+    | `user_phone_number` | string |  |
+    | `user_organization` | string |  |
+    | `user_job_title` | string |  |
+    | `user_affiliations` | array of strings | Person's affiliation within organization such as student, faculty, staff. |
+    | `user_gender` | any | User's gender (male, female, or unknown) |
+    | `user_personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
+    | `user_place_of_birth` | string |  |
+    | `user_address` | string |  |
+    | `user_country_of_residence` | string |  |
+    | `user_nationality` | string | Primary citizenship (ISO 3166-1 alpha-2 code) |
+    | `user_nationalities` | array of strings | List of all citizenships (ISO 3166-1 alpha-2 codes) |
+    | `user_organization_country` | string |  |
+    | `user_organization_type` | string | SCHAC URN (e.g., urn:schac:homeOrganizationType:int:university) |
+    | `user_organization_registry_code` | string | Company registration code of the user's organization, if known |
+    | `user_organization_vat_code` | string | VAT code of the user's organization |
+    | `user_organization_address` | string | Postal address of the user's organization |
+    | `user_eduperson_assurance` | array of strings | REFEDS assurance profile URIs from identity provider |
+    | `user_civil_number` | string |  |
+    | `user_birth_date` | string (date) |  |
+    | `user_identity_source` | string | Indicates what identity provider was used. |
+    | `user_uid_number` | integer (int64) | POSIX UID from the identity provider; used when an offering's uid_source is 'user_attribute'. |
+    | `user_primary_gid` | integer (int64) | POSIX primary GID from the identity provider; used when an offering's gid_source is 'user_attribute'. |
+    | `user_active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
 ---
 

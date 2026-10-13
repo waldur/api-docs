@@ -1454,13 +1454,15 @@ Discover available custom fields.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `api_url` | string (uri) | ✓ | Atlassian API URL (e.g., https://your-domain.atlassian.net) |
+    | `api_url` | string (uri) | ✓ | Atlassian site or API URL (e.g., https://your-domain.atlassian.net). With OAuth 2.0 client credentials a Cloud site URL is resolved to the API gateway URL. |
     | `auth_method` | any | ✓ | Authentication method to use |
     | `email` | string (email) |  |  |
     | `token` | string |  | <br>_Constraints: write-only_ |
     | `personal_access_token` | string |  | <br>_Constraints: write-only_ |
     | `username` | string |  |  |
     | `password` | string |  | <br>_Constraints: write-only_ |
+    | `client_id` | string |  |  |
+    | `client_secret` | string |  | <br>_Constraints: write-only_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `True`_ |
     | `project_id` | string |  |  |
     | `request_type_id` | string |  | Optional: Filter fields by request type |
@@ -1558,13 +1560,15 @@ Discover available priorities.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `api_url` | string (uri) | ✓ | Atlassian API URL (e.g., https://your-domain.atlassian.net) |
+    | `api_url` | string (uri) | ✓ | Atlassian site or API URL (e.g., https://your-domain.atlassian.net). With OAuth 2.0 client credentials a Cloud site URL is resolved to the API gateway URL. |
     | `auth_method` | any | ✓ | Authentication method to use |
     | `email` | string (email) |  |  |
     | `token` | string |  | <br>_Constraints: write-only_ |
     | `personal_access_token` | string |  | <br>_Constraints: write-only_ |
     | `username` | string |  |  |
     | `password` | string |  | <br>_Constraints: write-only_ |
+    | `client_id` | string |  |  |
+    | `client_secret` | string |  | <br>_Constraints: write-only_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `True`_ |
 
 
@@ -1659,13 +1663,15 @@ Discover available Service Desk projects.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `api_url` | string (uri) | ✓ | Atlassian API URL (e.g., https://your-domain.atlassian.net) |
+    | `api_url` | string (uri) | ✓ | Atlassian site or API URL (e.g., https://your-domain.atlassian.net). With OAuth 2.0 client credentials a Cloud site URL is resolved to the API gateway URL. |
     | `auth_method` | any | ✓ | Authentication method to use |
     | `email` | string (email) |  |  |
     | `token` | string |  | <br>_Constraints: write-only_ |
     | `personal_access_token` | string |  | <br>_Constraints: write-only_ |
     | `username` | string |  |  |
     | `password` | string |  | <br>_Constraints: write-only_ |
+    | `client_id` | string |  |  |
+    | `client_secret` | string |  | <br>_Constraints: write-only_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `True`_ |
 
 
@@ -1763,13 +1769,15 @@ Discover request types for a selected project.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `api_url` | string (uri) | ✓ | Atlassian API URL (e.g., https://your-domain.atlassian.net) |
+    | `api_url` | string (uri) | ✓ | Atlassian site or API URL (e.g., https://your-domain.atlassian.net). With OAuth 2.0 client credentials a Cloud site URL is resolved to the API gateway URL. |
     | `auth_method` | any | ✓ | Authentication method to use |
     | `email` | string (email) |  |  |
     | `token` | string |  | <br>_Constraints: write-only_ |
     | `personal_access_token` | string |  | <br>_Constraints: write-only_ |
     | `username` | string |  |  |
     | `password` | string |  | <br>_Constraints: write-only_ |
+    | `client_id` | string |  |  |
+    | `client_secret` | string |  | <br>_Constraints: write-only_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `True`_ |
     | `project_id` | string | ✓ | Service Desk project ID or key |
 
@@ -1802,7 +1810,7 @@ Generate preview of settings to be saved.
       https://api.example.com/api/support/settings/atlassian/preview_settings/ \
       Authorization:"Token YOUR_API_TOKEN" \
       api_url="https://api.example.com/api/api-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      auth_method="api_token" \
+      auth_method=null \
       project_id="string-value"
     ```
 
@@ -1819,7 +1827,7 @@ Generate preview of settings to be saved.
     
     body_data = AtlassianSettingsPreviewRequest(
         api_url="https://api.example.com/api/api-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        auth_method="api_token",
+        auth_method=null,
         project_id="string-value"
     )
     response = support_settings_atlassian_preview_settings.sync(
@@ -1844,7 +1852,7 @@ Generate preview of settings to be saved.
       auth: "Token YOUR_API_TOKEN",
       body: {
         "api_url": "https://api.example.com/api/api-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "auth_method": "api_token",
+        "auth_method": null,
         "project_id": "string-value"
       }
     });
@@ -1859,13 +1867,15 @@ Generate preview of settings to be saved.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `api_url` | string (uri) | ✓ |  |
-    | `auth_method` | string | ✓ | <br>_Enum: `api_token`, `personal_access_token`, `basic`_ |
+    | `api_url` | string (uri) | ✓ | Atlassian site or API URL (e.g., https://your-domain.atlassian.net). With OAuth 2.0 client credentials a Cloud site URL is resolved to the API gateway URL. |
+    | `auth_method` | any | ✓ | Authentication method to use |
     | `email` | string (email) |  |  |
     | `token` | string |  | <br>_Constraints: write-only_ |
     | `personal_access_token` | string |  | <br>_Constraints: write-only_ |
     | `username` | string |  |  |
     | `password` | string |  | <br>_Constraints: write-only_ |
+    | `client_id` | string |  |  |
+    | `client_secret` | string |  | <br>_Constraints: write-only_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `True`_ |
     | `project_id` | string | ✓ |  |
     | `issue_types` | array of strings |  |  |
@@ -1907,7 +1917,7 @@ Save selected settings to constance.
       https://api.example.com/api/support/settings/atlassian/save_settings/ \
       Authorization:"Token YOUR_API_TOKEN" \
       api_url="https://api.example.com/api/api-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      auth_method="api_token" \
+      auth_method=null \
       project_id="string-value" \
       confirm_save=true
     ```
@@ -1925,7 +1935,7 @@ Save selected settings to constance.
     
     body_data = AtlassianSettingsSaveRequest(
         api_url="https://api.example.com/api/api-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        auth_method="api_token",
+        auth_method=null,
         project_id="string-value",
         confirm_save=true
     )
@@ -1951,7 +1961,7 @@ Save selected settings to constance.
       auth: "Token YOUR_API_TOKEN",
       body: {
         "api_url": "https://api.example.com/api/api-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "auth_method": "api_token",
+        "auth_method": null,
         "project_id": "string-value",
         "confirm_save": true
       }
@@ -1967,13 +1977,15 @@ Save selected settings to constance.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `api_url` | string (uri) | ✓ |  |
-    | `auth_method` | string | ✓ | <br>_Enum: `api_token`, `personal_access_token`, `basic`_ |
+    | `api_url` | string (uri) | ✓ | Atlassian site or API URL (e.g., https://your-domain.atlassian.net). With OAuth 2.0 client credentials a Cloud site URL is resolved to the API gateway URL. |
+    | `auth_method` | any | ✓ | Authentication method to use |
     | `email` | string (email) |  |  |
     | `token` | string |  | <br>_Constraints: write-only_ |
     | `personal_access_token` | string |  | <br>_Constraints: write-only_ |
     | `username` | string |  |  |
     | `password` | string |  | <br>_Constraints: write-only_ |
+    | `client_id` | string |  |  |
+    | `client_secret` | string |  | <br>_Constraints: write-only_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `True`_ |
     | `project_id` | string | ✓ |  |
     | `issue_types` | array of strings |  |  |
@@ -2070,13 +2082,15 @@ Validate Atlassian credentials without saving them.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `api_url` | string (uri) | ✓ | Atlassian API URL (e.g., https://your-domain.atlassian.net) |
+    | `api_url` | string (uri) | ✓ | Atlassian site or API URL (e.g., https://your-domain.atlassian.net). With OAuth 2.0 client credentials a Cloud site URL is resolved to the API gateway URL. |
     | `auth_method` | any | ✓ | Authentication method to use |
     | `email` | string (email) |  |  |
     | `token` | string |  | <br>_Constraints: write-only_ |
     | `personal_access_token` | string |  | <br>_Constraints: write-only_ |
     | `username` | string |  |  |
     | `password` | string |  | <br>_Constraints: write-only_ |
+    | `client_id` | string |  |  |
+    | `client_secret` | string |  | <br>_Constraints: write-only_ |
     | `verify_ssl` | boolean |  | <br>_Constraints: default: `True`_ |
 
 

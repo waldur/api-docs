@@ -144,6 +144,7 @@ Returns a paginated list of robot accounts accessible to the current user.
     | `user_keys.type` | string |  |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
+    | `resource_backend_id` | string |  |
     | `project_name` | string |  |
     | `project_uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -268,6 +269,7 @@ Returns the details of a specific robot account.
     | `user_keys.type` | string |  |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
+    | `resource_backend_id` | string |  |
     | `project_name` | string |  |
     | `project_uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -778,6 +780,7 @@ Transitions the robot account state from 'Requested' to 'Creating'. This is typi
     | `user_keys.type` | string |  |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
+    | `resource_backend_id` | string |  |
     | `project_name` | string |  |
     | `project_uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -901,6 +904,7 @@ Transitions the robot account state from 'Requested deletion' to 'Deleted', mark
     | `user_keys.type` | string |  |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
+    | `resource_backend_id` | string |  |
     | `project_name` | string |  |
     | `project_uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -1036,6 +1040,7 @@ Manually moves the robot account into the 'Error' state. An optional error messa
     | `user_keys.type` | string |  |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
+    | `resource_backend_id` | string |  |
     | `project_name` | string |  |
     | `project_uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -1159,6 +1164,7 @@ Manually sets the robot account state to 'OK', indicating that it is fully opera
     | `user_keys.type` | string |  |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
+    | `resource_backend_id` | string |  |
     | `project_name` | string |  |
     | `project_uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -1282,6 +1288,7 @@ Transitions the robot account state from 'OK' to 'Requested deletion', initiatin
     | `user_keys.type` | string |  |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
+    | `resource_backend_id` | string |  |
     | `project_name` | string |  |
     | `project_uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |

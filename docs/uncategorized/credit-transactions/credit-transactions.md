@@ -25,7 +25,7 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.backend_resource_req_o_enum import BackendResourceReqOEnum # (1)
+    from waldur_api_client.models.credit_transaction_o_enum import CreditTransactionOEnum # (1)
     from waldur_api_client.api.credit_transactions import credit_transactions_list # (2)
     
     client = AuthenticatedClient(
@@ -38,7 +38,7 @@
     ```
     
     
-    1.  **Model Source:** [`BackendResourceReqOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_o_enum.py)
+    1.  **Model Source:** [`CreditTransactionOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/credit_transaction_o_enum.py)
     2.  **API Source:** [`credit_transactions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/credit_transactions/credit_transactions_list.py)
 
 === "TypeScript"
@@ -61,11 +61,16 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `billing_period` | string (date) |  |
+    | `billing_period_after` | string (date) |  |
+    | `billing_period_before` | string (date) |  |
     | `credit_uuid` | string (uuid) |  |
     | `customer_uuid` | string (uuid) |  |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `project_credit_uuid` | string (uuid) |  |
+    | `project_uuid` | string |  |
     | `transaction_type` | string |  |
 
 
@@ -85,6 +90,9 @@
     | `comment` | string |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+    | `project_uuid` | string |
+    | `project_name` | string |
+    | `billing_period` | string (date) |
 
 ---
 
@@ -160,5 +168,8 @@
     | `comment` | string |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+    | `project_uuid` | string |
+    | `project_name` | string |
+    | `billing_period` | string (date) |
 
 ---

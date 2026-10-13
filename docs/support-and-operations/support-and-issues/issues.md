@@ -18,6 +18,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/support-issues/{uuid}/escalate/` | [Escalate an issue](#escalate-an-issue) |
 | <span class="http-badge http-post">POST</span> | `/api/support-issues/{uuid}/reroute/` | [Re-route an already-routed issue to a different provider helpdesk](#re-route-an-already-routed-issue-to-a-different-provider-helpdesk) |
 | <span class="http-badge http-post">POST</span> | `/api/support-issues/{uuid}/route_to_provider/` | [Manually route an issue to a provider helpdesk](#manually-route-an-issue-to-a-provider-helpdesk) |
+| <span class="http-badge http-post">POST</span> | `/api/support-issues/{uuid}/set_status/` | [Move an issue to another status](#move-an-issue-to-another-status) |
 | <span class="http-badge http-post">POST</span> | `/api/support-issues/{uuid}/sync/` | [Sync](#sync) |
 
 ---
@@ -83,6 +84,7 @@
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `is_escalated` | boolean |  |
+    | `is_open` | boolean | Has not reached a terminal status |
     | `is_parent` | boolean | Is a parent issue |
     | `is_routed` | boolean | Has been routed to provider |
     | `key` | string |  |
@@ -154,6 +156,7 @@
     | `resolved` | boolean |  |
     | `update_is_available` | boolean |  |
     | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
     | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
@@ -279,6 +282,7 @@
     | `resolved` | boolean |  |
     | `update_is_available` | boolean |  |
     | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
     | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
@@ -379,6 +383,7 @@
     | `offering` | string (uuid) |  |  |
     | `is_reported_manually` | boolean |  | Set true if issue is created by regular user via portal.<br>_Constraints: write-only, default: `False`_ |
     | `template` | string (uri) |  |  |
+    | `first_comment` | string |  | Opening message, posted as the first public comment of an issue reported on behalf of another user.<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -426,6 +431,7 @@
     | `resolved` | boolean |  |
     | `update_is_available` | boolean |  |
     | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
     | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
@@ -537,6 +543,7 @@
     | `offering` | string (uuid) |  |  |
     | `is_reported_manually` | boolean |  | Set true if issue is created by regular user via portal.<br>_Constraints: write-only, default: `False`_ |
     | `template` | string (uri) |  |  |
+    | `first_comment` | string |  | Opening message, posted as the first public comment of an issue reported on behalf of another user.<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -584,6 +591,7 @@
     | `resolved` | boolean |  |
     | `update_is_available` | boolean |  |
     | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
     | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
@@ -678,6 +686,7 @@
     | `assignee` | string (uri) |  |  |
     | `offering` | string (uuid) |  |  |
     | `is_reported_manually` | boolean |  | Set true if issue is created by regular user via portal.<br>_Constraints: write-only, default: `False`_ |
+    | `first_comment` | string |  | Opening message, posted as the first public comment of an issue reported on behalf of another user.<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -725,6 +734,7 @@
     | `resolved` | boolean |  |
     | `update_is_available` | boolean |  |
     | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
     | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
@@ -936,6 +946,7 @@
     | `resolved` | boolean |  |
     | `update_is_available` | boolean |  |
     | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
     | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
@@ -1339,6 +1350,7 @@
     | `resolved` | boolean |  |
     | `update_is_available` | boolean |  |
     | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
     | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
@@ -1482,6 +1494,157 @@
     | `resolved` | boolean |  |
     | `update_is_available` | boolean |  |
     | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
+    | `add_comment_is_available` | boolean |  |
+    | `add_attachment_is_available` | boolean |  |
+    | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |
+    | `order_uuid` | string | Return order UUID if the issue's resource is an Order. |
+    | `order_project_uuid` | string | Return order's project UUID if the issue's resource is an Order. |
+    | `order_customer_uuid` | string | Return order's customer UUID if the issue's resource is an Order. |
+    | `order_resource_name` | string | Return order's resource name if the issue's resource is an Order. |
+    | `first_response_deadline` | string (date-time) | Deadline for first response from support staff. |
+    | `resolution_deadline` | string (date-time) | Deadline for issue resolution. |
+    | `first_response_at` | string (date-time) | Timestamp of first response from support staff. |
+    | `sla_breached` | boolean | Whether SLA has been breached for this issue. |
+    | `sla_status` | string |  |
+    | `parent_issue` | string (uri) |  |
+    | `provider_helpdesk` | string (uri) |  |
+    | `is_escalated` | boolean | Whether this issue has been escalated. |
+    | `escalated_at` | string (date-time) | When the issue was escalated. |
+    | `escalation_reason` | string | Reason for escalation. |
+    | `is_routed` | boolean |  |
+    | `provider_ticket_info` | object (free-form) |  |
+
+---
+
+### Move an issue to another status
+
+Change the status of an issue Waldur itself owns.
+
+`_update_is_available_validator` keeps this off the externally-backed
+issues: Jira, Zammad and SMAX inherit `update_is_available` as False, so
+their status stays whatever the remote service desk last told us.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/support-issues/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_status/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      status="OK"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.set_issue_status_request import SetIssueStatusRequest # (1)
+    from waldur_api_client.api.support_issues import support_issues_set_status # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = SetIssueStatusRequest(
+        status="OK"
+    )
+    response = support_issues_set_status.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`SetIssueStatusRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/set_issue_status_request.py)
+    2.  **API Source:** [`support_issues_set_status`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support_issues/support_issues_set_status.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { supportIssuesSetStatus } from 'waldur-js-client';
+    
+    try {
+      const response = await supportIssuesSetStatus({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "status": "OK"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `status` | string | ✓ | Name of the status to move to. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `type` | string |  |
+    | `key` | string |  |
+    | `backend_id` | string |  |
+    | `backend_name` | string |  |
+    | `remote_id` | string |  |
+    | `link` | string (uri) | Link to issue in support system. |
+    | `summary` | string |  |
+    | `description` | string |  |
+    | `status` | string |  |
+    | `resolution` | string |  |
+    | `priority` | string |  |
+    | `caller` | string (uri) |  |
+    | `caller_uuid` | string (uuid) |  |
+    | `caller_full_name` | string |  |
+    | `reporter` | string (uri) |  |
+    | `reporter_uuid` | string (uuid) |  |
+    | `reporter_name` | string |  |
+    | `assignee` | string (uri) |  |
+    | `assignee_uuid` | string (uuid) |  |
+    | `assignee_name` | string |  |
+    | `customer` | string (uri) |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `project` | string (uri) |  |
+    | `project_uuid` | string (uuid) |  |
+    | `project_name` | string |  |
+    | `resource` | string |  |
+    | `resource_type` | string |  |
+    | `resource_name` | string |  |
+    | `offering` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+    | `template` | string (uri) |  |
+    | `feedback` | any |  |
+    | `resolved` | boolean |  |
+    | `update_is_available` | boolean |  |
+    | `destroy_is_available` | boolean |  |
+    | `available_statuses` | array of strings |  |
     | `add_comment_is_available` | boolean |  |
     | `add_attachment_is_available` | boolean |  |
     | `processing_log` | object (free-form) | Internal processing log for debugging order lifecycle events. Visible only to staff. |

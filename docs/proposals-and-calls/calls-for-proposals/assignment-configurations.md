@@ -6,7 +6,6 @@
 |:--- |:--- |:--- |
 | <span class="http-badge http-get">GET</span> | `/api/call-assignment-configurations/` | [List Call Assignment Configurations](#list-call-assignment-configurations) |
 | <span class="http-badge http-get">GET</span> | `/api/call-assignment-configurations/{uuid}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/call-assignment-configurations/` | [Create](#create) |
 | <span class="http-badge http-put">PUT</span> | `/api/call-assignment-configurations/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/call-assignment-configurations/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/call-assignment-configurations/{uuid}/` | [Delete](#delete) |
@@ -149,87 +148,6 @@
 === "Responses"
 
     **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `call` | string (uri) |  |
-    | `call_uuid` | string (uuid) |  |
-    | `call_name` | string |  |
-    | `auto_reassign_on_decline` | boolean | Automatically assign next-best reviewer when someone declines. If False, manager must manually approve reassignments. |
-    | `max_auto_reassign_attempts` | integer | Maximum automatic reassignment attempts before requiring manual intervention. |
-    | `assignment_expiration_days` | integer | Days until assignment invitation expires if not responded to. |
-    | `send_reminder_before_expiry_days` | integer | Days before expiry to send reminder notification. |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-
----
-
-### Create
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/call-assignment-configurations/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.call_assignment_configuration_request import CallAssignmentConfigurationRequest # (1)
-    from waldur_api_client.api.call_assignment_configurations import call_assignment_configurations_create # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = CallAssignmentConfigurationRequest()
-    response = call_assignment_configurations_create.sync(
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`CallAssignmentConfigurationRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_assignment_configuration_request.py)
-    2.  **API Source:** [`call_assignment_configurations_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/call_assignment_configurations/call_assignment_configurations_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { callAssignmentConfigurationsCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await callAssignmentConfigurationsCreate({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `auto_reassign_on_decline` | boolean |  | Automatically assign next-best reviewer when someone declines. If False, manager must manually approve reassignments. |
-    | `max_auto_reassign_attempts` | integer |  | Maximum automatic reassignment attempts before requiring manual intervention. |
-    | `assignment_expiration_days` | integer |  | Days until assignment invitation expires if not responded to. |
-    | `send_reminder_before_expiry_days` | integer |  | Days before expiry to send reminder notification. |
-
-
-=== "Responses"
-
-    **`201`** - 
     
     | Field | Type | Description |
     |---|---|---|

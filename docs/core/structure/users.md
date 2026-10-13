@@ -15,6 +15,8 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/users/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/users/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/users/dashboard-general-stats/` | [Get general dashboard stats](#get-general-dashboard-stats) |
+| <span class="http-badge http-get">GET</span> | `/api/users/dashboard-pending-actions/` | [Get pending dashboard actions feed](#get-pending-dashboard-actions-feed) |
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/data_access_history/` | [Get user data access history](#get-user-data-access-history) |
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/data_access/` | [Get user data access visibility](#get-user-data-access-visibility) |
 | <span class="http-badge http-get">GET</span> | `/api/users/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
@@ -168,6 +170,7 @@
     | `permissions.revoked_by_full_name` | string |  |
     | `permissions.revoked_by_username` | string |  |
     | `permissions.revoke_reason` | string |  |
+    | `permissions.source` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
@@ -193,6 +196,8 @@
     | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
+    | `has_passkey` | boolean |  |
+    | `passkey_count` | integer |  |
     | `ip_address` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -216,6 +221,7 @@
     | `active_isds` | array of strings |  |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
+    | `details` | object (free-form) | Extra details from authentication backend. |
 
 ---
 
@@ -330,6 +336,7 @@
     | `permissions.revoked_by_full_name` | string |  |
     | `permissions.revoked_by_username` | string |  |
     | `permissions.revoke_reason` | string |  |
+    | `permissions.source` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
@@ -355,6 +362,8 @@
     | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
+    | `has_passkey` | boolean |  |
+    | `passkey_count` | integer |  |
     | `ip_address` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -378,6 +387,7 @@
     | `active_isds` | array of strings |  |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
+    | `details` | object (free-form) | Extra details from authentication backend. |
 
 ---
 
@@ -530,6 +540,7 @@
     | `permissions.revoked_by_full_name` | string |  |
     | `permissions.revoked_by_username` | string |  |
     | `permissions.revoke_reason` | string |  |
+    | `permissions.source` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
@@ -555,6 +566,8 @@
     | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
+    | `has_passkey` | boolean |  |
+    | `passkey_count` | integer |  |
     | `ip_address` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -578,6 +591,7 @@
     | `active_isds` | array of strings |  |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
+    | `details` | object (free-form) | Extra details from authentication backend. |
 
 ---
 
@@ -961,6 +975,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `permissions.revoked_by_full_name` | string |  |
     | `permissions.revoked_by_username` | string |  |
     | `permissions.revoke_reason` | string |  |
+    | `permissions.source` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
@@ -986,6 +1001,8 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
+    | `has_passkey` | boolean |  |
+    | `passkey_count` | integer |  |
     | `ip_address` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -1009,6 +1026,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `active_isds` | array of strings |  |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
+    | `details` | object (free-form) | Extra details from authentication backend. |
 
 ---
 
@@ -1162,6 +1180,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `permissions.revoked_by_full_name` | string |  |
     | `permissions.revoked_by_username` | string |  |
     | `permissions.revoke_reason` | string |  |
+    | `permissions.source` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
@@ -1187,6 +1206,8 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
+    | `has_passkey` | boolean |  |
+    | `passkey_count` | integer |  |
     | `ip_address` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -1210,6 +1231,7 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `active_isds` | array of strings |  |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
+    | `details` | object (free-form) | Extra details from authentication backend. |
 
 ---
 
@@ -1280,6 +1302,182 @@ Staff-only action to trigger recalculation of user actions for a specific user.
 
 ## Other Actions
 
+
+### Get general dashboard stats
+
+Returns counts shown on the general dashboard for the current user: pending permission requests they can act on, active invitations addressed to them, and their pending onboarding applications.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/dashboard-general-stats/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.users import users_dashboard_general_stats_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_dashboard_general_stats_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`users_dashboard_general_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_dashboard_general_stats_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersDashboardGeneralStatsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await usersDashboardGeneralStatsRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `pending_permission_requests` | integer |
+    | `active_invitations` | integer |
+    | `pending_onboarding_applications` | integer |
+
+---
+
+### Get pending dashboard actions feed
+
+Returns a typed feed of actions the current user should take, aggregating pending orders, failed resources, overdue invoices, missing Terms of Service consents, and incomplete profile state. Where USER_ACTIONS_ENABLED is set, the persistent UserAction queue is folded in as well; those items carry a uuid addressing the user-actions endpoints, along with any corrective actions and the route recorded for them.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/users/dashboard-pending-actions/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.marketplace_service_provider_user_o_enum import MarketplaceServiceProviderUserOEnum # (1)
+    from waldur_api_client.api.users import users_dashboard_pending_actions_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = users_dashboard_pending_actions_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`MarketplaceServiceProviderUserOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_service_provider_user_o_enum.py)
+    2.  **API Source:** [`users_dashboard_pending_actions_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/users/users_dashboard_pending_actions_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { usersDashboardPendingActionsList } from 'waldur-js-client';
+    
+    try {
+      const response = await usersDashboardPendingActionsList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `agreement_date` | string (date-time) | Agreement date after |
+    | `civil_number` | string |  |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `date_joined` | string (date-time) | Date joined after |
+    | `description` | string |  |
+    | `email` | string | Email |
+    | `full_name` | string | Full name |
+    | `is_active` | boolean | Is active |
+    | `is_staff` | boolean | Is staff |
+    | `is_support` | boolean | Is support |
+    | `job_title` | string | Job title |
+    | `modified` | string (date-time) | Date modified after |
+    | `native_name` | string | Native name |
+    | `o` | array | Ordering<br><br> |
+    | `organization` | string | Organization |
+    | `organization_roles` | string | Organization roles |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `phone_number` | string |  |
+    | `project_roles` | string | Project roles |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `query` | string | Filter by first name, last name, civil number, username or email |
+    | `registration_method` | string |  |
+    | `user_keyword` | string | User keyword |
+    | `username` | string | Username (exact) |
+    | `username_list` | string | Comma-separated usernames |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `type` | string |
+    | `title` | string |
+    | `description` | string |
+    | `variant` | any |
+    | `deadline` | string (date-time) |
+    | `count` | integer |
+    | `target_uuid` | string (uuid) |
+    | `customer_uuid` | string (uuid) |
+    | `uuid` | string (uuid) |
+    | `urgency` | string |
+    | `route_name` | string |
+    | `route_params` | object (free-form) |
+    | `can_silence` | boolean |
+    | `actions` | array of objects |
+    | `actions.label` | string |
+    | `actions.category` | string |
+    | `actions.severity` | string |
+    | `actions.method` | string |
+    | `actions.api_endpoint` | boolean |
+    | `actions.confirmation_required` | boolean |
+    | `actions.permissions_required` | array of strings |
+    | `actions.metadata` | object (free-form) |
+    | `actions.route_name` | string |
+    | `actions.route_params` | object (free-form) |
+
+---
 
 ### Get user data access history
 
@@ -1899,6 +2097,8 @@ Get current user details, including authentication token and profile completenes
     | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
+    | `has_passkey` | boolean |  |
+    | `passkey_count` | integer |  |
     | `ip_address` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -1922,6 +2122,7 @@ Get current user details, including authentication token and profile completenes
     | `active_isds` | array of strings |  |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
+    | `details` | object (free-form) | Extra details from authentication backend. |
     | `profile_completeness` | any |  |
 
 ---
@@ -2056,7 +2257,6 @@ Check if user profile is complete with all mandatory attributes.
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
-    | `token` | string |  |
 
 ---
 
@@ -2726,7 +2926,6 @@ Confirm email update using code
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
-    | `token` | string |  |
 
 ---
 

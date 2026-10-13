@@ -80,28 +80,39 @@ Manage autoprovisioning rules.
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `user_affiliations` | array of strings |
-    | `user_email_patterns` | array of strings |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string |
-    | `use_user_organization_as_customer_name` | boolean |
-    | `project_role` | string (uri) |
-    | `project_role_display_name` | string |
-    | `project_role_description` | string |
-    | `plan` | string (uri) |
-    | `plan_attributes` | object (free-form) |
-    | `plan_limits` | object (free-form) |
-    | `plan_name` | string |
-    | `offering_name` | string |
-    | `offering_uuid` | string (uuid) |
-    | `category_title` | string |
-    | `category_url` | string (uri) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings |  |
+    | `user_organization_types` | array of strings |  |
+    | `user_assurance_levels` | array of strings |  |
+    | `user_claims` | object (free-form) | Identity provider claims the user must carry, as {"claim": ["accepted", "values"]}. All claims must match; within one claim any value matches. A value ending in '*' matches by prefix. |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string |  |
+    | `use_user_organization_as_customer_name` | boolean |  |
+    | `create_project` | boolean | Create (or join) a project for the matched user. Disable to grant only the organization-level role. |
+    | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `revoke_when_unmatched` | boolean | Revoke the roles this rule granted once the user stops matching it. Off by default so enabling a rule cannot silently strip access that is already in use. |
+    | `project_role` | string (uri) |  |
+    | `project_role_display_name` | string |  |
+    | `project_role_description` | string |  |
+    | `customer_role` | string (uri) |  |
+    | `customer_role_display_name` | string |  |
+    | `customer_role_description` | string |  |
+    | `plan` | string (uri) |  |
+    | `plan_attributes` | object (free-form) |  |
+    | `plan_limits` | object (free-form) |  |
+    | `plan_name` | string |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `category_title` | string |  |
+    | `category_url` | string (uri) |  |
 
 ---
 
@@ -169,28 +180,39 @@ Manage autoprovisioning rules.
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `user_affiliations` | array of strings |
-    | `user_email_patterns` | array of strings |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string |
-    | `use_user_organization_as_customer_name` | boolean |
-    | `project_role` | string (uri) |
-    | `project_role_display_name` | string |
-    | `project_role_description` | string |
-    | `plan` | string (uri) |
-    | `plan_attributes` | object (free-form) |
-    | `plan_limits` | object (free-form) |
-    | `plan_name` | string |
-    | `offering_name` | string |
-    | `offering_uuid` | string (uuid) |
-    | `category_title` | string |
-    | `category_url` | string (uri) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings |  |
+    | `user_organization_types` | array of strings |  |
+    | `user_assurance_levels` | array of strings |  |
+    | `user_claims` | object (free-form) | Identity provider claims the user must carry, as {"claim": ["accepted", "values"]}. All claims must match; within one claim any value matches. A value ending in '*' matches by prefix. |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string |  |
+    | `use_user_organization_as_customer_name` | boolean |  |
+    | `create_project` | boolean | Create (or join) a project for the matched user. Disable to grant only the organization-level role. |
+    | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `revoke_when_unmatched` | boolean | Revoke the roles this rule granted once the user stops matching it. Off by default so enabling a rule cannot silently strip access that is already in use. |
+    | `project_role` | string (uri) |  |
+    | `project_role_display_name` | string |  |
+    | `project_role_description` | string |  |
+    | `customer_role` | string (uri) |  |
+    | `customer_role_display_name` | string |  |
+    | `customer_role_description` | string |  |
+    | `plan` | string (uri) |  |
+    | `plan_attributes` | object (free-form) |  |
+    | `plan_limits` | object (free-form) |  |
+    | `plan_name` | string |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `category_title` | string |  |
+    | `category_url` | string (uri) |  |
 
 ---
 
@@ -256,46 +278,67 @@ Manage autoprovisioning rules.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string | ✓ |
-    | `user_affiliations` | array of strings |  |
-    | `user_email_patterns` | array of strings |  |
-    | `customer` | string (uri) |  |
-    | `use_user_organization_as_customer_name` | boolean |  |
-    | `project_role` | string (uri) |  |
-    | `project_role_name` | string |  |
-    | `plan` | string (uri) |  |
-    | `plan_attributes` | object (free-form) |  |
-    | `plan_limits` | object (free-form) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  |  |
+    | `user_organization_types` | array of strings |  |  |
+    | `user_assurance_levels` | array of strings |  |  |
+    | `user_claims` | object (free-form) |  | Identity provider claims the user must carry, as {"claim": ["accepted", "values"]}. All claims must match; within one claim any value matches. A value ending in '*' matches by prefix. |
+    | `customer` | string (uri) |  |  |
+    | `use_user_organization_as_customer_name` | boolean |  |  |
+    | `create_project` | boolean |  | Create (or join) a project for the matched user. Disable to grant only the organization-level role. |
+    | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `revoke_when_unmatched` | boolean |  | Revoke the roles this rule granted once the user stops matching it. Off by default so enabling a rule cannot silently strip access that is already in use. |
+    | `project_role` | string (uri) |  |  |
+    | `project_role_name` | string |  | <br>_Constraints: write-only_ |
+    | `customer_role` | string (uri) |  |  |
+    | `customer_role_name` | string |  | <br>_Constraints: write-only_ |
+    | `plan` | string (uri) |  |  |
+    | `plan_attributes` | object (free-form) |  |  |
+    | `plan_limits` | object (free-form) |  |  |
 
 
 === "Responses"
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `user_affiliations` | array of strings |
-    | `user_email_patterns` | array of strings |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string |
-    | `use_user_organization_as_customer_name` | boolean |
-    | `project_role` | string (uri) |
-    | `project_role_display_name` | string |
-    | `project_role_description` | string |
-    | `plan` | string (uri) |
-    | `plan_attributes` | object (free-form) |
-    | `plan_limits` | object (free-form) |
-    | `plan_name` | string |
-    | `offering_name` | string |
-    | `offering_uuid` | string (uuid) |
-    | `category_title` | string |
-    | `category_url` | string (uri) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings |  |
+    | `user_organization_types` | array of strings |  |
+    | `user_assurance_levels` | array of strings |  |
+    | `user_claims` | object (free-form) | Identity provider claims the user must carry, as {"claim": ["accepted", "values"]}. All claims must match; within one claim any value matches. A value ending in '*' matches by prefix. |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string |  |
+    | `use_user_organization_as_customer_name` | boolean |  |
+    | `create_project` | boolean | Create (or join) a project for the matched user. Disable to grant only the organization-level role. |
+    | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `revoke_when_unmatched` | boolean | Revoke the roles this rule granted once the user stops matching it. Off by default so enabling a rule cannot silently strip access that is already in use. |
+    | `project_role` | string (uri) |  |
+    | `project_role_display_name` | string |  |
+    | `project_role_description` | string |  |
+    | `customer_role` | string (uri) |  |
+    | `customer_role_display_name` | string |  |
+    | `customer_role_description` | string |  |
+    | `plan` | string (uri) |  |
+    | `plan_attributes` | object (free-form) |  |
+    | `plan_limits` | object (free-form) |  |
+    | `plan_name` | string |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `category_title` | string |  |
+    | `category_url` | string (uri) |  |
 
 ---
 
@@ -372,46 +415,67 @@ Manage autoprovisioning rules.
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string | ✓ |
-    | `user_affiliations` | array of strings |  |
-    | `user_email_patterns` | array of strings |  |
-    | `customer` | string (uri) |  |
-    | `use_user_organization_as_customer_name` | boolean |  |
-    | `project_role` | string (uri) |  |
-    | `project_role_name` | string |  |
-    | `plan` | string (uri) |  |
-    | `plan_attributes` | object (free-form) |  |
-    | `plan_limits` | object (free-form) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string | ✓ |  |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  |  |
+    | `user_organization_types` | array of strings |  |  |
+    | `user_assurance_levels` | array of strings |  |  |
+    | `user_claims` | object (free-form) |  | Identity provider claims the user must carry, as {"claim": ["accepted", "values"]}. All claims must match; within one claim any value matches. A value ending in '*' matches by prefix. |
+    | `customer` | string (uri) |  |  |
+    | `use_user_organization_as_customer_name` | boolean |  |  |
+    | `create_project` | boolean |  | Create (or join) a project for the matched user. Disable to grant only the organization-level role. |
+    | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `revoke_when_unmatched` | boolean |  | Revoke the roles this rule granted once the user stops matching it. Off by default so enabling a rule cannot silently strip access that is already in use. |
+    | `project_role` | string (uri) |  |  |
+    | `project_role_name` | string |  | <br>_Constraints: write-only_ |
+    | `customer_role` | string (uri) |  |  |
+    | `customer_role_name` | string |  | <br>_Constraints: write-only_ |
+    | `plan` | string (uri) |  |  |
+    | `plan_attributes` | object (free-form) |  |  |
+    | `plan_limits` | object (free-form) |  |  |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `user_affiliations` | array of strings |
-    | `user_email_patterns` | array of strings |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string |
-    | `use_user_organization_as_customer_name` | boolean |
-    | `project_role` | string (uri) |
-    | `project_role_display_name` | string |
-    | `project_role_description` | string |
-    | `plan` | string (uri) |
-    | `plan_attributes` | object (free-form) |
-    | `plan_limits` | object (free-form) |
-    | `plan_name` | string |
-    | `offering_name` | string |
-    | `offering_uuid` | string (uuid) |
-    | `category_title` | string |
-    | `category_url` | string (uri) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings |  |
+    | `user_organization_types` | array of strings |  |
+    | `user_assurance_levels` | array of strings |  |
+    | `user_claims` | object (free-form) | Identity provider claims the user must carry, as {"claim": ["accepted", "values"]}. All claims must match; within one claim any value matches. A value ending in '*' matches by prefix. |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string |  |
+    | `use_user_organization_as_customer_name` | boolean |  |
+    | `create_project` | boolean | Create (or join) a project for the matched user. Disable to grant only the organization-level role. |
+    | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `revoke_when_unmatched` | boolean | Revoke the roles this rule granted once the user stops matching it. Off by default so enabling a rule cannot silently strip access that is already in use. |
+    | `project_role` | string (uri) |  |
+    | `project_role_display_name` | string |  |
+    | `project_role_description` | string |  |
+    | `customer_role` | string (uri) |  |
+    | `customer_role_display_name` | string |  |
+    | `customer_role_description` | string |  |
+    | `plan` | string (uri) |  |
+    | `plan_attributes` | object (free-form) |  |
+    | `plan_limits` | object (free-form) |  |
+    | `plan_name` | string |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `category_title` | string |  |
+    | `category_url` | string (uri) |  |
 
 ---
 
@@ -482,46 +546,67 @@ Manage autoprovisioning rules.
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `name` | string |  |
-    | `user_affiliations` | array of strings |  |
-    | `user_email_patterns` | array of strings |  |
-    | `customer` | string (uri) |  |
-    | `use_user_organization_as_customer_name` | boolean |  |
-    | `project_role` | string (uri) |  |
-    | `project_role_name` | string |  |
-    | `plan` | string (uri) |  |
-    | `plan_attributes` | object (free-form) |  |
-    | `plan_limits` | object (free-form) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `name` | string |  |  |
+    | `user_affiliations` | array of strings |  |  |
+    | `user_email_patterns` | array of strings |  |  |
+    | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  |  |
+    | `user_organization_types` | array of strings |  |  |
+    | `user_assurance_levels` | array of strings |  |  |
+    | `user_claims` | object (free-form) |  | Identity provider claims the user must carry, as {"claim": ["accepted", "values"]}. All claims must match; within one claim any value matches. A value ending in '*' matches by prefix. |
+    | `customer` | string (uri) |  |  |
+    | `use_user_organization_as_customer_name` | boolean |  |  |
+    | `create_project` | boolean |  | Create (or join) a project for the matched user. Disable to grant only the organization-level role. |
+    | `project_name_template` | string |  | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `revoke_when_unmatched` | boolean |  | Revoke the roles this rule granted once the user stops matching it. Off by default so enabling a rule cannot silently strip access that is already in use. |
+    | `project_role` | string (uri) |  |  |
+    | `project_role_name` | string |  | <br>_Constraints: write-only_ |
+    | `customer_role` | string (uri) |  |  |
+    | `customer_role_name` | string |  | <br>_Constraints: write-only_ |
+    | `plan` | string (uri) |  |  |
+    | `plan_attributes` | object (free-form) |  |  |
+    | `plan_limits` | object (free-form) |  |  |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `name` | string |
-    | `uuid` | string (uuid) |
-    | `url` | string (uri) |
-    | `user_affiliations` | array of strings |
-    | `user_email_patterns` | array of strings |
-    | `customer` | string (uri) |
-    | `customer_name` | string |
-    | `customer_uuid` | string |
-    | `use_user_organization_as_customer_name` | boolean |
-    | `project_role` | string (uri) |
-    | `project_role_display_name` | string |
-    | `project_role_description` | string |
-    | `plan` | string (uri) |
-    | `plan_attributes` | object (free-form) |
-    | `plan_limits` | object (free-form) |
-    | `plan_name` | string |
-    | `offering_name` | string |
-    | `offering_uuid` | string (uuid) |
-    | `category_title` | string |
-    | `category_url` | string (uri) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string |  |
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_email_patterns` | array of strings |  |
+    | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings |  |
+    | `user_organization_types` | array of strings |  |
+    | `user_assurance_levels` | array of strings |  |
+    | `user_claims` | object (free-form) | Identity provider claims the user must carry, as {"claim": ["accepted", "values"]}. All claims must match; within one claim any value matches. A value ending in '*' matches by prefix. |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string |  |
+    | `use_user_organization_as_customer_name` | boolean |  |
+    | `create_project` | boolean | Create (or join) a project for the matched user. Disable to grant only the organization-level role. |
+    | `project_name_template` | string | Template for project name. Supports {username}, {email}, {full_name} variables |
+    | `revoke_when_unmatched` | boolean | Revoke the roles this rule granted once the user stops matching it. Off by default so enabling a rule cannot silently strip access that is already in use. |
+    | `project_role` | string (uri) |  |
+    | `project_role_display_name` | string |  |
+    | `project_role_description` | string |  |
+    | `customer_role` | string (uri) |  |
+    | `customer_role_display_name` | string |  |
+    | `customer_role_description` | string |  |
+    | `plan` | string (uri) |  |
+    | `plan_attributes` | object (free-form) |  |
+    | `plan_limits` | object (free-form) |  |
+    | `plan_name` | string |  |
+    | `offering_name` | string |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `category_title` | string |  |
+    | `category_url` | string (uri) |  |
 
 ---
 
@@ -677,31 +762,34 @@ Evaluate this rule against the given user without provisioning. Returns per-filt
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `would_provision` | boolean |
-    | `block_reason` | string |
-    | `user_username` | string |
-    | `user_email` | string |
-    | `user_organization` | string |
-    | `user_registration_method` | string |
-    | `user_identity_source` | string |
-    | `user_affiliations` | array of strings |
-    | `user_is_protected` | boolean |
-    | `filter_results` | array of objects |
-    | `filter_results.name` | string |
-    | `filter_results.configured` | boolean |
-    | `filter_results.matched` | boolean |
-    | `filter_results.user_value` | object (free-form) |
-    | `filter_results.rule_value` | object (free-form) |
-    | `filter_results.reason` | string |
-    | `customer_lookup_performed` | boolean |
-    | `customer_candidates` | array of objects |
-    | `customer_candidates.uuid` | string (uuid) |
-    | `customer_candidates.name` | string |
-    | `customer_candidates.abbreviation` | string |
-    | `customer_candidates.url` | string |
-    | `customer_lookup_ambiguous` | boolean |
-    | `resolved_project_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `would_provision` | boolean |  |
+    | `block_reason` | string |  |
+    | `user_username` | string |  |
+    | `user_email` | string |  |
+    | `user_organization` | string |  |
+    | `user_registration_method` | string |  |
+    | `user_identity_source` | string |  |
+    | `user_affiliations` | array of strings |  |
+    | `user_claims` | object (free-form) | Values the user carries for each claim the rule requires. |
+    | `unconfigured_claims` | array of strings | Claims the rule matches on that no active identity provider passes through, so Waldur never receives them. Distinguishes 'the provider sent a different value' from 'the provider never sent this claim', which need opposite fixes. |
+    | `user_is_protected` | boolean |  |
+    | `filter_results` | array of objects |  |
+    | `filter_results.name` | string |  |
+    | `filter_results.configured` | boolean |  |
+    | `filter_results.matched` | boolean |  |
+    | `filter_results.user_value` | object (free-form) |  |
+    | `filter_results.rule_value` | object (free-form) |  |
+    | `filter_results.reason` | string |  |
+    | `customer_lookup_performed` | boolean |  |
+    | `customer_candidates` | array of objects |  |
+    | `customer_candidates.uuid` | string (uuid) |  |
+    | `customer_candidates.name` | string |  |
+    | `customer_candidates.abbreviation` | string |  |
+    | `customer_candidates.url` | string |  |
+    | `customer_lookup_ambiguous` | boolean |  |
+    | `resolved_project_name` | string |  |
+    | `project_action` | any | What provisioning does with the rule's project for this user: 'create' a new one, reuse an 'existing' one, or leave it deleted ('not_recreated') because this rule provisioned it before. Null when the rule creates no project or would not provision. |
 
 ---

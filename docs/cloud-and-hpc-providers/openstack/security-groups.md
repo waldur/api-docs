@@ -150,6 +150,7 @@ Get a list of security groups.
     | `rules.remote_group_uuid` | string (uuid) |  |
     | `rules.id` | integer |  |
     | `rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -279,6 +280,7 @@ Retrieve details of a specific security group.
     | `rules.remote_group_uuid` | string (uuid) |  |
     | `rules.id` | integer |  |
     | `rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |

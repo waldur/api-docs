@@ -226,7 +226,12 @@ Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Create
     | `nationalities` | array of strings |  |  |
     | `organization_country` | string |  |  |
     | `organization_type` | string |  |  |
+    | `organization_registry_code` | string |  |  |
+    | `organization_vat_code` | string |  |  |
+    | `organization_address` | string |  |  |
     | `eduperson_assurance` | array of strings |  |  |
+    | `uid_number` | integer (int64) |  |  |
+    | `primary_gid` | integer (int64) |  |  |
 
 
 === "Responses"

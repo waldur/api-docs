@@ -132,15 +132,16 @@
     | `offerings.components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `offerings.components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `offerings.components.limit_period` | any |  |
-    | `offerings.components.limit_amount` | integer |  |
+    | `offerings.components.limit_amount` | number (double) |  |
+    | `offerings.components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `offerings.components.article_code` | string |  |
-    | `offerings.components.max_value` | integer |  |
-    | `offerings.components.min_value` | integer |  |
-    | `offerings.components.max_available_limit` | integer |  |
+    | `offerings.components.max_value` | number (double) |  |
+    | `offerings.components.min_value` | number (double) |  |
+    | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
-    | `offerings.components.default_limit` | integer |  |
+    | `offerings.components.default_limit` | number (double) |  |
     | `offerings.components.factor` | integer |  |
-    | `offerings.components.is_builtin` | boolean |  |
+    | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
     | `offerings.components.overage_component` | string (uuid) |  |
     | `offerings.components.min_prepaid_duration` | integer |  |
@@ -160,6 +161,11 @@
     | `rounds.status` | any |  |
     | `rounds.allocation_date` | string (date-time) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.lifecycle_state` | any | Where the round stands after its cut-off: evaluating, deciding, results_published or closed. Empty before the cut-off. |
+    | `rounds.evaluation_started_at` | string (date-time) |  |
+    | `rounds.deciding_started_at` | string (date-time) |  |
+    | `rounds.results_published_at` | string (date-time) |  |
+    | `rounds.closed_at` | string (date-time) |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -190,15 +196,16 @@
     | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `resource_templates.requested_offering_components.limit_period` | any |  |
-    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.limit_amount` | number (double) |  |
+    | `resource_templates.requested_offering_components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `resource_templates.requested_offering_components.article_code` | string |  |
-    | `resource_templates.requested_offering_components.max_value` | integer |  |
-    | `resource_templates.requested_offering_components.min_value` | integer |  |
-    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.max_value` | number (double) |  |
+    | `resource_templates.requested_offering_components.min_value` | number (double) |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
-    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.factor` | integer |  |
-    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
     | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
     | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
@@ -211,11 +218,15 @@
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
     | `fixed_duration_in_days` | integer | Fixed duration in days that applies to all proposals in this call |
+    | `max_prepaid_duration_months` | integer | The longest prepaid subscription, in whole months, that fits inside fixed_duration_in_days measured from today; null when the call fixes no duration. |
     | `backend_id` | string |  |
     | `external_url` | string (uri) |  |
     | `reviewer_identity_visible_to_submitters` | boolean | Whether proposal applicants can see reviewer identities. If False, reviewers appear as 'Reviewer 1', 'Reviewer 2', etc. |
     | `reviews_visible_to_submitters` | boolean | Whether proposal applicants can see review comments and scores. If False, applicants only see final approval/rejection status. |
     | `has_eligibility_restrictions` | boolean | Check if call has any eligibility restrictions configured. |
+    | `proposal_field_config` | any |  |
+    | `evaluation_start` | any | When a submitted proposal's evaluation starts: at once on submission, or for every proposal of a round together at the round's cut-off. Cannot be changed while proposals are submitted or in review. |
+    | `publish_results` | any | When applicants learn the allocation decision: as soon as it is made, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
 
 ---
 
@@ -330,15 +341,16 @@
     | `offerings.components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `offerings.components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `offerings.components.limit_period` | any |  |
-    | `offerings.components.limit_amount` | integer |  |
+    | `offerings.components.limit_amount` | number (double) |  |
+    | `offerings.components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `offerings.components.article_code` | string |  |
-    | `offerings.components.max_value` | integer |  |
-    | `offerings.components.min_value` | integer |  |
-    | `offerings.components.max_available_limit` | integer |  |
+    | `offerings.components.max_value` | number (double) |  |
+    | `offerings.components.min_value` | number (double) |  |
+    | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
-    | `offerings.components.default_limit` | integer |  |
+    | `offerings.components.default_limit` | number (double) |  |
     | `offerings.components.factor` | integer |  |
-    | `offerings.components.is_builtin` | boolean |  |
+    | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
     | `offerings.components.overage_component` | string (uuid) |  |
     | `offerings.components.min_prepaid_duration` | integer |  |
@@ -358,6 +370,11 @@
     | `rounds.status` | any |  |
     | `rounds.allocation_date` | string (date-time) |  |
     | `rounds.review_duration_in_days` | integer |  |
+    | `rounds.lifecycle_state` | any | Where the round stands after its cut-off: evaluating, deciding, results_published or closed. Empty before the cut-off. |
+    | `rounds.evaluation_started_at` | string (date-time) |  |
+    | `rounds.deciding_started_at` | string (date-time) |  |
+    | `rounds.results_published_at` | string (date-time) |  |
+    | `rounds.closed_at` | string (date-time) |  |
     | `documents` | array of objects |  |
     | `documents.uuid` | string (uuid) |  |
     | `documents.file` | string (uri) | Documentation for call for proposals. |
@@ -388,15 +405,16 @@
     | `resource_templates.requested_offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `resource_templates.requested_offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `resource_templates.requested_offering_components.limit_period` | any |  |
-    | `resource_templates.requested_offering_components.limit_amount` | integer |  |
+    | `resource_templates.requested_offering_components.limit_amount` | number (double) |  |
+    | `resource_templates.requested_offering_components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `resource_templates.requested_offering_components.article_code` | string |  |
-    | `resource_templates.requested_offering_components.max_value` | integer |  |
-    | `resource_templates.requested_offering_components.min_value` | integer |  |
-    | `resource_templates.requested_offering_components.max_available_limit` | integer |  |
+    | `resource_templates.requested_offering_components.max_value` | number (double) |  |
+    | `resource_templates.requested_offering_components.min_value` | number (double) |  |
+    | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
-    | `resource_templates.requested_offering_components.default_limit` | integer |  |
+    | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.factor` | integer |  |
-    | `resource_templates.requested_offering_components.is_builtin` | boolean |  |
+    | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
     | `resource_templates.requested_offering_components.overage_component` | string (uuid) |  |
     | `resource_templates.requested_offering_components.min_prepaid_duration` | integer |  |
@@ -409,11 +427,15 @@
     | `resource_templates.created_by_name` | string |  |
     | `resource_templates.created` | string (date-time) |  |
     | `fixed_duration_in_days` | integer | Fixed duration in days that applies to all proposals in this call |
+    | `max_prepaid_duration_months` | integer | The longest prepaid subscription, in whole months, that fits inside fixed_duration_in_days measured from today; null when the call fixes no duration. |
     | `backend_id` | string |  |
     | `external_url` | string (uri) |  |
     | `reviewer_identity_visible_to_submitters` | boolean | Whether proposal applicants can see reviewer identities. If False, reviewers appear as 'Reviewer 1', 'Reviewer 2', etc. |
     | `reviews_visible_to_submitters` | boolean | Whether proposal applicants can see review comments and scores. If False, applicants only see final approval/rejection status. |
     | `has_eligibility_restrictions` | boolean | Check if call has any eligibility restrictions configured. |
+    | `proposal_field_config` | any |  |
+    | `evaluation_start` | any | When a submitted proposal's evaluation starts: at once on submission, or for every proposal of a round together at the round's cut-off. Cannot be changed while proposals are submitted or in review. |
+    | `publish_results` | any | When applicants learn the allocation decision: as soon as it is made, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
 
 ---
 

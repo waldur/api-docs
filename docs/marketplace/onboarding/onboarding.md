@@ -28,7 +28,7 @@ Return person identifier field specification for a specific validation method. T
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.validation_method_enum import ValidationMethodEnum # (1)
+    from waldur_api_client.models.onboarding_validation_enum import OnboardingValidationEnum # (1)
     from waldur_api_client.api.onboarding import onboarding_person_identifier_fields_retrieve # (2)
     
     client = AuthenticatedClient(
@@ -36,14 +36,14 @@ Return person identifier field specification for a specific validation method. T
     )
     response = onboarding_person_identifier_fields_retrieve.sync(
         client=client,
-        validation_method=ValidationMethodEnum.ARIREGISTER
+        validation_method=OnboardingValidationEnum.ARIREGISTER
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ValidationMethodEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/validation_method_enum.py)
+    1.  **Model Source:** [`OnboardingValidationEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_validation_enum.py)
     2.  **API Source:** [`onboarding_person_identifier_fields_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding/onboarding_person_identifier_fields_retrieve.py)
 
 === "TypeScript"

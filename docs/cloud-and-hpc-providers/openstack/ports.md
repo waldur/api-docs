@@ -390,7 +390,7 @@ Create a new network port.
     | `network` | string (uri) |  | Network to which this port belongs |
     | `port_security_enabled` | boolean |  | If True, security groups and rules will be applied to this port |
     | `security_groups` | array of objects |  |  |
-    | `security_groups.name` | string | ✓ |  |
+    | `security_groups.url` | string (uri) | ✓ |  |
 
 
 === "Responses"
@@ -877,7 +877,7 @@ Update an existing network port.
     | `network` | string (uri) |  | Network to which this port belongs |
     | `port_security_enabled` | boolean |  | If True, security groups and rules will be applied to this port |
     | `security_groups` | array of objects |  |  |
-    | `security_groups.name` | string | ✓ |  |
+    | `security_groups.url` | string (uri) | ✓ |  |
 
 
 === "Responses"
@@ -1020,8 +1020,6 @@ Update specific fields of a network port.
     | `name` | string |  |  |
     | `description` | string |  |  |
     | `target_tenant` | string (uri) |  | Target tenant for shared network port creation. If not specified, defaults to network's tenant.<br>_Constraints: write-only_ |
-    | `security_groups` | array of objects |  |  |
-    | `security_groups.name` | string | ✓ |  |
 
 
 === "Responses"

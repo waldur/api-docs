@@ -142,7 +142,7 @@ Get a list of routers.
     | `ports.subnet_uuid` | string (uuid) |  |
     | `ports.subnet_name` | string |  |
     | `ports.subnet_description` | string |  |
-    | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports.allowed_address_pairs` | array of objects |  |
     | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
@@ -189,6 +189,7 @@ Get a list of routers.
     | `ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `ports.security_groups.rules.id` | integer |  |
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
     | `ports.security_groups.marketplace_offering_type` | string |  |
@@ -340,7 +341,7 @@ Retrieve details of a specific router.
     | `ports.subnet_uuid` | string (uuid) |  |
     | `ports.subnet_name` | string |  |
     | `ports.subnet_description` | string |  |
-    | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports.allowed_address_pairs` | array of objects |  |
     | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
@@ -387,6 +388,7 @@ Retrieve details of a specific router.
     | `ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `ports.security_groups.rules.id` | integer |  |
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
     | `ports.security_groups.marketplace_offering_type` | string |  |

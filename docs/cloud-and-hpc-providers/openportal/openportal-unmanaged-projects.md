@@ -24,6 +24,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/{uuid}/stats/` | [Get project resource usage statistics](#get-project-resource-usage-statistics) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/{uuid}/move_project/` | [Move project to another customer](#move-project-to-another-customer) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/{uuid}/recover/` | [Recover a soft-deleted project](#recover-a-soft-deleted-project) |
+| <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/{uuid}/set_slug/` | [Set project slug](#set-project-slug) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/{uuid}/submit_answers/` | [Submit checklist answers](#submit-checklist-answers) |
 
 ---
@@ -131,7 +132,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -154,11 +155,12 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -184,6 +186,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
 
 ---
 
@@ -265,7 +268,7 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -288,11 +291,12 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -318,6 +322,7 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
 
 ---
 
@@ -389,7 +394,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string |  | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) | ✓ |  |
     | `description` | string |  | Project description (HTML content will be sanitized) |
     | `type` | string (uri) |  |  |
@@ -418,7 +423,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -441,11 +446,12 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -471,6 +477,7 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
 
 ---
 
@@ -632,7 +639,7 @@ Update the details of a project. Requires project administrator or customer owne
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string |  | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) | ✓ |  |
     | `description` | string |  | Project description (HTML content will be sanitized) |
     | `type` | string (uri) |  |  |
@@ -661,7 +668,7 @@ Update the details of a project. Requires project administrator or customer owne
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -684,11 +691,12 @@ Update the details of a project. Requires project administrator or customer owne
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -714,6 +722,7 @@ Update the details of a project. Requires project administrator or customer owne
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
 
 ---
 
@@ -787,7 +796,7 @@ Partially update the details of a project. Requires project administrator or cus
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string |  |  |
-    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string |  | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |  |
     | `description` | string |  | Project description (HTML content will be sanitized) |
     | `type` | string (uri) |  |  |
@@ -816,7 +825,7 @@ Partially update the details of a project. Requires project administrator or cus
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -839,11 +848,12 @@ Partially update the details of a project. Requires project administrator or cus
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -869,6 +879,7 @@ Partially update the details of a project. Requires project administrator or cus
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
 
 ---
 
@@ -1045,6 +1056,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `user_image` | string (uri) |  |
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `source` | string |  |
 
 ---
 
@@ -1743,25 +1755,28 @@ Provides statistics about the resource usage (e.g., CPU, RAM, storage) for all r
     | Name | Type | Description |
     |---|---|---|
     | `for_current_month` | boolean | If true, returns usage data for the current month only. Otherwise, returns total usage. |
+    | `include_terminated` | boolean | If true, also counts terminated resources that reported usage in the current month. Their share is returned as usage_terminated and limit_usage_terminated; limit never includes them. Ignored unless the dashboard.usage_include_terminated feature is enabled. |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `components` | array of objects |
-    | `components.type` | string |
-    | `components.name` | string |
-    | `components.description` | string |
-    | `components.measured_unit` | string |
-    | `components.billing_type` | string |
-    | `components.usage` | integer |
-    | `components.limit_usage` | integer |
-    | `components.limit` | integer |
-    | `components.offering_name` | string |
-    | `components.offering_uuid` | string (uuid) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `components` | array of objects |  |
+    | `components.type` | string |  |
+    | `components.name` | string |  |
+    | `components.description` | string |  |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | string |  |
+    | `components.usage` | integer |  |
+    | `components.limit_usage` | integer |  |
+    | `components.usage_terminated` | integer | Part of usage that came from terminated resources. |
+    | `components.limit_usage_terminated` | integer | Part of limit_usage that came from terminated resources. |
+    | `components.limit` | integer |  |
+    | `components.offering_name` | string |  |
+    | `components.offering_uuid` | string (uuid) |  |
 
 ---
 
@@ -1856,7 +1871,7 @@ Moves a project and its associated resources to a different customer. You can ch
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -1879,11 +1894,12 @@ Moves a project and its associated resources to a different customer. You can ch
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -1909,6 +1925,7 @@ Moves a project and its associated resources to a different customer. You can ch
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
 
 ---
 
@@ -1995,7 +2012,7 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -2018,11 +2035,12 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -2048,6 +2066,95 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
+
+---
+
+### Set project slug
+
+Updates the slug of a project. Requires staff or the PROJECT.SET_SLUG permission, which no role holds unless the deployment grants it. Other than staff, a holder cannot change the slug once a resource of the project is being provisioned or exists in the backend.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openportal-unmanaged-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_slug/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      slug="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.project_slug_request import ProjectSlugRequest # (1)
+    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_set_slug # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ProjectSlugRequest(
+        slug="string-value"
+    )
+    response = openportal_unmanaged_projects_set_slug.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ProjectSlugRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_slug_request.py)
+    2.  **API Source:** [`openportal_unmanaged_projects_set_slug`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_set_slug.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openportalUnmanagedProjectsSetSlug } from 'waldur-js-client';
+    
+    try {
+      const response = await openportalUnmanagedProjectsSetSlug({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "slug": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `slug` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

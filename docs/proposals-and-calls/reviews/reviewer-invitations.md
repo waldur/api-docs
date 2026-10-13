@@ -83,6 +83,7 @@ Get invitation details by token.
     | `call_name` | string |  |
     | `call_uuid` | string (uuid) |  |
     | `invitation_status` | string |  |
+    | `invited_at` | string (date-time) |  |
     | `expires_at` | string (date-time) |  |
     | `is_expired` | boolean |  |
     | `max_assignments` | integer |  |

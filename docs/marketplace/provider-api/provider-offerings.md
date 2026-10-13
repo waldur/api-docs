@@ -227,6 +227,8 @@ Returns a paginated list of offerings for the provider.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
+    | `billing_period_applies` | object (free-form) | Per plan billing mode, whether a plan's billing period changes what is invoiced. False means every component of this offering would price a quantity of its own under that mode, so the period is inert on the invoice. |
+    | `billing_mode_components` | object (free-form) | Per plan billing mode, every component of this offering as a plan in that mode would bill it: billing type, measured unit, prepaid flag and limit period. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
@@ -317,15 +319,16 @@ Returns a paginated list of offerings for the provider.
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -334,9 +337,13 @@ Returns a paginated list of offerings for the provider.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `limit_precision_advisory` | string |  |
     | `plugin_options` | any |  |
+    | `account_settings` | any |  |
     | `secret_options` | any |  |
     | `service_attributes` | object (free-form) |  |
+    | `can_update_integration` | boolean |  |
+    | `can_update_options` | boolean |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
     | `getting_started` | string |  |
@@ -351,6 +358,7 @@ Returns a paginated list of offerings for the provider.
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -368,7 +376,10 @@ Returns a paginated list of offerings for the provider.
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -396,6 +407,9 @@ Returns a paginated list of offerings for the provider.
     | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
+    | `scope_resource` | string (uri) |  |
+    | `scope_resource_uuid` | string |  |
+    | `scope_resource_name` | string |  |
     | `files` | array of objects |  |
     | `files.name` | string |  |
     | `files.created` | string (date-time) |  |
@@ -435,6 +449,7 @@ Returns a paginated list of offerings for the provider.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `compliance_checklist_details` | any |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
     | `offering_group` | string (uri) |  |
@@ -528,6 +543,8 @@ Returns details of a specific provider offering.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
+    | `billing_period_applies` | object (free-form) | Per plan billing mode, whether a plan's billing period changes what is invoiced. False means every component of this offering would price a quantity of its own under that mode, so the period is inert on the invoice. |
+    | `billing_mode_components` | object (free-form) | Per plan billing mode, every component of this offering as a plan in that mode would bill it: billing type, measured unit, prepaid flag and limit period. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
@@ -618,15 +635,16 @@ Returns details of a specific provider offering.
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -635,9 +653,13 @@ Returns details of a specific provider offering.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `limit_precision_advisory` | string |  |
     | `plugin_options` | any |  |
+    | `account_settings` | any |  |
     | `secret_options` | any |  |
     | `service_attributes` | object (free-form) |  |
+    | `can_update_integration` | boolean |  |
+    | `can_update_options` | boolean |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
     | `getting_started` | string |  |
@@ -652,6 +674,7 @@ Returns details of a specific provider offering.
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -669,7 +692,10 @@ Returns details of a specific provider offering.
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -697,6 +723,9 @@ Returns details of a specific provider offering.
     | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
+    | `scope_resource` | string (uri) |  |
+    | `scope_resource_uuid` | string |  |
+    | `scope_resource_name` | string |  |
     | `files` | array of objects |  |
     | `files.name` | string |  |
     | `files.created` | string (date-time) |  |
@@ -736,6 +765,7 @@ Returns details of a specific provider offering.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `compliance_checklist_details` | any |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
     | `offering_group` | string (uri) |  |
@@ -846,13 +876,14 @@ Creates a new provider offering.
     | `components.measured_unit` | string |  | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer |  | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |  |
-    | `components.limit_amount` | integer |  |  |
+    | `components.limit_amount` | number (double) |  |  |
+    | `components.limit_decimal_places` | integer |  | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |  |
-    | `components.max_value` | integer |  |  |
-    | `components.min_value` | integer |  |  |
-    | `components.max_available_limit` | integer |  |  |
+    | `components.max_value` | number (double) |  |  |
+    | `components.min_value` | number (double) |  |  |
+    | `components.max_available_limit` | number (double) |  |  |
     | `components.is_boolean` | boolean |  |  |
-    | `components.default_limit` | integer |  |  |
+    | `components.default_limit` | number (double) |  |  |
     | `components.is_prepaid` | boolean |  |  |
     | `components.overage_component` | string (uuid) |  |  |
     | `components.min_prepaid_duration` | integer |  |  |
@@ -862,16 +893,22 @@ Creates a new provider offering.
     | `components.max_renewal_duration` | integer |  | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer |  | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plugin_options` | object |  |  |
+    | `plugin_options.account_scope` | any |  | Where accounts are held: 'offering' keeps one account per offering (the historical behaviour); 'provider' shares one account per user across the provider's offerings. |
+    | `plugin_options.username_generation_policy` | any |  | How the usernames of offering users are generated. |
+    | `plugin_options.username_anonymized_prefix` | string |  | Prefix for anonymized usernames; the name is the prefix followed by the account's POSIX UID. |
+    | `plugin_options.homedir_prefix` | string |  | Prefix of each account's home directory; the username follows. |
+    | `plugin_options.login_shell` | string |  | Login shell assigned to GLAuth/LDAP accounts. |
     | `plugin_options.auto_approve_remote_orders` | boolean |  | If set to True, an order can be processed without approval |
     | `plugin_options.resource_expiration_threshold` | integer |  | Resource expiration threshold in days.<br>_Constraints: default: `30`_ |
     | `plugin_options.service_provider_can_create_offering_user` | boolean |  | Service provider can create offering user |
+    | `plugin_options.uses_robot_accounts` | boolean |  | This offering's identity model is per-resource robot accounts rather than automatic offering users. Unset means false. Cannot be combined with service_provider_can_create_offering_user. Does not block creating robot accounts on offerings that use offering users. |
     | `plugin_options.offering_user_auto_deletion` | boolean |  | If set to True, offering users will be automatically marked for deletion by the cleanup task when users lose project access. If False (default), deletion must be triggered manually by the service provider.<br>_Constraints: default: `False`_ |
     | `plugin_options.max_resource_termination_offset_in_days` | integer |  | Maximum resource termination offset in days |
     | `plugin_options.default_resource_termination_offset_in_days` | integer |  | If set, it will be used as a default resource termination offset in days |
     | `plugin_options.is_resource_termination_date_required` | boolean |  | If set to True, resource termination date is required |
     | `plugin_options.latest_date_for_resource_termination` | string |  | If set, it will be used as a latest date for resource termination. Format: YYYY-MM-DD |
     | `plugin_options.auto_approve_in_service_provider_projects` | boolean |  | Skip approval of public offering belonging to the same organization under which the request is done |
-    | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
+    | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual consumer approval, overriding every other consumer-side auto-approve mechanism (auto_approve_in_service_provider_projects, auto_approve_for_roles, project auto-approval rules, and the ORDER.APPROVE permission). Termination orders, staff users and provider approval are not affected |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
     | `plugin_options.disable_grace_period` | boolean |  | If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option. |
@@ -887,8 +924,11 @@ Creates a new provider offering.
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
     | `plugin_options.enable_resource_end_date_change_requests` | boolean |  | If set to True, users without RESOURCE.SET_END_DATE can request an end date change, and holders of that permission approve or reject. Approval writes the date directly; no order is created. Requests are published as events so an external approval system can decide instead. Not applicable to prepaid offerings, which extend through renewal instead. |
+    | `plugin_options.enable_resource_limit_change_requests` | boolean |  | If set to True, users who cannot change resource limits directly (RESOURCE.SET_LIMITS together with ORDER.CREATE) can request a limit change, and holders of RESOURCE.SET_LIMITS approve or reject. Approval submits an update order for the requested limits. |
     | `plugin_options.enable_resource_projects` | boolean |  | Enable sub-project management within resources. |
     | `plugin_options.enable_membership_sync_status` | boolean |  | Enable per-member sync status reporting by the site agent: team views show whether each role grant has propagated to the provider backend, and providers can trigger a resync. |
+    | `plugin_options.enable_scim_entitlements` | boolean |  | Include this offering in outbound SCIM user entitlement sync. Login hosts are read from scim_login_nodes. When unset or false, this offering is not pushed to the remote SCIM service even if SCIM_MEMBERSHIP_SYNC_ENABLED is on. |
+    | `plugin_options.scim_login_nodes` | array of strings |  | Bare hostnames of login nodes included in outbound SCIM entitlements when enable_scim_entitlements is set. Each entry is a DNS hostname only (for example login.example.org): stored lowercased, with no ssh:// URL, user@host, or host:port. These are not access links and do not appear in the resource access dropdown. |
     | `plugin_options.enable_resource_access_subnets` | boolean |  | If set to True, an Access subnets tab is shown on resource detail pages, letting consumers curate the IPs allowed to reach the backend entity. The list is advisory data for external firewalls. |
     | `plugin_options.conceal_subnet_restricted_resources` | boolean |  | If set to True, a resource of this offering that has access subnets is hidden from the consumer API unless the caller's IP is in the resource's allow-list. Staff and support are exempt; resources without any subnet stay visible. |
     | `plugin_options.resource_projects_limit_policy` | any |  | How parent resource limits are enforced on child resource projects: 'none' (accepted as-is, default), 'per_project' (each resource project limit must be within the parent resource limit), or 'aggregate' (the sum of all resource project limits must be within the parent limit). |
@@ -915,7 +955,7 @@ Creates a new provider offering.
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
     | `plugin_options.heappe_username` | string |  | HEAppE username |
-    | `plugin_options.homedir_prefix` | string |  | GLAuth homedir prefix<br>_Constraints: default: `/home/`_ |
+    | `plugin_options.heappe_identifier` | string |  | Identifier of the HEAppE instance this offering targets, e.g. 'it4i-heappe-prod'. Lets providers with multiple HEAppE deployments disambiguate which one a given offering uses. |
     | `plugin_options.scratch_project_directory` | string |  | HEAppE scratch project directory |
     | `plugin_options.project_permanent_directory` | string |  | HEAppE project permanent directory |
     | `plugin_options.enable_posix_account` | boolean |  | Manage a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for this offering's users. Disable for offerings that only need a username.<br>_Constraints: default: `True`_ |
@@ -923,9 +963,6 @@ Creates a new provider offering.
     | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
     | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
     | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
-    | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
-    | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
-    | `plugin_options.login_shell` | string |  | Default login shell assigned to GLAuth/LDAP accounts.<br>_Constraints: default: `/bin/bash`_ |
     | `plugin_options.uid_source` | any |  | Where each offering user's UID comes from: allocated from the POSIX ID pool (default), or taken from the user's uid_number attribute (e.g. an OIDC claim). Pair 'user_attribute' with a GID-only pool to avoid UID collisions.<br>_Constraints: default: `pool`_ |
     | `plugin_options.gid_source` | any |  | Where each offering user's primary GID comes from: the POSIX ID pool (default), or the user's primary_gid attribute.<br>_Constraints: default: `pool`_ |
     | `plugin_options.emit_display_name` | boolean |  | Emit the user's full name as a GLAuth displayName custom attribute (rendered to LDAP displayName).<br>_Constraints: default: `False`_ |
@@ -953,6 +990,7 @@ Creates a new provider offering.
     | `plugin_options.enable_display_of_order_actions_for_service_provider` | boolean |  | Enable display of order actions for service provider<br>_Constraints: default: `True`_ |
     | `plugin_options.slurm_periodic_policy_enabled` | boolean |  | Enable SLURM periodic usage policy configuration. When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.<br>_Constraints: default: `False`_ |
     | `plugin_options.enforce_qos` | boolean |  | When enabled, the site agent enforces the offering's QoS selection by granting the chosen QoS on the SLURM association (QosLevel/DefaultQOS). When disabled (default), QoS is informational only — profiles are shown and the selection is recorded on the resource, but the agent does not touch SLURM QoS. The agent config may override this per deployment.<br>_Constraints: default: `False`_ |
+    | `plugin_options.enable_api_key_provisioning` | boolean |  | Declares that the site agent can govern resource API keys one by one: request, assign, limit, pause, resume and delete them. Without it a resource's keys can only be revealed and rotated. Nothing checks the claim: turn it on only if the agent's backend supports per-key commands (such as the Envoy AI Gateway); on one that does not (such as Ceph S3) every such command errs. |
     | `plugin_options.auto_approve_marketplace_script` | boolean |  | If set to False, all orders require manual provider approval, including for service provider owners and staff<br>_Constraints: default: `True`_ |
     | `plugin_options.highlight_backend_id_display` | boolean |  | Defines if backend_id should be shown more prominently by the UI<br>_Constraints: default: `False`_ |
     | `plugin_options.backend_id_display_label` | string |  | Label used by UI for showing value of the backend_id<br>_Constraints: default: `Backend ID`_ |
@@ -960,6 +998,7 @@ Creates a new provider offering.
     | `plugin_options.expose_inference_playground` | boolean |  | Show an in-browser inference playground action for resources of this offering (for offerings whose resources expose an OpenAI-compatible endpoint).<br>_Constraints: default: `False`_ |
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
     | `plugin_options.show_ssh_key_loss_warning` | boolean |  | Show a warning about unrecoverable loss of the SSH private key on the OpenStack instance order form.<br>_Constraints: default: `False`_ |
+    | `plugin_options.hide_api_keys_tab` | boolean |  | Hide the API keys tab on resources of this offering. |
     | `vendor_details` | string |  |  |
     | `getting_started` | string |  |  |
     | `integration_guide` | string |  |  |
@@ -970,6 +1009,7 @@ Creates a new provider offering.
     | `plans.article_code` | string |  |  |
     | `plans.max_amount` | integer |  | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean |  | Forbids creation of new resources. |
+    | `plans.billing_mode` | any |  | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type.<br>_Constraints: default: `inherit`_ |
     | `plans.unit_price` | string (decimal) |  |  |
     | `plans.unit` | string |  | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
     | `plans.backend_id` | string |  |  |
@@ -998,6 +1038,8 @@ Creates a new provider offering.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
+    | `billing_period_applies` | object (free-form) | Per plan billing mode, whether a plan's billing period changes what is invoiced. False means every component of this offering would price a quantity of its own under that mode, so the period is inert on the invoice. |
+    | `billing_mode_components` | object (free-form) | Per plan billing mode, every component of this offering as a plan in that mode would bill it: billing type, measured unit, prepaid flag and limit period. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
@@ -1088,15 +1130,16 @@ Creates a new provider offering.
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -1105,9 +1148,13 @@ Creates a new provider offering.
     | `components.min_renewal_duration` | integer | Minimum number of months allowed for a renewal. |
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
+    | `limit_precision_advisory` | string |  |
     | `plugin_options` | any |  |
+    | `account_settings` | any |  |
     | `secret_options` | any |  |
     | `service_attributes` | object (free-form) |  |
+    | `can_update_integration` | boolean |  |
+    | `can_update_options` | boolean |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
     | `getting_started` | string |  |
@@ -1122,6 +1169,7 @@ Creates a new provider offering.
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -1139,7 +1187,10 @@ Creates a new provider offering.
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -1167,6 +1218,9 @@ Creates a new provider offering.
     | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
+    | `scope_resource` | string (uri) |  |
+    | `scope_resource_uuid` | string |  |
+    | `scope_resource_name` | string |  |
     | `files` | array of objects |  |
     | `files.name` | string |  |
     | `files.created` | string (date-time) |  |
@@ -1206,6 +1260,7 @@ Creates a new provider offering.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `compliance_checklist_details` | any |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
     | `offering_group` | string (uri) |  |
@@ -2153,6 +2208,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `permissions.revoked_by_full_name` | string |  |
     | `permissions.revoked_by_username` | string |  |
     | `permissions.revoke_reason` | string |  |
+    | `permissions.source` | string |  |
     | `permissions.role_name` | string |  |
     | `permissions.role_description` | string |  |
     | `permissions.role_uuid` | string (uuid) |  |
@@ -2178,6 +2234,8 @@ Returns a paginated list of users who have access to resources of this offering.
     | `should_protect_user_details` | boolean |  |
     | `has_active_session` | boolean |  |
     | `has_usable_password` | boolean |  |
+    | `has_passkey` | boolean |  |
+    | `passkey_count` | integer |  |
     | `ip_address` | string |  |
     | `gender` | any | User's gender (male, female, or unknown) |
     | `personal_title` | string | Honorific title (Mr, Ms, Dr, Prof, etc.) |
@@ -2201,6 +2259,7 @@ Returns a paginated list of users who have access to resources of this offering.
     | `active_isds` | array of strings |  |
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
+    | `details` | object (free-form) | Extra details from authentication backend. |
 
 ---
 
@@ -2454,6 +2513,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `user_image` | string (uri) |  |
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `source` | string |  |
 
 ---
 
@@ -3474,13 +3534,14 @@ Adds a new custom component to an offering.
     | `measured_unit` | string |  | Unit of measurement, for example, GB. |
     | `unit_factor` | integer |  | The conversion factor from backend units to measured_unit |
     | `limit_period` | any |  |  |
-    | `limit_amount` | integer |  |  |
+    | `limit_amount` | number (double) |  |  |
+    | `limit_decimal_places` | integer |  | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `article_code` | string |  |  |
-    | `max_value` | integer |  |  |
-    | `min_value` | integer |  |  |
-    | `max_available_limit` | integer |  |  |
+    | `max_value` | number (double) |  |  |
+    | `min_value` | number (double) |  |  |
+    | `max_available_limit` | number (double) |  |  |
     | `is_boolean` | boolean |  |  |
-    | `default_limit` | integer |  |  |
+    | `default_limit` | number (double) |  |  |
     | `is_prepaid` | boolean |  |  |
     | `overage_component` | string (uuid) |  |  |
     | `min_prepaid_duration` | integer |  |  |
@@ -3675,13 +3736,14 @@ Updates the properties of a specific component within an offering.
     | `measured_unit` | string |  | Unit of measurement, for example, GB. |
     | `unit_factor` | integer |  | The conversion factor from backend units to measured_unit |
     | `limit_period` | any |  |  |
-    | `limit_amount` | integer |  |  |
+    | `limit_amount` | number (double) |  |  |
+    | `limit_decimal_places` | integer |  | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `article_code` | string |  |  |
-    | `max_value` | integer |  |  |
-    | `min_value` | integer |  |  |
-    | `max_available_limit` | integer |  |  |
+    | `max_value` | number (double) |  |  |
+    | `min_value` | number (double) |  |  |
+    | `max_available_limit` | number (double) |  |  |
     | `is_boolean` | boolean |  |  |
-    | `default_limit` | integer |  |  |
+    | `default_limit` | number (double) |  |  |
     | `is_prepaid` | boolean |  |  |
     | `overage_component` | string (uuid) |  |  |
     | `min_prepaid_duration` | integer |  |  |
@@ -4991,6 +5053,8 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
+    | `billing_period_applies` | object (free-form) | Per plan billing mode, whether a plan's billing period changes what is invoiced. False means every component of this offering would price a quantity of its own under that mode, so the period is inert on the invoice. |
+    | `billing_mode_components` | object (free-form) | Per plan billing mode, every component of this offering as a plan in that mode would bill it: billing type, measured unit, prepaid flag and limit period. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
@@ -5081,15 +5145,16 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -5099,6 +5164,9 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plugin_options` | any |  |
+    | `account_settings` | any |  |
+    | `can_update_integration` | boolean |  |
+    | `can_update_options` | boolean |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
     | `getting_started` | string |  |
@@ -5113,6 +5181,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -5130,7 +5199,10 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -5158,6 +5230,9 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
+    | `scope_resource` | string (uri) |  |
+    | `scope_resource_uuid` | string |  |
+    | `scope_resource_name` | string |  |
     | `files` | array of objects |  |
     | `files.name` | string |  |
     | `files.created` | string (date-time) |  |
@@ -5196,12 +5271,14 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `compliance_checklist_details` | any |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
     | `offering_group` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
+    | `user_has_offering_user` | boolean |  |
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
@@ -5601,6 +5678,8 @@ Updates the backend integration settings for an offering, including plugin optio
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `secret_options` | object |  |  |
+    | `secret_options.order_notification_emails` | array of string (email)s |  | Email addresses notified about every new order for this offering, once the consumer side has approved it, or when it is placed if it needs no consumer approval. Provider approval is not awaited. Intended for provider-side mailboxes which do not belong to a Waldur user, so these addresses are notified even if a user with the same address disabled notifications. At most 10 addresses. |
+    | `secret_options.order_notification_roles` | array of strings |  | List of organization or offering role names (e.g. 'CUSTOMER.OWNER', 'OFFERING.MANAGER') whose holders are notified about every new order for this offering, once the consumer side has approved it, or when it is placed if it needs no consumer approval. Provider approval is not awaited. Names are resolved on the provider organization and on the offering itself. Users who disabled notifications in their profile are skipped. At most 10 names. |
     | `secret_options.heappe_cluster_password` | string |  | HEAppE cluster password |
     | `secret_options.heappe_password` | string |  | HEAppE password |
     | `secret_options.ipv4_external_ip_mapping` | array of objects |  | OpenStack IPv4 external IP mapping |
@@ -5646,16 +5725,22 @@ Updates the backend integration settings for an offering, including plugin optio
     | `secret_options.k8s_version` | string |  | Kubernetes version |
     | `secret_options.node_disk_driver` | any |  | OpenStack disk driver for Rancher nodes |
     | `plugin_options` | object |  |  |
+    | `plugin_options.account_scope` | any |  | Where accounts are held: 'offering' keeps one account per offering (the historical behaviour); 'provider' shares one account per user across the provider's offerings. |
+    | `plugin_options.username_generation_policy` | any |  | How the usernames of offering users are generated. |
+    | `plugin_options.username_anonymized_prefix` | string |  | Prefix for anonymized usernames; the name is the prefix followed by the account's POSIX UID. |
+    | `plugin_options.homedir_prefix` | string |  | Prefix of each account's home directory; the username follows. |
+    | `plugin_options.login_shell` | string |  | Login shell assigned to GLAuth/LDAP accounts. |
     | `plugin_options.auto_approve_remote_orders` | boolean |  | If set to True, an order can be processed without approval |
     | `plugin_options.resource_expiration_threshold` | integer |  | Resource expiration threshold in days.<br>_Constraints: default: `30`_ |
     | `plugin_options.service_provider_can_create_offering_user` | boolean |  | Service provider can create offering user |
+    | `plugin_options.uses_robot_accounts` | boolean |  | This offering's identity model is per-resource robot accounts rather than automatic offering users. Unset means false. Cannot be combined with service_provider_can_create_offering_user. Does not block creating robot accounts on offerings that use offering users. |
     | `plugin_options.offering_user_auto_deletion` | boolean |  | If set to True, offering users will be automatically marked for deletion by the cleanup task when users lose project access. If False (default), deletion must be triggered manually by the service provider.<br>_Constraints: default: `False`_ |
     | `plugin_options.max_resource_termination_offset_in_days` | integer |  | Maximum resource termination offset in days |
     | `plugin_options.default_resource_termination_offset_in_days` | integer |  | If set, it will be used as a default resource termination offset in days |
     | `plugin_options.is_resource_termination_date_required` | boolean |  | If set to True, resource termination date is required |
     | `plugin_options.latest_date_for_resource_termination` | string |  | If set, it will be used as a latest date for resource termination. Format: YYYY-MM-DD |
     | `plugin_options.auto_approve_in_service_provider_projects` | boolean |  | Skip approval of public offering belonging to the same organization under which the request is done |
-    | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual approval, overriding auto_approve_in_service_provider_projects |
+    | `plugin_options.disable_autoapprove` | boolean |  | If set to True, orders for this offering will always require manual consumer approval, overriding every other consumer-side auto-approve mechanism (auto_approve_in_service_provider_projects, auto_approve_for_roles, project auto-approval rules, and the ORDER.APPROVE permission). Termination orders, staff users and provider approval are not affected |
     | `plugin_options.supports_downscaling` | boolean |  | If set to True, it will be possible to downscale resources |
     | `plugin_options.supports_pausing` | boolean |  | If set to True, it will be possible to pause resources |
     | `plugin_options.disable_grace_period` | boolean |  | If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option. |
@@ -5671,8 +5756,11 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.conceal_billing_data` | boolean |  | If set to True, pricing and components tab would be concealed. |
     | `plugin_options.create_orders_on_resource_option_change` | boolean |  | If set to True, create orders when options of related resources are changed. |
     | `plugin_options.enable_resource_end_date_change_requests` | boolean |  | If set to True, users without RESOURCE.SET_END_DATE can request an end date change, and holders of that permission approve or reject. Approval writes the date directly; no order is created. Requests are published as events so an external approval system can decide instead. Not applicable to prepaid offerings, which extend through renewal instead. |
+    | `plugin_options.enable_resource_limit_change_requests` | boolean |  | If set to True, users who cannot change resource limits directly (RESOURCE.SET_LIMITS together with ORDER.CREATE) can request a limit change, and holders of RESOURCE.SET_LIMITS approve or reject. Approval submits an update order for the requested limits. |
     | `plugin_options.enable_resource_projects` | boolean |  | Enable sub-project management within resources. |
     | `plugin_options.enable_membership_sync_status` | boolean |  | Enable per-member sync status reporting by the site agent: team views show whether each role grant has propagated to the provider backend, and providers can trigger a resync. |
+    | `plugin_options.enable_scim_entitlements` | boolean |  | Include this offering in outbound SCIM user entitlement sync. Login hosts are read from scim_login_nodes. When unset or false, this offering is not pushed to the remote SCIM service even if SCIM_MEMBERSHIP_SYNC_ENABLED is on. |
+    | `plugin_options.scim_login_nodes` | array of strings |  | Bare hostnames of login nodes included in outbound SCIM entitlements when enable_scim_entitlements is set. Each entry is a DNS hostname only (for example login.example.org): stored lowercased, with no ssh:// URL, user@host, or host:port. These are not access links and do not appear in the resource access dropdown. |
     | `plugin_options.enable_resource_access_subnets` | boolean |  | If set to True, an Access subnets tab is shown on resource detail pages, letting consumers curate the IPs allowed to reach the backend entity. The list is advisory data for external firewalls. |
     | `plugin_options.conceal_subnet_restricted_resources` | boolean |  | If set to True, a resource of this offering that has access subnets is hidden from the consumer API unless the caller's IP is in the resource's allow-list. Staff and support are exempt; resources without any subnet stay visible. |
     | `plugin_options.resource_projects_limit_policy` | any |  | How parent resource limits are enforced on child resource projects: 'none' (accepted as-is, default), 'per_project' (each resource project limit must be within the parent resource limit), or 'aggregate' (the sum of all resource project limits must be within the parent limit). |
@@ -5699,7 +5787,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
     | `plugin_options.heappe_url` | string |  | HEAppE url |
     | `plugin_options.heappe_username` | string |  | HEAppE username |
-    | `plugin_options.homedir_prefix` | string |  | GLAuth homedir prefix<br>_Constraints: default: `/home/`_ |
+    | `plugin_options.heappe_identifier` | string |  | Identifier of the HEAppE instance this offering targets, e.g. 'it4i-heappe-prod'. Lets providers with multiple HEAppE deployments disambiguate which one a given offering uses. |
     | `plugin_options.scratch_project_directory` | string |  | HEAppE scratch project directory |
     | `plugin_options.project_permanent_directory` | string |  | HEAppE project permanent directory |
     | `plugin_options.enable_posix_account` | boolean |  | Manage a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for this offering's users. Disable for offerings that only need a username.<br>_Constraints: default: `True`_ |
@@ -5707,9 +5795,6 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.resource_project_role_map` | object (free-form) |  | Mapping of Waldur role names (on ResourceProject scope) to emitted role tokens. Same semantics as resource_role_map. |
     | `plugin_options.resource_role_group_template` | string |  | string.Template for resource-scope role group names. Variables: ${role_name}, ${resource_slug}, ${customer_slug}, ${project_slug}.<br>_Constraints: default: `${resource_slug}_${role_name}`_ |
     | `plugin_options.resource_project_role_group_template` | string |  | string.Template for resource-project-scope role group names. Adds ${rp_uuid}, ${rp_uuid_short}, ${project_name} to the variables available for resource-scope templates.<br>_Constraints: default: `${resource_slug}_${rp_uuid_short}_${role_name}`_ |
-    | `plugin_options.username_anonymized_prefix` | string |  | GLAuth prefix for anonymized usernames<br>_Constraints: default: `waldur_`_ |
-    | `plugin_options.username_generation_policy` | any |  | GLAuth username generation policy<br>_Constraints: default: `service_provider`_ |
-    | `plugin_options.login_shell` | string |  | Default login shell assigned to GLAuth/LDAP accounts.<br>_Constraints: default: `/bin/bash`_ |
     | `plugin_options.uid_source` | any |  | Where each offering user's UID comes from: allocated from the POSIX ID pool (default), or taken from the user's uid_number attribute (e.g. an OIDC claim). Pair 'user_attribute' with a GID-only pool to avoid UID collisions.<br>_Constraints: default: `pool`_ |
     | `plugin_options.gid_source` | any |  | Where each offering user's primary GID comes from: the POSIX ID pool (default), or the user's primary_gid attribute.<br>_Constraints: default: `pool`_ |
     | `plugin_options.emit_display_name` | boolean |  | Emit the user's full name as a GLAuth displayName custom attribute (rendered to LDAP displayName).<br>_Constraints: default: `False`_ |
@@ -5737,6 +5822,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.enable_display_of_order_actions_for_service_provider` | boolean |  | Enable display of order actions for service provider<br>_Constraints: default: `True`_ |
     | `plugin_options.slurm_periodic_policy_enabled` | boolean |  | Enable SLURM periodic usage policy configuration. When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.<br>_Constraints: default: `False`_ |
     | `plugin_options.enforce_qos` | boolean |  | When enabled, the site agent enforces the offering's QoS selection by granting the chosen QoS on the SLURM association (QosLevel/DefaultQOS). When disabled (default), QoS is informational only — profiles are shown and the selection is recorded on the resource, but the agent does not touch SLURM QoS. The agent config may override this per deployment.<br>_Constraints: default: `False`_ |
+    | `plugin_options.enable_api_key_provisioning` | boolean |  | Declares that the site agent can govern resource API keys one by one: request, assign, limit, pause, resume and delete them. Without it a resource's keys can only be revealed and rotated. Nothing checks the claim: turn it on only if the agent's backend supports per-key commands (such as the Envoy AI Gateway); on one that does not (such as Ceph S3) every such command errs. |
     | `plugin_options.auto_approve_marketplace_script` | boolean |  | If set to False, all orders require manual provider approval, including for service provider owners and staff<br>_Constraints: default: `True`_ |
     | `plugin_options.highlight_backend_id_display` | boolean |  | Defines if backend_id should be shown more prominently by the UI<br>_Constraints: default: `False`_ |
     | `plugin_options.backend_id_display_label` | string |  | Label used by UI for showing value of the backend_id<br>_Constraints: default: `Backend ID`_ |
@@ -5744,6 +5830,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.expose_inference_playground` | boolean |  | Show an in-browser inference playground action for resources of this offering (for offerings whose resources expose an OpenAI-compatible endpoint).<br>_Constraints: default: `False`_ |
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
     | `plugin_options.show_ssh_key_loss_warning` | boolean |  | Show a warning about unrecoverable loss of the SSH private key on the OpenStack instance order form.<br>_Constraints: default: `False`_ |
+    | `plugin_options.hide_api_keys_tab` | boolean |  | Hide the API keys tab on resources of this offering. |
     | `service_attributes` | object (free-form) |  |  |
     | `backend_id` | string |  |  |
 
@@ -6197,7 +6284,7 @@ Updates the resource report form options for an offering.
 
 ### Get statistics for offering components
 
-Returns monthly usage statistics for the components of an offering within a specified date range.
+Returns monthly usage statistics for the components of an offering within a specified date range. Requires SERVICE_PROVIDER.GET_STATISTICS on the offering's customer or its service provider, or ORDER.LIST on the offering, its customer, or that customer's service provider.
 
 
 === "HTTPie"
@@ -6807,7 +6894,7 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -6830,11 +6917,12 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -6860,6 +6948,7 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
 
 ---
 
@@ -6973,6 +7062,7 @@ Returns a paginated list of orders associated with a specific offering.
     | `resource_uuid` | string (uuid) |  |
     | `resource_type` | string |  |
     | `resource_name` | string |  |
+    | `resource_end_date` | string (date) |  |
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
@@ -7017,7 +7107,9 @@ Returns a paginated list of orders associated with a specific offering.
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | number (double) |  |
+    | `old_plan_billing_mode` | string |  |
+    | `new_plan_billing_mode` | string |  |
+    | `old_cost_estimate` | number (double) | The old-limits estimate, snapshotted by init_cost() at creation.  Must not recompute live: _compute_old_cost_estimate() prices from "today", which keeps advancing on every read while `cost` stays fixed from creation -- the shown cost change would grow the longer an order sits unread. Orders that predate this field have no snapshot, so they fall back to the live computation rather than a wrong zero. |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
@@ -7149,6 +7241,7 @@ Returns details of a specific order associated with an offering.
     | `resource_uuid` | string (uuid) |  |
     | `resource_type` | string |  |
     | `resource_name` | string |  |
+    | `resource_end_date` | string (date) |  |
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
@@ -7193,7 +7286,9 @@ Returns details of a specific order associated with an offering.
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | number (double) |  |
+    | `old_plan_billing_mode` | string |  |
+    | `new_plan_billing_mode` | string |  |
+    | `old_cost_estimate` | number (double) | The old-limits estimate, snapshotted by init_cost() at creation.  Must not recompute live: _compute_old_cost_estimate() prices from "today", which keeps advancing on every read while `cost` stays fixed from creation -- the shown cost change would grow the longer an order sits unread. Orders that predate this field have no snapshot, so they fall back to the live computation rather than a wrong zero. |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
@@ -7591,6 +7686,7 @@ Imports a backend resource into the marketplace.
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
     | `project_description` | string |  |
+    | `project_start_date` | string (date) |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
     | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
@@ -7606,8 +7702,8 @@ Imports a backend resource into the marketplace.
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
-    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
+    | `is_usage_based` | boolean | Returns True if the resource bills any component by usage under its plan. |
+    | `is_limit_based` | boolean | Returns True if the resource bills any component on user-adjustable limits under its plan. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
@@ -7651,15 +7747,16 @@ Imports a backend resource into the marketplace.
     | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `offering_components.limit_period` | any |  |
-    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.limit_amount` | number (double) |  |
+    | `offering_components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `offering_components.article_code` | string |  |
-    | `offering_components.max_value` | integer |  |
-    | `offering_components.min_value` | integer |  |
-    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.max_value` | number (double) |  |
+    | `offering_components.min_value` | number (double) |  |
+    | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
-    | `offering_components.default_limit` | integer |  |
+    | `offering_components.default_limit` | number (double) |  |
     | `offering_components.factor` | integer |  |
-    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
@@ -7669,6 +7766,7 @@ Imports a backend resource into the marketplace.
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
+    | `offering_account_settings` | any |  |
 
 ---
 
@@ -8054,27 +8152,32 @@ The POSIX ID pool that governs this offering: its own override pool if present, 
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `service_provider` | string (uuid) |
-    | `offering` | string (uuid) |
-    | `min_uid` | integer (int64) |
-    | `max_uid` | integer (int64) |
-    | `next_uid` | integer |
-    | `min_gid` | integer (int64) |
-    | `max_gid` | integer (int64) |
-    | `next_gid` | integer |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `scope` | string |
-    | `uid_used` | integer |
-    | `gid_used` | integer |
-    | `uid_utilization` | number (double) |
-    | `gid_utilization` | number (double) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `service_provider` | string (uuid) |  |
+    | `offering` | string (uuid) |  |
+    | `min_uid` | integer (int64) |  |
+    | `max_uid` | integer (int64) |  |
+    | `next_uid` | integer |  |
+    | `min_gid` | integer (int64) |  |
+    | `max_gid` | integer (int64) |  |
+    | `next_gid` | integer |  |
+    | `min_group_gid` | integer (int64) | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) | Last GID of the range reserved for project groups. |
+    | `next_group_gid` | integer |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `scope` | string |  |
+    | `uid_used` | integer |  |
+    | `gid_used` | integer |  |
+    | `group_gid_used` | integer |  |
+    | `uid_utilization` | number (double) |  |
+    | `gid_utilization` | number (double) |  |
+    | `group_gid_utilization` | number (double) |  |
 
 ---
 
@@ -8418,7 +8521,7 @@ Returns the version history for this object. Only accessible by staff and suppor
 
 ### Get offering resource and user state counters
 
-Returns resource and offering-user counts grouped by state for the given offering.
+Returns resource and offering-user counts grouped by state for the given offering. Requires SERVICE_PROVIDER.GET_STATISTICS on the offering's customer or its service provider, or ORDER.LIST on the offering, its customer, or that customer's service provider.
 
 
 === "HTTPie"

@@ -132,6 +132,8 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
+    | `billing_period_applies` | object (free-form) | Per plan billing mode, whether a plan's billing period changes what is invoiced. False means every component of this offering would price a quantity of its own under that mode, so the period is inert on the invoice. |
+    | `billing_mode_components` | object (free-form) | Per plan billing mode, every component of this offering as a plan in that mode would bill it: billing type, measured unit, prepaid flag and limit period. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
@@ -222,15 +224,16 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -240,6 +243,9 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plugin_options` | any |  |
+    | `account_settings` | any |  |
+    | `can_update_integration` | boolean |  |
+    | `can_update_options` | boolean |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
     | `getting_started` | string |  |
@@ -254,6 +260,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -271,7 +278,10 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -299,6 +309,9 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
+    | `scope_resource` | string (uri) |  |
+    | `scope_resource_uuid` | string |  |
+    | `scope_resource_name` | string |  |
     | `files` | array of objects |  |
     | `files.name` | string |  |
     | `files.created` | string (date-time) |  |
@@ -337,12 +350,14 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `compliance_checklist_details` | any |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
     | `offering_group` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
+    | `user_has_offering_user` | boolean |  |
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
@@ -440,6 +455,8 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
+    | `billing_period_applies` | object (free-form) | Per plan billing mode, whether a plan's billing period changes what is invoiced. False means every component of this offering would price a quantity of its own under that mode, so the period is inert on the invoice. |
+    | `billing_mode_components` | object (free-form) | Per plan billing mode, every component of this offering as a plan in that mode would bill it: billing type, measured unit, prepaid flag and limit period. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
@@ -530,15 +547,16 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -548,6 +566,9 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plugin_options` | any |  |
+    | `account_settings` | any |  |
+    | `can_update_integration` | boolean |  |
+    | `can_update_options` | boolean |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
     | `getting_started` | string |  |
@@ -562,6 +583,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -579,7 +601,10 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -607,6 +632,9 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
+    | `scope_resource` | string (uri) |  |
+    | `scope_resource_uuid` | string |  |
+    | `scope_resource_name` | string |  |
     | `files` | array of objects |  |
     | `files.name` | string |  |
     | `files.created` | string (date-time) |  |
@@ -645,12 +673,14 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `compliance_checklist_details` | any |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
     | `offering_group` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
+    | `user_has_offering_user` | boolean |  |
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
@@ -749,6 +779,7 @@ Returns a list of plans available for a specific offering. The plans are filtere
     | `article_code` | string |  |
     | `max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean | Forbids creation of new resources. |
+    | `billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `is_active` | boolean |  |
     | `unit_price` | string (decimal) |  |
     | `unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -766,7 +797,10 @@ Returns a list of plans available for a specific offering. The plans are filtere
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | any |  |
+    | `components.is_prepaid` | boolean |  |
+    | `components.limit_period` | any |  |
     | `components.amount` | integer |  |
     | `components.price` | string (decimal) |  |
     | `components.future_price` | string (decimal) |  |
@@ -858,6 +892,7 @@ Returns the details of a specific plan if it is available to the current user fo
     | `article_code` | string |  |
     | `max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean | Forbids creation of new resources. |
+    | `billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `is_active` | boolean |  |
     | `unit_price` | string (decimal) |  |
     | `unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -875,7 +910,10 @@ Returns the details of a specific plan if it is available to the current user fo
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | any |  |
+    | `components.is_prepaid` | boolean |  |
+    | `components.limit_period` | any |  |
     | `components.amount` | integer |  |
     | `components.price` | string (decimal) |  |
     | `components.future_price` | string (decimal) |  |

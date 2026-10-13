@@ -12,7 +12,9 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-posix-id-pools/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-posix-id-pools/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-posix-id-pools/{uuid}/repoint_preview/` | [Preview re-pointing existing accounts onto this pool](#preview-re-pointing-existing-accounts-onto-this-pool) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-posix-id-pools/{uuid}/stats/` | [Pool utilization statistics](#pool-utilization-statistics) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-posix-id-pools/{uuid}/repoint/` | [Re-point existing accounts onto this pool](#re-point-existing-accounts-onto-this-pool) |
 
 ---
 ## Core CRUD
@@ -84,27 +86,32 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `service_provider` | string (uuid) |
-    | `offering` | string (uuid) |
-    | `min_uid` | integer (int64) |
-    | `max_uid` | integer (int64) |
-    | `next_uid` | integer |
-    | `min_gid` | integer (int64) |
-    | `max_gid` | integer (int64) |
-    | `next_gid` | integer |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `scope` | string |
-    | `uid_used` | integer |
-    | `gid_used` | integer |
-    | `uid_utilization` | number (double) |
-    | `gid_utilization` | number (double) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `service_provider` | string (uuid) |  |
+    | `offering` | string (uuid) |  |
+    | `min_uid` | integer (int64) |  |
+    | `max_uid` | integer (int64) |  |
+    | `next_uid` | integer |  |
+    | `min_gid` | integer (int64) |  |
+    | `max_gid` | integer (int64) |  |
+    | `next_gid` | integer |  |
+    | `min_group_gid` | integer (int64) | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) | Last GID of the range reserved for project groups. |
+    | `next_group_gid` | integer |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `scope` | string |  |
+    | `uid_used` | integer |  |
+    | `gid_used` | integer |  |
+    | `group_gid_used` | integer |  |
+    | `uid_utilization` | number (double) |  |
+    | `gid_utilization` | number (double) |  |
+    | `group_gid_utilization` | number (double) |  |
 
 ---
 
@@ -179,27 +186,32 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `service_provider` | string (uuid) |
-    | `offering` | string (uuid) |
-    | `min_uid` | integer (int64) |
-    | `max_uid` | integer (int64) |
-    | `next_uid` | integer |
-    | `min_gid` | integer (int64) |
-    | `max_gid` | integer (int64) |
-    | `next_gid` | integer |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `scope` | string |
-    | `uid_used` | integer |
-    | `gid_used` | integer |
-    | `uid_utilization` | number (double) |
-    | `gid_utilization` | number (double) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `service_provider` | string (uuid) |  |
+    | `offering` | string (uuid) |  |
+    | `min_uid` | integer (int64) |  |
+    | `max_uid` | integer (int64) |  |
+    | `next_uid` | integer |  |
+    | `min_gid` | integer (int64) |  |
+    | `max_gid` | integer (int64) |  |
+    | `next_gid` | integer |  |
+    | `min_group_gid` | integer (int64) | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) | Last GID of the range reserved for project groups. |
+    | `next_group_gid` | integer |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `scope` | string |  |
+    | `uid_used` | integer |  |
+    | `gid_used` | integer |  |
+    | `group_gid_used` | integer |  |
+    | `uid_utilization` | number (double) |  |
+    | `gid_utilization` | number (double) |  |
+    | `group_gid_utilization` | number (double) |  |
 
 ---
 
@@ -257,42 +269,49 @@
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `description` | string |  |
-    | `service_provider` | string (uuid) |  |
-    | `offering` | string (uuid) |  |
-    | `min_uid` | integer (int64) |  |
-    | `max_uid` | integer (int64) |  |
-    | `min_gid` | integer (int64) |  |
-    | `max_gid` | integer (int64) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `description` | string |  |  |
+    | `service_provider` | string (uuid) |  |  |
+    | `offering` | string (uuid) |  |  |
+    | `min_uid` | integer (int64) |  |  |
+    | `max_uid` | integer (int64) |  |  |
+    | `min_gid` | integer (int64) |  |  |
+    | `max_gid` | integer (int64) |  |  |
+    | `min_group_gid` | integer (int64) |  | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) |  | Last GID of the range reserved for project groups. |
 
 
 === "Responses"
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `service_provider` | string (uuid) |
-    | `offering` | string (uuid) |
-    | `min_uid` | integer (int64) |
-    | `max_uid` | integer (int64) |
-    | `next_uid` | integer |
-    | `min_gid` | integer (int64) |
-    | `max_gid` | integer (int64) |
-    | `next_gid` | integer |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `scope` | string |
-    | `uid_used` | integer |
-    | `gid_used` | integer |
-    | `uid_utilization` | number (double) |
-    | `gid_utilization` | number (double) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `service_provider` | string (uuid) |  |
+    | `offering` | string (uuid) |  |
+    | `min_uid` | integer (int64) |  |
+    | `max_uid` | integer (int64) |  |
+    | `next_uid` | integer |  |
+    | `min_gid` | integer (int64) |  |
+    | `max_gid` | integer (int64) |  |
+    | `next_gid` | integer |  |
+    | `min_group_gid` | integer (int64) | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) | Last GID of the range reserved for project groups. |
+    | `next_group_gid` | integer |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `scope` | string |  |
+    | `uid_used` | integer |  |
+    | `gid_used` | integer |  |
+    | `group_gid_used` | integer |  |
+    | `uid_utilization` | number (double) |  |
+    | `gid_utilization` | number (double) |  |
+    | `group_gid_utilization` | number (double) |  |
 
 ---
 
@@ -361,42 +380,49 @@
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `description` | string |  |
-    | `service_provider` | string (uuid) |  |
-    | `offering` | string (uuid) |  |
-    | `min_uid` | integer (int64) |  |
-    | `max_uid` | integer (int64) |  |
-    | `min_gid` | integer (int64) |  |
-    | `max_gid` | integer (int64) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `description` | string |  |  |
+    | `service_provider` | string (uuid) |  |  |
+    | `offering` | string (uuid) |  |  |
+    | `min_uid` | integer (int64) |  |  |
+    | `max_uid` | integer (int64) |  |  |
+    | `min_gid` | integer (int64) |  |  |
+    | `max_gid` | integer (int64) |  |  |
+    | `min_group_gid` | integer (int64) |  | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) |  | Last GID of the range reserved for project groups. |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `service_provider` | string (uuid) |
-    | `offering` | string (uuid) |
-    | `min_uid` | integer (int64) |
-    | `max_uid` | integer (int64) |
-    | `next_uid` | integer |
-    | `min_gid` | integer (int64) |
-    | `max_gid` | integer (int64) |
-    | `next_gid` | integer |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `scope` | string |
-    | `uid_used` | integer |
-    | `gid_used` | integer |
-    | `uid_utilization` | number (double) |
-    | `gid_utilization` | number (double) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `service_provider` | string (uuid) |  |
+    | `offering` | string (uuid) |  |
+    | `min_uid` | integer (int64) |  |
+    | `max_uid` | integer (int64) |  |
+    | `next_uid` | integer |  |
+    | `min_gid` | integer (int64) |  |
+    | `max_gid` | integer (int64) |  |
+    | `next_gid` | integer |  |
+    | `min_group_gid` | integer (int64) | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) | Last GID of the range reserved for project groups. |
+    | `next_group_gid` | integer |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `scope` | string |  |
+    | `uid_used` | integer |  |
+    | `gid_used` | integer |  |
+    | `group_gid_used` | integer |  |
+    | `uid_utilization` | number (double) |  |
+    | `gid_utilization` | number (double) |  |
+    | `group_gid_utilization` | number (double) |  |
 
 ---
 
@@ -465,40 +491,47 @@
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `description` | string |  |
-    | `min_uid` | integer (int64) |  |
-    | `max_uid` | integer (int64) |  |
-    | `min_gid` | integer (int64) |  |
-    | `max_gid` | integer (int64) |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `description` | string |  |  |
+    | `min_uid` | integer (int64) |  |  |
+    | `max_uid` | integer (int64) |  |  |
+    | `min_gid` | integer (int64) |  |  |
+    | `max_gid` | integer (int64) |  |  |
+    | `min_group_gid` | integer (int64) |  | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) |  | Last GID of the range reserved for project groups. |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `description` | string |
-    | `service_provider` | string (uuid) |
-    | `offering` | string (uuid) |
-    | `min_uid` | integer (int64) |
-    | `max_uid` | integer (int64) |
-    | `next_uid` | integer |
-    | `min_gid` | integer (int64) |
-    | `max_gid` | integer (int64) |
-    | `next_gid` | integer |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `scope` | string |
-    | `uid_used` | integer |
-    | `gid_used` | integer |
-    | `uid_utilization` | number (double) |
-    | `gid_utilization` | number (double) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `service_provider` | string (uuid) |  |
+    | `offering` | string (uuid) |  |
+    | `min_uid` | integer (int64) |  |
+    | `max_uid` | integer (int64) |  |
+    | `next_uid` | integer |  |
+    | `min_gid` | integer (int64) |  |
+    | `max_gid` | integer (int64) |  |
+    | `next_gid` | integer |  |
+    | `min_group_gid` | integer (int64) | First GID of the range reserved for provider project groups. Without it, project groups draw from the GID range. |
+    | `max_group_gid` | integer (int64) | Last GID of the range reserved for project groups. |
+    | `next_group_gid` | integer |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_name` | string |  |
+    | `scope` | string |  |
+    | `uid_used` | integer |  |
+    | `gid_used` | integer |  |
+    | `group_gid_used` | integer |  |
+    | `uid_utilization` | number (double) |  |
+    | `gid_utilization` | number (double) |  |
+    | `group_gid_utilization` | number (double) |  |
 
 ---
 
@@ -570,6 +603,91 @@
 ## Other Actions
 
 
+### Preview re-pointing existing accounts onto this pool
+
+Adding an override pool to an offering that already has accounts changes nothing by itself: accounts created afterwards draw from the override pool, while existing ones keep the values they were given by the previously resolved pool. This action reports which offering users would change and from which value to which, without writing anything. Offering-level pools only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-posix-id-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/repoint_preview/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_posix_id_pools import marketplace_posix_id_pools_repoint_preview_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_posix_id_pools_repoint_preview_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_posix_id_pools_repoint_preview_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_posix_id_pools/marketplace_posix_id_pools_repoint_preview_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplacePosixIdPoolsRepointPreviewRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplacePosixIdPoolsRepointPreviewRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `changes` | array of objects |  |
+    | `changes.offering_user_uuid` | string |  |
+    | `changes.offering_uuid` | string |  |
+    | `changes.offering_name` | string |  |
+    | `changes.user_uuid` | string |  |
+    | `changes.username` | string |  |
+    | `changes.namespace` | string |  |
+    | `changes.old_value` | integer |  |
+    | `changes.new_value` | integer |  |
+    | `released` | integer | Identities freed in the previously resolved pool. Their values are withheld from recycling until an operator returns them. |
+    | `retained` | integer | Users whose previous identity stays active because this pool does not manage every namespace they hold a value in. |
+    | `other_consumers` | array of objects | Robot accounts and groups of the offering that keep their values from the previously resolved pool; re-pointing moves offering accounts only. |
+    | `other_consumers.kind` | string |  |
+    | `other_consumers.uid` | integer |  |
+    | `other_consumers.gid` | integer |  |
+    | `other_consumers.identity_uuid` | string |  |
+
+---
+
 ### Pool utilization statistics
 
 
@@ -632,10 +750,114 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `uid` | any |
-    | `gid` | any |
-    | `utilization_threshold` | integer |
+    | Field | Type | Description |
+    |---|---|---|
+    | `uid` | any |  |
+    | `gid` | any |  |
+    | `group_gid` | any | The range reserved for provider project groups, if any. |
+    | `utilization_threshold` | integer |  |
+
+---
+
+### Re-point existing accounts onto this pool
+
+Moves the offering's existing accounts onto this override pool and returns the identifiers that changed. Requires 'confirm': true - preview the impact with repoint_preview first, and reconcile the provider's filesystem afterwards, since the accounts' files still carry the old numbers. Values freed in the previously resolved pool are withheld from recycling until an operator returns them. Offering-level pools only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-posix-id-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/repoint/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      confirm=true
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.posix_id_pool_repoint_request_request import PosixIdPoolRepointRequestRequest # (1)
+    from waldur_api_client.api.marketplace_posix_id_pools import marketplace_posix_id_pools_repoint # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PosixIdPoolRepointRequestRequest(
+        confirm=true
+    )
+    response = marketplace_posix_id_pools_repoint.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PosixIdPoolRepointRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/posix_id_pool_repoint_request_request.py)
+    2.  **API Source:** [`marketplace_posix_id_pools_repoint`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_posix_id_pools/marketplace_posix_id_pools_repoint.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplacePosixIdPoolsRepoint } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplacePosixIdPoolsRepoint({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "confirm": true
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `confirm` | boolean | ✓ | Must be true. Re-pointing rewrites identifiers that the provider's directory and filesystem already carry, so it is never applied implicitly - preview it first with repoint_preview. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `changes` | array of objects |  |
+    | `changes.offering_user_uuid` | string |  |
+    | `changes.offering_uuid` | string |  |
+    | `changes.offering_name` | string |  |
+    | `changes.user_uuid` | string |  |
+    | `changes.username` | string |  |
+    | `changes.namespace` | string |  |
+    | `changes.old_value` | integer |  |
+    | `changes.new_value` | integer |  |
+    | `released` | integer | Identities freed in the previously resolved pool. Their values are withheld from recycling until an operator returns them. |
+    | `retained` | integer | Users whose previous identity stays active because this pool does not manage every namespace they hold a value in. |
+    | `other_consumers` | array of objects | Robot accounts and groups of the offering that keep their values from the previously resolved pool; re-pointing moves offering accounts only. |
+    | `other_consumers.kind` | string |  |
+    | `other_consumers.uid` | integer |  |
+    | `other_consumers.gid` | integer |  |
+    | `other_consumers.identity_uuid` | string |  |
 
 ---

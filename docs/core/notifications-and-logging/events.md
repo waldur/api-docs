@@ -248,6 +248,9 @@
 Returns a list of groups with event types.
 Group is used in exclude_features query param.
 
+Narrowed to the groups this deployment can emit. Groups left out stay
+deliverable and writable -- see waldur_core.logging.availability.
+
 
 === "HTTPie"
 

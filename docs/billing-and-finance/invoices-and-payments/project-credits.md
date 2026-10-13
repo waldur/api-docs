@@ -97,6 +97,7 @@
     | `customer_credit` | string (decimal) |  |
     | `allocated_customer_credit` | string |  |
     | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `creditable_cost_this_month` | string (decimal) |  |
     | `spendable_value` | string (decimal) |  |
     | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
     | `offerings` | array of objects |  |
@@ -191,6 +192,7 @@
     | `customer_credit` | string (decimal) |  |
     | `allocated_customer_credit` | string |  |
     | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `creditable_cost_this_month` | string (decimal) |  |
     | `spendable_value` | string (decimal) |  |
     | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
     | `offerings` | array of objects |  |
@@ -299,6 +301,7 @@
     | `customer_credit` | string (decimal) |  |
     | `allocated_customer_credit` | string |  |
     | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `creditable_cost_this_month` | string (decimal) |  |
     | `spendable_value` | string (decimal) |  |
     | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
     | `offerings` | array of objects |  |
@@ -418,6 +421,7 @@
     | `customer_credit` | string (decimal) |  |
     | `allocated_customer_credit` | string |  |
     | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `creditable_cost_this_month` | string (decimal) |  |
     | `spendable_value` | string (decimal) |  |
     | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
     | `offerings` | array of objects |  |
@@ -531,6 +535,7 @@
     | `customer_credit` | string (decimal) |  |
     | `allocated_customer_credit` | string |  |
     | `consumption_last_month` | number (double) | Credit drawn by this project in the previous month.  None when that month has no invoice at all — no billing period is not the same statement as "drew nothing", and callers should be able to tell them apart. |
+    | `creditable_cost_this_month` | string (decimal) |  |
     | `spendable_value` | string (decimal) |  |
     | `is_limited_by_organization_credit` | boolean | True when the organization balance, not this allocation, is binding. |
     | `offerings` | array of objects |  |

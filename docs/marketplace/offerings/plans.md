@@ -101,6 +101,7 @@ Returns a paginated list of plans managed by the provider. The list is filtered 
     | `article_code` | string |  |
     | `max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean | Forbids creation of new resources. |
+    | `billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `is_active` | boolean |  |
     | `unit_price` | string (decimal) |  |
     | `unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -118,7 +119,10 @@ Returns a paginated list of plans managed by the provider. The list is filtered 
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | any |  |
+    | `components.is_prepaid` | boolean |  |
+    | `components.limit_period` | any |  |
     | `components.amount` | integer |  |
     | `components.price` | string (decimal) |  |
     | `components.future_price` | string (decimal) |  |
@@ -208,6 +212,7 @@ Returns details of a specific plan.
     | `article_code` | string |  |
     | `max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean | Forbids creation of new resources. |
+    | `billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `is_active` | boolean |  |
     | `unit_price` | string (decimal) |  |
     | `unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -225,7 +230,10 @@ Returns details of a specific plan.
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | any |  |
+    | `components.is_prepaid` | boolean |  |
+    | `components.limit_period` | any |  |
     | `components.amount` | integer |  |
     | `components.price` | string (decimal) |  |
     | `components.future_price` | string (decimal) |  |
@@ -314,6 +322,7 @@ Creates a new billing plan for an offering.
     | `article_code` | string |  |  |
     | `max_amount` | integer |  | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean |  | Forbids creation of new resources. |
+    | `billing_mode` | any |  | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type.<br>_Constraints: default: `inherit`_ |
     | `unit_price` | string (decimal) |  |  |
     | `unit` | string |  | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
     | `backend_id` | string |  |  |
@@ -333,6 +342,7 @@ Creates a new billing plan for an offering.
     | `article_code` | string |  |
     | `max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean | Forbids creation of new resources. |
+    | `billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `is_active` | boolean |  |
     | `unit_price` | string (decimal) |  |
     | `unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -350,7 +360,10 @@ Creates a new billing plan for an offering.
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | any |  |
+    | `components.is_prepaid` | boolean |  |
+    | `components.limit_period` | any |  |
     | `components.amount` | integer |  |
     | `components.price` | string (decimal) |  |
     | `components.future_price` | string (decimal) |  |
@@ -794,6 +807,7 @@ Updates an existing plan. Note: A plan cannot be updated if it is already used b
     | `article_code` | string |  |  |
     | `max_amount` | integer |  | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean |  | Forbids creation of new resources. |
+    | `billing_mode` | any |  | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type.<br>_Constraints: default: `inherit`_ |
     | `unit_price` | string (decimal) |  |  |
     | `unit` | string |  | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
     | `backend_id` | string |  |  |
@@ -813,6 +827,7 @@ Updates an existing plan. Note: A plan cannot be updated if it is already used b
     | `article_code` | string |  |
     | `max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean | Forbids creation of new resources. |
+    | `billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `is_active` | boolean |  |
     | `unit_price` | string (decimal) |  |
     | `unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -830,7 +845,10 @@ Updates an existing plan. Note: A plan cannot be updated if it is already used b
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | any |  |
+    | `components.is_prepaid` | boolean |  |
+    | `components.limit_period` | any |  |
     | `components.amount` | integer |  |
     | `components.price` | string (decimal) |  |
     | `components.future_price` | string (decimal) |  |
@@ -921,6 +939,7 @@ Partially updates an existing plan. Note: A plan cannot be updated if it is alre
     | `article_code` | string |  |  |
     | `max_amount` | integer |  | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean |  | Forbids creation of new resources. |
+    | `billing_mode` | any |  | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type.<br>_Constraints: default: `inherit`_ |
     | `unit_price` | string (decimal) |  |  |
     | `unit` | string |  | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
     | `backend_id` | string |  |  |
@@ -939,6 +958,7 @@ Partially updates an existing plan. Note: A plan cannot be updated if it is alre
     | `article_code` | string |  |
     | `max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `archived` | boolean | Forbids creation of new resources. |
+    | `billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `is_active` | boolean |  |
     | `unit_price` | string (decimal) |  |
     | `unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -956,7 +976,10 @@ Partially updates an existing plan. Note: A plan cannot be updated if it is alre
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | any |  |
+    | `components.is_prepaid` | boolean |  |
+    | `components.limit_period` | any |  |
     | `components.amount` | integer |  |
     | `components.price` | string (decimal) |  |
     | `components.future_price` | string (decimal) |  |

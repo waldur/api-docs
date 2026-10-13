@@ -16,11 +16,14 @@
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/delete_user/` | [Revoke a role from a user](#revoke-a-role-from-a-user) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/update_user/` | [Update a user's role expiration](#update-a-users-role-expiration) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/awarded_resources/` | [Awarded resources](#awarded-resources) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/awarded_resources/{obj_uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/checklist/` | [Get checklist with questions and existing answers](#get-checklist-with-questions-and-existing-answers) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/checklist_review/` | [Checklist review](#checklist-review) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/checklist-template/` | [Get checklist template for creating new objects](#get-checklist-template-for-creating-new-objects) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/completion_review_status/` | [Get checklist completion status with review triggers (reviewers only)](#get-checklist-completion-status-with-review-triggers-reviewers-only) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/dashboard-stats/` | [Get submitter dashboard stats](#get-submitter-dashboard-stats) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/` | [List resources for a proposal](#list-resources-for-a-proposal) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/step-checklist-responses/` | [Step checklist responses](#step-checklist-responses) |
@@ -28,16 +31,21 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-proposals/{uuid}/workflow_states/` | [List all workflow step instances for this proposal](#list-all-workflow-step-instances-for-this-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/advance_workflow_step/` | [Manually advance a workflow that is awaiting call-manager confirmation](#manually-advance-a-workflow-that-is-awaiting-call-manager-confirmation) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/attach_document/` | [Attach document to proposal](#attach-document-to-proposal) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/awarded_resources/` | [Awarded resources](#awarded-resources) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/complete_workflow_step/` | [Complete the current workflow step with an outcome](#complete-the-current-workflow-step-with-an-outcome) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/detach_documents/` | [Detach documents from proposal](#detach-documents-from-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/reject_workflow_step/` | [Reject the proposal at the current workflow step](#reject-the-proposal-at-the-current-workflow-step) |
+| <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/reopen_decision/` | [Reopen decision](#reopen-decision) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/purchase_order/` | [Upload or replace the purchase order of a requested resource](#upload-or-replace-the-purchase-order-of-a-requested-resource) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/resources/` | [Create resource for a proposal](#create-resource-for-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit/` | [Submit a proposal](#submit-a-proposal) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit_answers/` | [Submit checklist answers](#submit-checklist-answers) |
 | <span class="http-badge http-post">POST</span> | `/api/proposal-proposals/{uuid}/submit-step-checklist-answers/` | [Submit answers to a workflow step's checklist](#submit-answers-to-a-workflow-steps-checklist) |
+| <span class="http-badge http-put">PUT</span> | `/api/proposal-proposals/{uuid}/awarded_resources/{obj_uuid}/` | [Update](#update) |
 | <span class="http-badge http-put">PUT</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Update](#update) |
+| <span class="http-badge http-patch">PATCH</span> | `/api/proposal-proposals/{uuid}/awarded_resources/{obj_uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Partial Update](#partial-update) |
+| <span class="http-badge http-delete">DELETE</span> | `/api/proposal-proposals/{uuid}/awarded_resources/{obj_uuid}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/purchase_order/` | [Remove the purchase order of a requested resource](#remove-the-purchase-order-of-a-requested-resource) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/proposal-proposals/{uuid}/resources/{obj_uuid}/` | [Delete](#delete) |
 
@@ -63,7 +71,8 @@
     from waldur_api_client.client import AuthenticatedClient
     from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
     from waldur_api_client.models.proposal_states import ProposalStates # (2)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_list # (3)
+    from waldur_api_client.models.responsible_role_enum import ResponsibleRoleEnum # (3)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -77,7 +86,8 @@
     
     1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
     2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
-    3.  **API Source:** [`proposal_proposals_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_list.py)
+    3.  **Model Source:** [`ResponsibleRoleEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/responsible_role_enum.py)
+    4.  **API Source:** [`proposal_proposals_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_list.py)
 
 === "TypeScript"
 
@@ -99,6 +109,7 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `as_role` | string | Only proposals the current user holds this role on<br><br><br>_Enum: `call_manager`, `offering_manager`, `reviewer`, `panel_member`, `applicant`_ |
     | `call_uuid` | string (uuid) |  |
     | `created_by_uuid` | string (uuid) |  |
     | `my_proposals` | boolean |  |
@@ -128,8 +139,6 @@
     | `description` | string |  |
     | `project_name` | string |  |
     | `project_summary` | string |  |
-    | `project_is_confidential` | boolean |  |
-    | `project_has_civilian_purpose` | boolean |  |
     | `supporting_documentation` | array of objects |  |
     | `supporting_documentation.uuid` | string (uuid) |  |
     | `supporting_documentation.file` | string (uri) | Upload supporting documentation in PDF format. |
@@ -168,7 +177,6 @@
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
     | `applicant_active_isds` | array of strings |  |
-    | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
     | `call_uuid` | string (uuid) |  |
@@ -185,6 +193,7 @@
     | `compliance_status` | any |  |
     | `can_submit` | any |  |
     | `awaiting_manual_advance` | boolean |  |
+    | `decision_held` | boolean |  |
     | `workflow_step` | any | Current active workflow step for this proposal. |
 
 ---
@@ -260,8 +269,6 @@
     | `description` | string |  |
     | `project_name` | string |  |
     | `project_summary` | string |  |
-    | `project_is_confidential` | boolean |  |
-    | `project_has_civilian_purpose` | boolean |  |
     | `supporting_documentation` | array of objects |  |
     | `supporting_documentation.uuid` | string (uuid) |  |
     | `supporting_documentation.file` | string (uri) | Upload supporting documentation in PDF format. |
@@ -300,7 +307,6 @@
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
     | `applicant_active_isds` | array of strings |  |
-    | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
     | `call_uuid` | string (uuid) |  |
@@ -317,6 +323,7 @@
     | `compliance_status` | any |  |
     | `can_submit` | any |  |
     | `awaiting_manual_advance` | boolean |  |
+    | `decision_held` | boolean |  |
     | `workflow_step` | any | Current active workflow step for this proposal. |
 
 ---
@@ -384,17 +391,14 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `project_summary` | string |  |  |
-    | `project_is_confidential` | boolean |  |  |
-    | `project_has_civilian_purpose` | boolean |  |  |
-    | `duration_in_days` | integer |  | Duration in days after provisioning of resources. |
-    | `round_uuid` | string (uuid) | ✓ | <br>_Constraints: write-only_ |
-    | `oecd_fos_2007_code` | any |  |  |
-    | `science_sub_domain` | string (uuid) |  |  |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string | ✓ |
+    | `description` | string |  |
+    | `project_summary` | string |  |
+    | `round_uuid` | string (uuid) | ✓ |
+    | `oecd_fos_2007_code` | any |  |
+    | `science_sub_domain` | string (uuid) |  |
 
 
 === "Responses"
@@ -410,8 +414,6 @@
     | `description` | string |  |
     | `project_name` | string |  |
     | `project_summary` | string |  |
-    | `project_is_confidential` | boolean |  |
-    | `project_has_civilian_purpose` | boolean |  |
     | `supporting_documentation` | array of objects |  |
     | `supporting_documentation.uuid` | string (uuid) |  |
     | `supporting_documentation.file` | string (uri) | Upload supporting documentation in PDF format. |
@@ -450,7 +452,6 @@
     | `applicant_civil_number` | string |  |
     | `applicant_birth_date` | string (date) |  |
     | `applicant_active_isds` | array of strings |  |
-    | `duration_in_days` | integer | Duration in days after provisioning of resources. |
     | `project` | string (uri) |  |
     | `round` | any |  |
     | `call_uuid` | string (uuid) |  |
@@ -467,6 +468,7 @@
     | `compliance_status` | any |  |
     | `can_submit` | any |  |
     | `awaiting_manual_advance` | boolean |  |
+    | `decision_held` | boolean |  |
     | `workflow_step` | any | Current active workflow step for this proposal. |
 
 ---
@@ -544,15 +546,12 @@ Update project details of a proposal.
 
 === "Request Body (required)"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `project_summary` | string |  |  |
-    | `project_is_confidential` | boolean |  |  |
-    | `project_has_civilian_purpose` | boolean |  |  |
-    | `duration_in_days` | integer |  | Duration in days after provisioning of resources. |
-    | `oecd_fos_2007_code` | any |  |  |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string | ✓ |
+    | `description` | string |  |
+    | `project_summary` | string |  |
+    | `science_sub_domain` | string (uuid) |  |
 
 
 === "Responses"
@@ -733,6 +732,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `user_image` | string (uri) |  |
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `source` | string |  |
 
 ---
 
@@ -1019,6 +1019,188 @@ Updates the expiration time for a user's existing role in the current scope. Thi
 
 ## Other Actions
 
+
+### Awarded resources
+
+List what the allocation decision awards the proposal. Staff, support, the call's managers and organisers, and the managers of the offerings involved see it at any time; the applicant team once the decision is released.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/awarded_resources/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_awarded_resources_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_awarded_resources_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_awarded_resources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_awarded_resources_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsAwardedResourcesList } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsAwardedResourcesList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_resource` | string (uuid) |  |
+    | `requested_offering` | any |  |
+    | `plan` | string (uuid) | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `plan_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `description` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `created_by` | string (uuid) |  |
+    | `created_by_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Retrieve
+
+Read, change or remove an item of the award. Changes are for call managers only, while the allocation decision is in progress.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-proposals/string-value/awarded_resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_awarded_resources_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_awarded_resources_retrieve.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_awarded_resources_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_awarded_resources_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsAwardedResourcesRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsAwardedResourcesRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_resource` | string (uuid) |  |
+    | `requested_offering` | any |  |
+    | `plan` | string (uuid) | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `plan_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `description` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `created_by` | string (uuid) |  |
+    | `created_by_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
 
 ### Get checklist with questions and existing answers
 
@@ -1579,6 +1761,69 @@ Get checklist completion status.
 
 ---
 
+### Get submitter dashboard stats
+
+Returns counts of the current user's own proposals grouped by state, covering both in-progress and decided proposals.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-proposals/dashboard-stats/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_dashboard_stats_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_dashboard_stats_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_dashboard_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_dashboard_stats_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsDashboardStatsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsDashboardStatsRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `total` | integer |
+    | `draft` | integer |
+    | `submitted` | integer |
+    | `in_review` | integer |
+    | `accepted` | integer |
+    | `rejected` | integer |
+    | `canceled` | integer |
+
+---
+
 ### List resources for a proposal
 
 List resources for a proposal.
@@ -1782,7 +2027,8 @@ List a workflow step's checklist answers grouped by reviewer, for the threaded t
     from waldur_api_client.client import AuthenticatedClient
     from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
     from waldur_api_client.models.proposal_states import ProposalStates # (2)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_step_checklist_responses_list # (3)
+    from waldur_api_client.models.responsible_role_enum import ResponsibleRoleEnum # (3)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_step_checklist_responses_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -1800,7 +2046,8 @@ List a workflow step's checklist answers grouped by reviewer, for the threaded t
     
     1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
     2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
-    3.  **API Source:** [`proposal_proposals_step_checklist_responses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_responses_list.py)
+    3.  **Model Source:** [`ResponsibleRoleEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/responsible_role_enum.py)
+    4.  **API Source:** [`proposal_proposals_step_checklist_responses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_responses_list.py)
 
 === "TypeScript"
 
@@ -1835,6 +2082,7 @@ List a workflow step's checklist answers grouped by reviewer, for the threaded t
 
     | Name | Type | Required | Description |
     |---|---|---|---|
+    | `as_role` | string |  | Only proposals the current user holds this role on<br><br><br>_Enum: `call_manager`, `offering_manager`, `reviewer`, `panel_member`, `applicant`_ |
     | `call_uuid` | string (uuid) |  |  |
     | `created_by_uuid` | string (uuid) |  |  |
     | `my_proposals` | boolean |  |  |
@@ -2015,7 +2263,8 @@ List all workflow step instances for this proposal.
     from waldur_api_client.client import AuthenticatedClient
     from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
     from waldur_api_client.models.proposal_states import ProposalStates # (2)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_workflow_states_list # (3)
+    from waldur_api_client.models.responsible_role_enum import ResponsibleRoleEnum # (3)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_workflow_states_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2032,7 +2281,8 @@ List all workflow step instances for this proposal.
     
     1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
     2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
-    3.  **API Source:** [`proposal_proposals_workflow_states_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_workflow_states_list.py)
+    3.  **Model Source:** [`ResponsibleRoleEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/responsible_role_enum.py)
+    4.  **API Source:** [`proposal_proposals_workflow_states_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_workflow_states_list.py)
 
 === "TypeScript"
 
@@ -2064,6 +2314,7 @@ List all workflow step instances for this proposal.
 
     | Name | Type | Description |
     |---|---|---|
+    | `as_role` | string | Only proposals the current user holds this role on<br><br><br>_Enum: `call_manager`, `offering_manager`, `reviewer`, `panel_member`, `applicant`_ |
     | `call_uuid` | string (uuid) |  |
     | `created_by_uuid` | string (uuid) |  |
     | `my_proposals` | boolean |  |
@@ -2255,6 +2506,106 @@ Attach document to proposal.
 
     **`200`** - No response body
     
+
+---
+
+### Awarded resources
+
+Add an item to the award. Call managers only, while the allocation decision is in progress.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/awarded_resources/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.awarded_resource_request import AwardedResourceRequest # (1)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_awarded_resources_set # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = AwardedResourceRequest()
+    response = proposal_proposals_awarded_resources_set.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`AwardedResourceRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/awarded_resource_request.py)
+    2.  **API Source:** [`proposal_proposals_awarded_resources_set`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_awarded_resources_set.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsAwardedResourcesSet } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsAwardedResourcesSet({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `requested_offering_uuid` | string (uuid) |  | An accepted offering of the proposal's call to award the item on. Required when adding an item.<br>_Constraints: write-only_ |
+    | `plan` | string (uuid) |  | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `attributes` | object (free-form) |  |  |
+    | `limits` | object (free-form) |  |  |
+    | `description` | string |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_resource` | string (uuid) |  |
+    | `requested_offering` | any |  |
+    | `plan` | string (uuid) | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `plan_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `description` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `created_by` | string (uuid) |  |
+    | `created_by_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 
@@ -2530,6 +2881,112 @@ Reject the proposal at the current workflow step.
     |---|---|
     | `detail` | string |
     | `proposal_state` | string |
+
+---
+
+### Reopen decision
+
+Reopen an allocation decision held for the round's publication: the decision step becomes active again with its outcome cleared, and the proposal counts as undecided until it is decided anew. Only before the round's results are published. Nothing is sent to the applicant. The reopen is logged on the proposal's event feed, which the applicant team reads, so the event carries neither the reason nor the outcome taken back.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/proposal-proposals/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reopen_decision/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      reason="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.reopen_decision_request import ReopenDecisionRequest # (1)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_reopen_decision # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ReopenDecisionRequest(
+        reason="string-value"
+    )
+    response = proposal_proposals_reopen_decision.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ReopenDecisionRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/reopen_decision_request.py)
+    2.  **API Source:** [`proposal_proposals_reopen_decision`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_reopen_decision.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsReopenDecision } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsReopenDecision({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "reason": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `reason` | string | ✓ | Why the held decision is taken back, e.g. the board changed the outcome when adopting the list. Never sent to the applicant and kept out of the proposal's event feed, which the applicant team reads; recorded in the server log. |
+    | `deadline` | string (date-time) |  | New deadline for the decision. Without one, a deadline that has passed is cleared and one still ahead is kept. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `step` | any |  |
+    | `step_name` | string |  |
+    | `step_description` | string |  |
+    | `responsible_role` | string |  |
+    | `status` | any |  |
+    | `outcome` | string | Step-specific outcome (e.g., eligible, feasible, approved). |
+    | `outcome_reason` | string | Explanation for the outcome (e.g., rejection reason). |
+    | `rejection_reason` | string |  |
+    | `internal_notes` | string |  |
+    | `started_at` | string (date-time) | When this step became active. |
+    | `completed_at` | string (date-time) |  |
+    | `completed_by` | string (uuid) |  |
+    | `deadline` | string (date-time) | Computed from started_at + step duration_in_days. |
+    | `applicant_visible` | boolean |  |
+    | `duration_in_days` | integer |  |
+    | `is_required` | boolean |  |
+    | `checklist_status` | any |  |
 
 ---
 
@@ -3010,6 +3467,109 @@ Submit answers to a workflow step's checklist.
 
 ### Update
 
+Read, change or remove an item of the award. Changes are for call managers only, while the allocation decision is in progress.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PUT \
+      https://api.example.com/api/proposal-proposals/string-value/awarded_resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.awarded_resource_request import AwardedResourceRequest # (1)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_awarded_resources_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = AwardedResourceRequest()
+    response = proposal_proposals_awarded_resources_update.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`AwardedResourceRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/awarded_resource_request.py)
+    2.  **API Source:** [`proposal_proposals_awarded_resources_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_awarded_resources_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsAwardedResourcesUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsAwardedResourcesUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `requested_offering_uuid` | string (uuid) |  | An accepted offering of the proposal's call to award the item on. Required when adding an item.<br>_Constraints: write-only_ |
+    | `plan` | string (uuid) |  | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `attributes` | object (free-form) |  |  |
+    | `limits` | object (free-form) |  |  |
+    | `description` | string |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_resource` | string (uuid) |  |
+    | `requested_offering` | any |  |
+    | `plan` | string (uuid) | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `plan_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `description` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `created_by` | string (uuid) |  |
+    | `created_by_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Update
+
 
 === "HTTPie"
 
@@ -3113,6 +3673,109 @@ Submit answers to a workflow step's checklist.
 
 ### Partial Update
 
+Read, change or remove an item of the award. Changes are for call managers only, while the allocation decision is in progress.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      PATCH \
+      https://api.example.com/api/proposal-proposals/string-value/awarded_resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.patched_awarded_resource_request import PatchedAwardedResourceRequest # (1)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_awarded_resources_partial_update # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = PatchedAwardedResourceRequest()
+    response = proposal_proposals_awarded_resources_partial_update.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`PatchedAwardedResourceRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_awarded_resource_request.py)
+    2.  **API Source:** [`proposal_proposals_awarded_resources_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_awarded_resources_partial_update.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsAwardedResourcesPartialUpdate } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsAwardedResourcesPartialUpdate({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `requested_offering_uuid` | string (uuid) |  | An accepted offering of the proposal's call to award the item on. Required when adding an item.<br>_Constraints: write-only_ |
+    | `plan` | string (uuid) |  | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `attributes` | object (free-form) |  |  |
+    | `limits` | object (free-form) |  |  |
+    | `description` | string |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_resource` | string (uuid) |  |
+    | `requested_offering` | any |  |
+    | `plan` | string (uuid) | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `plan_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `description` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `created_by` | string (uuid) |  |
+    | `created_by_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
+
+---
+
+### Partial Update
+
 
 === "HTTPie"
 
@@ -3211,6 +3874,93 @@ Submit answers to a workflow step's checklist.
     | `description` | string |  |
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
+
+---
+
+### Delete
+
+Read, change or remove an item of the award. Changes are for call managers only, while the allocation decision is in progress.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      DELETE \
+      https://api.example.com/api/proposal-proposals/string-value/awarded_resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_awarded_resources_destroy # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_proposals_awarded_resources_destroy.sync(
+        obj_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        uuid="string-value",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_proposals_awarded_resources_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_awarded_resources_destroy.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProposalsAwardedResourcesDestroy } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProposalsAwardedResourcesDestroy({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "obj_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "uuid": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `obj_uuid` | string | ✓ |
+    | `uuid` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string |  |
+    | `requested_resource` | string (uuid) |  |
+    | `requested_offering` | any |  |
+    | `plan` | string (uuid) | Plan of the awarded offering. Read back as the plan the item is provisioned on: the call offering's plan unless another was set. Null (or leaving it out when adding or moving) follows the call offering's plan. |
+    | `plan_name` | string |  |
+    | `attributes` | object (free-form) |  |
+    | `limits` | object (free-form) |  |
+    | `description` | string |  |
+    | `resource` | string (uuid) |  |
+    | `resource_name` | string |  |
+    | `created_by` | string (uuid) |  |
+    | `created_by_name` | string |  |
+    | `created` | string (date-time) |  |
+    | `modified` | string (date-time) |  |
 
 ---
 

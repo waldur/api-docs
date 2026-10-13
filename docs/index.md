@@ -45,7 +45,6 @@ This section provides a detailed reference for all available API endpoints.
 ## Cloud & HPC Providers
 
 - [AWS](./cloud-and-hpc-providers/aws/images.md)
-- [Azure](./cloud-and-hpc-providers/azure/images.md)
 - [DigitalOcean](./cloud-and-hpc-providers/digitalocean/droplets.md)
 - [OpenPortal](./cloud-and-hpc-providers/openportal/openportal.md)
 - [OpenStack](./cloud-and-hpc-providers/openstack/openstack.md)

@@ -7,7 +7,6 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/assignment-items/` | [List Assignment Items](#list-assignment-items) |
 | <span class="http-badge http-get">GET</span> | `/api/assignment-items/{uuid}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/assignment-items/` | [Create](#create) |
 | <span class="http-badge http-put">PUT</span> | `/api/assignment-items/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/assignment-items/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/assignment-items/{uuid}/` | [Delete](#delete) |
@@ -181,95 +180,6 @@
 === "Responses"
 
     **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `batch` | string (uri) |  |
-    | `proposal` | string (uri) |  |
-    | `proposal_uuid` | string (uuid) |  |
-    | `proposal_name` | string |  |
-    | `proposal_slug` | string |  |
-    | `status` | any |  |
-    | `status_display` | string |  |
-    | `affinity_score` | number (double) | Affinity score used for assignment (0-1). |
-    | `has_coi` | boolean | Whether COI was detected during pre-check. |
-    | `coi_count` | integer | Count of COI records blocking this assignment. |
-    | `responded_at` | string (date-time) |  |
-    | `decline_reason` | string | Reason provided by reviewer for declining. |
-    | `review` | string (uri) | The Review record created when this assignment was accepted. |
-    | `review_uuid` | string (uuid) |  |
-    | `reassign_count` | integer | Number of times this proposal has been reassigned. |
-    | `override_reason` | string | Reason for manager override of COI block. |
-    | `overridden_by_name` | string |  |
-    | `overridden_at` | string (date-time) |  |
-    | `created` | string (date-time) |  |
-
----
-
-### Create
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/assignment-items/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.assignment_item_request import AssignmentItemRequest # (1)
-    from waldur_api_client.api.assignment_items import assignment_items_create # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = AssignmentItemRequest()
-    response = assignment_items_create.sync(
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`AssignmentItemRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/assignment_item_request.py)
-    2.  **API Source:** [`assignment_items_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/assignment_items/assignment_items_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { assignmentItemsCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await assignmentItemsCreate({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `decline_reason` | string |  | Reason provided by reviewer for declining. |
-
-
-=== "Responses"
-
-    **`201`** - 
     
     | Field | Type | Description |
     |---|---|---|

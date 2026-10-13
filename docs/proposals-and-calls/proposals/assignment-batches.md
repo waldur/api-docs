@@ -7,7 +7,6 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/assignment-batches/` | [List Assignment Batches](#list-assignment-batches) |
 | <span class="http-badge http-get">GET</span> | `/api/assignment-batches/{uuid}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/assignment-batches/` | [Create](#create) |
 | <span class="http-badge http-put">PUT</span> | `/api/assignment-batches/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/assignment-batches/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/assignment-batches/{uuid}/` | [Delete](#delete) |
@@ -186,122 +185,6 @@
 === "Responses"
 
     **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `call` | string (uri) |  |
-    | `call_uuid` | string (uuid) |  |
-    | `call_name` | string |  |
-    | `reviewer_pool_entry` | string (uri) |  |
-    | `reviewer_pool_entry_uuid` | string (uuid) |  |
-    | `reviewer_name` | string | Get reviewer name from pool entry. |
-    | `reviewer_email` | string | Get reviewer email from pool entry. |
-    | `reviewer_uuid` | string | Get reviewer profile UUID if available. |
-    | `status` | any |  |
-    | `status_display` | string |  |
-    | `sent_at` | string (date-time) | When the invitation was sent to the reviewer. |
-    | `expires_at` | string (date-time) | When the invitation expires. |
-    | `responded_at` | string (date-time) | When the reviewer completed their response. |
-    | `source` | any |  |
-    | `source_display` | string |  |
-    | `created_by` | string (uri) | User who created/approved this batch. |
-    | `created_by_name` | string |  |
-    | `manager_notes` | string | Optional notes from call manager to reviewer. |
-    | `items` | array of objects |  |
-    | `items.url` | string (uri) |  |
-    | `items.uuid` | string (uuid) |  |
-    | `items.batch` | string (uri) |  |
-    | `items.proposal` | string (uri) |  |
-    | `items.proposal_uuid` | string (uuid) |  |
-    | `items.proposal_name` | string |  |
-    | `items.proposal_slug` | string |  |
-    | `items.status` | any |  |
-    | `items.status_display` | string |  |
-    | `items.affinity_score` | number (double) | Affinity score used for assignment (0-1). |
-    | `items.has_coi` | boolean | Whether COI was detected during pre-check. |
-    | `items.coi_count` | integer | Count of COI records blocking this assignment. |
-    | `items.responded_at` | string (date-time) |  |
-    | `items.decline_reason` | string | Reason provided by reviewer for declining. |
-    | `items.review` | string (uri) | The Review record created when this assignment was accepted. |
-    | `items.review_uuid` | string (uuid) |  |
-    | `items.reassign_count` | integer | Number of times this proposal has been reassigned. |
-    | `items.override_reason` | string | Reason for manager override of COI block. |
-    | `items.overridden_by_name` | string |  |
-    | `items.overridden_at` | string (date-time) |  |
-    | `items.created` | string (date-time) |  |
-    | `items_count` | integer | Total count of items in batch. |
-    | `items_pending_count` | integer | Count of pending items. |
-    | `items_accepted_count` | integer | Count of accepted items. |
-    | `items_declined_count` | integer | Count of declined items. |
-    | `is_expired` | boolean |  |
-    | `created` | string (date-time) |  |
-
----
-
-### Create
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/assignment-batches/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.assignment_batch_request import AssignmentBatchRequest # (1)
-    from waldur_api_client.api.assignment_batches import assignment_batches_create # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = AssignmentBatchRequest()
-    response = assignment_batches_create.sync(
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`AssignmentBatchRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/assignment_batch_request.py)
-    2.  **API Source:** [`assignment_batches_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/assignment_batches/assignment_batches_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { assignmentBatchesCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await assignmentBatchesCreate({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `manager_notes` | string |  | Optional notes from call manager to reviewer. |
-
-
-=== "Responses"
-
-    **`201`** - 
     
     | Field | Type | Description |
     |---|---|---|

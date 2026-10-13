@@ -83,7 +83,7 @@ Returns a paginated list of all plan components. A plan component defines the pr
     | `plan_name` | string |  |
     | `plan_unit` | any |  |
     | `component_name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `measured_unit` | string | Unit of measurement, for example, GB. |
+    | `measured_unit` | string |  |
     | `billing_type` | any |  |
     | `amount` | integer |  |
     | `price` | string (decimal) |  |
@@ -165,7 +165,7 @@ Returns the details of a specific plan component, including its pricing, quotas,
     | `plan_name` | string |  |
     | `plan_unit` | any |  |
     | `component_name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `measured_unit` | string | Unit of measurement, for example, GB. |
+    | `measured_unit` | string |  |
     | `billing_type` | any |  |
     | `amount` | integer |  |
     | `price` | string (decimal) |  |

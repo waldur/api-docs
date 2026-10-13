@@ -495,6 +495,7 @@ Create customer from successful verification.
     | `default_affiliations.created` | string (date-time) |  |
     | `default_affiliations.modified` | string (date-time) |  |
     | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `is_service_provider_manager_only` | boolean | True when the requesting user's only link to this organization is a role on its service provider. Such a row carries only identity fields. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |

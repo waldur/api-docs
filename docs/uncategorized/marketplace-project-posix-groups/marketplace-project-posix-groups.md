@@ -87,5 +87,14 @@ Returns every POSIX group GID a project has been assigned, across all offerings:
     | `scope_type` | string |
     | `scope_name` | string |
     | `scope_uuid` | string |
+    | `group_uuid` | string |
+    | `group_name` | string |
+    | `service_provider_uuid` | string |
+    | `in_use` | boolean |
+    | `offerings` | array of objects |
+    | `offerings.uuid` | string |
+    | `offerings.name` | string |
+    | `members` | array of strings |
+    | `member_count` | integer |
 
 ---

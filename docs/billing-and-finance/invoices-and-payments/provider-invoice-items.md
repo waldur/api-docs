@@ -111,7 +111,7 @@
     | `details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
     | `details.resource_limit_periods.start` | string | Start date of the resource limit period |
     | `details.resource_limit_periods.end` | string | End date of the resource limit period |
-    | `details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
+    | `details.resource_limit_periods.quantity` | number (double) | Quantity of resources consumed during this period |
     | `details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
     | `details.resource_limit_periods.total` | string | Total amount for this period |
     | `resource` | string (uri) |  |
@@ -219,7 +219,7 @@
     | `details.resource_limit_periods` | array of objects | List of resource limit periods for this invoice item |
     | `details.resource_limit_periods.start` | string | Start date of the resource limit period |
     | `details.resource_limit_periods.end` | string | End date of the resource limit period |
-    | `details.resource_limit_periods.quantity` | integer | Quantity of resources consumed during this period |
+    | `details.resource_limit_periods.quantity` | number (double) | Quantity of resources consumed during this period |
     | `details.resource_limit_periods.billing_periods` | integer | Number of billing periods |
     | `details.resource_limit_periods.total` | string | Total amount for this period |
     | `resource` | string (uri) |  |

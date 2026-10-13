@@ -488,8 +488,29 @@ Deletes a course account, which triggers a 'close' operation in the backend.
 
 === "Responses"
 
-    **`204`** - No response body
+    **`202`** - 
     
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+    | `project` | string (uuid) |
+    | `project_uuid` | string (uuid) |
+    | `project_name` | string |
+    | `project_slug` | string |
+    | `project_start_date` | string (date) |
+    | `project_end_date` | string (date) |
+    | `user_uuid` | string (uuid) |
+    | `username` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `state` | any |
+    | `email` | string (email) |
+    | `description` | string |
+    | `error_message` | string |
+    | `error_traceback` | string |
 
 ---
 

@@ -105,6 +105,7 @@
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
     | `calendar_token` | string |  |
     | `calendar_refresh_token` | string |  |
     | `google_auth_url` | string |  |
@@ -208,6 +209,7 @@
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
     | `calendar_token` | string |  |
     | `calendar_refresh_token` | string |  |
     | `google_auth_url` | string |  |

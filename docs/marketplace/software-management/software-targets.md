@@ -68,8 +68,8 @@ Returns a paginated list of software targets, which represent specific builds of
     | Name | Type | Description |
     |---|---|---|
     | `catalog_uuid` | string (uuid) |  |
-    | `cpu_family` | string |  |
-    | `cpu_microarchitecture` | string |  |
+    | `cpu_family` | array |  |
+    | `cpu_microarchitecture` | array |  |
     | `gpu_arch` | string | Filter targets by GPU architecture (e.g., nvidia/cc90) |
     | `has_gpu` | boolean | Filter targets that have GPU architectures |
     | `o` | array | Ordering<br><br> |

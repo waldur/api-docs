@@ -34,7 +34,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_project_estimated_cost_policies import marketplace_project_estimated_cost_policies_list # (1)
+    from waldur_api_client.models.project_estimated_cost_policy_field_enum import ProjectEstimatedCostPolicyFieldEnum # (1)
+    from waldur_api_client.api.marketplace_project_estimated_cost_policies import marketplace_project_estimated_cost_policies_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -46,7 +47,8 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_project_estimated_cost_policies_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_project_estimated_cost_policies/marketplace_project_estimated_cost_policies_list.py)
+    1.  **Model Source:** [`ProjectEstimatedCostPolicyFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_estimated_cost_policy_field_enum.py)
+    2.  **API Source:** [`marketplace_project_estimated_cost_policies_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_project_estimated_cost_policies/marketplace_project_estimated_cost_policies_list.py)
 
 === "TypeScript"
 
@@ -70,6 +72,7 @@
     |---|---|---|
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
+    | `field` | array |  |
     | `has_resource` | boolean |  |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -106,6 +109,9 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
+    | `current_cost` | string (decimal) | The cost this policy compares against limit_cost right now: the period's invoice total, less the credit already applied and the credit still to be drawn. Do not re-derive it — only the server can simulate the pending draw, and a figure computed from the invoice alone will not match what the policy evaluates. |
+    | `eta_days` | integer | Days until the policy fires, or null when no projection exists. 0 means the threshold is already crossed and the policy is triggered — measured, not projected. Null must be rendered as no date, never as 'now': it is the common case, and it is also what an unprojectable or more-than-a-year-away policy reports. Nothing is projected beyond 365 days, because the rate comes from the current month's spend. Note that a cost policy does not fire on cost alone — it also waits for the credit balance to fall to limit_cost — so a policy far over its cap can still report a future date or null. |
+    | `eta_date` | string (date) | eta_days as a calendar date, so clients do not each re-derive it. Null whenever eta_days is null; today when eta_days is 0. |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
     | `resource` | string (uuid) |  |
@@ -131,7 +137,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_project_estimated_cost_policies import marketplace_project_estimated_cost_policies_retrieve # (1)
+    from waldur_api_client.models.project_estimated_cost_policy_field_enum import ProjectEstimatedCostPolicyFieldEnum # (1)
+    from waldur_api_client.api.marketplace_project_estimated_cost_policies import marketplace_project_estimated_cost_policies_retrieve # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -145,7 +152,8 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_project_estimated_cost_policies_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_project_estimated_cost_policies/marketplace_project_estimated_cost_policies_retrieve.py)
+    1.  **Model Source:** [`ProjectEstimatedCostPolicyFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/project_estimated_cost_policy_field_enum.py)
+    2.  **API Source:** [`marketplace_project_estimated_cost_policies_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_project_estimated_cost_policies/marketplace_project_estimated_cost_policies_retrieve.py)
 
 === "TypeScript"
 
@@ -173,6 +181,13 @@
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type |
+    |---|---|
+    | `field` | array |
+
+
 === "Responses"
 
     **`200`** - 
@@ -195,6 +210,9 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
+    | `current_cost` | string (decimal) | The cost this policy compares against limit_cost right now: the period's invoice total, less the credit already applied and the credit still to be drawn. Do not re-derive it — only the server can simulate the pending draw, and a figure computed from the invoice alone will not match what the policy evaluates. |
+    | `eta_days` | integer | Days until the policy fires, or null when no projection exists. 0 means the threshold is already crossed and the policy is triggered — measured, not projected. Null must be rendered as no date, never as 'now': it is the common case, and it is also what an unprojectable or more-than-a-year-away policy reports. Nothing is projected beyond 365 days, because the rate comes from the current month's spend. Note that a cost policy does not fire on cost alone — it also waits for the credit balance to fall to limit_cost — so a policy far over its cap can still report a future date or null. |
+    | `eta_date` | string (date) | eta_days as a calendar date, so clients do not each re-derive it. Null whenever eta_days is null; today when eta_days is 0. |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
     | `resource` | string (uuid) |  |
@@ -303,6 +321,9 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
+    | `current_cost` | string (decimal) | The cost this policy compares against limit_cost right now: the period's invoice total, less the credit already applied and the credit still to be drawn. Do not re-derive it — only the server can simulate the pending draw, and a figure computed from the invoice alone will not match what the policy evaluates. |
+    | `eta_days` | integer | Days until the policy fires, or null when no projection exists. 0 means the threshold is already crossed and the policy is triggered — measured, not projected. Null must be rendered as no date, never as 'now': it is the common case, and it is also what an unprojectable or more-than-a-year-away policy reports. Nothing is projected beyond 365 days, because the rate comes from the current month's spend. Note that a cost policy does not fire on cost alone — it also waits for the credit balance to fall to limit_cost — so a policy far over its cap can still report a future date or null. |
+    | `eta_date` | string (date) | eta_days as a calendar date, so clients do not each re-derive it. Null whenever eta_days is null; today when eta_days is 0. |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
     | `resource` | string (uuid) |  |
@@ -422,6 +443,9 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
+    | `current_cost` | string (decimal) | The cost this policy compares against limit_cost right now: the period's invoice total, less the credit already applied and the credit still to be drawn. Do not re-derive it — only the server can simulate the pending draw, and a figure computed from the invoice alone will not match what the policy evaluates. |
+    | `eta_days` | integer | Days until the policy fires, or null when no projection exists. 0 means the threshold is already crossed and the policy is triggered — measured, not projected. Null must be rendered as no date, never as 'now': it is the common case, and it is also what an unprojectable or more-than-a-year-away policy reports. Nothing is projected beyond 365 days, because the rate comes from the current month's spend. Note that a cost policy does not fire on cost alone — it also waits for the credit balance to fall to limit_cost — so a policy far over its cap can still report a future date or null. |
+    | `eta_date` | string (date) | eta_days as a calendar date, so clients do not each re-derive it. Null whenever eta_days is null; today when eta_days is 0. |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
     | `resource` | string (uuid) |  |
@@ -529,6 +553,9 @@
     | `limit_cost` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
+    | `current_cost` | string (decimal) | The cost this policy compares against limit_cost right now: the period's invoice total, less the credit already applied and the credit still to be drawn. Do not re-derive it — only the server can simulate the pending draw, and a figure computed from the invoice alone will not match what the policy evaluates. |
+    | `eta_days` | integer | Days until the policy fires, or null when no projection exists. 0 means the threshold is already crossed and the policy is triggered — measured, not projected. Null must be rendered as no date, never as 'now': it is the common case, and it is also what an unprojectable or more-than-a-year-away policy reports. Nothing is projected beyond 365 days, because the rate comes from the current month's spend. Note that a cost policy does not fire on cost alone — it also waits for the credit balance to fall to limit_cost — so a policy far over its cap can still report a future date or null. |
+    | `eta_date` | string (date) | eta_days as a calendar date, so clients do not each re-derive it. Null whenever eta_days is null; today when eta_days is 0. |
     | `project_credit` | string |  |
     | `customer_credit` | string |  |
     | `resource` | string (uuid) |  |

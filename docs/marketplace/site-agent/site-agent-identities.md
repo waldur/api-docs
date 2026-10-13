@@ -110,6 +110,7 @@
     | `services.statistics` | object (free-form) |  |
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
+    | `compatibility` | any |  |
 
 ---
 
@@ -200,6 +201,7 @@
     | `services.statistics` | object (free-form) |  |
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
+    | `compatibility` | any |  |
 
 ---
 
@@ -308,6 +310,7 @@
     | `services.statistics` | object (free-form) |  |
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
+    | `compatibility` | any |  |
 
 ---
 
@@ -427,6 +430,7 @@
     | `services.statistics` | object (free-form) |  |
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
+    | `compatibility` | any |  |
 
 ---
 

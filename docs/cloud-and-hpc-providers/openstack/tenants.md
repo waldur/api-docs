@@ -161,6 +161,7 @@ Get a list of OpenStack tenants.
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
     | `skip_creation_of_default_router` | boolean |  |
+    | `is_managed` | boolean | False for an OpenStack project that Waldur does not manage but that shares networks with managed tenants. Waldur only reads such a project: it holds no credentials for it and never provisions, pulls with tenant credentials, bills or deletes it. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -288,6 +289,7 @@ Retrieve details of a specific OpenStack tenant.
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
     | `skip_creation_of_default_router` | boolean |  |
+    | `is_managed` | boolean | False for an OpenStack project that Waldur does not manage but that shares networks with managed tenants. Waldur only reads such a project: it holds no credentials for it and never provisions, pulls with tenant credentials, bills or deletes it. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -588,6 +590,7 @@ Update an existing OpenStack tenant.
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
     | `skip_creation_of_default_router` | boolean |  |
+    | `is_managed` | boolean | False for an OpenStack project that Waldur does not manage but that shares networks with managed tenants. Waldur only reads such a project: it holds no credentials for it and never provisions, pulls with tenant credentials, bills or deletes it. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -735,6 +738,7 @@ Update specific fields of an OpenStack tenant.
     | `quotas.limit` | integer |  |
     | `default_volume_type_name` | string | Volume type name to use when creating volumes. |
     | `skip_creation_of_default_router` | boolean |  |
+    | `is_managed` | boolean | False for an OpenStack project that Waldur does not manage but that shares networks with managed tenants. Waldur only reads such a project: it holds no credentials for it and never provisions, pulls with tenant credentials, bills or deletes it. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -1207,6 +1211,7 @@ Create network for tenant
     | `tenant` | string (uri) | OpenStack tenant this network belongs to |
     | `tenant_name` | string |  |
     | `tenant_uuid` | string (uuid) |  |
+    | `tenant_is_managed` | boolean | False when the network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `is_external` | boolean | Defines whether this network is external (public) or internal (private) |
     | `type` | string | Network type, such as local, flat, vlan, vxlan, or gre |
     | `segmentation_id` | integer | VLAN ID for VLAN networks or tunnel ID for VXLAN/GRE networks |
@@ -1214,12 +1219,14 @@ Create network for tenant
     | `subnets.uuid` | string (uuid) |  |
     | `subnets.name` | string |  |
     | `subnets.description` | string |  |
-    | `subnets.cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `subnets.cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `subnets.gateway_ip` | any | IP address of the gateway for this subnet |
     | `subnets.allocation_pools` | array of objects |  |
     | `subnets.allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `subnets.allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `subnets.ip_version` | integer | IP protocol version (4 or 6) |
+    | `subnets.ipv6_ra_mode` | any |  |
+    | `subnets.ipv6_address_mode` | any |  |
     | `subnets.enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `subnets.port_security_enabled` | boolean |  |
     | `mtu` | integer | The maximum transmission unit (MTU) value to address fragmentation. |
@@ -1389,6 +1396,7 @@ Create a security group for the tenant.
     | `rules.remote_group_uuid` | string (uuid) |  |
     | `rules.id` | integer |  |
     | `rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |

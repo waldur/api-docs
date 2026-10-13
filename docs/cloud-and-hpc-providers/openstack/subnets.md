@@ -143,6 +143,7 @@ Get a list of subnets.
     | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
+    | `tenant_is_managed` | boolean | False when the subnet's network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `network` | string (uri) | Network to which this subnet belongs |
     | `network_name` | string |  |
     | `cidr` | string |  |
@@ -152,6 +153,8 @@ Get a list of subnets.
     | `allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `ip_version` | integer | IP protocol version (4 or 6) |
+    | `ipv6_ra_mode` | any | How the router advertises an IPv6 subnet. Set at creation only; null for an IPv4 subnet. |
+    | `ipv6_address_mode` | any | How instances on an IPv6 subnet get their address. Set at creation only; null for an IPv4 subnet. |
     | `enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `dns_nameservers` | array of anys |  |
     | `host_routes` | array of objects |  |
@@ -159,6 +162,9 @@ Get a list of subnets.
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `port_security_enabled` | boolean |  |
+    | `router` | string (uri) | Router to attach the subnet to. Optional: when omitted Waldur picks a router of the tenant itself. Cannot be changed here afterwards -- use the router's add/remove interface actions. |
+    | `router_name` | string |  |
+    | `router_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -275,6 +281,7 @@ Retrieve details of a specific subnet.
     | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
+    | `tenant_is_managed` | boolean | False when the subnet's network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `network` | string (uri) | Network to which this subnet belongs |
     | `network_name` | string |  |
     | `cidr` | string |  |
@@ -284,6 +291,8 @@ Retrieve details of a specific subnet.
     | `allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `ip_version` | integer | IP protocol version (4 or 6) |
+    | `ipv6_ra_mode` | any | How the router advertises an IPv6 subnet. Set at creation only; null for an IPv4 subnet. |
+    | `ipv6_address_mode` | any | How instances on an IPv6 subnet get their address. Set at creation only; null for an IPv4 subnet. |
     | `enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `dns_nameservers` | array of anys |  |
     | `host_routes` | array of objects |  |
@@ -291,6 +300,9 @@ Retrieve details of a specific subnet.
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `port_security_enabled` | boolean |  |
+    | `router` | string (uri) | Router to attach the subnet to. Optional: when omitted Waldur picks a router of the tenant itself. Cannot be changed here afterwards -- use the router's add/remove interface actions. |
+    | `router_name` | string |  |
+    | `router_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -535,10 +547,14 @@ Update an existing subnet.
     | `allocation_pools` | array of objects |  |  |
     | `allocation_pools.start` | any | ✓ | An IPv4 or IPv6 address. |
     | `allocation_pools.end` | any | ✓ | An IPv4 or IPv6 address. |
+    | `ipv6_ra_mode` | any |  | How the router advertises an IPv6 subnet. Set at creation only; null for an IPv4 subnet. |
+    | `ipv6_address_mode` | any |  | How instances on an IPv6 subnet get their address. Set at creation only; null for an IPv4 subnet. |
     | `dns_nameservers` | array of anys |  |  |
     | `host_routes` | array of objects |  |  |
     | `host_routes.destination` | string | ✓ |  |
     | `host_routes.nexthop` | any | ✓ | An IPv4 or IPv6 address. |
+    | `router` | string (uri) |  | Router to attach the subnet to. Optional: when omitted Waldur picks a router of the tenant itself. Cannot be changed here afterwards -- use the router's add/remove interface actions. |
+    | `skip_router_connection` | boolean |  | Create the subnet without attaching it to a router. Off by default, so an omitted field behaves exactly as before: Waldur attaches the subnet to a router of the tenant.<br>_Constraints: write-only, default: `False`_ |
 
 
 === "Responses"
@@ -574,6 +590,7 @@ Update an existing subnet.
     | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
+    | `tenant_is_managed` | boolean | False when the subnet's network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `network` | string (uri) | Network to which this subnet belongs |
     | `network_name` | string |  |
     | `cidr` | string |  |
@@ -583,6 +600,8 @@ Update an existing subnet.
     | `allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `ip_version` | integer | IP protocol version (4 or 6) |
+    | `ipv6_ra_mode` | any | How the router advertises an IPv6 subnet. Set at creation only; null for an IPv4 subnet. |
+    | `ipv6_address_mode` | any | How instances on an IPv6 subnet get their address. Set at creation only; null for an IPv4 subnet. |
     | `enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `dns_nameservers` | array of anys |  |
     | `host_routes` | array of objects |  |
@@ -590,6 +609,9 @@ Update an existing subnet.
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `port_security_enabled` | boolean |  |
+    | `router` | string (uri) | Router to attach the subnet to. Optional: when omitted Waldur picks a router of the tenant itself. Cannot be changed here afterwards -- use the router's add/remove interface actions. |
+    | `router_name` | string |  |
+    | `router_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -681,10 +703,14 @@ Update specific fields of a subnet.
     | `allocation_pools` | array of objects |  |  |
     | `allocation_pools.start` | any | ✓ | An IPv4 or IPv6 address. |
     | `allocation_pools.end` | any | ✓ | An IPv4 or IPv6 address. |
+    | `ipv6_ra_mode` | any |  | How the router advertises an IPv6 subnet. Set at creation only; null for an IPv4 subnet. |
+    | `ipv6_address_mode` | any |  | How instances on an IPv6 subnet get their address. Set at creation only; null for an IPv4 subnet. |
     | `dns_nameservers` | array of anys |  |  |
     | `host_routes` | array of objects |  |  |
     | `host_routes.destination` | string | ✓ |  |
     | `host_routes.nexthop` | any | ✓ | An IPv4 or IPv6 address. |
+    | `router` | string (uri) |  | Router to attach the subnet to. Optional: when omitted Waldur picks a router of the tenant itself. Cannot be changed here afterwards -- use the router's add/remove interface actions. |
+    | `skip_router_connection` | boolean |  | Create the subnet without attaching it to a router. Off by default, so an omitted field behaves exactly as before: Waldur attaches the subnet to a router of the tenant.<br>_Constraints: write-only, default: `False`_ |
 
 
 === "Responses"
@@ -720,6 +746,7 @@ Update specific fields of a subnet.
     | `access_url` | any |  |
     | `tenant` | string (uri) |  |
     | `tenant_name` | string |  |
+    | `tenant_is_managed` | boolean | False when the subnet's network belongs to an OpenStack project that Waldur does not manage and only reaches tenants through an RBAC share. |
     | `network` | string (uri) | Network to which this subnet belongs |
     | `network_name` | string |  |
     | `cidr` | string |  |
@@ -729,6 +756,8 @@ Update specific fields of a subnet.
     | `allocation_pools.start` | any | An IPv4 or IPv6 address. |
     | `allocation_pools.end` | any | An IPv4 or IPv6 address. |
     | `ip_version` | integer | IP protocol version (4 or 6) |
+    | `ipv6_ra_mode` | any | How the router advertises an IPv6 subnet. Set at creation only; null for an IPv4 subnet. |
+    | `ipv6_address_mode` | any | How instances on an IPv6 subnet get their address. Set at creation only; null for an IPv4 subnet. |
     | `enable_dhcp` | boolean | If True, DHCP service will be enabled on this subnet |
     | `dns_nameservers` | array of anys |  |
     | `host_routes` | array of objects |  |
@@ -736,6 +765,9 @@ Update specific fields of a subnet.
     | `host_routes.nexthop` | any | An IPv4 or IPv6 address. |
     | `is_connected` | boolean | Is subnet connected to the default tenant router. |
     | `port_security_enabled` | boolean |  |
+    | `router` | string (uri) | Router to attach the subnet to. Optional: when omitted Waldur picks a router of the tenant itself. Cannot be changed here afterwards -- use the router's add/remove interface actions. |
+    | `router_name` | string |  |
+    | `router_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
     | `marketplace_offering_type` | string |  |
@@ -822,7 +854,7 @@ Delete a subnet.
 
 ### Connect subnet to router
 
-Connect the subnet to the default tenant router.
+Connect the subnet to its router: the one chosen when the subnet was created or last attached to, and otherwise the tenant router Waldur picks.
 
 
 === "HTTPie"
@@ -892,7 +924,7 @@ Connect the subnet to the default tenant router.
 
 ### Disconnect subnet from router
 
-Disconnect the subnet from the default tenant router.
+Disconnect the subnet from its router. The router is remembered, so connecting again returns the subnet to it.
 
 
 === "HTTPie"

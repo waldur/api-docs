@@ -262,16 +262,16 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) | ✓ |
-    | `offerings` | array of string (uri)s |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption_logic` | string |  |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `value` | string (decimal) |  |  |
+    | `customer` | string (uri) | ✓ |  |
+    | `offerings` | array of string (uri)s |  | Offerings the credit may be drawn against. Leave empty to allow all offerings: an empty list means unrestricted, not none. Cost on any other offering is invoiced normally and is never compensated from this credit. |
+    | `end_date` | string (date) |  |  |
+    | `expected_consumption` | string (decimal) |  |  |
+    | `minimal_consumption_logic` | string |  | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |  |
+    | `apply_as_minimal_consumption` | boolean |  |  |
 
 
 === "Responses"
@@ -287,7 +287,7 @@
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
-    | `offerings` | array of string (uri)s |  |
+    | `offerings` | array of string (uri)s | Offerings the credit may be drawn against. Leave empty to allow all offerings: an empty list means unrestricted, not none. Cost on any other offering is invoiced normally and is never compensated from this credit. |
     | `end_date` | string (date) |  |
     | `expected_consumption` | string (decimal) |  |
     | `minimal_consumption` | number (double) |  |
@@ -371,16 +371,16 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) | ✓ |
-    | `offerings` | array of string (uri)s |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption_logic` | string |  |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `value` | string (decimal) |  |  |
+    | `customer` | string (uri) | ✓ |  |
+    | `offerings` | array of string (uri)s |  | Offerings the credit may be drawn against. Leave empty to allow all offerings: an empty list means unrestricted, not none. Cost on any other offering is invoiced normally and is never compensated from this credit. |
+    | `end_date` | string (date) |  |  |
+    | `expected_consumption` | string (decimal) |  |  |
+    | `minimal_consumption_logic` | string |  | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |  |
+    | `apply_as_minimal_consumption` | boolean |  |  |
 
 
 === "Responses"
@@ -396,7 +396,7 @@
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
-    | `offerings` | array of string (uri)s |  |
+    | `offerings` | array of string (uri)s | Offerings the credit may be drawn against. Leave empty to allow all offerings: an empty list means unrestricted, not none. Cost on any other offering is invoiced normally and is never compensated from this credit. |
     | `end_date` | string (date) |  |
     | `expected_consumption` | string (decimal) |  |
     | `minimal_consumption` | number (double) |  |
@@ -474,16 +474,16 @@
 
 === "Request Body"
 
-    | Field | Type | Required |
-    |---|---|---|
-    | `value` | string (decimal) |  |
-    | `customer` | string (uri) |  |
-    | `offerings` | array of string (uri)s |  |
-    | `end_date` | string (date) |  |
-    | `expected_consumption` | string (decimal) |  |
-    | `minimal_consumption_logic` | string |  |
-    | `grace_coefficient` | string (decimal) |  |
-    | `apply_as_minimal_consumption` | boolean |  |
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `value` | string (decimal) |  |  |
+    | `customer` | string (uri) |  |  |
+    | `offerings` | array of string (uri)s |  | Offerings the credit may be drawn against. Leave empty to allow all offerings: an empty list means unrestricted, not none. Cost on any other offering is invoiced normally and is never compensated from this credit. |
+    | `end_date` | string (date) |  |  |
+    | `expected_consumption` | string (decimal) |  |  |
+    | `minimal_consumption_logic` | string |  | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |  |
+    | `apply_as_minimal_consumption` | boolean |  |  |
 
 
 === "Responses"
@@ -499,7 +499,7 @@
     | `customer_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_slug` | string |  |
-    | `offerings` | array of string (uri)s |  |
+    | `offerings` | array of string (uri)s | Offerings the credit may be drawn against. Leave empty to allow all offerings: an empty list means unrestricted, not none. Cost on any other offering is invoiced normally and is never compensated from this credit. |
     | `end_date` | string (date) |  |
     | `expected_consumption` | string (decimal) |  |
     | `minimal_consumption` | number (double) |  |

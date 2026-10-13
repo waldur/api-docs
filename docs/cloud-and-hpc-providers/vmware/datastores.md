@@ -80,8 +80,8 @@
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `type` | string |  |
-    | `capacity` | integer | Capacity, in MB. |
-    | `free_space` | integer | Available space, in MB. |
+    | `capacity` | integer (int64) | Capacity, in MB. |
+    | `free_space` | integer (int64) | Available space, in MB. |
 
 ---
 
@@ -153,7 +153,7 @@
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `type` | string |  |
-    | `capacity` | integer | Capacity, in MB. |
-    | `free_space` | integer | Available space, in MB. |
+    | `capacity` | integer (int64) | Capacity, in MB. |
+    | `free_space` | integer (int64) | Available space, in MB. |
 
 ---

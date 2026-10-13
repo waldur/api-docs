@@ -34,6 +34,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/project-digest-config/` | [Get project digest configuration](#get-project-digest-configuration) |
+| <span class="http-badge http-get">GET</span> | `/api/customers/{uuid}/providers/` | [List service providers serving this customer](#list-service-providers-serving-this-customer) |
 | <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/contact/` | [Update customer contact details](#update-customer-contact-details) |
 | <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/project-digest-config/preview/` | [Preview digest for a project](#preview-digest-for-a-project) |
 | <span class="http-badge http-post">POST</span> | `/api/customers/{uuid}/project-digest-config/send-test/` | [Send a test digest email](#send-a-test-digest-email) |
@@ -44,7 +45,7 @@
 
 ### List customers
 
-Retrieve a list of customers. The list is filtered based on the user's permissions.
+Retrieve a list of customers. The list is filtered based on the user's permissions. A user whose only link to an organization is a role on its service provider sees it with a restricted field set: url, uuid, name, native_name, display_name, abbreviation, slug, image, country, country_name, is_service_provider, service_provider and service_provider_uuid. All other fields are omitted for that row.
 
 
 === "HTTPie"
@@ -175,6 +176,7 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `default_affiliations.created` | string (date-time) |  |
     | `default_affiliations.modified` | string (date-time) |  |
     | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `is_service_provider_manager_only` | boolean | True when the requesting user's only link to this organization is a role on its service provider. Such a row carries only identity fields. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -232,7 +234,7 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
 
 ### Retrieve customer details
 
-Fetch the details of a specific customer by its UUID.
+Fetch the details of a specific customer by its UUID. A user whose only link to the organization is a role on its service provider receives the restricted field set described on the list operation.
 
 
 === "HTTPie"
@@ -348,6 +350,7 @@ Fetch the details of a specific customer by its UUID.
     | `default_affiliations.created` | string (date-time) |  |
     | `default_affiliations.modified` | string (date-time) |  |
     | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `is_service_provider_manager_only` | boolean | True when the requesting user's only link to this organization is a role on its service provider. Such a row carries only identity fields. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -562,6 +565,7 @@ A new customer can only be created by users with staff privilege.
     | `default_affiliations.created` | string (date-time) |  |
     | `default_affiliations.modified` | string (date-time) |  |
     | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `is_service_provider_manager_only` | boolean | True when the requesting user's only link to this organization is a role on its service provider. Such a row carries only identity fields. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -866,6 +870,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `default_affiliations.created` | string (date-time) |  |
     | `default_affiliations.modified` | string (date-time) |  |
     | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `is_service_provider_manager_only` | boolean | True when the requesting user's only link to this organization is a role on its service provider. Such a row carries only identity fields. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -1180,6 +1185,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `default_affiliations.created` | string (date-time) |  |
     | `default_affiliations.modified` | string (date-time) |  |
     | `default_affiliations.projects_count` | integer | Number of active projects affiliated with this organization |
+    | `is_service_provider_manager_only` | boolean | True when the requesting user's only link to this organization is a role on its service provider. Such a row carries only identity fields. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |
@@ -1503,6 +1509,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `user_image` | string (uri) |  |
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `source` | string |  |
 
 ---
 
@@ -2260,7 +2267,14 @@ Provides a paginated list of all questions from the customer's compliance checkl
     | `max_value` | string (decimal) |  |
     | `total_projects` | integer | Get total projects count. |
     | `answered_projects_count` | integer | Get count of projects that answered this question. |
-    | `project_answers` | array of objects | Get all project answers for this question. |
+    | `project_answers` | array of objects |  |
+    | `project_answers.project_uuid` | string (uuid) |  |
+    | `project_answers.project_name` | string |  |
+    | `project_answers.answer_uuid` | string (uuid) |  |
+    | `project_answers.answer_data` | object (free-form) |  |
+    | `project_answers.answered_by` | string |  |
+    | `project_answers.answered_at` | string (date-time) | When the shown answer was last saved. |
+    | `project_answers.requires_review` | boolean |  |
     | `question_options` | array of objects | Get question options for select-type questions. |
 
 ---
@@ -2507,25 +2521,28 @@ Provides statistics about the resource usage (e.g., CPU, RAM, storage) for all p
     | Name | Type | Description |
     |---|---|---|
     | `for_current_month` | boolean | If true, returns usage data for the current month only. Otherwise, returns total usage. |
+    | `include_terminated` | boolean | If true, also counts terminated resources that reported usage in the current month. Their share is returned as usage_terminated and limit_usage_terminated; limit never includes them. Ignored unless the dashboard.usage_include_terminated feature is enabled. |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `components` | array of objects |
-    | `components.type` | string |
-    | `components.name` | string |
-    | `components.description` | string |
-    | `components.measured_unit` | string |
-    | `components.billing_type` | string |
-    | `components.usage` | integer |
-    | `components.limit_usage` | integer |
-    | `components.limit` | integer |
-    | `components.offering_name` | string |
-    | `components.offering_uuid` | string (uuid) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `components` | array of objects |  |
+    | `components.type` | string |  |
+    | `components.name` | string |  |
+    | `components.description` | string |  |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | string |  |
+    | `components.usage` | integer |  |
+    | `components.limit_usage` | integer |  |
+    | `components.usage_terminated` | integer | Part of usage that came from terminated resources. |
+    | `components.limit_usage_terminated` | integer | Part of limit_usage that came from terminated resources. |
+    | `components.limit` | integer |  |
+    | `components.offering_name` | string |  |
+    | `components.offering_uuid` | string (uuid) |  |
 
 ---
 
@@ -2814,6 +2831,137 @@ Retrieve the project digest email configuration for this organization.
     | `available_sections` | array of objects |  |
     | `available_sections.key` | string |  |
     | `available_sections.title` | string |  |
+
+---
+
+### List service providers serving this customer
+
+Returns service providers with at least one active resource provisioned for this customer.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/customers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/providers/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.service_provider_field_enum import ServiceProviderFieldEnum # (1)
+    from waldur_api_client.api.customers import customers_providers_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = customers_providers_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`ServiceProviderFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/service_provider_field_enum.py)
+    2.  **API Source:** [`customers_providers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customers/customers_providers_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customersProvidersList } from 'waldur-js-client';
+    
+    try {
+      const response = await customersProvidersList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `abbreviation` | string | Abbreviation |
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
+    | `agreement_number` | string |  |
+    | `archived` | boolean |  |
+    | `backend_id` | string |  |
+    | `contact_details` | string | Contact details |
+    | `current_user_has_project_create_permission` | boolean | Return a list of customers where current user has project create permission. |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
+    | `field` | array |  |
+    | `has_resources` | string | Filter by customers with resources. |
+    | `is_call_managing_organization` | boolean | Filter by customers that are call managing organizations. |
+    | `is_service_provider` | boolean | Filter by customers that are service providers. |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `native_name` | string | Native name |
+    | `o` | string | Which field to use when ordering the results. |
+    | `organization_group_name` | string | Organization group name |
+    | `organization_group_uuid` | array | Organization group UUID |
+    | `owned_by_current_user` | boolean | Return a list of customers where current user is owner. |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `query` | string | Filter by name, native name, abbreviation, domain, UUID, registration code or agreement number |
+    | `registration_code` | string |  |
+    | `service_provider_uuid` | string (uuid) | Filter by service provider UUID. |
+    | `slug` | string | Slug |
+    | `user_uuid` | string (uuid) | Filter by user UUID. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `description` | string |  |
+    | `enable_notifications` | boolean |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_image` | string (uri) |  |
+    | `customer_abbreviation` | string |  |
+    | `customer_slug` | string |  |
+    | `customer_native_name` | string |  |
+    | `customer_country` | string |  |
+    | `image` | string (uri) |  |
+    | `organization_groups` | array of objects |  |
+    | `organization_groups.uuid` | string (uuid) |  |
+    | `organization_groups.url` | string (uri) |  |
+    | `organization_groups.name` | string |  |
+    | `organization_groups.parent_uuid` | string (uuid) | UUID of the parent organization group |
+    | `organization_groups.parent_name` | string | Name of the parent organization group |
+    | `organization_groups.parent` | string (uri) |  |
+    | `organization_groups.customers_count` | integer | Number of customers in this organization group |
+    | `offering_count` | integer |  |
+    | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 ---
 

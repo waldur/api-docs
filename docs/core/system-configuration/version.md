@@ -63,5 +63,6 @@ Retrieves the current installed version of the application. Staff and support us
     |---|---|---|
     | `version` | string | Current installed version of the application |
     | `latest_version` | string | Latest available version from GitHub. Only included for staff or support users when update checks are enabled. |
+    | `changelog_summary` | object (free-form) | Compact changelog summary with version count, risk info, and security alerts. |
 
 ---

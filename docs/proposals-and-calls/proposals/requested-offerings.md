@@ -113,15 +113,16 @@
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -229,15 +230,16 @@
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |

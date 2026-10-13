@@ -74,8 +74,8 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `catalog_uuid` | string (uuid) | Filter packages from a specific software catalog |
     | `catalog_version` | string | Filter packages by catalog version (case-insensitive partial match) |
     | `category` | string | Filter packages by category (e.g., bio, hpc, chemistry) |
-    | `cpu_family` | string | Filter packages available for specific CPU family (e.g., x86_64, aarch64) |
-    | `cpu_microarchitecture` | string | Filter packages available for specific CPU microarchitecture (e.g., generic, zen2, haswell) |
+    | `cpu_family` | array | Filter packages available for any of the given CPU families (e.g., x86_64, aarch64) |
+    | `cpu_microarchitecture` | array | Filter packages available for any of the given CPU microarchitectures (e.g., generic, amd/zen3, intel/sapphirerapids) |
     | `description` | string | Filter packages by description (case-insensitive partial match) |
     | `extension_name` | string | Filter packages having extensions with a specific name |
     | `extension_type` | string | Filter packages having extensions of a specific type (e.g., 'python') |

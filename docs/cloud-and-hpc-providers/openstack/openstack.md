@@ -3166,6 +3166,7 @@ Create a new load balancer.
     | `name` | string | ✓ |  |
     | `tenant` | string (uri) | ✓ | OpenStack tenant this load balancer belongs to |
     | `vip_subnet` | string (uri) | ✓ |  |
+    | `vip_address` | any |  | Virtual IP address to request, IPv4 or IPv6. It must be of the same family as vip_subnet and lie inside it. Octavia allocates one from vip_subnet when omitted. |
 
 
 === "Responses"
@@ -3179,6 +3180,7 @@ Create a new load balancer.
     | `name` | string |  |
     | `tenant` | string (uri) | OpenStack tenant this load balancer belongs to |
     | `vip_subnet` | string (uri) |  |
+    | `vip_address` | any | Virtual IP address to request, IPv4 or IPv6. It must be of the same family as vip_subnet and lie inside it. Octavia allocates one from vip_subnet when omitted. |
 
 ---
 

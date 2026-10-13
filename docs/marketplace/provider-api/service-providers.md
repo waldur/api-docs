@@ -7,6 +7,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/course_accounts/` | [List course project accounts for a service provider](#list-course-project-accounts-for-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/customer_projects/` | [List customer projects of a service provider](#list-customer-projects-of-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/customers/` | [List customers of a service provider](#list-customers-of-a-service-provider) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{uuid}/glauth_tree/` | [Get the structured GLAuth tree of the provider's shared accounts](#get-the-structured-glauth-tree-of-the-providers-shared-accounts) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{uuid}/glauth_users_config/` | [Get the GLAuth configuration of the provider's shared accounts](#get-the-glauth-configuration-of-the-providers-shared-accounts) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/keys/` | [List SSH keys of a service provider](#list-ssh-keys-of-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/` | [List service providers](#list-service-providers) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{uuid}/list_users/` | [List users and their roles in a scope](#list-users-and-their-roles-in-a-scope) |
@@ -21,12 +23,15 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{uuid}/robot_account_projects/` | [List projects with robot accounts](#list-projects-with-robot-accounts) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{uuid}/stat/` | [Get service provider statistics](#get-service-provider-statistics) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/user_customers/` | [List customers of a specific user within a service provider's scope](#list-customers-of-a-specific-user-within-a-service-providers-scope) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{uuid}/username_conflicts/` | [Report username conflicts before adopting provider accounts](#report-username-conflicts-before-adopting-provider-accounts) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/users/` | [List users of a service provider](#list-users-of-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{uuid}/api_secret_code/` | [Get service provider API secret code](#get-service-provider-api-secret-code) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/compliance/checklists_summary/` | [Get summary of compliance checklists](#get-summary-of-compliance-checklists) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/compliance/compliance_overview/` | [Get compliance overview for a service provider](#get-compliance-overview-for-a-service-provider) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-service-providers/{service_provider_uuid}/compliance/offering_users/` | [List offering users' compliance status](#list-offering-users-compliance-status) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/account_options_preview/` | [Preview a change of the provider's account options](#preview-a-change-of-the-providers-account-options) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/add_user/` | [Grant a role to a user](#grant-a-role-to-a-user) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/adopt_provider_accounts/` | [Adopt provider-level accounts](#adopt-provider-level-accounts) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/` | [Create a service provider](#create-a-service-provider) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/delete_user/` | [Revoke a role from a user](#revoke-a-role-from-a-user) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-service-providers/{uuid}/generate_site_agent_config/` | [Generate site agent configuration](#generate-site-agent-configuration) |
@@ -410,6 +415,182 @@ Returns a paginated list of customers who have consumed resources from the speci
 
 ---
 
+### Get the structured GLAuth tree of the provider's shared accounts
+
+The same directory as the provider's `glauth_users_config`, as a structured JSON tree.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-service-providers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/glauth_tree/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_glauth_tree_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_service_providers_glauth_tree_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_service_providers_glauth_tree_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_glauth_tree_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceServiceProvidersGlauthTreeRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceServiceProvidersGlauthTreeRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string |  |
+    | `offerings.name` | string |  |
+    | `offerings.slug` | string |  |
+    | `groups` | array of objects |  |
+    | `groups.gid` | integer |  |
+    | `groups.name` | string |  |
+    | `groups.kind` | string | <br>_Enum: `project`, `provider_project`, `resource_role`, `resource_project_role`, `personal`_ |
+    | `groups.scope` | object |  |
+    | `groups.scope.type` | string | <br>_Enum: `resource`, `resource_project`, `project`, `user`_ |
+    | `groups.scope.uuid` | string |  |
+    | `groups.scope.name` | string |  |
+    | `groups.scope.slug` | string |  |
+    | `groups.scope.resource_uuid` | string |  |
+    | `groups.role` | string |  |
+    | `groups.members` | array of strings |  |
+    | `users` | array of objects |  |
+    | `users.username` | string |  |
+    | `users.uidnumber` | integer |  |
+    | `users.disabled` | boolean |  |
+    | `users.personal_group` | integer |  |
+    | `users.mail` | string |  |
+    | `users.givenname` | string |  |
+    | `users.sn` | string |  |
+    | `users.login_shell` | string |  |
+    | `users.home_dir` | string |  |
+    | `users.ssh_keys` | array of strings |  |
+    | `users.memberships` | array of objects |  |
+    | `users.memberships.gid` | integer |  |
+    | `users.memberships.group_name` | string |  |
+    | `users.memberships.kind` | string | <br>_Enum: `project`, `provider_project`, `resource_role`, `resource_project_role`, `personal`_ |
+    | `users.memberships.role` | string |  |
+    | `robot_accounts` | array of objects |  |
+    | `robot_accounts.username` | string |  |
+    | `robot_accounts.uidnumber` | integer |  |
+    | `robot_accounts.personal_group` | integer |  |
+    | `robot_accounts.login_shell` | string |  |
+    | `robot_accounts.home_dir` | string |  |
+    | `robot_accounts.ssh_keys` | array of strings |  |
+    | `warnings` | array of strings | Disagreements between the offerings that could not be merged. |
+
+---
+
+### Get the GLAuth configuration of the provider's shared accounts
+
+One GLAuth config for the offerings of this provider that use provider accounts, as a directory shared by them serves it: each person once, with the groups of all those offerings. Disagreements between the offerings are listed as comments at the top.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-service-providers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/glauth_users_config/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_glauth_users_config_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_service_providers_glauth_users_config_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_service_providers_glauth_users_config_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_glauth_users_config_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceServiceProvidersGlauthUsersConfigRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceServiceProvidersGlauthUsersConfigRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+
+---
+
 ### List SSH keys of a service provider
 
 Returns a paginated list of SSH public keys for all users who have consumed resources from the specified service provider.
@@ -573,10 +754,14 @@ Returns a paginated list of service providers.
 
     | Name | Type | Description |
     |---|---|---|
+    | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
     | `customer` | string (uri) | Customer URL |
     | `customer_keyword` | string | Customer keyword (name, abbreviation or native name) |
     | `customer_uuid` | string (uuid) | Customer UUID |
     | `field` | array |  |
+    | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
     | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
@@ -614,6 +799,7 @@ Returns a paginated list of service providers.
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 ---
 
@@ -720,6 +906,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `user_image` | string (uri) |  |
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `source` | string |  |
 
 ---
 
@@ -869,15 +1056,16 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -894,6 +1082,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -911,7 +1100,10 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -1401,7 +1593,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `slug` | string | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
@@ -1424,11 +1616,12 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `is_industry` | boolean |  |
     | `image` | string (uri) |  |
     | `resources_count` | integer | Number of active resources in this project |
-    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only). |
+    | `project_metadata` | array of objects | Answers to the customer's project-metadata checklist (read-only): the latest answer per question. |
     | `project_metadata.question_uuid` | string |  |
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
     | `is_removed` | boolean |  |
@@ -1454,6 +1647,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `project_credit` | number (double) |  |
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
+    | `has_metrics` | boolean |  |
 
 ---
 
@@ -1556,6 +1750,7 @@ Returns details of a specific service provider.
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 ---
 
@@ -2025,6 +2220,105 @@ Returns a paginated list of customers that a specified user has access to within
     | `users.full_name` | string |
     | `users.email` | string (email) |
     | `users.image` | string (uri) |
+
+---
+
+### Report username conflicts before adopting provider accounts
+
+Lists every user whose offering accounts at this provider disagree about the username, with the evidence needed to choose which one survives: how many offerings use it, whether any of those accounts belongs to a user with a live resource, and the home directories recorded for it. An empty list means the provider can adopt provider-level accounts without operator input.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-service-providers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/username_conflicts/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.call_managing_organisation_o_enum import CallManagingOrganisationOEnum # (1)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_username_conflicts_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_service_providers_username_conflicts_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`CallManagingOrganisationOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_managing_organisation_o_enum.py)
+    2.  **API Source:** [`marketplace_service_providers_username_conflicts_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_username_conflicts_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceServiceProvidersUsernameConflictsList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceServiceProvidersUsernameConflictsList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
+    | `customer` | string (uri) | Customer URL |
+    | `customer_keyword` | string | Customer keyword (name, abbreviation or native name) |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
+    | `o` | array | Ordering<br><br> |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `user_uuid` | string |
+    | `user_username` | string |
+    | `user_full_name` | string |
+    | `candidates` | array of objects |
+    | `candidates.username` | string |
+    | `candidates.offering_count` | integer |
+    | `candidates.offering_uuids` | array of strings |
+    | `candidates.has_active_resources` | boolean |
+    | `candidates.home_directories` | array of strings |
 
 ---
 
@@ -2502,6 +2796,164 @@ Returns a list of offering users with their compliance status for this service p
 
 ---
 
+### Preview a change of the provider's account options
+
+Shows what a change of the provider's account options would do, without saving it: each offering's account settings before and after, the offering accounts that would be renamed, the provider accounts that keep their names, and what a new person would get. The options are merged into the current ones key by key, as the provider update does; a blank value removes a setting.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-service-providers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/account_options_preview/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      account_options=null
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.account_options_change_request import AccountOptionsChangeRequest # (1)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_account_options_preview # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = AccountOptionsChangeRequest(
+        account_options=null
+    )
+    response = marketplace_service_providers_account_options_preview.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`AccountOptionsChangeRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/account_options_change_request.py)
+    2.  **API Source:** [`marketplace_service_providers_account_options_preview`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_account_options_preview.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceServiceProvidersAccountOptionsPreview } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceServiceProvidersAccountOptionsPreview({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "account_options": null
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `account_options` | any | ✓ | Changes to the provider's account options, merged into the current ones key by key; a blank value removes a setting. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `account_options` | object |  |
+    | `account_options.current` | object |  |
+    | `account_options.current.account_scope` | any | Where accounts are held: 'offering' keeps one account per offering (the historical behaviour); 'provider' shares one account per user across the provider's offerings. |
+    | `account_options.current.username_generation_policy` | any | How the usernames of offering users are generated. |
+    | `account_options.current.username_anonymized_prefix` | string | Prefix for anonymized usernames; the name is the prefix followed by the account's POSIX UID. |
+    | `account_options.current.homedir_prefix` | string | Prefix of each account's home directory; the username follows. |
+    | `account_options.current.login_shell` | string | Login shell assigned to GLAuth/LDAP accounts. |
+    | `account_options.current.project_groups_enabled` | boolean | Give every project with a resource on this provider's offerings one POSIX group, with a GID from the provider's POSIX ID pool (its group GID range when set). Turning it on also creates the groups of projects already using the provider. |
+    | `account_options.proposed` | object |  |
+    | `account_options.proposed.account_scope` | any | Where accounts are held: 'offering' keeps one account per offering (the historical behaviour); 'provider' shares one account per user across the provider's offerings. |
+    | `account_options.proposed.username_generation_policy` | any | How the usernames of offering users are generated. |
+    | `account_options.proposed.username_anonymized_prefix` | string | Prefix for anonymized usernames; the name is the prefix followed by the account's POSIX UID. |
+    | `account_options.proposed.homedir_prefix` | string | Prefix of each account's home directory; the username follows. |
+    | `account_options.proposed.login_shell` | string | Login shell assigned to GLAuth/LDAP accounts. |
+    | `account_options.proposed.project_groups_enabled` | boolean | Give every project with a resource on this provider's offerings one POSIX group, with a GID from the provider's POSIX ID pool (its group GID range when set). Turning it on also creates the groups of projects already using the provider. |
+    | `warnings` | array of strings | Things to settle before saving, e.g. a missing group range. |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string |  |
+    | `offerings.name` | string |  |
+    | `offerings.settings` | object |  |
+    | `offerings.settings.account_scope` | object |  |
+    | `offerings.settings.account_scope.before` | object |  |
+    | `offerings.settings.account_scope.before.value` | string | The value the setting resolves to. |
+    | `offerings.settings.account_scope.before.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.account_scope.after` | object |  |
+    | `offerings.settings.account_scope.after.value` | string | The value the setting resolves to. |
+    | `offerings.settings.account_scope.after.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.username_generation_policy` | object |  |
+    | `offerings.settings.username_generation_policy.before` | object |  |
+    | `offerings.settings.username_generation_policy.before.value` | string | The value the setting resolves to. |
+    | `offerings.settings.username_generation_policy.before.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.username_generation_policy.after` | object |  |
+    | `offerings.settings.username_generation_policy.after.value` | string | The value the setting resolves to. |
+    | `offerings.settings.username_generation_policy.after.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.username_anonymized_prefix` | object |  |
+    | `offerings.settings.username_anonymized_prefix.before` | object |  |
+    | `offerings.settings.username_anonymized_prefix.before.value` | string | The value the setting resolves to. |
+    | `offerings.settings.username_anonymized_prefix.before.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.username_anonymized_prefix.after` | object |  |
+    | `offerings.settings.username_anonymized_prefix.after.value` | string | The value the setting resolves to. |
+    | `offerings.settings.username_anonymized_prefix.after.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.homedir_prefix` | object |  |
+    | `offerings.settings.homedir_prefix.before` | object |  |
+    | `offerings.settings.homedir_prefix.before.value` | string | The value the setting resolves to. |
+    | `offerings.settings.homedir_prefix.before.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.homedir_prefix.after` | object |  |
+    | `offerings.settings.homedir_prefix.after.value` | string | The value the setting resolves to. |
+    | `offerings.settings.homedir_prefix.after.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.login_shell` | object |  |
+    | `offerings.settings.login_shell.before` | object |  |
+    | `offerings.settings.login_shell.before.value` | string | The value the setting resolves to. |
+    | `offerings.settings.login_shell.before.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.settings.login_shell.after` | object |  |
+    | `offerings.settings.login_shell.after.value` | string | The value the setting resolves to. |
+    | `offerings.settings.login_shell.after.source` | any | Where the value comes from: the offering's own plugin option, the service provider's account options, or the built-in default. |
+    | `offerings.changed` | array of strings |  |
+    | `offerings.example` | object |  |
+    | `offerings.example.username` | string | The username a person new to the offering would get; placeholders in angle brackets stand for the person's own values. |
+    | `offerings.example.home_directory` | string |  |
+    | `offerings.example.login_shell` | string |  |
+    | `offerings.renames` | array of objects |  |
+    | `offerings.renames.username` | string |  |
+    | `offerings.renames.new_username` | string | Null when the rename would first allocate a POSIX UID. |
+    | `offerings.renames.home_directory` | string |  |
+    | `offerings.renames.new_home_directory` | string |  |
+    | `offerings.provider_accounts_kept` | integer | Provider accounts that keep their username and POSIX values. |
+    | `offerings.accounts_keeping_home_or_shell` | integer | Existing accounts that keep their home directory and login shell; the change applies to accounts created afterwards. |
+    | `renamed` | integer |  |
+    | `provider_accounts_kept` | integer |  |
+    | `accounts_keeping_home_or_shell` | integer |  |
+    | `username_conflicts` | integer | People whose usernames disagree across offerings. Non-zero blocks switching to per service provider accounts. |
+
+---
+
 ### Grant a role to a user
 
 Assigns a specific role to a user within the current scope. An optional expiration time for the role can be set.
@@ -2600,6 +3052,91 @@ Assigns a specific role to a user within the current scope. An optional expirati
 
 ---
 
+### Adopt provider-level accounts
+
+Backs every offering account at this provider with one provider-level account per user, so a person resolves to a single username and POSIX identity across the provider's offerings.
+
+Users whose accounts already agree are adopted without input. A user whose accounts disagree must be given a surviving username in 'resolutions', keyed by user UUID — see the 'username_conflicts' action. The call is refused while any conflict is unresolved, rather than adopting part of the provider and leaving the rest on the old per-offering behaviour.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-service-providers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/adopt_provider_accounts/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.adopt_provider_accounts_request import AdoptProviderAccountsRequest # (1)
+    from waldur_api_client.api.marketplace_service_providers import marketplace_service_providers_adopt_provider_accounts # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = AdoptProviderAccountsRequest()
+    response = marketplace_service_providers_adopt_provider_accounts.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`AdoptProviderAccountsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/adopt_provider_accounts_request.py)
+    2.  **API Source:** [`marketplace_service_providers_adopt_provider_accounts`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_adopt_provider_accounts.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceServiceProvidersAdoptProviderAccounts } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceServiceProvidersAdoptProviderAccounts({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `resolutions` | object (free-form) |  | User UUID (hex) to the username that survives adoption. Only needed for users reported by the 'username_conflicts' action. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `adopted` | integer | Provider accounts created. |
+    | `backed` | integer | Offering accounts now reading through a provider account. |
+
+---
+
 ### Create a service provider
 
 Creates a new service provider profile for a customer.
@@ -2669,6 +3206,7 @@ Creates a new service provider profile for a customer.
     | `customer` | string (uri) | ✓ |  |
     | `image` | string (binary) |  |  |
     | `allowed_domains` | array of strings |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any |  | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 
 === "Responses"
@@ -2701,6 +3239,7 @@ Creates a new service provider profile for a customer.
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 ---
 
@@ -3214,6 +3753,7 @@ Updates an existing service provider profile.
     | `customer` | string (uri) | ✓ |  |
     | `image` | string (binary) |  |  |
     | `allowed_domains` | array of strings |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any |  | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 
 === "Responses"
@@ -3246,6 +3786,7 @@ Updates an existing service provider profile.
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 ---
 
@@ -3322,6 +3863,7 @@ Partially updates an existing service provider profile.
     | `enable_notifications` | boolean |  |  |
     | `image` | string (binary) |  |  |
     | `allowed_domains` | array of strings |  | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any |  | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 
 === "Responses"
@@ -3354,6 +3896,7 @@ Partially updates an existing service provider profile.
     | `organization_groups.customers_count` | integer | Number of customers in this organization group |
     | `offering_count` | integer |  |
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
+    | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
 ---
 

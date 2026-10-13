@@ -13,6 +13,7 @@
 | <span class="http-badge http-patch">PATCH</span> | `/api/roles/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/roles/{uuid}/` | [Delete a role](#delete-a-role) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/roles/hygiene_report/` | [Role hygiene report](#role-hygiene-report) |
 | <span class="http-badge http-post">POST</span> | `/api/roles/{uuid}/clone_to_customer/` | [Clone a role into an organization](#clone-a-role-into-an-organization) |
 | <span class="http-badge http-post">POST</span> | `/api/roles/{uuid}/disable/` | [Disable a role](#disable-a-role) |
 | <span class="http-badge http-post">POST</span> | `/api/roles/{uuid}/enable/` | [Enable a role](#enable-a-role) |
@@ -116,6 +117,7 @@ Get a list of all available roles.
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_hr` | string |
     | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
@@ -221,6 +223,7 @@ Retrieve the details of a specific role by its UUID.
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_hr` | string |
     | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
@@ -320,6 +323,7 @@ Allows staff users to create a new custom role with a specific set of permission
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
+    | `description_hr` | string |  |
     | `description_km` | string |  |
     | `permissions` | object (free-form) | ✓ |
     | `is_active` | boolean |  |
@@ -349,6 +353,7 @@ Allows staff users to create a new custom role with a specific set of permission
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_hr` | string |
     | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
@@ -459,6 +464,7 @@ Allows staff users to update an existing role's name, description, content type,
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
+    | `description_hr` | string |  |
     | `description_km` | string |  |
     | `permissions` | object (free-form) | ✓ |
     | `is_active` | boolean |  |
@@ -488,6 +494,7 @@ Allows staff users to update an existing role's name, description, content type,
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_hr` | string |
     | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
@@ -585,6 +592,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
+    | `description_hr` | string |  |
     | `description_km` | string |  |
 
 
@@ -609,6 +617,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_hr` | string |
     | `description_km` | string |
 
 ---
@@ -696,6 +705,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_nb` | string |  |
     | `description_ar` | string |  |
     | `description_cs` | string |  |
+    | `description_hr` | string |  |
     | `description_km` | string |  |
     | `is_active` | boolean |  |
 
@@ -723,6 +733,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_hr` | string |
     | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
@@ -805,6 +816,77 @@ Allows staff users to delete a custom role. System roles and roles that are curr
 
 ## Other Actions
 
+
+### Role hygiene report
+
+Staff-only. Reports roles whose name is not a machine code, whose scope or organization binding is wrong, that are silently global, or that carry permissions inert for their scope. Read-only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/roles/hygiene_report/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.roles import roles_hygiene_report_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = roles_hygiene_report_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`roles_hygiene_report_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/roles/roles_hygiene_report_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { rolesHygieneReportRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await rolesHygieneReportRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `roles_checked` | integer |
+    | `roles_with_findings` | integer |
+    | `error_count` | integer |
+    | `warning_count` | integer |
+    | `info_count` | integer |
+    | `findings` | array of objects |
+    | `findings.check` | string |
+    | `findings.severity` | string |
+    | `findings.role_uuid` | string |
+    | `findings.role_name` | string |
+    | `findings.role_description` | string |
+    | `findings.scope_type` | any |
+    | `findings.is_system_role` | boolean |
+    | `findings.message` | string |
+    | `findings.details` | object (free-form) |
+
+---
 
 ### Clone a role into an organization
 
@@ -909,6 +991,7 @@ Staff-only. Creates an organization-private copy of this role (customer or proje
     | `description_nb` | string |
     | `description_ar` | string |
     | `description_cs` | string |
+    | `description_hr` | string |
     | `description_km` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |

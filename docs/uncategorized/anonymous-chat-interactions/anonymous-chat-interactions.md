@@ -671,6 +671,7 @@ One row per anonymous conversation (``session_id``) with aggregate counters, mir
     | `message_count` | integer |  |
     | `is_flagged` | boolean |  |
     | `max_severity` | string |  |
+    | `max_severity_rank` | integer | Numeric ordinal of max_severity (0=none … 4=critical) for severity-ordered sorting. |
     | `has_feedback` | boolean |  |
     | `offerings_shown` | integer |  |
     | `offerings_clicked` | integer | Click-throughs on recommended offerings; repeat clicks count separately. |
@@ -774,6 +775,8 @@ Returns aggregate counters and rates for the anonymous chat flow. Filters are ho
     | `satisfaction_rate` | number (double) | positive / (positive + negative); null when no human feedback. |
     | `clicks_total` | integer |  |
     | `click_through_rate` | number (double) | clicks / interactions; null when no interactions. |
+    | `clarification_requests_total` | integer | Interactions where the assistant asked a clarifying question (ask_user) instead of recommending. |
+    | `clarification_rate` | number (double) | clarification_requests_total / interactions_total; null when no interactions. |
     | `input_tokens_total` | integer | Prompt tokens summed over the filtered turns. Turns recorded before per-interaction token capture contribute nothing, so this understates spend on historical data. |
     | `output_tokens_total` | integer | Completion tokens summed over the filtered turns. |
     | `reviewed_total` | integer | Threads carrying a judge verdict. Always present, unlike the review rates below — zero here is the signal that the nightly pass is off or stalled, so consumers can keep showing the row. |

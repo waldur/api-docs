@@ -8,6 +8,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/call-rounds/` | [List Call Rounds](#list-call-rounds) |
 | <span class="http-badge http-get">GET</span> | `/api/call-rounds/{uuid}/` | [Retrieve](#retrieve) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/call-rounds/dashboard-deadlines/` | [Get upcoming round deadlines for the call manager dashboard](#get-upcoming-round-deadlines-for-the-call-manager-dashboard) |
 | <span class="http-badge http-get">GET</span> | `/api/call-rounds/{uuid}/reviewers/` | [Return list of reviewers for round](#return-list-of-reviewers-for-round) |
 
 ---
@@ -164,6 +165,78 @@
 
 ## Other Actions
 
+
+### Get upcoming round deadlines for the call manager dashboard
+
+Returns the rounds in calls managed by the current user that are still open (cutoff time in the future), nearest first. Paginated: the exact total is in the X-Result-Count header.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/call-rounds/dashboard-deadlines/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.call_rounds import call_rounds_dashboard_deadlines_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = call_rounds_dashboard_deadlines_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`call_rounds_dashboard_deadlines_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/call_rounds/call_rounds_dashboard_deadlines_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { callRoundsDashboardDeadlinesList } from 'waldur-js-client';
+    
+    try {
+      const response = await callRoundsDashboardDeadlinesList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `call_uuid` | string (uuid) |
+    | `call_name` | string |
+    | `round_name` | string |
+    | `due_date` | string (date-time) |
+
+---
 
 ### Return list of reviewers for round
 

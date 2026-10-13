@@ -12,6 +12,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/call-reviewer-pools/{uuid}/accept/` | [Accept a pool invitation (authenticated users only)](#accept-a-pool-invitation-authenticated-users-only) |
 | <span class="http-badge http-post">POST</span> | `/api/call-reviewer-pools/{uuid}/decline/` | [Decline a pool invitation (authenticated users only)](#decline-a-pool-invitation-authenticated-users-only) |
 | <span class="http-badge http-post">POST</span> | `/api/call-reviewer-pools/{uuid}/force-accept/` | [Force-accept a pool invitation (manager override)](#force-accept-a-pool-invitation-manager-override) |
+| <span class="http-badge http-post">POST</span> | `/api/call-reviewer-pools/{uuid}/resend-invitation/` | [Resend invitation](#resend-invitation) |
 
 ---
 ## Core CRUD
@@ -107,7 +108,7 @@
     | `response_date` | string (date-time) |  |
     | `decline_reason` | string |  |
     | `max_assignments` | integer |  |
-    | `current_assignments` | integer |  |
+    | `current_assignments` | integer | Number of the reviewer's open assignments in this call: pending or accepted assignment items whose review is not finished, plus reviews in progress created without an assignment item. |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
     | `invitation_link` | string |  |
@@ -207,7 +208,7 @@
     | `response_date` | string (date-time) |  |
     | `decline_reason` | string |  |
     | `max_assignments` | integer |  |
-    | `current_assignments` | integer |  |
+    | `current_assignments` | integer | Number of the reviewer's open assignments in this call: pending or accepted assignment items whose review is not finished, plus reviews in progress created without an assignment item. |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
     | `invitation_link` | string |  |
@@ -592,7 +593,109 @@ Force-accept a pool invitation (manager override).
     | `response_date` | string (date-time) |  |
     | `decline_reason` | string |  |
     | `max_assignments` | integer |  |
-    | `current_assignments` | integer |  |
+    | `current_assignments` | integer | Number of the reviewer's open assignments in this call: pending or accepted assignment items whose review is not finished, plus reviews in progress created without an assignment item. |
+    | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
+    | `invited_by_name` | string |  |
+    | `invitation_link` | string |  |
+    | `invitation_expires_at` | string (date-time) |  |
+    | `created` | string (date-time) |  |
+    | `coi_count` | integer | Count total COIs for this reviewer in this call. |
+    | `coi_by_severity` | object (free-form) | Count COIs by severity level. |
+    | `reviews_pending` | integer | Legacy field - always returns 0.  Previously counted reviews in 'created' state, but that state has been removed. Reviews are now created directly in 'in_review' state. Kept for backwards compatibility with frontend. |
+    | `reviews_in_progress` | integer | Count reviews in 'in_review' state. |
+    | `reviews_completed` | integer | Count reviews in 'submitted' state. |
+    | `override_reason` | string | Reason for manager override of invitation status. |
+    | `overridden_by_name` | string |  |
+    | `overridden_at` | string (date-time) |  |
+
+---
+
+### Resend invitation
+
+Send a pending or expired pool invitation again. The invitation returns to pending with a new expiry date from the call's assignment configuration, and the invitee is emailed the link again.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/call-reviewer-pools/a1b2c3d4-e5f6-7890-abcd-ef1234567890/resend-invitation/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.call_reviewer_pools import call_reviewer_pools_resend_invitation # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = call_reviewer_pools_resend_invitation.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`call_reviewer_pools_resend_invitation`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/call_reviewer_pools/call_reviewer_pools_resend_invitation.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { callReviewerPoolsResendInvitation } from 'waldur-js-client';
+    
+    try {
+      const response = await callReviewerPoolsResendInvitation({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `call` | string (uri) |  |
+    | `call_uuid` | string (uuid) |  |
+    | `call_name` | string |  |
+    | `reviewer` | string (uri) |  |
+    | `reviewer_uuid` | string | Get reviewer profile UUID if available. |
+    | `reviewer_name` | string | Get reviewer name from profile or invited_user. |
+    | `reviewer_email` | string | Get email from profile, invited_user, or invited_email. |
+    | `has_profile` | boolean | Check if reviewer has a profile. |
+    | `invited_email` | string (email) | Email address for direct invitations |
+    | `invited_user` | string (uri) | Waldur user if email matches existing account |
+    | `invited_user_name` | string |  |
+    | `invited_at` | string (date-time) |  |
+    | `invitation_status` | any |  |
+    | `invitation_status_display` | string |  |
+    | `response_date` | string (date-time) |  |
+    | `decline_reason` | string |  |
+    | `max_assignments` | integer |  |
+    | `current_assignments` | integer | Number of the reviewer's open assignments in this call: pending or accepted assignment items whose review is not finished, plus reviews in progress created without an assignment item. |
     | `expertise_match_score` | number (double) | Calculated affinity to call topics (0-1) |
     | `invited_by_name` | string |  |
     | `invitation_link` | string |  |

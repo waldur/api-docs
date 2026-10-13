@@ -26,6 +26,7 @@
 | **Data & Reporting** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-orders/{uuid}/offering/` | [Get offering details](#get-offering-details) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-orders/dashboard-my-orders/` | [List current user's unfinished orders](#list-current-users-unfinished-orders) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-orders/{uuid}/resource/` | [Get resource details](#get-resource-details) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-orders/{uuid}/retry/` | [Retry an erred order](#retry-an-erred-order) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-orders/{uuid}/set_consumer_info/` | [Set consumer info on order](#set-consumer-info-on-order) |
@@ -165,6 +166,7 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `resource_uuid` | string (uuid) |  |
     | `resource_type` | string |  |
     | `resource_name` | string |  |
+    | `resource_end_date` | string (date) |  |
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
@@ -209,7 +211,9 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | number (double) |  |
+    | `old_plan_billing_mode` | string |  |
+    | `new_plan_billing_mode` | string |  |
+    | `old_cost_estimate` | number (double) | The old-limits estimate, snapshotted by init_cost() at creation.  Must not recompute live: _compute_old_cost_estimate() prices from "today", which keeps advancing on every read while `cost` stays fixed from creation -- the shown cost change would grow the longer an order sits unread. Orders that predate this field have no snapshot, so they fall back to the live computation rather than a wrong zero. |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
@@ -338,6 +342,7 @@ Returns the details of a specific order.
     | `resource_uuid` | string (uuid) |  |
     | `resource_type` | string |  |
     | `resource_name` | string |  |
+    | `resource_end_date` | string (date) |  |
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
@@ -382,7 +387,9 @@ Returns the details of a specific order.
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | number (double) |  |
+    | `old_plan_billing_mode` | string |  |
+    | `new_plan_billing_mode` | string |  |
+    | `old_cost_estimate` | number (double) | The old-limits estimate, snapshotted by init_cost() at creation.  Must not recompute live: _compute_old_cost_estimate() prices from "today", which keeps advancing on every read while `cost` stays fixed from creation -- the shown cost change would grow the longer an order sits unread. Orders that predate this field have no snapshot, so they fall back to the live computation rather than a wrong zero. |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
@@ -481,7 +488,7 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `callback_url` | string (uri) |  |  |
     | `request_comment` | string |  |  |
     | `start_date` | string (date) |  | Enables delayed processing of resource provisioning order. |
-    | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
+    | `slug` | string |  | Slug of the new resource. Used when the caller is staff or holds RESOURCE.SET_SLUG on the project, the offering or their organizations; otherwise ignored. |
     | `project` | string (uri) | ✓ |  |
 
 
@@ -521,6 +528,7 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `resource_uuid` | string (uuid) |  |
     | `resource_type` | string |  |
     | `resource_name` | string |  |
+    | `resource_end_date` | string (date) |  |
     | `cost` | string (decimal) |  |
     | `state` | any |  |
     | `output` | string |  |
@@ -565,7 +573,9 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `new_plan_name` | string |  |
     | `old_plan_uuid` | string (uuid) |  |
     | `new_plan_uuid` | string (uuid) |  |
-    | `old_cost_estimate` | number (double) |  |
+    | `old_plan_billing_mode` | string |  |
+    | `new_plan_billing_mode` | string |  |
+    | `old_cost_estimate` | number (double) | The old-limits estimate, snapshotted by init_cost() at creation.  Must not recompute live: _compute_old_cost_estimate() prices from "today", which keeps advancing on every read while `cost` stays fixed from creation -- the shown cost change would grow the longer an order sits unread. Orders that predate this field have no snapshot, so they fall back to the live computation rather than a wrong zero. |
     | `new_cost_estimate` | string (decimal) |  |
     | `can_terminate` | boolean |  |
     | `fixed_price` | number (double) |  |
@@ -880,6 +890,11 @@ Approves a pending order from the provider's side. This typically transitions th
     | Field | Type |
     |---|---|
     | `detail` | string |
+    
+    ---
+    
+    **`409`** - Order is no longer pending provider review.
+    
 
 ---
 
@@ -1106,6 +1121,11 @@ Rejects a pending order from the provider's side. This moves the order to the 'r
 === "Responses"
 
     **`200`** - No response body
+    
+    
+    ---
+    
+    **`409`** - Order is no longer pending provider review.
     
 
 ---
@@ -1646,6 +1666,8 @@ Returns details of the offering connected to the requested object.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
+    | `billing_period_applies` | object (free-form) | Per plan billing mode, whether a plan's billing period changes what is invoiced. False means every component of this offering would price a quantity of its own under that mode, so the period is inert on the invoice. |
+    | `billing_mode_components` | object (free-form) | Per plan billing mode, every component of this offering as a plan in that mode would bill it: billing type, measured unit, prepaid flag and limit period. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
@@ -1736,15 +1758,16 @@ Returns details of the offering connected to the requested object.
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -1754,6 +1777,9 @@ Returns details of the offering connected to the requested object.
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plugin_options` | any |  |
+    | `account_settings` | any |  |
+    | `can_update_integration` | boolean |  |
+    | `can_update_options` | boolean |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
     | `getting_started` | string |  |
@@ -1768,6 +1794,7 @@ Returns details of the offering connected to the requested object.
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -1785,7 +1812,10 @@ Returns details of the offering connected to the requested object.
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -1813,6 +1843,9 @@ Returns details of the offering connected to the requested object.
     | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
+    | `scope_resource` | string (uri) |  |
+    | `scope_resource_uuid` | string |  |
+    | `scope_resource_name` | string |  |
     | `files` | array of objects |  |
     | `files.name` | string |  |
     | `files.created` | string (date-time) |  |
@@ -1851,12 +1884,14 @@ Returns details of the offering connected to the requested object.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `compliance_checklist_details` | any |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
     | `offering_group` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
+    | `user_has_offering_user` | boolean |  |
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
@@ -1878,6 +1913,116 @@ Returns details of the offering connected to the requested object.
 
 ## Other Actions
 
+
+### List current user's unfinished orders
+
+Returns the orders created by the current user that are still pending approval or being processed, newest first. Scoped to the requesting user only, so requesters can track their orders even without list permissions on the project or organization. Paginated: the exact total is in the X-Result-Count header.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-orders/dashboard-my-orders/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.order_details_o_enum import OrderDetailsOEnum # (1)
+    from waldur_api_client.models.order_state import OrderState # (2)
+    from waldur_api_client.models.request_types import RequestTypes # (3)
+    from waldur_api_client.api.marketplace_orders import marketplace_orders_dashboard_my_orders_list # (4)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_orders_dashboard_my_orders_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`OrderDetailsOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_details_o_enum.py)
+    2.  **Model Source:** [`OrderState`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/order_state.py)
+    3.  **Model Source:** [`RequestTypes`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/request_types.py)
+    4.  **API Source:** [`marketplace_orders_dashboard_my_orders_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_orders/marketplace_orders_dashboard_my_orders_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceOrdersDashboardMyOrdersList } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceOrdersDashboardMyOrdersList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `can_approve_as_consumer` | boolean | Can approve as consumer |
+    | `can_approve_as_provider` | boolean | Can approve as provider |
+    | `category_uuid` | string (uuid) | Category UUID |
+    | `created` | string (date-time) | Created after |
+    | `created_before` | string (date-time) | Created before |
+    | `customer_uuid` | string (uuid) | Customer UUID |
+    | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
+    | `o` | array | Ordering<br><br> |
+    | `offering` | string (uri) |  |
+    | `offering_slug` | array | Multiple values may be separated by commas. |
+    | `offering_type` | array | Offering type |
+    | `offering_uuid` | string (uuid) | Offering UUID |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `parent_offering_uuid` | string (uuid) |  |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `provider_uuid` | string (uuid) | Provider UUID |
+    | `query` | string | Search by order UUID, slug, project name or resource name |
+    | `resource` | string (uri) | Resource URL |
+    | `resource_name` | string | Resource name |
+    | `resource_uuid` | string (uuid) | Resource UUID |
+    | `service_manager_uuid` | string (uuid) | Service manager UUID |
+    | `slug` | string | Slug |
+    | `state` | array | Order state<br><br> |
+    | `type` | array | Order type<br><br> |
+    | `was_auto_approved` | boolean | Auto-approved |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string (uuid) |
+    | `offering_uuid` | string (uuid) |
+    | `offering_name` | string |
+    | `resource_uuid` | string (uuid) |
+    | `resource_name` | string |
+    | `project_uuid` | string (uuid) |
+    | `project_name` | string |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `state` | any |
+    | `type` | any |
+    | `created` | string (date-time) |
+
+---
 
 ### Get resource details
 
@@ -1993,6 +2138,7 @@ Returns details of the resource connected to the requested object.
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
     | `project_description` | string |  |
+    | `project_start_date` | string (date) |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
     | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
@@ -2008,8 +2154,8 @@ Returns details of the resource connected to the requested object.
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
-    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
+    | `is_usage_based` | boolean | Returns True if the resource bills any component by usage under its plan. |
+    | `is_limit_based` | boolean | Returns True if the resource bills any component on user-adjustable limits under its plan. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
@@ -2053,15 +2199,16 @@ Returns details of the resource connected to the requested object.
     | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `offering_components.limit_period` | any |  |
-    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.limit_amount` | number (double) |  |
+    | `offering_components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `offering_components.article_code` | string |  |
-    | `offering_components.max_value` | integer |  |
-    | `offering_components.min_value` | integer |  |
-    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.max_value` | number (double) |  |
+    | `offering_components.min_value` | number (double) |  |
+    | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
-    | `offering_components.default_limit` | integer |  |
+    | `offering_components.default_limit` | number (double) |  |
     | `offering_components.factor` | integer |  |
-    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
@@ -2071,6 +2218,7 @@ Returns details of the resource connected to the requested object.
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
+    | `offering_account_settings` | any |  |
 
 ---
 

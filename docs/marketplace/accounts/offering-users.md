@@ -106,6 +106,7 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `field` | array |  |
     | `has_complete_profile` | boolean | User has complete profile for the offering |
     | `has_consent` | boolean | User Has Consent |
+    | `is_provider_backed` | boolean | Backed by a service provider account |
     | `is_restricted` | boolean | Is restricted |
     | `modified` | string (date-time) | Modified after |
     | `modified_before` | string (date-time) | Modified before |
@@ -120,9 +121,11 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by offering name, username, user name, UID or primary GID |
     | `runtime_state` | array | Offering user runtime state<br><br> |
+    | `service_provider_account_uuid` | string (uuid) | Service provider account UUID |
     | `state` | array | Offering user state<br><br> |
     | `user_username` | string | User username |
     | `user_uuid` | string (uuid) | User UUID |
+    | `username` | string | Username |
 
 
 === "Responses"
@@ -178,6 +181,8 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
+    | `service_provider_account_uuid` | string (uuid) |  |
+    | `service_provider_account_username` | string |  |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `offering_has_active_tos` | boolean |  |
@@ -312,6 +317,8 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
+    | `service_provider_account_uuid` | string (uuid) |  |
+    | `service_provider_account_username` | string |  |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `offering_has_active_tos` | boolean |  |
@@ -442,6 +449,8 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
+    | `service_provider_account_uuid` | string (uuid) |  |
+    | `service_provider_account_username` | string |  |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `offering_has_active_tos` | boolean |  |
@@ -753,6 +762,8 @@ Allows a service provider to set the operational/access state of an offering use
     | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
+    | `service_provider_account_uuid` | string (uuid) |  |
+    | `service_provider_account_username` | string |  |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `offering_has_active_tos` | boolean |  |
@@ -892,6 +903,8 @@ Allows a service provider to set the operational/access state of an offering use
     | `runtime_state` | any |  |
     | `service_provider_comment` | string | Additional comment for pending states like validation or account linking |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
+    | `service_provider_account_uuid` | string (uuid) |  |
+    | `service_provider_account_username` | string |  |
     | `has_consent` | boolean | Check if the user has active consent for this offering. |
     | `requires_reconsent` | boolean | Check if the user needs to re-consent due to ToS changes. |
     | `offering_has_active_tos` | boolean |  |
@@ -1621,7 +1634,7 @@ Get checklist completion status.
 
 ### List POSIX UID/GID allocations of an offering user
 
-Returns the user's POSIX identifiers (UID, primary GID) and, for each, the POSIX ID pool that tracks it. The pool fields are null when the value is not tracked by a pool.
+Returns the user's POSIX identifiers (UID, primary GID) and, for each, the POSIX ID pool that tracks it plus the user's other offerings that resolve to the same pool and therefore carry the very same value. The pool fields are null when the value is not tracked by a pool.
 
 
 === "HTTPie"
@@ -1694,6 +1707,7 @@ Returns the user's POSIX identifiers (UID, primary GID) and, for each, the POSIX
     | `created_before` | string (date-time) | Created before |
     | `has_complete_profile` | boolean | User has complete profile for the offering |
     | `has_consent` | boolean | User Has Consent |
+    | `is_provider_backed` | boolean | Backed by a service provider account |
     | `is_restricted` | boolean | Is restricted |
     | `modified` | string (date-time) | Modified after |
     | `modified_before` | string (date-time) | Modified before |
@@ -1708,9 +1722,11 @@ Returns the user's POSIX identifiers (UID, primary GID) and, for each, the POSIX
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by offering name, username, user name, UID or primary GID |
     | `runtime_state` | array | Offering user runtime state<br><br> |
+    | `service_provider_account_uuid` | string (uuid) | Service provider account UUID |
     | `state` | array | Offering user state<br><br> |
     | `user_username` | string | User username |
     | `user_uuid` | string (uuid) | User UUID |
+    | `username` | string | Username |
 
 
 === "Responses"
@@ -1726,6 +1742,9 @@ Returns the user's POSIX identifiers (UID, primary GID) and, for each, the POSIX
     | `pool_uuid` | string |
     | `scope` | string |
     | `scope_name` | string |
+    | `shared_with_offerings` | array of objects |
+    | `shared_with_offerings.uuid` | string |
+    | `shared_with_offerings.name` | string |
 
 ---
 
@@ -1804,6 +1823,7 @@ Returns the project group GIDs (shared GIDs that appear in the user's GLAuth oth
     | `created_before` | string (date-time) | Created before |
     | `has_complete_profile` | boolean | User has complete profile for the offering |
     | `has_consent` | boolean | User Has Consent |
+    | `is_provider_backed` | boolean | Backed by a service provider account |
     | `is_restricted` | boolean | Is restricted |
     | `modified` | string (date-time) | Modified after |
     | `modified_before` | string (date-time) | Modified before |
@@ -1818,9 +1838,11 @@ Returns the project group GIDs (shared GIDs that appear in the user's GLAuth oth
     | `provider_uuid` | string (uuid) | Provider UUID |
     | `query` | string | Search by offering name, username, user name, UID or primary GID |
     | `runtime_state` | array | Offering user runtime state<br><br> |
+    | `service_provider_account_uuid` | string (uuid) | Service provider account UUID |
     | `state` | array | Offering user state<br><br> |
     | `user_username` | string | User username |
     | `user_uuid` | string (uuid) | User UUID |
+    | `username` | string | Username |
 
 
 === "Responses"
@@ -1831,6 +1853,9 @@ Returns the project group GIDs (shared GIDs that appear in the user's GLAuth oth
     
     | Field | Type |
     |---|---|
+    | `kind` | string |
+    | `group_name` | string |
+    | `service_provider_name` | string |
     | `gid` | integer |
     | `offering_name` | string |
     | `project_name` | string |
@@ -1839,12 +1864,13 @@ Returns the project group GIDs (shared GIDs that appear in the user's GLAuth oth
     | `customer_uuid` | string |
     | `project_accessible` | boolean |
     | `pool_uuid` | string |
+    | `pool_scope` | string |
 
 ---
 
 ### List a user's POSIX identities across all their offerings
 
-Consolidated view of one user's POSIX identifiers (UID, primary GID and project group GIDs) across every offering they have an account on, each with the range it was allocated from. Scoped to the offering users the requester is allowed to see.
+Consolidated view of one user's POSIX identifiers (UID, primary GID and project group GIDs), one row per pool and namespace: a UID allocated once for the user is reported once, listing every offering that uses it. An offering with its own pool yields its own row. Scoped to the offering users the requester is allowed to see.
 
 
 === "HTTPie"
@@ -1911,6 +1937,7 @@ Consolidated view of one user's POSIX identifiers (UID, primary GID and project 
     | `created_before` | string (date-time) |  | Created before |
     | `has_complete_profile` | boolean |  | User has complete profile for the offering |
     | `has_consent` | boolean |  | User Has Consent |
+    | `is_provider_backed` | boolean |  | Backed by a service provider account |
     | `is_restricted` | boolean |  | Is restricted |
     | `modified` | string (date-time) |  | Modified after |
     | `modified_before` | string (date-time) |  | Modified before |
@@ -1925,9 +1952,11 @@ Consolidated view of one user's POSIX identifiers (UID, primary GID and project 
     | `provider_uuid` | string (uuid) |  | Provider UUID |
     | `query` | string |  | Search by offering name, username, user name, UID or primary GID |
     | `runtime_state` | array |  | Offering user runtime state<br><br> |
+    | `service_provider_account_uuid` | string (uuid) |  | Service provider account UUID |
     | `state` | array |  | Offering user state<br><br> |
     | `user_username` | string |  | User username |
     | `user_uuid` | string (uuid) | ✓ |  |
+    | `username` | string |  | Username |
 
 
 === "Responses"
@@ -1936,14 +1965,18 @@ Consolidated view of one user's POSIX identifiers (UID, primary GID and project 
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `offering_name` | string |
-    | `offering_uuid` | string |
-    | `namespace` | string |
-    | `value` | integer |
-    | `context` | string |
-    | `pool_uuid` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `namespace` | string |  |
+    | `value` | integer |  |
+    | `context` | string |  |
+    | `pool_uuid` | string |  |
+    | `pool_scope` | string |  |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string |  |
+    | `offerings.name` | string |  |
+    | `offering_name` | string | Deprecated: the first entry of 'offerings'. The endpoint used to return one row per offering; read 'offerings' instead. |
+    | `offering_uuid` | string | Deprecated: the first entry of 'offerings'. Read 'offerings' instead. |
 
 ---
 
@@ -2405,7 +2438,7 @@ Manually moves the offering user into the 'Error Deleting' state. This is typica
 
 ### Set state to OK
 
-Manually sets the offering user state to 'OK'. This can be used to recover from an error state or to complete a manual creation process.
+Manually sets the offering user state to 'OK'. This can be used to recover from an error state or to complete a manual creation process. This clears any service provider comments.
 
 
 === "HTTPie"
@@ -2635,6 +2668,8 @@ Transitions the state to 'Pending Additional Validation' and allows a service pr
 Override the login shell, home directory, UID and/or primary GID for a single offering user, taking precedence over the offering-level defaults / the range allocator. This is the programmatic equivalent of the 'Edit POSIX attributes' dialog. The accepted fields are 'login_shell', 'home_directory', 'uidnumber' and 'primarygroup'; all are optional, but at least one must be provided.
 
 A UID or primary GID re-points the allocation ledger and must fall within the POSIX ID pool resolved for the offering: a value outside that pool's range is rejected with 400, as is a value already held by another active identity (another account, a robot account or a group) and any override on an offering for which no pool resolves. The action is all-or-nothing - a conflict on the second identifier rolls back the change made for the first.
+
+A UID or primary GID belongs to the user within the pool, not to this single account, so the pin applies across every offering of the provider that resolves to the same pool. An offering with its own pool is unaffected.
 
 The response 'warnings' list carries only non-fatal advisories about values that were accepted: the reserved POSIX ids 65534 and 65535, and values of 2^31 or above, which may break software using signed 32-bit ids.
 

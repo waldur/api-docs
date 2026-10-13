@@ -85,6 +85,8 @@ Requires support user permissions.
     | `vhosts.queues.subscription_uuid` | string | Parsed subscription UUID from queue name |
     | `vhosts.queues.offering_uuid` | string | Parsed offering UUID from queue name |
     | `vhosts.queues.object_type` | string | Parsed object type from queue name (e.g., 'resource', 'order') |
+    | `vhosts.queues.consumer_uuid` | string | Parsed EventConsumer UUID from a unified consumer queue name |
+    | `vhosts.queues.queue_kind` | any | How Waldur uses the queue: a unified consumer queue, a legacy subscription queue, or one whose name matches neither |
     | `vhosts.queues.message_ttl` | integer | Message TTL in milliseconds |
     | `vhosts.queues.max_length` | integer | Maximum number of messages in queue |
     | `vhosts.queues.max_length_bytes` | integer | Maximum total size of messages in bytes |

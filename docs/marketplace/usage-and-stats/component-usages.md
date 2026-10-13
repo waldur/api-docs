@@ -36,7 +36,8 @@ Returns a paginated list of component usage records for resources. This data is 
     from waldur_api_client.client import AuthenticatedClient
     from waldur_api_client.models.component_usage_field_enum import ComponentUsageFieldEnum # (1)
     from waldur_api_client.models.component_usage_o_enum import ComponentUsageOEnum # (2)
-    from waldur_api_client.api.marketplace_component_usages import marketplace_component_usages_list # (3)
+    from waldur_api_client.models.missing_usage_policy_enum import MissingUsagePolicyEnum # (3)
+    from waldur_api_client.api.marketplace_component_usages import marketplace_component_usages_list # (4)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -50,7 +51,8 @@ Returns a paginated list of component usage records for resources. This data is 
     
     1.  **Model Source:** [`ComponentUsageFieldEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/component_usage_field_enum.py)
     2.  **Model Source:** [`ComponentUsageOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/component_usage_o_enum.py)
-    3.  **API Source:** [`marketplace_component_usages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_component_usages/marketplace_component_usages_list.py)
+    3.  **Model Source:** [`MissingUsagePolicyEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/missing_usage_policy_enum.py)
+    4.  **API Source:** [`marketplace_component_usages_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_component_usages/marketplace_component_usages_list.py)
 
 === "TypeScript"
 
@@ -79,6 +81,7 @@ Returns a paginated list of component usage records for resources. This data is 
     | `date_after` | string (date) | Date after or equal to |
     | `date_before` | string (date) | Date before or equal to |
     | `field` | array |  |
+    | `missing_usage_policy` | array | Missing usage policy<br><br> |
     | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
@@ -105,7 +108,8 @@ Returns a paginated list of component usage records for resources. This data is 
     | `measured_unit` | string | Unit of measurement, for example, GB. |
     | `usage` | integer |  |
     | `date` | string (date-time) |  |
-    | `recurring` | boolean | Reported value is reused every month until changed. |
+    | `missing_usage_policy` | any | What to record when no usage is reported for the following billing period. |
+    | `recurring` | boolean | Deprecated, use missing_usage_policy instead. True when the reported value is reused every month until changed. |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
@@ -202,7 +206,8 @@ Returns the details of a specific component usage record.
     | `measured_unit` | string | Unit of measurement, for example, GB. |
     | `usage` | integer |  |
     | `date` | string (date-time) |  |
-    | `recurring` | boolean | Reported value is reused every month until changed. |
+    | `missing_usage_policy` | any | What to record when no usage is reported for the following billing period. |
+    | `recurring` | boolean | Deprecated, use missing_usage_policy instead. True when the reported value is reused every month until changed. |
     | `resource_name` | string |  |
     | `resource_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
@@ -294,7 +299,8 @@ Returns the details of a specific component usage record.
     | `usages.type` | string | ✓ | Type of the component |
     | `usages.amount` | string (decimal) | ✓ | Usage amount |
     | `usages.description` | string |  | Optional description of usage |
-    | `usages.recurring` | boolean |  | Whether this usage is recurring<br>_Constraints: default: `False`_ |
+    | `usages.missing_usage_policy` | any |  | What to record for this component when the following billing period passes with no usage report. |
+    | `usages.recurring` | boolean |  | Deprecated, use missing_usage_policy instead. True is equivalent to missing_usage_policy='reuse'. |
     | `plan_period` | string (uuid) |  | UUID of the specific resource plan period for usage reporting |
     | `resource` | string (uuid) |  | UUID of the resource for usage reporting (required if plan_period not provided) |
     | `date` | string (date-time) |  | Date for usage reporting (staff and service providers for limit-based components). If not provided, current date is used. |

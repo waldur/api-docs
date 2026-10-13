@@ -4,14 +4,89 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
+| <span class="http-badge http-get">GET</span> | `/api/debug/email/config/` | [Audit the outgoing email configuration](#audit-the-outgoing-email-configuration) |
 | <span class="http-badge http-get">GET</span> | `/api/debug/pubsub/circuit_breaker/` | [Get circuit breaker state](#get-circuit-breaker-state) |
 | <span class="http-badge http-get">GET</span> | `/api/debug/pubsub/dead_letter_queue/` | [Get dead letter queue status](#get-dead-letter-queue-status) |
 | <span class="http-badge http-get">GET</span> | `/api/debug/pubsub/message_state_cache/` | [Get message state cache statistics](#get-message-state-cache-statistics) |
 | <span class="http-badge http-get">GET</span> | `/api/debug/pubsub/metrics/` | [Get publishing metrics](#get-publishing-metrics) |
 | <span class="http-badge http-get">GET</span> | `/api/debug/pubsub/overview/` | [Get pubsub system health overview](#get-pubsub-system-health-overview) |
 | <span class="http-badge http-get">GET</span> | `/api/debug/pubsub/queues/` | [Get subscription queues overview](#get-subscription-queues-overview) |
+| <span class="http-badge http-post">POST</span> | `/api/debug/email/probe/` | [Test the SMTP connection](#test-the-smtp-connection) |
+| <span class="http-badge http-post">POST</span> | `/api/debug/email/send_test/` | [Send a test email](#send-a-test-email) |
 | <span class="http-badge http-post">POST</span> | `/api/debug/pubsub/circuit_breaker_reset/` | [Reset circuit breaker](#reset-circuit-breaker) |
 | <span class="http-badge http-post">POST</span> | `/api/debug/pubsub/metrics_reset/` | [Reset publishing metrics](#reset-publishing-metrics) |
+
+---
+
+### Audit the outgoing email configuration
+
+Reports the effective mail settings and the problems found in them.
+
+Reads settings only — no connection is opened and no message is sent.
+Covers the two independent halves of email delivery: a usable SMTP relay,
+and at least one enabled notification type. Requires staff permissions.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/debug/email/config/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.debug import debug_email_config_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = debug_email_config_retrieve.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`debug_email_config_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/debug/debug_email_config_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { debugEmailConfigRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await debugEmailConfigRetrieve({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `status` | string | Worst finding level: OK, WARNING or ERROR |
+    | `config` | any |  |
+    | `findings` | array of objects |  |
+    | `findings.level` | string | OK, WARNING or ERROR |
+    | `findings.code` | string | Stable machine-readable id |
+    | `findings.title` | string | Short summary |
+    | `findings.detail` | string | What was observed |
+    | `findings.remediation` | string | How to fix it |
+    | `enabled_notification_count` | integer |  |
+    | `total_notification_count` | integer |  |
+    | `emails_sent_last_week` | integer |  |
+    | `last_email_sent_at` | string (date-time) |  |
 
 ---
 
@@ -460,6 +535,149 @@ Requires staff permissions.
     | Field | Type | Description |
     |---|---|---|
     | `error` | string | Error message describing what went wrong |
+
+---
+
+### Test the SMTP connection
+
+Opens and closes a connection to the configured relay without sending a message.
+
+The connection is made from the API process, which may reach the network
+differently than the Celery workers that send real notifications.
+Requires staff permissions.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/debug/email/probe/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.debug import debug_email_probe # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = debug_email_probe.sync(client=client)
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`debug_email_probe`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/debug/debug_email_probe.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { debugEmailProbe } from 'waldur-js-client';
+    
+    try {
+      const response = await debugEmailProbe({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `success` | boolean |  |
+    | `latency_ms` | integer | Time to open the connection, in milliseconds |
+    | `error` | string | Failure reason, empty on success |
+
+---
+
+### Send a test email
+
+Sends a test message through the same code path as real notifications.
+
+Defaults to the address of the requesting user. Requires staff permissions.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/debug/email/send_test/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.email_test_send_request_request import EmailTestSendRequestRequest # (1)
+    from waldur_api_client.api.debug import debug_email_send_test # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = EmailTestSendRequestRequest()
+    response = debug_email_send_test.sync(
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`EmailTestSendRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/email_test_send_request_request.py)
+    2.  **API Source:** [`debug_email_send_test`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/debug/debug_email_send_test.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { debugEmailSendTest } from 'waldur-js-client';
+    
+    try {
+      const response = await debugEmailSendTest({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `email` | string (email) |  | Recipient of the test message. Defaults to the current user's own address. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `success` | boolean |  |
+    | `email` | string (email) | Address the test was sent to |
+    | `error` | string | Failure reason, empty on success |
+    
+    ---
+    
+    **`400`** - No response body
+    
 
 ---
 

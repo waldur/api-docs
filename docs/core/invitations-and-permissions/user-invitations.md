@@ -962,7 +962,7 @@ Checks if an invitation is pending and returns its email and whether a civil num
 
 ### Check for duplicate invitations
 
-Returns pending invitations that already exist for the same email and role within the given scope.
+Returns pending invitations that already exist for the same email and role within the given scope, along with the active roles those emails already hold in it.
 
 
 === "HTTPie"
@@ -1037,12 +1037,19 @@ Returns pending invitations that already exist for the same email and role withi
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `duplicates` | array of objects |
-    | `duplicates.email` | string (email) |
-    | `duplicates.role` | string (uuid) |
-    | `duplicates.existing_invitation_uuid` | string (uuid) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `duplicates` | array of objects |  |
+    | `duplicates.email` | string (email) |  |
+    | `duplicates.role` | string (uuid) |  |
+    | `duplicates.existing_invitation_uuid` | string (uuid) |  |
+    | `existing_roles` | array of objects |  |
+    | `existing_roles.email` | string (email) |  |
+    | `existing_roles.role` | string (uuid) | UUID of the role requested for this email |
+    | `existing_roles.existing_role` | string (uuid) | UUID of the role the user already holds in the scope |
+    | `existing_roles.existing_role_name` | string | Name of the role the user already holds in the scope |
+    | `existing_roles.existing_role_description` | string | Human-readable description of the role the user already holds, for display. Falls back to the role name when the description is blank. |
+    | `existing_roles.is_same_role` | boolean | Whether the role already held is the one being requested. This reports what the scope currently holds, not the outcome of a grant: acceptance is decided per accepting user and also depends on the INVITATION_DISABLE_MULTIPLE_ROLES and ONLY_ONE_PROJECT_MANAGER settings. |
 
 ---
 

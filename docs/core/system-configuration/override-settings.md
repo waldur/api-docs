@@ -15,7 +15,7 @@
 
 ### Get all overridable settings
 
-Returns all settings that can be overridden in the database via the Constance backend. Requires admin permissions.
+Returns all settings that can be overridden in the database via the Constance backend. Staff receive every value. Support users receive the same keys, with secret_field values blanked.
 
 
 === "HTTPie"
@@ -71,6 +71,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `HOMEPORT_URL` | string |
     | `RANCHER_USERNAME_INPUT_LABEL` | string |
     | `DISCLAIMER_AREA_TEXT` | string |
+    | `ABOUT_US_PAGE_ENABLED` | boolean |
+    | `ABOUT_US_PAGE_CONTENT` | string |
     | `SITE_ADDRESS` | string |
     | `SITE_EMAIL` | string |
     | `SITE_PHONE` | string |
@@ -95,6 +97,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |
     | `TELEMETRY_URL` | string |
     | `TELEMETRY_VERSION` | integer |
+    | `TELEMETRY_DEPLOYMENT_ID` | string |
     | `CHECK_FOR_UPDATES` | boolean |
     | `SCRIPT_RUN_MODE` | string |
     | `DOCKER_CLIENT` | string |
@@ -148,6 +151,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `WALDUR_SUPPORT_ENABLED` | boolean |
     | `WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE` | string |
     | `WALDUR_SUPPORT_DISPLAY_REQUEST_TYPE` | boolean |
+    | `WALDUR_SUPPORT_ISSUE_KEY_PREFIX` | string |
     | `WALDUR_SUPPORT_PROVIDER_ROUTING_ENABLED` | boolean |
     | `WALDUR_SUPPORT_AUTO_ASSIGN` | boolean |
     | `WALDUR_SUPPORT_AUTO_ASSIGN_STRATEGY` | string |
@@ -163,6 +167,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ATLASSIAN_TOKEN` | string |
     | `ATLASSIAN_PERSONAL_ACCESS_TOKEN` | string |
     | `ATLASSIAN_OAUTH2_CLIENT_ID` | string |
+    | `ATLASSIAN_OAUTH2_CLIENT_SECRET` | string |
     | `ATLASSIAN_OAUTH2_ACCESS_TOKEN` | string |
     | `ATLASSIAN_OAUTH2_TOKEN_TYPE` | string |
     | `ATLASSIAN_VERIFY_SSL` | boolean |
@@ -212,6 +217,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND` | boolean |
     | `ENABLE_MOCK_COURSE_ACCOUNT_BACKEND` | boolean |
     | `PROPOSAL_REVIEW_DURATION` | integer |
+    | `PROPOSAL_DASHBOARD_REVIEWS_DUE_WITHIN_DAYS` | integer |
     | `ORCID_CLIENT_ID` | string |
     | `ORCID_CLIENT_SECRET` | string |
     | `ORCID_REDIRECT_URI` | string (uri) |
@@ -246,6 +252,10 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `SCIM_INBOUND_SOURCE_NAME` | string |
     | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |
     | `SCIM_INBOUND_SSH_KEYS_ENABLED` | boolean |
+    | `SCIM_USER_MATCH_WALDUR_ATTRIBUTE` | string |
+    | `SCIM_USER_MATCH_SCIM_ATTRIBUTE` | string |
+    | `SRAM_INTEGRATION_ENABLED` | boolean |
+    | `SRAM_PLACEHOLDER_ROLE_TEMPLATE` | string |
     | `SCIM_PULL_API_URL` | string |
     | `SCIM_PULL_API_KEY` | string |
     | `SCIM_PULL_SOURCE_NAME` | string |
@@ -257,6 +267,7 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `OIDC_CLIENT_SECRET` | string |
     | `OIDC_USER_FIELD` | string |
     | `OIDC_CACHE_TIMEOUT` | integer |
+    | `OIDC_REGISTRATION_METHOD` | string |
     | `OIDC_ACCESS_TOKEN_ENABLED` | boolean |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS_RESPONSE_MESSAGE` | string |
@@ -269,6 +280,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |
     | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of anys |
     | `DEFAULT_CALL_USER_ATTRIBUTES` | array of anys |
+    | `DEFAULT_PROPOSAL_REQUIRED_FIELDS` | array of anys |
+    | `DEFAULT_PROPOSAL_HIDDEN_FIELDS` | array of anys |
     | `INVITATION_ALLOWED_FIELDS` | array of anys |
     | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of anys |
     | `MANDATORY_USER_ATTRIBUTES` | array of anys |
@@ -356,6 +369,12 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ARROW_CONSUMPTION_SYNC_ENABLED` | boolean |
     | `ARROW_CONSUMPTION_SYNC_INTERVAL_HOURS` | integer |
     | `ARROW_BILLING_CHECK_INTERVAL_HOURS` | integer |
+    | `METRICS_LATE_DATA_DAYS` | integer |
+    | `METRICS_MAX_SERIES_PER_RESOURCE_METRIC` | integer |
+    | `METRICS_MAX_POINTS_PER_REQUEST` | integer |
+    | `METRICS_MAX_OTLP_BODY_BYTES` | integer |
+    | `METRICS_DEFAULT_RETENTION_POLICY` | string |
+    | `METRICS_ARCHIVE_GRACE_DAYS` | integer |
     | `USAGE_POLL_RECORD_RETENTION_MONTHS` | integer |
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |
@@ -370,21 +389,25 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `POSIX_ID_POOL_UTILIZATION_THRESHOLD` | integer |
     | `AFFILIATES_ENABLED` | boolean |
     | `MATRIX_ENABLED` | boolean |
+    | `MATRIX_AUTO_CREATE_PROJECT_ROOMS` | boolean |
     | `MATRIX_HOMESERVER_URL` | string (uri) |
     | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |
     | `MATRIX_HOMESERVER_DOMAIN` | string |
     | `MATRIX_APPSERVICE_AS_TOKEN` | string |
     | `MATRIX_APPSERVICE_HS_TOKEN` | string |
     | `MATRIX_APPSERVICE_SENDER_LOCALPART` | string |
+    | `MATRIX_TOKENS_MANAGED_BY` | string |
     | `MATRIX_HISTORY_EXPORT_ENABLED` | boolean |
     | `MATRIX_EXPORT_MEDIA` | boolean |
+    | `MATRIX_HISTORY_EXPORT_RETENTION_DAYS` | integer |
     | `MATRIX_USER_REGISTRATION_SECRET` | string |
     | `MATRIX_USER_ID_FORMAT` | string |
-    | `MATRIX_LOGIN_METHOD` | string |
-    | `MATRIX_OIDC_PROVIDER_URL` | string (uri) |
+    | `MATRIX_EXTERNAL_LOGIN_METHOD` | string |
+    | `MATRIX_SSO_REGISTRATION_METHOD` | string |
     | `MATRIX_LIVEKIT_KEY` | string |
     | `MATRIX_LIVEKIT_SECRET` | string |
     | `MATRIX_LIVEKIT_URL` | string (uri) |
+    | `MATRIX_LIVEKIT_PUBLIC_URL` | string |
     | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |
     | `PAT_ENABLED` | boolean |
     | `PAT_MAX_LIFETIME_DAYS` | integer |
@@ -399,7 +422,7 @@ Returns all settings that can be overridden in the database via the Constance ba
 
 ### Update overridable settings
 
-Updates one or more settings in the database via the Constance backend. Requires admin permissions.
+Updates one or more settings in the database via the Constance backend. Requires staff permissions. Support users cannot update settings.
 
 
 === "HTTPie"
@@ -460,6 +483,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `HOMEPORT_URL` | string |  |
     | `RANCHER_USERNAME_INPUT_LABEL` | string |  |
     | `DISCLAIMER_AREA_TEXT` | string |  |
+    | `ABOUT_US_PAGE_ENABLED` | boolean |  |
+    | `ABOUT_US_PAGE_CONTENT` | string |  |
     | `SITE_ADDRESS` | string |  |
     | `SITE_EMAIL` | string |  |
     | `SITE_PHONE` | string |  |
@@ -484,6 +509,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES` | boolean |  |
     | `TELEMETRY_URL` | string |  |
     | `TELEMETRY_VERSION` | integer |  |
+    | `TELEMETRY_DEPLOYMENT_ID` | string |  |
     | `CHECK_FOR_UPDATES` | boolean |  |
     | `SCRIPT_RUN_MODE` | string |  |
     | `DOCKER_CLIENT` | string |  |
@@ -537,6 +563,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `WALDUR_SUPPORT_ENABLED` | boolean |  |
     | `WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE` | string |  |
     | `WALDUR_SUPPORT_DISPLAY_REQUEST_TYPE` | boolean |  |
+    | `WALDUR_SUPPORT_ISSUE_KEY_PREFIX` | string |  |
     | `WALDUR_SUPPORT_PROVIDER_ROUTING_ENABLED` | boolean |  |
     | `WALDUR_SUPPORT_AUTO_ASSIGN` | boolean |  |
     | `WALDUR_SUPPORT_AUTO_ASSIGN_STRATEGY` | string |  |
@@ -552,6 +579,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ATLASSIAN_TOKEN` | string |  |
     | `ATLASSIAN_PERSONAL_ACCESS_TOKEN` | string |  |
     | `ATLASSIAN_OAUTH2_CLIENT_ID` | string |  |
+    | `ATLASSIAN_OAUTH2_CLIENT_SECRET` | string |  |
     | `ATLASSIAN_OAUTH2_ACCESS_TOKEN` | string |  |
     | `ATLASSIAN_OAUTH2_TOKEN_TYPE` | string |  |
     | `ATLASSIAN_VERIFY_SSL` | boolean |  |
@@ -601,6 +629,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND` | boolean |  |
     | `ENABLE_MOCK_COURSE_ACCOUNT_BACKEND` | boolean |  |
     | `PROPOSAL_REVIEW_DURATION` | integer |  |
+    | `PROPOSAL_DASHBOARD_REVIEWS_DUE_WITHIN_DAYS` | integer |  |
     | `ORCID_CLIENT_ID` | string |  |
     | `ORCID_CLIENT_SECRET` | string |  |
     | `ORCID_REDIRECT_URI` | string (uri) |  |
@@ -635,6 +664,10 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `SCIM_INBOUND_SOURCE_NAME` | string |  |
     | `SCIM_INBOUND_ALLOWED_ATTRIBUTES` | array of anys |  |
     | `SCIM_INBOUND_SSH_KEYS_ENABLED` | boolean |  |
+    | `SCIM_USER_MATCH_WALDUR_ATTRIBUTE` | string |  |
+    | `SCIM_USER_MATCH_SCIM_ATTRIBUTE` | string |  |
+    | `SRAM_INTEGRATION_ENABLED` | boolean |  |
+    | `SRAM_PLACEHOLDER_ROLE_TEMPLATE` | string |  |
     | `SCIM_PULL_API_URL` | string |  |
     | `SCIM_PULL_API_KEY` | string |  |
     | `SCIM_PULL_SOURCE_NAME` | string |  |
@@ -646,6 +679,7 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `OIDC_CLIENT_SECRET` | string |  |
     | `OIDC_USER_FIELD` | string |  |
     | `OIDC_CACHE_TIMEOUT` | integer |  |
+    | `OIDC_REGISTRATION_METHOD` | string |  |
     | `OIDC_ACCESS_TOKEN_ENABLED` | boolean |  |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS` | boolean |  |
     | `OIDC_BLOCK_CREATION_OF_UNINVITED_USERS_RESPONSE_MESSAGE` | string |  |
@@ -658,6 +692,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `REMOTE_EDUTEAMS_REFRESH_TOKEN` | string |  |
     | `DEFAULT_OFFERING_USER_ATTRIBUTES` | array of anys |  |
     | `DEFAULT_CALL_USER_ATTRIBUTES` | array of anys |  |
+    | `DEFAULT_PROPOSAL_REQUIRED_FIELDS` | array of anys |  |
+    | `DEFAULT_PROPOSAL_HIDDEN_FIELDS` | array of anys |  |
     | `INVITATION_ALLOWED_FIELDS` | array of anys |  |
     | `ENABLED_USER_PROFILE_ATTRIBUTES` | array of anys |  |
     | `MANDATORY_USER_ATTRIBUTES` | array of anys |  |
@@ -745,6 +781,12 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ARROW_CONSUMPTION_SYNC_ENABLED` | boolean |  |
     | `ARROW_CONSUMPTION_SYNC_INTERVAL_HOURS` | integer |  |
     | `ARROW_BILLING_CHECK_INTERVAL_HOURS` | integer |  |
+    | `METRICS_LATE_DATA_DAYS` | integer |  |
+    | `METRICS_MAX_SERIES_PER_RESOURCE_METRIC` | integer |  |
+    | `METRICS_MAX_POINTS_PER_REQUEST` | integer |  |
+    | `METRICS_MAX_OTLP_BODY_BYTES` | integer |  |
+    | `METRICS_DEFAULT_RETENTION_POLICY` | string |  |
+    | `METRICS_ARCHIVE_GRACE_DAYS` | integer |  |
     | `USAGE_POLL_RECORD_RETENTION_MONTHS` | integer |  |
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |  |
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |  |
@@ -759,21 +801,25 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `POSIX_ID_POOL_UTILIZATION_THRESHOLD` | integer |  |
     | `AFFILIATES_ENABLED` | boolean |  |
     | `MATRIX_ENABLED` | boolean |  |
+    | `MATRIX_AUTO_CREATE_PROJECT_ROOMS` | boolean |  |
     | `MATRIX_HOMESERVER_URL` | string (uri) |  |
     | `MATRIX_HOMESERVER_PUBLIC_URL` | string (uri) |  |
     | `MATRIX_HOMESERVER_DOMAIN` | string |  |
     | `MATRIX_APPSERVICE_AS_TOKEN` | string |  |
     | `MATRIX_APPSERVICE_HS_TOKEN` | string |  |
     | `MATRIX_APPSERVICE_SENDER_LOCALPART` | string |  |
+    | `MATRIX_TOKENS_MANAGED_BY` | string |  |
     | `MATRIX_HISTORY_EXPORT_ENABLED` | boolean |  |
     | `MATRIX_EXPORT_MEDIA` | boolean |  |
+    | `MATRIX_HISTORY_EXPORT_RETENTION_DAYS` | integer |  |
     | `MATRIX_USER_REGISTRATION_SECRET` | string |  |
     | `MATRIX_USER_ID_FORMAT` | string |  |
-    | `MATRIX_LOGIN_METHOD` | string |  |
-    | `MATRIX_OIDC_PROVIDER_URL` | string (uri) |  |
+    | `MATRIX_EXTERNAL_LOGIN_METHOD` | string |  |
+    | `MATRIX_SSO_REGISTRATION_METHOD` | string |  |
     | `MATRIX_LIVEKIT_KEY` | string |  |
     | `MATRIX_LIVEKIT_SECRET` | string |  |
     | `MATRIX_LIVEKIT_URL` | string (uri) |  |
+    | `MATRIX_LIVEKIT_PUBLIC_URL` | string |  |
     | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |  |
     | `PAT_ENABLED` | boolean |  |
     | `PAT_MAX_LIFETIME_DAYS` | integer |  |

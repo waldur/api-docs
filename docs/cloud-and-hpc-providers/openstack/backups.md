@@ -159,7 +159,7 @@ Get a list of instance backups.
     | `restorations.floating_ips.subnet_uuid` | string (uuid) |  |
     | `restorations.floating_ips.subnet_name` | string |  |
     | `restorations.floating_ips.subnet_description` | string |  |
-    | `restorations.floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.security_groups` | array of objects |  |
     | `restorations.security_groups.url` | string (uri) |  |
     | `restorations.security_groups.name` | string |  |
@@ -186,7 +186,7 @@ Get a list of instance backups.
     | `restorations.ports.subnet_uuid` | string (uuid) |  |
     | `restorations.ports.subnet_name` | string |  |
     | `restorations.ports.subnet_description` | string |  |
-    | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
     | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
@@ -233,6 +233,7 @@ Get a list of instance backups.
     | `restorations.ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `restorations.ports.security_groups.rules.id` | integer |  |
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `restorations.ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
@@ -270,7 +271,7 @@ Get a list of instance backups.
     | `instance_ports.subnet_uuid` | string (uuid) |  |
     | `instance_ports.subnet_name` | string |  |
     | `instance_ports.subnet_description` | string |  |
-    | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
     | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
@@ -317,6 +318,7 @@ Get a list of instance backups.
     | `instance_ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `instance_ports.security_groups.rules.id` | integer |  |
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `instance_ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
     | `instance_ports.security_groups.marketplace_offering_type` | string |  |
@@ -340,7 +342,7 @@ Get a list of instance backups.
     | `instance_floating_ips.subnet_uuid` | string (uuid) |  |
     | `instance_floating_ips.subnet_name` | string |  |
     | `instance_floating_ips.subnet_description` | string |  |
-    | `instance_floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -479,7 +481,7 @@ Retrieve details of a specific instance backup.
     | `restorations.floating_ips.subnet_uuid` | string (uuid) |  |
     | `restorations.floating_ips.subnet_name` | string |  |
     | `restorations.floating_ips.subnet_description` | string |  |
-    | `restorations.floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.security_groups` | array of objects |  |
     | `restorations.security_groups.url` | string (uri) |  |
     | `restorations.security_groups.name` | string |  |
@@ -506,7 +508,7 @@ Retrieve details of a specific instance backup.
     | `restorations.ports.subnet_uuid` | string (uuid) |  |
     | `restorations.ports.subnet_name` | string |  |
     | `restorations.ports.subnet_description` | string |  |
-    | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
     | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
@@ -553,6 +555,7 @@ Retrieve details of a specific instance backup.
     | `restorations.ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `restorations.ports.security_groups.rules.id` | integer |  |
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `restorations.ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
@@ -590,7 +593,7 @@ Retrieve details of a specific instance backup.
     | `instance_ports.subnet_uuid` | string (uuid) |  |
     | `instance_ports.subnet_name` | string |  |
     | `instance_ports.subnet_description` | string |  |
-    | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
     | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
@@ -637,6 +640,7 @@ Retrieve details of a specific instance backup.
     | `instance_ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `instance_ports.security_groups.rules.id` | integer |  |
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `instance_ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
     | `instance_ports.security_groups.marketplace_offering_type` | string |  |
@@ -660,7 +664,7 @@ Retrieve details of a specific instance backup.
     | `instance_floating_ips.subnet_uuid` | string (uuid) |  |
     | `instance_floating_ips.subnet_name` | string |  |
     | `instance_floating_ips.subnet_description` | string |  |
-    | `instance_floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -957,7 +961,7 @@ Update an existing instance backup.
     | `restorations.floating_ips.subnet_uuid` | string (uuid) |  |
     | `restorations.floating_ips.subnet_name` | string |  |
     | `restorations.floating_ips.subnet_description` | string |  |
-    | `restorations.floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.security_groups` | array of objects |  |
     | `restorations.security_groups.url` | string (uri) |  |
     | `restorations.security_groups.name` | string |  |
@@ -984,7 +988,7 @@ Update an existing instance backup.
     | `restorations.ports.subnet_uuid` | string (uuid) |  |
     | `restorations.ports.subnet_name` | string |  |
     | `restorations.ports.subnet_description` | string |  |
-    | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
     | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
@@ -1031,6 +1035,7 @@ Update an existing instance backup.
     | `restorations.ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `restorations.ports.security_groups.rules.id` | integer |  |
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `restorations.ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
@@ -1068,7 +1073,7 @@ Update an existing instance backup.
     | `instance_ports.subnet_uuid` | string (uuid) |  |
     | `instance_ports.subnet_name` | string |  |
     | `instance_ports.subnet_description` | string |  |
-    | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
     | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
@@ -1115,6 +1120,7 @@ Update an existing instance backup.
     | `instance_ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `instance_ports.security_groups.rules.id` | integer |  |
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `instance_ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
     | `instance_ports.security_groups.marketplace_offering_type` | string |  |
@@ -1138,7 +1144,7 @@ Update an existing instance backup.
     | `instance_floating_ips.subnet_uuid` | string (uuid) |  |
     | `instance_floating_ips.subnet_name` | string |  |
     | `instance_floating_ips.subnet_description` | string |  |
-    | `instance_floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -1282,7 +1288,7 @@ Update specific fields of an instance backup.
     | `restorations.floating_ips.subnet_uuid` | string (uuid) |  |
     | `restorations.floating_ips.subnet_name` | string |  |
     | `restorations.floating_ips.subnet_description` | string |  |
-    | `restorations.floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.security_groups` | array of objects |  |
     | `restorations.security_groups.url` | string (uri) |  |
     | `restorations.security_groups.name` | string |  |
@@ -1309,7 +1315,7 @@ Update specific fields of an instance backup.
     | `restorations.ports.subnet_uuid` | string (uuid) |  |
     | `restorations.ports.subnet_name` | string |  |
     | `restorations.ports.subnet_description` | string |  |
-    | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
     | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
@@ -1356,6 +1362,7 @@ Update specific fields of an instance backup.
     | `restorations.ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `restorations.ports.security_groups.rules.id` | integer |  |
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `restorations.ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
@@ -1393,7 +1400,7 @@ Update specific fields of an instance backup.
     | `instance_ports.subnet_uuid` | string (uuid) |  |
     | `instance_ports.subnet_name` | string |  |
     | `instance_ports.subnet_description` | string |  |
-    | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
     | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
@@ -1440,6 +1447,7 @@ Update specific fields of an instance backup.
     | `instance_ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `instance_ports.security_groups.rules.id` | integer |  |
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `instance_ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
     | `instance_ports.security_groups.marketplace_offering_type` | string |  |
@@ -1463,7 +1471,7 @@ Update specific fields of an instance backup.
     | `instance_floating_ips.subnet_uuid` | string (uuid) |  |
     | `instance_floating_ips.subnet_name` | string |  |
     | `instance_floating_ips.subnet_description` | string |  |
-    | `instance_floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -1734,7 +1742,7 @@ Restore instance from backup
     | `floating_ips.subnet_uuid` | string (uuid) |  |
     | `floating_ips.subnet_name` | string |  |
     | `floating_ips.subnet_description` | string |  |
-    | `floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports` | array of objects |  |
     | `ports.url` | string (uri) |  |
     | `ports.fixed_ips` | array of objects |  |
@@ -1745,7 +1753,7 @@ Restore instance from backup
     | `ports.subnet_uuid` | string (uuid) |  |
     | `ports.subnet_name` | string |  |
     | `ports.subnet_description` | string |  |
-    | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports.allowed_address_pairs` | array of objects |  |
     | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
@@ -1792,6 +1800,7 @@ Restore instance from backup
     | `ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `ports.security_groups.rules.id` | integer |  |
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
     | `ports.security_groups.marketplace_offering_type` | string |  |
@@ -1814,6 +1823,7 @@ Restore instance from backup
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
     | `external_address` | array of strings |  |
+    | `metadata` | object (free-form) | Nova instance metadata as string-to-string pairs. At most 128 entries; keys and values up to 255 characters. |
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |

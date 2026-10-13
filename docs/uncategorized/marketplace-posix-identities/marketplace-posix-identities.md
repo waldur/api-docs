@@ -25,7 +25,9 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_posix_identities import marketplace_posix_identities_list # (1)
+    from waldur_api_client.models.posix_identity_consumer_type_enum import PosixIdentityConsumerTypeEnum # (1)
+    from waldur_api_client.models.posix_identity_o_enum import PosixIdentityOEnum # (2)
+    from waldur_api_client.api.marketplace_posix_identities import marketplace_posix_identities_list # (3)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -37,7 +39,9 @@
     ```
     
     
-    1.  **API Source:** [`marketplace_posix_identities_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_posix_identities/marketplace_posix_identities_list.py)
+    1.  **Model Source:** [`PosixIdentityConsumerTypeEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/posix_identity_consumer_type_enum.py)
+    2.  **Model Source:** [`PosixIdentityOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/posix_identity_o_enum.py)
+    3.  **API Source:** [`marketplace_posix_identities_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_posix_identities/marketplace_posix_identities_list.py)
 
 === "TypeScript"
 
@@ -59,11 +63,22 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `consumer_type` | string | Principal kind<br><br><br>_Enum: `offeringrolegroup`, `offeringusergroup`, `robotaccount`, `user`_ |
+    | `gid` | integer | GID |
+    | `gid_max` | integer | Maximum GID |
+    | `gid_min` | integer | Minimum GID |
     | `is_released` | boolean |  |
+    | `keyword` | string | Keyword (account username, first or last name, robot account name) |
+    | `o` | array | Ordering<br><br> |
     | `offering_uuid` | string (uuid) | Offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `pool_uuid` | string (uuid) | POSIX ID pool UUID |
+    | `recyclable` | boolean | Recyclable (false lists released values withheld from the pool) |
+    | `uid` | integer | UID |
+    | `uid_max` | integer | Maximum UID |
+    | `uid_min` | integer | Minimum UID |
+    | `user_uuid` | string (uuid) | User UUID |
 
 
 === "Responses"
@@ -72,19 +87,22 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `uid` | integer (int64) |
-    | `gid` | integer (int64) |
-    | `released_at` | string (date-time) |
-    | `pool_uuid` | string (uuid) |
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
-    | `consumer_type` | string |
-    | `consumer_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `uid` | integer (int64) |  |
+    | `gid` | integer (int64) |  |
+    | `released_at` | string (date-time) |  |
+    | `recyclable` | boolean |  |
+    | `pool_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `user_uuid` | string (uuid) |  |
+    | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `consumer_type` | string |  |
+    | `consumer_name` | string |  |
 
 ---
 
@@ -150,18 +168,21 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `uid` | integer (int64) |
-    | `gid` | integer (int64) |
-    | `released_at` | string (date-time) |
-    | `pool_uuid` | string (uuid) |
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
-    | `consumer_type` | string |
-    | `consumer_name` | string |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `created` | string (date-time) |  |
+    | `uid` | integer (int64) |  |
+    | `gid` | integer (int64) |  |
+    | `released_at` | string (date-time) |  |
+    | `recyclable` | boolean |  |
+    | `pool_uuid` | string (uuid) |  |
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `user_uuid` | string (uuid) |  |
+    | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `consumer_type` | string |  |
+    | `consumer_name` | string |  |
 
 ---

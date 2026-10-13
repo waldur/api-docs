@@ -21,6 +21,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/openstack-instances/{uuid}/floating_ips/` | [List instance floating IPs](#list-instance-floating-ips) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-instances/{uuid}/ports/` | [List instance ports](#list-instance-ports) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/backup/` | [Create instance backup](#create-instance-backup) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/console_log/` | [Get console log](#get-console-log) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/update_allowed_address_pairs/` | [Update instance allowed address pairs](#update-instance-allowed-address-pairs) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/update_floating_ips/` | [Update instance floating IPs](#update-instance-floating-ips) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/update_ports/` | [Update instance ports](#update-instance-ports) |
@@ -31,6 +32,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/diagnose_connectivity/` | [Diagnose connectivity](#diagnose-connectivity) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/rescue/` | [Rescue instance](#rescue-instance) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/set_metadata/` | [Set instance metadata](#set-instance-metadata) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/set_ok/` | [Mark resource as OK](#mark-resource-as-ok) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/unrescue/` | [Unrescue instance](#unrescue-instance) |
 
@@ -118,6 +120,8 @@ Get a list of VM instances.
     | `project_uuid` | string (uuid) | Project UUID |
     | `query` | string | Search by name, internal IP, or external IP |
     | `runtime_state` | string |  |
+    | `security_group` | string (uri) | Security group URL |
+    | `security_group_uuid` | string (uuid) | Security group UUID |
     | `service_settings_name` | string | Service settings name |
     | `service_settings_uuid` | string (uuid) | Service settings UUID |
     | `state` | array | State<br><br> |
@@ -220,7 +224,7 @@ Get a list of VM instances.
     | `floating_ips.subnet_uuid` | string (uuid) |  |
     | `floating_ips.subnet_name` | string |  |
     | `floating_ips.subnet_description` | string |  |
-    | `floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports` | array of objects |  |
     | `ports.url` | string (uri) |  |
     | `ports.fixed_ips` | array of objects |  |
@@ -231,7 +235,7 @@ Get a list of VM instances.
     | `ports.subnet_uuid` | string (uuid) |  |
     | `ports.subnet_name` | string |  |
     | `ports.subnet_description` | string |  |
-    | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports.allowed_address_pairs` | array of objects |  |
     | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
@@ -278,6 +282,7 @@ Get a list of VM instances.
     | `ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `ports.security_groups.rules.id` | integer |  |
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
     | `ports.security_groups.marketplace_offering_type` | string |  |
@@ -300,6 +305,7 @@ Get a list of VM instances.
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
     | `external_address` | array of strings |  |
+    | `metadata` | object (free-form) | Nova instance metadata as string-to-string pairs. At most 128 entries; keys and values up to 255 characters. |
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -477,7 +483,7 @@ Retrieve details of a specific VM instance.
     | `floating_ips.subnet_uuid` | string (uuid) |  |
     | `floating_ips.subnet_name` | string |  |
     | `floating_ips.subnet_description` | string |  |
-    | `floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports` | array of objects |  |
     | `ports.url` | string (uri) |  |
     | `ports.fixed_ips` | array of objects |  |
@@ -488,7 +494,7 @@ Retrieve details of a specific VM instance.
     | `ports.subnet_uuid` | string (uuid) |  |
     | `ports.subnet_name` | string |  |
     | `ports.subnet_description` | string |  |
-    | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports.allowed_address_pairs` | array of objects |  |
     | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
@@ -535,6 +541,7 @@ Retrieve details of a specific VM instance.
     | `ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `ports.security_groups.rules.id` | integer |  |
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
     | `ports.security_groups.marketplace_offering_type` | string |  |
@@ -557,6 +564,7 @@ Retrieve details of a specific VM instance.
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
     | `external_address` | array of strings |  |
+    | `metadata` | object (free-form) | Nova instance metadata as string-to-string pairs. At most 128 entries; keys and values up to 255 characters. |
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -891,7 +899,7 @@ Update an existing VM instance.
     | `floating_ips.subnet_uuid` | string (uuid) |  |
     | `floating_ips.subnet_name` | string |  |
     | `floating_ips.subnet_description` | string |  |
-    | `floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports` | array of objects |  |
     | `ports.url` | string (uri) |  |
     | `ports.fixed_ips` | array of objects |  |
@@ -902,7 +910,7 @@ Update an existing VM instance.
     | `ports.subnet_uuid` | string (uuid) |  |
     | `ports.subnet_name` | string |  |
     | `ports.subnet_description` | string |  |
-    | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports.allowed_address_pairs` | array of objects |  |
     | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
@@ -949,6 +957,7 @@ Update an existing VM instance.
     | `ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `ports.security_groups.rules.id` | integer |  |
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
     | `ports.security_groups.marketplace_offering_type` | string |  |
@@ -971,6 +980,7 @@ Update an existing VM instance.
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
     | `external_address` | array of strings |  |
+    | `metadata` | object (free-form) | Nova instance metadata as string-to-string pairs. At most 128 entries; keys and values up to 255 characters. |
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -1152,7 +1162,7 @@ Update specific fields of a VM instance.
     | `floating_ips.subnet_uuid` | string (uuid) |  |
     | `floating_ips.subnet_name` | string |  |
     | `floating_ips.subnet_description` | string |  |
-    | `floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports` | array of objects |  |
     | `ports.url` | string (uri) |  |
     | `ports.fixed_ips` | array of objects |  |
@@ -1163,7 +1173,7 @@ Update specific fields of a VM instance.
     | `ports.subnet_uuid` | string (uuid) |  |
     | `ports.subnet_name` | string |  |
     | `ports.subnet_description` | string |  |
-    | `ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `ports.allowed_address_pairs` | array of objects |  |
     | `ports.allowed_address_pairs.ip_address` | string |  |
     | `ports.allowed_address_pairs.mac_address` | string |  |
@@ -1210,6 +1220,7 @@ Update specific fields of a VM instance.
     | `ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `ports.security_groups.rules.id` | integer |  |
     | `ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `ports.security_groups.marketplace_offering_uuid` | string |  |
     | `ports.security_groups.marketplace_offering_name` | string |  |
     | `ports.security_groups.marketplace_offering_type` | string |  |
@@ -1232,6 +1243,7 @@ Update specific fields of a VM instance.
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
     | `tenant` | string (uri) | The OpenStack tenant to create the instance in |
     | `external_address` | array of strings |  |
+    | `metadata` | object (free-form) | Nova instance metadata as string-to-string pairs. At most 128 entries; keys and values up to 255 characters. |
     | `rancher_cluster` | any |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -1695,7 +1707,7 @@ Get a list of instance floating IPs
     | `subnet_uuid` | string (uuid) |  |
     | `subnet_name` | string |  |
     | `subnet_description` | string |  |
-    | `subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
 
 ---
 
@@ -1785,7 +1797,7 @@ Get a list of instance ports
     | `subnet_uuid` | string (uuid) |  |
     | `subnet_name` | string |  |
     | `subnet_description` | string |  |
-    | `subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `allowed_address_pairs` | array of objects |  |
     | `allowed_address_pairs.ip_address` | string |  |
     | `allowed_address_pairs.mac_address` | string |  |
@@ -1832,6 +1844,7 @@ Get a list of instance ports
     | `security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `security_groups.rules.id` | integer |  |
     | `security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `security_groups.marketplace_offering_uuid` | string |  |
     | `security_groups.marketplace_offering_name` | string |  |
     | `security_groups.marketplace_offering_type` | string |  |
@@ -1980,7 +1993,7 @@ Create backup from instance
     | `restorations.floating_ips.subnet_uuid` | string (uuid) |  |
     | `restorations.floating_ips.subnet_name` | string |  |
     | `restorations.floating_ips.subnet_description` | string |  |
-    | `restorations.floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.security_groups` | array of objects |  |
     | `restorations.security_groups.url` | string (uri) |  |
     | `restorations.security_groups.name` | string |  |
@@ -2007,7 +2020,7 @@ Create backup from instance
     | `restorations.ports.subnet_uuid` | string (uuid) |  |
     | `restorations.ports.subnet_name` | string |  |
     | `restorations.ports.subnet_description` | string |  |
-    | `restorations.ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `restorations.ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `restorations.ports.allowed_address_pairs` | array of objects |  |
     | `restorations.ports.allowed_address_pairs.ip_address` | string |  |
     | `restorations.ports.allowed_address_pairs.mac_address` | string |  |
@@ -2054,6 +2067,7 @@ Create backup from instance
     | `restorations.ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `restorations.ports.security_groups.rules.id` | integer |  |
     | `restorations.ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `restorations.ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `restorations.ports.security_groups.marketplace_offering_uuid` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_name` | string |  |
     | `restorations.ports.security_groups.marketplace_offering_type` | string |  |
@@ -2091,7 +2105,7 @@ Create backup from instance
     | `instance_ports.subnet_uuid` | string (uuid) |  |
     | `instance_ports.subnet_name` | string |  |
     | `instance_ports.subnet_description` | string |  |
-    | `instance_ports.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_ports.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `instance_ports.allowed_address_pairs` | array of objects |  |
     | `instance_ports.allowed_address_pairs.ip_address` | string |  |
     | `instance_ports.allowed_address_pairs.mac_address` | string |  |
@@ -2138,6 +2152,7 @@ Create backup from instance
     | `instance_ports.security_groups.rules.remote_group_uuid` | string (uuid) |  |
     | `instance_ports.security_groups.rules.id` | integer |  |
     | `instance_ports.security_groups.rules.remote_group` | string (uri) | Remote security group that this rule references, if any |
+    | `instance_ports.security_groups.instance_count` | integer | Number of instances the security group is attached to. It is annotated by the security group endpoints only, so it is null when the group is rendered as a nested object. |
     | `instance_ports.security_groups.marketplace_offering_uuid` | string |  |
     | `instance_ports.security_groups.marketplace_offering_name` | string |  |
     | `instance_ports.security_groups.marketplace_offering_type` | string |  |
@@ -2161,7 +2176,7 @@ Create backup from instance
     | `instance_floating_ips.subnet_uuid` | string (uuid) |  |
     | `instance_floating_ips.subnet_name` | string |  |
     | `instance_floating_ips.subnet_description` | string |  |
-    | `instance_floating_ips.subnet_cidr` | string | IPv4 network address in CIDR format (e.g. 192.168.0.0/24) |
+    | `instance_floating_ips.subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
     | `tenant_uuid` | string (uuid) |  |
     | `marketplace_offering_uuid` | string |  |
     | `marketplace_offering_name` | string |  |
@@ -2174,6 +2189,85 @@ Create backup from instance
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+---
+
+### Get console log
+
+Get console log for the instance. Same as the GET form, but takes `length` in the request body, so action-oriented clients such as the Ansible collection can call it like any other instance action.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-instances/a1b2c3d4-e5f6-7890-abcd-ef1234567890/console_log/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.open_stack_console_log_request import OpenStackConsoleLogRequest # (1)
+    from waldur_api_client.api.openstack_instances import openstack_instances_console_log # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = OpenStackConsoleLogRequest()
+    response = openstack_instances_console_log.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`OpenStackConsoleLogRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_console_log_request.py)
+    2.  **API Source:** [`openstack_instances_console_log`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_instances/openstack_instances_console_log.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackInstancesConsoleLog } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackInstancesConsoleLog({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `length` | integer |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
 
 ---
 
@@ -2971,6 +3065,94 @@ Manually transition the resource to ERRED state. This is useful for resources st
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+---
+
+### Set instance metadata
+
+Replace the instance metadata with the given string key/value pairs. Keys absent from the payload are removed from Nova as well.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-instances/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_metadata/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      metadata:='{}'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.instance_set_metadata_request import InstanceSetMetadataRequest # (1)
+    from waldur_api_client.api.openstack_instances import openstack_instances_set_metadata # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = InstanceSetMetadataRequest(
+        metadata={}
+    )
+    response = openstack_instances_set_metadata.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`InstanceSetMetadataRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/instance_set_metadata_request.py)
+    2.  **API Source:** [`openstack_instances_set_metadata`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_instances/openstack_instances_set_metadata.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackInstancesSetMetadata } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackInstancesSetMetadata({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "metadata": {}
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `metadata` | object (free-form) | ✓ | Nova instance metadata as string-to-string pairs. At most 128 entries; keys and values up to 255 characters. |
+
+
+=== "Responses"
+
+    **`202`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `status` | string |
 
 ---
 

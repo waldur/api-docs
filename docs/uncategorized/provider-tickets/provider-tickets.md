@@ -79,6 +79,7 @@
     | `page_size` | integer | Number of results to return per page. |
     | `priority` | string |  |
     | `provider_assignee` | string (uuid) |  |
+    | `provider_helpdesk_uuid` | string (uuid) |  |
     | `sla_breached` | boolean |  |
     | `status` | string |  |
     | `summary` | string |  |
@@ -104,6 +105,7 @@
     | `modified` | string (date-time) |  |
     | `parent_issue_key` | string |  |
     | `parent_issue_uuid` | string (uuid) |  |
+    | `provider_helpdesk_uuid` | string (uuid) |  |
     | `is_escalated` | boolean | Whether this issue has been escalated. |
     | `escalated_at` | string (date-time) | When the issue was escalated. |
     | `provider_assignee` | string (uuid) |  |
@@ -197,6 +199,7 @@
     | `modified` | string (date-time) |  |
     | `parent_issue_key` | string |  |
     | `parent_issue_uuid` | string (uuid) |  |
+    | `provider_helpdesk_uuid` | string (uuid) |  |
     | `is_escalated` | boolean | Whether this issue has been escalated. |
     | `escalated_at` | string (date-time) | When the issue was escalated. |
     | `provider_assignee` | string (uuid) |  |
@@ -304,6 +307,7 @@
     | `modified` | string (date-time) |  |
     | `parent_issue_key` | string |  |
     | `parent_issue_uuid` | string (uuid) |  |
+    | `provider_helpdesk_uuid` | string (uuid) |  |
     | `is_escalated` | boolean | Whether this issue has been escalated. |
     | `escalated_at` | string (date-time) | When the issue was escalated. |
     | `provider_assignee` | string (uuid) |  |
@@ -411,6 +415,7 @@
     | `modified` | string (date-time) |  |
     | `parent_issue_key` | string |  |
     | `parent_issue_uuid` | string (uuid) |  |
+    | `provider_helpdesk_uuid` | string (uuid) |  |
     | `is_escalated` | boolean | Whether this issue has been escalated. |
     | `escalated_at` | string (date-time) | When the issue was escalated. |
     | `provider_assignee` | string (uuid) |  |
@@ -552,6 +557,13 @@
       console.error('Error:', error);
     }
     ```
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `provider_helpdesk_uuid` | string (uuid) | Count only the tickets routed to this helpdesk. |
 
 
 === "Responses"

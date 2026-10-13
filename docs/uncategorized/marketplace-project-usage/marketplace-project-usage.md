@@ -15,7 +15,7 @@
 
 ### Get resource usage statistics broken down per offering
 
-Returns one row per (offering, component type, billing type) for all non-terminated resources within the scope. Each row's `usage` and `limit_usage` are aggregated using the offering's own `limit_period`.
+Returns one row per (offering, component type, billing type) for all non-terminated resources within the scope (or all resources when `include_terminated` is true). Each row's `usage` and `limit_usage` are aggregated using the offering's own `limit_period`.
 
 
 === "HTTPie"
@@ -73,27 +73,36 @@ Returns one row per (offering, component type, billing type) for all non-termina
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `include_terminated` | boolean | If true, also counts terminated resources. Their share of usage is returned as usage_terminated (and limit_usage_terminated); limit never includes them. Ignored unless the dashboard.usage_include_terminated feature is enabled. |
+
+
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `components` | array of objects |
-    | `components.type` | string |
-    | `components.name` | string |
-    | `components.description` | string |
-    | `components.measured_unit` | string |
-    | `components.billing_type` | string |
-    | `components.usage` | number (double) |
-    | `components.limit_usage` | number (double) |
-    | `components.limit` | number (double) |
-    | `components.offering_name` | string |
-    | `components.offering_uuid` | string (uuid) |
-    | `components.limit_period` | string |
-    | `components.current_period_label` | string |
-    | `components.current_period_start` | string (date) |
-    | `components.current_period_end` | string (date) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `components` | array of objects |  |
+    | `components.type` | string |  |
+    | `components.name` | string |  |
+    | `components.description` | string |  |
+    | `components.measured_unit` | string |  |
+    | `components.billing_type` | string |  |
+    | `components.usage` | number (double) |  |
+    | `components.limit_usage` | number (double) |  |
+    | `components.usage_terminated` | number (double) | Part of usage that came from terminated resources. |
+    | `components.limit_usage_terminated` | number (double) | Part of limit_usage that came from terminated resources. |
+    | `components.limit` | number (double) |  |
+    | `components.offering_name` | string |  |
+    | `components.offering_uuid` | string (uuid) |  |
+    | `components.limit_period` | string |  |
+    | `components.current_period_label` | string |  |
+    | `components.current_period_start` | string (date) |  |
+    | `components.current_period_end` | string (date) |  |
 
 ---
 
@@ -167,33 +176,35 @@ Returns a per-month timeseries of `ComponentUsage` for one offering, restricted 
 
 === "Query Parameters"
 
-    | Name | Type | Required |
-    |---|---|---|
-    | `component_type` | string |  |
-    | `offering_uuid` | string (uuid) | ✓ |
-    | `period_offset` | integer |  |
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `component_type` | string |  |  |
+    | `include_terminated` | boolean |  | If true, also counts terminated resources. Their share of usage is returned as usage_terminated (and limit_usage_terminated); limit never includes them. Ignored unless the dashboard.usage_include_terminated feature is enabled. |
+    | `offering_uuid` | string (uuid) | ✓ |  |
+    | `period_offset` | integer |  |  |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `offering_uuid` | string (uuid) |
-    | `offering_name` | string |
-    | `type` | string |
-    | `name` | string |
-    | `measured_unit` | string |
-    | `billing_type` | string |
-    | `limit_period` | string |
-    | `limit` | number (double) |
-    | `current_period_label` | string |
-    | `current_period_start` | string (date) |
-    | `current_period_end` | string (date) |
-    | `today` | string (date) |
-    | `buckets` | array of objects |
-    | `buckets.billing_period` | string (date) |
-    | `buckets.usage` | number (double) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `offering_uuid` | string (uuid) |  |
+    | `offering_name` | string |  |
+    | `type` | string |  |
+    | `name` | string |  |
+    | `measured_unit` | string |  |
+    | `billing_type` | string |  |
+    | `limit_period` | string |  |
+    | `limit` | number (double) |  |
+    | `current_period_label` | string |  |
+    | `current_period_start` | string (date) |  |
+    | `current_period_end` | string (date) |  |
+    | `today` | string (date) |  |
+    | `buckets` | array of objects |  |
+    | `buckets.billing_period` | string (date) |  |
+    | `buckets.usage` | number (double) |  |
+    | `buckets.usage_terminated` | number (double) | Part of usage that came from terminated resources. |
 
 ---

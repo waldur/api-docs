@@ -210,6 +210,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
     | `project_description` | string |  |
+    | `project_start_date` | string (date) |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
     | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
@@ -225,8 +226,8 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
-    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
+    | `is_usage_based` | boolean | Returns True if the resource bills any component by usage under its plan. |
+    | `is_limit_based` | boolean | Returns True if the resource bills any component on user-adjustable limits under its plan. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
@@ -270,15 +271,16 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `offering_components.limit_period` | any |  |
-    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.limit_amount` | number (double) |  |
+    | `offering_components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `offering_components.article_code` | string |  |
-    | `offering_components.max_value` | integer |  |
-    | `offering_components.min_value` | integer |  |
-    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.max_value` | number (double) |  |
+    | `offering_components.min_value` | number (double) |  |
+    | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
-    | `offering_components.default_limit` | integer |  |
+    | `offering_components.default_limit` | number (double) |  |
     | `offering_components.factor` | integer |  |
-    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
@@ -288,6 +290,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
+    | `offering_account_settings` | any |  |
 
 ---
 
@@ -394,6 +397,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `user_image` | string (uri) |  |
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
+    | `source` | string |  |
 
 ---
 
@@ -511,6 +515,7 @@ Returns details of a specific resource accessible to the consumer.
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
     | `project_description` | string |  |
+    | `project_start_date` | string (date) |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
     | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
@@ -526,8 +531,8 @@ Returns details of a specific resource accessible to the consumer.
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
-    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
+    | `is_usage_based` | boolean | Returns True if the resource bills any component by usage under its plan. |
+    | `is_limit_based` | boolean | Returns True if the resource bills any component on user-adjustable limits under its plan. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
@@ -571,15 +576,16 @@ Returns details of a specific resource accessible to the consumer.
     | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `offering_components.limit_period` | any |  |
-    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.limit_amount` | number (double) |  |
+    | `offering_components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `offering_components.article_code` | string |  |
-    | `offering_components.max_value` | integer |  |
-    | `offering_components.min_value` | integer |  |
-    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.max_value` | number (double) |  |
+    | `offering_components.min_value` | number (double) |  |
+    | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
-    | `offering_components.default_limit` | integer |  |
+    | `offering_components.default_limit` | number (double) |  |
     | `offering_components.factor` | integer |  |
-    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
@@ -589,6 +595,7 @@ Returns details of a specific resource accessible to the consumer.
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
+    | `offering_account_settings` | any |  |
 
 ---
 
@@ -1380,6 +1387,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
     | `project_description` | string |  |
+    | `project_start_date` | string (date) |  |
     | `project_end_date` | string (date) | The date is inclusive. Once reached, all project resource will be scheduled for termination. |
     | `project_effective_end_date` | string (date) | Effective project end date including grace period. After this date, resources are terminated, except resources of offerings that disable the grace period — those are terminated on the raw project end date. |
     | `resource_effective_end_date` | string (date) | The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date). |
@@ -1395,8 +1403,8 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `parent_uuid` | string (uuid) |  |
     | `parent_name` | string |  |
     | `backend_metadata` | any |  |
-    | `is_usage_based` | boolean | Returns True if the resource has usage-based components that track variable consumption. |
-    | `is_limit_based` | boolean | Returns True if the resource has limit-based components with user-adjustable quotas. |
+    | `is_usage_based` | boolean | Returns True if the resource bills any component by usage under its plan. |
+    | `is_limit_based` | boolean | Returns True if the resource bills any component on user-adjustable limits under its plan. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `current_usages` | object (free-form) | Dictionary mapping component types to their latest reported usage amounts. |
@@ -1440,15 +1448,16 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `offering_components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `offering_components.limit_period` | any |  |
-    | `offering_components.limit_amount` | integer |  |
+    | `offering_components.limit_amount` | number (double) |  |
+    | `offering_components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `offering_components.article_code` | string |  |
-    | `offering_components.max_value` | integer |  |
-    | `offering_components.min_value` | integer |  |
-    | `offering_components.max_available_limit` | integer |  |
+    | `offering_components.max_value` | number (double) |  |
+    | `offering_components.min_value` | number (double) |  |
+    | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
-    | `offering_components.default_limit` | integer |  |
+    | `offering_components.default_limit` | number (double) |  |
     | `offering_components.factor` | integer |  |
-    | `offering_components.is_builtin` | boolean |  |
+    | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
     | `offering_components.overage_component` | string (uuid) |  |
     | `offering_components.min_prepaid_duration` | integer |  |
@@ -1458,6 +1467,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
+    | `offering_account_settings` | any |  |
 
 ---
 
@@ -1715,7 +1725,7 @@ Sets the 'restrict_member_access' flag for a resource. Requires staff permission
 
 ### Set resource slug
 
-Updates the slug for a resource. Requires staff permissions.
+Updates the slug of a resource. Requires staff or the RESOURCE.SET_SLUG permission, which no role holds unless the deployment grants it. Other than staff, a holder cannot change the slug once the resource's creation order is executing or the resource exists in the backend.
 
 
 === "HTTPie"
@@ -2376,6 +2386,8 @@ Returns details of the offering connected to the requested object.
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `created` | string (date-time) |  |
+    | `billing_period_applies` | object (free-form) | Per plan billing mode, whether a plan's billing period changes what is invoiced. False means every component of this offering would price a quantity of its own under that mode, so the period is inert on the invoice. |
+    | `billing_mode_components` | object (free-form) | Per plan billing mode, every component of this offering as a plan in that mode would bill it: billing type, measured unit, prepaid flag and limit period. |
     | `name` | string |  |
     | `slug` | string | URL-friendly identifier. Only editable by staff users. |
     | `description` | string |  |
@@ -2466,15 +2478,16 @@ Returns details of the offering connected to the requested object.
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.unit_factor` | integer | The conversion factor from backend units to measured_unit |
     | `components.limit_period` | any |  |
-    | `components.limit_amount` | integer |  |
+    | `components.limit_amount` | number (double) |  |
+    | `components.limit_decimal_places` | integer | Number of decimal places accepted for this component's limit. 0 keeps the limit integer-only. |
     | `components.article_code` | string |  |
-    | `components.max_value` | integer |  |
-    | `components.min_value` | integer |  |
-    | `components.max_available_limit` | integer |  |
+    | `components.max_value` | number (double) |  |
+    | `components.min_value` | number (double) |  |
+    | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
-    | `components.default_limit` | integer |  |
+    | `components.default_limit` | number (double) |  |
     | `components.factor` | integer |  |
-    | `components.is_builtin` | boolean |  |
+    | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
     | `components.overage_component` | string (uuid) |  |
     | `components.min_prepaid_duration` | integer |  |
@@ -2484,6 +2497,9 @@ Returns details of the offering connected to the requested object.
     | `components.max_renewal_duration` | integer | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plugin_options` | any |  |
+    | `account_settings` | any |  |
+    | `can_update_integration` | boolean |  |
+    | `can_update_options` | boolean |  |
     | `state` | any |  |
     | `vendor_details` | string |  |
     | `getting_started` | string |  |
@@ -2498,6 +2514,7 @@ Returns details of the offering connected to the requested object.
     | `plans.article_code` | string |  |
     | `plans.max_amount` | integer | Maximum number of plans that could be active. Plan is disabled when maximum amount is reached. |
     | `plans.archived` | boolean | Forbids creation of new resources. |
+    | `plans.billing_mode` | any | How the offering's builtin components are billed under this plan. Custom components keep their own accounting type. |
     | `plans.is_active` | boolean |  |
     | `plans.unit_price` | string (decimal) |  |
     | `plans.unit` | string | <br>_Enum: `month`, `quarter`, `half_month`, `day`, `hour`, `quantity`_ |
@@ -2515,7 +2532,10 @@ Returns details of the offering connected to the requested object.
     | `plans.components` | array of objects |  |
     | `plans.components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `plans.components.name` | string | Display name for the measured unit, for example, Floating IP. |
-    | `plans.components.measured_unit` | string | Unit of measurement, for example, GB. |
+    | `plans.components.measured_unit` | string |  |
+    | `plans.components.billing_type` | any |  |
+    | `plans.components.is_prepaid` | boolean |  |
+    | `plans.components.limit_period` | any |  |
     | `plans.components.amount` | integer |  |
     | `plans.components.price` | string (decimal) |  |
     | `plans.components.future_price` | string (decimal) |  |
@@ -2543,6 +2563,9 @@ Returns details of the offering connected to the requested object.
     | `scope_name` | string |  |
     | `scope_state` | any |  |
     | `scope_error_message` | string |  |
+    | `scope_resource` | string (uri) |  |
+    | `scope_resource_uuid` | string |  |
+    | `scope_resource_name` | string |  |
     | `files` | array of objects |  |
     | `files.name` | string |  |
     | `files.created` | string (date-time) |  |
@@ -2581,12 +2604,14 @@ Returns details of the offering connected to the requested object.
     | `billing_type_classification` | string | Classify offering components by billing type. Returns 'limit_only', 'usage_only', or 'mixed'. |
     | `effective_available_limits` | array of strings |  |
     | `compliance_checklist` | string (uri) |  |
+    | `compliance_checklist_details` | any |  |
     | `profile_uuid` | string (uuid) |  |
     | `profile_name` | string |  |
     | `offering_group` | string (uri) |  |
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
     | `user_has_consent` | boolean |  |
+    | `user_has_offering_user` | boolean |  |
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
@@ -2689,7 +2714,8 @@ Returns a list of active and future plan periods for the resource. Each period i
     | `components.measured_unit` | string | Unit of measurement, for example, GB. |
     | `components.usage` | string (decimal) |  |
     | `components.date` | string (date-time) |  |
-    | `components.recurring` | boolean | Reported value is reused every month until changed. |
+    | `components.missing_usage_policy` | any | What to record when no usage is reported for the following billing period. |
+    | `components.recurring` | boolean | Deprecated, use missing_usage_policy instead. True when the reported value is reused every month until changed. |
 
 ---
 

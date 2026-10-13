@@ -62,6 +62,7 @@ List customer quotas.
 
     | Name | Type | Description |
     |---|---|---|
+    | `customer_uuid` | string (uuid) | Limit results to the given organization |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `quota_name` | string | Name of the quota<br>_Enum: `estimated_price`, `nc_resource_count`, `os_cpu_count`, `os_ram_size`, `os_storage_size`, `vpc_cpu_count`, `vpc_floating_ip_count`, `vpc_instance_count`, `vpc_ram_size`, `vpc_storage_size`_ |

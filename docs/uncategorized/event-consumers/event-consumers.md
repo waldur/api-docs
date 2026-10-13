@@ -30,7 +30,8 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.event_consumers import event_consumers_list # (1)
+    from waldur_api_client.models.backend_resource_req_o_enum import BackendResourceReqOEnum # (1)
+    from waldur_api_client.api.event_consumers import event_consumers_list # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -42,7 +43,8 @@
     ```
     
     
-    1.  **API Source:** [`event_consumers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/event_consumers/event_consumers_list.py)
+    1.  **Model Source:** [`BackendResourceReqOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/backend_resource_req_o_enum.py)
+    2.  **API Source:** [`event_consumers_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/event_consumers/event_consumers_list.py)
 
 === "TypeScript"
 
@@ -64,8 +66,12 @@
 
     | Name | Type | Description |
     |---|---|---|
+    | `is_global` | boolean | Consumer is bound to no scope and therefore receives every event |
+    | `o` | array | Ordering<br><br> |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
+    | `user_username` | string |  |
+    | `user_uuid` | string (uuid) | Owner UUID |
 
 
 === "Responses"
@@ -77,13 +83,22 @@
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) |  |
-    | `object_types` | object (free-form) | List of observable object types this consumer receives. Empty list means all types. |
+    | `object_types` | array of strings |  |
     | `scopes` | array of objects |  |
     | `scopes.type` | string |  |
     | `scopes.uuid` | string |  |
     | `is_global` | boolean |  |
     | `rmq_username` | string | RabbitMQ username (UUID hex) for the consumer queue. |
     | `queue_created` | boolean |  |
+    | `user_uuid` | string (uuid) |  |
+    | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
+    | `user_full_name` | string |  |
+    | `user_is_staff` | boolean | Designates whether the user can log into this admin site. |
+    | `auth_kind` | any |  |
+    | `auth_token_prefix` | string | Prefix of the Personal Access Token used, when auth_kind is pat. |
+    | `auth_token_name` | string | Name of the Personal Access Token used, when auth_kind is pat. |
+    | `authorized_via` | any |  |
+    | `delivery_blocked_reason` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 

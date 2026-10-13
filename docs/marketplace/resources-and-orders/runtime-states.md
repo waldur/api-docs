@@ -11,10 +11,12 @@
 ### List available runtime states for resources
 
 
-        Returns a unique, sorted list of runtime states for all resources accessible to the current user.
+        Returns a unique, sorted list of runtime states for resources accessible to the current user.
         The runtime state is a backend-specific state of a resource (e.g., 'ACTIVE', 'SHUTOFF' for a VM).
         This endpoint is useful for building dynamic filters in a user interface.
-        The list can be optionally filtered by project or category.
+
+        At least one scope query parameter is required: `project_uuid`, `category_uuid`,
+        `offering_uuid`, or `customer_uuid`.
         
 
 
@@ -66,6 +68,7 @@
     | Name | Type | Description |
     |---|---|---|
     | `category_uuid` | string (uuid) | Filter runtime states by resources belonging to a specific category. |
+    | `customer_uuid` | string (uuid) | Filter runtime states by resources within a specific customer. |
     | `offering_uuid` | string (uuid) | Filter runtime states by resources of a specific offering. |
     | `project_uuid` | string (uuid) | Filter runtime states by resources within a specific project. |
 
