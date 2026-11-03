@@ -19448,7 +19448,7 @@
 </div>
 <hr />
 <h3 id="earnings">Earnings</h3>
-<p>Earnings summary of this affiliate link: lifetime total, per-month series and the affiliate organization's withdrawable credit balance.</p>
+<p>Earnings summary of this affiliate link: lifetime total, per-month series, the affiliate organization's withdrawable credit balance and the fee the current month is expected to earn.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:6"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Responses</label><label for="__tabbed_8_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -19543,32 +19543,44 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>total_earned</code></td>
 <td>string (decimal)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>withdrawable_balance</code></td>
 <td>string (decimal)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>per_month</code></td>
 <td>array of objects</td>
+<td></td>
 </tr>
 <tr>
 <td><code>per_month.year</code></td>
 <td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>per_month.month</code></td>
 <td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>per_month.amount</code></td>
 <td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>upcoming</code></td>
+<td>any</td>
+<td>Fee the current month is expected to earn from the referred customer's open invoice, after its estimated volume discounts and credit compensation. Null when the month will earn nothing on this link. Not yet accrued: the amount changes until month close.</td>
 </tr>
 </tbody>
 </table>
