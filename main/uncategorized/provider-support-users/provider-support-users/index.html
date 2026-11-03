@@ -18243,7 +18243,7 @@
 <tr>
 <td><code>user</code></td>
 <td>string (uri)</td>
-<td></td>
+<td>User who is the agent. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>user_full_name</code></td>
@@ -18258,7 +18258,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the agent answers for. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>role</code></td>
@@ -18304,7 +18304,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Agents of helpdesks of service providers whose organization the caller owns; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -18421,7 +18422,7 @@
 <tr>
 <td><code>user</code></td>
 <td>string (uri)</td>
-<td></td>
+<td>User who is the agent. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>user_full_name</code></td>
@@ -18436,7 +18437,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the agent answers for. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>role</code></td>
@@ -18482,7 +18483,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Agents of helpdesks of service providers whose organization the caller owns; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -18591,13 +18593,13 @@
 <td><code>user</code></td>
 <td>string (uri)</td>
 <td>✓</td>
-<td></td>
+<td>User who is the agent. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
 <td>✓</td>
-<td></td>
+<td>Helpdesk the agent answers for. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>role</code></td>
@@ -18650,7 +18652,7 @@
 <tr>
 <td><code>user</code></td>
 <td>string (uri)</td>
-<td></td>
+<td>User who is the agent. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>user_full_name</code></td>
@@ -18665,7 +18667,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the agent answers for. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>role</code></td>
@@ -18846,13 +18848,13 @@
 <td><code>user</code></td>
 <td>string (uri)</td>
 <td>✓</td>
-<td></td>
+<td>User who is the agent. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
 <td>✓</td>
-<td></td>
+<td>Helpdesk the agent answers for. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>role</code></td>
@@ -18905,7 +18907,7 @@
 <tr>
 <td><code>user</code></td>
 <td>string (uri)</td>
-<td></td>
+<td>User who is the agent. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>user_full_name</code></td>
@@ -18920,7 +18922,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the agent answers for. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>role</code></td>
@@ -18966,7 +18968,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the service provider whose helpdesk it belongs to.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19083,13 +19089,13 @@
 <td><code>user</code></td>
 <td>string (uri)</td>
 <td></td>
-<td></td>
+<td>User who is the agent. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
 <td></td>
-<td></td>
+<td>Helpdesk the agent answers for. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>role</code></td>
@@ -19142,7 +19148,7 @@
 <tr>
 <td><code>user</code></td>
 <td>string (uri)</td>
-<td></td>
+<td>User who is the agent. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>user_full_name</code></td>
@@ -19157,7 +19163,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the agent answers for. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>role</code></td>
@@ -19203,7 +19209,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the service provider whose helpdesk it belongs to.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19300,7 +19310,11 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the service provider whose helpdesk it belongs to.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19444,7 +19458,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user. It lists the active agents of helpdesks of service providers whose organization the caller owns; staff and support see every helpdesk's.</p>
 </div>
 </div>
 </div>

@@ -19423,7 +19423,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Orders of projects where the caller holds ORDER.LIST on the project or its organization, and orders for offerings where they hold it on the offering, on the offering's organization or on its service provider. Staff, support and holders of it site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -20041,7 +20042,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Orders of projects where the caller holds ORDER.LIST on the project or its organization, and orders for offerings where they hold it on the offering, on the offering's organization or on its service provider. Staff, support and holders of it site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -20721,7 +20723,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff and support. Otherwise who holds ORDER.CREATE on the order's project, its organization or site-wide and, for an offering restricted to designated roles, holds one of them in the project or its organization.</p>
 </div>
 </div>
 </div>
@@ -20821,7 +20823,7 @@
 <p><strong><code>403</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff only.</p>
 </div>
 </div>
 </div>
@@ -21410,7 +21412,12 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The order's creator.</li>
+<li>Requires <code>ORDER.REJECT</code> on the project or the project's customer.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -23618,7 +23625,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Orders of projects where the caller holds ORDER.LIST on the project or its organization, and orders for offerings where they hold it on the offering, on the offering's organization or on its service provider. Staff, support and holders of it site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -23905,7 +23913,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The caller's own orders awaiting approval or processing.</p>
 </div>
 </div>
 </div>
@@ -24704,6 +24712,7 @@
 </div>
 <div class="tabbed-block">
 <p>Anyone who may see the requested object, for a resource that the consumer or the provider resource view shows them. Outside staff and support, an organization that limits portal access to some networks, and an offering that conceals subnet-restricted resources, hide the resource from consumers outside the allowed networks; the response is then 404.</p>
+<p>Orders of projects where the caller holds ORDER.LIST on the project or its organization, and orders for offerings where they hold it on the offering, on the offering's organization or on its service provider. Staff, support and holders of it site-wide see all.</p>
 </div>
 </div>
 </div>

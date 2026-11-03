@@ -19748,7 +19748,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>All of:</p>
+<ul>
+<li>The signed-in user's profile has an email and a full name.</li>
+<li>Any signed-in user, for an issue of their own (is_reported_manually); staff and support may also report one for another user. An issue about an organization needs one of its owners, and one about a project or a resource an owner of its organization or a manager, admin or member of the project; staff and support may name any. Only staff and support may set the priority.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -21625,7 +21629,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff or support.</li>
+<li>The issue's caller.</li>
+<li>One of these roles: <code>CUSTOMER.OWNER</code> on the customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on the project.</li>
+<li>An active agent of the provider helpdesk the issue is routed to.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -21763,7 +21774,7 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff or support only.</p>
 </div>
 </div>
 </div>

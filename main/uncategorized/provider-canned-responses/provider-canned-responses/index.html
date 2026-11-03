@@ -18243,7 +18243,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the response belongs to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -18274,7 +18274,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Canned responses of helpdesks of service providers whose organization the caller owns; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -18396,7 +18397,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the response belongs to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -18427,7 +18428,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Canned responses of helpdesks of service providers whose organization the caller owns; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -18548,7 +18550,7 @@
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
 <td>✓</td>
-<td></td>
+<td>Helpdesk the response belongs to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -18594,7 +18596,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the response belongs to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -18772,7 +18774,7 @@
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
 <td>✓</td>
-<td></td>
+<td>Helpdesk the response belongs to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -18818,7 +18820,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the response belongs to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -18849,7 +18851,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the service provider whose helpdesk it belongs to.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -18972,7 +18978,7 @@
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
 <td></td>
-<td></td>
+<td>Helpdesk the response belongs to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -19018,7 +19024,7 @@
 <tr>
 <td><code>provider_helpdesk</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Helpdesk the response belongs to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -19049,7 +19055,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the service provider whose helpdesk it belongs to.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19146,7 +19156,11 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the service provider whose helpdesk it belongs to.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19285,7 +19299,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, support, or an owner of the organization of the service provider whose helpdesk the response belongs to: whoever the list shows the response to.</p>
 </div>
 </div>
 </div>

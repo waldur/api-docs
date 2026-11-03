@@ -18238,7 +18238,7 @@
 <tr>
 <td><code>service_provider</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Service provider the helpdesk serves. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>service_provider_name</code></td>
@@ -18247,13 +18247,13 @@
 </tr>
 <tr>
 <td><code>backend_type</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>basic</code>, <code>email</code>, <code>atlassian</code>, <code>zammad</code>, <code>smax</code></em></td>
+<td>any</td>
+<td>Helpdesk system the helpdesk connects to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td>object (free-form)</td>
-<td>Backend-specific configuration.</td>
+<td>Backend-specific configuration. Only staff can change it, and only staff see the credentials in it.</td>
 </tr>
 <tr>
 <td><code>is_active</code></td>
@@ -18319,7 +18319,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Helpdesks of service providers whose organization the caller owns; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -18436,7 +18437,7 @@
 <tr>
 <td><code>service_provider</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Service provider the helpdesk serves. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>service_provider_name</code></td>
@@ -18445,13 +18446,13 @@
 </tr>
 <tr>
 <td><code>backend_type</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>basic</code>, <code>email</code>, <code>atlassian</code>, <code>zammad</code>, <code>smax</code></em></td>
+<td>any</td>
+<td>Helpdesk system the helpdesk connects to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td>object (free-form)</td>
-<td>Backend-specific configuration.</td>
+<td>Backend-specific configuration. Only staff can change it, and only staff see the credentials in it.</td>
 </tr>
 <tr>
 <td><code>is_active</code></td>
@@ -18517,7 +18518,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Helpdesks of service providers whose organization the caller owns; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -18620,19 +18622,19 @@
 <td><code>service_provider</code></td>
 <td>string (uuid)</td>
 <td>✓</td>
-<td></td>
+<td>Service provider the helpdesk serves. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>backend_type</code></td>
-<td>string</td>
+<td>any</td>
 <td></td>
-<td><br><em>Enum: <code>basic</code>, <code>email</code>, <code>atlassian</code>, <code>zammad</code>, <code>smax</code></em></td>
+<td>Helpdesk system the helpdesk connects to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td>object (free-form)</td>
 <td></td>
-<td>Backend-specific configuration.</td>
+<td>Backend-specific configuration. Only staff can change it, and only staff see the credentials in it.</td>
 </tr>
 <tr>
 <td><code>is_active</code></td>
@@ -18703,7 +18705,7 @@
 <tr>
 <td><code>service_provider</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Service provider the helpdesk serves. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>service_provider_name</code></td>
@@ -18712,13 +18714,13 @@
 </tr>
 <tr>
 <td><code>backend_type</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>basic</code>, <code>email</code>, <code>atlassian</code>, <code>zammad</code>, <code>smax</code></em></td>
+<td>any</td>
+<td>Helpdesk system the helpdesk connects to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td>object (free-form)</td>
-<td>Backend-specific configuration.</td>
+<td>Backend-specific configuration. Only staff can change it, and only staff see the credentials in it.</td>
 </tr>
 <tr>
 <td><code>is_active</code></td>
@@ -18913,19 +18915,19 @@
 <td><code>service_provider</code></td>
 <td>string (uuid)</td>
 <td>✓</td>
-<td></td>
+<td>Service provider the helpdesk serves. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>backend_type</code></td>
-<td>string</td>
+<td>any</td>
 <td></td>
-<td><br><em>Enum: <code>basic</code>, <code>email</code>, <code>atlassian</code>, <code>zammad</code>, <code>smax</code></em></td>
+<td>Helpdesk system the helpdesk connects to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td>object (free-form)</td>
 <td></td>
-<td>Backend-specific configuration.</td>
+<td>Backend-specific configuration. Only staff can change it, and only staff see the credentials in it.</td>
 </tr>
 <tr>
 <td><code>is_active</code></td>
@@ -18996,7 +18998,7 @@
 <tr>
 <td><code>service_provider</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Service provider the helpdesk serves. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>service_provider_name</code></td>
@@ -19005,13 +19007,13 @@
 </tr>
 <tr>
 <td><code>backend_type</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>basic</code>, <code>email</code>, <code>atlassian</code>, <code>zammad</code>, <code>smax</code></em></td>
+<td>any</td>
+<td>Helpdesk system the helpdesk connects to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td>object (free-form)</td>
-<td>Backend-specific configuration.</td>
+<td>Backend-specific configuration. Only staff can change it, and only staff see the credentials in it.</td>
 </tr>
 <tr>
 <td><code>is_active</code></td>
@@ -19077,7 +19079,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the helpdesk's service provider.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19194,19 +19200,19 @@
 <td><code>service_provider</code></td>
 <td>string (uuid)</td>
 <td></td>
-<td></td>
+<td>Service provider the helpdesk serves. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>backend_type</code></td>
-<td>string</td>
+<td>any</td>
 <td></td>
-<td><br><em>Enum: <code>basic</code>, <code>email</code>, <code>atlassian</code>, <code>zammad</code>, <code>smax</code></em></td>
+<td>Helpdesk system the helpdesk connects to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td>object (free-form)</td>
 <td></td>
-<td>Backend-specific configuration.</td>
+<td>Backend-specific configuration. Only staff can change it, and only staff see the credentials in it.</td>
 </tr>
 <tr>
 <td><code>is_active</code></td>
@@ -19277,7 +19283,7 @@
 <tr>
 <td><code>service_provider</code></td>
 <td>string (uuid)</td>
-<td></td>
+<td>Service provider the helpdesk serves. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>service_provider_name</code></td>
@@ -19286,13 +19292,13 @@
 </tr>
 <tr>
 <td><code>backend_type</code></td>
-<td>string</td>
-<td><br><em>Enum: <code>basic</code>, <code>email</code>, <code>atlassian</code>, <code>zammad</code>, <code>smax</code></em></td>
+<td>any</td>
+<td>Helpdesk system the helpdesk connects to. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>settings</code></td>
 <td>object (free-form)</td>
-<td>Backend-specific configuration.</td>
+<td>Backend-specific configuration. Only staff can change it, and only staff see the credentials in it.</td>
 </tr>
 <tr>
 <td><code>is_active</code></td>
@@ -19358,7 +19364,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the helpdesk's service provider.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19455,7 +19465,11 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the helpdesk's service provider.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19553,7 +19567,11 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An owner of the organization of the helpdesk's service provider.</li>
+</ul>
 </div>
 </div>
 </div>

@@ -18076,58 +18076,81 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>issue</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>issue_key</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>created</code></td>
 <td>string (date-time)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>mime_type</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file_size</code></td>
 <td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file_name</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>backend_id</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>destroy_is_available</code></td>
 <td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>can_delete</code></td>
+<td>boolean</td>
+<td>Whether the caller may delete this attachment, by the check the delete route runs. Whether the support backend allows deleting it is destroy_is_available.</td>
+</tr>
+<tr>
+<td><code>delete_is_local_only</code></td>
+<td>boolean</td>
+<td>True when the attachment's ticket was routed to a provider helpdesk that has since been removed from Waldur: deleting removes the file from Waldur only, and any copy on the provider's helpdesk stays.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Returns only objects the caller holds a role on, support tickets they raised and tickets of a helpdesk they serve; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -18246,58 +18269,81 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>issue</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>issue_key</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>created</code></td>
 <td>string (date-time)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>mime_type</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file_size</code></td>
 <td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file_name</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>backend_id</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>destroy_is_available</code></td>
 <td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>can_delete</code></td>
+<td>boolean</td>
+<td>Whether the caller may delete this attachment, by the check the delete route runs. Whether the support backend allows deleting it is destroy_is_available.</td>
+</tr>
+<tr>
+<td><code>delete_is_local_only</code></td>
+<td>boolean</td>
+<td>True when the attachment's ticket was routed to a provider helpdesk that has since been removed from Waldur: deleting removes the file from Waldur only, and any copy on the provider's helpdesk stays.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Returns only objects the caller holds a role on, support tickets they raised and tickets of a helpdesk they serve; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -18421,58 +18467,91 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>url</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>issue</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>issue_key</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>created</code></td>
 <td>string (date-time)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file</code></td>
 <td>string (uri)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>mime_type</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file_size</code></td>
 <td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>file_name</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>backend_id</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>destroy_is_available</code></td>
 <td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>can_delete</code></td>
+<td>boolean</td>
+<td>Whether the caller may delete this attachment, by the check the delete route runs. Whether the support backend allows deleting it is destroy_is_available.</td>
+</tr>
+<tr>
+<td><code>delete_is_local_only</code></td>
+<td>boolean</td>
+<td>True when the attachment's ticket was routed to a provider helpdesk that has since been removed from Waldur: deleting removes the file from Waldur only, and any copy on the provider's helpdesk stays.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>All of:</p>
+<ul>
+<li>The issue named in the request must be one the caller can see; any other is answered as if it did not exist.</li>
+<li>Any of:<ul>
+<li>Staff or support.</li>
+<li>The issue's caller.</li>
+<li>For the <code>issue</code> named in the request, one of these roles: <code>CUSTOMER.OWNER</code> on its customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on its project.</li>
+<li>An active agent of the provider helpdesk the issue is routed to.</li>
+</ul>
+</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -18569,7 +18648,11 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>The attachment's uploader, while they may still comment on its issue, as attaching requires. Not on a ticket whose provider helpdesk has been deleted, where only staff may delete.</li>
+</ul>
 </div>
 </div>
 </div>

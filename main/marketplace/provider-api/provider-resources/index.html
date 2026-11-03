@@ -20197,7 +20197,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -20995,7 +20996,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -21107,7 +21109,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Anyone who may see the resource. It only schedules a refresh from the backend.</p>
 </div>
 </div>
 </div>
@@ -22825,7 +22827,8 @@
 <p><strong><code>404</code></strong> - </p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -23886,7 +23889,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -25239,7 +25243,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -25431,7 +25436,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -25611,7 +25617,12 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Requires <code>RESOURCE.CREATE_ROBOT_ACCOUNT</code> on the offering's customer.</li>
+<li>Requires <code>RESOURCE.UPDATE_ROBOT_ACCOUNT</code> on the offering's customer.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -25787,6 +25798,7 @@
 </div>
 <div class="tabbed-block">
 <p>Staff and support. Otherwise a caller with an active role on the resource itself; with a role granting CUSTOMER.VIEW_TEAM on the resource's organization; with a role granting PROJECT.VIEW_TEAM on any project of that organization; or with OFFERING.UPDATE on the resource's offering, on the offering's organization or on its service provider. A role on one of the resource's resource projects is not enough.</p>
+<p>Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -28129,7 +28141,12 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff or support.</li>
+<li>Requires <code>RESOURCE.SET_END_DATE</code> on the offering's customer or the offering.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>

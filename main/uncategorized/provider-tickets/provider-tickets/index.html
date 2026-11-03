@@ -18473,7 +18473,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Tickets routed to a provider helpdesk the caller speaks for, as an owner of the organization of its service provider or as one of its active agents; staff and support see every routed ticket.</p>
 </div>
 </div>
 </div>
@@ -18716,13 +18717,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Tickets routed to a provider helpdesk the caller speaks for, as an owner of the organization of its service provider or as one of its active agents; staff and support see every routed ticket.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="update">Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:7"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><input id="__tabbed_3_7" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Path Parameters</label><label for="__tabbed_3_5">Request Body</label><label for="__tabbed_3_6">Responses</label><label for="__tabbed_3_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Path Parameters</label><label for="__tabbed_3_5">Responses</label><label for="__tabbed_3_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -18746,29 +18748,20 @@
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.provider_ticket_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProviderTicketRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.provider_tickets</span><span class="w"> </span><span class="kn">import</span> <span class="n">provider_tickets_update</span> <span class="c1"># (2)</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.provider_tickets</span><span class="w"> </span><span class="kn">import</span> <span class="n">provider_tickets_update</span> <span class="c1"># (1)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
-
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">ProviderTicketRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">provider_tickets_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_ticket_request.py"><code>ProviderTicketRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_update.py"><code>provider_tickets_update</code></a></li>
 </ol>
 </div>
@@ -18819,38 +18812,6 @@
 </table>
 </div>
 <div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>escalated_at</code></td>
-<td>string (date-time)</td>
-<td></td>
-<td>When the issue was escalated.</td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
 <p><strong><code>200</code></strong> - </p>
 <table>
 <thead>
@@ -19000,13 +18961,13 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="partial-update">Partial Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><input id="__tabbed_4_7" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Request Body</label><label for="__tabbed_4_6">Responses</label><label for="__tabbed_4_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Responses</label><label for="__tabbed_4_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19030,29 +18991,20 @@
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.patched_provider_ticket_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">PatchedProviderTicketRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.provider_tickets</span><span class="w"> </span><span class="kn">import</span> <span class="n">provider_tickets_partial_update</span> <span class="c1"># (2)</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.provider_tickets</span><span class="w"> </span><span class="kn">import</span> <span class="n">provider_tickets_partial_update</span> <span class="c1"># (1)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
-
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">PatchedProviderTicketRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">provider_tickets_partial_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_provider_ticket_request.py"><code>PatchedProviderTicketRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_partial_update.py"><code>provider_tickets_partial_update</code></a></li>
 </ol>
 </div>
@@ -19103,38 +19055,6 @@
 </table>
 </div>
 <div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>escalated_at</code></td>
-<td>string (date-time)</td>
-<td></td>
-<td>When the issue was escalated.</td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
 <p><strong><code>200</code></strong> - </p>
 <table>
 <thead>
@@ -19284,13 +19204,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.</p>
 </div>
 </div>
 </div>
 <hr />
 <h2 id="other-actions">Other Actions</h2>
 <h3 id="get-customer-context-for-this-ticket">Get customer context for this ticket</h3>
+<p>The original ticket's caller (full name, email and organization), its resource, and the caller's five latest other tickets among those the provider ticket list shows the requester: tickets routed to a helpdesk they speak for, as an owner of the service provider's organization or as an active agent. Staff and support see the caller's tickets routed to any provider. Tickets kept on the operator's own desk are not listed.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:6"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Responses</label><label for="__tabbed_5_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -19436,7 +19357,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever the ticket list shows the ticket to: staff, support, owners of the organization of the service provider whose helpdesk it is routed to, and that helpdesk's active agents. Beyond the ticket, it shows the full name and email of the original ticket's caller, the name of the original ticket's organization, the name and type of its resource, and the UUID, key, summary, status and creation time of the caller's five latest other tickets among those the ticket list shows the requester.</p>
 </div>
 </div>
 </div>
@@ -19555,7 +19476,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Tickets routed to a provider helpdesk the caller speaks for, as an owner of the organization of its service provider or as one of its active agents; staff and support see every routed ticket.</p>
 </div>
 </div>
 </div>
@@ -19705,13 +19627,13 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="claim">Claim</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:7"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><input id="__tabbed_8_7" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Request Body</label><label for="__tabbed_8_6">Responses</label><label for="__tabbed_8_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:6"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Responses</label><label for="__tabbed_8_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19735,29 +19657,20 @@
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.provider_ticket_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProviderTicketRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.provider_tickets</span><span class="w"> </span><span class="kn">import</span> <span class="n">provider_tickets_claim</span> <span class="c1"># (2)</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.provider_tickets</span><span class="w"> </span><span class="kn">import</span> <span class="n">provider_tickets_claim</span> <span class="c1"># (1)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
-
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">ProviderTicketRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">provider_tickets_claim</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_ticket_request.py"><code>ProviderTicketRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_claim.py"><code>provider_tickets_claim</code></a></li>
 </ol>
 </div>
@@ -19808,38 +19721,6 @@
 </table>
 </div>
 <div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>escalated_at</code></td>
-<td>string (date-time)</td>
-<td></td>
-<td>When the issue was escalated.</td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
 <p><strong><code>200</code></strong> - </p>
 <table>
 <thead>
@@ -19857,7 +19738,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>An active agent of the helpdesk the ticket is routed to.</p>
 </div>
 </div>
 </div>
@@ -19998,7 +19879,7 @@
 <p><strong><code>201</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.</p>
 </div>
 </div>
 </div>
@@ -20109,7 +19990,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.</p>
 </div>
 </div>
 </div>

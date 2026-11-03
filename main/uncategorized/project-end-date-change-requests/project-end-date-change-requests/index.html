@@ -18656,7 +18656,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A caller who sees the project the request names through a role (any role on the project, PROJECT.LIST on its organization or site-wide, or a role on one of its resources) or as global support, and who may not change its end date directly: not staff, and without PROJECT.UPDATE on the project, its organization or site-wide.</p>
 </div>
 </div>
 </div>
@@ -18784,7 +18784,8 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>Only users with UPDATE_PROJECT on customer or project can approve/reject.</p>
+<p>Requires <code>PROJECT.UPDATE</code> on the project or the project's customer.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -18882,7 +18883,7 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The request's author.</p>
 </div>
 </div>
 </div>
@@ -19009,7 +19010,8 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>Only users with UPDATE_PROJECT on customer or project can approve/reject.</p>
+<p>Requires <code>PROJECT.UPDATE</code> on the project or the project's customer.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
