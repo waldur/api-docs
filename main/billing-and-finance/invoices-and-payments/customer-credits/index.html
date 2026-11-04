@@ -867,6 +867,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reclassify
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Top up
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -18157,6 +18179,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reclassify
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Top up
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -18249,6 +18293,16 @@
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/customer-credits/{uuid}/clear_compensations/</code></td>
 <td style="text-align: left;"><a href="#clear-compensations">Clear compensations</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/customer-credits/{uuid}/reclassify/</code></td>
+<td style="text-align: left;"><a href="#reclassify">Reclassify</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/customer-credits/{uuid}/top_up/</code></td>
+<td style="text-align: left;"><a href="#top-up">Top up</a></td>
 </tr>
 </tbody>
 </table>
@@ -18480,7 +18534,17 @@
 <tr>
 <td><code>withdrawable_balance</code></td>
 <td>number (double)</td>
-<td>Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too.</td>
+<td>Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards.</td>
+</tr>
+<tr>
+<td><code>paid_balance</code></td>
+<td>number (double)</td>
+<td>What is left of the customer's prepayments recorded by staff.</td>
+</tr>
+<tr>
+<td><code>granted_balance</code></td>
+<td>number (double)</td>
+<td>What is left of staff-granted credit.</td>
 </tr>
 </tbody>
 </table>
@@ -18694,7 +18758,17 @@
 <tr>
 <td><code>withdrawable_balance</code></td>
 <td>number (double)</td>
-<td>Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too.</td>
+<td>Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards.</td>
+</tr>
+<tr>
+<td><code>paid_balance</code></td>
+<td>number (double)</td>
+<td>What is left of the customer's prepayments recorded by staff.</td>
+</tr>
+<tr>
+<td><code>granted_balance</code></td>
+<td>number (double)</td>
+<td>What is left of staff-granted credit.</td>
 </tr>
 </tbody>
 </table>
@@ -18945,7 +19019,17 @@
 <tr>
 <td><code>withdrawable_balance</code></td>
 <td>number (double)</td>
-<td>Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too.</td>
+<td>Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards.</td>
+</tr>
+<tr>
+<td><code>paid_balance</code></td>
+<td>number (double)</td>
+<td>What is left of the customer's prepayments recorded by staff.</td>
+</tr>
+<tr>
+<td><code>granted_balance</code></td>
+<td>number (double)</td>
+<td>What is left of staff-granted credit.</td>
 </tr>
 </tbody>
 </table>
@@ -19221,7 +19305,17 @@
 <tr>
 <td><code>withdrawable_balance</code></td>
 <td>number (double)</td>
-<td>Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too.</td>
+<td>Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards.</td>
+</tr>
+<tr>
+<td><code>paid_balance</code></td>
+<td>number (double)</td>
+<td>What is left of the customer's prepayments recorded by staff.</td>
+</tr>
+<tr>
+<td><code>granted_balance</code></td>
+<td>number (double)</td>
+<td>What is left of staff-granted credit.</td>
 </tr>
 </tbody>
 </table>
@@ -19485,7 +19579,17 @@
 <tr>
 <td><code>withdrawable_balance</code></td>
 <td>number (double)</td>
-<td>Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too.</td>
+<td>Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards.</td>
+</tr>
+<tr>
+<td><code>paid_balance</code></td>
+<td>number (double)</td>
+<td>What is left of the customer's prepayments recorded by staff.</td>
+</tr>
+<tr>
+<td><code>granted_balance</code></td>
+<td>number (double)</td>
+<td>What is left of staff-granted credit.</td>
 </tr>
 </tbody>
 </table>
@@ -20017,7 +20121,17 @@
 <tr>
 <td><code>withdrawable_balance</code></td>
 <td>number (double)</td>
-<td>Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too.</td>
+<td>Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards.</td>
+</tr>
+<tr>
+<td><code>paid_balance</code></td>
+<td>number (double)</td>
+<td>What is left of the customer's prepayments recorded by staff.</td>
+</tr>
+<tr>
+<td><code>granted_balance</code></td>
+<td>number (double)</td>
+<td>What is left of staff-granted credit.</td>
 </tr>
 </tbody>
 </table>
@@ -20215,6 +20329,563 @@
 </div>
 <div class="tabbed-block">
 <p><strong><code>200</code></strong> - No response body</p>
+</div>
+<div class="tabbed-block">
+<p>Staff only.</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="reclassify">Reclassify</h3>
+<p>Mark part of the granted credit as paid, e.g. a prepayment that was recorded as a plain credit grant. The credit value does not change; the ledger records the move with the comment.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:7"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><input id="__tabbed_11_5" name="__tabbed_11" type="radio" /><input id="__tabbed_11_6" name="__tabbed_11" type="radio" /><input id="__tabbed_11_7" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">HTTPie</label><label for="__tabbed_11_2">Python</label><label for="__tabbed_11_3">TypeScript</label><label for="__tabbed_11_4">Path Parameters</label><label for="__tabbed_11_5">Request Body (required)</label><label for="__tabbed_11_6">Responses</label><label for="__tabbed_11_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/customer-credits/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reclassify/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">amount</span><span class="o">=</span><span class="s2">&quot;12.34&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.credit_reclassification_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">CreditReclassificationRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.customer_credits</span><span class="w"> </span><span class="kn">import</span> <span class="n">customer_credits_reclassify</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">CreditReclassificationRequest</span><span class="p">(</span>
+    <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;12.34&quot;</span><span class="p">,</span>
+    <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">customer_credits_reclassify</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/credit_reclassification_request.py"><code>CreditReclassificationRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_reclassify.py"><code>customer_credits_reclassify</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">customerCreditsReclassify</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">customerCreditsReclassify</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;amount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;12.34&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;comment&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>amount</code></td>
+<td>string (decimal)</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td>string</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td>string (date)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>expected_consumption</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimal_consumption</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimal_consumption_logic</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>fixed</code>, <code>linear</code></em></td>
+</tr>
+<tr>
+<td><code>grace_coefficient</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>apply_as_minimal_consumption</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>allocated_to_projects</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>consumption_last_month</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>withdrawable_balance</code></td>
+<td>number (double)</td>
+<td>Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards.</td>
+</tr>
+<tr>
+<td><code>paid_balance</code></td>
+<td>number (double)</td>
+<td>What is left of the customer's prepayments recorded by staff.</td>
+</tr>
+<tr>
+<td><code>granted_balance</code></td>
+<td>number (double)</td>
+<td>What is left of staff-granted credit.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Staff only.</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="top-up">Top up</h3>
+<p>Record a customer prepayment as paid credit. Raises the credit value and writes a top-up ledger entry with the comment. Unlike granted credit, invoices paid from it count towards the affiliate fee, and it does not expire. A negative amount reverses a top-up, e.g. a bounced payment, and draws on paid credit only.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:7"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><input id="__tabbed_12_4" name="__tabbed_12" type="radio" /><input id="__tabbed_12_5" name="__tabbed_12" type="radio" /><input id="__tabbed_12_6" name="__tabbed_12" type="radio" /><input id="__tabbed_12_7" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">HTTPie</label><label for="__tabbed_12_2">Python</label><label for="__tabbed_12_3">TypeScript</label><label for="__tabbed_12_4">Path Parameters</label><label for="__tabbed_12_5">Request Body (required)</label><label for="__tabbed_12_6">Responses</label><label for="__tabbed_12_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/customer-credits/a1b2c3d4-e5f6-7890-abcd-ef1234567890/top_up/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">amount</span><span class="o">=</span><span class="s2">&quot;12.34&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.credit_top_up_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">CreditTopUpRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.customer_credits</span><span class="w"> </span><span class="kn">import</span> <span class="n">customer_credits_top_up</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">CreditTopUpRequest</span><span class="p">(</span>
+    <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;12.34&quot;</span><span class="p">,</span>
+    <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">customer_credits_top_up</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/credit_top_up_request.py"><code>CreditTopUpRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_top_up.py"><code>customer_credits_top_up</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">customerCreditsTopUp</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">customerCreditsTopUp</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;amount&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;12.34&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;comment&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>amount</code></td>
+<td>string (decimal)</td>
+<td>✓</td>
+<td>Positive to record a prepayment, negative to reverse one.</td>
+</tr>
+<tr>
+<td><code>comment</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>payment_reference</code></td>
+<td>string</td>
+<td></td>
+<td>Bank transfer or payment identifier, kept in the ledger comment.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.url</code></td>
+<td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td>string (date)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>expected_consumption</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimal_consumption</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>minimal_consumption_logic</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>fixed</code>, <code>linear</code></em></td>
+</tr>
+<tr>
+<td><code>grace_coefficient</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>apply_as_minimal_consumption</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>allocated_to_projects</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>consumption_last_month</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>withdrawable_balance</code></td>
+<td>number (double)</td>
+<td>Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards.</td>
+</tr>
+<tr>
+<td><code>paid_balance</code></td>
+<td>number (double)</td>
+<td>What is left of the customer's prepayments recorded by staff.</td>
+</tr>
+<tr>
+<td><code>granted_balance</code></td>
+<td>number (double)</td>
+<td>What is left of staff-granted credit.</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="tabbed-block">
 <p>Staff only.</p>
