@@ -8573,17 +8573,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Create
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#create-customer-from-successful-verification" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8660,17 +8649,6 @@
     <span class="md-ellipsis">
       
         Checklist
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-checklist-template-for-creating-new-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Get checklist template for creating new objects
       
     </span>
   </a>
@@ -18097,17 +18075,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Create
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#create-customer-from-successful-verification" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -18184,17 +18151,6 @@
     <span class="md-ellipsis">
       
         Checklist
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-checklist-template-for-creating-new-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Get checklist template for creating new objects
       
     </span>
   </a>
@@ -18295,11 +18251,6 @@
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
-<td style="text-align: left;"><code>/api/onboarding-verifications/</code></td>
-<td style="text-align: left;"><a href="#create">Create</a></td>
-</tr>
-<tr>
-<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/onboarding-verifications/{uuid}/create_customer/</code></td>
 <td style="text-align: left;"><a href="#create-customer-from-successful-verification">Create customer from successful verification</a></td>
 </tr>
@@ -18332,11 +18283,6 @@
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/onboarding-verifications/{uuid}/checklist/</code></td>
 <td style="text-align: left;"><a href="#checklist">Checklist</a></td>
-</tr>
-<tr>
-<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
-<td style="text-align: left;"><code>/api/onboarding-verifications/checklist-template/</code></td>
-<td style="text-align: left;"><a href="#get-checklist-template-for-creating-new-objects">Get checklist template for creating new objects</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
@@ -19105,378 +19051,9 @@
 </div>
 </div>
 <hr />
-<h3 id="create">Create</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Request Body</label><label for="__tabbed_3_5">Responses</label><label for="__tabbed_3_6">Authorization</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>https://api.example.com/api/onboarding-verifications/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.onboarding_verification_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnboardingVerificationRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.onboarding_verifications</span><span class="w"> </span><span class="kn">import</span> <span class="n">onboarding_verifications_create</span> <span class="c1"># (2)</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
-    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
-<span class="p">)</span>
-
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">OnboardingVerificationRequest</span><span class="p">()</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">onboarding_verifications_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_verification_request.py"><code>OnboardingVerificationRequest</code></a></li>
-<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_create.py"><code>onboarding_verifications_create</code></a></li>
-</ol>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">onboardingVerificationsCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
-
-<span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onboardingVerificationsCreate</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
-<span class="p">});</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
-<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>country</code></td>
-<td>string</td>
-<td></td>
-<td>ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method.</td>
-</tr>
-<tr>
-<td><code>legal_person_identifier</code></td>
-<td>string</td>
-<td></td>
-<td>Official company registration code (required for automatic validation)</td>
-</tr>
-<tr>
-<td><code>legal_name</code></td>
-<td>string</td>
-<td></td>
-<td>Company name(optional, for reference)</td>
-</tr>
-<tr>
-<td><code>expires_at</code></td>
-<td>string (date-time)</td>
-<td></td>
-<td>When this verification expires</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
-<p><strong><code>201</code></strong> - </p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>user</code></td>
-<td>string (uri)</td>
-<td>User requesting company onboarding</td>
-</tr>
-<tr>
-<td><code>user_full_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>country</code></td>
-<td>string</td>
-<td>ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method.</td>
-</tr>
-<tr>
-<td><code>legal_person_identifier</code></td>
-<td>string</td>
-<td>Official company registration code (required for automatic validation)</td>
-</tr>
-<tr>
-<td><code>legal_name</code></td>
-<td>string</td>
-<td>Company name(optional, for reference)</td>
-</tr>
-<tr>
-<td><code>status</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.verification</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.verification_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.user</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.user_full_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.legal_person_identifier</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.legal_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.user_justification</code></td>
-<td>string</td>
-<td>User's explanation for why they should be authorized</td>
-</tr>
-<tr>
-<td><code>justifications.validated_by</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.validated_at</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.validation_decision</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.staff_notes</code></td>
-<td>string</td>
-<td>Administrator notes on the review decision</td>
-</tr>
-<tr>
-<td><code>justifications.supporting_documentation</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.supporting_documentation.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.supporting_documentation.file</code></td>
-<td>string (uri)</td>
-<td>Upload supporting documentation.</td>
-</tr>
-<tr>
-<td><code>justifications.supporting_documentation.file_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.supporting_documentation.file_size</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.supporting_documentation.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.onboarding_metadata</code></td>
-<td>object (free-form)</td>
-<td>Onboarding-specific data like intents, purposes extracted from checklist answers</td>
-</tr>
-<tr>
-<td><code>justifications.user_submitted_customer_data</code></td>
-<td>object (free-form)</td>
-<td>Customer-related data submitted by the user via checklist answers</td>
-</tr>
-<tr>
-<td><code>justifications.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>justifications.modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>validation_method</code></td>
-<td>any</td>
-<td>Method used for validation</td>
-</tr>
-<tr>
-<td><code>verified_user_roles</code></td>
-<td>object (free-form)</td>
-<td>Roles the user has in the company</td>
-</tr>
-<tr>
-<td><code>verified_company_data</code></td>
-<td>object (free-form)</td>
-<td>Company information retrieved during validation</td>
-</tr>
-<tr>
-<td><code>raw_response</code></td>
-<td>object (free-form)</td>
-<td>Raw API response for debugging and auditing</td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>validated_at</code></td>
-<td>string (date-time)</td>
-<td>When validation was completed</td>
-</tr>
-<tr>
-<td><code>expires_at</code></td>
-<td>string (date-time)</td>
-<td>When this verification expires</td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>string (uri)</td>
-<td>Customer created after successful validation</td>
-</tr>
-<tr>
-<td><code>onboarding_metadata</code></td>
-<td>object (free-form)</td>
-<td>Onboarding-specific data like intents, purposes extracted from checklist answers</td>
-</tr>
-<tr>
-<td><code>user_submitted_customer_data</code></td>
-<td>object (free-form)</td>
-<td>Get customer data submitted by the user during onboarding.</td>
-</tr>
-<tr>
-<td><code>can_customer_be_created</code></td>
-<td>boolean</td>
-<td>Boolean indicating if a customer can be created from this verification</td>
-</tr>
-<tr>
-<td><code>customer_creation_error_message</code></td>
-<td>string</td>
-<td>Reason why customer cannot be created (null if can be created)</td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
-</div>
-</div>
-</div>
-<hr />
 <h3 id="create-customer-from-successful-verification">Create customer from successful verification</h3>
 <p>Create customer from successful verification.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Responses</label><label for="__tabbed_4_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Path Parameters</label><label for="__tabbed_3_5">Responses</label><label for="__tabbed_3_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20098,13 +19675,17 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own verification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="update">Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><input id="__tabbed_5_7" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Request Body</label><label for="__tabbed_5_6">Responses</label><label for="__tabbed_5_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><input id="__tabbed_4_7" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Request Body</label><label for="__tabbed_4_6">Responses</label><label for="__tabbed_4_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20493,13 +20074,17 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own verification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="partial-update">Partial Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:7"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><input id="__tabbed_6_7" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Request Body</label><label for="__tabbed_6_6">Responses</label><label for="__tabbed_6_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><input id="__tabbed_5_7" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Request Body</label><label for="__tabbed_5_6">Responses</label><label for="__tabbed_5_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20888,13 +20473,17 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own verification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="delete">Delete</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Path Parameters</label><label for="__tabbed_7_5">Responses</label><label for="__tabbed_7_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Responses</label><label for="__tabbed_6_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20985,7 +20574,11 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own verification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -20993,7 +20586,7 @@
 <h2 id="other-actions">Other Actions</h2>
 <h3 id="available-checklists">Available checklists</h3>
 <p>Get available onboarding checklists (customer and intent) for preview. This endpoint allows users to see checklist questions before creating a verification. Supports checklist_type parameter to filter by customer or intent checklists. Includes questions with onboarding metadata (field mappings).</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:6"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Query Parameters</label><label for="__tabbed_8_5">Responses</label><label for="__tabbed_8_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Query Parameters</label><label for="__tabbed_7_5">Responses</label><label for="__tabbed_7_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21093,14 +20686,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="checklist">Checklist</h3>
 <p>Get checklist with questions and existing answers. Supports both customer and intent checklists via checklist_type parameter.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:7"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><input id="__tabbed_9_7" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Query Parameters</label><label for="__tabbed_9_6">Responses</label><label for="__tabbed_9_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:7"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><input id="__tabbed_8_7" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Query Parameters</label><label for="__tabbed_8_6">Responses</label><label for="__tabbed_8_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21388,436 +20981,15 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
-</div>
-</div>
-</div>
-<hr />
-<h3 id="get-checklist-template-for-creating-new-objects">Get checklist template for creating new objects</h3>
-<p>Get checklist template for creating new objects.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:6"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><input id="__tabbed_10_5" name="__tabbed_10" type="radio" /><input id="__tabbed_10_6" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">HTTPie</label><label for="__tabbed_10_2">Python</label><label for="__tabbed_10_3">TypeScript</label><label for="__tabbed_10_4">Query Parameters</label><label for="__tabbed_10_5">Responses</label><label for="__tabbed_10_6">Authorization</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>https://api.example.com/api/onboarding-verifications/checklist-template/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">parent_uuid</span><span class="o">==</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.onboarding_verifications</span><span class="w"> </span><span class="kn">import</span> <span class="n">onboarding_verifications_checklist_template_retrieve</span> <span class="c1"># (1)</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
-    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
-<span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">onboarding_verifications_checklist_template_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">parent_uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<ol>
-<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_checklist_template_retrieve.py"><code>onboarding_verifications_checklist_template_retrieve</code></a></li>
-</ol>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">onboardingVerificationsChecklistTemplateRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
-
-<span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onboardingVerificationsChecklistTemplateRetrieve</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;parent_uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">});</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
-<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>parent_uuid</code></td>
-<td>string (uuid)</td>
-<td>✓</td>
-<td>UUID of the parent object (e.g., customer UUID for new projects)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
-<p><strong><code>200</code></strong> - </p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>checklist</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.required</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.user_guidance</code></td>
-<td>string</td>
-<td>Additional guidance text visible to users when answering and reviewing</td>
-</tr>
-<tr>
-<td><code>questions.question_options</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.question_options.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.question_options.label</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.question_options.order</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.question_type</code></td>
-<td>any</td>
-<td>Type of question and expected answer format</td>
-</tr>
-<tr>
-<td><code>questions.order</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.min_value</code></td>
-<td>string (decimal)</td>
-<td>Minimum value allowed for NUMBER, YEAR, and RATING type questions</td>
-</tr>
-<tr>
-<td><code>questions.max_value</code></td>
-<td>string (decimal)</td>
-<td>Maximum value allowed for NUMBER, YEAR, and RATING type questions</td>
-</tr>
-<tr>
-<td><code>questions.allowed_file_types</code></td>
-<td>array of strings</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.allowed_mime_types</code></td>
-<td>array of strings</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.max_file_size_mb</code></td>
-<td>integer</td>
-<td>Maximum file size in megabytes. If not set, no size limit is enforced.</td>
-</tr>
-<tr>
-<td><code>questions.max_files_count</code></td>
-<td>integer</td>
-<td>Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced.</td>
-</tr>
-<tr>
-<td><code>questions.likert_scale_length</code></td>
-<td>any</td>
-<td>Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions.</td>
-</tr>
-<tr>
-<td><code>questions.likert_low_label</code></td>
-<td>string</td>
-<td>Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional.</td>
-</tr>
-<tr>
-<td><code>questions.likert_high_label</code></td>
-<td>string</td>
-<td>Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional.</td>
-</tr>
-<tr>
-<td><code>questions.likert_allow_na</code></td>
-<td>boolean</td>
-<td>Allow respondents to choose 'N/A' as an answer for LIKERT type questions.</td>
-</tr>
-<tr>
-<td><code>questions.rich_text_char_limit</code></td>
-<td>integer</td>
-<td>Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced.</td>
-</tr>
-<tr>
-<td><code>questions.rich_text_toolbar_level</code></td>
-<td>any</td>
-<td>Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'.</td>
-</tr>
-<tr>
-<td><code>questions.operator</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.review_answer_value</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.always_requires_review</code></td>
-<td>boolean</td>
-<td>This question always requires review regardless of answer</td>
-</tr>
-<tr>
-<td><code>questions.guidance_answer_value</code></td>
-<td>object (free-form)</td>
-<td>Answer value that triggers display of user guidance.</td>
-</tr>
-<tr>
-<td><code>questions.guidance_operator</code></td>
-<td>any</td>
-<td>Operator to use when comparing answer with guidance_answer_value</td>
-</tr>
-<tr>
-<td><code>questions.always_show_guidance</code></td>
-<td>boolean</td>
-<td>Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator</td>
-</tr>
-<tr>
-<td><code>questions.dependency_logic_operator</code></td>
-<td>any</td>
-<td>Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.required</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.user_guidance</code></td>
-<td>string</td>
-<td>Additional guidance text visible to users when answering and reviewing</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_options</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_options.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_options.label</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_options.order</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_type</code></td>
-<td>any</td>
-<td>Type of question and expected answer format</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.order</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.min_value</code></td>
-<td>string (decimal)</td>
-<td>Minimum value allowed for NUMBER, YEAR, and RATING type questions</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.max_value</code></td>
-<td>string (decimal)</td>
-<td>Maximum value allowed for NUMBER, YEAR, and RATING type questions</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.allowed_file_types</code></td>
-<td>array of strings</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.allowed_mime_types</code></td>
-<td>array of strings</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.max_file_size_mb</code></td>
-<td>integer</td>
-<td>Maximum file size in megabytes. If not set, no size limit is enforced.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.max_files_count</code></td>
-<td>integer</td>
-<td>Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.likert_scale_length</code></td>
-<td>any</td>
-<td>Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.likert_low_label</code></td>
-<td>string</td>
-<td>Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.likert_high_label</code></td>
-<td>string</td>
-<td>Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.likert_allow_na</code></td>
-<td>boolean</td>
-<td>Allow respondents to choose 'N/A' as an answer for LIKERT type questions.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.rich_text_char_limit</code></td>
-<td>integer</td>
-<td>Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.rich_text_toolbar_level</code></td>
-<td>any</td>
-<td>Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.operator</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.review_answer_value</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.always_requires_review</code></td>
-<td>boolean</td>
-<td>This question always requires review regardless of answer</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.guidance_answer_value</code></td>
-<td>object (free-form)</td>
-<td>Answer value that triggers display of user guidance.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.guidance_operator</code></td>
-<td>any</td>
-<td>Operator to use when comparing answer with guidance_answer_value</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.always_show_guidance</code></td>
-<td>boolean</td>
-<td>Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.dependency_logic_operator</code></td>
-<td>any</td>
-<td>Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<p><strong><code>400</code></strong> - </p>
-<hr />
-<p><strong><code>404</code></strong> - </p>
-</div>
-<div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Staff see every row; support see every row read-only; others see their own.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="completion-status">Completion status</h3>
 <p>Get checklist completion status. Supports both customer and intent checklists via checklist_type parameter.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:7"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><input id="__tabbed_11_5" name="__tabbed_11" type="radio" /><input id="__tabbed_11_6" name="__tabbed_11" type="radio" /><input id="__tabbed_11_7" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">HTTPie</label><label for="__tabbed_11_2">Python</label><label for="__tabbed_11_3">TypeScript</label><label for="__tabbed_11_4">Path Parameters</label><label for="__tabbed_11_5">Query Parameters</label><label for="__tabbed_11_6">Responses</label><label for="__tabbed_11_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:7"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><input id="__tabbed_9_7" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Query Parameters</label><label for="__tabbed_9_6">Responses</label><label for="__tabbed_9_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21980,14 +21152,15 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Staff see every row; support see every row read-only; others see their own.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="run-validation">Run validation</h3>
 <p>Run automatic validation using the required fields provided during verification creation. Checklist answers (if any) are only used for supplemental customer/intent data.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:7"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><input id="__tabbed_12_4" name="__tabbed_12" type="radio" /><input id="__tabbed_12_5" name="__tabbed_12" type="radio" /><input id="__tabbed_12_6" name="__tabbed_12" type="radio" /><input id="__tabbed_12_7" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">HTTPie</label><label for="__tabbed_12_2">Python</label><label for="__tabbed_12_3">TypeScript</label><label for="__tabbed_12_4">Path Parameters</label><label for="__tabbed_12_5">Request Body</label><label for="__tabbed_12_6">Responses</label><label for="__tabbed_12_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:7"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><input id="__tabbed_10_5" name="__tabbed_10" type="radio" /><input id="__tabbed_10_6" name="__tabbed_10" type="radio" /><input id="__tabbed_10_7" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">HTTPie</label><label for="__tabbed_10_2">Python</label><label for="__tabbed_10_3">TypeScript</label><label for="__tabbed_10_4">Path Parameters</label><label for="__tabbed_10_5">Request Body</label><label for="__tabbed_10_6">Responses</label><label for="__tabbed_10_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22376,14 +21549,18 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own verification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="start-verification">Start verification</h3>
 <p>Start company validation process by creating a verification record. User selects validation_method (e.g., 'ariregister', 'wirtschaftscompass'). Checklists are used for intent and customer data collection. Then call run_validation to perform automatic validation or create manual justification.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:6"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><input id="__tabbed_13_3" name="__tabbed_13" type="radio" /><input id="__tabbed_13_4" name="__tabbed_13" type="radio" /><input id="__tabbed_13_5" name="__tabbed_13" type="radio" /><input id="__tabbed_13_6" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">HTTPie</label><label for="__tabbed_13_2">Python</label><label for="__tabbed_13_3">TypeScript</label><label for="__tabbed_13_4">Request Body</label><label for="__tabbed_13_5">Responses</label><label for="__tabbed_13_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:6"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><input id="__tabbed_11_5" name="__tabbed_11" type="radio" /><input id="__tabbed_11_6" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">HTTPie</label><label for="__tabbed_11_2">Python</label><label for="__tabbed_11_3">TypeScript</label><label for="__tabbed_11_4">Request Body</label><label for="__tabbed_11_5">Responses</label><label for="__tabbed_11_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22746,14 +21923,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A new verification for the caller.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="submit-answers">Submit answers</h3>
 <p>Submit answers to checklist questions. Automatically detects which checklist (customer or intent) each question belongs to.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:7"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><input id="__tabbed_14_3" name="__tabbed_14" type="radio" /><input id="__tabbed_14_4" name="__tabbed_14" type="radio" /><input id="__tabbed_14_5" name="__tabbed_14" type="radio" /><input id="__tabbed_14_6" name="__tabbed_14" type="radio" /><input id="__tabbed_14_7" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">HTTPie</label><label for="__tabbed_14_2">Python</label><label for="__tabbed_14_3">TypeScript</label><label for="__tabbed_14_4">Path Parameters</label><label for="__tabbed_14_5">Request Body (required)</label><label for="__tabbed_14_6">Responses</label><label for="__tabbed_14_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:7"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><input id="__tabbed_12_4" name="__tabbed_12" type="radio" /><input id="__tabbed_12_5" name="__tabbed_12" type="radio" /><input id="__tabbed_12_6" name="__tabbed_12" type="radio" /><input id="__tabbed_12_7" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">HTTPie</label><label for="__tabbed_12_2">Python</label><label for="__tabbed_12_3">TypeScript</label><label for="__tabbed_12_4">Path Parameters</label><label for="__tabbed_12_5">Request Body (required)</label><label for="__tabbed_12_6">Responses</label><label for="__tabbed_12_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23121,7 +22298,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own verification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>

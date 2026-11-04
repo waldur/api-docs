@@ -18398,7 +18398,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Every grant to staff and support, the list only active ones unless show_inactive=true. Anyone else sees their own active grants, except those on an organization, or a project of one, that limits portal access to networks the caller's address is outside.</p>
 </div>
 </div>
 </div>
@@ -18610,7 +18611,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Every grant to staff and support, the list only active ones unless show_inactive=true. Anyone else sees their own active grants, except those on an organization, or a project of one, that limits portal access to networks the caller's address is outside.</p>
 </div>
 </div>
 </div>
@@ -18736,7 +18738,7 @@
 <p><strong><code>200</code></strong> - Role restored successfully.</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or a holder of the team permission for the grant's scope type (CUSTOMER.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, ...) on the scope or on its organization, among the grants the caller sees.</p>
 </div>
 </div>
 </div>
@@ -18861,7 +18863,7 @@
 <p><strong><code>200</code></strong> - Role revoked successfully.</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or a holder of the team permission for the grant's scope type (CUSTOMER.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, ...) on the scope or on its organization, among the grants the caller sees.</p>
 </div>
 </div>
 </div>

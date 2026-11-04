@@ -18374,7 +18374,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>The caller's own personal access tokens.</p>
 </div>
 </div>
 </div>
@@ -18557,7 +18558,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>The caller's own personal access tokens.</p>
 </div>
 </div>
 </div>
@@ -18783,7 +18785,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A token for the caller, who must be allowed personal access tokens. Only staff may give it STAFF.ACCESS, and only staff or support SUPPORT.ACCESS; unless the caller is staff, each entity it is bound to needs one of its permissions held there or on an entity above it. Not with a personal access token, and for staff and support under passkey enforcement only from a passkey-verified session.</p>
 </div>
 </div>
 </div>
@@ -18880,7 +18882,7 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The caller's own token; not with a personal access token.</p>
 </div>
 </div>
 </div>
@@ -18998,7 +19000,7 @@ descendants at request time).</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The entity types where the caller's own roles grant each permission; every type for staff.</p>
 </div>
 </div>
 </div>
@@ -19114,7 +19116,7 @@ create serializer would accept.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The permissions the caller's own roles let them give a token; every one for staff.</p>
 </div>
 </div>
 </div>
@@ -19278,7 +19280,7 @@ create serializer would accept.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The caller's own token; not with a personal access token, and for staff and support under passkey enforcement only from a passkey-verified session.</p>
 </div>
 </div>
 </div>
@@ -19503,7 +19505,7 @@ disabled on this viewset, and the change gets its own audit event.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The caller's own token; not with a personal access token.</p>
 </div>
 </div>
 </div>

@@ -18388,6 +18388,16 @@
 <td></td>
 </tr>
 <tr>
+<td><code>ephemeral</code></td>
+<td>boolean</td>
+<td>Registered by a short-lived client (a browser tab). Deleted automatically once its queue has had no reader for EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS.</td>
+</tr>
+<tr>
+<td><code>unread_since</code></td>
+<td>string (date-time)</td>
+<td>When the sweep first saw this ephemeral consumer's queue without a reader. Cleared when a reader returns or the client re-registers.</td>
+</tr>
+<tr>
 <td><code>created</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -18401,7 +18411,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>The caller's own event consumers; staff and global support see every consumer. Consumers owned by a site agent are left out.</p>
 </div>
 </div>
 </div>
@@ -18663,6 +18674,16 @@
 <td></td>
 </tr>
 <tr>
+<td><code>ephemeral</code></td>
+<td>boolean</td>
+<td>Registered by a short-lived client (a browser tab). Deleted automatically once its queue has had no reader for EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS.</td>
+</tr>
+<tr>
+<td><code>unread_since</code></td>
+<td>string (date-time)</td>
+<td>When the sweep first saw this ephemeral consumer's queue without a reader. Cleared when a reader returns or the client re-registers.</td>
+</tr>
+<tr>
 <td><code>created</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -18773,7 +18794,19 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>All of:</p>
+<ul>
+<li>Any of:<ul>
+<li>Staff.</li>
+<li>A consumer that does not deliver to a webhook.</li>
+</ul>
+</li>
+<li>Any of:<ul>
+<li>The caller's own consumer.</li>
+<li>Staff.</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -18886,6 +18919,12 @@
 <td>✓</td>
 <td></td>
 </tr>
+<tr>
+<td><code>ephemeral</code></td>
+<td>boolean</td>
+<td></td>
+<td>Set by short-lived clients such as a browser tab. An ephemeral consumer and its queue are deleted once the queue has had no reader for EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS, or once its owner has no active token. Re-registering an existing consumer without the flag makes it permanent. Re-registering a permanent consumer with it makes it ephemeral only for a browser-style registration (DRF token or session, previously too, bound to your own user); otherwise it stays permanent. Integrations should leave it unset.<br><em>Constraints: default: <code>False</code></em></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -18957,7 +18996,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user, for a consumer of their own. Each binding names an entity the caller holds a role on, or one below an entity they hold a role on, or the caller themselves; staff and global support bind to anything. A consumer with no bindings receives every event and requires staff or global support.</p>
 </div>
 </div>
 </div>
@@ -19221,6 +19260,16 @@
 <td><code>last_error_at</code></td>
 <td>string (date-time)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>ephemeral</code></td>
+<td>boolean</td>
+<td>Registered by a short-lived client (a browser tab). Deleted automatically once its queue has had no reader for EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS.</td>
+</tr>
+<tr>
+<td><code>unread_since</code></td>
+<td>string (date-time)</td>
+<td>When the sweep first saw this ephemeral consumer's queue without a reader. Cleared when a reader returns or the client re-registers.</td>
 </tr>
 <tr>
 <td><code>created</code></td>

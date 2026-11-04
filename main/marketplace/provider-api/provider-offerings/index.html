@@ -39465,7 +39465,7 @@
 </div>
 <hr />
 <h3 id="list-offerings-grouped-by-provider">List offerings grouped by provider</h3>
-<p>Returns a paginated list of active, shared offerings grouped by their service provider.</p>
+<p>Returns a paginated list of active, shared offerings grouped by their service provider. Only offerings the caller may see in the public offerings list are included.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="55:6"><input checked="checked" id="__tabbed_55_1" name="__tabbed_55" type="radio" /><input id="__tabbed_55_2" name="__tabbed_55" type="radio" /><input id="__tabbed_55_3" name="__tabbed_55" type="radio" /><input id="__tabbed_55_4" name="__tabbed_55" type="radio" /><input id="__tabbed_55_5" name="__tabbed_55" type="radio" /><input id="__tabbed_55_6" name="__tabbed_55" type="radio" /><div class="tabbed-labels"><label for="__tabbed_55_1">HTTPie</label><label for="__tabbed_55_2">Python</label><label for="__tabbed_55_3">TypeScript</label><label for="__tabbed_55_4">Query Parameters</label><label for="__tabbed_55_5">Responses</label><label for="__tabbed_55_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -39810,7 +39810,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Any signed-in user.</li>
+<li>Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.</li>
+</ul>
 </div>
 </div>
 </div>

@@ -8517,17 +8517,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Create
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#create-justification-for-failed-verification" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -18053,17 +18042,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Create
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#create-justification-for-failed-verification" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -18204,11 +18182,6 @@
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/onboarding-justifications/{uuid}/</code></td>
 <td style="text-align: left;"><a href="#retrieve">Retrieve</a></td>
-</tr>
-<tr>
-<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
-<td style="text-align: left;"><code>/api/onboarding-justifications/</code></td>
-<td style="text-align: left;"><a href="#create">Create</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -18749,263 +18722,9 @@
 </div>
 </div>
 <hr />
-<h3 id="create">Create</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Request Body (required)</label><label for="__tabbed_3_5">Responses</label><label for="__tabbed_3_6">Authorization</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>https://api.example.com/api/onboarding-justifications/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">verification</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.onboarding_justification_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnboardingJustificationRequest</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.onboarding_justifications</span><span class="w"> </span><span class="kn">import</span> <span class="n">onboarding_justifications_create</span> <span class="c1"># (2)</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
-    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
-<span class="p">)</span>
-
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">OnboardingJustificationRequest</span><span class="p">(</span>
-    <span class="n">verification</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
-<span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">onboarding_justifications_create</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_justification_request.py"><code>OnboardingJustificationRequest</code></a></li>
-<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_justifications/onboarding_justifications_create.py"><code>onboarding_justifications_create</code></a></li>
-</ol>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">onboardingJustificationsCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
-
-<span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onboardingJustificationsCreate</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;verification&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">});</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
-<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>verification</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><code>user_justification</code></td>
-<td>string</td>
-<td></td>
-<td>User's explanation for why they should be authorized</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
-<p><strong><code>201</code></strong> - </p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>verification</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>verification_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>country</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>user</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>user_full_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>legal_person_identifier</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>legal_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>user_justification</code></td>
-<td>string</td>
-<td>User's explanation for why they should be authorized</td>
-</tr>
-<tr>
-<td><code>validated_by</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>validated_at</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>validation_decision</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>staff_notes</code></td>
-<td>string</td>
-<td>Administrator notes on the review decision</td>
-</tr>
-<tr>
-<td><code>supporting_documentation</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>supporting_documentation.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>supporting_documentation.file</code></td>
-<td>string (uri)</td>
-<td>Upload supporting documentation.</td>
-</tr>
-<tr>
-<td><code>supporting_documentation.file_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>supporting_documentation.file_size</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>supporting_documentation.created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>onboarding_metadata</code></td>
-<td>object (free-form)</td>
-<td>Onboarding-specific data like intents, purposes extracted from checklist answers</td>
-</tr>
-<tr>
-<td><code>user_submitted_customer_data</code></td>
-<td>object (free-form)</td>
-<td>Customer-related data submitted by the user via checklist answers</td>
-</tr>
-<tr>
-<td><code>created</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>modified</code></td>
-<td>string (date-time)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
-</div>
-</div>
-</div>
-<hr />
 <h3 id="create-justification-for-failed-verification">Create justification for failed verification</h3>
 <p>Create justification for failed verification.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Request Body (required)</label><label for="__tabbed_4_5">Responses</label><label for="__tabbed_4_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Request Body (required)</label><label for="__tabbed_3_5">Responses</label><label for="__tabbed_3_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19253,13 +18972,13 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A justification of the caller's own verification, which the request names.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="update">Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><input id="__tabbed_5_7" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Request Body (required)</label><label for="__tabbed_5_6">Responses</label><label for="__tabbed_5_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><input id="__tabbed_4_7" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Request Body (required)</label><label for="__tabbed_4_6">Responses</label><label for="__tabbed_4_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19539,7 +19258,7 @@
 </div>
 <hr />
 <h3 id="partial-update">Partial Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:7"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><input id="__tabbed_6_7" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Request Body</label><label for="__tabbed_6_6">Responses</label><label for="__tabbed_6_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><input id="__tabbed_5_7" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Request Body</label><label for="__tabbed_5_6">Responses</label><label for="__tabbed_5_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19807,7 +19526,7 @@
 </div>
 <hr />
 <h3 id="delete">Delete</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Path Parameters</label><label for="__tabbed_7_5">Responses</label><label for="__tabbed_7_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Responses</label><label for="__tabbed_6_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -19898,7 +19617,11 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own justification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -19906,7 +19629,7 @@
 <h2 id="other-actions">Other Actions</h2>
 <h3 id="approve-justification-and-mark-verification-as-verified">Approve justification and mark verification as VERIFIED</h3>
 <p>Approve justification and mark verification as VERIFIED.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:7"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><input id="__tabbed_8_7" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Request Body</label><label for="__tabbed_8_6">Responses</label><label for="__tabbed_8_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:7"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><input id="__tabbed_7_7" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Path Parameters</label><label for="__tabbed_7_5">Request Body</label><label for="__tabbed_7_6">Responses</label><label for="__tabbed_7_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20169,7 +19892,7 @@
 <hr />
 <h3 id="attach-supporting-document-to-justification">Attach supporting document to justification</h3>
 <p>Attach supporting document to justification.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:7"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><input id="__tabbed_9_7" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Request Body</label><label for="__tabbed_9_6">Responses</label><label for="__tabbed_9_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:7"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><input id="__tabbed_8_7" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Request Body</label><label for="__tabbed_8_6">Responses</label><label for="__tabbed_8_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20325,14 +20048,18 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own justification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="reject-justification-and-mark-verification-as-failed">Reject justification and mark verification as FAILED</h3>
 <p>Reject justification and mark verification as FAILED.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:7"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><input id="__tabbed_10_5" name="__tabbed_10" type="radio" /><input id="__tabbed_10_6" name="__tabbed_10" type="radio" /><input id="__tabbed_10_7" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">HTTPie</label><label for="__tabbed_10_2">Python</label><label for="__tabbed_10_3">TypeScript</label><label for="__tabbed_10_4">Path Parameters</label><label for="__tabbed_10_5">Request Body</label><label for="__tabbed_10_6">Responses</label><label for="__tabbed_10_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:7"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><input id="__tabbed_9_7" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Request Body</label><label for="__tabbed_9_6">Responses</label><label for="__tabbed_9_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
