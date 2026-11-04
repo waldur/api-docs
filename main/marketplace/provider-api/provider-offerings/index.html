@@ -22343,7 +22343,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -23661,7 +23662,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -26109,7 +26111,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or who holds OFFERING.CREATE on the organization named in the request.</p>
 </div>
 </div>
 </div>
@@ -27410,7 +27412,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -27834,7 +27836,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -28864,7 +28866,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -29267,7 +29269,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -34003,7 +34005,7 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or who holds OFFERING.UPDATE_THUMBNAIL on the offering's organization while the offering is active, draft, paused or unavailable.</p>
 </div>
 </div>
 </div>
@@ -34101,7 +34103,7 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or who holds OFFERING.UPDATE_THUMBNAIL on the offering's organization while the offering is active, draft, paused or unavailable.</p>
 </div>
 </div>
 </div>
@@ -34238,7 +34240,7 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or who holds OFFERING.UPDATE_THUMBNAIL on the offering's organization while the offering is active, draft, paused or unavailable.</p>
 </div>
 </div>
 </div>
@@ -34375,7 +34377,7 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or who holds OFFERING.UPDATE_THUMBNAIL on the offering's organization while the offering is active, draft, paused or unavailable.</p>
 </div>
 </div>
 </div>
@@ -38097,7 +38099,12 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>All of:</p>
+<ul>
+<li>Requires <code>OFFERING.UPDATE</code> on the object, its customer or its customer's service provider.</li>
+<li>While ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT is off, only staff may change an offering that is not a draft.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -40910,7 +40917,12 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff or support.</li>
+<li>One of these roles: <code>OFFERING.MANAGER</code> on the offering; <code>CUSTOMER.OWNER</code> on the customer.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -41537,7 +41549,12 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff or support.</li>
+<li>One of these roles: <code>OFFERING.MANAGER</code> on the offering; <code>CUSTOMER.OWNER</code> on the customer.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -41857,7 +41874,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -42013,7 +42031,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff. For an offering that is not shared, also who holds RESOURCE.LIST_IMPORTABLE on the offering's project or organization.</p>
 </div>
 </div>
 </div>
@@ -42857,7 +42875,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff. For an offering that is not shared, also who holds RESOURCE.LIST_IMPORTABLE on the offering's project or organization.</p>
 </div>
 </div>
 </div>
@@ -43218,7 +43236,12 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff or support.</li>
+<li>One of these roles: <code>OFFERING.MANAGER</code> on the offering; <code>CUSTOMER.OWNER</code> on the customer.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -43412,7 +43435,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff and support, or who is an offering manager of, or an owner of the organization of, every offering the request names.</p>
 </div>
 </div>
 </div>
@@ -43660,7 +43683,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.</p>
 </div>
 </div>
 </div>
@@ -46873,7 +46896,12 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>All of:</p>
+<ul>
+<li>Requires <code>OFFERING.UPDATE</code> on the object, its customer or its customer's service provider.</li>
+<li>While ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT is off, only staff may change an offering that is not a draft.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -47330,7 +47358,8 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Requires <code>OFFERING.UPDATE</code> on the customer.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -48039,7 +48068,12 @@
 <p><strong><code>200</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>All of:</p>
+<ul>
+<li>Requires <code>OFFERING.UPDATE</code> on the object, its customer or its customer's service provider.</li>
+<li>While ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT is off, only staff may change an offering that is not a draft.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -48194,7 +48228,7 @@
 <div class="tabbed-block">
 <p>All of:</p>
 <ul>
-<li>A check this reference does not describe yet.</li>
+<li>The route is open only while ENABLE_MARKDOWN_IMAGE_UPLOAD is on.</li>
 <li>Requires <code>OFFERING.UPDATE_DESCRIPTION</code> on the object, its customer or its customer's service provider.</li>
 </ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
