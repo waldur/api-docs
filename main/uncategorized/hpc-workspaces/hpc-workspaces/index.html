@@ -18471,7 +18471,7 @@
 <hr />
 <h2 id="core-crud">Core CRUD</h2>
 <h3 id="list-hpc-workspaces">List HPC workspaces</h3>
-<p>SLURM allocations visible to the user whose offering is connected to FirecREST.</p>
+<p>SLURM allocations visible to the user whose offering is connected to FirecREST or a cluster monitor.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTTPie</label><label for="__tabbed_1_2">Python</label><label for="__tabbed_1_3">TypeScript</label><label for="__tabbed_1_4">Query Parameters</label><label for="__tabbed_1_5">Responses</label><label for="__tabbed_1_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -18551,6 +18551,11 @@
 <td>integer</td>
 <td>Number of results to return per page.</td>
 </tr>
+<tr>
+<td><code>resource_uuid</code></td>
+<td>string (uuid)</td>
+<td>Only the workspace of this resource, e.g. to tell whether a resource page has one.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -18617,6 +18622,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>firecrest_enabled</code></td>
+<td>boolean</td>
+<td>Jobs can be submitted and canceled and files opened through FirecREST. Without it the workspace is read-only, from the cluster monitor.</td>
+</tr>
+<tr>
 <td><code>monitoring_enabled</code></td>
 <td>boolean</td>
 <td>Jobs have per-run performance samples from the cluster monitor.</td>
@@ -18631,7 +18641,7 @@
 </div>
 <hr />
 <h3 id="hpc-workspace-overview">HPC workspace overview</h3>
-<p>Allocation, the user's cluster identity and FirecREST system health. Problems reaching FirecREST are reported in 'error' rather than failing the request; 'sign_in_provider' names the identity provider to sign in through again when that is the remedy.</p>
+<p>Allocation, the user's cluster identity and FirecREST system health. Problems reaching FirecREST are reported in 'error' rather than failing the request; 'sign_in_provider' names the identity provider to sign in through again when that is the remedy. Without FirecREST ('firecrest_enabled' false) the health is left out.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">HTTPie</label><label for="__tabbed_2_2">Python</label><label for="__tabbed_2_3">TypeScript</label><label for="__tabbed_2_4">Path Parameters</label><label for="__tabbed_2_5">Responses</label><label for="__tabbed_2_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -18779,6 +18789,11 @@
 <td><code>state</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>firecrest_enabled</code></td>
+<td>boolean</td>
+<td>Jobs can be submitted and canceled and files opened through FirecREST. Without it the workspace is read-only, from the cluster monitor.</td>
 </tr>
 <tr>
 <td><code>monitoring_enabled</code></td>

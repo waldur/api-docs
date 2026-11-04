@@ -177890,7 +177890,11 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff or support.</li>
+<li>A role on the organization that customer_uuid names, from an address within its portal networks; anyone else is answered as if the organization did not exist. Resources of an offering that conceals subnet-restricted resources are left out unless the caller's address is in their access subnets.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -450800,7 +450804,7 @@ the deadline of the reviews accepted from it.'
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/user-actions/update_actions/</code></td>
-<td style="text-align: left;"><a href="#marketplace-automation-user-actions-trigger-update-of-user-actions">Trigger update of user actions</a></td>
+<td style="text-align: left;"><a href="#marketplace-automation-user-actions-staff-only-action-to-trigger-recalculation-of-the-actions-of-every-user">Staff-only action to trigger recalculation of the actions of every user</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Other Actions</strong></td>
@@ -451483,8 +451487,8 @@ the deadline of the reviews accepted from it.'
 </div>
 </div>
 <hr />
-<h3 id="marketplace-automation-user-actions-trigger-update-of-user-actions">Trigger update of user actions</h3>
-<p>Trigger update of user actions</p>
+<h3 id="marketplace-automation-user-actions-staff-only-action-to-trigger-recalculation-of-the-actions-of-every-user">Staff-only action to trigger recalculation of the actions of every user</h3>
+<p>Staff-only action to trigger recalculation of the actions of every user.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="marketplace-automation-user-actions-__tabbed_3_1" name="marketplace-automation-user-actions-__tabbed_3" type="radio" /><input id="marketplace-automation-user-actions-__tabbed_3_2" name="marketplace-automation-user-actions-__tabbed_3" type="radio" /><input id="marketplace-automation-user-actions-__tabbed_3_3" name="marketplace-automation-user-actions-__tabbed_3" type="radio" /><input id="marketplace-automation-user-actions-__tabbed_3_4" name="marketplace-automation-user-actions-__tabbed_3" type="radio" /><input id="marketplace-automation-user-actions-__tabbed_3_5" name="marketplace-automation-user-actions-__tabbed_3" type="radio" /><input id="marketplace-automation-user-actions-__tabbed_3_6" name="marketplace-automation-user-actions-__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="marketplace-automation-user-actions-__tabbed_3_1">HTTPie</label><label for="marketplace-automation-user-actions-__tabbed_3_2">Python</label><label for="marketplace-automation-user-actions-__tabbed_3_3">TypeScript</label><label for="marketplace-automation-user-actions-__tabbed_3_4">Request Body</label><label for="marketplace-automation-user-actions-__tabbed_3_5">Responses</label><label for="marketplace-automation-user-actions-__tabbed_3_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -451601,7 +451605,7 @@ the deadline of the reviews accepted from it.'
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff only.</p>
 </div>
 </div>
 </div>
@@ -496937,18 +496941,16 @@ the deadline of the reviews accepted from it.'
 </div>
 <hr />
 <h3 id="marketplace-onboarding-onboarding-justifications-update">Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="marketplace-onboarding-onboarding-justifications-__tabbed_4_1" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_2" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_3" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_4" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_5" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_6" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_7" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_1">HTTPie</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_2">Python</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_3">TypeScript</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_4">Path Parameters</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_5">Request Body (required)</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_6">Responses</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="marketplace-onboarding-onboarding-justifications-__tabbed_4_1" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_2" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_3" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_4" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_5" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_6" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><input id="marketplace-onboarding-onboarding-justifications-__tabbed_4_7" name="marketplace-onboarding-onboarding-justifications-__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_1">HTTPie</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_2">Python</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_3">TypeScript</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_4">Path Parameters</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_5">Request Body</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_6">Responses</label><label for="marketplace-onboarding-onboarding-justifications-__tabbed_4_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>PUT<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/onboarding-justifications/a1b2c3d4-e5f6-7890-abcd-ef1234567890/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">verification</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -496967,9 +496969,7 @@ the deadline of the reviews accepted from it.'
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.onboarding_justification_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnboardingJustificationRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.onboarding_justifications</span><span class="w"> </span><span class="kn">import</span> <span class="n">onboarding_justifications_update</span> <span class="c1"># (2)</span>
 
@@ -496977,9 +496977,7 @@ the deadline of the reviews accepted from it.'
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">OnboardingJustificationRequest</span><span class="p">(</span>
-    <span class="n">verification</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
-<span class="p">)</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">OnboardingJustificationRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">onboarding_justifications_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -497006,19 +497004,13 @@ the deadline of the reviews accepted from it.'
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">onboardingJustificationsUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">onboardingJustificationsUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onboardingJustificationsUpdate</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;verification&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
@@ -497056,12 +497048,6 @@ the deadline of the reviews accepted from it.'
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>verification</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-<td></td>
-</tr>
 <tr>
 <td><code>user_justification</code></td>
 <td>string</td>
@@ -497211,7 +497197,11 @@ the deadline of the reviews accepted from it.'
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own justification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -497325,12 +497315,6 @@ the deadline of the reviews accepted from it.'
 </thead>
 <tbody>
 <tr>
-<td><code>verification</code></td>
-<td>string (uri)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td><code>user_justification</code></td>
 <td>string</td>
 <td></td>
@@ -497479,7 +497463,11 @@ the deadline of the reviews accepted from it.'
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The caller's own justification.</li>
+<li>Staff.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -498839,7 +498827,7 @@ the deadline of the reviews accepted from it.'
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff only.</p>
 </div>
 </div>
 </div>
@@ -499050,7 +499038,7 @@ the deadline of the reviews accepted from it.'
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff only.</p>
 </div>
 </div>
 </div>
@@ -499249,7 +499237,7 @@ the deadline of the reviews accepted from it.'
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff only.</p>
 </div>
 </div>
 </div>
@@ -499346,7 +499334,7 @@ the deadline of the reviews accepted from it.'
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff only.</p>
 </div>
 </div>
 </div>
@@ -520008,7 +519996,7 @@ the deadline of the reviews accepted from it.'
 <td><code>plugin_options.firecrest_api_url</code></td>
 <td>string (uri)</td>
 <td></td>
-<td>FirecREST v2 API URL users of this SLURM offering work through (jobs, files, cluster status). Must also be listed in the FIRECREST_ALLOWED_API_URLS setting. Leave empty to disable the HPC workspace.</td>
+<td>FirecREST v2 API URL users of this SLURM offering work through (jobs, files, cluster status). Must also be listed in the FIRECREST_ALLOWED_API_URLS setting. Leave empty to run no jobs through Waldur; with a slurm-monitor URL the workspace is then read-only.</td>
 </tr>
 <tr>
 <td><code>plugin_options.firecrest_system_name</code></td>
@@ -520020,7 +520008,7 @@ the deadline of the reviews accepted from it.'
 <td><code>plugin_options.slurm_monitor_api_url</code></td>
 <td>string (uri)</td>
 <td></td>
-<td>slurm-monitor API URL (ending in /api/v2) with the cluster's per-job samples (GPU, CPU, memory over time). Must also be listed in the SLURM_MONITOR_ALLOWED_API_URLS setting. Leave empty to hide job performance.</td>
+<td>slurm-monitor API URL (ending in /api/v2) with the cluster's per-job samples (GPU, CPU, memory over time). Must also be listed in the SLURM_MONITOR_ALLOWED_API_URLS setting. Leave empty to hide job performance. Without FirecREST, the allocations get a read-only workspace from it: jobs, their performance, job statistics and software.</td>
 </tr>
 <tr>
 <td><code>plugin_options.slurm_monitor_cluster_name</code></td>
@@ -532730,7 +532718,7 @@ the deadline of the reviews accepted from it.'
 <td><code>plugin_options.firecrest_api_url</code></td>
 <td>string (uri)</td>
 <td></td>
-<td>FirecREST v2 API URL users of this SLURM offering work through (jobs, files, cluster status). Must also be listed in the FIRECREST_ALLOWED_API_URLS setting. Leave empty to disable the HPC workspace.</td>
+<td>FirecREST v2 API URL users of this SLURM offering work through (jobs, files, cluster status). Must also be listed in the FIRECREST_ALLOWED_API_URLS setting. Leave empty to run no jobs through Waldur; with a slurm-monitor URL the workspace is then read-only.</td>
 </tr>
 <tr>
 <td><code>plugin_options.firecrest_system_name</code></td>
@@ -532742,7 +532730,7 @@ the deadline of the reviews accepted from it.'
 <td><code>plugin_options.slurm_monitor_api_url</code></td>
 <td>string (uri)</td>
 <td></td>
-<td>slurm-monitor API URL (ending in /api/v2) with the cluster's per-job samples (GPU, CPU, memory over time). Must also be listed in the SLURM_MONITOR_ALLOWED_API_URLS setting. Leave empty to hide job performance.</td>
+<td>slurm-monitor API URL (ending in /api/v2) with the cluster's per-job samples (GPU, CPU, memory over time). Must also be listed in the SLURM_MONITOR_ALLOWED_API_URLS setting. Leave empty to hide job performance. Without FirecREST, the allocations get a read-only workspace from it: jobs, their performance, job statistics and software.</td>
 </tr>
 <tr>
 <td><code>plugin_options.slurm_monitor_cluster_name</code></td>
@@ -711807,7 +711795,7 @@ their status stays whatever the remote service desk last told us.</p>
 <hr />
 <h2 id="uncategorized-hpc-workspaces-hpc-workspaces-core-crud">Core CRUD</h2>
 <h3 id="uncategorized-hpc-workspaces-hpc-workspaces-list-hpc-workspaces">List HPC workspaces</h3>
-<p>SLURM allocations visible to the user whose offering is connected to FirecREST.</p>
+<p>SLURM allocations visible to the user whose offering is connected to FirecREST or a cluster monitor.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_1" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_2" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_3" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_4" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_5" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_6" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_1">HTTPie</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_2">Python</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_3">TypeScript</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_4">Query Parameters</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_5">Responses</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_1_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -711887,6 +711875,11 @@ their status stays whatever the remote service desk last told us.</p>
 <td>integer</td>
 <td>Number of results to return per page.</td>
 </tr>
+<tr>
+<td><code>resource_uuid</code></td>
+<td>string (uuid)</td>
+<td>Only the workspace of this resource, e.g. to tell whether a resource page has one.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -711953,6 +711946,11 @@ their status stays whatever the remote service desk last told us.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>firecrest_enabled</code></td>
+<td>boolean</td>
+<td>Jobs can be submitted and canceled and files opened through FirecREST. Without it the workspace is read-only, from the cluster monitor.</td>
+</tr>
+<tr>
 <td><code>monitoring_enabled</code></td>
 <td>boolean</td>
 <td>Jobs have per-run performance samples from the cluster monitor.</td>
@@ -711967,7 +711965,7 @@ their status stays whatever the remote service desk last told us.</p>
 </div>
 <hr />
 <h3 id="uncategorized-hpc-workspaces-hpc-workspaces-hpc-workspace-overview">HPC workspace overview</h3>
-<p>Allocation, the user's cluster identity and FirecREST system health. Problems reaching FirecREST are reported in 'error' rather than failing the request; 'sign_in_provider' names the identity provider to sign in through again when that is the remedy.</p>
+<p>Allocation, the user's cluster identity and FirecREST system health. Problems reaching FirecREST are reported in 'error' rather than failing the request; 'sign_in_provider' names the identity provider to sign in through again when that is the remedy. Without FirecREST ('firecrest_enabled' false) the health is left out.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_1" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_2" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_3" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_4" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_5" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2" type="radio" /><input id="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_6" name="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_1">HTTPie</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_2">Python</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_3">TypeScript</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_4">Path Parameters</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_5">Responses</label><label for="uncategorized-hpc-workspaces-hpc-workspaces-__tabbed_2_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -712115,6 +712113,11 @@ their status stays whatever the remote service desk last told us.</p>
 <td><code>state</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>firecrest_enabled</code></td>
+<td>boolean</td>
+<td>Jobs can be submitted and canceled and files opened through FirecREST. Without it the workspace is read-only, from the cluster monitor.</td>
 </tr>
 <tr>
 <td><code>monitoring_enabled</code></td>
