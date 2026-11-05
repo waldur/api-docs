@@ -18382,6 +18382,16 @@
 <td></td>
 </tr>
 <tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
 <td><code>offering_uuids</code></td>
 <td>object (free-form)</td>
 <td></td>
@@ -18586,6 +18596,16 @@
 </tr>
 <tr>
 <td><code>output_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
 <td>integer</td>
 <td></td>
 </tr>
@@ -18963,6 +18983,16 @@
 </tr>
 <tr>
 <td><code>output_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
 <td>integer</td>
 <td></td>
 </tr>
@@ -19440,6 +19470,16 @@
 <td></td>
 </tr>
 <tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
 <td><code>offering_uuids</code></td>
 <td>object (free-form)</td>
 <td></td>
@@ -19776,6 +19816,21 @@
 <td>input_tokens + output_tokens. Excludes LLM judge spend, which runs on its own budget.</td>
 </tr>
 <tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td>Part of input_tokens served from the provider's prompt cache; null when no turn in the conversation reported it.</td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
+<td>integer</td>
+<td>Part of input_tokens written to the provider's prompt cache; null when no turn in the conversation reported it.</td>
+</tr>
+<tr>
+<td><code>cache_ratio</code></td>
+<td>number (double)</td>
+<td>cache_read_tokens over the input of turns whose provider reported a cache figure; null when none did.</td>
+</tr>
+<tr>
 <td><code>started</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -20052,6 +20107,21 @@
 <td><code>output_tokens_total</code></td>
 <td>integer</td>
 <td>Completion tokens summed over the filtered turns.</td>
+</tr>
+<tr>
+<td><code>cache_read_tokens_total</code></td>
+<td>integer</td>
+<td>Part of input_tokens_total served from the provider's prompt cache; null when no turn reported it.</td>
+</tr>
+<tr>
+<td><code>cache_write_tokens_total</code></td>
+<td>integer</td>
+<td>Part of input_tokens_total written to the provider's prompt cache; null when no turn reported it.</td>
+</tr>
+<tr>
+<td><code>cache_ratio</code></td>
+<td>number (double)</td>
+<td>cache_read_tokens_total over the input of turns whose provider reported a cache figure; null when none did.</td>
 </tr>
 <tr>
 <td><code>reviewed_total</code></td>

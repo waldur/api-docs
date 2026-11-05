@@ -18623,6 +18623,16 @@
 <td></td>
 </tr>
 <tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
 <td><code>is_flagged</code></td>
 <td>boolean</td>
 <td></td>
@@ -19629,6 +19639,31 @@
 <td></td>
 </tr>
 <tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td>Part of input_tokens served from the provider's prompt cache, title generation included. Null when the provider never reported it.</td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
+<td>integer</td>
+<td>Part of input_tokens written to the provider's prompt cache, title generation included. Null when the provider never reported it.</td>
+</tr>
+<tr>
+<td><code>title_gen_cache_read_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>title_gen_cache_write_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_ratio</code></td>
+<td>number (double)</td>
+<td>cache_read_tokens / input_tokens, counting only turns whose provider reported a cache figure. Null when none did.</td>
+</tr>
+<tr>
 <td><code>models_used</code></td>
 <td>string</td>
 <td>Comma-separated distinct LLM models across the thread's messages. More than one when an admin switched AI_ASSISTANT_MODEL mid-thread; blank for threads written before model tracking existed.</td>
@@ -19850,6 +19885,31 @@
 <td><code>title_gen_output_tokens</code></td>
 <td>integer</td>
 <td></td>
+</tr>
+<tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td>Part of input_tokens served from the provider's prompt cache, title generation included. Null when the provider never reported it.</td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
+<td>integer</td>
+<td>Part of input_tokens written to the provider's prompt cache, title generation included. Null when the provider never reported it.</td>
+</tr>
+<tr>
+<td><code>title_gen_cache_read_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>title_gen_cache_write_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_ratio</code></td>
+<td>number (double)</td>
+<td>cache_read_tokens / input_tokens, counting only turns whose provider reported a cache figure. Null when none did.</td>
 </tr>
 <tr>
 <td><code>models_used</code></td>
@@ -20125,6 +20185,21 @@ would collide with the aggregates below. Visibility comes from
 <td></td>
 </tr>
 <tr>
+<td><code>cache_read_tokens_total</code></td>
+<td>integer</td>
+<td>Part of input_tokens_total served from the provider's prompt cache; null when no turn reported it.</td>
+</tr>
+<tr>
+<td><code>cache_write_tokens_total</code></td>
+<td>integer</td>
+<td>Part of input_tokens_total written to the provider's prompt cache; null when no turn reported it.</td>
+</tr>
+<tr>
+<td><code>cache_ratio</code></td>
+<td>number (double)</td>
+<td>cache_read_tokens_total over the input of turns whose provider reported a cache figure; null when none did.</td>
+</tr>
+<tr>
 <td><code>flagged_total</code></td>
 <td>integer</td>
 <td>Threads carrying at least one flagged message.</td>
@@ -20368,6 +20443,16 @@ would collide with the aggregates below. Visibility comes from
 </tr>
 <tr>
 <td><code>output_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_read_tokens</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cache_write_tokens</code></td>
 <td>integer</td>
 <td></td>
 </tr>
