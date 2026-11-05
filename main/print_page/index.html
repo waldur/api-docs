@@ -741671,6 +741671,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>Creating</code>, <code>OK</code>, <code>Updating</code>, <code>Paused</code>, <code>Deleting</code>, <code>Deleted</code>, <code>Erred</code></em></td>
@@ -741910,6 +741915,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>Creating</code>, <code>OK</code>, <code>Updating</code>, <code>Paused</code>, <code>Deleting</code>, <code>Deleted</code>, <code>Erred</code></em></td>
@@ -742030,7 +742040,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 <hr />
 <h3 id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-request-an-api-key">Request an API key</h3>
-<p>Asks the site agent to create a key for the resource. Waldur generates nothing: the key appears as Creating and turns OK once the agent reports it. Only on offerings with enable_api_key_provisioning.</p>
+<p>Asks the site agent to create a key for the resource. Waldur generates nothing: the key appears as Creating and turns OK once the agent reports it. Only on offerings with enable_api_key_provisioning, and refused with 409 until the agent has created the resource (it has no backend_id yet).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_1" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_2" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_3" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_4" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_5" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_6" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_1">HTTPie</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_2">Python</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_3">TypeScript</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_4">Request Body (required)</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_5">Responses</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_3_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -742125,6 +742135,12 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+<td>A note telling the key apart from the resource's other keys, such as the environment that uses it. No command to the site agent carries it, so changing it alone issues none and needs no enable_api_key_provisioning. Everyone who can list the key reads it, the provider included.</td>
+</tr>
+<tr>
 <td><code>limits</code></td>
 <td>object (free-form)</td>
 <td></td>
@@ -742185,6 +742201,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </tr>
 <tr>
 <td><code>client_id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -742309,7 +742330,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 <hr />
 <h3 id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-edit-an-api-key">Edit an API key</h3>
-<p>Changes the key's limits or model allowlist. A change is sent to the site agent as an update command, unless the key is paused: resuming it applies them. The key's assignee is set when the key is requested and cannot be changed: an edit that names user, null included, is refused with 400. To hand a key to someone else, request a key for them and delete this one. Only on offerings with enable_api_key_provisioning.</p>
+<p>Changes the key's limits, model allowlist or description. A change of limits or models is sent to the site agent as an update command, unless the key is paused: resuming it applies them. The key's assignee is set when the key is requested and cannot be changed: an edit that names user, null included, is refused with 400. To hand a key to someone else, request a key for them and delete this one. Only on offerings with enable_api_key_provisioning, except an edit of the description alone: that is saved at once on any offering and in any state but Deleted, sends no command and leaves the key's state as it is.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_1" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_2" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_3" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_4" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_5" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_6" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_7" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_1">HTTPie</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_2">Python</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_3">TypeScript</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_4">Path Parameters</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_5">Request Body</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_6">Responses</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_4_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -742418,6 +742439,12 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+<td>A note telling the key apart from the resource's other keys, such as the environment that uses it. No command to the site agent carries it, so changing it alone issues none and needs no enable_api_key_provisioning. Everyone who can list the key reads it, the provider included.</td>
+</tr>
+<tr>
 <td><code>limits</code></td>
 <td>object (free-form)</td>
 <td></td>
@@ -742466,6 +742493,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </tr>
 <tr>
 <td><code>client_id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -742820,6 +742852,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </tr>
 <tr>
 <td><code>client_id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -743333,6 +743370,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>Creating</code>, <code>OK</code>, <code>Updating</code>, <code>Paused</code>, <code>Deleting</code>, <code>Deleted</code>, <code>Erred</code></em></td>
@@ -743628,6 +743670,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </tr>
 <tr>
 <td><code>client_id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -744219,6 +744266,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>Creating</code>, <code>OK</code>, <code>Updating</code>, <code>Paused</code>, <code>Deleting</code>, <code>Deleted</code>, <code>Erred</code></em></td>
@@ -744494,6 +744546,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </tr>
 <tr>
 <td><code>client_id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -744782,6 +744839,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>Creating</code>, <code>OK</code>, <code>Updating</code>, <code>Paused</code>, <code>Deleting</code>, <code>Deleted</code>, <code>Erred</code></em></td>
@@ -745022,6 +745084,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>Creating</code>, <code>OK</code>, <code>Updating</code>, <code>Paused</code>, <code>Deleting</code>, <code>Deleted</code>, <code>Erred</code></em></td>
@@ -745258,6 +745325,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </tr>
 <tr>
 <td><code>client_id</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
 <td>string</td>
 <td></td>
 </tr>
