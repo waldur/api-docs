@@ -18102,7 +18102,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Staff.</li>
+<li>An identity manager (<code>is_identity_manager</code>), with a personal access token of any scopes: a token narrows only the staff and support flags.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -18240,13 +18244,13 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff only.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="push-user-attributes-from-an-isd">Push user attributes from an ISD</h3>
-<p>Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Creates or updates a user based on username (CUID). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds.</p>
+<p>Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Creates or updates a user based on username (CUID). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds. Only staff may push staff, support or identity manager accounts.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Request Body (required)</label><label for="__tabbed_3_5">Responses</label><label for="__tabbed_3_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -18537,7 +18541,7 @@
 </div>
 <hr />
 <h3 id="remove-a-user-from-an-isd">Remove a user from an ISD</h3>
-<p>Signals that a user has been removed from an ISD. Removes the source from active_isds, clears attributes owned by that source, and deactivates the user if no ISDs remain (configurable via FEDERATED_IDENTITY_DEACTIVATION_POLICY). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds.</p>
+<p>Signals that a user has been removed from an ISD. Removes the source from active_isds, clears attributes owned by that source, and deactivates the user if no ISDs remain (configurable via FEDERATED_IDENTITY_DEACTIVATION_POLICY). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds. Only staff may remove staff, support or identity manager accounts. A user who is not in the source ISD is answered with 404 and left unchanged.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Request Body (required)</label><label for="__tabbed_4_5">Responses</label><label for="__tabbed_4_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

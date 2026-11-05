@@ -18258,7 +18258,7 @@
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Returns only objects the caller holds a role on; staff and support see all.</p>
+<p>Memberships of the role groups of the clusters and Rancher projects the caller can see (through a role on the cluster's project or organization); users with the staff or support flag see all of them, whatever their token's scopes.</p>
 </div>
 </div>
 </div>
@@ -18452,7 +18452,7 @@
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Returns only objects the caller holds a role on; staff and support see all.</p>
+<p>Memberships of the role groups of the clusters and Rancher projects the caller can see (through a role on the cluster's project or organization); users with the staff or support flag see all of them, whatever their token's scopes.</p>
 </div>
 </div>
 </div>
@@ -18696,7 +18696,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or an owner of the organization, or a manager or administrator of the project, that holds the Rancher cluster of the role group: the cluster itself or the cluster of the Rancher project.</p>
 </div>
 </div>
 </div>
@@ -18793,7 +18793,7 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, or an owner of the organization, or a manager or administrator of the project, that holds the Rancher cluster of the role group: the cluster itself or the cluster of the Rancher project.</p>
 </div>
 </div>
 </div>

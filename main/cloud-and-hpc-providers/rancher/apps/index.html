@@ -19108,26 +19108,6 @@
 <td>✓</td>
 </tr>
 <tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>template</code></td>
 <td>string (uri)</td>
 <td>✓</td>
@@ -19360,8 +19340,9 @@
 <div class="tabbed-block">
 <p>All of:</p>
 <ul>
-<li>A check this reference does not describe yet.</li>
 <li>One of these roles: <code>CUSTOMER.OWNER</code> on the customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on the project.</li>
+<li>For the <code>rancher_project</code> named in the request, one of these roles: <code>CUSTOMER.OWNER</code> on its customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on its project.</li>
+<li>On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.</li>
 </ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
@@ -19494,7 +19475,7 @@
 <p>All of:</p>
 <ul>
 <li>One of these roles: <code>CUSTOMER.OWNER</code> on the customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on the project.</li>
-<li>A check this reference does not describe yet.</li>
+<li>On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.</li>
 </ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
@@ -19771,26 +19752,6 @@
 <td>✓</td>
 </tr>
 <tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>template</code></td>
 <td>string (uri)</td>
 <td>✓</td>
@@ -20024,7 +19985,7 @@
 <p>All of:</p>
 <ul>
 <li>One of these roles: <code>CUSTOMER.OWNER</code> on the customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on the project.</li>
-<li>A check this reference does not describe yet.</li>
+<li>On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.</li>
 </ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
@@ -20149,56 +20110,6 @@
 <td></td>
 </tr>
 <tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rancher_project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>version</code></td>
 <td>string</td>
 <td></td>
@@ -20412,7 +20323,7 @@
 <p>All of:</p>
 <ul>
 <li>One of these roles: <code>CUSTOMER.OWNER</code> on the customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on the project.</li>
-<li>A check this reference does not describe yet.</li>
+<li>On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.</li>
 </ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
@@ -20514,7 +20425,7 @@
 <p>All of:</p>
 <ul>
 <li>One of these roles: <code>CUSTOMER.OWNER</code> on the customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on the project.</li>
-<li>A check this reference does not describe yet.</li>
+<li>On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.</li>
 </ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>

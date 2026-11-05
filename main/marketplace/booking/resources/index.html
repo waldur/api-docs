@@ -19158,7 +19158,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Bookings of offerings whose organization the caller owns or manages, and those the caller ordered; staff see all.</p>
 </div>
 </div>
 </div>
@@ -20005,7 +20006,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Bookings of offerings whose organization the caller owns or manages, and those the caller ordered; staff see all.</p>
 </div>
 </div>
 </div>
@@ -20229,7 +20231,12 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>The creator of the booking's executing order.</li>
+<li>Requires <code>RESOURCE.REJECT_BOOKING_REQUEST</code> on the project or the project's customer.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>

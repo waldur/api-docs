@@ -19977,7 +19977,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For the <code>tenant</code> named in the request, one of these roles: <code>CUSTOMER.OWNER</code> on its customer; <code>PROJECT.MANAGER</code> or <code>PROJECT.ADMIN</code> on its project.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -20271,7 +20272,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever sees the router, as retrieve shows it. It lists the shared external networks of the router's cloud (all of them for staff and owners of the organization that owns the cloud) and the networks shared into its tenant as external.</p>
 </div>
 </div>
 </div>
@@ -20455,7 +20456,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Returns only objects the caller holds a role on; staff and support see all.</p>
 </div>
 </div>
 </div>

@@ -18758,7 +18758,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The caller's own Matrix account, created if missing.</p>
 </div>
 </div>
 </div>
@@ -18867,7 +18867,7 @@
 <p><strong><code>200</code></strong> - </p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>History exports of rooms the caller manages: MATRIX_ROOM.CREATE on the room's project or organization. Staff and support see all. A personal access token reaches only its bindings, and needs the support scope or MATRIX_ROOM.CREATE.</p>
 </div>
 </div>
 </div>
@@ -19047,7 +19047,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>History exports of rooms the caller manages: MATRIX_ROOM.CREATE on the room's project or organization. Staff and support see all. A personal access token reaches only its bindings, and needs the support scope or MATRIX_ROOM.CREATE.</p>
 </div>
 </div>
 </div>
@@ -19210,7 +19211,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>History exports of rooms the caller manages: MATRIX_ROOM.CREATE on the room's project or organization. Staff and support see all. A personal access token reaches only its bindings, and needs the support scope or MATRIX_ROOM.CREATE.</p>
 </div>
 </div>
 </div>
@@ -19378,7 +19380,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Rooms of projects and organizations where the caller holds a role, and of the projects of organizations where the caller holds MATRIX_ROOM.CREATE; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -19521,7 +19524,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Lists the projects the caller may create a room for: MATRIX_ROOM.CREATE on the project or its organization; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -19748,7 +19751,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Rooms of projects and organizations where the caller holds a role, and of the projects of organizations where the caller holds MATRIX_ROOM.CREATE; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -19935,7 +19939,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Members of a room the caller sees. Rooms of projects and organizations where the caller holds a role, and of the projects of organizations where the caller holds MATRIX_ROOM.CREATE; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -20148,7 +20152,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Rooms of projects and organizations where the caller holds a role, and of the projects of organizations where the caller holds MATRIX_ROOM.CREATE; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -20327,7 +20332,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Drafts the caller requested, in project rooms, while Matrix chat is enabled. Retrieve also needs a role that still puts the caller in the room: one on the project, or MATRIX_ROOM.CREATE on its organization.</p>
 </div>
 </div>
 </div>
@@ -20425,7 +20431,7 @@
 <p><strong><code>503</code></strong> - The homeserver did not set it: either the Waldur bot is not a homeserver admin yet, the homeserver's admin API is not reachable or the account is a homeserver admin's, which needs an operator, or the homeserver failed and a later try may succeed. The detail says which.</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The caller's own Matrix account, created if missing. Any authentication is accepted, including a scoped personal access token or a staff member impersonating the user; see #1080.</p>
 </div>
 </div>
 </div>
@@ -21159,7 +21165,12 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any of:</p>
+<ul>
+<li>Requires <code>MATRIX_ROOM.CREATE</code> on the project or the project's customer.</li>
+<li>Staff or support.</li>
+</ul>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -22174,7 +22185,7 @@
 <p><strong><code>409</code></strong> - The room is not active.</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A room the caller sees, of which the caller is a current member, invited or joined. A role that reaches the room is not enough.</p>
 </div>
 </div>
 </div>
@@ -22815,7 +22826,7 @@
 <p><strong><code>503</code></strong> - The homeserver could not start a session: either it failed and a later try may succeed, or the user's Matrix account is locked, which needs an operator. The detail says which.</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The caller's own Matrix account, created if missing. Any authentication is accepted, including a scoped personal access token or a staff member impersonating the user; see #1080.</p>
 </div>
 </div>
 </div>
@@ -22912,7 +22923,7 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A draft the caller requested, while a role still puts them in the room: one on the room's project, or MATRIX_ROOM.CREATE on its organization.</p>
 </div>
 </div>
 </div>
@@ -23079,7 +23090,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A draft the caller requested, while a role still puts them in the room: one on the room's project, or MATRIX_ROOM.CREATE on its organization.</p>
 </div>
 </div>
 </div>

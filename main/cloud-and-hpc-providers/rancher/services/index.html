@@ -19136,26 +19136,6 @@
 <td>✓</td>
 </tr>
 <tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>namespace</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -19613,15 +19593,11 @@
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>PUT<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/rancher-services/a1b2c3d4-e5f6-7890-abcd-ef1234567890/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-rancher-service&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">service_settings</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">project</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>target_workloads:<span class="o">=</span><span class="s1">&#39;[]&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -19644,9 +19620,7 @@
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.rancher_service_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">RancherServiceRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.rancher_services</span><span class="w"> </span><span class="kn">import</span> <span class="n">rancher_services_update</span> <span class="c1"># (2)</span>
 
@@ -19656,8 +19630,6 @@
 
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">RancherServiceRequest</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-rancher-service&quot;</span><span class="p">,</span>
-    <span class="n">service_settings</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
     <span class="n">target_workloads</span><span class="o">=</span><span class="p">[]</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">rancher_services_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
@@ -19690,9 +19662,7 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rancherServicesUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rancherServicesUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">rancherServicesUpdate</span><span class="p">({</span>
@@ -19702,8 +19672,6 @@
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-rancher-service&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;service_settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;project&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;target_workloads&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
@@ -19749,41 +19717,6 @@
 <tr>
 <td><code>description</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace</code></td>
-<td>string (uri)</td>
 <td></td>
 </tr>
 <tr>
@@ -20124,41 +20057,6 @@
 <tr>
 <td><code>description</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace</code></td>
-<td>string (uri)</td>
 <td></td>
 </tr>
 <tr>
@@ -20589,7 +20487,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Returns only objects the caller holds a role on; staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -20859,15 +20758,11 @@
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>PUT<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/rancher-services/a1b2c3d4-e5f6-7890-abcd-ef1234567890/yaml/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-rancher-service&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">service_settings</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">project</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>target_workloads:<span class="o">=</span><span class="s1">&#39;[]&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -20890,9 +20785,7 @@
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.rancher_service_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">RancherServiceRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.rancher_services</span><span class="w"> </span><span class="kn">import</span> <span class="n">rancher_services_yaml_update</span> <span class="c1"># (2)</span>
 
@@ -20902,8 +20795,6 @@
 
 <span class="n">body_data</span> <span class="o">=</span> <span class="n">RancherServiceRequest</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-rancher-service&quot;</span><span class="p">,</span>
-    <span class="n">service_settings</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
     <span class="n">target_workloads</span><span class="o">=</span><span class="p">[]</span>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">rancher_services_yaml_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
@@ -20936,9 +20827,7 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rancherServicesYamlUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rancherServicesYamlUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">rancherServicesYamlUpdate</span><span class="p">({</span>
@@ -20948,8 +20837,6 @@
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-rancher-service&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;service_settings&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;project&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;target_workloads&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
@@ -20995,41 +20882,6 @@
 <tr>
 <td><code>description</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>service_settings</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-</tr>
-<tr>
-<td><code>project</code></td>
-<td>string (uri)</td>
-<td>✓</td>
-</tr>
-<tr>
-<td><code>error_message</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>error_traceback</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>backend_id</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>runtime_state</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>namespace</code></td>
-<td>string (uri)</td>
 <td></td>
 </tr>
 <tr>

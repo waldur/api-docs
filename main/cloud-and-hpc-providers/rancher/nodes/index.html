@@ -19578,7 +19578,7 @@
 <p><strong><code>404</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>As /api/openstack-instances/<uuid>/console_log/ checks it, on the OpenStack instance the node runs on: staff, and, where ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS is on, holders of OPENSTACK_INSTANCE.CONSOLE_ACCESS on the instance's project or organization. A node without an instance answers 404.</p>
 </div>
 </div>
 </div>
@@ -19690,7 +19690,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>As /api/openstack-instances/<uuid>/console/ checks it, on the OpenStack instance the node runs on: staff, and, where ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS is on, holders of OPENSTACK_INSTANCE.CONSOLE_ACCESS on the instance's project or organization. A node without an instance answers 404.</p>
 </div>
 </div>
 </div>
