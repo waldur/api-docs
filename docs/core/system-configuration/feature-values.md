@@ -60,4 +60,9 @@ Allows administrators to enable or disable specific feature flags in the system.
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---

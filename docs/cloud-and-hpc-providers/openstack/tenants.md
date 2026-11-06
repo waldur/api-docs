@@ -174,6 +174,13 @@ Get a list of OpenStack tenants.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get tenant details
@@ -302,6 +309,13 @@ Retrieve details of a specific OpenStack tenant.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Synchronize resource state
@@ -380,6 +394,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -448,6 +469,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -603,6 +629,13 @@ Update an existing OpenStack tenant.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update tenant
@@ -751,6 +784,13 @@ Update specific fields of an OpenStack tenant.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Configuration & Updates
@@ -841,6 +881,13 @@ Change password for tenant user
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -962,6 +1009,11 @@ On successful completion the task will synchronize quotas with the backend.
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Staff, or an owner or service provider manager of the organization that owns the tenant's service settings, that is, the provider.
+
 ---
 
 ## Sub-Resource Creation
@@ -1071,7 +1123,7 @@ Create floating IP for tenant
     | `backend_id` | string |  |
     | `access_url` | any |  |
     | `runtime_state` | string |  |
-    | `address` | any | The public IPv4 address of the floating IP |
+    | `address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `backend_network_id` | string | ID of network in OpenStack where this floating IP is allocated |
     | `tenant` | string (uri) | OpenStack tenant this floating IP belongs to |
     | `tenant_name` | string |  |
@@ -1095,6 +1147,13 @@ Create floating IP for tenant
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1257,6 +1316,13 @@ Create network for tenant
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Create security group
@@ -1409,6 +1475,13 @@ Create a security group for the tenant.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Create server group
@@ -1543,6 +1616,13 @@ Create a new server group for the tenant.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Data & Reporting
@@ -1654,6 +1734,13 @@ Return a list of volumes from backend
     | `availability_zone` | string |  |
     | `hypervisor_hostname` | string | Name of the hypervisor hosting this instance |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### List backend volumes
@@ -1763,6 +1850,13 @@ Return a list of volumes from backend
     | `state` | string |  |
     | `availability_zone` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ## Remote Actions & Sync
@@ -1832,6 +1926,13 @@ Trigger job to pull floating IPs from remote VPC
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1903,6 +2004,13 @@ It triggers celery job to pull quotas from remote VPC
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Pull security groups
@@ -1973,6 +2081,13 @@ Trigger job to pull security groups from remote VPC
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Pull server groups
@@ -2042,6 +2157,13 @@ Trigger job to pull server groups from remote VPC
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2124,6 +2246,13 @@ Compose the tenant's network topology — routers, networks, subnets, ports, ins
     | `edges.source` | string |
     | `edges.target` | string |
     | `edges.kind` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -2223,6 +2352,13 @@ Compose the tenant's network topology — routers, networks, subnets, ports, ins
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark resource as ERRED
@@ -2306,6 +2442,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -2375,5 +2516,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

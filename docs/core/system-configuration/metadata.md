@@ -66,6 +66,11 @@ Retrieves metadata for all available event types, grouped by categories. This en
     |---|---|---|
     | `event_groups` | object (free-form) | Map of event group keys to lists of event type enums from EventType |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Get feature flag metadata
@@ -128,6 +133,11 @@ Retrieves metadata for all available feature flags, including their keys, descri
     | `features.items.key` | string |  |
     | `features.items.description` | string |  |
     | `feature_enums` | object (free-form) | Nested feature enum values by section |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -193,11 +203,16 @@ Retrieves metadata about roles, permissions, and their descriptions. This endpoi
     | `permission_descriptions.options.label` | string | Human-readable permission label |
     | `permission_descriptions.options.value` | any | Permission enum value |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Get overridable settings metadata
 
-Retrieves metadata for all settings that can be configured via the Constance backend. This includes setting keys, human-readable descriptions, default values, and types. This endpoint is publicly accessible.
+Retrieves metadata for all settings that can be changed at runtime. This includes setting keys, human-readable descriptions, default values, and types. This endpoint is publicly accessible.
 
 
 === "HTTPie"
@@ -258,5 +273,10 @@ Retrieves metadata for all settings that can be configured via the Constance bac
     | `settings.items.options` | array of objects |
     | `settings.items.options.value` | string |
     | `settings.items.options.label` | string |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---

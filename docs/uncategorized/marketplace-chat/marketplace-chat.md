@@ -103,6 +103,11 @@
     **`404`** - Unknown interaction_uuid.
     
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Feedback
@@ -199,6 +204,11 @@
     
     **`404`** - Unknown interaction_uuid.
     
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -307,5 +317,10 @@ Anonymous chat streaming endpoint. Returns NDJSON with one assistant content blo
     
     **`503`** - Site-wide daily token or request budget exhausted. Retry-After header + structured rate-limit body.
     
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---

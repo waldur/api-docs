@@ -85,6 +85,11 @@ Returns a list of available demo data presets. Staff access only.
     | `entity_counts` | object (free-form) |
     | `scenarios` | array of strings |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Other Actions
@@ -167,6 +172,11 @@ Returns detailed information about a specific demo preset. Staff access only.
     
     **`404`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -270,5 +280,10 @@ Load a demo preset into the database. This operation will optionally clean up ex
     
     **`404`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

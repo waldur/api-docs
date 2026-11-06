@@ -85,10 +85,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `service_provider` | string (uuid) |  |
+    | `service_provider` | string (uuid) | Service provider the helpdesk serves. Only staff can change it. |
     | `service_provider_name` | string |  |
-    | `backend_type` | string | <br>_Enum: `basic`, `email`, `atlassian`, `zammad`, `smax`_ |
-    | `settings` | object (free-form) | Backend-specific configuration. |
+    | `backend_type` | any | Helpdesk system the helpdesk connects to. Only staff can change it. |
+    | `settings` | object (free-form) | Backend-specific configuration. Only staff can change it, and only staff see the credentials in it. |
     | `is_active` | boolean |  |
     | `webhook_secret` | string |  |
     | `notification_email` | string (email) | Primary email for notifications. |
@@ -101,6 +101,13 @@
     | `failed_routing_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Helpdesks of service providers whose organization the caller owns; staff and support see all.
 
 ---
 
@@ -170,10 +177,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `service_provider` | string (uuid) |  |
+    | `service_provider` | string (uuid) | Service provider the helpdesk serves. Only staff can change it. |
     | `service_provider_name` | string |  |
-    | `backend_type` | string | <br>_Enum: `basic`, `email`, `atlassian`, `zammad`, `smax`_ |
-    | `settings` | object (free-form) | Backend-specific configuration. |
+    | `backend_type` | any | Helpdesk system the helpdesk connects to. Only staff can change it. |
+    | `settings` | object (free-form) | Backend-specific configuration. Only staff can change it, and only staff see the credentials in it. |
     | `is_active` | boolean |  |
     | `webhook_secret` | string |  |
     | `notification_email` | string (email) | Primary email for notifications. |
@@ -186,6 +193,13 @@
     | `failed_routing_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Helpdesks of service providers whose organization the caller owns; staff and support see all.
 
 ---
 
@@ -251,9 +265,9 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `service_provider` | string (uuid) | ✓ |  |
-    | `backend_type` | string |  | <br>_Enum: `basic`, `email`, `atlassian`, `zammad`, `smax`_ |
-    | `settings` | object (free-form) |  | Backend-specific configuration. |
+    | `service_provider` | string (uuid) | ✓ | Service provider the helpdesk serves. Only staff can change it. |
+    | `backend_type` | any |  | Helpdesk system the helpdesk connects to. Only staff can change it. |
+    | `settings` | object (free-form) |  | Backend-specific configuration. Only staff can change it, and only staff see the credentials in it. |
     | `is_active` | boolean |  |  |
     | `webhook_secret` | string |  |  |
     | `notification_email` | string (email) |  | Primary email for notifications. |
@@ -271,10 +285,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `service_provider` | string (uuid) |  |
+    | `service_provider` | string (uuid) | Service provider the helpdesk serves. Only staff can change it. |
     | `service_provider_name` | string |  |
-    | `backend_type` | string | <br>_Enum: `basic`, `email`, `atlassian`, `zammad`, `smax`_ |
-    | `settings` | object (free-form) | Backend-specific configuration. |
+    | `backend_type` | any | Helpdesk system the helpdesk connects to. Only staff can change it. |
+    | `settings` | object (free-form) | Backend-specific configuration. Only staff can change it, and only staff see the credentials in it. |
     | `is_active` | boolean |  |
     | `webhook_secret` | string |  |
     | `notification_email` | string (email) | Primary email for notifications. |
@@ -287,6 +301,11 @@
     | `failed_routing_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -363,9 +382,9 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `service_provider` | string (uuid) | ✓ |  |
-    | `backend_type` | string |  | <br>_Enum: `basic`, `email`, `atlassian`, `zammad`, `smax`_ |
-    | `settings` | object (free-form) |  | Backend-specific configuration. |
+    | `service_provider` | string (uuid) | ✓ | Service provider the helpdesk serves. Only staff can change it. |
+    | `backend_type` | any |  | Helpdesk system the helpdesk connects to. Only staff can change it. |
+    | `settings` | object (free-form) |  | Backend-specific configuration. Only staff can change it, and only staff see the credentials in it. |
     | `is_active` | boolean |  |  |
     | `webhook_secret` | string |  |  |
     | `notification_email` | string (email) |  | Primary email for notifications. |
@@ -383,10 +402,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `service_provider` | string (uuid) |  |
+    | `service_provider` | string (uuid) | Service provider the helpdesk serves. Only staff can change it. |
     | `service_provider_name` | string |  |
-    | `backend_type` | string | <br>_Enum: `basic`, `email`, `atlassian`, `zammad`, `smax`_ |
-    | `settings` | object (free-form) | Backend-specific configuration. |
+    | `backend_type` | any | Helpdesk system the helpdesk connects to. Only staff can change it. |
+    | `settings` | object (free-form) | Backend-specific configuration. Only staff can change it, and only staff see the credentials in it. |
     | `is_active` | boolean |  |
     | `webhook_secret` | string |  |
     | `notification_email` | string (email) | Primary email for notifications. |
@@ -399,6 +418,14 @@
     | `failed_routing_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the helpdesk's service provider.
 
 ---
 
@@ -469,9 +496,9 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `service_provider` | string (uuid) |  |  |
-    | `backend_type` | string |  | <br>_Enum: `basic`, `email`, `atlassian`, `zammad`, `smax`_ |
-    | `settings` | object (free-form) |  | Backend-specific configuration. |
+    | `service_provider` | string (uuid) |  | Service provider the helpdesk serves. Only staff can change it. |
+    | `backend_type` | any |  | Helpdesk system the helpdesk connects to. Only staff can change it. |
+    | `settings` | object (free-form) |  | Backend-specific configuration. Only staff can change it, and only staff see the credentials in it. |
     | `is_active` | boolean |  |  |
     | `webhook_secret` | string |  |  |
     | `notification_email` | string (email) |  | Primary email for notifications. |
@@ -489,10 +516,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `service_provider` | string (uuid) |  |
+    | `service_provider` | string (uuid) | Service provider the helpdesk serves. Only staff can change it. |
     | `service_provider_name` | string |  |
-    | `backend_type` | string | <br>_Enum: `basic`, `email`, `atlassian`, `zammad`, `smax`_ |
-    | `settings` | object (free-form) | Backend-specific configuration. |
+    | `backend_type` | any | Helpdesk system the helpdesk connects to. Only staff can change it. |
+    | `settings` | object (free-form) | Backend-specific configuration. Only staff can change it, and only staff see the credentials in it. |
     | `is_active` | boolean |  |
     | `webhook_secret` | string |  |
     | `notification_email` | string (email) | Primary email for notifications. |
@@ -505,6 +532,14 @@
     | `failed_routing_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the helpdesk's service provider.
 
 ---
 
@@ -570,6 +605,14 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the helpdesk's service provider.
 
 ---
 
@@ -638,5 +681,13 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the helpdesk's service provider.
 
 ---

@@ -89,6 +89,11 @@ Returns a paginated list of all attributes. Attributes define form fields within
     | `required` | boolean | A value must be provided for the attribute. |
     | `default` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve an attribute
@@ -167,6 +172,11 @@ Returns the details of a specific attribute, identified by its UUID.
     | `type` | string | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean | A value must be provided for the attribute. |
     | `default` | object (free-form) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -267,6 +277,11 @@ Creates a new attribute within a section. Requires staff permissions.
     | `type` | string | <br>_Enum: `boolean`, `string`, `text`, `integer`, `choice`, `list`_ |
     | `required` | boolean | A value must be provided for the attribute. |
     | `default` | object (free-form) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -379,6 +394,11 @@ Updates an existing attribute. Requires staff permissions.
     | `required` | boolean | A value must be provided for the attribute. |
     | `default` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update an attribute
@@ -475,6 +495,11 @@ Partially updates an existing attribute. Requires staff permissions.
     | `required` | boolean | A value must be provided for the attribute. |
     | `default` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete an attribute
@@ -541,5 +566,10 @@ Deletes an attribute. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

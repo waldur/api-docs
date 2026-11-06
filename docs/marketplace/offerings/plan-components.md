@@ -11,7 +11,7 @@
 
 ### List plan components
 
-Returns a paginated list of all plan components. A plan component defines the pricing and quotas for an offering component within a billing plan. The list is filtered based on the current user's access permissions and organization group memberships.
+Returns a paginated list of plan components. A plan component defines the pricing and quotas for an offering component within a billing plan. The list shows the components of plans of offerings the caller sees in public or provider offerings, narrowed by the plans' organization groups.
 
 
 === "HTTPie"
@@ -90,6 +90,16 @@ Returns a paginated list of all plan components. A plan component defines the pr
     | `future_price` | string (decimal) |  |
     | `discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
     | `discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+    
+    Components of plans of the offerings that public offerings or provider offerings show the caller, of plans with no organization groups or one of the caller's. Staff and support see all.
 
 ---
 
@@ -172,5 +182,15 @@ Returns the details of a specific plan component, including its pricing, quotas,
     | `future_price` | string (decimal) |  |
     | `discount_formula` | string | Volume discount formula evaluated with the billed quantity bound to `usage`; returns a discount percentage (clamped to 0-100). Empty means no discount. Example: '10 if usage >= 100 else 0'. |
     | `discount_aggregation` | any | Whether the volume discount is computed on a single resource's usage or aggregated across all of the customer's resources of this offering. |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+    
+    Components of plans of the offerings that public offerings or provider offerings show the caller, of plans with no organization groups or one of the caller's. Staff and support see all.
 
 ---

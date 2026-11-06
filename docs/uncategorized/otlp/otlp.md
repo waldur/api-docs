@@ -60,4 +60,9 @@ Accepts an OpenTelemetry ExportMetricsServiceRequest as JSON or protobuf, option
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Staff, or who holds RESOURCE.SET_USAGE on the offering of every resource in the request, on its organization or on its service provider; otherwise nothing is recorded.
+
 ---

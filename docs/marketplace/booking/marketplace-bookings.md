@@ -79,4 +79,9 @@
     | `start` | string (date-time) |
     | `end` | string (date-time) |
 
+
+=== "Authorization"
+
+    The offering must be one the caller may order. A booking names its creator only to callers sharing an organization with them.
+
 ---

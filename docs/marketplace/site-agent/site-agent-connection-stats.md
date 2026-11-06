@@ -89,7 +89,7 @@ Requires support user permissions.
     | `agents.auth_kind` | any | How the agent authenticated when it registered the queue |
     | `agents.auth_token_prefix` | string | Prefix of the Personal Access Token backing the queue |
     | `agents.auth_token_name` | string | Name of the Personal Access Token backing the queue |
-    | `agents.authorized_via` | any | Permission branch that authorised the registration |
+    | `agents.authorized_via` | any | Permission branch that authorized the registration |
     | `agents.delivery_blocked_reason` | string | Why no event can reach this consumer, null when delivery works |
     | `agents.services` | array of objects | Services running within this agent |
     | `agents.services.uuid` | string (uuid) | Service UUID |
@@ -113,5 +113,10 @@ Requires support user permissions.
     
     **`503`** - 
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

@@ -87,6 +87,13 @@
     | `is_active` | boolean |
     | `permissions` | array of strings |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Roles available on an offering, directly or through its service profile, that the caller sees as its provider or as a consumer: offerings of organizations, service providers and projects where the caller holds a role, offerings they hold a role on, and offerings of resources in projects and organizations where they hold a role or of resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of OFFERING.LIST or RESOURCE.LIST site-wide see all.
+
 ---
 
 ### Retrieve
@@ -161,6 +168,13 @@
     | `offering_name` | string |
     | `is_active` | boolean |
     | `permissions` | array of strings |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Roles available on an offering, directly or through its service profile, that the caller sees as its provider or as a consumer: offerings of organizations, service providers and projects where the caller holds a role, offerings they hold a role on, and offerings of resources in projects and organizations where they hold a role or of resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of OFFERING.LIST or RESOURCE.LIST site-wide see all.
 
 ---
 
@@ -246,6 +260,11 @@
     | `offering_name` | string |
     | `is_active` | boolean |
     | `permissions` | array of strings |
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE on the organization of the offering named in the request.
 
 ---
 
@@ -343,6 +362,11 @@
     | `is_active` | boolean |
     | `permissions` | array of strings |
 
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE on the organization of every offering the role is available on; staff alone for a role available on no existing offering.
+
 ---
 
 ### Partial Update
@@ -433,6 +457,11 @@
     | `is_active` | boolean |
     | `permissions` | array of strings |
 
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE on the organization of every offering the role is available on; staff alone for a role available on no existing offering.
+
 ---
 
 ### Delete
@@ -497,5 +526,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE on the organization of every offering the role is available on; staff alone for a role available on no existing offering.
 
 ---

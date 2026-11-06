@@ -77,6 +77,11 @@ List all pending assignment batches for the authenticated reviewer.
     | `items_pending_count` | integer |
     | `manager_notes` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Get details of a specific assignment batch with items
@@ -166,5 +171,10 @@ Get details of a specific assignment batch with items.
     | `items.status_display` | string |
     | `items.affinity_score` | number (double) |
     | `items.has_coi` | boolean |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

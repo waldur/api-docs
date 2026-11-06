@@ -86,12 +86,19 @@
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the response belongs to. Only staff can change it. |
     | `text` | string | Template text. Supports Django template syntax. |
     | `category` | string |  |
     | `usage_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Canned responses of helpdesks of service providers whose organization the caller owns; staff and support see all.
 
 ---
 
@@ -162,12 +169,19 @@
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the response belongs to. Only staff can change it. |
     | `text` | string | Template text. Supports Django template syntax. |
     | `category` | string |  |
     | `usage_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Canned responses of helpdesks of service providers whose organization the caller owns; staff and support see all.
 
 ---
 
@@ -240,7 +254,7 @@
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `provider_helpdesk` | string (uuid) | ✓ |  |
+    | `provider_helpdesk` | string (uuid) | ✓ | Helpdesk the response belongs to. Only staff can change it. |
     | `text` | string | ✓ | Template text. Supports Django template syntax. |
     | `category` | string |  |  |
 
@@ -254,12 +268,17 @@
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the response belongs to. Only staff can change it. |
     | `text` | string | Template text. Supports Django template syntax. |
     | `category` | string |  |
     | `usage_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -343,7 +362,7 @@
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `provider_helpdesk` | string (uuid) | ✓ |  |
+    | `provider_helpdesk` | string (uuid) | ✓ | Helpdesk the response belongs to. Only staff can change it. |
     | `text` | string | ✓ | Template text. Supports Django template syntax. |
     | `category` | string |  |  |
 
@@ -357,12 +376,20 @@
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the response belongs to. Only staff can change it. |
     | `text` | string | Template text. Supports Django template syntax. |
     | `category` | string |  |
     | `usage_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the service provider whose helpdesk it belongs to.
 
 ---
 
@@ -434,7 +461,7 @@
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string |  |  |
-    | `provider_helpdesk` | string (uuid) |  |  |
+    | `provider_helpdesk` | string (uuid) |  | Helpdesk the response belongs to. Only staff can change it. |
     | `text` | string |  | Template text. Supports Django template syntax. |
     | `category` | string |  |  |
 
@@ -448,12 +475,20 @@
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the response belongs to. Only staff can change it. |
     | `text` | string | Template text. Supports Django template syntax. |
     | `category` | string |  |
     | `usage_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the service provider whose helpdesk it belongs to.
 
 ---
 
@@ -519,6 +554,14 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the service provider whose helpdesk it belongs to.
 
 ---
 
@@ -602,5 +645,10 @@
     | Field | Type |
     |---|---|
     | `rendered_text` | string |
+
+
+=== "Authorization"
+
+    Staff, support, or an owner of the organization of the service provider whose helpdesk the response belongs to: whoever the list shows the response to.
 
 ---

@@ -77,6 +77,11 @@
     | `issue_type_name` | string |  |
     | `order` | integer | Display order. First type (lowest order) is the default. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -148,5 +153,10 @@
     | `name` | string |  |
     | `issue_type_name` | string |  |
     | `order` | integer | Display order. First type (lowest order) is the default. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

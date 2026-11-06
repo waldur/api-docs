@@ -81,6 +81,11 @@
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -156,6 +161,11 @@
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -220,5 +230,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

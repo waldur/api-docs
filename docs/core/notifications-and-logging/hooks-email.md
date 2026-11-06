@@ -97,6 +97,13 @@
     | `author_email` | string |
     | `email` | string (email) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff see every row; support see every row read-only; others see their own.
+
 ---
 
 ### Retrieve
@@ -176,6 +183,13 @@
     | `author_username` | string |
     | `author_email` | string |
     | `email` | string (email) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff see every row; support see every row read-only; others see their own.
 
 ---
 
@@ -266,6 +280,11 @@
     | `author_username` | string |
     | `author_email` | string |
     | `email` | string (email) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -368,6 +387,14 @@
     | `author_email` | string |
     | `email` | string (email) |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own hook.
+    - Staff.
+
 ---
 
 ### Partial Update
@@ -463,6 +490,14 @@
     | `author_email` | string |
     | `email` | string (email) |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own hook.
+    - Staff.
+
 ---
 
 ### Delete
@@ -527,5 +562,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own hook.
+    - Staff.
 
 ---

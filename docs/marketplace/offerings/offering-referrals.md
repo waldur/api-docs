@@ -90,6 +90,13 @@ Returns a paginated list of Datacite referrals associated with marketplace offer
     | `title` | string |
     | `referral_url` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve a specific Datacite referral
@@ -170,5 +177,12 @@ Returns the details of a single Datacite referral record, identified by its UUID
     | `published` | string |
     | `title` | string |
     | `referral_url` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

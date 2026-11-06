@@ -7,8 +7,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/openstack-migrations/` | [List Openstack Migrations](#list-openstack-migrations) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-migrations/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-migrations/` | [Create](#create) |
-| <span class="http-badge http-put">PUT</span> | `/api/openstack-migrations/{uuid}/` | [Update](#update) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/openstack-migrations/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-migrations/{uuid}/` | [Delete](#delete) |
 
 ---
@@ -105,6 +103,13 @@
     | `error_message` | string |
     | `error_traceback` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -198,6 +203,13 @@
     | `state` | string |
     | `error_message` | string |
     | `error_traceback` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -304,245 +316,10 @@
     | `mappings.networks` | array of string (uuid)s |
     | `src_resource` | string (uuid) |
 
----
 
-### Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PUT \
-      https://api.example.com/api/openstack-migrations/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      mappings:='{}'
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.migration_details_request import MigrationDetailsRequest # (1)
-    from waldur_api_client.api.openstack_migrations import openstack_migrations_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = MigrationDetailsRequest(
-        mappings={}
-    )
-    response = openstack_migrations_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`MigrationDetailsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/migration_details_request.py)
-    2.  **API Source:** [`openstack_migrations_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_migrations/openstack_migrations_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackMigrationsUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackMigrationsUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "mappings": {}
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `mappings` | object | ✓ |
-    | `mappings.volume_types` | array of objects |  |
-    | `mappings.volume_types.src_type_uuid` | string (uuid) | ✓ |
-    | `mappings.volume_types.dst_type_uuid` | string (uuid) | ✓ |
-    | `mappings.subnets` | array of objects |  |
-    | `mappings.subnets.src_cidr` | string | ✓ |
-    | `mappings.subnets.dst_cidr` | string | ✓ |
-    | `mappings.skip_connection_extnet` | boolean |  |
-    | `mappings.sync_instance_ports` | boolean |  |
-    | `mappings.networks` | array of string (uuid)s |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `mappings` | object |
-    | `mappings.volume_types` | array of objects |
-    | `mappings.volume_types.src_type_uuid` | string (uuid) |
-    | `mappings.volume_types.dst_type_uuid` | string (uuid) |
-    | `mappings.subnets` | array of objects |
-    | `mappings.subnets.src_cidr` | string |
-    | `mappings.subnets.dst_cidr` | string |
-    | `mappings.skip_connection_extnet` | boolean |
-    | `mappings.sync_instance_ports` | boolean |
-    | `mappings.networks` | array of string (uuid)s |
-    | `created_by_uuid` | string (uuid) |
-    | `created_by_full_name` | string |
-    | `src_offering_uuid` | string (uuid) |
-    | `src_offering_name` | string |
-    | `dst_offering_uuid` | string (uuid) |
-    | `dst_offering_name` | string |
-    | `src_resource_uuid` | string (uuid) |
-    | `src_resource_name` | string |
-    | `dst_resource_uuid` | string (uuid) |
-    | `dst_resource_name` | string |
-    | `dst_resource_state` | string |
-    | `state` | string |
-    | `error_message` | string |
-    | `error_traceback` | string |
-
----
-
-### Partial Update
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/openstack-migrations/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_migration_details_request import PatchedMigrationDetailsRequest # (1)
-    from waldur_api_client.api.openstack_migrations import openstack_migrations_partial_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = PatchedMigrationDetailsRequest()
-    response = openstack_migrations_partial_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`PatchedMigrationDetailsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_migration_details_request.py)
-    2.  **API Source:** [`openstack_migrations_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_migrations/openstack_migrations_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackMigrationsPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackMigrationsPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `mappings` | object |  |
-    | `mappings.volume_types` | array of objects |  |
-    | `mappings.volume_types.src_type_uuid` | string (uuid) | ✓ |
-    | `mappings.volume_types.dst_type_uuid` | string (uuid) | ✓ |
-    | `mappings.subnets` | array of objects |  |
-    | `mappings.subnets.src_cidr` | string | ✓ |
-    | `mappings.subnets.dst_cidr` | string | ✓ |
-    | `mappings.skip_connection_extnet` | boolean |  |
-    | `mappings.sync_instance_ports` | boolean |  |
-    | `mappings.networks` | array of string (uuid)s |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `mappings` | object |
-    | `mappings.volume_types` | array of objects |
-    | `mappings.volume_types.src_type_uuid` | string (uuid) |
-    | `mappings.volume_types.dst_type_uuid` | string (uuid) |
-    | `mappings.subnets` | array of objects |
-    | `mappings.subnets.src_cidr` | string |
-    | `mappings.subnets.dst_cidr` | string |
-    | `mappings.skip_connection_extnet` | boolean |
-    | `mappings.sync_instance_ports` | boolean |
-    | `mappings.networks` | array of string (uuid)s |
-    | `created_by_uuid` | string (uuid) |
-    | `created_by_full_name` | string |
-    | `src_offering_uuid` | string (uuid) |
-    | `src_offering_name` | string |
-    | `dst_offering_uuid` | string (uuid) |
-    | `dst_offering_name` | string |
-    | `src_resource_uuid` | string (uuid) |
-    | `src_resource_name` | string |
-    | `dst_resource_uuid` | string (uuid) |
-    | `dst_resource_name` | string |
-    | `dst_resource_state` | string |
-    | `state` | string |
-    | `error_message` | string |
-    | `error_traceback` | string |
+    Staff, or who sees the source resource through their roles, holds ORDER.CREATE on its project or organization and, for a destination offering restricted to designated roles, one of them there, as placing the order would need; and, unless consumer review of that order would be skipped, ORDER.APPROVE there too. Global support, which only reads, may not.
 
 ---
 
@@ -608,5 +385,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The migration's creator.
 
 ---

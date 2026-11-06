@@ -84,4 +84,9 @@
     | `value` | string | Value of the runtime state |
     | `label` | string | Human-readable label for the runtime state |
 
+
+=== "Authorization"
+
+    Any signed-in user. It reads the non-terminated resources of projects the caller can see; with offering_uuid, only that offering's resources the caller sees as consumer or as provider.
+
 ---

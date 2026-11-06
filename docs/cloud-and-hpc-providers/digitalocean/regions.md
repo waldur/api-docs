@@ -77,6 +77,11 @@
     | `uuid` | string (uuid) |
     | `name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -146,5 +151,10 @@
     | `url` | string (uri) |
     | `uuid` | string (uuid) |
     | `name` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

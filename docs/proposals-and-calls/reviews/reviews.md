@@ -134,6 +134,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -236,6 +241,11 @@
     | `coi_confirmation_required` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -357,6 +367,11 @@
     | `coi_confirmation_required` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Check permissions for creating reviews.
 
 ---
 
@@ -490,6 +505,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Partial Update
@@ -614,6 +634,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Delete
@@ -678,6 +703,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Check permissions for destroying reviews.
 
 ---
 
@@ -749,6 +779,11 @@ Returns counts (assigned, pending, completed) for every review assigned to the c
     | `deadlines.due_date` | string (date-time) |
     | `deadlines_total` | integer |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Reject a review, changing its state to REJECTED
@@ -815,6 +850,11 @@ Reject a review, changing its state to REJECTED.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -897,5 +937,10 @@ Submit a review, changing its state to SUBMITTED.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

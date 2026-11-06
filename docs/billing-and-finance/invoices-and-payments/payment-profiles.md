@@ -102,6 +102,13 @@
     | `payment_type_display` | string |
     | `is_active` | boolean |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -180,6 +187,13 @@
     | `payment_type` | string |
     | `payment_type_display` | string |
     | `is_active` | boolean |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -279,6 +293,11 @@
     | `payment_type` | string |
     | `payment_type_display` | string |
     | `is_active` | boolean |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -390,6 +409,11 @@
     | `payment_type_display` | string |
     | `is_active` | boolean |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -488,6 +512,11 @@
     | `payment_type_display` | string |
     | `is_active` | boolean |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -552,6 +581,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -623,5 +657,10 @@
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

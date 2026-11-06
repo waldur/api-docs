@@ -89,4 +89,9 @@ Requires support user permissions.
     | `query_performance` | any | Query performance indicators |
     | `replication` | any | Replication status (if applicable) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

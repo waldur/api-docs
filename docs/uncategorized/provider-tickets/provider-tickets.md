@@ -121,6 +121,13 @@
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Tickets routed to a provider helpdesk the caller speaks for, as an owner of the organization of its service provider or as one of its active agents; staff and support see every routed ticket.
+
 ---
 
 ### Retrieve
@@ -215,6 +222,13 @@
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Tickets routed to a provider helpdesk the caller speaks for, as an owner of the organization of its service provider or as one of its active agents; staff and support see every routed ticket.
+
 ---
 
 ### Update
@@ -233,26 +247,21 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.provider_ticket_request import ProviderTicketRequest # (1)
-    from waldur_api_client.api.provider_tickets import provider_tickets_update # (2)
+    from waldur_api_client.api.provider_tickets import provider_tickets_update # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ProviderTicketRequest()
     response = provider_tickets_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ProviderTicketRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_ticket_request.py)
-    2.  **API Source:** [`provider_tickets_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_update.py)
+    1.  **API Source:** [`provider_tickets_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_update.py)
 
 === "TypeScript"
 
@@ -280,15 +289,6 @@
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `escalated_at` | string (date-time) |  | When the issue was escalated. |
-    | `customer` | string (uri) |  |  |
-    | `project` | string (uri) |  |  |
-
-
 === "Responses"
 
     **`200`** - 
@@ -323,6 +323,11 @@
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
 
+
+=== "Authorization"
+
+    Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.
+
 ---
 
 ### Partial Update
@@ -341,26 +346,21 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_provider_ticket_request import PatchedProviderTicketRequest # (1)
-    from waldur_api_client.api.provider_tickets import provider_tickets_partial_update # (2)
+    from waldur_api_client.api.provider_tickets import provider_tickets_partial_update # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = PatchedProviderTicketRequest()
     response = provider_tickets_partial_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`PatchedProviderTicketRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_provider_ticket_request.py)
-    2.  **API Source:** [`provider_tickets_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_partial_update.py)
+    1.  **API Source:** [`provider_tickets_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_partial_update.py)
 
 === "TypeScript"
 
@@ -388,15 +388,6 @@
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `escalated_at` | string (date-time) |  | When the issue was escalated. |
-    | `customer` | string (uri) |  |  |
-    | `project` | string (uri) |  |  |
-
-
 === "Responses"
 
     **`200`** - 
@@ -431,12 +422,19 @@
     | `project_uuid` | string (uuid) |  |
     | `project_name` | string |  |
 
+
+=== "Authorization"
+
+    Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.
+
 ---
 
 ## Other Actions
 
 
 ### Get customer context for this ticket
+
+The original ticket's caller (full name, email and organization), its resource, and the caller's five latest other tickets among those the provider ticket list shows the requester: tickets routed to a helpdesk they speak for, as an owner of the service provider's organization or as an active agent. Staff and support see the caller's tickets routed to any provider. Tickets kept on the operator's own desk are not listed.
 
 
 === "HTTPie"
@@ -512,6 +510,11 @@
     | `recent_tickets.status` | string |
     | `recent_tickets.created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Whoever the ticket list shows the ticket to: staff, support, owners of the organization of the service provider whose helpdesk it is routed to, and that helpdesk's active agents. Beyond the ticket, it shows the full name and email of the original ticket's caller, the name of the original ticket's organization, the name and type of its resource, and the UUID, key, summary, status and creation time of the caller's five latest other tickets among those the ticket list shows the requester.
+
 ---
 
 ### Get statistics for provider tickets
@@ -578,6 +581,13 @@
     | `sla_breach_count` | integer |
     | `avg_resolution_hours` | number (double) |
     | `by_status` | object (free-form) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Tickets routed to a provider helpdesk the caller speaks for, as an owner of the organization of its service provider or as one of its active agents; staff and support see every routed ticket.
 
 ---
 
@@ -665,6 +675,11 @@
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.
+
 ---
 
 ### Claim
@@ -683,26 +698,21 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.provider_ticket_request import ProviderTicketRequest # (1)
-    from waldur_api_client.api.provider_tickets import provider_tickets_claim # (2)
+    from waldur_api_client.api.provider_tickets import provider_tickets_claim # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ProviderTicketRequest()
     response = provider_tickets_claim.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ProviderTicketRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_ticket_request.py)
-    2.  **API Source:** [`provider_tickets_claim`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_claim.py)
+    1.  **API Source:** [`provider_tickets_claim`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/provider_tickets/provider_tickets_claim.py)
 
 === "TypeScript"
 
@@ -730,15 +740,6 @@
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `escalated_at` | string (date-time) |  | When the issue was escalated. |
-    | `customer` | string (uri) |  |  |
-    | `project` | string (uri) |  |  |
-
-
 === "Responses"
 
     **`200`** - 
@@ -746,6 +747,11 @@
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    An active agent of the helpdesk the ticket is routed to.
 
 ---
 
@@ -831,6 +837,11 @@
     **`201`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.
+
 ---
 
 ### Resolve
@@ -898,5 +909,10 @@
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Staff, support, an owner of the organization of the service provider whose helpdesk the ticket is routed to, or an active agent of that helpdesk: whoever the ticket list shows the ticket to.
 
 ---

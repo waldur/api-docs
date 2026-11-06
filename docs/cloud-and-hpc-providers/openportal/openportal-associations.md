@@ -79,6 +79,13 @@
     | `useridentifier` | string |
     | `allocation` | string (uri) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -150,5 +157,12 @@
     | `groupname` | string |
     | `useridentifier` | string |
     | `allocation` | string (uri) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

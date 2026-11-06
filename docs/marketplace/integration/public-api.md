@@ -92,6 +92,11 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Anyone; the request data must be signed with the API secret code of the service provider it names.
+
 ---
 
 ### Set component usage with signature
@@ -176,5 +181,10 @@
 
     **`201`** - No response body
     
+
+
+=== "Authorization"
+
+    Anyone; the request data must be signed with the API secret code of the service provider whose offering the reported resource belongs to.
 
 ---

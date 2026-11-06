@@ -65,4 +65,9 @@ Get aggregated statistics about agent identities, services, and processors. Supp
     | `services` | any | Statistics about agent services |
     | `processors` | any | Statistics about agent processors |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

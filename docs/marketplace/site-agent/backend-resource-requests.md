@@ -107,6 +107,13 @@ Returns a paginated list of requests for backend resources.
     | `error_message` | string |  |
     | `error_traceback` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve a backend resource request
@@ -187,6 +194,13 @@ Returns the details of a specific backend resource request.
     | `offering_url` | string (uri) |  |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -276,6 +290,11 @@ Creates a new request to fetch a list of importable resources from a backend. Th
     | `error_message` | string |  |
     | `error_traceback` | string |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Other Actions
@@ -348,6 +367,13 @@ Transitions the request state from 'Processing' to 'Done'. This is used by a sit
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.MANAGE_BACKEND_RESOURCES` on the offering or the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -432,6 +458,13 @@ Transitions the request state to 'Erred'. This is used by a site agent to report
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.MANAGE_BACKEND_RESOURCES` on the offering or the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Start processing a request
@@ -501,5 +534,12 @@ Transitions the request state from 'Sent' to 'Processing'. This is used by a sit
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.MANAGE_BACKEND_RESOURCES` on the offering or the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

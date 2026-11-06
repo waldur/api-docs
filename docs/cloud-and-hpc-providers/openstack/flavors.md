@@ -111,6 +111,13 @@ Get a list of available VM instance flavors.
     | `backend_id` | string |  |
     | `display_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get flavor details
@@ -198,6 +205,13 @@ Retrieve details of a specific VM instance flavor.
     | `backend_id` | string |  |
     | `display_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ## Other Actions
@@ -254,5 +268,10 @@ Retrieve usage statistics for VM instance flavors, showing running and created i
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

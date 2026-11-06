@@ -98,6 +98,11 @@ Rules granting project roles to holders of SRAM placeholder roles.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Rules granting project roles to holders of SRAM placeholder roles
@@ -181,6 +186,11 @@ Rules granting project roles to holders of SRAM placeholder roles.
     | `project_role_description` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -283,6 +293,11 @@ Rules granting project roles to holders of SRAM placeholder roles.
     | `project_role_description` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -397,6 +412,11 @@ Rules granting project roles to holders of SRAM placeholder roles.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Rules granting project roles to holders of SRAM placeholder roles
@@ -501,6 +521,11 @@ Rules granting project roles to holders of SRAM placeholder roles.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Rules granting project roles to holders of SRAM placeholder roles
@@ -567,6 +592,11 @@ Rules granting project roles to holders of SRAM placeholder roles.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -654,7 +684,7 @@ Groups the rule matches now, with the projects it selects and the placeholder ho
     | `group.uuid` | string (uuid) |  |
     | `group.external_id` | string |  |
     | `group.display_name` | string |  |
-    | `group.urn` | string | SRAM global URN: '<organisation>:<co>' or '<organisation>:<co>:<group>'. |
+    | `group.urn` | string | SRAM global URN: '<organization>:<co>' or '<organization>:<co>:<group>'. |
     | `group.kind` | any |  |
     | `group.description` | string |  |
     | `group.labels` | array of strings |  |
@@ -674,5 +704,10 @@ Groups the rule matches now, with the projects it selects and the placeholder ho
     | `users.uuid` | string (uuid) |  |
     | `users.username` | string |  |
     | `users.full_name` | string |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

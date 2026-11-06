@@ -92,6 +92,11 @@
     | `error_message` | string |  |
     | `details` | string | Cancellation details. |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ## Other Actions
@@ -187,5 +192,10 @@
     | `state` | any |  |
     | `error_message` | string |  |
     | `details` | string | Cancellation details. |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---

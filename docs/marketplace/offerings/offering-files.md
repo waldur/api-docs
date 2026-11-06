@@ -90,6 +90,11 @@
     | `created` | string (date-time) |
     | `file` | string (uri) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -171,6 +176,11 @@
     | `offering` | string (uri) |
     | `created` | string (date-time) |
     | `file` | string (uri) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -260,6 +270,11 @@
     | `created` | string (date-time) |
     | `file` | string (uri) |
 
+
+=== "Authorization"
+
+    Staff, or an owner of the organization of the offering named in the request.
+
 ---
 
 ### Delete
@@ -324,5 +339,12 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

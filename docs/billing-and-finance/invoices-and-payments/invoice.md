@@ -89,4 +89,9 @@
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

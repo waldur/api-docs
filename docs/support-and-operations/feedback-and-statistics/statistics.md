@@ -63,4 +63,9 @@
     | `closed_this_month_count` | integer |
     | `recent_broadcasts_count` | integer |
 
+
+=== "Authorization"
+
+    Staff and support, for every ticket. While provider routing is on (WALDUR_SUPPORT_PROVIDER_ROUTING_ENABLED, off by default), also an owner of the organization of a service provider with a helpdesk, or an active agent of one, for the tickets routed to those helpdesks.
+
 ---

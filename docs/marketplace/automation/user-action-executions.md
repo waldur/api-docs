@@ -79,6 +79,13 @@
     | `error_message` | string |
     | `execution_metadata` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own action executions.
+
 ---
 
 ### Retrieve
@@ -151,5 +158,12 @@
     | `success` | boolean |
     | `error_message` | string |
     | `execution_metadata` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own action executions.
 
 ---

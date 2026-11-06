@@ -89,6 +89,11 @@ Retrieve a list of user agreements (Terms of Service and Privacy Policy). Suppor
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve user agreement
@@ -165,6 +170,11 @@ Fetch the details of a specific user agreement by its UUID.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Create
@@ -178,8 +188,7 @@ Fetch the details of a specific user agreement by its UUID.
       https://api.example.com/api/user-agreements/ \
       Authorization:"Token YOUR_API_TOKEN" \
       content="string-value" \
-      agreement_type="TOS" \
-      language="string-value"
+      agreement_type="TOS"
     ```
 
 === "Python"
@@ -195,8 +204,7 @@ Fetch the details of a specific user agreement by its UUID.
     
     body_data = UserAgreementRequest(
         content="string-value",
-        agreement_type="TOS",
-        language="string-value"
+        agreement_type="TOS"
     )
     response = user_agreements_create.sync(
         client=client,
@@ -220,8 +228,7 @@ Fetch the details of a specific user agreement by its UUID.
       auth: "Token YOUR_API_TOKEN",
       body: {
         "content": "string-value",
-        "agreement_type": "TOS",
-        "language": "string-value"
+        "agreement_type": "TOS"
       }
     });
       console.log('Success:', response);
@@ -237,7 +244,7 @@ Fetch the details of a specific user agreement by its UUID.
     |---|---|---|---|
     | `content` | string | ✓ |  |
     | `agreement_type` | string | ✓ | <br>_Enum: `TOS`, `PP`_ |
-    | `language` | string | ✓ | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
+    | `language` | string |  | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version.<br>_Constraints: default: ``_ |
 
 
 === "Responses"
@@ -254,6 +261,11 @@ Fetch the details of a specific user agreement by its UUID.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Update
@@ -267,8 +279,7 @@ Fetch the details of a specific user agreement by its UUID.
       https://api.example.com/api/user-agreements/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
       content="string-value" \
-      agreement_type="TOS" \
-      language="string-value"
+      agreement_type="TOS"
     ```
 
 === "Python"
@@ -284,8 +295,7 @@ Fetch the details of a specific user agreement by its UUID.
     
     body_data = UserAgreementRequest(
         content="string-value",
-        agreement_type="TOS",
-        language="string-value"
+        agreement_type="TOS"
     )
     response = user_agreements_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -313,8 +323,7 @@ Fetch the details of a specific user agreement by its UUID.
       },
       body: {
         "content": "string-value",
-        "agreement_type": "TOS",
-        "language": "string-value"
+        "agreement_type": "TOS"
       }
     });
       console.log('Success:', response);
@@ -337,7 +346,7 @@ Fetch the details of a specific user agreement by its UUID.
     |---|---|---|---|
     | `content` | string | ✓ |  |
     | `agreement_type` | string | ✓ | <br>_Enum: `TOS`, `PP`_ |
-    | `language` | string | ✓ | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
+    | `language` | string |  | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version.<br>_Constraints: default: ``_ |
 
 
 === "Responses"
@@ -353,6 +362,11 @@ Fetch the details of a specific user agreement by its UUID.
     | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -425,7 +439,7 @@ Fetch the details of a specific user agreement by its UUID.
     |---|---|---|---|
     | `content` | string |  |  |
     | `agreement_type` | string |  | <br>_Enum: `TOS`, `PP`_ |
-    | `language` | string |  | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
+    | `language` | string |  | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version.<br>_Constraints: default: ``_ |
 
 
 === "Responses"
@@ -441,6 +455,11 @@ Fetch the details of a specific user agreement by its UUID.
     | `language` | string | ISO 639-1 language code (e.g., 'en', 'de', 'et'). Leave empty for the default version. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -506,5 +525,10 @@ Fetch the details of a specific user agreement by its UUID.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

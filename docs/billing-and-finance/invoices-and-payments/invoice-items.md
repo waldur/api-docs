@@ -115,6 +115,13 @@
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -201,6 +208,13 @@
     | `project_name` | string |  |
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -290,6 +304,11 @@ Create compensation invoice item for selected invoice item.
     |---|---|
     | `invoice_item_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Update
@@ -377,6 +396,11 @@ Create compensation invoice item for selected invoice item.
     | `unit_price` | string (decimal) |  |
     | `start` | string (date-time) | Date and time when item usage has started. |
     | `end` | string (date-time) | Date and time when item usage has ended. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -466,6 +490,11 @@ Create compensation invoice item for selected invoice item.
     | `start` | string (date-time) | Date and time when item usage has started. |
     | `end` | string (date-time) | Date and time when item usage has ended. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -530,6 +559,11 @@ Create compensation invoice item for selected invoice item.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -623,6 +657,13 @@ Create compensation invoice item for selected invoice item.
     | `month` | string |
     | `price` | string (decimal) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get costs breakdown for a project by year and month
@@ -703,6 +744,11 @@ Get costs breakdown for a project by year and month.
     | `items.measured_unit` | string |
     | `items.price` | number (double) |
 
+
+=== "Authorization"
+
+    Sums only the invoice items the caller's roles reach: those of organizations where the caller holds INVOICE.LIST, and those of the caller's projects in organizations that display billing info in projects. Staff, support and holders of INVOICE.LIST site-wide reach all.
+
 ---
 
 ### Customer costs for period
@@ -767,6 +813,11 @@ Get costs breakdown for a project by year and month.
     | `total_price` | string |
     | `start_date` | string (date) |
     | `end_date` | string (date) |
+
+
+=== "Authorization"
+
+    Sums only the invoice items the caller's roles reach: those of organizations where the caller holds INVOICE.LIST, and those of the caller's projects in organizations that display billing info in projects. Staff, support and holders of INVOICE.LIST site-wide reach all.
 
 ---
 
@@ -835,6 +886,11 @@ Get resource cost breakdown for a project over a specified period.
     | `total_price` | string |
     | `start_date` | string (date) |
     | `end_date` | string (date) |
+
+
+=== "Authorization"
+
+    Sums only the invoice items the caller's roles reach: those of organizations where the caller holds INVOICE.LIST, and those of the caller's projects in organizations that display billing info in projects. Staff, support and holders of INVOICE.LIST site-wide reach all.
 
 ---
 
@@ -907,6 +963,13 @@ Calculate total price for filtered invoice items.
     | Field | Type | Description |
     |---|---|---|
     | `total_price` | string (decimal) | Total price for the invoice item |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -995,5 +1058,10 @@ Move invoice item from one invoice to another one.
     | Field | Type |
     |---|---|
     | `invoice_item_uuid` | string (uuid) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

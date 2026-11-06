@@ -60,4 +60,9 @@ Called by the homeserver when Waldur asks it to ping the appservice (MSC2659). A
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Only the homeserver: the request carries MATRIX_APPSERVICE_HS_TOKEN as its bearer token. No Waldur authentication.
+
 ---

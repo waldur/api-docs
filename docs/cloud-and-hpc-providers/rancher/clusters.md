@@ -179,6 +179,13 @@
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -328,6 +335,13 @@
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Create management security group
@@ -405,7 +419,6 @@
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `vm_project` | string (uri) |  |  |
     | `ssh_public_key` | string (uri) |  | <br>_Constraints: write-only_ |
     | `install_longhorn` | boolean |  | Longhorn is a distributed block storage deployed on top of Kubernetes cluster<br>_Constraints: default: `False`_ |
 
@@ -417,6 +430,13 @@
     | Field | Type |
     |---|---|
     | `security_group_uuid` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -496,6 +516,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -564,6 +591,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -642,7 +674,6 @@ Delete resource from the database without scheduling operations on backend
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `vm_project` | string (uri) |  |  |
     | `ssh_public_key` | string (uri) |  | <br>_Constraints: write-only_ |
     | `install_longhorn` | boolean |  | Longhorn is a distributed block storage deployed on top of Kubernetes cluster<br>_Constraints: default: `False`_ |
 
@@ -726,6 +757,13 @@ Delete resource from the database without scheduling operations on backend
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -798,7 +836,6 @@ Delete resource from the database without scheduling operations on backend
     |---|---|---|---|
     | `name` | string |  |  |
     | `description` | string |  |  |
-    | `vm_project` | string (uri) |  |  |
     | `ssh_public_key` | string (uri) |  | <br>_Constraints: write-only_ |
     | `install_longhorn` | boolean |  | Longhorn is a distributed block storage deployed on top of Kubernetes cluster<br>_Constraints: default: `False`_ |
 
@@ -882,6 +919,13 @@ Delete resource from the database without scheduling operations on backend
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -971,6 +1015,11 @@ Delete resource from the database without scheduling operations on backend
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as ERRED
@@ -1054,6 +1103,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -1123,5 +1177,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

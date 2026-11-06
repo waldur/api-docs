@@ -93,6 +93,13 @@
     | `scope` | string |
     | `scope_type` | any |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Catalogs of the Rancher service settings, clusters and Rancher projects the caller can see. settings_uuid or cluster_uuid shows those of one service settings, or of one cluster and its service settings, and answers 404 when the caller cannot see it.
+
 ---
 
 ### Retrieve
@@ -171,6 +178,13 @@
     | `runtime_state` | string |
     | `scope` | string |
     | `scope_type` | any |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Catalogs of the Rancher service settings, clusters and Rancher projects the caller can see. settings_uuid or cluster_uuid shows those of one service settings, or of one cluster and its service settings, and answers 404 when the caller cannot see it.
 
 ---
 
@@ -275,6 +289,11 @@
     | `username` | string |
     | `password` | string |
 
+
+=== "Authorization"
+
+    Staff. A global catalog, one of a Rancher service settings, only staff. A catalog of a cluster or of a Rancher project in a cluster, also an owner of the organization, or a manager or administrator of the project, that holds the cluster, unless the cluster is provided by a Rancher offering whose deployment mode is managed: that takes the staff flag.
+
 ---
 
 ### Update
@@ -289,8 +308,7 @@
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-rancher-catalog" \
       catalog_url="https://api.example.com/api/catalog-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      branch="string-value" \
-      scope="string-value"
+      branch="string-value"
     ```
 
 === "Python"
@@ -307,8 +325,7 @@
     body_data = RancherCatalogUpdateRequest(
         name="my-awesome-rancher-catalog",
         catalog_url="https://api.example.com/api/catalog-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        branch="string-value",
-        scope="string-value"
+        branch="string-value"
     )
     response = rancher_catalogs_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -337,8 +354,7 @@
       body: {
         "name": "my-awesome-rancher-catalog",
         "catalog_url": "https://api.example.com/api/catalog-url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "branch": "string-value",
-        "scope": "string-value"
+        "branch": "string-value"
       }
     });
       console.log('Success:', response);
@@ -363,7 +379,6 @@
     | `description` | string |  |
     | `catalog_url` | string (uri) | ✓ |
     | `branch` | string | ✓ |
-    | `scope` | string | ✓ |
 
 
 === "Responses"
@@ -385,6 +400,11 @@
     | `scope` | string |
     | `scope_type` | any |
 
+
+=== "Authorization"
+
+    Staff. A global catalog, one of a Rancher service settings, only staff. A catalog of a cluster or of a Rancher project in a cluster, also an owner of the organization, or a manager or administrator of the project, that holds the cluster, unless the cluster is provided by a Rancher offering whose deployment mode is managed: that takes the staff flag.
+
 ---
 
 ### Partial Update
@@ -403,14 +423,14 @@
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_rancher_catalog_request import PatchedRancherCatalogRequest # (1)
+    from waldur_api_client.models.patched_rancher_catalog_update_request import PatchedRancherCatalogUpdateRequest # (1)
     from waldur_api_client.api.rancher_catalogs import rancher_catalogs_partial_update # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = PatchedRancherCatalogRequest()
+    body_data = PatchedRancherCatalogUpdateRequest()
     response = rancher_catalogs_partial_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -421,7 +441,7 @@
     ```
     
     
-    1.  **Model Source:** [`PatchedRancherCatalogRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_rancher_catalog_request.py)
+    1.  **Model Source:** [`PatchedRancherCatalogUpdateRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_rancher_catalog_update_request.py)
     2.  **API Source:** [`rancher_catalogs_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/rancher_catalogs/rancher_catalogs_partial_update.py)
 
 === "TypeScript"
@@ -458,7 +478,6 @@
     | `description` | string |  |
     | `catalog_url` | string (uri) |  |
     | `branch` | string |  |
-    | `scope` | string |  |
 
 
 === "Responses"
@@ -479,6 +498,11 @@
     | `runtime_state` | string |
     | `scope` | string |
     | `scope_type` | any |
+
+
+=== "Authorization"
+
+    Staff. A global catalog, one of a Rancher service settings, only staff. A catalog of a cluster or of a Rancher project in a cluster, also an owner of the organization, or a manager or administrator of the project, that holds the cluster, unless the cluster is provided by a Rancher offering whose deployment mode is managed: that takes the staff flag.
 
 ---
 
@@ -544,6 +568,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff. A global catalog, one of a Rancher service settings, only staff. A catalog of a cluster or of a Rancher project in a cluster, also an owner of the organization, or a manager or administrator of the project, that holds the cluster, unless the cluster is provided by a Rancher offering whose deployment mode is managed: that takes the staff flag.
 
 ---
 
@@ -612,5 +641,10 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

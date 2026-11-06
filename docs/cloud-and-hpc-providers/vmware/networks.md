@@ -82,6 +82,13 @@
     | `name` | string |
     | `type` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rows of VMware service settings the caller may use: settings behind an active or paused offering the caller may order from, settings of a VM the caller sees, and settings of organizations in which the caller holds an organization-level role. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -152,5 +159,12 @@
     | `uuid` | string (uuid) |
     | `name` | string |
     | `type` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rows of VMware service settings the caller may use: settings behind an active or paused offering the caller may order from, settings of a VM the caller sees, and settings of organizations in which the caller holds an organization-level role. Staff and support see all.
 
 ---

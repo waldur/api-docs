@@ -117,6 +117,11 @@
     | `progress` | any |  |
     | `error_message` | string |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -205,6 +210,11 @@
     | `verification` | any |  |
     | `progress` | any |  |
     | `error_message` | string |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -309,6 +319,11 @@
     | `verification` | any |  |
     | `progress` | any |  |
     | `error_message` | string |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -416,6 +431,11 @@
     | `progress` | any |  |
     | `error_message` | string |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -480,6 +500,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -583,6 +608,11 @@ undone, is described from its journal: what was actually written.
     | `new_value` | string | The value after the merge; null when the row does not change. |
     | `kept_on_source` | boolean | Whether the row stays with the archived source instead of moving. |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Suggest plan mappings by name and component mappings by type
@@ -666,6 +696,11 @@ Suggest plan mappings by name and component mappings by type.
     | `unmatched_components.offering_uuid` | string |  |
     | `unmatched_components.type` | string |  |
     | `unmatched_components.name` | string |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -792,6 +827,11 @@ merge is ``previewed``, which also refuses a second request.
     **`409`** - The merge is not previewed.
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Compute the merge preview: counts, blockers and warnings
@@ -898,6 +938,11 @@ receive the same preview without it being stored.
     
     **`409`** - The merge is not in a previewable state.
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1010,5 +1055,10 @@ refused, the answer is 400 with the blockers and nothing is queued.
     
     **`409`** - The merge is not done.
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

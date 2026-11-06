@@ -91,6 +91,11 @@
     |---|---|
     | `updated_count` | integer |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Preview article code replacements
@@ -188,5 +193,10 @@
     | `offering_customer_name` | string |
     | `old_article_code` | string |
     | `new_article_code` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

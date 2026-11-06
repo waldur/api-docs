@@ -112,6 +112,13 @@
     | `review_comment` | string | Optional comment provided during review |
     | `backend_id` | string | Identifier of this request in an external approval system. Empty means it has not been submitted there yet. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -202,6 +209,13 @@
     | `review_comment` | string | Optional comment provided during review |
     | `backend_id` | string | Identifier of this request in an external approval system. Empty means it has not been submitted there yet. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Create
@@ -286,6 +300,11 @@
     | `uuid` | string (uuid) |  |
     | `state` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user other than staff and support, for a resource their roles reach (and a personal access token's bindings, if they use one). Refused with 400 to who may set the end date directly: who holds RESOURCE.SET_END_DATE on the resource's project or its organization.
+
 ---
 
 ## Other Actions
@@ -368,6 +387,11 @@ Approve resource end date change request and apply the date to the resource.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Deciding a request needs the same right as setting the date outright.
+
 ---
 
 ### Cancel resource end date change request. Only the creator can cancel
@@ -381,38 +405,28 @@ Cancel resource end date change request. Only the creator can cancel.
     http \
       POST \
       https://api.example.com/api/marketplace-resource-end-date-change-requests/a1b2c3d4-e5f6-7890-abcd-ef1234567890/cancel/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      resource="https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      requested_end_date="2023-10-01"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.resource_end_date_change_request_request import ResourceEndDateChangeRequestRequest # (1)
-    from waldur_api_client.api.marketplace_resource_end_date_change_requests import marketplace_resource_end_date_change_requests_cancel # (2)
+    from waldur_api_client.api.marketplace_resource_end_date_change_requests import marketplace_resource_end_date_change_requests_cancel # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ResourceEndDateChangeRequestRequest(
-        resource="https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        requested_end_date="2023-10-01"
-    )
     response = marketplace_resource_end_date_change_requests_cancel.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ResourceEndDateChangeRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_end_date_change_request_request.py)
-    2.  **API Source:** [`marketplace_resource_end_date_change_requests_cancel`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resource_end_date_change_requests/marketplace_resource_end_date_change_requests_cancel.py)
+    1.  **API Source:** [`marketplace_resource_end_date_change_requests_cancel`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resource_end_date_change_requests/marketplace_resource_end_date_change_requests_cancel.py)
 
 === "TypeScript"
 
@@ -424,10 +438,6 @@ Cancel resource end date change request. Only the creator can cancel.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "resource": "https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "requested_end_date": "2023-10-01"
       }
     });
       console.log('Success:', response);
@@ -444,16 +454,6 @@ Cancel resource end date change request. Only the creator can cancel.
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `resource` | string (uri) | ✓ |  |
-    | `requested_end_date` | string (date) | ✓ | The requested new end date for the resource |
-    | `comment` | string |  | Optional comment from the requester |
-    | `review_comment` | string |  | Optional comment provided during review |
-
-
 === "Responses"
 
     **`200`** - 
@@ -461,6 +461,11 @@ Cancel resource end date change request. Only the creator can cancel.
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    The request's author.
 
 ---
 
@@ -540,6 +545,11 @@ Reject resource end date change request.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Deciding a request needs the same right as setting the date outright.
 
 ---
 
@@ -622,5 +632,10 @@ Records the identifier this request has in an external approval system, so that 
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Deciding a request needs the same right as setting the date outright.
 
 ---

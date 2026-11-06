@@ -60,4 +60,9 @@ Returns a dictionary of public settings for the Waldur deployment. This includes
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---

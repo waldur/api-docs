@@ -86,6 +86,13 @@
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own profile; staff see all.
+
 ---
 
 ### Retrieve
@@ -160,6 +167,13 @@
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own profile; staff see all.
 
 ---
 
@@ -244,6 +258,11 @@
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
 
+
+=== "Authorization"
+
+    A profile for the caller, who has none yet.
+
 ---
 
 ### Update SSH keys for profile
@@ -310,6 +329,14 @@ Update SSH keys for profile.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own profile.
+    - Staff.
 
 ---
 
@@ -405,6 +432,14 @@ Update SSH keys for profile.
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own profile.
+    - Staff.
+
 ---
 
 ### Partial Update
@@ -479,5 +514,13 @@ Update SSH keys for profile.
     | `user_uuid` | string (uuid) |  |
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_full_name` | string |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own profile.
+    - Staff.
 
 ---

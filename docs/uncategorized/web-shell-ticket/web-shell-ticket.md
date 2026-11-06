@@ -63,4 +63,9 @@ Returns a single-use link that opens `waldur shell` in the browser as the callin
     |---|---|---|
     | `url` | string | Single-use link that opens the web shell. Valid for one minute; the ticket is in the URL fragment. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---

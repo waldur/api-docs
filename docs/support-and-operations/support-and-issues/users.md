@@ -106,6 +106,11 @@
     | `comments_count` | integer |  |
     | `attachments_count` | integer |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -185,6 +190,11 @@
     | `assigned_issues_count` | integer |  |
     | `comments_count` | integer |  |
     | `attachments_count` | integer |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -276,6 +286,11 @@
     | `assigned_issues_count` | integer |  |
     | `comments_count` | integer |  |
     | `attachments_count` | integer |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -379,6 +394,11 @@
     | `comments_count` | integer |  |
     | `attachments_count` | integer |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -475,6 +495,11 @@
     | `comments_count` | integer |  |
     | `attachments_count` | integer |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -539,6 +564,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -639,6 +669,11 @@
     | `attachments.issue_key` | string |
     | `attachments.issue_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Merge
@@ -736,5 +771,10 @@
     | `assigned_issues_count` | integer |  |
     | `comments_count` | integer |  |
     | `attachments_count` | integer |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

@@ -113,6 +113,13 @@
     | `gid_utilization` | number (double) |  |
     | `group_gid_utilization` | number (double) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Pools of service providers, and of offerings, of organizations where the caller holds a role. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -213,6 +220,13 @@
     | `gid_utilization` | number (double) |  |
     | `group_gid_utilization` | number (double) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Pools of service providers, and of offerings, of organizations where the caller holds a role. Staff and support see all.
+
 ---
 
 ### Create
@@ -312,6 +326,13 @@
     | `uid_utilization` | number (double) |  |
     | `gid_utilization` | number (double) |  |
     | `group_gid_utilization` | number (double) |  |
+
+
+=== "Authorization"
+
+    Requires `POSIX_ID_POOL.MANAGE` on the service provider's customer or the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -424,6 +445,13 @@
     | `gid_utilization` | number (double) |  |
     | `group_gid_utilization` | number (double) |  |
 
+
+=== "Authorization"
+
+    Requires `POSIX_ID_POOL.MANAGE` on the customer or the customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -533,6 +561,13 @@
     | `gid_utilization` | number (double) |  |
     | `group_gid_utilization` | number (double) |  |
 
+
+=== "Authorization"
+
+    Requires `POSIX_ID_POOL.MANAGE` on the customer or the customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -597,6 +632,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `POSIX_ID_POOL.MANAGE` on the customer or the customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -686,6 +728,13 @@ Adding an override pool to an offering that already has accounts changes nothing
     | `other_consumers.gid` | integer |  |
     | `other_consumers.identity_uuid` | string |  |
 
+
+=== "Authorization"
+
+    Requires `POSIX_ID_POOL.MANAGE` on the customer or the customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Pool utilization statistics
@@ -756,6 +805,13 @@ Adding an override pool to an offering that already has accounts changes nothing
     | `gid` | any |  |
     | `group_gid` | any | The range reserved for provider project groups, if any. |
     | `utilization_threshold` | integer |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Pools of service providers, and of offerings, of organizations where the caller holds a role. Staff and support see all.
 
 ---
 
@@ -859,5 +915,12 @@ Moves the offering's existing accounts onto this override pool and returns the i
     | `other_consumers.uid` | integer |  |
     | `other_consumers.gid` | integer |  |
     | `other_consumers.identity_uuid` | string |  |
+
+
+=== "Authorization"
+
+    Requires `POSIX_ID_POOL.MANAGE` on the customer or the customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

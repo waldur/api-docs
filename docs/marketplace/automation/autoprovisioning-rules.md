@@ -114,6 +114,13 @@ Manage autoprovisioning rules.
     | `category_title` | string |  |
     | `category_url` | string (uri) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Manage autoprovisioning rules
@@ -213,6 +220,13 @@ Manage autoprovisioning rules.
     | `offering_uuid` | string (uuid) |  |
     | `category_title` | string |  |
     | `category_url` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -339,6 +353,11 @@ Manage autoprovisioning rules.
     | `offering_uuid` | string (uuid) |  |
     | `category_title` | string |  |
     | `category_url` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -477,6 +496,11 @@ Manage autoprovisioning rules.
     | `category_title` | string |  |
     | `category_url` | string (uri) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Manage autoprovisioning rules
@@ -608,6 +632,11 @@ Manage autoprovisioning rules.
     | `category_title` | string |  |
     | `category_url` | string (uri) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Manage autoprovisioning rules
@@ -674,6 +703,11 @@ Manage autoprovisioning rules.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -791,5 +825,10 @@ Evaluate this rule against the given user without provisioning. Returns per-filt
     | `customer_lookup_ambiguous` | boolean |  |
     | `resolved_project_name` | string |  |
     | `project_action` | any | What provisioning does with the rule's project for this user: 'create' a new one, reuse an 'existing' one, or leave it deleted ('not_recreated') because this rule provisioned it before. Null when the rule creates no project or would not provision. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

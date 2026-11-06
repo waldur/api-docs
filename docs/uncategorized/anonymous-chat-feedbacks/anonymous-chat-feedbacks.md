@@ -96,6 +96,11 @@
     | `llm_judge_model` | string |  |
     | `modified_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -178,5 +183,10 @@
     | `llm_judge_output_tokens` | integer |  |
     | `llm_judge_model` | string |  |
     | `modified_at` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

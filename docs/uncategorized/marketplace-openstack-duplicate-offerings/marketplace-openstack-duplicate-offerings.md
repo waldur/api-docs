@@ -98,4 +98,9 @@
     | `candidates.total_resources` | integer |  |
     | `candidates.is_recommended_keeper` | boolean |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

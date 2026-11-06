@@ -135,6 +135,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -235,6 +240,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Sync Control
@@ -310,6 +320,11 @@ Pause consumption sync operations.
     |---|---|---|
     | `paused` | array of strings | List of paused items |
     | `resumed` | array of strings | List of resumed items |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -391,6 +406,11 @@ Trigger reconciliation for a specific period.
     **`202`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Resume consumption sync operations
@@ -463,6 +483,11 @@ Resume consumption sync operations.
     |---|---|---|
     | `paused` | array of strings | List of paused items |
     | `resumed` | array of strings | List of resumed items |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -544,6 +569,11 @@ Trigger consumption sync for a specific period.
     **`202`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Trigger reconciliation (check billing export and apply adjustments)
@@ -623,6 +653,11 @@ Trigger reconciliation (check billing export and apply adjustments).
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -704,6 +739,11 @@ Trigger billing sync for a specific period.
     **`202`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Data Retrieval
@@ -775,6 +815,11 @@ Get consumption statistics.
     | `period_breakdown.finalized_count` | integer |
     | `period_breakdown.reconciled_count` | integer |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Get current consumption sync status
@@ -834,6 +879,11 @@ Get current consumption sync status.
     | `settings_sync_enabled` | boolean |
     | `settings_uuid` | string (uuid) |
     | `last_sync_run` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -917,6 +967,11 @@ List pending consumption records (not yet finalized).
     | `billing_period` | string (date) |
     | `consumed_sell` | string (decimal) |
     | `last_sync_at` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1004,6 +1059,11 @@ Fetch raw billing export from Arrow API.
     | `row_count` | integer |  |
     | `data` | array of objects | Raw billing export data from Arrow API |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Fetch raw consumption data from Arrow API
@@ -1088,6 +1148,11 @@ Fetch raw consumption data from Arrow API.
     | `row_count` | integer |  |
     | `data` | array of objects | Raw consumption data from Arrow API |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Fetch license details from Arrow API
@@ -1164,6 +1229,11 @@ Fetch license details from Arrow API.
     | Field | Type | Description |
     |---|---|---|
     | `data` | object (free-form) | Raw license data from Arrow API |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1260,6 +1330,11 @@ Sync historical consumption for a specific resource from Arrow.
     | `preview_periods.status` | string |
     | `preview_periods.row_count` | integer |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Sync resources
@@ -1337,6 +1412,11 @@ Sync Arrow IAAS subscriptions to Waldur Resources. Matches subscriptions by Vend
     | `synced` | integer |
     | `created` | integer |
     | `updated` | integer |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1420,5 +1500,10 @@ Delete consumption records with optional dry-run preview.
     | `records_deleted` | integer |
     | `compensation_items_affected` | integer |
     | `invoice_items_affected` | integer |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

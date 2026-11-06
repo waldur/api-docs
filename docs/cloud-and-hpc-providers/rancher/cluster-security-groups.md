@@ -89,6 +89,13 @@
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
     | `rules.description` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -167,6 +174,13 @@
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
     | `rules.description` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -272,6 +286,13 @@
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
     | `rules.description` | string |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -369,5 +390,12 @@
     | `rules.to_port` | integer | Ending port number in the range (1-65535) |
     | `rules.cidr` | string | CIDR notation for the source/destination network address range |
     | `rules.description` | string |  |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

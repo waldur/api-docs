@@ -87,6 +87,11 @@
     | `parent` | string (uri) |  |
     | `customers_count` | integer | Number of customers in this organization group |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve
@@ -160,6 +165,11 @@
     | `parent_name` | string | Name of the parent organization group |
     | `parent` | string (uri) |  |
     | `customers_count` | integer | Number of customers in this organization group |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -242,6 +252,11 @@
     | `parent_name` | string | Name of the parent organization group |
     | `parent` | string (uri) |  |
     | `customers_count` | integer | Number of customers in this organization group |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -336,6 +351,11 @@
     | `parent` | string (uri) |  |
     | `customers_count` | integer | Number of customers in this organization group |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -423,6 +443,11 @@
     | `parent` | string (uri) |  |
     | `customers_count` | integer | Number of customers in this organization group |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -487,5 +512,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

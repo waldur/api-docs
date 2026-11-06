@@ -100,6 +100,13 @@
     | `state` | string | <br>_Enum: `active`, `deprecated`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Global definitions, and those private to organizations where the caller holds a role or to service providers they hold a role on. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -180,6 +187,13 @@
     | `owner_customer_name` | string |  |
     | `state` | string | <br>_Enum: `active`, `deprecated`_ |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Global definitions, and those private to organizations where the caller holds a role or to service providers they hold a role on. Staff and support see all.
 
 ---
 
@@ -281,6 +295,11 @@
     | `owner_customer_name` | string |  |
     | `state` | string | <br>_Enum: `active`, `deprecated`_ |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff for a global definition. For one private to the organization the request names, also who holds OFFERING.CREATE on it or on its service provider.
 
 ---
 
@@ -394,6 +413,11 @@
     | `state` | string | <br>_Enum: `active`, `deprecated`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff for a global definition. For one private to an organization, also who holds OFFERING.CREATE on it or on its service provider.
+
 ---
 
 ### Partial Update
@@ -497,6 +521,11 @@
     | `state` | string | <br>_Enum: `active`, `deprecated`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff for a global definition. For one private to an organization, also who holds OFFERING.CREATE on it or on its service provider.
+
 ---
 
 ### Delete
@@ -561,5 +590,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff for a global definition. For one private to an organization, also who holds OFFERING.CREATE on it or on its service provider.
 
 ---

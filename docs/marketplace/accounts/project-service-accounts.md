@@ -107,6 +107,13 @@
     | `customer_name` | string |
     | `customer_abbreviation` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Service accounts, except closed ones, of projects where the caller holds SERVICE_ACCOUNT.MANAGE on the project or site-wide. Staff and support see all.
+
 ---
 
 ### Retrieve a service account
@@ -193,6 +200,13 @@
     | `customer_name` | string |
     | `customer_abbreviation` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Service accounts, except closed ones, of projects where the caller holds SERVICE_ACCOUNT.MANAGE on the project or site-wide. Staff and support see all.
+
 ---
 
 ### Create a project service account
@@ -259,9 +273,7 @@ Creates a new service account scoped to a specific project. This generates an AP
 
     | Field | Type | Required |
     |---|---|---|
-    | `username` | string |  |
     | `description` | string |  |
-    | `error_traceback` | string |  |
     | `email` | string (email) |  |
     | `preferred_identifier` | string |  |
     | `project` | string (uuid) | ✓ |
@@ -292,6 +304,13 @@ Creates a new service account scoped to a specific project. This generates an AP
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
     | `customer_abbreviation` | string |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -368,9 +387,7 @@ Creates a new service account scoped to a specific project. This generates an AP
 
     | Field | Type | Required |
     |---|---|---|
-    | `username` | string |  |
     | `description` | string |  |
-    | `error_traceback` | string |  |
     | `email` | string (email) |  |
     | `preferred_identifier` | string |  |
     | `project` | string (uuid) | ✓ |
@@ -401,6 +418,13 @@ Creates a new service account scoped to a specific project. This generates an AP
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
     | `customer_abbreviation` | string |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -471,9 +495,7 @@ Creates a new service account scoped to a specific project. This generates an AP
 
     | Field | Type | Required |
     |---|---|---|
-    | `username` | string |  |
     | `description` | string |  |
-    | `error_traceback` | string |  |
     | `email` | string (email) |  |
     | `preferred_identifier` | string |  |
     | `project` | string (uuid) |  |
@@ -504,6 +526,13 @@ Creates a new service account scoped to a specific project. This generates an AP
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
     | `customer_abbreviation` | string |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -571,6 +600,13 @@ Deactivates a project service account and revokes its API key.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -662,5 +698,12 @@ Generates a new API key for the service account, immediately invalidating the ol
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
     | `customer_abbreviation` | string |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

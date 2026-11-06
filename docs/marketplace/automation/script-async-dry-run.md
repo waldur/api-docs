@@ -81,6 +81,13 @@
     | `output` | string |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -156,5 +163,12 @@
     | `get_state_display` | string |
     | `output` | string |
     | `created` | string (date-time) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

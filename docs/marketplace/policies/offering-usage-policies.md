@@ -103,6 +103,13 @@
     | `period` | any |  |
     | `period_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -189,6 +196,13 @@
     | `component_limits_set.limit` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -297,6 +311,13 @@
     | `component_limits_set.limit` | integer |  |
     | `period` | any |  |
     | `period_name` | string |  |
+
+
+=== "Authorization"
+
+    For the `scope` named in the request, the `CUSTOMER.OWNER` role on its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -417,6 +438,13 @@
     | `period` | any |  |
     | `period_name` | string |  |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -524,6 +552,13 @@
     | `period` | any |  |
     | `period_name` | string |  |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -589,6 +624,13 @@
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Other Actions
@@ -644,5 +686,10 @@
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

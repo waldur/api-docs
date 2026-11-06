@@ -85,4 +85,9 @@ Pull a marketplace script resource.
     **`404`** - No response body
     
 
+
+=== "Authorization"
+
+    The resource named in the request must be one the caller sees as a service consumer: Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all.
+
 ---

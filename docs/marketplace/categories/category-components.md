@@ -87,6 +87,11 @@ Returns a paginated list of all components defined at the category level. These 
     | `category.uuid` | string (uuid) |  |
     | `category.title` | string |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve a category component
@@ -164,6 +169,11 @@ Returns the details of a specific category component, identified by its ID.
     | `category.url` | string (uri) |  |
     | `category.uuid` | string (uuid) |  |
     | `category.title` | string |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -260,6 +270,11 @@ Creates a new component for a category. Requires staff permissions.
     | `category.url` | string (uri) |  |
     | `category.uuid` | string (uuid) |  |
     | `category.title` | string |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -368,6 +383,11 @@ Updates an existing category component. Requires staff permissions.
     | `category.uuid` | string (uuid) |  |
     | `category.title` | string |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update a category component
@@ -463,6 +483,11 @@ Partially updates an existing category component. Requires staff permissions.
     | `category.uuid` | string (uuid) |  |
     | `category.title` | string |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a category component
@@ -529,5 +554,10 @@ Deletes a category component. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

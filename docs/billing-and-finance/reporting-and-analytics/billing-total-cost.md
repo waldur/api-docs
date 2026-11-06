@@ -73,4 +73,9 @@
     | `total` | number (double) |
     | `price` | number (double) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

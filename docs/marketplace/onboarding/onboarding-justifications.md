@@ -7,7 +7,6 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding-justifications/` | [List Onboarding Justifications](#list-onboarding-justifications) |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding-justifications/{uuid}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/onboarding-justifications/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/onboarding-justifications/create_justification/` | [Create justification for failed verification](#create-justification-for-failed-verification) |
 | <span class="http-badge http-put">PUT</span> | `/api/onboarding-justifications/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/onboarding-justifications/{uuid}/` | [Partial Update](#partial-update) |
@@ -118,6 +117,13 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff see every row; support see every row read-only; others see their own.
+
 ---
 
 ### Retrieve
@@ -210,105 +216,12 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
----
 
-### Create
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/onboarding-justifications/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      verification="https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.onboarding_justification_request import OnboardingJustificationRequest # (1)
-    from waldur_api_client.api.onboarding_justifications import onboarding_justifications_create # (2)
+    Any signed-in user.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = OnboardingJustificationRequest(
-        verification="https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    )
-    response = onboarding_justifications_create.sync(
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`OnboardingJustificationRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_justification_request.py)
-    2.  **API Source:** [`onboarding_justifications_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_justifications/onboarding_justifications_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { onboardingJustificationsCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await onboardingJustificationsCreate({
-      auth: "Token YOUR_API_TOKEN",
-      body: {
-        "verification": "https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `verification` | string (uri) | ✓ |  |
-    | `user_justification` | string |  | User's explanation for why they should be authorized |
-
-
-=== "Responses"
-
-    **`201`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `verification` | string (uri) |  |
-    | `verification_uuid` | string (uuid) |  |
-    | `country` | string |  |
-    | `user` | string (uri) |  |
-    | `user_full_name` | string |  |
-    | `legal_person_identifier` | string |  |
-    | `legal_name` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `user_justification` | string | User's explanation for why they should be authorized |
-    | `validated_by` | string (uri) |  |
-    | `validated_at` | string (date-time) |  |
-    | `validation_decision` | any |  |
-    | `staff_notes` | string | Administrator notes on the review decision |
-    | `supporting_documentation` | array of objects |  |
-    | `supporting_documentation.uuid` | string (uuid) |  |
-    | `supporting_documentation.file` | string (uri) | Upload supporting documentation. |
-    | `supporting_documentation.file_name` | string |  |
-    | `supporting_documentation.file_size` | integer |  |
-    | `supporting_documentation.created` | string (date-time) |  |
-    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
-    | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
+    Staff see every row; support see every row read-only; others see their own.
 
 ---
 
@@ -412,6 +325,11 @@ Create justification for failed verification.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    A justification of the caller's own verification, which the request names.
+
 ---
 
 ### Update
@@ -423,8 +341,7 @@ Create justification for failed verification.
     http \
       PUT \
       https://api.example.com/api/onboarding-justifications/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      verification="https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
@@ -438,9 +355,7 @@ Create justification for failed verification.
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = OnboardingJustificationRequest(
-        verification="https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    )
+    body_data = OnboardingJustificationRequest()
     response = onboarding_justifications_update.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -464,9 +379,6 @@ Create justification for failed verification.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "verification": "https://api.example.com/api/verification/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
       }
     });
       console.log('Success:', response);
@@ -483,11 +395,10 @@ Create justification for failed verification.
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body (required)"
+=== "Request Body"
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `verification` | string (uri) | ✓ |  |
     | `user_justification` | string |  | User's explanation for why they should be authorized |
 
 
@@ -522,6 +433,16 @@ Create justification for failed verification.
     | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Staff may change a justification at any time; its owner only until staff approve or reject it.
+    - Any of:
+        - The caller's own justification.
+        - Staff.
 
 ---
 
@@ -592,7 +513,6 @@ Create justification for failed verification.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `verification` | string (uri) |  |  |
     | `user_justification` | string |  | User's explanation for why they should be authorized |
 
 
@@ -627,6 +547,16 @@ Create justification for failed verification.
     | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Staff may change a justification at any time; its owner only until staff approve or reject it.
+    - Any of:
+        - The caller's own justification.
+        - Staff.
 
 ---
 
@@ -692,6 +622,16 @@ Create justification for failed verification.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Staff may change a justification at any time; its owner only until staff approve or reject it.
+    - Any of:
+        - The caller's own justification.
+        - Staff.
 
 ---
 
@@ -802,6 +742,11 @@ Approve justification and mark verification as VERIFIED.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Attach supporting document to justification
@@ -887,6 +832,16 @@ Attach supporting document to justification.
     | `file_name` | string |  |
     | `file_size` | integer |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Staff may change a justification at any time; its owner only until staff approve or reject it.
+    - Any of:
+        - The caller's own justification.
+        - Staff.
 
 ---
 
@@ -993,5 +948,10 @@ Reject justification and mark verification as FAILED.
     | `user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

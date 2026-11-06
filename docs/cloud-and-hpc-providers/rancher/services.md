@@ -108,53 +108,60 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `runtime_state` | string |  |
-    | `namespace` | string (uri) |  |
-    | `namespace_name` | string |  |
-    | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |
-    | `target_workloads` | array of objects |  |
-    | `target_workloads.uuid` | string (uuid) |  |
-    | `target_workloads.url` | string (uri) |  |
-    | `target_workloads.name` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `service_name` | string |
+    | `service_settings` | string (uri) |
+    | `service_settings_uuid` | string (uuid) |
+    | `service_settings_state` | string |
+    | `service_settings_error_message` | string |
+    | `project` | string (uri) |
+    | `project_name` | string |
+    | `project_uuid` | string (uuid) |
+    | `customer` | string (uri) |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `customer_native_name` | string |
+    | `customer_abbreviation` | string |
+    | `error_message` | string |
+    | `error_traceback` | string |
+    | `resource_type` | string |
+    | `state` | any |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+    | `backend_id` | string |
+    | `access_url` | any |
+    | `runtime_state` | string |
+    | `namespace` | string (uri) |
+    | `namespace_name` | string |
+    | `cluster_ip` | string (ipv4) |
+    | `selector` | object (free-form) |
+    | `target_workloads` | array of objects |
+    | `target_workloads.uuid` | string (uuid) |
+    | `target_workloads.url` | string (uri) |
+    | `target_workloads.name` | string |
+    | `marketplace_offering_uuid` | string |
+    | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
+    | `marketplace_offering_plugin_options` | object (free-form) |
+    | `marketplace_category_uuid` | string |
+    | `marketplace_category_name` | string |
+    | `marketplace_resource_uuid` | string |
+    | `marketplace_plan_uuid` | string |
+    | `marketplace_resource_state` | string |
+    | `is_usage_based` | boolean |
+    | `is_limit_based` | boolean |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -229,53 +236,60 @@
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `runtime_state` | string |  |
-    | `namespace` | string (uri) |  |
-    | `namespace_name` | string |  |
-    | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |
-    | `target_workloads` | array of objects |  |
-    | `target_workloads.uuid` | string (uuid) |  |
-    | `target_workloads.url` | string (uri) |  |
-    | `target_workloads.name` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `service_name` | string |
+    | `service_settings` | string (uri) |
+    | `service_settings_uuid` | string (uuid) |
+    | `service_settings_state` | string |
+    | `service_settings_error_message` | string |
+    | `project` | string (uri) |
+    | `project_name` | string |
+    | `project_uuid` | string (uuid) |
+    | `customer` | string (uri) |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `customer_native_name` | string |
+    | `customer_abbreviation` | string |
+    | `error_message` | string |
+    | `error_traceback` | string |
+    | `resource_type` | string |
+    | `state` | any |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+    | `backend_id` | string |
+    | `access_url` | any |
+    | `runtime_state` | string |
+    | `namespace` | string (uri) |
+    | `namespace_name` | string |
+    | `cluster_ip` | string (ipv4) |
+    | `selector` | object (free-form) |
+    | `target_workloads` | array of objects |
+    | `target_workloads.uuid` | string (uuid) |
+    | `target_workloads.url` | string (uri) |
+    | `target_workloads.name` | string |
+    | `marketplace_offering_uuid` | string |
+    | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
+    | `marketplace_offering_plugin_options` | object (free-form) |
+    | `marketplace_category_uuid` | string |
+    | `marketplace_category_name` | string |
+    | `marketplace_resource_uuid` | string |
+    | `marketplace_plan_uuid` | string |
+    | `marketplace_resource_state` | string |
+    | `is_usage_based` | boolean |
+    | `is_limit_based` | boolean |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -345,72 +359,75 @@
 
 === "Request Body (required)"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) | ✓ |  |
-    | `project` | string (uri) | ✓ |  |
-    | `error_message` | string |  |  |
-    | `error_traceback` | string |  |  |
-    | `backend_id` | string |  |  |
-    | `runtime_state` | string |  |  |
-    | `namespace` | string (uri) |  |  |
-    | `cluster_ip` | any |  | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |  |
-    | `target_workloads` | array of objects |  |  |
-    | `target_workloads.url` | string (uri) | ✓ |  |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string | ✓ |
+    | `description` | string |  |
+    | `service_settings` | string (uri) | ✓ |
+    | `project` | string (uri) | ✓ |
+    | `namespace` | string (uri) |  |
+    | `cluster_ip` | string (ipv4) |  |
+    | `selector` | object (free-form) |  |
+    | `target_workloads` | array of objects |  |
+    | `target_workloads.url` | string (uri) | ✓ |
 
 
 === "Responses"
 
     **`201`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `runtime_state` | string |  |
-    | `namespace` | string (uri) |  |
-    | `namespace_name` | string |  |
-    | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |
-    | `target_workloads` | array of objects |  |
-    | `target_workloads.url` | string (uri) |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `service_name` | string |
+    | `service_settings` | string (uri) |
+    | `service_settings_uuid` | string (uuid) |
+    | `service_settings_state` | string |
+    | `service_settings_error_message` | string |
+    | `project` | string (uri) |
+    | `project_name` | string |
+    | `project_uuid` | string (uuid) |
+    | `customer` | string (uri) |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `customer_native_name` | string |
+    | `customer_abbreviation` | string |
+    | `error_message` | string |
+    | `error_traceback` | string |
+    | `resource_type` | string |
+    | `state` | any |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+    | `backend_id` | string |
+    | `access_url` | any |
+    | `runtime_state` | string |
+    | `namespace` | string (uri) |
+    | `namespace_name` | string |
+    | `cluster_ip` | string (ipv4) |
+    | `selector` | object (free-form) |
+    | `target_workloads` | array of objects |
+    | `target_workloads.url` | string (uri) |
+    | `marketplace_offering_uuid` | string |
+    | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
+    | `marketplace_offering_plugin_options` | object (free-form) |
+    | `marketplace_category_uuid` | string |
+    | `marketplace_category_name` | string |
+    | `marketplace_resource_uuid` | string |
+    | `marketplace_plan_uuid` | string |
+    | `marketplace_resource_state` | string |
+    | `is_usage_based` | boolean |
+    | `is_limit_based` | boolean |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -490,6 +507,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -559,6 +583,11 @@ Delete resource from the database without scheduling operations on backend
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Update
@@ -572,8 +601,6 @@ Delete resource from the database without scheduling operations on backend
       https://api.example.com/api/rancher-services/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-rancher-service" \
-      service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       target_workloads:='[]'
     ```
 
@@ -590,8 +617,6 @@ Delete resource from the database without scheduling operations on backend
     
     body_data = RancherServiceRequest(
         name="my-awesome-rancher-service",
-        service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         target_workloads=[]
     )
     response = rancher_services_update.sync(
@@ -620,8 +645,6 @@ Delete resource from the database without scheduling operations on backend
       },
       body: {
         "name": "my-awesome-rancher-service",
-        "service_settings": "https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "target_workloads": []
       }
     });
@@ -641,74 +664,74 @@ Delete resource from the database without scheduling operations on backend
 
 === "Request Body (required)"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) | ✓ |  |
-    | `project` | string (uri) | ✓ |  |
-    | `error_message` | string |  |  |
-    | `error_traceback` | string |  |  |
-    | `backend_id` | string |  |  |
-    | `runtime_state` | string |  |  |
-    | `namespace` | string (uri) |  |  |
-    | `cluster_ip` | any |  | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |  |
-    | `target_workloads` | array of objects | ✓ |  |
-    | `target_workloads.name` | string | ✓ |  |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string | ✓ |
+    | `description` | string |  |
+    | `cluster_ip` | string (ipv4) |  |
+    | `selector` | object (free-form) |  |
+    | `target_workloads` | array of objects | ✓ |
+    | `target_workloads.name` | string | ✓ |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `runtime_state` | string |  |
-    | `namespace` | string (uri) |  |
-    | `namespace_name` | string |  |
-    | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |
-    | `target_workloads` | array of objects |  |
-    | `target_workloads.uuid` | string (uuid) |  |
-    | `target_workloads.url` | string (uri) |  |
-    | `target_workloads.name` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `service_name` | string |
+    | `service_settings` | string (uri) |
+    | `service_settings_uuid` | string (uuid) |
+    | `service_settings_state` | string |
+    | `service_settings_error_message` | string |
+    | `project` | string (uri) |
+    | `project_name` | string |
+    | `project_uuid` | string (uuid) |
+    | `customer` | string (uri) |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `customer_native_name` | string |
+    | `customer_abbreviation` | string |
+    | `error_message` | string |
+    | `error_traceback` | string |
+    | `resource_type` | string |
+    | `state` | any |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+    | `backend_id` | string |
+    | `access_url` | any |
+    | `runtime_state` | string |
+    | `namespace` | string (uri) |
+    | `namespace_name` | string |
+    | `cluster_ip` | string (ipv4) |
+    | `selector` | object (free-form) |
+    | `target_workloads` | array of objects |
+    | `target_workloads.uuid` | string (uuid) |
+    | `target_workloads.url` | string (uri) |
+    | `target_workloads.name` | string |
+    | `marketplace_offering_uuid` | string |
+    | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
+    | `marketplace_offering_plugin_options` | object (free-form) |
+    | `marketplace_category_uuid` | string |
+    | `marketplace_category_name` | string |
+    | `marketplace_resource_uuid` | string |
+    | `marketplace_plan_uuid` | string |
+    | `marketplace_resource_state` | string |
+    | `is_usage_based` | boolean |
+    | `is_limit_based` | boolean |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -777,74 +800,74 @@ Delete resource from the database without scheduling operations on backend
 
 === "Request Body"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string |  |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) |  |  |
-    | `project` | string (uri) |  |  |
-    | `error_message` | string |  |  |
-    | `error_traceback` | string |  |  |
-    | `backend_id` | string |  |  |
-    | `runtime_state` | string |  |  |
-    | `namespace` | string (uri) |  |  |
-    | `cluster_ip` | any |  | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |  |
-    | `target_workloads` | array of objects |  |  |
-    | `target_workloads.name` | string | ✓ |  |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string |  |
+    | `description` | string |  |
+    | `cluster_ip` | string (ipv4) |  |
+    | `selector` | object (free-form) |  |
+    | `target_workloads` | array of objects |  |
+    | `target_workloads.name` | string | ✓ |
 
 
 === "Responses"
 
     **`200`** - 
     
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `runtime_state` | string |  |
-    | `namespace` | string (uri) |  |
-    | `namespace_name` | string |  |
-    | `cluster_ip` | any | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |
-    | `target_workloads` | array of objects |  |
-    | `target_workloads.uuid` | string (uuid) |  |
-    | `target_workloads.url` | string (uri) |  |
-    | `target_workloads.name` | string |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    | Field | Type |
+    |---|---|
+    | `url` | string (uri) |
+    | `uuid` | string (uuid) |
+    | `name` | string |
+    | `description` | string |
+    | `service_name` | string |
+    | `service_settings` | string (uri) |
+    | `service_settings_uuid` | string (uuid) |
+    | `service_settings_state` | string |
+    | `service_settings_error_message` | string |
+    | `project` | string (uri) |
+    | `project_name` | string |
+    | `project_uuid` | string (uuid) |
+    | `customer` | string (uri) |
+    | `customer_uuid` | string (uuid) |
+    | `customer_name` | string |
+    | `customer_native_name` | string |
+    | `customer_abbreviation` | string |
+    | `error_message` | string |
+    | `error_traceback` | string |
+    | `resource_type` | string |
+    | `state` | any |
+    | `created` | string (date-time) |
+    | `modified` | string (date-time) |
+    | `backend_id` | string |
+    | `access_url` | any |
+    | `runtime_state` | string |
+    | `namespace` | string (uri) |
+    | `namespace_name` | string |
+    | `cluster_ip` | string (ipv4) |
+    | `selector` | object (free-form) |
+    | `target_workloads` | array of objects |
+    | `target_workloads.uuid` | string (uuid) |
+    | `target_workloads.url` | string (uri) |
+    | `target_workloads.name` | string |
+    | `marketplace_offering_uuid` | string |
+    | `marketplace_offering_name` | string |
+    | `marketplace_offering_type` | string |
+    | `marketplace_offering_plugin_options` | object (free-form) |
+    | `marketplace_category_uuid` | string |
+    | `marketplace_category_name` | string |
+    | `marketplace_resource_uuid` | string |
+    | `marketplace_plan_uuid` | string |
+    | `marketplace_resource_state` | string |
+    | `is_usage_based` | boolean |
+    | `is_limit_based` | boolean |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -910,6 +933,13 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -981,6 +1011,13 @@ Delete resource from the database without scheduling operations on backend
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -1065,6 +1102,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -1135,6 +1177,11 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Yaml
@@ -1148,8 +1195,6 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
       https://api.example.com/api/rancher-services/a1b2c3d4-e5f6-7890-abcd-ef1234567890/yaml/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-rancher-service" \
-      service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
       target_workloads:='[]'
     ```
 
@@ -1166,8 +1211,6 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     
     body_data = RancherServiceRequest(
         name="my-awesome-rancher-service",
-        service_settings="https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        project="https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         target_workloads=[]
     )
     response = rancher_services_yaml_update.sync(
@@ -1196,8 +1239,6 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
       },
       body: {
         "name": "my-awesome-rancher-service",
-        "service_settings": "https://api.example.com/api/service-settings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "project": "https://api.example.com/api/project/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
         "target_workloads": []
       }
     });
@@ -1217,21 +1258,14 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
 
 === "Request Body (required)"
 
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `service_settings` | string (uri) | ✓ |  |
-    | `project` | string (uri) | ✓ |  |
-    | `error_message` | string |  |  |
-    | `error_traceback` | string |  |  |
-    | `backend_id` | string |  |  |
-    | `runtime_state` | string |  |  |
-    | `namespace` | string (uri) |  |  |
-    | `cluster_ip` | any |  | An IPv4 or IPv6 address. |
-    | `selector` | object (free-form) |  |  |
-    | `target_workloads` | array of objects | ✓ |  |
-    | `target_workloads.name` | string | ✓ |  |
+    | Field | Type | Required |
+    |---|---|---|
+    | `name` | string | ✓ |
+    | `description` | string |  |
+    | `cluster_ip` | string (ipv4) |  |
+    | `selector` | object (free-form) |  |
+    | `target_workloads` | array of objects | ✓ |
+    | `target_workloads.name` | string | ✓ |
 
 
 === "Responses"
@@ -1241,5 +1275,12 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

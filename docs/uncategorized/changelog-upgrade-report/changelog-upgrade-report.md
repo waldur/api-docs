@@ -71,4 +71,9 @@ Returns a Markdown upgrade report, maintenance announcement text and upgrade com
     | `announcement` | string | Markdown text for a maintenance announcement |
     | `announcement_type` | string | <br>_Enum: `information`, `warning`_ |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

@@ -91,6 +91,11 @@ Get a list of available volume types.
     | `description` | string |
     | `settings` | string (uri) |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Get volume type details
@@ -165,6 +170,11 @@ Retrieve details of a specific volume type.
     | `description` | string |
     | `settings` | string (uri) |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ## Other Actions
@@ -222,5 +232,10 @@ Return a list of unique volume type names.
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

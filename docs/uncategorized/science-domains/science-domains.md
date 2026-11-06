@@ -94,6 +94,11 @@
     | `modified` | string (date-time) |  |
     | `subdomains_count` | integer | Number of sub-domains in this domain |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve
@@ -167,6 +172,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `subdomains_count` | integer | Number of sub-domains in this domain |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -249,6 +259,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `subdomains_count` | integer | Number of sub-domains in this domain |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -343,6 +358,11 @@
     | `modified` | string (date-time) |  |
     | `subdomains_count` | integer | Number of sub-domains in this domain |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -430,6 +450,11 @@
     | `modified` | string (date-time) |  |
     | `subdomains_count` | integer | Number of sub-domains in this domain |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -494,6 +519,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -570,6 +600,11 @@
     | `name` | string |
     | `label` | string |
     | `description` | string |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -648,5 +683,10 @@
     | `created_subdomains` | integer |
     | `skipped_domains` | integer |
     | `skipped_subdomains` | integer |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

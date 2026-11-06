@@ -116,6 +116,14 @@ Returns a paginated list of software versions. Can be filtered by package, catal
     | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Retrieve a software version
@@ -202,6 +210,14 @@ Returns the details of a specific software version, including its release date a
     | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Create a software version
@@ -274,6 +290,11 @@ Creates a new version for a software package. Requires staff permissions.
     | `extensions` | array of anys |  |
     | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -361,6 +382,11 @@ Updates an existing software version. Requires staff permissions.
     | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update a software version
@@ -447,6 +473,11 @@ Partially updates an existing software version. Requires staff permissions.
     | `toolchain` | any |  |
     | `toolchain_families_compatibility` | array of anys |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a software version
@@ -513,5 +544,10 @@ Deletes a software version. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

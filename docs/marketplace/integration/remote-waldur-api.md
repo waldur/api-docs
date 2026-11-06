@@ -24,7 +24,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/remote_customers/` | [List remote customers owned by current user](#list-remote-customers-owned-by-current-user) |
 | <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/shared_offerings/` | [List remote importable offerings for particular customer](#list-remote-importable-offerings-for-particular-customer) |
 | <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/sync_resource/{uuid}/` | [Resource](#resource) |
-| <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/sync_resource_project_permissions/{uuid}/` | [Permissions](#permissions) |
+| <span class="http-badge http-post">POST</span> | `/api/remote-waldur-api/sync_resource_project_permissions/{uuid}/` | [Queue a push of the resource's project team to the remote Waldur](#queue-a-push-of-the-resources-project-team-to-the-remote-waldur) |
 
 ---
 ## Core CRUD
@@ -93,6 +93,13 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Orders
@@ -157,6 +164,13 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -223,6 +237,13 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Accounts
@@ -287,6 +308,13 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -353,6 +381,13 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Users
@@ -417,6 +452,13 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -485,6 +527,11 @@ Schedule order pull task
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Accounts
@@ -549,6 +596,11 @@ Schedule order pull task
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -626,6 +678,11 @@ Get remote order details
     | `local_state` | any | Local order state |
     | `sync_status` | any | Sync status: in_sync, out_of_sync, sync_failed |
 
+
+=== "Authorization"
+
+    Staff and support, or who holds RESOURCE.LIST on the resource's project or its organization; others get 404.
+
 ---
 
 ### Get remote resource sync status
@@ -698,6 +755,11 @@ Get remote resource sync status
     | `remote_state` | any | Remote resource state |
     | `sync_status` | any | Sync status: in_sync, out_of_sync, sync_failed |
     | `last_sync` | string (date-time) | Last sync timestamp |
+
+
+=== "Authorization"
+
+    Staff and support, or who holds RESOURCE.LIST on the resource's project or its organization; others get 404.
 
 ---
 
@@ -783,6 +845,11 @@ Get remote resource team members
     | `remote_role` | string | Remote role |
     | `sync_status` | any | Sync status: in_sync, out_of_sync, sync_failed |
 
+
+=== "Authorization"
+
+    Staff and support, or who holds RESOURCE.LIST on the resource's project or its organization; others get 404.
+
 ---
 
 ### Cancel termination order
@@ -849,6 +916,13 @@ Cancel termination order
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -947,6 +1021,14 @@ Create local offering from remote
     |---|---|
     | `uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Staff (a personal access token needs the STAFF.ACCESS scope to act as staff), or who holds OFFERING.CREATE on at least one organization or site-wide. A personal access token also needs the OFFERING.CREATE scope and, if it is bound, a binding to such an organization.
+    - Staff, or who holds OFFERING.CREATE on the local organization named by local_customer_uuid.
+
 ---
 
 ### Data
@@ -1011,6 +1093,13 @@ Create local offering from remote
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1132,7 +1221,7 @@ List remote marketplace categories
     | `columns.index` | integer | Index allows to reorder columns. |
     | `columns.title` | string | Title is rendered as column header. |
     | `columns.attribute` | string | Resource attribute is rendered as table cell. |
-    | `columns.widget` | any | Widget field allows to customise table cell rendering. |
+    | `columns.widget` | any | Widget field allows to customize table cell rendering. |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -1142,6 +1231,11 @@ List remote marketplace categories
     | `articles.title` | string |  |
     | `articles.url` | string (uri) |  |
     | `group` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff (a personal access token needs the STAFF.ACCESS scope to act as staff), or who holds OFFERING.CREATE on at least one organization or site-wide. A personal access token also needs the OFFERING.CREATE scope and, if it is bound, a binding to such an organization.
 
 ---
 
@@ -1238,6 +1332,11 @@ List remote customers owned by current user
     | `abbreviation` | string |
     | `phone_number` | string |
     | `email` | string |
+
+
+=== "Authorization"
+
+    Staff (a personal access token needs the STAFF.ACCESS scope to act as staff), or who holds OFFERING.CREATE on at least one organization or site-wide. A personal access token also needs the OFFERING.CREATE scope and, if it is bound, a binding to such an organization.
 
 ---
 
@@ -1336,6 +1435,11 @@ List remote importable offerings for particular customer
     | `state` | string |
     | `category_title` | string |
 
+
+=== "Authorization"
+
+    Staff (a personal access token needs the STAFF.ACCESS scope to act as staff), or who holds OFFERING.CREATE on at least one organization or site-wide. A personal access token also needs the OFFERING.CREATE scope and, if it is bound, a binding to such an organization.
+
 ---
 
 ### Resource
@@ -1401,9 +1505,16 @@ List remote importable offerings for particular customer
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
-### Permissions
+### Queue a push of the resource's project team to the remote Waldur
+
+Queue a push of the resource's project team to the remote Waldur.
 
 
 === "HTTPie"
@@ -1463,7 +1574,12 @@ List remote importable offerings for particular customer
 
 === "Responses"
 
-    **`200`** - No response body
+    **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

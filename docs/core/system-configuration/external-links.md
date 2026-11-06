@@ -88,6 +88,11 @@ Retrieve a list of external links available in the system.
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve external link
@@ -164,6 +169,11 @@ Fetch the details of a specific external link by its UUID.
     | `image` | string (uri) |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -254,6 +264,11 @@ Create a new external link. This action is restricted to staff users.
     | `image` | string (uri) |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -356,6 +371,11 @@ Update an existing external link. This action is restricted to staff users.
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update an external link
@@ -448,6 +468,11 @@ Partially update an existing external link. This action is restricted to staff u
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete an external link
@@ -514,5 +539,10 @@ Delete an existing external link. This action is restricted to staff users.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

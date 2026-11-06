@@ -97,6 +97,11 @@ Get invitation details by token.
     | `proposals.name` | string |  |
     | `proposals.summary` | string |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ## Other Actions
@@ -205,6 +210,11 @@ Accept a reviewer invitation.
     |---|---|
     | `error` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Decline a reviewer invitation
@@ -292,5 +302,10 @@ Decline a reviewer invitation.
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

@@ -121,6 +121,11 @@
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -221,6 +226,11 @@
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Delete a reviewer suggestion
@@ -287,6 +297,13 @@ Delete a reviewer suggestion.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -406,6 +423,11 @@ Confirm a reviewer suggestion. The reviewer will be invited to the call.
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Reject a reviewer suggestion
@@ -519,5 +541,10 @@ Reject a reviewer suggestion.
     | `source_type` | any | What content was used to generate this suggestion |
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

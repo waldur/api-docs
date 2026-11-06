@@ -81,6 +81,11 @@ Return person identifier field specification for a specific validation method. T
     | `validation_method` | string | The validation method identifier |
     | `person_identifier_fields` | object (free-form) | Field specification for person identification. For simple identifiers: {type: 'string', field: 'civil_number', ...}. For composite identifiers: {type: 'object', fields: {...}} |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Return list of supported countries for validation
@@ -137,5 +142,10 @@ Return list of supported countries for validation.
     | Field | Type |
     |---|---|
     | `supported_countries` | array of strings |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

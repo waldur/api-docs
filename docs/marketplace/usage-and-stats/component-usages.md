@@ -121,6 +121,13 @@ Returns a paginated list of component usage records for resources. This data is 
     | `billing_period` | string (date) |  |
     | `modified_by` | integer |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve a component usage record
@@ -219,6 +226,13 @@ Returns the details of a specific component usage record.
     | `billing_period` | string (date) |  |
     | `modified_by` | integer |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ## Other Actions
@@ -233,6 +247,7 @@ Returns the details of a specific component usage record.
         - If a `plan_period` is provided, the usage is associated with that period.
         - If only a `resource` is provided, the system will determine the correct plan period based on the current date.
         - If a usage record for the same resource, component, and billing period already exists, it will be updated. Otherwise, a new record is created.
+        - Usage-based components may be reported per UTC date in `daily_usages`. Each date replaces its previous amount, and the month's usage becomes the sum of its days. A month total for a month that has daily amounts is rejected. Day and week spending limits need daily amounts.
         
 
 
@@ -295,12 +310,16 @@ Returns the details of a specific component usage record.
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `usages` | array of objects | ✓ | List of component usage items to report |
+    | `usages` | array of objects | ✓ | List of component usage items to report, each the total of the billing month so far. May be empty when daily_usages is given. |
     | `usages.type` | string | ✓ | Type of the component |
     | `usages.amount` | string (decimal) | ✓ | Usage amount |
     | `usages.description` | string |  | Optional description of usage |
     | `usages.missing_usage_policy` | any |  | What to record for this component when the following billing period passes with no usage report. |
     | `usages.recurring` | boolean |  | Deprecated, use missing_usage_policy instead. True is equivalent to missing_usage_policy='reuse'. |
+    | `daily_usages` | array of objects |  | Usage of usage-based components per UTC date. The month's usage is then the sum of its days, and a month total for a month that has daily amounts is rejected. Needed for day and week spending limits. At most 1000 items. |
+    | `daily_usages.type` | string | ✓ | Type of the usage-based component |
+    | `daily_usages.date` | string (date) | ✓ | UTC date the amount was used on |
+    | `daily_usages.amount` | string (decimal) | ✓ | Usage on that date. Replaces the amount reported for it before. |
     | `plan_period` | string (uuid) |  | UUID of the specific resource plan period for usage reporting |
     | `resource` | string (uuid) |  | UUID of the resource for usage reporting (required if plan_period not provided) |
     | `date` | string (date-time) |  | Date for usage reporting (staff and service providers for limit-based components). If not provided, current date is used. |
@@ -310,6 +329,13 @@ Returns the details of a specific component usage record.
 
     **`201`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.SET_USAGE` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -404,6 +430,13 @@ Returns the details of a specific component usage record.
 
     **`201`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.SET_USAGE` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -500,5 +533,12 @@ Returns the details of a specific component usage record.
 
     **`201`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.SET_USAGE` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

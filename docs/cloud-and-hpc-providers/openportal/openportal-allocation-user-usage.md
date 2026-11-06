@@ -85,6 +85,13 @@
     | `username` | string |
     | `full_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -158,5 +165,12 @@
     | `user` | string (uri) |
     | `username` | string |
     | `full_name` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

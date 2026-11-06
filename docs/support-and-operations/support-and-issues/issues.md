@@ -177,6 +177,13 @@
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on, support tickets they raised and tickets of a helpdesk they serve; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -302,6 +309,13 @@
     | `escalation_reason` | string | Reason for escalation. |
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on, support tickets they raised and tickets of a helpdesk they serve; staff and support see all.
 
 ---
 
@@ -451,6 +465,14 @@
     | `escalation_reason` | string | Reason for escalation. |
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - The signed-in user's profile has an email and a full name.
+    - Any signed-in user, for an issue of their own (is_reported_manually); staff and support may also report one for another user. An issue about an organization needs one of its owners, and one about a project or a resource an owner of its organization or a manager, admin or member of the project; staff and support may name any. Only staff and support may set the priority.
 
 ---
 
@@ -612,6 +634,11 @@
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Partial Update
@@ -755,6 +782,11 @@
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Delete
@@ -819,6 +851,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -967,6 +1004,11 @@
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Bulk update multiple issues
@@ -1041,6 +1083,11 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1144,6 +1191,18 @@
     | `update_is_available` | boolean |
     | `destroy_is_available` | boolean |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - The issue's caller.
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - An active agent of the provider helpdesk the issue is routed to.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Escalate an issue
@@ -1226,6 +1285,11 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1371,6 +1435,11 @@
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Manually route an issue to a provider helpdesk
@@ -1514,6 +1583,11 @@
     | `escalation_reason` | string | Reason for escalation. |
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1665,6 +1739,11 @@ their status stays whatever the remote service desk last told us.
     | `is_routed` | boolean |  |
     | `provider_ticket_info` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Sync
@@ -1729,5 +1808,10 @@ their status stays whatever the remote service desk last told us.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

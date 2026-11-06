@@ -89,4 +89,9 @@ Requires support user permissions.
     |---|---|---|
     | `error` | string | Error message describing what went wrong |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

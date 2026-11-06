@@ -102,6 +102,13 @@
     | `update_is_available` | boolean |
     | `destroy_is_available` | boolean |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on, support tickets they raised and tickets of a helpdesk they serve; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -184,6 +191,13 @@
     | `created` | string (date-time) |
     | `update_is_available` | boolean |
     | `destroy_is_available` | boolean |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on, support tickets they raised and tickets of a helpdesk they serve; staff and support see all.
 
 ---
 
@@ -287,6 +301,11 @@
     | `update_is_available` | boolean |
     | `destroy_is_available` | boolean |
 
+
+=== "Authorization"
+
+    Staff, or the comment's author where the active support backend (WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE) lets authors edit their own comments, as the built-in desk, the default, does; Atlassian, Zammad and SMAX do not. The author may not once the comment's ticket is routed to or from a provider helpdesk, nor for a comment forwarded between such tickets.
+
 ---
 
 ### Partial Update
@@ -383,6 +402,11 @@
     | `update_is_available` | boolean |
     | `destroy_is_available` | boolean |
 
+
+=== "Authorization"
+
+    Staff, or the comment's author where the active support backend (WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE) lets authors edit their own comments, as the built-in desk, the default, does; Atlassian, Zammad and SMAX do not. The author may not once the comment's ticket is routed to or from a provider helpdesk, nor for a comment forwarded between such tickets.
+
 ---
 
 ### Delete
@@ -447,5 +471,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or the comment's author where the active support backend (WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE) lets authors delete their own comments, as the built-in desk, the default, does; Atlassian, Zammad and SMAX do not. The author may not once the comment's ticket is routed to or from a provider helpdesk, nor for a comment forwarded between such tickets.
 
 ---

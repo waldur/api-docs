@@ -73,4 +73,9 @@ Get media file
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Whoever the access rule registered for the file's upload path admits, signed in or not; a file with no rule is served to no one. A refused request is answered as if the file did not exist.
+
 ---

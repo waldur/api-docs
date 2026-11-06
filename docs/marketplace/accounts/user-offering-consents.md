@@ -8,9 +8,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-user-offering-consents/` | [List user offering consents](#list-user-offering-consents) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-user-offering-consents/{uuid}/` | [Retrieve a user offering consent](#retrieve-a-user-offering-consent) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-user-offering-consents/` | [Grant consent to an offering's Terms of Service](#grant-consent-to-an-offerings-terms-of-service) |
-| <span class="http-badge http-put">PUT</span> | `/api/marketplace-user-offering-consents/{uuid}/` | [Update](#update) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/marketplace-user-offering-consents/{uuid}/` | [Partial Update](#partial-update) |
-| <span class="http-badge http-delete">DELETE</span> | `/api/marketplace-user-offering-consents/{uuid}/` | [Delete](#delete) |
 | **Other Actions** | | |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-user-offering-consents/{uuid}/revoke/` | [Revoke consent to Terms of Service](#revoke-consent-to-terms-of-service) |
 
@@ -110,6 +107,13 @@ Returns a paginated list of Terms of Service consents for the current user. Staf
     | `requires_reconsent` | boolean |  |
     | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own consents. Staff and support see all.
+
 ---
 
 ### Retrieve a user offering consent
@@ -196,6 +200,13 @@ Returns the details of a specific consent record.
     | `requires_reconsent` | boolean |  |
     | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own consents. Staff and support see all.
+
 ---
 
 ### Grant consent to an offering's Terms of Service
@@ -273,262 +284,10 @@ Creates a consent record for the current user and a specific offering. This indi
     |---|---|
     | `offering` | string (uuid) |
 
----
 
-### Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PUT \
-      https://api.example.com/api/marketplace-user-offering-consents/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.user_offering_consent_request import UserOfferingConsentRequest # (1)
-    from waldur_api_client.api.marketplace_user_offering_consents import marketplace_user_offering_consents_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = UserOfferingConsentRequest()
-    response = marketplace_user_offering_consents_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`UserOfferingConsentRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_offering_consent_request.py)
-    2.  **API Source:** [`marketplace_user_offering_consents_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_user_offering_consents/marketplace_user_offering_consents_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceUserOfferingConsentsUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceUserOfferingConsentsUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `version` | string |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `user_uuid` | string (uuid) |  |
-    | `offering_uuid` | string (uuid) |  |
-    | `agreement_date` | string (date-time) |  |
-    | `version` | string |  |
-    | `revocation_date` | string (date-time) |  |
-    | `created` | string (date-time) |  |
-    | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `user_full_name` | string |  |
-    | `user_email` | string (email) |  |
-    | `offering_name` | string |  |
-    | `offering_slug` | string |  |
-    | `offering_url` | string (uri) |  |
-    | `modified` | string (date-time) |  |
-    | `has_consent` | boolean |  |
-    | `requires_reconsent` | boolean |  |
-    | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
-
----
-
-### Partial Update
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/marketplace-user-offering-consents/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_user_offering_consent_request import PatchedUserOfferingConsentRequest # (1)
-    from waldur_api_client.api.marketplace_user_offering_consents import marketplace_user_offering_consents_partial_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = PatchedUserOfferingConsentRequest()
-    response = marketplace_user_offering_consents_partial_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`PatchedUserOfferingConsentRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_user_offering_consent_request.py)
-    2.  **API Source:** [`marketplace_user_offering_consents_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_user_offering_consents/marketplace_user_offering_consents_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceUserOfferingConsentsPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceUserOfferingConsentsPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `version` | string |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `user_uuid` | string (uuid) |  |
-    | `offering_uuid` | string (uuid) |  |
-    | `agreement_date` | string (date-time) |  |
-    | `version` | string |  |
-    | `revocation_date` | string (date-time) |  |
-    | `created` | string (date-time) |  |
-    | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
-    | `user_full_name` | string |  |
-    | `user_email` | string (email) |  |
-    | `offering_name` | string |  |
-    | `offering_slug` | string |  |
-    | `offering_url` | string (uri) |  |
-    | `modified` | string (date-time) |  |
-    | `has_consent` | boolean |  |
-    | `requires_reconsent` | boolean |  |
-    | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
-
----
-
-### Delete
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      DELETE \
-      https://api.example.com/api/marketplace-user-offering-consents/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_user_offering_consents import marketplace_user_offering_consents_destroy # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = marketplace_user_offering_consents_destroy.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`marketplace_user_offering_consents_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_user_offering_consents/marketplace_user_offering_consents_destroy.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceUserOfferingConsentsDestroy } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceUserOfferingConsentsDestroy({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`204`** - No response body
-    
+    A consent of the caller's own, to the offering named in the request.
 
 ---
 
@@ -618,5 +377,13 @@ Revokes a user's consent to the Terms of Service for an offering. The consent re
     | `has_consent` | boolean |  |
     | `requires_reconsent` | boolean |  |
     | `collected_attributes` | array of strings | List of user attributes that will be shared with service provider |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The consent's user.
 
 ---

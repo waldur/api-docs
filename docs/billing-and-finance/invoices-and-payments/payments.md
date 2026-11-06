@@ -95,6 +95,13 @@
     | `invoice_period` | string |
     | `customer_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -171,6 +178,13 @@
     | `invoice_uuid` | string (uuid) |
     | `invoice_period` | string |
     | `customer_uuid` | string (uuid) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -262,6 +276,11 @@
     | `invoice_period` | string |
     | `customer_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Unlink from invoice
@@ -331,6 +350,11 @@ Unlink a payment from an invoice. Remove connection between payment and existing
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -433,6 +457,11 @@ Unlink a payment from an invoice. Remove connection between payment and existing
     | `invoice_period` | string |
     | `customer_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -525,6 +554,11 @@ Unlink a payment from an invoice. Remove connection between payment and existing
     | `invoice_period` | string |
     | `customer_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -589,6 +623,11 @@ Unlink a payment from an invoice. Remove connection between payment and existing
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -680,5 +719,10 @@ Link a payment to an invoice. Payment can be linked to an invoice only if they b
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

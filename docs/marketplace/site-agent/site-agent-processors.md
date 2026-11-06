@@ -89,6 +89,13 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Processors of services of agent identities of offerings that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all. An identity manager with managed ISDs also sees the processors of services of agent identities they created for offerings in an ISD-allowed state.
+
 ---
 
 ### Retrieve
@@ -166,6 +173,13 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Processors of services of agent identities of offerings that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all. An identity manager with managed ISDs also sees the processors of services of agent identities they created for offerings in an ISD-allowed state.
+
 ---
 
 ### Delete
@@ -230,5 +244,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
 
 ---

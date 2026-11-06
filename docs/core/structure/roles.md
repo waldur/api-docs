@@ -104,6 +104,7 @@ Get a list of all available roles.
     | `name` | string |
     | `description` | string |
     | `description_en` | string |
+    | `description_en_gb` | string |
     | `description_et` | string |
     | `description_lt` | string |
     | `description_lv` | string |
@@ -118,7 +119,12 @@ Get a list of all available roles.
     | `description_ar` | string |
     | `description_cs` | string |
     | `description_hr` | string |
+    | `description_sl` | string |
+    | `description_el` | string |
+    | `description_bg` | string |
     | `description_km` | string |
+    | `description_mk` | string |
+    | `description_sq` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
@@ -128,6 +134,11 @@ Get a list of all available roles.
     | `template_name` | string |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -210,6 +221,7 @@ Retrieve the details of a specific role by its UUID.
     | `name` | string |
     | `description` | string |
     | `description_en` | string |
+    | `description_en_gb` | string |
     | `description_et` | string |
     | `description_lt` | string |
     | `description_lv` | string |
@@ -224,7 +236,12 @@ Retrieve the details of a specific role by its UUID.
     | `description_ar` | string |
     | `description_cs` | string |
     | `description_hr` | string |
+    | `description_sl` | string |
+    | `description_el` | string |
+    | `description_bg` | string |
     | `description_km` | string |
+    | `description_mk` | string |
+    | `description_sq` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
@@ -234,6 +251,11 @@ Retrieve the details of a specific role by its UUID.
     | `template_name` | string |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -310,6 +332,7 @@ Allows staff users to create a new custom role with a specific set of permission
     | `name` | string | ✓ |
     | `description` | string |  |
     | `description_en` | string |  |
+    | `description_en_gb` | string |  |
     | `description_et` | string |  |
     | `description_lt` | string |  |
     | `description_lv` | string |  |
@@ -324,7 +347,12 @@ Allows staff users to create a new custom role with a specific set of permission
     | `description_ar` | string |  |
     | `description_cs` | string |  |
     | `description_hr` | string |  |
+    | `description_sl` | string |  |
+    | `description_el` | string |  |
+    | `description_bg` | string |  |
     | `description_km` | string |  |
+    | `description_mk` | string |  |
+    | `description_sq` | string |  |
     | `permissions` | object (free-form) | ✓ |
     | `is_active` | boolean |  |
     | `content_type` | string | ✓ |
@@ -340,6 +368,7 @@ Allows staff users to create a new custom role with a specific set of permission
     | `name` | string |
     | `description` | string |
     | `description_en` | string |
+    | `description_en_gb` | string |
     | `description_et` | string |
     | `description_lt` | string |
     | `description_lv` | string |
@@ -354,7 +383,12 @@ Allows staff users to create a new custom role with a specific set of permission
     | `description_ar` | string |
     | `description_cs` | string |
     | `description_hr` | string |
+    | `description_sl` | string |
+    | `description_el` | string |
+    | `description_bg` | string |
     | `description_km` | string |
+    | `description_mk` | string |
+    | `description_sq` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
@@ -364,6 +398,11 @@ Allows staff users to create a new custom role with a specific set of permission
     | `template_name` | string |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -451,6 +490,7 @@ Allows staff users to update an existing role's name, description, content type,
     | `name` | string | ✓ |
     | `description` | string |  |
     | `description_en` | string |  |
+    | `description_en_gb` | string |  |
     | `description_et` | string |  |
     | `description_lt` | string |  |
     | `description_lv` | string |  |
@@ -465,7 +505,12 @@ Allows staff users to update an existing role's name, description, content type,
     | `description_ar` | string |  |
     | `description_cs` | string |  |
     | `description_hr` | string |  |
+    | `description_sl` | string |  |
+    | `description_el` | string |  |
+    | `description_bg` | string |  |
     | `description_km` | string |  |
+    | `description_mk` | string |  |
+    | `description_sq` | string |  |
     | `permissions` | object (free-form) | ✓ |
     | `is_active` | boolean |  |
     | `content_type` | string | ✓ |
@@ -481,6 +526,7 @@ Allows staff users to update an existing role's name, description, content type,
     | `name` | string |
     | `description` | string |
     | `description_en` | string |
+    | `description_en_gb` | string |
     | `description_et` | string |
     | `description_lt` | string |
     | `description_lv` | string |
@@ -495,7 +541,12 @@ Allows staff users to update an existing role's name, description, content type,
     | `description_ar` | string |
     | `description_cs` | string |
     | `description_hr` | string |
+    | `description_sl` | string |
+    | `description_el` | string |
+    | `description_bg` | string |
     | `description_km` | string |
+    | `description_mk` | string |
+    | `description_sq` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
@@ -505,6 +556,11 @@ Allows staff users to update an existing role's name, description, content type,
     | `template_name` | string |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -579,6 +635,7 @@ Allows staff users to update the multilingual descriptions of a role.
     |---|---|---|
     | `description` | string |  |
     | `description_en` | string |  |
+    | `description_en_gb` | string |  |
     | `description_et` | string |  |
     | `description_lt` | string |  |
     | `description_lv` | string |  |
@@ -593,7 +650,12 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_ar` | string |  |
     | `description_cs` | string |  |
     | `description_hr` | string |  |
+    | `description_sl` | string |  |
+    | `description_el` | string |  |
+    | `description_bg` | string |  |
     | `description_km` | string |  |
+    | `description_mk` | string |  |
+    | `description_sq` | string |  |
 
 
 === "Responses"
@@ -604,6 +666,7 @@ Allows staff users to update the multilingual descriptions of a role.
     |---|---|
     | `description` | string |
     | `description_en` | string |
+    | `description_en_gb` | string |
     | `description_et` | string |
     | `description_lt` | string |
     | `description_lv` | string |
@@ -618,7 +681,17 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_ar` | string |
     | `description_cs` | string |
     | `description_hr` | string |
+    | `description_sl` | string |
+    | `description_el` | string |
+    | `description_bg` | string |
     | `description_km` | string |
+    | `description_mk` | string |
+    | `description_sq` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -692,6 +765,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `name` | string |  |
     | `description` | string |  |
     | `description_en` | string |  |
+    | `description_en_gb` | string |  |
     | `description_et` | string |  |
     | `description_lt` | string |  |
     | `description_lv` | string |  |
@@ -706,7 +780,12 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_ar` | string |  |
     | `description_cs` | string |  |
     | `description_hr` | string |  |
+    | `description_sl` | string |  |
+    | `description_el` | string |  |
+    | `description_bg` | string |  |
     | `description_km` | string |  |
+    | `description_mk` | string |  |
+    | `description_sq` | string |  |
     | `is_active` | boolean |  |
 
 
@@ -720,6 +799,7 @@ Allows staff users to update the multilingual descriptions of a role.
     | `name` | string |
     | `description` | string |
     | `description_en` | string |
+    | `description_en_gb` | string |
     | `description_et` | string |
     | `description_lt` | string |
     | `description_lv` | string |
@@ -734,7 +814,12 @@ Allows staff users to update the multilingual descriptions of a role.
     | `description_ar` | string |
     | `description_cs` | string |
     | `description_hr` | string |
+    | `description_sl` | string |
+    | `description_el` | string |
+    | `description_bg` | string |
     | `description_km` | string |
+    | `description_mk` | string |
+    | `description_sq` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
@@ -744,6 +829,11 @@ Allows staff users to update the multilingual descriptions of a role.
     | `template_name` | string |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -811,6 +901,11 @@ Allows staff users to delete a custom role. System roles and roles that are curr
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -885,6 +980,11 @@ Staff-only. Reports roles whose name is not a machine code, whose scope or organ
     | `findings.is_system_role` | boolean |
     | `findings.message` | string |
     | `findings.details` | object (free-form) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -978,6 +1078,7 @@ Staff-only. Creates an organization-private copy of this role (customer or proje
     | `name` | string |
     | `description` | string |
     | `description_en` | string |
+    | `description_en_gb` | string |
     | `description_et` | string |
     | `description_lt` | string |
     | `description_lv` | string |
@@ -992,7 +1093,12 @@ Staff-only. Creates an organization-private copy of this role (customer or proje
     | `description_ar` | string |
     | `description_cs` | string |
     | `description_hr` | string |
+    | `description_sl` | string |
+    | `description_el` | string |
+    | `description_bg` | string |
     | `description_km` | string |
+    | `description_mk` | string |
+    | `description_sq` | string |
     | `permissions` | array of strings |
     | `is_system_role` | boolean |
     | `is_active` | boolean |
@@ -1002,6 +1108,11 @@ Staff-only. Creates an organization-private copy of this role (customer or proje
     | `template_name` | string |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1070,6 +1181,11 @@ Allows staff users to disable a role, preventing it from being assigned further.
     **`200`** - Role disabled successfully.
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Enable a role
@@ -1136,5 +1252,10 @@ Allows staff users to enable a role, making it available for assignment.
 
     **`200`** - Role enabled successfully.
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

@@ -103,4 +103,11 @@ Returns paginated monthly component usage across all offerings and service provi
     | `total_allocated` | string (decimal) |
     | `usage_percent` | string (decimal) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Monthly usage of components of offerings: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
+
 ---

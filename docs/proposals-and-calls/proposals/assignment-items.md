@@ -117,6 +117,11 @@
     | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -204,6 +209,11 @@
     | `overridden_by_name` | string |  |
     | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -305,6 +315,13 @@
     | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the batch's call or the batch's call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -405,6 +422,13 @@
     | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the batch's call or the batch's call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -469,6 +493,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the batch's call or the batch's call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -548,6 +579,13 @@ Suggest alternative reviewers for a declined assignment.
     | `suggestions.current_assignments` | integer |  |
     | `suggestions.max_assignments` | integer |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the batch's call or the batch's call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Accept this assignment item. Creates a Review record
@@ -618,6 +656,11 @@ Accept this assignment item. Creates a Review record.
     |---|---|---|
     | `detail` | string |  |
     | `review_uuid` | string (uuid) | UUID of created review (only on accept) |
+
+
+=== "Authorization"
+
+    ActionsPermission check for the assignment accept / decline actions.
 
 ---
 
@@ -701,6 +744,11 @@ Decline this assignment item.
     |---|---|---|
     | `detail` | string |  |
     | `review_uuid` | string (uuid) | UUID of created review (only on accept) |
+
+
+=== "Authorization"
+
+    ActionsPermission check for the assignment accept / decline actions.
 
 ---
 
@@ -810,6 +858,13 @@ Force-unblock a COI-blocked assignment item (manager override).
     | `overridden_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the batch's call or the batch's call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Reassign this item to a different reviewer
@@ -900,5 +955,12 @@ Reassign this item to a different reviewer.
     | `detail` | string |
     | `new_item_uuid` | string (uuid) |
     | `new_batch_uuid` | string (uuid) |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the batch's call or the batch's call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

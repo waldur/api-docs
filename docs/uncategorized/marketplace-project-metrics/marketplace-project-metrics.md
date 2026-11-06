@@ -99,4 +99,9 @@
     | `goal_is_project` | boolean |  |
     | `goal_met` | boolean |  |
 
+
+=== "Authorization"
+
+    The project must be one where the caller holds a role or of an organization where they do; staff and support may name any. Metrics the caller sees, as offering metrics show them, except archived ones. Of a metric the caller sees, who is on the provider side (a role on the offering, its organization or its service provider; staff and support) reads every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.
+
 ---

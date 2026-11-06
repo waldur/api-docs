@@ -81,4 +81,9 @@
     |---|---|
     | `id` | string |
 
+
+=== "Authorization"
+
+    No sign-in. When SMAX_WEBHOOK_SHARED_SECRET is set, the X-Webhook-Secret header must match it. It is empty by default, and then anyone may call.
+
 ---

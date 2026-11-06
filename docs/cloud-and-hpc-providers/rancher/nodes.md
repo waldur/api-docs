@@ -117,6 +117,13 @@
     | `annotations` | object (free-form) |  |
     | `runtime_state` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -213,6 +220,13 @@
     | `labels` | object (free-form) |  |
     | `annotations` | object (free-form) |  |
     | `runtime_state` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -311,6 +325,11 @@
     | `role` | string |
     | `uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Synchronize resource state
@@ -389,6 +408,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -458,6 +484,11 @@ Delete resource from the database without scheduling operations on backend
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Unlinks node from OpenStack instance
@@ -525,6 +556,11 @@ Unlinks node from OpenStack instance.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -589,6 +625,13 @@ Unlinks node from OpenStack instance.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -672,6 +715,11 @@ Returns console log for the node.
     **`404`** - No response body
     
 
+
+=== "Authorization"
+
+    As /api/openstack-instances/<uuid>/console_log/ checks it, on the OpenStack instance the node runs on: staff, and, where ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS is on, holders of OPENSTACK_INSTANCE.CONSOLE_ACCESS on the instance's project or organization. A node without an instance answers 404.
+
 ---
 
 ### Returns console URL for the node
@@ -741,6 +789,11 @@ Returns console URL for the node.
     | Field | Type |
     |---|---|
     | `url` | string (uri) |
+
+
+=== "Authorization"
+
+    As /api/openstack-instances/<uuid>/console/ checks it, on the OpenStack instance the node runs on: staff, and, where ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS is on, holders of OPENSTACK_INSTANCE.CONSOLE_ACCESS on the instance's project or organization. A node without an instance answers 404.
 
 ---
 
@@ -827,6 +880,11 @@ Links node to OpenStack instance.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as ERRED
@@ -910,6 +968,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -979,5 +1042,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

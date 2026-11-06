@@ -70,6 +70,11 @@ This view triggers synchronization of issues from backend.
     **`403`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ## Other Actions
@@ -131,5 +136,10 @@ This view triggers synchronization of issues from backend.
     
     **`403`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

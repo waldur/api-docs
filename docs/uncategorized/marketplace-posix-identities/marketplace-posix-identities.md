@@ -104,6 +104,13 @@
     | `consumer_type` | string |  |
     | `consumer_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Identities in pools of service providers, and of offerings, of organizations where the caller holds a role. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -184,5 +191,12 @@
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `consumer_type` | string |  |
     | `consumer_name` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Identities in pools of service providers, and of offerings, of organizations where the caller holds a role. Staff and support see all.
 
 ---

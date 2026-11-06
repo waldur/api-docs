@@ -99,6 +99,13 @@ Get a list of available VM instance images.
     | `hw_rescue_bus` | string | Glance hw_rescue_bus property (scsi/virtio/ide/usb). |
     | `is_rescue_image` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get image details
@@ -179,6 +186,13 @@ Retrieve details of a specific VM instance image.
     | `hw_rescue_bus` | string | Glance hw_rescue_bus property (scsi/virtio/ide/usb). |
     | `is_rescue_image` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ## Other Actions
@@ -240,5 +254,10 @@ Retrieve usage statistics for VM instance images, showing running and created in
     | `name` | string |
     | `running_instances_count` | integer |
     | `created_instances_count` | integer |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

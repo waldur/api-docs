@@ -86,4 +86,9 @@ Execute a given SQL query against a read-only database replica. This is a powerf
     **`400`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---

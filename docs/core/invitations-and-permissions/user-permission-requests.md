@@ -113,6 +113,13 @@ Retrieve a list of permission requests visible to the user.
     | `project_name` | string | Custom project name provided by user during invitation acceptance. |
     | `project_description` | string | Custom project description provided by user during invitation acceptance. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve permission request
@@ -203,6 +210,13 @@ Retrieve details of a specific permission request.
     | `project_name` | string | Custom project name provided by user during invitation acceptance. |
     | `project_description` | string | Custom project description provided by user during invitation acceptance. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Delete a permission request (staff only)
@@ -269,6 +283,11 @@ Deletes a permission request. This action is restricted to staff users.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -352,6 +371,11 @@ Approves a pending permission request, granting the requesting user the permissi
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the scope of the request's invitation. For an invitation that creates a project, instead staff or PROJECT.CREATE_PERMISSION on its organization.
+
 ---
 
 ### Cancel a permission request
@@ -423,6 +447,14 @@ Cancels a pending or draft permission request. This can be done by the user who 
     | `uuid` | string | UUID of the canceled permission request |
     | `scope_name` | string | Name of the invitation scope |
     | `scope_uuid` | string | UUID of the invitation scope |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The request's author.
+    - Staff.
 
 ---
 
@@ -502,5 +534,10 @@ Rejects a pending permission request.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the scope of the request's invitation. For an invitation that creates a project, instead staff or PROJECT.CREATE_PERMISSION on its organization.
 
 ---

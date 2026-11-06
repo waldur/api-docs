@@ -90,6 +90,13 @@ Returns a paginated list of usage limits set for specific users on resource comp
     | `user` | string (uri) |  |
     | `limit` | string (decimal) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve a component usage limit
@@ -165,6 +172,13 @@ Returns the details of a specific user's usage limit for a component.
     | `component_type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `user` | string (uri) |  |
     | `limit` | string (decimal) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -257,6 +271,13 @@ Sets a usage limit for a specific user on a resource's component. This is only a
     | `component_type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `user` | string (uri) |  |
     | `limit` | string (decimal) |  |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.CONSUMPTION_LIMITATION` on the resource's project or the resource's project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -361,6 +382,13 @@ Updates an existing usage limit for a user on a component.
     | `user` | string (uri) |  |
     | `limit` | string (decimal) |  |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.CONSUMPTION_LIMITATION` on the resource's project's customer or the resource's project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a component usage limit
@@ -452,6 +480,13 @@ Partially updates an existing usage limit for a user on a component.
     | `user` | string (uri) |  |
     | `limit` | string (decimal) |  |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.CONSUMPTION_LIMITATION` on the resource's project's customer or the resource's project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete a component usage limit
@@ -518,5 +553,12 @@ Removes a usage limit for a user on a component.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.CONSUMPTION_LIMITATION` on the resource's project's customer or the resource's project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

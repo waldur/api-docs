@@ -109,6 +109,11 @@ Requires support user permissions.
     |---|---|---|
     | `error` | string | Error message describing what went wrong |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ## Other Actions
@@ -225,5 +230,10 @@ Requires staff permissions (more restrictive than viewing).
     | Field | Type | Description |
     |---|---|---|
     | `error` | string | Error message describing what went wrong |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

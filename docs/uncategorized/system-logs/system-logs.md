@@ -102,6 +102,11 @@
     | `message` | string |  |
     | `context` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -177,6 +182,11 @@
     | `logger_name` | string |  |
     | `message` | string |  |
     | `context` | object (free-form) |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -267,6 +277,11 @@ List all known instances (pods/containers) with their last activity.
     | `last_seen` | string (date-time) |
     | `count` | integer |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get system log statistics
@@ -328,5 +343,10 @@ Return log count statistics per source and instance, plus total table size.
     | `instances.count` | integer |
     | `total_size_bytes` | integer |
     | `total_size_mb` | number (double) |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

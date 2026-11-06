@@ -93,6 +93,11 @@
     | `original_content` | string |  |
     | `is_content_overridden` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -166,6 +171,11 @@
     | `content` | string |  |
     | `original_content` | string |  |
     | `is_content_overridden` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -251,6 +261,11 @@
     | `content` | string |  |
     | `original_content` | string |  |
     | `is_content_overridden` | boolean |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -348,6 +363,11 @@
     | `original_content` | string |  |
     | `is_content_overridden` | boolean |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -435,6 +455,11 @@
     | `original_content` | string |  |
     | `is_content_overridden` | boolean |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -499,6 +524,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -585,5 +615,10 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

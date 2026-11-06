@@ -7,7 +7,6 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/` | [List Onboarding Verifications](#list-onboarding-verifications) |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/{uuid}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/onboarding-verifications/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/onboarding-verifications/{uuid}/create_customer/` | [Create customer from successful verification](#create-customer-from-successful-verification) |
 | <span class="http-badge http-put">PUT</span> | `/api/onboarding-verifications/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/onboarding-verifications/{uuid}/` | [Partial Update](#partial-update) |
@@ -15,7 +14,6 @@
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/available_checklists/` | [Available checklists](#available-checklists) |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/{uuid}/checklist/` | [Checklist](#checklist) |
-| <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/checklist-template/` | [Get checklist template for creating new objects](#get-checklist-template-for-creating-new-objects) |
 | <span class="http-badge http-get">GET</span> | `/api/onboarding-verifications/{uuid}/completion_status/` | [Completion status](#completion-status) |
 | <span class="http-badge http-post">POST</span> | `/api/onboarding-verifications/{uuid}/run_validation/` | [Run validation](#run-validation) |
 | <span class="http-badge http-post">POST</span> | `/api/onboarding-verifications/start_verification/` | [Start verification](#start-verification) |
@@ -150,6 +148,13 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff see every row; support see every row read-only; others see their own.
+
 ---
 
 ### Retrieve
@@ -265,124 +270,12 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
----
 
-### Create
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/onboarding-verifications/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.onboarding_verification_request import OnboardingVerificationRequest # (1)
-    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_create # (2)
+    Any signed-in user.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = OnboardingVerificationRequest()
-    response = onboarding_verifications_create.sync(
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`OnboardingVerificationRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/onboarding_verification_request.py)
-    2.  **API Source:** [`onboarding_verifications_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { onboardingVerificationsCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await onboardingVerificationsCreate({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `country` | string |  | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
-    | `legal_person_identifier` | string |  | Official company registration code (required for automatic validation) |
-    | `legal_name` | string |  | Company name(optional, for reference) |
-    | `expires_at` | string (date-time) |  | When this verification expires |
-
-
-=== "Responses"
-
-    **`201`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `user` | string (uri) | User requesting company onboarding |
-    | `user_full_name` | string |  |
-    | `country` | string | ISO country code (e.g., 'EE', 'AT') for context. Can be inferred from validation_method. |
-    | `legal_person_identifier` | string | Official company registration code (required for automatic validation) |
-    | `legal_name` | string | Company name(optional, for reference) |
-    | `status` | any |  |
-    | `justifications` | array of objects |  |
-    | `justifications.uuid` | string (uuid) |  |
-    | `justifications.verification` | string (uri) |  |
-    | `justifications.verification_uuid` | string (uuid) |  |
-    | `justifications.country` | string |  |
-    | `justifications.user` | string (uri) |  |
-    | `justifications.user_full_name` | string |  |
-    | `justifications.legal_person_identifier` | string |  |
-    | `justifications.legal_name` | string |  |
-    | `justifications.error_message` | string |  |
-    | `justifications.error_traceback` | string |  |
-    | `justifications.user_justification` | string | User's explanation for why they should be authorized |
-    | `justifications.validated_by` | string (uri) |  |
-    | `justifications.validated_at` | string (date-time) |  |
-    | `justifications.validation_decision` | any |  |
-    | `justifications.staff_notes` | string | Administrator notes on the review decision |
-    | `justifications.supporting_documentation` | array of objects |  |
-    | `justifications.supporting_documentation.uuid` | string (uuid) |  |
-    | `justifications.supporting_documentation.file` | string (uri) | Upload supporting documentation. |
-    | `justifications.supporting_documentation.file_name` | string |  |
-    | `justifications.supporting_documentation.file_size` | integer |  |
-    | `justifications.supporting_documentation.created` | string (date-time) |  |
-    | `justifications.onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
-    | `justifications.user_submitted_customer_data` | object (free-form) | Customer-related data submitted by the user via checklist answers |
-    | `justifications.created` | string (date-time) |  |
-    | `justifications.modified` | string (date-time) |  |
-    | `validation_method` | any | Method used for validation |
-    | `verified_user_roles` | object (free-form) | Roles the user has in the company |
-    | `verified_company_data` | object (free-form) | Company information retrieved during validation |
-    | `raw_response` | object (free-form) | Raw API response for debugging and auditing |
-    | `error_traceback` | string |  |
-    | `error_message` | string |  |
-    | `validated_at` | string (date-time) | When validation was completed |
-    | `expires_at` | string (date-time) | When this verification expires |
-    | `customer` | string (uri) | Customer created after successful validation |
-    | `onboarding_metadata` | object (free-form) | Onboarding-specific data like intents, purposes extracted from checklist answers |
-    | `user_submitted_customer_data` | object (free-form) | Get customer data submitted by the user during onboarding. |
-    | `can_customer_be_created` | boolean | Boolean indicating if a customer can be created from this verification |
-    | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
+    Staff see every row; support see every row read-only; others see their own.
 
 ---
 
@@ -470,6 +363,10 @@ Create customer from successful verification.
     | `archived` | boolean |  |
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
+    | `is_private_person` | boolean | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
+    | `vat_code_verified` | boolean | Whether the EU VIES service confirmed the current VAT number. |
+    | `vat_percent` | string (decimal) | VAT percent calculated from EU VAT rules, when VAT taxation is on. |
+    | `vat_rule` | string | Which EU VAT rule picked vat_percent, or why it cannot be calculated. |
     | `accounting_start_date` | string (date-time) |  |
     | `projects_count` | integer | Number of projects in this organization |
     | `users_count` | integer | Number of users with access to this organization |
@@ -481,6 +378,9 @@ Create customer from successful verification.
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -518,6 +418,7 @@ Create customer from successful verification.
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |
     | `state` | string |  |
     | `parish` | string |  |
@@ -548,6 +449,14 @@ Create customer from successful verification.
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
     | `has_active_helpdesk` | boolean |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own verification.
+    - Staff.
 
 ---
 
@@ -679,6 +588,14 @@ Create customer from successful verification.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own verification.
+    - Staff.
+
 ---
 
 ### Partial Update
@@ -809,6 +726,14 @@ Create customer from successful verification.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own verification.
+    - Staff.
+
 ---
 
 ### Delete
@@ -873,6 +798,16 @@ Create customer from successful verification.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Staff may delete any verification; its owner only one with no justification that staff have approved or rejected.
+    - Any of:
+        - The caller's own verification.
+        - Staff.
 
 ---
 
@@ -943,6 +878,11 @@ Get available onboarding checklists (customer and intent) for preview. This endp
     |---|---|
     | `customer_checklist` | object (free-form) |
     | `intent_checklist` | object (free-form) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -1055,146 +995,12 @@ Get checklist with questions and existing answers. Supports both customer and in
     | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
     | `questions.dependencies_info` | any |  |
 
----
 
-### Get checklist template for creating new objects
+=== "Authorization"
 
-Get checklist template for creating new objects.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/onboarding-verifications/checklist-template/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      parent_uuid=="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.onboarding_verifications import onboarding_verifications_checklist_template_retrieve # (1)
+    Any signed-in user.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = onboarding_verifications_checklist_template_retrieve.sync(
-        client=client,
-        parent_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`onboarding_verifications_checklist_template_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/onboarding_verifications/onboarding_verifications_checklist_template_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { onboardingVerificationsChecklistTemplateRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await onboardingVerificationsChecklistTemplateRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      query: {
-        "parent_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Query Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `parent_uuid` | string (uuid) | ✓ | UUID of the parent object (e.g., customer UUID for new projects) |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `checklist` | any |  |
-    | `questions` | array of objects |  |
-    | `questions.uuid` | string (uuid) |  |
-    | `questions.required` | boolean |  |
-    | `questions.description` | string |  |
-    | `questions.user_guidance` | string | Additional guidance text visible to users when answering and reviewing |
-    | `questions.question_options` | array of objects |  |
-    | `questions.question_options.uuid` | string (uuid) |  |
-    | `questions.question_options.label` | string |  |
-    | `questions.question_options.order` | integer |  |
-    | `questions.question_type` | any | Type of question and expected answer format |
-    | `questions.order` | integer |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | array of strings |  |
-    | `questions.allowed_mime_types` | array of strings |  |
-    | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
-    | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
-    | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
-    | `questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
-    | `questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
-    | `questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
-    | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
-    | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
-    | `questions.operator` | any |  |
-    | `questions.review_answer_value` | any |  |
-    | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
-    | `questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
-    | `questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
-    | `questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
-    | `initial_visible_questions` | array of objects |  |
-    | `initial_visible_questions.uuid` | string (uuid) |  |
-    | `initial_visible_questions.required` | boolean |  |
-    | `initial_visible_questions.description` | string |  |
-    | `initial_visible_questions.user_guidance` | string | Additional guidance text visible to users when answering and reviewing |
-    | `initial_visible_questions.question_options` | array of objects |  |
-    | `initial_visible_questions.question_options.uuid` | string (uuid) |  |
-    | `initial_visible_questions.question_options.label` | string |  |
-    | `initial_visible_questions.question_options.order` | integer |  |
-    | `initial_visible_questions.question_type` | any | Type of question and expected answer format |
-    | `initial_visible_questions.order` | integer |  |
-    | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `initial_visible_questions.allowed_file_types` | array of strings |  |
-    | `initial_visible_questions.allowed_mime_types` | array of strings |  |
-    | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
-    | `initial_visible_questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
-    | `initial_visible_questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
-    | `initial_visible_questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
-    | `initial_visible_questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
-    | `initial_visible_questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
-    | `initial_visible_questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
-    | `initial_visible_questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
-    | `initial_visible_questions.operator` | any |  |
-    | `initial_visible_questions.review_answer_value` | any |  |
-    | `initial_visible_questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `initial_visible_questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
-    | `initial_visible_questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
-    | `initial_visible_questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
-    | `initial_visible_questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
-    
-    ---
-    
-    **`400`** - 
-    
-    
-    ---
-    
-    **`404`** - 
-    
+    Staff see every row; support see every row read-only; others see their own.
 
 ---
 
@@ -1281,6 +1087,13 @@ Get checklist completion status. Supports both customer and intent checklists vi
     | `checklist_description` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff see every row; support see every row read-only; others see their own.
 
 ---
 
@@ -1414,6 +1227,14 @@ Run automatic validation using the required fields provided during verification 
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own verification.
+    - Staff.
+
 ---
 
 ### Start verification
@@ -1534,6 +1355,11 @@ Start company validation process by creating a verification record. User selects
     | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    A new verification for the caller.
 
 ---
 
@@ -1662,5 +1488,15 @@ Submit answers to checklist questions. Automatically detects which checklist (cu
     | `customer_creation_error_message` | string | Reason why customer cannot be created (null if can be created) |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - The verification's owner may submit answers only until staff approve or reject one of its justifications; staff are not held to this.
+    - Any of:
+        - The caller's own verification.
+        - Staff.
 
 ---

@@ -94,6 +94,11 @@
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects using this sub-domain |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve
@@ -171,6 +176,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects using this sub-domain |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -261,6 +271,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects using this sub-domain |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -363,6 +378,11 @@
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects using this sub-domain |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -455,6 +475,11 @@
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects using this sub-domain |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -519,5 +544,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

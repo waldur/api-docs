@@ -123,6 +123,13 @@ Retrieve a list of group invitations. Unauthenticated users can only see public 
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+    
+    Active public invitations, and those of organizations where the caller holds INVITATION.LIST; a signed-in caller may also retrieve any invitation by its UUID, which its link shares. Staff, support and holders of INVITATION.LIST site-wide see all.
+
 ---
 
 ### Retrieve group invitation
@@ -219,6 +226,13 @@ Retrieve details of a specific group invitation. Unauthenticated users can only 
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+    
+    Active public invitations, and those of organizations where the caller holds INVITATION.LIST; a signed-in caller may also retrieve any invitation by its UUID, which its link shares. Staff, support and holders of INVITATION.LIST site-wide see all.
 
 ---
 
@@ -339,6 +353,11 @@ Create a new group invitation, which acts as a template for users to request per
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
+
 ---
 
 ### Update a group invitation
@@ -444,6 +463,11 @@ Update an active group invitation. Only active invitations can be edited.
     | `custom_text` | string | Custom description text displayed to users viewing this invitation. |
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
+
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
 
 ---
 
@@ -551,6 +575,11 @@ Partially update an active group invitation. Only active invitations can be edit
     | `allow_multiple_requests` | boolean | Allow users to submit multiple permission requests for this invitation. |
     | `allow_custom_project_details` | boolean | Allow users to provide custom project name and description when accepting the invitation. If disabled, the project name is auto-generated from the template. |
 
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
+
 ---
 
 ### Delete a group invitation
@@ -617,6 +646,11 @@ Deletes an inactive group invitation. Only invitations that have been canceled (
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
 
 ---
 
@@ -703,6 +737,11 @@ For a group invitation scoped to a customer, this endpoint lists all projects wi
     | `uuid` | string (uuid) |
     | `url` | string (uri) |
 
+
+=== "Authorization"
+
+    Any signed-in user who has the invitation's UUID, which its link shares.
+
 ---
 
 ### Cancel a group invitation
@@ -769,6 +808,11 @@ Cancels an active group invitation, preventing new permission requests from bein
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
 
 ---
 
@@ -858,5 +902,10 @@ Creates a permission request based on a group invitation for the currently authe
     | `auto_approved` | boolean | Whether the request was automatically approved |
     | `project_uuid` | string | UUID of the project the user was added to. Present when the invitation has auto_approve and auto_create_project enabled. Null otherwise. |
     | `project_created` | boolean | True if a new project was created for the user; false if an existing project with the same name was reused. Null when no project workflow ran. |
+
+
+=== "Authorization"
+
+    Any signed-in user who has an active invitation's UUID, matches its email and affiliation patterns, and meets the membership restrictions of its scope.
 
 ---

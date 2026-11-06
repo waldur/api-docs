@@ -83,6 +83,11 @@
     | `nodes.preferred_volume_type` | string |
     | `nodes.role` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -160,5 +165,10 @@
     | `nodes.system_volume_size` | integer |
     | `nodes.preferred_volume_type` | string |
     | `nodes.role` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

@@ -115,6 +115,14 @@ Returns a paginated list of available software catalogs, such as EESSI or Spack.
     | `version_count` | integer |  |
     | `target_count` | integer |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Retrieve a software catalog
@@ -202,6 +210,14 @@ Returns the details of a specific software catalog, including its name, version,
     | `package_count` | integer |  |
     | `version_count` | integer |  |
     | `target_count` | integer |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
 
 ---
 
@@ -308,6 +324,11 @@ Creates a new software catalog. Requires staff permissions.
     | `version_count` | integer |  |
     | `target_count` | integer |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Trigger async update for an existing catalog
@@ -374,6 +395,11 @@ Triggers a Celery task to update the given catalog from its upstream source. Ret
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -491,6 +517,11 @@ Updates an existing software catalog. Requires staff permissions.
     | `version_count` | integer |  |
     | `target_count` | integer |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update a software catalog
@@ -598,6 +629,11 @@ Partially updates an existing software catalog. Requires staff permissions.
     | `version_count` | integer |  |
     | `target_count` | integer |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a software catalog
@@ -664,6 +700,11 @@ Deletes a software catalog. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -742,6 +783,14 @@ Returns CPU family and microarchitecture choices for this catalog's version, tak
     | `cpu_family` | string |
     | `cpu_microarchitecture` | string |
     | `full_arch` | string |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
 
 ---
 
@@ -826,6 +875,11 @@ Queries upstream sources (EESSI, Spack) for available catalog versions without c
     | `existing_version` | string |
     | `update_available` | boolean |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Import a new software catalog
@@ -899,5 +953,10 @@ Creates a new catalog record and triggers async data loading via Celery. Returns
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

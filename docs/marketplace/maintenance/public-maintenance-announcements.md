@@ -67,6 +67,7 @@ Returns a paginated list of public maintenance announcements. Only announcements
     |---|---|---|
     | `maintenance_type` | integer | Maintenance type |
     | `o` | array | Ordering<br><br> |
+    | `offering_uuid` | string (uuid) | Affected offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `scheduled_end_after` | string (date-time) | Scheduled end after |
@@ -106,8 +107,14 @@ Returns a paginated list of public maintenance announcements. Only announcements
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_level_display` | any |  |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_offerings.affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -197,7 +204,13 @@ Returns the details of a specific public maintenance announcement.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_level_display` | any |  |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_offerings.affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---

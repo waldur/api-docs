@@ -91,6 +91,13 @@
     | `period` | string | <br>_Enum: `month`, `quarter`, `rolling_30d`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Goals of metrics the caller sees, as offering metrics show them: the offerings' default goals, and goals of projects where the caller holds a role or of organizations where they do, or of offerings of organizations or service providers where they hold a role. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -166,6 +173,13 @@
     | `value` | string (decimal) |  |
     | `period` | string | <br>_Enum: `month`, `quarter`, `rolling_30d`_ |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Goals of metrics the caller sees, as offering metrics show them: the offerings' default goals, and goals of projects where the caller holds a role or of organizations where they do, or of offerings of organizations or service providers where they hold a role. Staff and support see all.
 
 ---
 
@@ -256,6 +270,11 @@
     | `value` | string (decimal) |  |
     | `period` | string | <br>_Enum: `month`, `quarter`, `rolling_30d`_ |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff. For a project's goal, also who holds PROJECT.UPDATE on the project or its organization; for an offering's default goal, who holds OFFERING.UPDATE on the offering, its organization or its service provider. The metric must not be archived.
 
 ---
 
@@ -358,6 +377,11 @@
     | `period` | string | <br>_Enum: `month`, `quarter`, `rolling_30d`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff. For a project's goal, also who holds PROJECT.UPDATE on the project or its organization; for an offering's default goal, who holds OFFERING.UPDATE on the offering, its organization or its service provider.
+
 ---
 
 ### Partial Update
@@ -450,6 +474,11 @@
     | `period` | string | <br>_Enum: `month`, `quarter`, `rolling_30d`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff. For a project's goal, also who holds PROJECT.UPDATE on the project or its organization; for an offering's default goal, who holds OFFERING.UPDATE on the offering, its organization or its service provider.
+
 ---
 
 ### Delete
@@ -514,5 +543,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff. For a project's goal, also who holds PROJECT.UPDATE on the project or its organization; for an offering's default goal, who holds OFFERING.UPDATE on the offering, its organization or its service provider.
 
 ---

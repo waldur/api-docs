@@ -83,6 +83,13 @@
     | `capacity` | integer (int64) | Capacity, in MB. |
     | `free_space` | integer (int64) | Available space, in MB. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rows of VMware service settings the caller may use: settings behind an active or paused offering the caller may order from, settings of a VM the caller sees, and settings of organizations in which the caller holds an organization-level role. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -155,5 +162,12 @@
     | `type` | string |  |
     | `capacity` | integer (int64) | Capacity, in MB. |
     | `free_space` | integer (int64) | Available space, in MB. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rows of VMware service settings the caller may use: settings behind an active or paused offering the caller may order from, settings of a VM the caller sees, and settings of organizations in which the caller holds an organization-level role. Staff and support see all.
 
 ---

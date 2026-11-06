@@ -93,6 +93,13 @@
     | `project_uuid` | string (uuid) |
     | `project_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -169,6 +176,13 @@
     | `project_uuid` | string (uuid) |
     | `project_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ## Other Actions
@@ -238,5 +252,10 @@ Complete project permission review.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Who sees the review: staff, global support, and holders of PROJECT.REVIEW_MEMBERSHIP on its project, the project's organization or site-wide.
 
 ---

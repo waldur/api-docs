@@ -20,7 +20,7 @@ This endpoint returns detailed information about:
 - **active**: Tasks currently being executed by workers
 - **scheduled**: Tasks scheduled for future execution (with ETA)
 - **reserved**: Tasks received by workers but not yet started
-- **revoked**: Task IDs that have been cancelled/revoked
+- **revoked**: Task IDs that have been canceled/revoked
 - **query_task**: Results of task queries (if any)
 - **stats**: Detailed worker statistics including uptime, pool info, and broker connection
 
@@ -81,9 +81,14 @@ Requires support user permissions.
     | `active` | object (free-form) | Currently executing tasks per worker. Keys are worker names, values are lists of active tasks. |
     | `scheduled` | object (free-form) | Tasks scheduled for future execution per worker. Keys are worker names, values are lists of scheduled tasks with ETA. |
     | `reserved` | object (free-form) | Tasks that have been received but not yet started per worker. Keys are worker names, values are lists of reserved tasks. |
-    | `revoked` | object (free-form) | IDs of revoked (cancelled) tasks per worker. Keys are worker names, values are lists of task IDs. |
+    | `revoked` | object (free-form) | IDs of revoked (canceled) tasks per worker. Keys are worker names, values are lists of task IDs. |
     | `query_task` | object (free-form) | Query results for specific tasks. May be null if no query was performed. |
     | `stats` | object (free-form) | Detailed statistics per worker including uptime, pool info, and resource usage. Keys are worker names. |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -167,6 +172,11 @@ Requires support user permissions.
     | `active_queries` | any | Currently running queries |
     | `query_performance` | any | Query performance indicators |
     | `replication` | any | Replication status (if applicable) |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -266,6 +276,11 @@ Requires support user permissions.
     | `alerts.growth_percent` | number (double) | Actual growth percentage observed |
     | `alerts.threshold` | integer | Configured threshold that was exceeded |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Execute read-only SQL query
@@ -346,6 +361,11 @@ Execute a given SQL query against a read-only database replica. This is a powerf
     **`400`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Trigger table size sampling
@@ -402,5 +422,10 @@ Triggers the sample_table_sizes Celery task to collect current table size data. 
     | Field | Type | Description |
     |---|---|---|
     | `detail` | string | Status message about the triggered task |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

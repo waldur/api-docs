@@ -7,7 +7,7 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/user-actions/` | [List User Actions](#list-user-actions) |
 | <span class="http-badge http-get">GET</span> | `/api/user-actions/{uuid}/` | [Retrieve](#retrieve) |
-| <span class="http-badge http-post">POST</span> | `/api/user-actions/update_actions/` | [Trigger update of user actions](#trigger-update-of-user-actions) |
+| <span class="http-badge http-post">POST</span> | `/api/user-actions/update_actions/` | [Staff-only action to trigger recalculation of the actions of every user](#staff-only-action-to-trigger-recalculation-of-the-actions-of-every-user) |
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/user-actions/summary/` | [Get action summary counts](#get-action-summary-counts) |
 | <span class="http-badge http-post">POST</span> | `/api/user-actions/bulk_silence/` | [Bulk silence actions by filters](#bulk-silence-actions-by-filters) |
@@ -132,6 +132,13 @@
     | `resource_uuid` | string (uuid) |  |
     | `order_type` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own actions; staff see those of the user named in `user_uuid`.
+
 ---
 
 ### Retrieve
@@ -237,11 +244,18 @@
     | `resource_uuid` | string (uuid) |  |
     | `order_type` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own actions; staff see those of the user named in `user_uuid`.
+
 ---
 
-### Trigger update of user actions
+### Staff-only action to trigger recalculation of the actions of every user
 
-Trigger update of user actions
+Staff-only action to trigger recalculation of the actions of every user.
 
 
 === "HTTPie"
@@ -310,6 +324,11 @@ Trigger update of user actions
     | `message` | string |
     | `provider_action_type` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Other Actions
@@ -372,6 +391,13 @@ Get action summary counts
     | `by_urgency` | object (free-form) | Map of urgency level to count of actions |
     | `by_type` | object (free-form) | Map of action type string to count of actions |
     | `overdue` | integer |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own actions; staff see those of the user named in `user_uuid`.
 
 ---
 
@@ -445,6 +471,14 @@ Bulk silence actions by filters
     | `status` | string |
     | `count` | integer |
     | `duration_days` | integer |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own actions.
+    - Staff, for the actions of the user named in `user_uuid`.
 
 ---
 
@@ -553,6 +587,14 @@ Execute a corrective action
     |---|---|
     | `error` | string |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own actions.
+    - Staff, for the actions of the user named in `user_uuid`.
+
 ---
 
 ### Silence an action temporarily or permanently
@@ -636,6 +678,14 @@ Silence an action temporarily or permanently
     | `status` | string |
     | `duration_days` | integer |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own actions.
+    - Staff, for the actions of the user named in `user_uuid`.
+
 ---
 
 ### Remove silence from an action
@@ -705,5 +755,10 @@ Remove silence from an action
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    The caller's own action.
 
 ---

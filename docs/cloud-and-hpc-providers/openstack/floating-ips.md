@@ -138,7 +138,7 @@ Get a list of floating IP addresses. Status *DOWN* means that floating IP is not
     | `backend_id` | string |  |
     | `access_url` | any |  |
     | `runtime_state` | string |  |
-    | `address` | any | The public IPv4 address of the floating IP |
+    | `address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `backend_network_id` | string | ID of network in OpenStack where this floating IP is allocated |
     | `tenant` | string (uri) | OpenStack tenant this floating IP belongs to |
     | `tenant_name` | string |  |
@@ -162,6 +162,13 @@ Get a list of floating IP addresses. Status *DOWN* means that floating IP is not
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -266,7 +273,7 @@ Retrieve details of a specific floating IP address.
     | `backend_id` | string |  |
     | `access_url` | any |  |
     | `runtime_state` | string |  |
-    | `address` | any | The public IPv4 address of the floating IP |
+    | `address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `backend_network_id` | string | ID of network in OpenStack where this floating IP is allocated |
     | `tenant` | string (uri) | OpenStack tenant this floating IP belongs to |
     | `tenant_name` | string |  |
@@ -290,6 +297,13 @@ Retrieve details of a specific floating IP address.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -369,6 +383,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -437,6 +458,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -520,6 +546,13 @@ Update description of the floating IP
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete floating IP
@@ -586,6 +619,13 @@ Delete a floating IP address.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -678,6 +718,13 @@ Attach floating IP to port
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Detach floating IP from port
@@ -747,6 +794,13 @@ Detach floating IP from port
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -831,6 +885,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -900,5 +959,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

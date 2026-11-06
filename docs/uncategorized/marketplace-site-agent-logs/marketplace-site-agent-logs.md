@@ -86,6 +86,13 @@
     | `module` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Logs of agent identities of offerings, of a type site agents serve, where the caller holds OFFERING.UPDATE on the offering, its organization or its service provider, or site-wide. Staff see all.
+
 ---
 
 ### Push site agent logs
@@ -180,5 +187,10 @@ Receive a batch of log entries from a site agent. Send a list where each entry i
     | `message` | string |  |
     | `module` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.CREATE on the organization of, or OFFERING.UPDATE on, the offering of every agent identity the entries name.
 
 ---

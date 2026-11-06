@@ -86,10 +86,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `user` | string (uri) |  |
+    | `user` | string (uri) | User who is the agent. Only staff can change it. |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the agent answers for. Only staff can change it. |
     | `role` | string | <br>_Enum: `agent`, `manager`_ |
     | `is_active` | boolean |  |
     | `skills` | array of strings | List of skill tags for routing. |
@@ -98,6 +98,13 @@
     | `has_capacity` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Agents of helpdesks of service providers whose organization the caller owns; staff and support see all.
 
 ---
 
@@ -167,10 +174,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `user` | string (uri) |  |
+    | `user` | string (uri) | User who is the agent. Only staff can change it. |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the agent answers for. Only staff can change it. |
     | `role` | string | <br>_Enum: `agent`, `manager`_ |
     | `is_active` | boolean |  |
     | `skills` | array of strings | List of skill tags for routing. |
@@ -179,6 +186,13 @@
     | `has_capacity` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Agents of helpdesks of service providers whose organization the caller owns; staff and support see all.
 
 ---
 
@@ -247,8 +261,8 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `user` | string (uri) | ✓ |  |
-    | `provider_helpdesk` | string (uuid) | ✓ |  |
+    | `user` | string (uri) | ✓ | User who is the agent. Only staff can change it. |
+    | `provider_helpdesk` | string (uuid) | ✓ | Helpdesk the agent answers for. Only staff can change it. |
     | `role` | string |  | <br>_Enum: `agent`, `manager`_ |
     | `is_active` | boolean |  |  |
     | `skills` | array of strings |  | List of skill tags for routing. |
@@ -263,10 +277,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `user` | string (uri) |  |
+    | `user` | string (uri) | User who is the agent. Only staff can change it. |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the agent answers for. Only staff can change it. |
     | `role` | string | <br>_Enum: `agent`, `manager`_ |
     | `is_active` | boolean |  |
     | `skills` | array of strings | List of skill tags for routing. |
@@ -275,6 +289,11 @@
     | `has_capacity` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -354,8 +373,8 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `user` | string (uri) | ✓ |  |
-    | `provider_helpdesk` | string (uuid) | ✓ |  |
+    | `user` | string (uri) | ✓ | User who is the agent. Only staff can change it. |
+    | `provider_helpdesk` | string (uuid) | ✓ | Helpdesk the agent answers for. Only staff can change it. |
     | `role` | string |  | <br>_Enum: `agent`, `manager`_ |
     | `is_active` | boolean |  |  |
     | `skills` | array of strings |  | List of skill tags for routing. |
@@ -370,10 +389,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `user` | string (uri) |  |
+    | `user` | string (uri) | User who is the agent. Only staff can change it. |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the agent answers for. Only staff can change it. |
     | `role` | string | <br>_Enum: `agent`, `manager`_ |
     | `is_active` | boolean |  |
     | `skills` | array of strings | List of skill tags for routing. |
@@ -382,6 +401,14 @@
     | `has_capacity` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the service provider whose helpdesk it belongs to.
 
 ---
 
@@ -452,8 +479,8 @@
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `user` | string (uri) |  |  |
-    | `provider_helpdesk` | string (uuid) |  |  |
+    | `user` | string (uri) |  | User who is the agent. Only staff can change it. |
+    | `provider_helpdesk` | string (uuid) |  | Helpdesk the agent answers for. Only staff can change it. |
     | `role` | string |  | <br>_Enum: `agent`, `manager`_ |
     | `is_active` | boolean |  |  |
     | `skills` | array of strings |  | List of skill tags for routing. |
@@ -468,10 +495,10 @@
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `user` | string (uri) |  |
+    | `user` | string (uri) | User who is the agent. Only staff can change it. |
     | `user_full_name` | string |  |
     | `user_email` | string (email) |  |
-    | `provider_helpdesk` | string (uuid) |  |
+    | `provider_helpdesk` | string (uuid) | Helpdesk the agent answers for. Only staff can change it. |
     | `role` | string | <br>_Enum: `agent`, `manager`_ |
     | `is_active` | boolean |  |
     | `skills` | array of strings | List of skill tags for routing. |
@@ -480,6 +507,14 @@
     | `has_capacity` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the service provider whose helpdesk it belongs to.
 
 ---
 
@@ -545,6 +580,14 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the organization of the service provider whose helpdesk it belongs to.
 
 ---
 
@@ -622,5 +665,10 @@
     | `open_ticket_count` | integer |
     | `max_open_tickets` | integer |
     | `has_capacity` | boolean |
+
+
+=== "Authorization"
+
+    Any signed-in user. It lists the active agents of helpdesks of service providers whose organization the caller owns; staff and support see every helpdesk's.
 
 ---

@@ -83,8 +83,16 @@ Returns a paginated list of category columns used for resource table rendering.
     | `index` | integer | Index allows to reorder columns. |
     | `title` | string | Title is rendered as column header. |
     | `attribute` | string | Resource attribute is rendered as table cell. |
-    | `widget` | any | Widget field allows to customise table cell rendering. |
+    | `widget` | any | Widget field allows to customize table cell rendering. |
     | `category` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
 
 ---
 
@@ -158,8 +166,16 @@ Returns details of a specific category column.
     | `index` | integer | Index allows to reorder columns. |
     | `title` | string | Title is rendered as column header. |
     | `attribute` | string | Resource attribute is rendered as table cell. |
-    | `widget` | any | Widget field allows to customise table cell rendering. |
+    | `widget` | any | Widget field allows to customize table cell rendering. |
     | `category` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
 
 ---
 
@@ -236,7 +252,7 @@ Creates a new category column. Requires staff permissions.
     | `index` | integer | ✓ | Index allows to reorder columns. |
     | `title` | string | ✓ | Title is rendered as column header. |
     | `attribute` | string |  | Resource attribute is rendered as table cell. |
-    | `widget` | any |  | Widget field allows to customise table cell rendering. |
+    | `widget` | any |  | Widget field allows to customize table cell rendering. |
     | `category` | string (uri) | ✓ |  |
 
 
@@ -250,8 +266,13 @@ Creates a new category column. Requires staff permissions.
     | `index` | integer | Index allows to reorder columns. |
     | `title` | string | Title is rendered as column header. |
     | `attribute` | string | Resource attribute is rendered as table cell. |
-    | `widget` | any | Widget field allows to customise table cell rendering. |
+    | `widget` | any | Widget field allows to customize table cell rendering. |
     | `category` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -339,7 +360,7 @@ Updates an existing category column. Requires staff permissions.
     | `index` | integer | ✓ | Index allows to reorder columns. |
     | `title` | string | ✓ | Title is rendered as column header. |
     | `attribute` | string |  | Resource attribute is rendered as table cell. |
-    | `widget` | any |  | Widget field allows to customise table cell rendering. |
+    | `widget` | any |  | Widget field allows to customize table cell rendering. |
     | `category` | string (uri) | ✓ |  |
 
 
@@ -353,8 +374,13 @@ Updates an existing category column. Requires staff permissions.
     | `index` | integer | Index allows to reorder columns. |
     | `title` | string | Title is rendered as column header. |
     | `attribute` | string | Resource attribute is rendered as table cell. |
-    | `widget` | any | Widget field allows to customise table cell rendering. |
+    | `widget` | any | Widget field allows to customize table cell rendering. |
     | `category` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -430,7 +456,7 @@ Partially updates an existing category column. Requires staff permissions.
     | `index` | integer |  | Index allows to reorder columns. |
     | `title` | string |  | Title is rendered as column header. |
     | `attribute` | string |  | Resource attribute is rendered as table cell. |
-    | `widget` | any |  | Widget field allows to customise table cell rendering. |
+    | `widget` | any |  | Widget field allows to customize table cell rendering. |
     | `category` | string (uri) |  |  |
 
 
@@ -444,8 +470,13 @@ Partially updates an existing category column. Requires staff permissions.
     | `index` | integer | Index allows to reorder columns. |
     | `title` | string | Title is rendered as column header. |
     | `attribute` | string | Resource attribute is rendered as table cell. |
-    | `widget` | any | Widget field allows to customise table cell rendering. |
+    | `widget` | any | Widget field allows to customize table cell rendering. |
     | `category` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -513,5 +544,10 @@ Deletes a category column. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

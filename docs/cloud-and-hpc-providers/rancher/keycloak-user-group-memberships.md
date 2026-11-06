@@ -7,8 +7,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/keycloak-user-group-memberships/` | [List Keycloak User Group Memberships](#list-keycloak-user-group-memberships) |
 | <span class="http-badge http-get">GET</span> | `/api/keycloak-user-group-memberships/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/keycloak-user-group-memberships/` | [Create](#create) |
-| <span class="http-badge http-put">PUT</span> | `/api/keycloak-user-group-memberships/{uuid}/` | [Update](#update) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/keycloak-user-group-memberships/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/keycloak-user-group-memberships/{uuid}/` | [Delete](#delete) |
 
 ---
@@ -104,6 +102,13 @@
     | `error_message` | string |  |
     | `error_traceback` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Memberships of the role groups of the clusters and Rancher projects the caller can see (through a role on the cluster's project or organization); users with the staff or support flag see all of them, whatever their token's scopes.
+
 ---
 
 ### Retrieve
@@ -187,6 +192,13 @@
     | `last_checked` | string (date-time) |  |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Memberships of the role groups of the clusters and Rancher projects the caller can see (through a role on the cluster's project or organization); users with the staff or support flag see all of them, whatever their token's scopes.
 
 ---
 
@@ -291,218 +303,10 @@
     | `error_message` | string |  |
     | `error_traceback` | string |  |
 
----
 
-### Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PUT \
-      https://api.example.com/api/keycloak-user-group-memberships/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      username="alice" \
-      email="alice@example.com" \
-      scope_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
-      role="https://api.example.com/api/role/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.keycloak_user_group_membership_request import KeycloakUserGroupMembershipRequest # (1)
-    from waldur_api_client.api.keycloak_user_group_memberships import keycloak_user_group_memberships_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = KeycloakUserGroupMembershipRequest(
-        username="alice",
-        email="alice@example.com",
-        scope_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        role="https://api.example.com/api/role/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    )
-    response = keycloak_user_group_memberships_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`KeycloakUserGroupMembershipRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/keycloak_user_group_membership_request.py)
-    2.  **API Source:** [`keycloak_user_group_memberships_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/keycloak_user_group_memberships/keycloak_user_group_memberships_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { keycloakUserGroupMembershipsUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await keycloakUserGroupMembershipsUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "username": "alice",
-        "email": "alice@example.com",
-        "scope_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "role": "https://api.example.com/api/role/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `username` | string | ✓ | Keycloak user username |
-    | `email` | string (email) | ✓ | User's email for notifications |
-    | `scope_uuid` | string (uuid) | ✓ | UUID of a cluster or a project in Rancher<br>_Constraints: write-only_ |
-    | `role` | string (uri) | ✓ | <br>_Constraints: write-only_ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `username` | string | Keycloak user username |
-    | `email` | string (email) | User's email for notifications |
-    | `first_name` | string |  |
-    | `last_name` | string |  |
-    | `group` | string (uri) |  |
-    | `group_name` | string |  |
-    | `group_role` | string |  |
-    | `group_scope_type` | string |  |
-    | `group_scope_name` | string | Get the name of the cluster or project |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `last_checked` | string (date-time) |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-
----
-
-### Partial Update
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/keycloak-user-group-memberships/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_keycloak_user_group_membership_request import PatchedKeycloakUserGroupMembershipRequest # (1)
-    from waldur_api_client.api.keycloak_user_group_memberships import keycloak_user_group_memberships_partial_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = PatchedKeycloakUserGroupMembershipRequest()
-    response = keycloak_user_group_memberships_partial_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`PatchedKeycloakUserGroupMembershipRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_keycloak_user_group_membership_request.py)
-    2.  **API Source:** [`keycloak_user_group_memberships_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/keycloak_user_group_memberships/keycloak_user_group_memberships_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { keycloakUserGroupMembershipsPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await keycloakUserGroupMembershipsPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `username` | string |  | Keycloak user username |
-    | `email` | string (email) |  | User's email for notifications |
-    | `scope_uuid` | string (uuid) |  | UUID of a cluster or a project in Rancher<br>_Constraints: write-only_ |
-    | `role` | string (uri) |  | <br>_Constraints: write-only_ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `uuid` | string (uuid) |  |
-    | `url` | string (uri) |  |
-    | `username` | string | Keycloak user username |
-    | `email` | string (email) | User's email for notifications |
-    | `first_name` | string |  |
-    | `last_name` | string |  |
-    | `group` | string (uri) |  |
-    | `group_name` | string |  |
-    | `group_role` | string |  |
-    | `group_scope_type` | string |  |
-    | `group_scope_name` | string | Get the name of the cluster or project |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `last_checked` | string (date-time) |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
+    Staff, or an owner of the organization, or a manager or administrator of the project, that holds the Rancher cluster of the role group: the cluster itself or the cluster of the Rancher project.
 
 ---
 
@@ -568,5 +372,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or an owner of the organization, or a manager or administrator of the project, that holds the Rancher cluster of the role group: the cluster itself or the cluster of the Rancher project.
 
 ---

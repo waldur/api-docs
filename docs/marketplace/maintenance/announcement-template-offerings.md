@@ -93,6 +93,13 @@ Returns a paginated list of associations between maintenance announcement templa
     | `impact_level` | any | Expected impact on this offering |
     | `impact_description` | string | Specific description of how this offering will be affected |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve an affected offering template link
@@ -169,6 +176,13 @@ Returns the details of a specific link between a maintenance announcement templa
     | `offering_uuid` | string (uuid) |  |
     | `impact_level` | any | Expected impact on this offering |
     | `impact_description` | string | Specific description of how this offering will be affected |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -259,6 +273,13 @@ Creates a reusable association between an offering and a maintenance announcemen
     | `offering_uuid` | string (uuid) |  |
     | `impact_level` | any | Expected impact on this offering |
     | `impact_description` | string | Specific description of how this offering will be affected |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the maintenance template's service provider or the maintenance template's service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -361,6 +382,13 @@ Updates the default impact level or description for an offering linked to a main
     | `impact_level` | any | Expected impact on this offering |
     | `impact_description` | string | Specific description of how this offering will be affected |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the maintenance template's service provider's customer or the maintenance template's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update an affected offering template link
@@ -453,6 +481,13 @@ Partially updates the default impact level or description for an offering linked
     | `impact_level` | any | Expected impact on this offering |
     | `impact_description` | string | Specific description of how this offering will be affected |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the maintenance template's service provider's customer or the maintenance template's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink an offering from a maintenance template
@@ -519,5 +554,12 @@ Removes the association between an offering and a maintenance announcement templ
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the maintenance template's service provider's customer or the maintenance template's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

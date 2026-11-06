@@ -81,6 +81,13 @@
     | `type` | any |  |
     | `type_display` | string |  |
 
+
+=== "Authorization"
+
+    Staff only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -152,6 +159,13 @@
     | `name` | string | Status name in Jira. |
     | `type` | any |  |
     | `type_display` | string |  |
+
+
+=== "Authorization"
+
+    Staff only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -229,6 +243,11 @@
     |---|---|---|
     | `name` | string | Status name in Jira. |
     | `type` | any |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -318,6 +337,11 @@
     | `name` | string | Status name in Jira. |
     | `type` | any |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -403,6 +427,11 @@
     | `type` | any |  |
     | `type_display` | string |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -467,5 +496,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

@@ -77,6 +77,11 @@ Returns the current appservice configuration state.
     | `homeserver_domain` | string |
     | `transaction_count` | integer |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Run Matrix connectivity diagnostics
@@ -139,6 +144,11 @@ Performs live connectivity checks against the configured Matrix homeserver and r
     | `checks.ok` | boolean |  |
     | `checks.detail` | string |  |
     | `checks.metrics` | object (free-form) | The check's numbers, for monitoring: {"round_trip_ms": 12} for appservice_ping, {"failed": 2} for history_exports and {"4xx": 3, "5xx": 0} for webhook_errors. Absent on other checks, and on appservice_ping when the ping failed. |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -208,6 +218,11 @@ Point-in-time snapshot of active LiveKit rooms with participant/publisher totals
     | `totals.participant_count` | integer |
     | `totals.publisher_count` | integer |
     | `livekit_url` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -296,6 +311,11 @@ Participants and their tracks for a single LiveKit room. Staff only. An unknown 
     | `tracks.source` | string | What the track carries, as LiveKit names it: CAMERA, MICROPHONE, SCREEN_SHARE, SCREEN_SHARE_AUDIO or UNKNOWN. |
     | `tracks.encryption` | string | How the publisher encrypts the track's media end to end, as LiveKit names it: GCM (LiveKit's end-to-end encryption, which Matrix calls in encrypted rooms use), CUSTOM (another scheme) or NONE (only encrypted between the browser and LiveKit). |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Setup Matrix appservice registration
@@ -382,6 +402,11 @@ Generates fresh appservice tokens (rotating any existing ones), enables the apps
     **`409`** - The deployment owns the appservice tokens and re-seeds them on every sync. Rotate its Matrix secret and redeploy instead, or clear MATRIX_TOKENS_MANAGED_BY if the deployment no longer manages Matrix.
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Reprovision all active Matrix rooms on a new homeserver
@@ -439,5 +464,10 @@ Resets all active rooms to 'creating' state and re-queues them for provisioning.
     |---|---|
     | `rooms_reprovisioned` | integer |
     | `users_reset` | integer |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

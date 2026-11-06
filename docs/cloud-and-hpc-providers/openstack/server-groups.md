@@ -7,7 +7,6 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-server-groups/` | [List server groups](#list-server-groups) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-server-groups/{uuid}/` | [Get server group details](#get-server-group-details) |
-| <span class="http-badge http-post">POST</span> | `/api/openstack-server-groups/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-server-groups/{uuid}/pull/` | [Synchronize resource state](#synchronize-resource-state) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-server-groups/{uuid}/unlink/` | [Unlink resource](#unlink-resource) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-server-groups/{uuid}/` | [Delete server group](#delete-server-group) |
@@ -153,6 +152,13 @@ Get a list of server groups.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get server group details
@@ -276,126 +282,12 @@ Retrieve details of a specific server group.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
----
 
-### Create
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/openstack-server-groups/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      name="my-awesome-openstack-server-group"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.open_stack_server_group_request import OpenStackServerGroupRequest # (1)
-    from waldur_api_client.api.openstack_server_groups import openstack_server_groups_create # (2)
+    Any signed-in user.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = OpenStackServerGroupRequest(
-        name="my-awesome-openstack-server-group"
-    )
-    response = openstack_server_groups_create.sync(
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`OpenStackServerGroupRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/open_stack_server_group_request.py)
-    2.  **API Source:** [`openstack_server_groups_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_server_groups/openstack_server_groups_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackServerGroupsCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackServerGroupsCreate({
-      auth: "Token YOUR_API_TOKEN",
-      body: {
-        "name": "my-awesome-openstack-server-group"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `name` | string | ✓ |  |
-    | `description` | string |  |  |
-    | `policy` | any |  | affinity — all instances are placed on the same hypervisor. anti-affinity — all instances are placed on different hypervisors. soft-affinity — instances are placed on the same hypervisor if possible, but not enforced. soft-anti-affinity — instances are placed on different hypervisors if possible, but not enforced. |
-
-
-=== "Responses"
-
-    **`201`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `name` | string |  |
-    | `description` | string |  |
-    | `service_name` | string |  |
-    | `service_settings` | string (uri) |  |
-    | `service_settings_uuid` | string (uuid) |  |
-    | `service_settings_state` | string |  |
-    | `service_settings_error_message` | string |  |
-    | `project` | string (uri) |  |
-    | `project_name` | string |  |
-    | `project_uuid` | string (uuid) |  |
-    | `customer` | string (uri) |  |
-    | `customer_uuid` | string (uuid) |  |
-    | `customer_name` | string |  |
-    | `customer_native_name` | string |  |
-    | `customer_abbreviation` | string |  |
-    | `error_message` | string |  |
-    | `error_traceback` | string |  |
-    | `resource_type` | string |  |
-    | `state` | any |  |
-    | `created` | string (date-time) |  |
-    | `modified` | string (date-time) |  |
-    | `backend_id` | string |  |
-    | `access_url` | any |  |
-    | `tenant` | string (uri) |  |
-    | `tenant_name` | string |  |
-    | `tenant_uuid` | string (uuid) |  |
-    | `policy` | any | affinity — all instances are placed on the same hypervisor. anti-affinity — all instances are placed on different hypervisors. soft-affinity — instances are placed on the same hypervisor if possible, but not enforced. soft-anti-affinity — instances are placed on different hypervisors if possible, but not enforced. |
-    | `display_name` | string |  |
-    | `instances` | array of objects |  |
-    | `instances.backend_id` | string | Instance ID in the OpenStack backend |
-    | `instances.name` | string |  |
-    | `instances.uuid` | string (uuid) |  |
-    | `marketplace_offering_uuid` | string |  |
-    | `marketplace_offering_name` | string |  |
-    | `marketplace_offering_type` | string |  |
-    | `marketplace_offering_plugin_options` | object (free-form) |  |
-    | `marketplace_category_uuid` | string |  |
-    | `marketplace_category_name` | string |  |
-    | `marketplace_resource_uuid` | string |  |
-    | `marketplace_plan_uuid` | string |  |
-    | `marketplace_resource_state` | string |  |
-    | `is_usage_based` | boolean |  |
-    | `is_limit_based` | boolean |  |
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -475,6 +367,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -544,6 +443,11 @@ Delete resource from the database without scheduling operations on backend
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete server group
@@ -610,6 +514,13 @@ Delete a server group.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -697,6 +608,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -766,5 +682,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

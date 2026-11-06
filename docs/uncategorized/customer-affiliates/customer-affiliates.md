@@ -104,6 +104,13 @@
     | `total_earned` | number (double) |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -184,6 +191,13 @@
     | `end_date` | string (date) |
     | `total_earned` | number (double) |
     | `created` | string (date-time) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -280,6 +294,11 @@
     | `end_date` | string (date) |
     | `total_earned` | number (double) |
     | `created` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -388,6 +407,11 @@
     | `total_earned` | number (double) |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -486,6 +510,11 @@
     | `total_earned` | number (double) |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -550,6 +579,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -649,11 +683,18 @@ List fees accrued from this affiliate link. Exposes the fee amount and invoice p
     | `invoice_month` | integer |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Earnings
 
-Earnings summary of this affiliate link: lifetime total, per-month series and the affiliate organization's withdrawable credit balance.
+Earnings summary of this affiliate link: lifetime total, per-month series, the affiliate organization's withdrawable credit balance and the fee the current month is expected to earn.
 
 
 === "HTTPie"
@@ -715,13 +756,21 @@ Earnings summary of this affiliate link: lifetime total, per-month series and th
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `total_earned` | string (decimal) |
-    | `withdrawable_balance` | string (decimal) |
-    | `per_month` | array of objects |
-    | `per_month.year` | integer |
-    | `per_month.month` | integer |
-    | `per_month.amount` | string (decimal) |
+    | Field | Type | Description |
+    |---|---|---|
+    | `total_earned` | string (decimal) |  |
+    | `withdrawable_balance` | string (decimal) |  |
+    | `per_month` | array of objects |  |
+    | `per_month.year` | integer |  |
+    | `per_month.month` | integer |  |
+    | `per_month.amount` | string (decimal) |  |
+    | `upcoming` | any | Fee the current month is expected to earn from the referred customer's open invoice, on the base an accrual uses: the net price after estimated volume discounts and credit compensation, plus what paid credit covers. Null when the month will earn nothing on this link. Not yet accrued: the amount changes until month close. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

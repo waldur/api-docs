@@ -83,6 +83,13 @@
     | `question` | string (uri) |
     | `question_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -155,6 +162,13 @@
     | `url` | string (uri) |
     | `question` | string (uri) |
     | `question_uuid` | string (uuid) |
+
+
+=== "Authorization"
+
+    Staff only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -240,6 +254,11 @@
     | `url` | string (uri) |
     | `question` | string (uri) |
     | `question_uuid` | string (uuid) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -337,6 +356,11 @@
     | `question` | string (uri) |
     | `question_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -423,6 +447,11 @@
     | `question` | string (uri) |
     | `question_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -487,5 +516,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

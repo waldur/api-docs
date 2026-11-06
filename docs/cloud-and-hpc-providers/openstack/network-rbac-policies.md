@@ -7,8 +7,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/openstack-network-rbac-policies/` | [List network RBAC policies](#list-network-rbac-policies) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-network-rbac-policies/{uuid}/` | [Get network RBAC policy details](#get-network-rbac-policy-details) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-network-rbac-policies/` | [Create RBAC policy](#create-rbac-policy) |
-| <span class="http-badge http-put">PUT</span> | `/api/openstack-network-rbac-policies/{uuid}/` | [Update](#update) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/openstack-network-rbac-policies/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-network-rbac-policies/{uuid}/` | [Delete RBAC policy](#delete-rbac-policy) |
 
 ---
@@ -103,6 +101,13 @@ Get a list of network RBAC policies.
     | `policy_type` | any | Type of access granted - either shared access or external network access |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and support see every share. Others see the shares whose network's tenant or target tenant belongs to a project where they hold a role, or to an organization where they hold one.
+
 ---
 
 ### Get network RBAC policy details
@@ -184,6 +189,13 @@ Retrieve details of a specific network RBAC policy.
     | `backend_id` | string |  |
     | `policy_type` | any | Type of access granted - either shared access or external network access |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and support see every share. Others see the shares whose network's tenant or target tenant belongs to a project where they hold a role, or to an organization where they hold one.
 
 ---
 
@@ -279,202 +291,10 @@ Create RBAC policy for the network
     | `policy_type` | any | Type of access granted - either shared access or external network access |
     | `created` | string (date-time) |  |
 
----
 
-### Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PUT \
-      https://api.example.com/api/openstack-network-rbac-policies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      network="https://api.example.com/api/network/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      target_tenant="https://api.example.com/api/target-tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.network_rbac_policy_request import NetworkRBACPolicyRequest # (1)
-    from waldur_api_client.api.openstack_network_rbac_policies import openstack_network_rbac_policies_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = NetworkRBACPolicyRequest(
-        network="https://api.example.com/api/network/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        target_tenant="https://api.example.com/api/target-tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-    )
-    response = openstack_network_rbac_policies_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`NetworkRBACPolicyRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/network_rbac_policy_request.py)
-    2.  **API Source:** [`openstack_network_rbac_policies_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_network_rbac_policies/openstack_network_rbac_policies_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackNetworkRbacPoliciesUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackNetworkRbacPoliciesUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "network": "https://api.example.com/api/network/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "target_tenant": "https://api.example.com/api/target-tenant/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `network` | string (uri) | ✓ |  |
-    | `target_tenant` | string (uri) | ✓ |  |
-    | `policy_type` | any |  | Type of access granted - either shared access or external network access<br>_Constraints: default: `access_as_shared`_ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `network` | string (uri) |  |
-    | `network_name` | string |  |
-    | `source_tenant_uuid` | string (uuid) |  |
-    | `source_tenant_name` | string |  |
-    | `target_tenant` | string (uri) |  |
-    | `target_tenant_name` | string |  |
-    | `target_label` | string |  |
-    | `direction` | any |  |
-    | `backend_id` | string |  |
-    | `policy_type` | any | Type of access granted - either shared access or external network access |
-    | `created` | string (date-time) |  |
-
----
-
-### Partial Update
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/openstack-network-rbac-policies/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_network_rbac_policy_request import PatchedNetworkRBACPolicyRequest # (1)
-    from waldur_api_client.api.openstack_network_rbac_policies import openstack_network_rbac_policies_partial_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = PatchedNetworkRBACPolicyRequest()
-    response = openstack_network_rbac_policies_partial_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`PatchedNetworkRBACPolicyRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_network_rbac_policy_request.py)
-    2.  **API Source:** [`openstack_network_rbac_policies_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_network_rbac_policies/openstack_network_rbac_policies_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackNetworkRbacPoliciesPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackNetworkRbacPoliciesPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `network` | string (uri) |  |  |
-    | `target_tenant` | string (uri) |  |  |
-    | `policy_type` | any |  | Type of access granted - either shared access or external network access<br>_Constraints: default: `access_as_shared`_ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `url` | string (uri) |  |
-    | `uuid` | string (uuid) |  |
-    | `network` | string (uri) |  |
-    | `network_name` | string |  |
-    | `source_tenant_uuid` | string (uuid) |  |
-    | `source_tenant_name` | string |  |
-    | `target_tenant` | string (uri) |  |
-    | `target_tenant_name` | string |  |
-    | `target_label` | string |  |
-    | `direction` | any |  |
-    | `backend_id` | string |  |
-    | `policy_type` | any | Type of access granted - either shared access or external network access |
-    | `created` | string (date-time) |  |
+    Staff, or who is an owner of the organization or an administrator or manager of the project on both sides of the share: the network's project and the target tenant's project.
 
 ---
 
@@ -542,5 +362,10 @@ Delete RBAC policy for the network
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or who is an owner of the organization or an administrator or manager of the project on both sides of the share: the network's project and the target tenant's project.
 
 ---

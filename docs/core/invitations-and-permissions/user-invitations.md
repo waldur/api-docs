@@ -134,6 +134,13 @@ Retrieve a list of user invitations visible to the current user.
     | `extra_invitation_text` | string |  |
     | `execution_state` | any |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Invitations to scopes where the caller holds the scope's create permission, those of organizations where they hold INVITATION.LIST, and pending ones sent to their email; staff, support and holders of INVITATION.LIST site-wide see all.
+
 ---
 
 ### Retrieve user invitation
@@ -229,6 +236,13 @@ Retrieve details of a specific user invitation.
     | `error_message` | string |  |
     | `extra_invitation_text` | string |  |
     | `execution_state` | any |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Invitations to scopes where the caller holds the scope's create permission, those of organizations where they hold INVITATION.LIST, and pending ones sent to their email; staff, support and holders of INVITATION.LIST site-wide see all.
 
 ---
 
@@ -348,6 +362,11 @@ Create a new user invitation to grant a role in a specific scope (e.g., organiza
     | `extra_invitation_text` | string |  |
     | `execution_state` | any |  |
 
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
+
 ---
 
 ### Update user invitation
@@ -438,6 +457,11 @@ Update an existing user invitation. Only pending invitations can be edited. Allo
     | `email` | string (email) | Invitation link will be sent to this email. Note that user can accept invitation with different email. |
     | `role` | string (uuid) | UUID of the new role to assign. Must be compatible with the invitation scope. |
 
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
+
 ---
 
 ### Partially update user invitation
@@ -522,6 +546,11 @@ Partially update an existing user invitation. Only pending invitations can be ed
     | `email` | string (email) | Invitation link will be sent to this email. Note that user can accept invitation with different email. |
     | `role` | string (uuid) | UUID of the new role to assign. Must be compatible with the invitation scope. |
 
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
+
 ---
 
 ### Delete user invitation
@@ -588,6 +617,11 @@ Delete a user invitation. Only users with invitation management permissions can 
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
 
 ---
 
@@ -676,11 +710,16 @@ Retrieves public-facing details of an invitation. This is used to show informati
     | `execution_state` | any |  |
     | `state` | any | Current state of the invitation (e.g., 'pending', 'accepted', 'rejected') |
 
+
+=== "Authorization"
+
+    Any signed-in user, for an invitation to a scope they hold a role in, or a pending, expired or canceled one whose UUID they have and whose civil number, if it names one, is theirs; a deployment may also require their email to match. Staff and support for any.
+
 ---
 
 ### Accept an invitation
 
-Accepts an invitation for the currently authenticated user. This grants the user the specified role in the invitation's scope.
+Accepts an invitation for the currently authenticated user. This grants the user the specified role in the invitation's scope. Staff may pass `user` to accept it for that user instead, for example from a service account that registers users elsewhere; the user's email must match the invitation.
 
 
 === "HTTPie"
@@ -696,21 +735,26 @@ Accepts an invitation for the currently authenticated user. This grants the user
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.user_invitations import user_invitations_accept # (1)
+    from waldur_api_client.models.user_invitation_accept_request import UserInvitationAcceptRequest # (1)
+    from waldur_api_client.api.user_invitations import user_invitations_accept # (2)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
+    
+    body_data = UserInvitationAcceptRequest()
     response = user_invitations_accept.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
+        client=client,
+        body=body_data
     )
     
     print(response)
     ```
     
     
-    1.  **API Source:** [`user_invitations_accept`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_invitations/user_invitations_accept.py)
+    1.  **Model Source:** [`UserInvitationAcceptRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/user_invitation_accept_request.py)
+    2.  **API Source:** [`user_invitations_accept`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/user_invitations/user_invitations_accept.py)
 
 === "TypeScript"
 
@@ -738,10 +782,22 @@ Accepts an invitation for the currently authenticated user. This grants the user
     | `uuid` | string (uuid) | ✓ |
 
 
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `user` | string (uuid) |  | Staff only. Accept the invitation for this user instead of the caller. The user's email must match the invitation. Empty, null or the caller's own uuid accepts for the caller. |
+
+
 === "Responses"
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Any signed-in user who has a pending invitation's UUID, which the invitation email carries, and whose civil number matches the invitation's if it names one; a deployment may also require their email to match. The scope's membership restrictions apply. Staff may accept one for a named user whose email matches.
 
 ---
 
@@ -820,6 +876,11 @@ Accepts an invitation for the currently authenticated user. This grants the user
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Anyone with the signed link emailed to staff for an invitation awaiting approval, while the staff user it names is active staff; no sign-in.
+
 ---
 
 ### Cancel an invitation
@@ -886,6 +947,11 @@ Cancels a pending or planned (pending_project) invitation.
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
 
 ---
 
@@ -957,6 +1023,11 @@ Checks if an invitation is pending and returns its email and whether a civil num
     |---|---|---|
     | `email` | string (email) | Email address to check for existing invitations |
     | `civil_number_required` | boolean | Whether civil number verification is required |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -1051,6 +1122,11 @@ Returns pending invitations that already exist for the same email and role withi
     | `existing_roles.existing_role_description` | string | Human-readable description of the role the user already holds, for display. Falls back to the role name when the description is blank. |
     | `existing_roles.is_same_role` | boolean | Whether the role already held is the one being requested. This reports what the scope currently holds, not the outcome of a grant: acceptance is decided per accepting user and also depends on the INVITATION_DISABLE_MULTIPLE_ROLES and ONLY_ONE_PROJECT_MANAGER settings. |
 
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
+
 ---
 
 ### Delete an invitation (staff only)
@@ -1117,6 +1193,11 @@ Deletes an invitation. This action is restricted to staff users.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1195,6 +1276,11 @@ Deletes an invitation. This action is restricted to staff users.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Anyone with the signed link emailed to staff for an invitation awaiting approval, while the staff user it names is active staff; no sign-in.
+
 ---
 
 ### Resend an invitation
@@ -1261,5 +1347,10 @@ Resends an email for a pending, expired, or canceled invitation. If the invitati
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or a caller who may grant roles in the invitation's scope: who holds the scope's create permission (such as PROJECT.CREATE_PERMISSION) on the scope, its project, its organization or site-wide, or for a call on the call's managing organization; who holds CUSTOMER.CREATE_PERMISSION on its organization; or who oversees the scope, as a call's managers oversee its proposals. Nobody may for a deleted project.
 
 ---

@@ -76,19 +76,28 @@
     
     The response body is an array of objects, where each object has the following structure:
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `issue` | string (uri) |
-    | `issue_key` | string |
-    | `created` | string (date-time) |
-    | `file` | string (uri) |
-    | `mime_type` | string |
-    | `file_size` | integer |
-    | `file_name` | string |
-    | `backend_id` | string |
-    | `destroy_is_available` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `issue` | string (uri) |  |
+    | `issue_key` | string |  |
+    | `created` | string (date-time) |  |
+    | `file` | string (uri) |  |
+    | `mime_type` | string |  |
+    | `file_size` | integer |  |
+    | `file_name` | string |  |
+    | `backend_id` | string |  |
+    | `destroy_is_available` | boolean |  |
+    | `can_delete` | boolean | Whether the caller may delete this attachment, by the check the delete route runs. Whether the support backend allows deleting it is destroy_is_available. |
+    | `delete_is_local_only` | boolean | True when the attachment's ticket was routed to a provider helpdesk that has since been removed from Waldur: deleting removes the file from Waldur only, and any copy on the provider's helpdesk stays. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on, support tickets they raised and tickets of a helpdesk they serve; staff and support see all.
 
 ---
 
@@ -163,19 +172,28 @@
 
     **`200`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `issue` | string (uri) |
-    | `issue_key` | string |
-    | `created` | string (date-time) |
-    | `file` | string (uri) |
-    | `mime_type` | string |
-    | `file_size` | integer |
-    | `file_name` | string |
-    | `backend_id` | string |
-    | `destroy_is_available` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `issue` | string (uri) |  |
+    | `issue_key` | string |  |
+    | `created` | string (date-time) |  |
+    | `file` | string (uri) |  |
+    | `mime_type` | string |  |
+    | `file_size` | integer |  |
+    | `file_name` | string |  |
+    | `backend_id` | string |  |
+    | `destroy_is_available` | boolean |  |
+    | `can_delete` | boolean | Whether the caller may delete this attachment, by the check the delete route runs. Whether the support backend allows deleting it is destroy_is_available. |
+    | `delete_is_local_only` | boolean | True when the attachment's ticket was routed to a provider helpdesk that has since been removed from Waldur: deleting removes the file from Waldur only, and any copy on the provider's helpdesk stays. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on, support tickets they raised and tickets of a helpdesk they serve; staff and support see all.
 
 ---
 
@@ -252,19 +270,35 @@
 
     **`201`** - 
     
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `issue` | string (uri) |
-    | `issue_key` | string |
-    | `created` | string (date-time) |
-    | `file` | string (uri) |
-    | `mime_type` | string |
-    | `file_size` | integer |
-    | `file_name` | string |
-    | `backend_id` | string |
-    | `destroy_is_available` | boolean |
+    | Field | Type | Description |
+    |---|---|---|
+    | `url` | string (uri) |  |
+    | `uuid` | string (uuid) |  |
+    | `issue` | string (uri) |  |
+    | `issue_key` | string |  |
+    | `created` | string (date-time) |  |
+    | `file` | string (uri) |  |
+    | `mime_type` | string |  |
+    | `file_size` | integer |  |
+    | `file_name` | string |  |
+    | `backend_id` | string |  |
+    | `destroy_is_available` | boolean |  |
+    | `can_delete` | boolean | Whether the caller may delete this attachment, by the check the delete route runs. Whether the support backend allows deleting it is destroy_is_available. |
+    | `delete_is_local_only` | boolean | True when the attachment's ticket was routed to a provider helpdesk that has since been removed from Waldur: deleting removes the file from Waldur only, and any copy on the provider's helpdesk stays. |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - The issue named in the request must be one the caller can see; any other is answered as if it did not exist.
+    - Any of:
+        - Staff or support.
+        - The issue's caller.
+        - For the `issue` named in the request, one of these roles: `CUSTOMER.OWNER` on its customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on its project.
+        - An active agent of the provider helpdesk the issue is routed to.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -330,5 +364,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The attachment's uploader, while they may still comment on its issue, as attaching requires. Not on a ticket whose provider helpdesk has been deleted, where only staff may delete.
 
 ---

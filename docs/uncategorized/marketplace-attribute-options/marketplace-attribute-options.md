@@ -87,6 +87,11 @@ Returns a paginated list of options for choice-type attributes. Filter by attrib
     | `attribute_title` | string |  |
     | `is_default` | boolean | Return True if this option is the default for its attribute. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve an attribute option
@@ -163,6 +168,11 @@ Returns the details of a specific attribute option.
     | `attribute` | string (uri) |  |
     | `attribute_title` | string |  |
     | `is_default` | boolean | Return True if this option is the default for its attribute. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -255,6 +265,11 @@ Creates a new option for a choice-type attribute. Requires staff permissions.
     | `attribute` | string (uri) |  |
     | `attribute_title` | string |  |
     | `is_default` | boolean | Return True if this option is the default for its attribute. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -359,6 +374,11 @@ Updates an existing attribute option. Requires staff permissions.
     | `attribute_title` | string |  |
     | `is_default` | boolean | Return True if this option is the default for its attribute. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update an attribute option
@@ -450,6 +470,11 @@ Partially updates an existing attribute option. To set the default option, PATCH
     | `attribute_title` | string |  |
     | `is_default` | boolean | Return True if this option is the default for its attribute. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete an attribute option
@@ -516,5 +541,10 @@ Deletes an attribute option. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

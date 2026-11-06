@@ -106,6 +106,11 @@
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects affiliated with this organization |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve
@@ -194,6 +199,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects affiliated with this organization |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -291,6 +301,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects affiliated with this organization |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -400,6 +415,11 @@
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects affiliated with this organization |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -499,6 +519,11 @@
     | `modified` | string (date-time) |  |
     | `projects_count` | integer | Number of active projects affiliated with this organization |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -563,6 +588,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -648,6 +678,14 @@ Staff-only report showing aggregated data for all affiliated organizations plus 
     | `resources_count` | integer |
     | `estimated_cost` | string (decimal) |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Anyone, including anonymous callers.
+    - Staff.
+
 ---
 
 ### Get affiliated organization statistics
@@ -719,5 +757,10 @@ Returns permission-filtered statistics for this affiliated organization.
     | `active_projects_count` | integer |
     | `resources_count` | integer |
     | `estimated_monthly_cost` | string (decimal) |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---

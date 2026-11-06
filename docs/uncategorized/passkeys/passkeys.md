@@ -103,6 +103,13 @@
     | `revoked_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `revocation_reason` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own passkeys.
+
 ---
 
 ### Retrieve
@@ -187,6 +194,13 @@
     | `revoked_at` | string (date-time) |  |
     | `revoked_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `revocation_reason` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own passkeys.
 
 ---
 
@@ -274,6 +288,11 @@
     |---|---|
     | `name` | string |
 
+
+=== "Authorization"
+
+    The caller's own passkey.
+
 ---
 
 ### Partial Update
@@ -354,6 +373,11 @@
     |---|---|
     | `name` | string |
 
+
+=== "Authorization"
+
+    The caller's own passkey.
+
 ---
 
 ## Other Actions
@@ -432,6 +456,11 @@
     |---|---|
     | `ceremony` | string (uuid) |
     | `options` | object (free-form) |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -512,6 +541,11 @@
     |---|---|
     | `token` | string |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Begin passkey registration
@@ -567,6 +601,11 @@
     |---|---|
     | `ceremony` | string (uuid) |
     | `options` | object (free-form) |
+
+
+=== "Authorization"
+
+    A new passkey for the caller.
 
 ---
 
@@ -668,6 +707,11 @@
     | `revoked_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `revocation_reason` | string |  |
 
+
+=== "Authorization"
+
+    A registration the caller began.
+
 ---
 
 ### Revoke a passkey
@@ -745,6 +789,11 @@
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    The caller's own passkey.
+
 ---
 
 ### Begin passwordless passkey sign-in
@@ -800,6 +849,11 @@
     |---|---|
     | `ceremony` | string (uuid) |
     | `options` | object (free-form) |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -879,5 +933,10 @@
     | Field | Type |
     |---|---|
     | `token` | string |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---

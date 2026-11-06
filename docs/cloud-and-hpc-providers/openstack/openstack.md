@@ -4,8 +4,6 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
-| <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/` | [List Openstack Discovery](#list-openstack-discovery) |
-| <span class="http-badge http-get">GET</span> | `/api/openstack/discovery/{id}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-health-monitors/` | [List health monitors](#list-health-monitors) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-health-monitors/{uuid}/` | [Get health monitor details](#get-health-monitor-details) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-hypervisor-inventories/` | [List Openstack Hypervisor Inventories](#list-openstack-hypervisor-inventories) |
@@ -22,7 +20,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/openstack-pool-members/{uuid}/` | [Get pool member details](#get-pool-member-details) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-pools/` | [List pools](#list-pools) |
 | <span class="http-badge http-get">GET</span> | `/api/openstack-pools/{uuid}/` | [Get pool details](#get-pool-details) |
-| <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/discover_external_networks/` | [Discover available external networks](#discover-available-external-networks) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/discover_flavors/` | [Discover available flavors](#discover-available-flavors) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack/discovery/discover_instance_availability_zones/` | [Discover available Nova instance availability zones](#discover-available-nova-instance-availability-zones) |
@@ -44,149 +41,21 @@
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pool-members/{uuid}/pull/` | [Pull pool member](#pull-pool-member) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pools/` | [Create pool](#create-pool) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-pools/{uuid}/pull/` | [Pull pool](#pull-pool) |
-| <span class="http-badge http-put">PUT</span> | `/api/openstack/discovery/{id}/` | [Update](#update) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack-health-monitors/{uuid}/` | [Update health monitor](#update-health-monitor) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack-listeners/{uuid}/` | [Update listener](#update-listener) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack-loadbalancers/{uuid}/` | [Update load balancer](#update-load-balancer) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack-pool-members/{uuid}/` | [Update pool member](#update-pool-member) |
 | <span class="http-badge http-put">PUT</span> | `/api/openstack-pools/{uuid}/` | [Update pool](#update-pool) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/openstack/discovery/{id}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/openstack-health-monitors/{uuid}/` | [Partially update health monitor](#partially-update-health-monitor) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/openstack-listeners/{uuid}/` | [Partially update listener](#partially-update-listener) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/openstack-loadbalancers/{uuid}/` | [Partially update load balancer](#partially-update-load-balancer) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/openstack-pool-members/{uuid}/` | [Partially update pool member](#partially-update-pool-member) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/openstack-pools/{uuid}/` | [Partially update pool](#partially-update-pool) |
-| <span class="http-badge http-delete">DELETE</span> | `/api/openstack/discovery/{id}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-health-monitors/{uuid}/` | [Delete health monitor](#delete-health-monitor) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-listeners/{uuid}/` | [Delete listener](#delete-listener) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-loadbalancers/{uuid}/` | [Delete load balancer](#delete-load-balancer) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-pool-members/{uuid}/` | [Delete pool member](#delete-pool-member) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/openstack-pools/{uuid}/` | [Delete pool](#delete-pool) |
-
----
-
-### List Openstack Discovery
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/openstack/discovery/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_list # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_list.sync(client=client)
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_list.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryList } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryList({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Query Parameters"
-
-    | Name | Type | Description |
-    |---|---|---|
-    | `page` | integer | A page number within the paginated result set. |
-    | `page_size` | integer | Number of results to return per page. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
-### Retrieve
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/openstack/discovery/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_retrieve # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_retrieve.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
 
 ---
 
@@ -313,6 +182,13 @@ Get a list of pool health monitors.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get health monitor details
@@ -437,6 +313,13 @@ Retrieve details of a specific health monitor.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### List Openstack Hypervisor Inventories
@@ -518,6 +401,13 @@ Retrieve details of a specific health monitor.
     | `used` | integer (int64) |  |
     | `effective_total` | integer | Capacity the Nova scheduler treats as available. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -598,6 +488,13 @@ Retrieve details of a specific health monitor.
     | `used` | integer (int64) |  |
     | `effective_total` | integer | Capacity the Nova scheduler treats as available. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Pre-flight allocation candidates
@@ -675,6 +572,11 @@ Ask Placement which compute hosts could currently satisfy a request for the give
     |---|---|---|
     | `candidate_count` | integer | Total number of allocation candidates Placement returned. |
     | `provider_summaries` | object (free-form) | Placement's per-provider summary: maps resource_provider_uuid → {resources: {CLASS: {used, capacity}, ...}, traits: [...]}. |
+
+
+=== "Authorization"
+
+    The caller must see a hypervisor of the service settings named by settings_uuid, as the hypervisor list shows them: staff, support, and those with a role in the organization that owns the settings.
 
 ---
 
@@ -765,6 +667,13 @@ Ask Placement which compute hosts could currently satisfy a request for the give
     | `status` | string | Hypervisor status, e.g. enabled or disabled |
     | `traits` | array of strings |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -848,6 +757,13 @@ Ask Placement which compute hosts could currently satisfy a request for the give
     | `status` | string | Hypervisor status, e.g. enabled or disabled |
     | `traits` | array of strings |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get hypervisor summary statistics
@@ -924,6 +840,13 @@ Return aggregated vCPU, RAM and disk totals across all hypervisors matching the 
     | `total_local_gb` | integer |
     | `used_local_gb` | integer |
     | `total_running_vms` | integer |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -1047,6 +970,13 @@ Get a list of load balancer listeners.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get listener details
@@ -1168,6 +1098,13 @@ Retrieve details of a specific listener.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -1295,6 +1232,13 @@ Get a list of load balancers.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -1424,6 +1368,13 @@ Retrieve details of a specific load balancer.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### List pool members
@@ -1549,6 +1500,13 @@ Get a list of pool members.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get pool member details
@@ -1673,6 +1631,13 @@ Retrieve details of a specific pool member.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### List pools
@@ -1793,6 +1758,13 @@ Get a list of load balancer pools.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -1915,57 +1887,12 @@ Retrieve details of a specific pool.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
----
 
-### Create
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/openstack/discovery/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_create # (1)
+    Any signed-in user.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_create.sync(client=client)
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryCreate({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Responses"
-
-    **`201`** - No response body
-    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -2077,6 +2004,11 @@ Discover available external networks.
     | `subnets.gateway_ip` | string |
     | `subnets.ip_version` | integer |
 
+
+=== "Authorization"
+
+    Staff users or owners of a customer that is a service provider.
+
 ---
 
 ### Discover available flavors
@@ -2183,6 +2115,11 @@ Discover available flavors.
     | `ram` | integer | RAM in MB |
     | `disk` | integer | Disk in GB |
 
+
+=== "Authorization"
+
+    Staff users or owners of a customer that is a service provider.
+
 ---
 
 ### Discover available Nova instance availability zones
@@ -2286,6 +2223,11 @@ Discover available Nova instance availability zones.
     | `name` | string |
     | `state` | string |
 
+
+=== "Authorization"
+
+    Staff users or owners of a customer that is a service provider.
+
 ---
 
 ### Discover available Cinder volume availability zones
@@ -2388,6 +2330,11 @@ Discover available Cinder volume availability zones.
     |---|---|
     | `name` | string |
     | `state` | string |
+
+
+=== "Authorization"
+
+    Staff users or owners of a customer that is a service provider.
 
 ---
 
@@ -2493,6 +2440,11 @@ Discover available volume types.
     | `name` | string |
     | `description` | string |
 
+
+=== "Authorization"
+
+    Staff users or owners of a customer that is a service provider.
+
 ---
 
 ### Build service_attributes and plugin_options from selected values
@@ -2588,6 +2540,11 @@ Build service_attributes and plugin_options from selected values.
     | `service_attributes` | object (free-form) |
     | `plugin_options` | object (free-form) |
 
+
+=== "Authorization"
+
+    Staff users or owners of a customer that is a service provider.
+
 ---
 
 ### Validate OpenStack credentials without saving them
@@ -2681,6 +2638,11 @@ Validate OpenStack credentials without saving them.
     | `message` | string |
     | `error` | string |
     | `server_info` | any |
+
+
+=== "Authorization"
+
+    Staff users or owners of a customer that is a service provider.
 
 ---
 
@@ -2776,6 +2738,13 @@ Create a new health monitor for a pool.
     | `pool` | string (uri) | Pool this health monitor belongs to |
     | `type` | string | <br>_Enum: `TCP`, `UDP`_ |
 
+
+=== "Authorization"
+
+    For the `pool` named in the request, one of these roles: `CUSTOMER.OWNER` on its customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on its project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Pull health monitor
@@ -2842,6 +2811,13 @@ Synchronize health monitor state from the OpenStack backend. Also pulls the asso
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2936,6 +2912,13 @@ Create a new listener for a load balancer.
     | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
     | `protocol_port` | integer | Port on which the listener listens |
 
+
+=== "Authorization"
+
+    For the `load_balancer` named in the request, one of these roles: `CUSTOMER.OWNER` on its customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on its project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Pull listener
@@ -3002,6 +2985,13 @@ Synchronize listener state from the OpenStack backend. Also pulls pools of the l
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3090,6 +3080,13 @@ Attach a floating IP to the load balancer VIP port.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3182,6 +3179,13 @@ Create a new load balancer.
     | `vip_subnet` | string (uri) |  |
     | `vip_address` | any | Virtual IP address to request, IPv4 or IPv6. It must be of the same family as vip_subnet and lie inside it. Octavia allocates one from vip_subnet when omitted. |
 
+
+=== "Authorization"
+
+    For the `tenant` named in the request, one of these roles: `CUSTOMER.OWNER` on its customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on its project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Detach floating IP from VIP
@@ -3252,6 +3256,13 @@ Detach floating IP from the load balancer VIP port.
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Pull load balancer
@@ -3318,6 +3329,13 @@ Synchronize load balancer state from the OpenStack backend.
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3411,6 +3429,13 @@ Set security groups on the load balancer VIP port to control access.
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink load balancer
@@ -3477,6 +3502,11 @@ Delete the load balancer from the Waldur database without scheduling operations 
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -3576,6 +3606,13 @@ Create a new member for a pool.
     | `protocol_port` | integer | Port on the backend server |
     | `subnet` | string (uri) |  |
 
+
+=== "Authorization"
+
+    For the `pool` named in the request, one of these roles: `CUSTOMER.OWNER` on its customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on its project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Pull pool member
@@ -3642,6 +3679,13 @@ Synchronize pool member state from the OpenStack backend. Also pulls the associa
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3734,6 +3778,13 @@ Create a new pool for a load balancer.
     | `protocol` | string | <br>_Enum: `TCP`, `UDP`_ |
     | `lb_algorithm` | any |  |
 
+
+=== "Authorization"
+
+    For the `load_balancer` named in the request, one of these roles: `CUSTOMER.OWNER` on its customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on its project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Pull pool
@@ -3801,70 +3852,12 @@ Synchronize pool state from the OpenStack backend. Also pulls the associated loa
     **`202`** - No response body
     
 
----
 
-### Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PUT \
-      https://api.example.com/api/openstack/discovery/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_update # (1)
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_update.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3958,6 +3951,13 @@ Update an existing health monitor.
     | `max_retries` | integer |  |
     | `max_retries_down` | integer |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update listener
@@ -4041,6 +4041,13 @@ Update an existing listener.
     |---|---|
     | `name` | string |
     | `default_pool` | string (uri) |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4132,6 +4139,13 @@ Update an existing load balancer.
     | `uuid` | string (uuid) |
     | `name` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update pool member
@@ -4217,6 +4231,13 @@ Update an existing pool member.
     | `uuid` | string (uuid) |
     | `name` | string |
     | `weight` | integer |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4308,70 +4329,12 @@ Update an existing pool.
     | `uuid` | string (uuid) |
     | `name` | string |
 
----
 
-### Partial Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/openstack/discovery/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_partial_update # (1)
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_partial_update.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4465,6 +4428,13 @@ Update specific fields of a health monitor.
     | `max_retries` | integer |  |
     | `max_retries_down` | integer |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update listener
@@ -4549,6 +4519,13 @@ Update specific fields of a listener.
     | `name` | string |
     | `default_pool` | string (uri) |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update load balancer
@@ -4632,6 +4609,13 @@ Update specific fields of a load balancer.
     | `url` | string (uri) |
     | `uuid` | string (uuid) |
     | `name` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4719,6 +4703,13 @@ Update specific fields of a pool member.
     | `name` | string |
     | `weight` | integer |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update pool
@@ -4803,70 +4794,12 @@ Update specific fields of a pool.
     | `uuid` | string (uuid) |
     | `name` | string |
 
----
 
-### Delete
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      DELETE \
-      https://api.example.com/api/openstack/discovery/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.openstack import openstack_discovery_destroy # (1)
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = openstack_discovery_destroy.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`openstack_discovery_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack/openstack_discovery_destroy.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { openstackDiscoveryDestroy } from 'waldur-js-client';
-    
-    try {
-      const response = await openstackDiscoveryDestroy({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this Service provider. |
-
-
-=== "Responses"
-
-    **`204`** - No response body
-    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4935,6 +4868,13 @@ Delete a health monitor.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete listener
@@ -5001,6 +4941,13 @@ Delete a listener.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5069,6 +5016,13 @@ Delete a load balancer.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete pool member
@@ -5136,6 +5090,13 @@ Delete a pool member.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete pool
@@ -5202,5 +5163,12 @@ Delete a pool.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

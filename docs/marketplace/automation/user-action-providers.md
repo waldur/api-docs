@@ -80,6 +80,11 @@
     | `last_execution` | string (date-time) |
     | `last_execution_status` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -154,5 +159,10 @@
     | `schedule` | string |
     | `last_execution` | string (date-time) |
     | `last_execution_status` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

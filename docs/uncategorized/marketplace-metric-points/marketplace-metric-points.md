@@ -71,4 +71,9 @@ Records points for resources against metrics their offerings adopt. Send one poi
     | `rejected.index` | integer |
     | `rejected.reason` | string |
 
+
+=== "Authorization"
+
+    Staff, or who holds RESOURCE.SET_USAGE on the offering of every resource in the request, on its organization or on its service provider; otherwise nothing is recorded.
+
 ---

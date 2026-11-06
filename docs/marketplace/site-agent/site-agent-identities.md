@@ -97,7 +97,7 @@
     | `dependencies.package` | string |  |
     | `dependencies.version` | string |  |
     | `config_file_path` | string | Example: '/etc/waldur/agent.yaml' |
-    | `config_file_content` | string |  |
+    | `config_file_content` | string | Returned only to staff, to who holds OFFERING.UPDATE on the identity's offering, its organization or its service provider, and to the identity manager who created the identity, while the offering is in an ISD-allowed state. |
     | `last_restarted` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -111,6 +111,13 @@
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
     | `compatibility` | any |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Agent identities of offerings that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all. An identity manager with managed ISDs also sees the agent identities they created for offerings in an ISD-allowed state.
 
 ---
 
@@ -188,7 +195,7 @@
     | `dependencies.package` | string |  |
     | `dependencies.version` | string |  |
     | `config_file_path` | string | Example: '/etc/waldur/agent.yaml' |
-    | `config_file_content` | string |  |
+    | `config_file_content` | string | Returned only to staff, to who holds OFFERING.UPDATE on the identity's offering, its organization or its service provider, and to the identity manager who created the identity, while the offering is in an ISD-allowed state. |
     | `last_restarted` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -202,6 +209,13 @@
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
     | `compatibility` | any |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Agent identities of offerings that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all. An identity manager with managed ISDs also sees the agent identities they created for offerings in an ISD-allowed state.
 
 ---
 
@@ -277,7 +291,7 @@
     | `dependencies.package` | string | ✓ |  |
     | `dependencies.version` | string | ✓ |  |
     | `config_file_path` | string |  | Example: '/etc/waldur/agent.yaml' |
-    | `config_file_content` | string |  |  |
+    | `config_file_content` | string |  | Returned only to staff, to who holds OFFERING.UPDATE on the identity's offering, its organization or its service provider, and to the identity manager who created the identity, while the offering is in an ISD-allowed state. |
     | `last_restarted` | string (date-time) |  |  |
 
 
@@ -297,7 +311,7 @@
     | `dependencies.package` | string |  |
     | `dependencies.version` | string |  |
     | `config_file_path` | string | Example: '/etc/waldur/agent.yaml' |
-    | `config_file_content` | string |  |
+    | `config_file_content` | string | Returned only to staff, to who holds OFFERING.UPDATE on the identity's offering, its organization or its service provider, and to the identity manager who created the identity, while the offering is in an ISD-allowed state. |
     | `last_restarted` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -311,6 +325,11 @@
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
     | `compatibility` | any |  |
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state, for the offering the request names.
 
 ---
 
@@ -397,7 +416,7 @@
     | `dependencies.package` | string | ✓ |  |
     | `dependencies.version` | string | ✓ |  |
     | `config_file_path` | string |  | Example: '/etc/waldur/agent.yaml' |
-    | `config_file_content` | string |  |  |
+    | `config_file_content` | string |  | Returned only to staff, to who holds OFFERING.UPDATE on the identity's offering, its organization or its service provider, and to the identity manager who created the identity, while the offering is in an ISD-allowed state. |
     | `last_restarted` | string (date-time) |  |  |
 
 
@@ -417,7 +436,7 @@
     | `dependencies.package` | string |  |
     | `dependencies.version` | string |  |
     | `config_file_path` | string | Example: '/etc/waldur/agent.yaml' |
-    | `config_file_content` | string |  |
+    | `config_file_content` | string | Returned only to staff, to who holds OFFERING.UPDATE on the identity's offering, its organization or its service provider, and to the identity manager who created the identity, while the offering is in an ISD-allowed state. |
     | `last_restarted` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
@@ -431,6 +450,11 @@
     | `services.created` | string (date-time) |  |
     | `services.modified` | string (date-time) |  |
     | `compatibility` | any |  |
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
 
 ---
 
@@ -496,6 +520,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
 
 ---
 
@@ -580,6 +609,11 @@ Remove agent identities that have no active services. Staff only.
     | `items.identity__name` | string |  |
     | `items.state` | string |  |
     | `items.modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -681,7 +715,7 @@ DEPRECATED: use register_queue instead, which creates a single unified consumer 
     | `observable_objects.object_id` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `source_ip` | any | An IPv4 or IPv6 address. |
+    | `source_ip` | string (ipv4) |  |
     
     ---
     
@@ -702,7 +736,12 @@ DEPRECATED: use register_queue instead, which creates a single unified consumer 
     | `observable_objects.object_id` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `source_ip` | any | An IPv4 or IPv6 address. |
+    | `source_ip` | string (ipv4) |  |
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
 
 ---
 
@@ -799,6 +838,11 @@ Register a unified event-consumer queue for this agent identity. Creates a singl
     | `queue_name` | string | RabbitMQ queue name (consumer_{consumer_uuid}) |
     | `vhost` | string | RabbitMQ virtual host (user UUID) |
     | `observable_object_types` | array of strings | List of observable object types routed to this queue |
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
 
 ---
 
@@ -932,5 +976,10 @@ Register a new processor or get the existing one for the agent service
     | `processors.backend_version` | string |  |
     | `processors.created` | string (date-time) |  |
     | `processors.modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
 
 ---

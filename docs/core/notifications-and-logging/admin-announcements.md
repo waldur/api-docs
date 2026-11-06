@@ -108,6 +108,11 @@
     | `maintenance_affected_offerings.impact_description` | string |
     | `maintenance_external_reference_url` | string |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve
@@ -204,6 +209,11 @@
     | `maintenance_affected_offerings.impact_level_display` | string |
     | `maintenance_affected_offerings.impact_description` | string |
     | `maintenance_external_reference_url` | string |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -305,6 +315,11 @@
     | `maintenance_affected_offerings.impact_level_display` | string |
     | `maintenance_affected_offerings.impact_description` | string |
     | `maintenance_external_reference_url` | string |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -418,6 +433,11 @@
     | `maintenance_affected_offerings.impact_description` | string |
     | `maintenance_external_reference_url` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Partial Update
@@ -521,6 +541,11 @@
     | `maintenance_affected_offerings.impact_description` | string |
     | `maintenance_external_reference_url` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Delete
@@ -585,5 +610,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

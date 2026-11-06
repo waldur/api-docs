@@ -84,7 +84,15 @@ Returns a paginated list of offerings affected by maintenance announcements.
     | `impact_level` | any | Expected impact on this offering |
     | `impact_level_display` | any |  |
     | `impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `offering_name` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -161,7 +169,15 @@ Returns the details of a specific link between a maintenance announcement and an
     | `impact_level` | any | Expected impact on this offering |
     | `impact_level_display` | any |  |
     | `impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `offering_name` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -236,6 +252,7 @@ Creates a new association between an offering and a maintenance announcement, sp
     | `offering` | string (uri) | ✓ |  |
     | `impact_level` | any |  | Expected impact on this offering |
     | `impact_description` | string |  | Specific description of how this offering will be affected |
+    | `affected_partitions` | array of strings |  | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
 
 
 === "Responses"
@@ -251,7 +268,15 @@ Creates a new association between an offering and a maintenance announcement, sp
     | `impact_level` | any | Expected impact on this offering |
     | `impact_level_display` | any |  |
     | `impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `offering_name` | string |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the maintenance's service provider or the maintenance's service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -337,6 +362,7 @@ Updates the impact level or description for an offering linked to a maintenance 
     | `offering` | string (uri) | ✓ |  |
     | `impact_level` | any |  | Expected impact on this offering |
     | `impact_description` | string |  | Specific description of how this offering will be affected |
+    | `affected_partitions` | array of strings |  | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
 
 
 === "Responses"
@@ -352,7 +378,15 @@ Updates the impact level or description for an offering linked to a maintenance 
     | `impact_level` | any | Expected impact on this offering |
     | `impact_level_display` | any |  |
     | `impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `offering_name` | string |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the maintenance's service provider's customer or the maintenance's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -429,6 +463,7 @@ Partially updates the impact level or description for an offering linked to a ma
     | `offering` | string (uri) |  |  |
     | `impact_level` | any |  | Expected impact on this offering |
     | `impact_description` | string |  | Specific description of how this offering will be affected |
+    | `affected_partitions` | array of strings |  | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
 
 
 === "Responses"
@@ -444,7 +479,15 @@ Partially updates the impact level or description for an offering linked to a ma
     | `impact_level` | any | Expected impact on this offering |
     | `impact_level_display` | any |  |
     | `impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `offering_name` | string |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the maintenance's service provider's customer or the maintenance's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -512,5 +555,12 @@ Removes the association between an offering and a maintenance announcement.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the maintenance's service provider's customer or the maintenance's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

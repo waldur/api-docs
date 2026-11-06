@@ -17,7 +17,6 @@
 | **Other Actions** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/checklist/` | [Get checklist with questions and existing answers](#get-checklist-with-questions-and-existing-answers) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/checklist_review/` | [Checklist review](#checklist-review) |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/checklist-template/` | [Get checklist template for creating new objects](#get-checklist-template-for-creating-new-objects) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/completion_review_status/` | [Get checklist completion status with review triggers (reviewers only)](#get-checklist-completion-status-with-review-triggers-reviewers-only) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-offering-users/{uuid}/posix_allocations/` | [List POSIX UID/GID allocations of an offering user](#list-posix-uidgid-allocations-of-an-offering-user) |
@@ -195,6 +194,13 @@ Returns a paginated list of users associated with offerings. The visibility of u
     | `login_shell` | string |  |
     | `home_directory` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    On offerings that let the service provider create offering accounts: the caller's own accounts; every account on offerings of organizations and service providers where the caller holds a role, and on offerings they hold a role on; and accounts of users who hold a role in an organization or project the caller can see, on offerings of organizations where the caller holds a role on the organization or one of its projects, or of those organizations' organization groups. Identity managers also see the accounts of users active in the ISDs they manage. List and retrieve hide other users' accounts on offerings with active terms of service that the user has not accepted when ENFORCE_USER_CONSENT_FOR_OFFERINGS is on, and those of users with an incomplete profile when ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS is on. Staff and support see all, without that hiding.
+
 ---
 
 ### Retrieve an offering user
@@ -331,6 +337,13 @@ Returns the details of a specific offering-user link. Visibility follows the sam
     | `login_shell` | string |  |
     | `home_directory` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    On offerings that let the service provider create offering accounts: the caller's own accounts; every account on offerings of organizations and service providers where the caller holds a role, and on offerings they hold a role on; and accounts of users who hold a role in an organization or project the caller can see, on offerings of organizations where the caller holds a role on the organization or one of its projects, or of those organizations' organization groups. Identity managers also see the accounts of users active in the ISDs they manage. List and retrieve hide other users' accounts on offerings with active terms of service that the user has not accepted when ENFORCE_USER_CONSENT_FOR_OFFERINGS is on, and those of users with an incomplete profile when ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS is on. Staff and support see all, without that hiding.
+
 ---
 
 ### Create an offering user
@@ -463,6 +476,13 @@ Associates a user with a specific offering, creating an offering-specific user a
     | `login_shell` | string |  |
     | `home_directory` | string |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.CREATE_USER` on the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update restriction status
@@ -547,6 +567,13 @@ Allows a service provider to mark an offering user as restricted or unrestricted
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -634,6 +661,13 @@ Allows a service provider to set the operational/access state of an offering use
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -776,6 +810,13 @@ Allows a service provider to set the operational/access state of an offering use
     | `login_shell` | string |  |
     | `home_directory` | string |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -917,6 +958,13 @@ Allows a service provider to set the operational/access state of an offering use
     | `login_shell` | string |  |
     | `home_directory` | string |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update service provider comments
@@ -1001,6 +1049,11 @@ Allows a service provider to update the `service_provider_comment` and `service_
     | `service_provider_comment` | string |  |
     | `service_provider_comment_url` | string (uri) | URL link for additional information or actions related to service provider comment |
 
+
+=== "Authorization"
+
+    Check if offering user is in valid state for updating comments.
+
 ---
 
 ### Delete an offering user
@@ -1067,6 +1120,13 @@ Removes the association between a user and an offering. This action may trigger 
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.DELETE_USER` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1189,6 +1249,11 @@ Get checklist with questions and existing answers.
     **`404`** - 
     
 
+
+=== "Authorization"
+
+    Allow access to: 1. The offering user themselves (user == obj.user) 2. Service provider staff with UPDATE_OFFERING_USER permission.
+
 ---
 
 ### Checklist review
@@ -1309,146 +1374,12 @@ Get checklist with questions and existing answers including review logic (review
     **`404`** - 
     
 
----
 
-### Get checklist template for creating new objects
+=== "Authorization"
 
-Get checklist template for creating new objects.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/marketplace-offering-users/checklist-template/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      parent_uuid=="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_offering_users import marketplace_offering_users_checklist_template_retrieve # (1)
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = marketplace_offering_users_checklist_template_retrieve.sync(
-        client=client,
-        parent_uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`marketplace_offering_users_checklist_template_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_checklist_template_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceOfferingUsersChecklistTemplateRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceOfferingUsersChecklistTemplateRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      query: {
-        "parent_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Query Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `parent_uuid` | string (uuid) | ✓ | UUID of the parent object (e.g., customer UUID for new projects) |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type | Description |
-    |---|---|---|
-    | `checklist` | any |  |
-    | `questions` | array of objects |  |
-    | `questions.uuid` | string (uuid) |  |
-    | `questions.required` | boolean |  |
-    | `questions.description` | string |  |
-    | `questions.user_guidance` | string | Additional guidance text visible to users when answering and reviewing |
-    | `questions.question_options` | array of objects |  |
-    | `questions.question_options.uuid` | string (uuid) |  |
-    | `questions.question_options.label` | string |  |
-    | `questions.question_options.order` | integer |  |
-    | `questions.question_type` | any | Type of question and expected answer format |
-    | `questions.order` | integer |  |
-    | `questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `questions.allowed_file_types` | array of strings |  |
-    | `questions.allowed_mime_types` | array of strings |  |
-    | `questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
-    | `questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
-    | `questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
-    | `questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
-    | `questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
-    | `questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
-    | `questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
-    | `questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
-    | `questions.operator` | any |  |
-    | `questions.review_answer_value` | any |  |
-    | `questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
-    | `questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
-    | `questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
-    | `questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
-    | `initial_visible_questions` | array of objects |  |
-    | `initial_visible_questions.uuid` | string (uuid) |  |
-    | `initial_visible_questions.required` | boolean |  |
-    | `initial_visible_questions.description` | string |  |
-    | `initial_visible_questions.user_guidance` | string | Additional guidance text visible to users when answering and reviewing |
-    | `initial_visible_questions.question_options` | array of objects |  |
-    | `initial_visible_questions.question_options.uuid` | string (uuid) |  |
-    | `initial_visible_questions.question_options.label` | string |  |
-    | `initial_visible_questions.question_options.order` | integer |  |
-    | `initial_visible_questions.question_type` | any | Type of question and expected answer format |
-    | `initial_visible_questions.order` | integer |  |
-    | `initial_visible_questions.min_value` | string (decimal) | Minimum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `initial_visible_questions.max_value` | string (decimal) | Maximum value allowed for NUMBER, YEAR, and RATING type questions |
-    | `initial_visible_questions.allowed_file_types` | array of strings |  |
-    | `initial_visible_questions.allowed_mime_types` | array of strings |  |
-    | `initial_visible_questions.max_file_size_mb` | integer | Maximum file size in megabytes. If not set, no size limit is enforced. |
-    | `initial_visible_questions.max_files_count` | integer | Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced. |
-    | `initial_visible_questions.likert_scale_length` | any | Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions. |
-    | `initial_visible_questions.likert_low_label` | string | Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional. |
-    | `initial_visible_questions.likert_high_label` | string | Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional. |
-    | `initial_visible_questions.likert_allow_na` | boolean | Allow respondents to choose 'N/A' as an answer for LIKERT type questions. |
-    | `initial_visible_questions.rich_text_char_limit` | integer | Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced. |
-    | `initial_visible_questions.rich_text_toolbar_level` | any | Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'. |
-    | `initial_visible_questions.operator` | any |  |
-    | `initial_visible_questions.review_answer_value` | any |  |
-    | `initial_visible_questions.always_requires_review` | boolean | This question always requires review regardless of answer |
-    | `initial_visible_questions.guidance_answer_value` | object (free-form) | Answer value that triggers display of user guidance. |
-    | `initial_visible_questions.guidance_operator` | any | Operator to use when comparing answer with guidance_answer_value |
-    | `initial_visible_questions.always_show_guidance` | boolean | Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator |
-    | `initial_visible_questions.dependency_logic_operator` | any | Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied. |
-    
-    ---
-    
-    **`400`** - 
-    
-    
-    ---
-    
-    **`404`** - 
-    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1543,6 +1474,13 @@ Get checklist completion status with review triggers (reviewers only).
     **`404`** - 
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get checklist completion status
@@ -1629,6 +1567,11 @@ Get checklist completion status.
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Allow access to: 1. The offering user themselves (user == obj.user) 2. Service provider staff with UPDATE_OFFERING_USER permission.
 
 ---
 
@@ -1745,6 +1688,11 @@ Returns the user's POSIX identifiers (UID, primary GID) and, for each, the POSIX
     | `shared_with_offerings` | array of objects |
     | `shared_with_offerings.uuid` | string |
     | `shared_with_offerings.name` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -1866,6 +1814,13 @@ Returns the project group GIDs (shared GIDs that appear in the user's GLAuth oth
     | `pool_uuid` | string |
     | `pool_scope` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    On offerings that let the service provider create offering accounts: the caller's own accounts; every account on offerings of organizations and service providers where the caller holds a role, and on offerings they hold a role on; and accounts of users who hold a role in an organization or project the caller can see, on offerings of organizations where the caller holds a role on the organization or one of its projects, or of those organizations' organization groups. Identity managers also see the accounts of users active in the ISDs they manage. List and retrieve hide other users' accounts on offerings with active terms of service that the user has not accepted when ENFORCE_USER_CONSENT_FOR_OFFERINGS is on, and those of users with an incomplete profile when ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS is on. Staff and support see all, without that hiding.
+
 ---
 
 ### List a user's POSIX identities across all their offerings
@@ -1978,6 +1933,13 @@ Consolidated view of one user's POSIX identifiers (UID, primary GID and project 
     | `offering_name` | string | Deprecated: the first entry of 'offerings'. The endpoint used to return one row per offering; read 'offerings' instead. |
     | `offering_uuid` | string | Deprecated: the first entry of 'offerings'. Read 'offerings' instead. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    On offerings that let the service provider create offering accounts: the caller's own accounts; every account on offerings of organizations and service providers where the caller holds a role, and on offerings they hold a role on; and accounts of users who hold a role in an organization or project the caller can see, on offerings of organizations where the caller holds a role on the organization or one of its projects, or of those organizations' organization groups. Identity managers also see the accounts of users active in the ISDs they manage. List and retrieve hide other users' accounts on offerings with active terms of service that the user has not accepted when ENFORCE_USER_CONSENT_FOR_OFFERINGS is on, and those of users with an incomplete profile when ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS is on. Staff and support see all, without that hiding.
+
 ---
 
 ### Get profile field warnings
@@ -2031,6 +1993,11 @@ Returns a mapping of user profile field names to offerings that expose those fie
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    The caller's own offering accounts.
 
 ---
 
@@ -2099,6 +2066,13 @@ Transitions the offering user state from 'Requested' or 'Error Creating' to 'Cre
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Request deletion of an offering user
@@ -2165,6 +2139,13 @@ Initiates the deletion process for an offering user account by transitioning it 
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2233,6 +2214,13 @@ Transitions the offering user to the 'Deleted' state, marking the successful com
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Begin deletion process
@@ -2299,6 +2287,13 @@ Transitions the offering user to the 'Deleting' state. This is typically used by
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2367,6 +2362,13 @@ Manually moves the offering user into the 'Error Creating' state. This is typica
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set state to Error Deleting
@@ -2434,6 +2436,13 @@ Manually moves the offering user into the 'Error Deleting' state. This is typica
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set state to OK
@@ -2500,6 +2509,13 @@ Manually sets the offering user state to 'OK'. This can be used to recover from 
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2581,6 +2597,13 @@ Transitions the state to 'Pending Account Linking' and allows a service provider
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set state to Pending Additional Validation
@@ -2660,6 +2683,13 @@ Transitions the state to 'Pending Additional Validation' and allows a service pr
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2754,6 +2784,13 @@ The response 'warnings' list carries only non-fatal advisories about values that
     | `primarygroup` | integer | The primary GID now stored for the account. |
     | `warnings` | array of strings | Non-fatal advisories about the accepted values: a reserved POSIX id (65534 or 65535) or a value of 2^31 or above. Out-of-range and already-allocated values are rejected with 400 instead. |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set state to Validation Complete
@@ -2820,6 +2857,13 @@ Transitions the state from a pending validation state to 'OK', indicating that t
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the offering's customer or the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2920,5 +2964,10 @@ Submit checklist answers.
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Allow access to: 1. The offering user themselves (user == obj.user) 2. Service provider staff with UPDATE_OFFERING_USER permission.
 
 ---

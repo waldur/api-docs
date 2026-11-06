@@ -92,4 +92,9 @@
     | `resource_uuid` | string (uuid) |  |
     | `resource_name` | string |  |
 
+
+=== "Authorization"
+
+    With resource_uuid: The resource must be of a project where the caller holds a role or of an organization where they do, or of an offering on whose provider side they are; staff and support may name any. It must be of the metric's offering. Otherwise: The project must be one where the caller holds a role or of an organization where they do; staff and support may name any. Metrics of offerings where the caller holds a role, or holds one on the offering's organization or service provider; and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all. Of a metric the caller sees, who is on the provider side (a role on the offering, its organization or its service provider; staff and support) reads every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.
+
 ---

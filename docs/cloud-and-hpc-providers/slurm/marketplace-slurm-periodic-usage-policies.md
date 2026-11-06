@@ -119,6 +119,13 @@
     | `qos_strategy` | any | QoS management strategy |
     | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -214,6 +221,13 @@
     | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
     | `qos_strategy` | any | QoS management strategy |
     | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -339,6 +353,13 @@
     | `raw_usage_reset` | boolean | Reset raw usage at period transitions (PriorityUsageResetPeriod=None) |
     | `qos_strategy` | any | QoS management strategy |
     | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
+
+
+=== "Authorization"
+
+    For the `scope` named in the request, the `CUSTOMER.OWNER` role on its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -476,6 +497,13 @@
     | `qos_strategy` | any | QoS management strategy |
     | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -600,6 +628,13 @@
     | `qos_strategy` | any | QoS management strategy |
     | `warnings` | array of strings | Warnings about misconfiguration, e.g. missing site agent queue registration. |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -665,6 +700,13 @@
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Other Actions
@@ -720,6 +762,11 @@
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -811,6 +858,13 @@ List command history for this policy.
     | `execution_mode` | any | Whether command was executed in production or emulator mode |
     | `success` | boolean | Whether the command execution was successful |
     | `error_message` | string | Error message if command execution failed |
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -907,6 +961,13 @@ List evaluation logs for this policy.
     | `site_agent_response` | object (free-form) | Response payload from the site agent |
     | `evaluated_at` | string (date-time) | When this evaluation was performed |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Dry run
@@ -998,6 +1059,11 @@ Staff-only. Dry-run evaluation: calculates usage percentages and shows what acti
     | `resources.downscaled` | boolean |
     | `resources.would_trigger` | array of strings |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Evaluate
@@ -1088,6 +1154,11 @@ Staff-only. Run synchronous policy evaluation: calculates usage, applies actions
     | `resources.previous_state` | object (free-form) |
     | `resources.new_state` | object (free-form) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Force period reset
@@ -1177,6 +1248,11 @@ Staff-only. Force-trigger period reset: re-evaluates paused/downscaled resources
     | `resources.actions_taken` | array of strings |
     | `resources.previous_state` | object (free-form) |
     | `resources.new_state` | object (free-form) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1302,6 +1378,11 @@ Preview policy impact without saving. Returns threshold calculations, carryover 
     | `billing_period_start` | string (date) |  |
     | `billing_period_end` | string (date) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Report command execution result from site agent
@@ -1393,5 +1474,10 @@ Report command execution result from site agent.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

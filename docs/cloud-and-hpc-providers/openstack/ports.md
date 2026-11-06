@@ -174,6 +174,13 @@ Get a list of network ports.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get port details
@@ -311,6 +318,13 @@ Retrieve details of a specific network port.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Create port
@@ -383,9 +397,6 @@ Create a new network port.
     | `fixed_ips.ip_address` | any | ✓ | IP address to assign to the port |
     | `fixed_ips.subnet_id` | string | ✓ | ID of the subnet in which to assign the IP address |
     | `mac_address` | string |  | MAC address of the port |
-    | `allowed_address_pairs` | array of objects |  |  |
-    | `allowed_address_pairs.ip_address` | string |  | <br>_Constraints: default: `192.168.42.0/24`_ |
-    | `allowed_address_pairs.mac_address` | string |  |  |
     | `target_tenant` | string (uri) |  | Target tenant for shared network port creation. If not specified, defaults to network's tenant.<br>_Constraints: write-only_ |
     | `network` | string (uri) |  | Network to which this port belongs |
     | `port_security_enabled` | boolean |  | If True, security groups and rules will be applied to this port |
@@ -458,6 +469,11 @@ Create a new network port.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    The serializer requires staff, an owner of the organization, or an administrator or manager of the project of the tenant the port goes into: target_tenant, or else the network's tenant.
 
 ---
 
@@ -537,6 +553,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -605,6 +628,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -694,6 +722,16 @@ Update port IP address.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - Port settings Neutron leaves to the owner of the port's network.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -787,6 +825,13 @@ Update security groups of the port
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update port
@@ -870,9 +915,6 @@ Update an existing network port.
     | `fixed_ips.ip_address` | any | ✓ | IP address to assign to the port |
     | `fixed_ips.subnet_id` | string | ✓ | ID of the subnet in which to assign the IP address |
     | `mac_address` | string |  | MAC address of the port |
-    | `allowed_address_pairs` | array of objects |  |  |
-    | `allowed_address_pairs.ip_address` | string |  | <br>_Constraints: default: `192.168.42.0/24`_ |
-    | `allowed_address_pairs.mac_address` | string |  |  |
     | `target_tenant` | string (uri) |  | Target tenant for shared network port creation. If not specified, defaults to network's tenant.<br>_Constraints: write-only_ |
     | `network` | string (uri) |  | Network to which this port belongs |
     | `port_security_enabled` | boolean |  | If True, security groups and rules will be applied to this port |
@@ -945,6 +987,13 @@ Update an existing network port.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1088,6 +1137,13 @@ Update specific fields of a network port.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete port
@@ -1154,6 +1210,13 @@ Delete a network port.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1225,6 +1288,13 @@ Disable port.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Disable port security
@@ -1291,6 +1361,16 @@ Disable port security for the port
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - Port settings Neutron leaves to the owner of the port's network.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1359,6 +1439,13 @@ Enable port.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Enable port security
@@ -1425,6 +1512,13 @@ Enable port security for the port
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1574,6 +1668,13 @@ Replace the Port's allowed_address_pairs list. Cluster-VIP workloads (keepalived
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark resource as ERRED
@@ -1657,6 +1758,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -1726,5 +1832,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

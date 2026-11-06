@@ -124,6 +124,13 @@
     | `metrics.target.utilization` | integer |
     | `metrics.target.averageValue` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -220,6 +227,13 @@
     | `metrics.target.type` | string |
     | `metrics.target.utilization` | integer |
     | `metrics.target.averageValue` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -339,6 +353,16 @@
     | `metrics.target.utilization` | integer |
     | `metrics.target.averageValue` | string |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - For the `workload` named in the request, one of these roles: `CUSTOMER.OWNER` on its customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on its project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Synchronize resource state
@@ -417,6 +441,16 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -485,6 +519,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -615,6 +654,16 @@ Delete resource from the database without scheduling operations on backend
     | `metrics.target.utilization` | integer |
     | `metrics.target.averageValue` | string |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -735,6 +784,16 @@ Delete resource from the database without scheduling operations on backend
     | `metrics.target.utilization` | integer |
     | `metrics.target.averageValue` | string |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -799,6 +858,16 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -870,6 +939,13 @@ Delete resource from the database without scheduling operations on backend
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -954,6 +1030,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -1023,6 +1104,11 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1123,5 +1209,15 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

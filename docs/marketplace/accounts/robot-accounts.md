@@ -153,6 +153,13 @@ Returns a paginated list of robot accounts accessible to the current user.
     | `provider_name` | string |  |
     | `offering_plugin_options` | any |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Robot accounts of resources in projects and organizations where the caller holds a role, and of resources of offerings of organizations where they hold a role. Staff and support see all.
+
 ---
 
 ### Retrieve a robot account
@@ -278,6 +285,13 @@ Returns the details of a specific robot account.
     | `provider_name` | string |  |
     | `offering_plugin_options` | any |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Robot accounts of resources in projects and organizations where the caller holds a role, and of resources of offerings of organizations where they hold a role. Staff and support see all.
+
 ---
 
 ### Create a robot account
@@ -381,6 +395,13 @@ Creates a new robot account for a specific resource. This is typically used for 
     | `fingerprints.sha256` | string | SHA256 fingerprint of SSH key |
     | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.CREATE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -497,6 +518,16 @@ Updates the properties of a robot account, such as its username or associated us
     | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | string (uri) |  |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Refuses changes to a robot account synchronized from a remote Waldur, one that carries a backend ID.
+    - Requires `RESOURCE.UPDATE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a robot account
@@ -603,6 +634,16 @@ Partially updates the properties of a robot account. Not allowed for synchronize
     | `fingerprints.sha512` | string | SHA512 fingerprint of SSH key |
     | `responsible_user` | string (uri) |  |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Refuses changes to a robot account synchronized from a remote Waldur, one that carries a backend ID.
+    - Requires `RESOURCE.UPDATE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete a robot account
@@ -669,6 +710,13 @@ Deletes a robot account. This is a hard delete and should be used with caution.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.DELETE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -797,6 +845,13 @@ Transitions the robot account state from 'Requested' to 'Creating'. This is typi
     |---|---|---|
     | `detail` | string | Error message to be displayed to the user |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.UPDATE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set robot account state to deleted
@@ -920,6 +975,13 @@ Transitions the robot account state from 'Requested deletion' to 'Deleted', mark
     | Field | Type | Description |
     |---|---|---|
     | `detail` | string | Error message to be displayed to the user |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.UPDATE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1057,6 +1119,13 @@ Manually moves the robot account into the 'Error' state. An optional error messa
     |---|---|---|
     | `detail` | string | Error message to be displayed to the user |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.UPDATE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set robot account state to OK
@@ -1181,6 +1250,13 @@ Manually sets the robot account state to 'OK', indicating that it is fully opera
     |---|---|---|
     | `detail` | string | Error message to be displayed to the user |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.UPDATE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Request deletion of a robot account
@@ -1304,5 +1380,12 @@ Transitions the robot account state from 'OK' to 'Requested deletion', initiatin
     | Field | Type | Description |
     |---|---|---|
     | `detail` | string | Error message to be displayed to the user |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.UPDATE_ROBOT_ACCOUNT` on the resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

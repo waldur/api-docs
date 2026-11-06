@@ -107,6 +107,11 @@
     | `is_current` | boolean |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -200,6 +205,11 @@
     | `valid_until` | string (date) | Typically 1 year from certification |
     | `is_current` | boolean |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -309,5 +319,10 @@
     | `valid_until` | string (date) | Typically 1 year from certification |
     | `is_current` | boolean |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

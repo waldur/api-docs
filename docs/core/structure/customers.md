@@ -45,7 +45,7 @@
 
 ### List customers
 
-Retrieve a list of customers. The list is filtered based on the user's permissions. A user whose only link to an organization is a role on its service provider sees it with a restricted field set: url, uuid, name, native_name, display_name, abbreviation, slug, image, country, country_name, is_service_provider, service_provider and service_provider_uuid. All other fields are omitted for that row.
+Retrieve a list of customers. The list is filtered based on the user's permissions. A user whose only link to an organization is a role on its service provider sees it with a restricted field set: url, uuid, name, native_name, display_name, abbreviation, slug, image, country, country_name, is_service_provider, service_provider and service_provider_uuid. All other fields are omitted for that row. Except to staff and support, an organization that limits portal access to some networks is hidden from callers outside them; only a user whose sole link to it is a service provider role still finds it, with the restricted field set.
 
 
 === "HTTPie"
@@ -151,6 +151,10 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `archived` | boolean |  |
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
+    | `is_private_person` | boolean | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
+    | `vat_code_verified` | boolean | Whether the EU VIES service confirmed the current VAT number. |
+    | `vat_percent` | string (decimal) | VAT percent calculated from EU VAT rules, when VAT taxation is on. |
+    | `vat_rule` | string | Which EU VAT rule picked vat_percent, or why it cannot be calculated. |
     | `accounting_start_date` | string (date-time) |  |
     | `projects_count` | integer | Number of projects in this organization |
     | `users_count` | integer | Number of users with access to this organization |
@@ -162,6 +166,9 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -199,6 +206,7 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |
     | `state` | string |  |
     | `parish` | string |  |
@@ -229,6 +237,13 @@ Retrieve a list of customers. The list is filtered based on the user's permissio
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
     | `has_active_helpdesk` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -325,6 +340,10 @@ Fetch the details of a specific customer by its UUID. A user whose only link to 
     | `archived` | boolean |  |
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
+    | `is_private_person` | boolean | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
+    | `vat_code_verified` | boolean | Whether the EU VIES service confirmed the current VAT number. |
+    | `vat_percent` | string (decimal) | VAT percent calculated from EU VAT rules, when VAT taxation is on. |
+    | `vat_rule` | string | Which EU VAT rule picked vat_percent, or why it cannot be calculated. |
     | `accounting_start_date` | string (date-time) |  |
     | `projects_count` | integer | Number of projects in this organization |
     | `users_count` | integer | Number of users with access to this organization |
@@ -336,6 +355,9 @@ Fetch the details of a specific customer by its UUID. A user whose only link to 
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -373,6 +395,7 @@ Fetch the details of a specific customer by its UUID. A user whose only link to 
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |
     | `state` | string |  |
     | `parish` | string |  |
@@ -403,6 +426,13 @@ Fetch the details of a specific customer by its UUID. A user whose only link to 
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
     | `has_active_helpdesk` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -476,6 +506,7 @@ A new customer can only be created by users with staff privilege.
     | `archived` | boolean |  |  |
     | `display_billing_info_in_projects` | boolean |  |  |
     | `default_tax_percent` | string (decimal) |  |  |
+    | `is_private_person` | boolean |  | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
     | `accounting_start_date` | string (date-time) |  |  |
     | `sponsor_number` | integer |  | External ID of the sponsor covering the costs |
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
@@ -484,6 +515,9 @@ A new customer can only be created by users with staff privilege.
     | `user_email_patterns` | array of strings |  |  |
     | `user_affiliations` | array of strings |  |  |
     | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | Required assurance URIs (REFEDS). User must have all of these. |
     | `name` | string | ✓ |  |
     | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
@@ -506,6 +540,7 @@ A new customer can only be created by users with staff privilege.
     | `bank_account` | string |  |  |
     | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string |  | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |  |
     | `state` | string |  |  |
     | `parish` | string |  |  |
@@ -540,6 +575,10 @@ A new customer can only be created by users with staff privilege.
     | `archived` | boolean |  |
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
+    | `is_private_person` | boolean | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
+    | `vat_code_verified` | boolean | Whether the EU VIES service confirmed the current VAT number. |
+    | `vat_percent` | string (decimal) | VAT percent calculated from EU VAT rules, when VAT taxation is on. |
+    | `vat_rule` | string | Which EU VAT rule picked vat_percent, or why it cannot be calculated. |
     | `accounting_start_date` | string (date-time) |  |
     | `projects_count` | integer | Number of projects in this organization |
     | `users_count` | integer | Number of users with access to this organization |
@@ -551,6 +590,9 @@ A new customer can only be created by users with staff privilege.
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -588,6 +630,7 @@ A new customer can only be created by users with staff privilege.
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |
     | `state` | string |  |
     | `parish` | string |  |
@@ -618,6 +661,11 @@ A new customer can only be created by users with staff privilege.
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
     | `has_active_helpdesk` | boolean |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -697,6 +745,11 @@ Replaces the organization's default affiliation list. Project creators in the or
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -781,6 +834,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `archived` | boolean |  |  |
     | `display_billing_info_in_projects` | boolean |  |  |
     | `default_tax_percent` | string (decimal) |  |  |
+    | `is_private_person` | boolean |  | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
     | `accounting_start_date` | string (date-time) |  |  |
     | `sponsor_number` | integer |  | External ID of the sponsor covering the costs |
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
@@ -789,6 +843,9 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `user_email_patterns` | array of strings |  |  |
     | `user_affiliations` | array of strings |  |  |
     | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | Required assurance URIs (REFEDS). User must have all of these. |
     | `name` | string | ✓ |  |
     | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
@@ -811,6 +868,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `bank_account` | string |  |  |
     | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string |  | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |  |
     | `state` | string |  |  |
     | `parish` | string |  |  |
@@ -845,6 +903,10 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `archived` | boolean |  |
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
+    | `is_private_person` | boolean | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
+    | `vat_code_verified` | boolean | Whether the EU VIES service confirmed the current VAT number. |
+    | `vat_percent` | string (decimal) | VAT percent calculated from EU VAT rules, when VAT taxation is on. |
+    | `vat_rule` | string | Which EU VAT rule picked vat_percent, or why it cannot be calculated. |
     | `accounting_start_date` | string (date-time) |  |
     | `projects_count` | integer | Number of projects in this organization |
     | `users_count` | integer | Number of users with access to this organization |
@@ -856,6 +918,9 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -893,6 +958,7 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |
     | `state` | string |  |
     | `parish` | string |  |
@@ -923,6 +989,13 @@ Update the details of an existing customer. Requires customer owner or staff per
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
     | `has_active_helpdesk` | boolean |  |
+
+
+=== "Authorization"
+
+    Requires `CUSTOMER.UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1019,6 +1092,13 @@ Update the project digest email configuration for this organization.
     | `available_sections.key` | string |  |
     | `available_sections.title` | string |  |
 
+
+=== "Authorization"
+
+    Requires `CUSTOMER.UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a customer
@@ -1096,6 +1176,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `archived` | boolean |  |  |
     | `display_billing_info_in_projects` | boolean |  |  |
     | `default_tax_percent` | string (decimal) |  |  |
+    | `is_private_person` | boolean |  | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
     | `accounting_start_date` | string (date-time) |  |  |
     | `sponsor_number` | integer |  | External ID of the sponsor covering the costs |
     | `max_service_accounts` | integer |  | Maximum number of service accounts allowed |
@@ -1104,6 +1185,9 @@ Partially update the details of an existing customer. Requires customer owner or
     | `user_email_patterns` | array of strings |  |  |
     | `user_affiliations` | array of strings |  |  |
     | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | Required assurance URIs (REFEDS). User must have all of these. |
     | `name` | string |  |  |
     | `slug` | string |  | URL-friendly identifier. Only editable by staff users. |
     | `native_name` | string |  |  |
@@ -1126,6 +1210,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `bank_account` | string |  |  |
     | `country` | any |  | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string |  | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |  |
     | `state` | string |  |  |
     | `parish` | string |  |  |
@@ -1160,6 +1245,10 @@ Partially update the details of an existing customer. Requires customer owner or
     | `archived` | boolean |  |
     | `display_billing_info_in_projects` | boolean |  |
     | `default_tax_percent` | string (decimal) |  |
+    | `is_private_person` | boolean | Organization represents a private person rather than a legal entity. Used for EU VAT calculation. |
+    | `vat_code_verified` | boolean | Whether the EU VIES service confirmed the current VAT number. |
+    | `vat_percent` | string (decimal) | VAT percent calculated from EU VAT rules, when VAT taxation is on. |
+    | `vat_rule` | string | Which EU VAT rule picked vat_percent, or why it cannot be calculated. |
     | `accounting_start_date` | string (date-time) |  |
     | `projects_count` | integer | Number of projects in this organization |
     | `users_count` | integer | Number of users with access to this organization |
@@ -1171,6 +1260,9 @@ Partially update the details of an existing customer. Requires customer owner or
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `default_affiliations` | array of objects | Affiliations offered to project creators of this organization. |
     | `default_affiliations.uuid` | string (uuid) |  |
     | `default_affiliations.url` | string (uri) |  |
@@ -1208,6 +1300,7 @@ Partially update the details of an existing customer. Requires customer owner or
     | `bank_account` | string |  |
     | `country` | any | Country code (ISO 3166-1 alpha-2) |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
     | `city` | string |  |
     | `state` | string |  |
     | `parish` | string |  |
@@ -1238,6 +1331,13 @@ Partially update the details of an existing customer. Requires customer owner or
     | `call_managing_organization_uuid` | string |  |
     | `billing_price_estimate` | any |  |
     | `has_active_helpdesk` | boolean |  |
+
+
+=== "Authorization"
+
+    Requires `CUSTOMER.UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1334,6 +1434,13 @@ Update the project digest email configuration for this organization.
     | `available_sections.key` | string |  |
     | `available_sections.title` | string |  |
 
+
+=== "Authorization"
+
+    Requires `CUSTOMER.UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete a customer
@@ -1400,6 +1507,11 @@ Delete a customer. This action is only available to staff users. If a customer h
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1482,6 +1594,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `role` | array | Role UUID or name. Repeat to filter by several roles. |
+    | `role_template` | array | Role name. Matches that role and organization copies of it. Repeat to match several. Omit to leave the role filter unchanged. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -1510,6 +1623,11 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
     | `source` | string |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
 
 ---
 
@@ -1628,6 +1746,13 @@ Lists all users who have a role in the specified customer or any of its projects
     | `expiration_time` | string (date-time) |  |
     | `image` | string (uri) |  |
 
+
+=== "Authorization"
+
+    Staff, global support, or a holder of CUSTOMER.LIST_USERS on the organization in the URL, there or site-wide.
+    
+    Active users with a role in the organization or in one of its projects, deleted projects aside.
+
 ---
 
 ### Grant a role to a user
@@ -1726,6 +1851,11 @@ Assigns a specific role to a user within the current scope. An optional expirati
     **`400`** - Validation error, for example when trying to add a user to a terminated project.
     
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to grant roles in the scope's type (CALL.CREATE_PERMISSION, CUSTOMER.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, PROPOSAL.MANAGE, RESOURCE.CREATE_PERMISSION, RESOURCE_PROJECT.CREATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Revoke a role from a user
@@ -1815,6 +1945,11 @@ Removes a specific role from a user within the current scope. This effectively r
 
     **`200`** - Role revoked successfully.
     
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to revoke roles in the scope's type (CALL.DELETE_PERMISSION, CUSTOMER.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, PROPOSAL.DELETE_PERMISSION, RESOURCE.DELETE_PERMISSION, RESOURCE_PROJECT.DELETE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -1908,6 +2043,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     | Field | Type |
     |---|---|
     | `expiration_time` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to change roles in the scope's type (CALL.UPDATE_PERMISSION, CUSTOMER.UPDATE_PERMISSION, OFFERING.UPDATE_PERMISSION, PROJECT.UPDATE_PERMISSION, PROPOSAL.UPDATE_PERMISSION, RESOURCE.UPDATE_PERMISSION, RESOURCE_PROJECT.UPDATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -2006,6 +2146,11 @@ Provides detailed compliance status for all projects within a customer, includin
     | `project_details.answers` | array of anys |
     | `project_details.unanswered_required_questions` | array of anys |
 
+
+=== "Authorization"
+
+    Staff, or a holder of PROJECT.LIST on the organization in the URL, there or site-wide.
+
 ---
 
 ### Get project metadata compliance overview
@@ -2090,6 +2235,11 @@ Provides aggregated statistics about project metadata compliance for all project
     | `fully_completed_projects` | integer |
     | `projects_requiring_review` | integer |
     | `average_completion_percentage` | number (double) |
+
+
+=== "Authorization"
+
+    Staff, or a holder of PROJECT.LIST on the organization in the URL, there or site-wide.
 
 ---
 
@@ -2178,6 +2328,11 @@ Provides a paginated list of projects with their checklist completion status and
     | `requires_review` | boolean | Get review requirement status. |
     | `answers_count` | integer | Get count of answers. |
     | `unanswered_required_count` | integer | Get count of unanswered required questions. |
+
+
+=== "Authorization"
+
+    Staff, or a holder of PROJECT.LIST on the organization in the URL, there or site-wide.
 
 ---
 
@@ -2277,6 +2432,11 @@ Provides a paginated list of all questions from the customer's compliance checkl
     | `project_answers.requires_review` | boolean |  |
     | `question_options` | array of objects | Get question options for select-type questions. |
 
+
+=== "Authorization"
+
+    Staff, or a holder of PROJECT.LIST on the organization in the URL, there or site-wide.
+
 ---
 
 ## Configuration & Updates
@@ -2358,6 +2518,11 @@ Assigns a customer to one or more organization groups. This action is restricted
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -2454,6 +2619,11 @@ Returns a list of countries that can be used when creating or updating a custome
     | `label` | string |
     | `value` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Get customer resource usage statistics
@@ -2543,6 +2713,13 @@ Provides statistics about the resource usage (e.g., CPU, RAM, storage) for all p
     | `components.limit` | integer |  |
     | `components.offering_name` | string |  |
     | `components.offering_uuid` | string (uuid) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -2642,6 +2819,11 @@ Returns the state of the object as it was at the specified timestamp. Only acces
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2753,6 +2935,11 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get project digest configuration
@@ -2831,6 +3018,13 @@ Retrieve the project digest email configuration for this organization.
     | `available_sections` | array of objects |  |
     | `available_sections.key` | string |  |
     | `available_sections.title` | string |  |
+
+
+=== "Authorization"
+
+    Requires `CUSTOMER.UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2963,6 +3157,13 @@ Returns service providers with at least one active resource provisioned for this
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Update customer contact details
@@ -3039,6 +3240,7 @@ Update organization contact information. Requires CUSTOMER_CONTACT_UPDATE or CUS
     | `phone_number` | string |  |  |
     | `homepage` | string (uri) |  |  |
     | `notification_emails` | string |  | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string |  | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
 
 
 === "Responses"
@@ -3052,6 +3254,17 @@ Update organization contact information. Requires CUSTOMER_CONTACT_UPDATE or CUS
     | `phone_number` | string |  |
     | `homepage` | string (uri) |  |
     | `notification_emails` | string | Comma-separated list of notification email addresses |
+    | `invoice_emails` | string | Comma-separated list of email addresses that receive invoice notifications instead of the organization owners |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Requires `CUSTOMER.UPDATE` on the object.
+    - Requires `CUSTOMER.CONTACT_UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3143,6 +3356,13 @@ Returns rendered HTML preview of the digest for a specific project.
     | `html_body` | string |
     | `text_body` | string |
 
+
+=== "Authorization"
+
+    Requires `CUSTOMER.UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Send a test digest email
@@ -3209,5 +3429,12 @@ Send a test digest email to the requesting user.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `CUSTOMER.UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

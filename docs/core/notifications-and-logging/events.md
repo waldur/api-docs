@@ -102,6 +102,13 @@
     | `message` | string |
     | `context` | object (free-form) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every event. Others name what they look at: the events of a scope whose events they may read (`scope`), or the events filed on them, made by them or affecting them (their own UUID in `related_user_uuid`); without either they see none. Events that an event-type guard hides from the caller are left out.
+
 ---
 
 ### Retrieve
@@ -183,6 +190,13 @@
     | `message` | string |
     | `context` | object (free-form) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every event. Others name what they look at: the events of a scope whose events they may read (`scope`), or the events filed on them, made by them or affecting them (their own UUID in `related_user_uuid`); without either they see none. Events that an event-type guard hides from the caller are left out.
+
 ---
 
 ## Other Actions
@@ -240,6 +254,13 @@
     | Field | Type |
     |---|---|
     | `count` | integer |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every event. Others name what they look at: the events of a scope whose events they may read (`scope`), or the events filed on them, made by them or affecting them (their own UUID in `related_user_uuid`); without either they see none. Events that an event-type guard hides from the caller are left out.
 
 ---
 
@@ -299,6 +320,11 @@ deliverable and writable -- see waldur_core.logging.availability.
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Returns a list of scope types acceptable by events filter
@@ -353,5 +379,10 @@ Returns a list of scope types acceptable by events filter.
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

@@ -66,6 +66,14 @@ Returns the list of user attribute fields that the Identity Bridge currently acc
     |---|---|
     | `allowed_fields` | array of strings |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An identity manager (`is_identity_manager`), with a personal access token of any scopes: a token narrows only the staff and support flags.
+
 ---
 
 ### Get Identity Bridge statistics
@@ -137,11 +145,16 @@ Returns system-wide statistics about the Identity Bridge: feature configuration,
     | `identity_managers.full_name` | string |
     | `identity_managers.managed_isds` | array of strings |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Push user attributes from an ISD
 
-Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Creates or updates a user based on username (CUID). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds.
+Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Creates or updates a user based on username (CUID). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds. Only staff may push staff, support or identity manager accounts.
 
 
 === "HTTPie"
@@ -244,11 +257,16 @@ Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Create
     | `created` | boolean |
     | `updated_fields` | array of strings |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Remove a user from an ISD
 
-Signals that a user has been removed from an ISD. Removes the source from active_isds, clears attributes owned by that source, and deactivates the user if no ISDs remain (configurable via FEDERATED_IDENTITY_DEACTIVATION_POLICY). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds.
+Signals that a user has been removed from an ISD. Removes the source from active_isds, clears attributes owned by that source, and deactivates the user if no ISDs remain (configurable via FEDERATED_IDENTITY_DEACTIVATION_POLICY). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds. Only staff may remove staff, support or identity manager accounts. A user who is not in the source ISD is answered with 404 and left unchanged.
 
 
 === "HTTPie"
@@ -325,5 +343,10 @@ Signals that a user has been removed from an ISD. Removes the source from active
     |---|---|
     | `uuid` | string (uuid) |
     | `deactivated` | boolean |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

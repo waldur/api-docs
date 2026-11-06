@@ -103,6 +103,14 @@ Returns a paginated list of software targets, which represent specific builds of
     | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
     | `gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Retrieve a software target
@@ -182,6 +190,14 @@ Returns the details of a specific software target, including its CPU family, mic
     | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
     | `gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Create a software target
@@ -247,6 +263,11 @@ Creates a new target for a software version. Requires staff permissions.
     | `location` | string | Target location (CVMFS path, download URL, etc.) |
     | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
     | `gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -327,6 +348,11 @@ Updates an existing software target. Requires staff permissions.
     | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
     | `gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update a software target
@@ -406,6 +432,11 @@ Partially updates an existing software target. Requires staff permissions.
     | `metadata` | object (free-form) | Target-specific metadata (build options, system requirements, etc.) |
     | `gpu_architectures` | array of strings | List of GPU architectures this target supports (e.g., ['nvidia/cc70', 'nvidia/cc90']) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a software target
@@ -472,5 +503,10 @@ Deletes a software target. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

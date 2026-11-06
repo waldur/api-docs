@@ -81,6 +81,11 @@
     | `hourly_days` | integer |  |
     | `daily_days` | integer | Empty keeps daily roll-ups forever. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -152,6 +157,11 @@
     | `raw_days` | integer |  |
     | `hourly_days` | integer |  |
     | `daily_days` | integer | Empty keeps daily roll-ups forever. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -234,6 +244,11 @@
     | `raw_days` | integer |  |
     | `hourly_days` | integer |  |
     | `daily_days` | integer | Empty keeps daily roll-ups forever. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -328,6 +343,11 @@
     | `hourly_days` | integer |  |
     | `daily_days` | integer | Empty keeps daily roll-ups forever. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -415,6 +435,11 @@
     | `hourly_days` | integer |  |
     | `daily_days` | integer | Empty keeps daily roll-ups forever. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -479,5 +504,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
