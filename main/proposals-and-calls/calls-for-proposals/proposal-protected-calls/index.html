@@ -22503,6 +22503,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>image</code></td>
+<td>string (uri)</td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>any</td>
 <td></td>
@@ -23431,7 +23436,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -23595,6 +23601,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>image</code></td>
+<td>string (uri)</td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>any</td>
 <td></td>
@@ -24523,7 +24534,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -24645,6 +24657,12 @@
 <td>string</td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>string (binary)</td>
+<td></td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
 </tr>
 <tr>
 <td><code>manager</code></td>
@@ -24929,6 +24947,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>image</code></td>
+<td>string (uri)</td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
+</tr>
+<tr>
 <td><code>state</code></td>
 <td>any</td>
 <td></td>
@@ -25857,7 +25880,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>CALL.CREATE on the call managing organisation named in manager and, unless the user has the staff flag, CALL.CREATE_PERMISSION on it too.</p>
 </div>
 </div>
 </div>
@@ -26212,6 +26235,12 @@
 <td></td>
 </tr>
 <tr>
+<td><code>image</code></td>
+<td>string (binary)</td>
+<td></td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
+</tr>
+<tr>
 <td><code>manager</code></td>
 <td>string (uri)</td>
 <td>✓</td>
@@ -26492,6 +26521,11 @@
 <td><code>description</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>string (uri)</td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
 </tr>
 <tr>
 <td><code>state</code></td>
@@ -27555,6 +27589,12 @@
 <td></td>
 </tr>
 <tr>
+<td><code>image</code></td>
+<td>string (binary)</td>
+<td></td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
+</tr>
+<tr>
 <td><code>fixed_duration_in_days</code></td>
 <td>integer</td>
 <td></td>
@@ -27829,6 +27869,11 @@
 <td><code>description</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>string (uri)</td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
 </tr>
 <tr>
 <td><code>state</code></td>
@@ -31138,7 +31183,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Counts over the calls where the caller holds the call manager role on the call itself; zeros without one.</p>
 </div>
 </div>
 </div>
@@ -31810,7 +31855,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -31984,7 +32029,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A read is for those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404. A write needs CALL.UPDATE, as the call's other writes do.</p>
 </div>
 </div>
 </div>
@@ -32140,7 +32185,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A read is for those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404. A write needs CALL.UPDATE, as the call's other writes do.</p>
 </div>
 </div>
 </div>
@@ -32368,7 +32413,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -32573,7 +32618,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -32760,7 +32806,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -33280,7 +33327,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -33777,7 +33825,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -34479,7 +34528,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -34661,7 +34711,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -37813,7 +37864,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -38150,7 +38202,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -38835,7 +38888,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -39182,7 +39236,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -39607,7 +39662,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Those who configure a call or may create one (CALL.UPDATE on a call, its call managing organisation or organization, or CALL.CREATE on a call managing organisation or organization) and users with the staff or support flag, whatever their token's scopes. Each sees the shared forms and those of the organizations whose calls they configure or may create; staff and support see every form.</p>
 </div>
 </div>
 </div>
@@ -40177,7 +40232,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -41216,7 +41271,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -41718,7 +41773,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -41890,7 +41945,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -42222,7 +42277,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -42320,7 +42375,7 @@
 <p><strong><code>200</code></strong> - </p>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -42569,7 +42624,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -42794,7 +42849,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
 </div>
 </div>
 </div>
@@ -43414,7 +43469,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -44016,7 +44072,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag see every call, whatever their token's scopes, as does a site-wide CALL.LIST grant. Anyone else sees the calls of organizations where they hold CALL.LIST, those of call managing organisations where they hold a role, and the calls they hold a role on, such as call manager or reviewer.</p>
 </div>
 </div>
 </div>
@@ -44247,7 +44304,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -44407,7 +44464,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>For those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404.</p>
 </div>
 </div>
 </div>
@@ -45612,6 +45669,11 @@
 <td><code>description</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>string (uri)</td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
 </tr>
 <tr>
 <td><code>state</code></td>
@@ -47317,7 +47379,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>CALL.CREATE on the call managing organisation named in manager. Only users with the staff flag may name an unpublished template.</p>
 </div>
 </div>
 </div>
@@ -48318,7 +48380,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>Requires <code>CALL.UPDATE</code> on the object or its manager.</p>
+<p>All of:</p>
+<ul>
+<li>Requires <code>CALL.UPDATE</code> on the object or its manager.</li>
+<li>A read is for those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404. A write needs CALL.UPDATE, as the call's other writes do.</li>
+</ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
@@ -52214,6 +52280,12 @@
 <td>string</td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>string (binary)</td>
+<td></td>
+<td>Logo shown on the call's card in place of its initials. A PNG, JPEG or GIF of at most 2 MB; null or an empty value removes it.</td>
 </tr>
 <tr>
 <td><code>manager</code></td>
@@ -57967,7 +58039,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>Requires <code>CALL.UPDATE</code> on the object or its manager.</p>
+<p>All of:</p>
+<ul>
+<li>Requires <code>CALL.UPDATE</code> on the object or its manager.</li>
+<li>A read is for those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404. A write needs CALL.UPDATE, as the call's other writes do.</li>
+</ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
@@ -62356,7 +62432,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>Requires <code>CALL.UPDATE</code> on the object or its manager.</p>
+<p>All of:</p>
+<ul>
+<li>Requires <code>CALL.UPDATE</code> on the object or its manager.</li>
+<li>A read is for those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404. A write needs CALL.UPDATE, as the call's other writes do.</li>
+</ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
@@ -65769,7 +65849,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>Requires <code>CALL.UPDATE</code> on the object or its manager.</p>
+<p>All of:</p>
+<ul>
+<li>Requires <code>CALL.UPDATE</code> on the object or its manager.</li>
+<li>A read is for those who configure the call (CALL.UPDATE on the call, on its call managing organisation or on the organization running it) and users with the staff or support flag, read from the user whatever their token's scopes; anyone else who sees the call gets 404. A write needs CALL.UPDATE, as the call's other writes do.</li>
+</ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>

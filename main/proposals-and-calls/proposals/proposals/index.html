@@ -10505,17 +10505,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-checklist-template-for-creating-new-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Get checklist template for creating new objects
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get-checklist-completion-status-with-review-triggers-reviewers-only" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -19680,17 +19669,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-checklist-template-for-creating-new-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Get checklist template for creating new objects
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get-checklist-completion-status-with-review-triggers-reviewers-only" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -20549,11 +20527,6 @@
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/proposal-proposals/{uuid}/checklist_review/</code></td>
 <td style="text-align: left;"><a href="#checklist-review">Checklist review</a></td>
-</tr>
-<tr>
-<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
-<td style="text-align: left;"><code>/api/proposal-proposals/checklist-template/</code></td>
-<td style="text-align: left;"><a href="#get-checklist-template-for-creating-new-objects">Get checklist template for creating new objects</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
@@ -21586,7 +21559,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag, or a site-wide LIST_PROPOSALS grant, see every proposal. Others see the proposals of calls whose organisation's customer they hold LIST_PROPOSALS on, their applicant team's, those they hold a role on, those of calls they manage or organise, a panel member's submitted ones without a blocking conflict of interest, those they review, are assigned, contribute to or hold an evaluator role on, a results reader's once the round is published, and an offering manager's or slot delegate's for their offering's part.</p>
 </div>
 </div>
 </div>
@@ -22174,7 +22148,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any signed-in user.</p>
+<p>Users with the staff or support flag, or a site-wide LIST_PROPOSALS grant, see every proposal. Others see the proposals of calls whose organisation's customer they hold LIST_PROPOSALS on, their applicant team's, those they hold a role on, those of calls they manage or organise, a panel member's submitted ones without a blocking conflict of interest, those they review, are assigned, contribute to or hold an evaluator role on, a results reader's once the round is published, and an offering manager's or slot delegate's for their offering's part.</p>
 </div>
 </div>
 </div>
@@ -22806,7 +22781,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Any authenticated user drafts a proposal in an open round of an active call, if they match the call's user restrictions (email, affiliation, identity source, AAI); they become its manager.</p>
 </div>
 </div>
 </div>
@@ -24425,7 +24400,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Where the proposal's award stands against the call's budgets is read by users with the staff or support flag, those overseeing its call and those driving its workflow; never by the applicant team (<code>user_can_view_proposal_budget</code>).</p>
 </div>
 </div>
 </div>
@@ -24738,7 +24713,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever sees the proposal; it lists only the requests they read (user_reads_change_request): every one for users with the staff or support flag and the call's workflow managers, a request to the applicant for the applicant team and the step's completers, a reopened contribution for its holders and the person it is handed to.</p>
+<p>Users with the staff or support flag, or a site-wide LIST_PROPOSALS grant, see every proposal. Others see the proposals of calls whose organisation's customer they hold LIST_PROPOSALS on, their applicant team's, those they hold a role on, those of calls they manage or organise, a panel member's submitted ones without a blocking conflict of interest, those they review, are assigned, contribute to or hold an evaluator role on, a results reader's once the round is published, and an offering manager's or slot delegate's for their offering's part.</p>
 </div>
 </div>
 </div>
@@ -25032,7 +25008,7 @@
 <p>Any of:</p>
 <ul>
 <li>Global support, for reads.</li>
-<li>A check this reference does not describe yet.</li>
+<li>Staff and support; the applicant team and whoever may update the proposal; LIST_PROPOSALS holders on its call or the call's managing organisation; the call's managers; a reviewer holding a live review of it; and holders of an evaluator role on it (reads_proposal_checklist).</li>
 </ul>
 </div>
 </div>
@@ -25356,431 +25332,9 @@
 </div>
 </div>
 <hr />
-<h3 id="get-checklist-template-for-creating-new-objects">Get checklist template for creating new objects</h3>
-<p>Get checklist template for creating new objects.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:6"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><input id="__tabbed_16_3" name="__tabbed_16" type="radio" /><input id="__tabbed_16_4" name="__tabbed_16" type="radio" /><input id="__tabbed_16_5" name="__tabbed_16" type="radio" /><input id="__tabbed_16_6" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">HTTPie</label><label for="__tabbed_16_2">Python</label><label for="__tabbed_16_3">TypeScript</label><label for="__tabbed_16_4">Query Parameters</label><label for="__tabbed_16_5">Responses</label><label for="__tabbed_16_6">Authorization</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>https://api.example.com/api/proposal-proposals/checklist-template/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">parent_uuid</span><span class="o">==</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_proposals</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_proposals_checklist_template_retrieve</span> <span class="c1"># (1)</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
-    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
-<span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">proposal_proposals_checklist_template_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">parent_uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<ol>
-<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_checklist_template_retrieve.py"><code>proposal_proposals_checklist_template_retrieve</code></a></li>
-</ol>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">proposalProposalsChecklistTemplateRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
-
-<span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">proposalProposalsChecklistTemplateRetrieve</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;parent_uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">});</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
-<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>parent_uuid</code></td>
-<td>string (uuid)</td>
-<td>✓</td>
-<td>UUID of the parent object (e.g., customer UUID for new projects)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tabbed-block">
-<p><strong><code>200</code></strong> - </p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>checklist</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.required</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.user_guidance</code></td>
-<td>string</td>
-<td>Additional guidance text visible to users when answering and reviewing</td>
-</tr>
-<tr>
-<td><code>questions.question_options</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.question_options.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.question_options.label</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.question_options.order</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.question_type</code></td>
-<td>any</td>
-<td>Type of question and expected answer format</td>
-</tr>
-<tr>
-<td><code>questions.order</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.min_value</code></td>
-<td>string (decimal)</td>
-<td>Minimum value allowed for NUMBER, YEAR, and RATING type questions</td>
-</tr>
-<tr>
-<td><code>questions.max_value</code></td>
-<td>string (decimal)</td>
-<td>Maximum value allowed for NUMBER, YEAR, and RATING type questions</td>
-</tr>
-<tr>
-<td><code>questions.allowed_file_types</code></td>
-<td>array of strings</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.allowed_mime_types</code></td>
-<td>array of strings</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.max_file_size_mb</code></td>
-<td>integer</td>
-<td>Maximum file size in megabytes. If not set, no size limit is enforced.</td>
-</tr>
-<tr>
-<td><code>questions.max_files_count</code></td>
-<td>integer</td>
-<td>Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced.</td>
-</tr>
-<tr>
-<td><code>questions.likert_scale_length</code></td>
-<td>any</td>
-<td>Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions.</td>
-</tr>
-<tr>
-<td><code>questions.likert_low_label</code></td>
-<td>string</td>
-<td>Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional.</td>
-</tr>
-<tr>
-<td><code>questions.likert_high_label</code></td>
-<td>string</td>
-<td>Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional.</td>
-</tr>
-<tr>
-<td><code>questions.likert_allow_na</code></td>
-<td>boolean</td>
-<td>Allow respondents to choose 'N/A' as an answer for LIKERT type questions.</td>
-</tr>
-<tr>
-<td><code>questions.rich_text_char_limit</code></td>
-<td>integer</td>
-<td>Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced.</td>
-</tr>
-<tr>
-<td><code>questions.rich_text_toolbar_level</code></td>
-<td>any</td>
-<td>Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'.</td>
-</tr>
-<tr>
-<td><code>questions.operator</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.review_answer_value</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>questions.always_requires_review</code></td>
-<td>boolean</td>
-<td>This question always requires review regardless of answer</td>
-</tr>
-<tr>
-<td><code>questions.guidance_answer_value</code></td>
-<td>object (free-form)</td>
-<td>Answer value that triggers display of user guidance.</td>
-</tr>
-<tr>
-<td><code>questions.guidance_operator</code></td>
-<td>any</td>
-<td>Operator to use when comparing answer with guidance_answer_value</td>
-</tr>
-<tr>
-<td><code>questions.always_show_guidance</code></td>
-<td>boolean</td>
-<td>Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator</td>
-</tr>
-<tr>
-<td><code>questions.dependency_logic_operator</code></td>
-<td>any</td>
-<td>Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.required</code></td>
-<td>boolean</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.description</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.user_guidance</code></td>
-<td>string</td>
-<td>Additional guidance text visible to users when answering and reviewing</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_options</code></td>
-<td>array of objects</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_options.uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_options.label</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_options.order</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.question_type</code></td>
-<td>any</td>
-<td>Type of question and expected answer format</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.order</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.min_value</code></td>
-<td>string (decimal)</td>
-<td>Minimum value allowed for NUMBER, YEAR, and RATING type questions</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.max_value</code></td>
-<td>string (decimal)</td>
-<td>Maximum value allowed for NUMBER, YEAR, and RATING type questions</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.allowed_file_types</code></td>
-<td>array of strings</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.allowed_mime_types</code></td>
-<td>array of strings</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.max_file_size_mb</code></td>
-<td>integer</td>
-<td>Maximum file size in megabytes. If not set, no size limit is enforced.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.max_files_count</code></td>
-<td>integer</td>
-<td>Maximum number of files allowed for MULTIPLE_FILES type questions. If not set, no count limit is enforced.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.likert_scale_length</code></td>
-<td>any</td>
-<td>Number of points on the Likert scale (3, 5, or 7). Required for LIKERT type questions.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.likert_low_label</code></td>
-<td>string</td>
-<td>Label for the lowest point on the Likert scale (e.g. 'Strongly disagree'). Optional.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.likert_high_label</code></td>
-<td>string</td>
-<td>Label for the highest point on the Likert scale (e.g. 'Strongly agree'). Optional.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.likert_allow_na</code></td>
-<td>boolean</td>
-<td>Allow respondents to choose 'N/A' as an answer for LIKERT type questions.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.rich_text_char_limit</code></td>
-<td>integer</td>
-<td>Maximum number of characters allowed in RICH_TEXT type answers. If not set, no limit is enforced.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.rich_text_toolbar_level</code></td>
-<td>any</td>
-<td>Toolbar level for the rich text editor: 'minimal', 'standard', or 'extended'.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.operator</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.review_answer_value</code></td>
-<td>any</td>
-<td></td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.always_requires_review</code></td>
-<td>boolean</td>
-<td>This question always requires review regardless of answer</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.guidance_answer_value</code></td>
-<td>object (free-form)</td>
-<td>Answer value that triggers display of user guidance.</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.guidance_operator</code></td>
-<td>any</td>
-<td>Operator to use when comparing answer with guidance_answer_value</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.always_show_guidance</code></td>
-<td>boolean</td>
-<td>Show user guidance always, regardless of answer. If False, guidance is conditional on answer matching guidance_answer_value with guidance_operator</td>
-</tr>
-<tr>
-<td><code>initial_visible_questions.dependency_logic_operator</code></td>
-<td>any</td>
-<td>Defines how multiple dependencies are evaluated. AND: All dependencies must be satisfied. OR: At least one dependency must be satisfied.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<p><strong><code>400</code></strong> - </p>
-<hr />
-<p><strong><code>404</code></strong> - </p>
-</div>
-<div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
-</div>
-</div>
-</div>
-<hr />
 <h3 id="get-checklist-completion-status-with-review-triggers-reviewers-only">Get checklist completion status with review triggers (reviewers only)</h3>
 <p>Get checklist completion status with review triggers (reviewers only).</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:6"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><input id="__tabbed_17_4" name="__tabbed_17" type="radio" /><input id="__tabbed_17_5" name="__tabbed_17" type="radio" /><input id="__tabbed_17_6" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HTTPie</label><label for="__tabbed_17_2">Python</label><label for="__tabbed_17_3">TypeScript</label><label for="__tabbed_17_4">Path Parameters</label><label for="__tabbed_17_5">Responses</label><label for="__tabbed_17_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:6"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><input id="__tabbed_16_3" name="__tabbed_16" type="radio" /><input id="__tabbed_16_4" name="__tabbed_16" type="radio" /><input id="__tabbed_16_5" name="__tabbed_16" type="radio" /><input id="__tabbed_16_6" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">HTTPie</label><label for="__tabbed_16_2">Python</label><label for="__tabbed_16_3">TypeScript</label><label for="__tabbed_16_4">Path Parameters</label><label for="__tabbed_16_5">Responses</label><label for="__tabbed_16_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -25963,7 +25517,7 @@
 <hr />
 <h3 id="get-checklist-completion-status">Get checklist completion status</h3>
 <p>Get checklist completion status.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:6"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><input id="__tabbed_18_4" name="__tabbed_18" type="radio" /><input id="__tabbed_18_5" name="__tabbed_18" type="radio" /><input id="__tabbed_18_6" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HTTPie</label><label for="__tabbed_18_2">Python</label><label for="__tabbed_18_3">TypeScript</label><label for="__tabbed_18_4">Path Parameters</label><label for="__tabbed_18_5">Responses</label><label for="__tabbed_18_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:6"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><input id="__tabbed_17_3" name="__tabbed_17" type="radio" /><input id="__tabbed_17_4" name="__tabbed_17" type="radio" /><input id="__tabbed_17_5" name="__tabbed_17" type="radio" /><input id="__tabbed_17_6" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">HTTPie</label><label for="__tabbed_17_2">Python</label><label for="__tabbed_17_3">TypeScript</label><label for="__tabbed_17_4">Path Parameters</label><label for="__tabbed_17_5">Responses</label><label for="__tabbed_17_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -26112,7 +25666,7 @@
 <p>Any of:</p>
 <ul>
 <li>Global support, for reads.</li>
-<li>A check this reference does not describe yet.</li>
+<li>Staff and support; the applicant team and whoever may update the proposal; LIST_PROPOSALS holders on its call or the call's managing organisation; the call's managers; a reviewer holding a live review of it; and holders of an evaluator role on it (reads_proposal_checklist).</li>
 </ul>
 </div>
 </div>
@@ -26120,7 +25674,7 @@
 <hr />
 <h3 id="contributions">Contributions</h3>
 <p>List the contributions to the proposal's workflow steps the caller may read: one per person or per requested offering, with status, outcome and conditions.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:7"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><input id="__tabbed_19_6" name="__tabbed_19" type="radio" /><input id="__tabbed_19_7" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Path Parameters</label><label for="__tabbed_19_5">Query Parameters</label><label for="__tabbed_19_6">Responses</label><label for="__tabbed_19_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:7"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><input id="__tabbed_18_3" name="__tabbed_18" type="radio" /><input id="__tabbed_18_4" name="__tabbed_18" type="radio" /><input id="__tabbed_18_5" name="__tabbed_18" type="radio" /><input id="__tabbed_18_6" name="__tabbed_18" type="radio" /><input id="__tabbed_18_7" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">HTTPie</label><label for="__tabbed_18_2">Python</label><label for="__tabbed_18_3">TypeScript</label><label for="__tabbed_18_4">Path Parameters</label><label for="__tabbed_18_5">Query Parameters</label><label for="__tabbed_18_6">Responses</label><label for="__tabbed_18_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -26516,14 +26070,15 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever sees the proposal; it lists only the contributions they read (contributions.Access.can_read) and the slots handed to them.</p>
+<p>Users with the staff or support flag, or a site-wide LIST_PROPOSALS grant, see every proposal. Others see the proposals of calls whose organisation's customer they hold LIST_PROPOSALS on, their applicant team's, those they hold a role on, those of calls they manage or organise, a panel member's submitted ones without a blocking conflict of interest, those they review, are assigned, contribute to or hold an evaluator role on, a results reader's once the round is published, and an offering manager's or slot delegate's for their offering's part.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="get-submitter-dashboard-stats">Get submitter dashboard stats</h3>
 <p>Returns counts of the current user's own proposals grouped by state, covering both in-progress and decided proposals.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:5"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Responses</label><label for="__tabbed_20_5">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:5"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Responses</label><label for="__tabbed_19_5">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -26622,14 +26177,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Counts of the proposals the caller created.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="the-reviewers-the-caller-suggested-for-the-proposal-with-where-each-stands">The reviewers the caller suggested for the proposal, with where each stands</h3>
 <p>The reviewers the caller suggested for the proposal, with where each stands.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:7"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><input id="__tabbed_21_7" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Query Parameters</label><label for="__tabbed_21_6">Responses</label><label for="__tabbed_21_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:7"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><input id="__tabbed_20_6" name="__tabbed_20" type="radio" /><input id="__tabbed_20_7" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Path Parameters</label><label for="__tabbed_20_5">Query Parameters</label><label for="__tabbed_20_6">Responses</label><label for="__tabbed_20_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -26824,7 +26379,7 @@
 <hr />
 <h3 id="offering-assessments">Offering assessments</h3>
 <p>What the proposal's per-offering assessments concluded about each requested offering -- accepted, conditionally accepted with its conditions, or rejected -- for the allocation decision.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:7"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><input id="__tabbed_22_6" name="__tabbed_22" type="radio" /><input id="__tabbed_22_7" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Path Parameters</label><label for="__tabbed_22_5">Query Parameters</label><label for="__tabbed_22_6">Responses</label><label for="__tabbed_22_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:7"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><input id="__tabbed_21_7" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Query Parameters</label><label for="__tabbed_21_6">Responses</label><label for="__tabbed_21_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -27108,14 +26663,15 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever sees the proposal; it lists every per-offering outcome for those overseeing the call who are not on the applicant team, and otherwise only the contributions the caller reads (contributions.Access.can_read).</p>
+<p>Users with the staff or support flag, or a site-wide LIST_PROPOSALS grant, see every proposal. Others see the proposals of calls whose organisation's customer they hold LIST_PROPOSALS on, their applicant team's, those they hold a role on, those of calls they manage or organise, a panel member's submitted ones without a blocking conflict of interest, those they review, are assigned, contribute to or hold an evaluator role on, a results reader's once the round is published, and an offering manager's or slot delegate's for their offering's part.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="the-roles-the-proposal-may-be-previewed-as">The roles the proposal may be previewed as</h3>
 <p>Every role of the proposal's call that its page may be previewed as -- an offering's team once per requested offering. For the same readers as workflow-timeline.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="23:7"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><input id="__tabbed_23_6" name="__tabbed_23" type="radio" /><input id="__tabbed_23_7" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Path Parameters</label><label for="__tabbed_23_5">Query Parameters</label><label for="__tabbed_23_6">Responses</label><label for="__tabbed_23_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:7"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><input id="__tabbed_22_6" name="__tabbed_22" type="radio" /><input id="__tabbed_22_7" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Path Parameters</label><label for="__tabbed_22_5">Query Parameters</label><label for="__tabbed_22_6">Responses</label><label for="__tabbed_22_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -27258,14 +26814,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Users with the staff or support flag, and holders of UPDATE_CALL on the proposal's call, its managing organisation or the customer running it who are not on the proposal's applicant team; 404 for anyone else.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="released-reports">Released reports</h3>
 <p>The reports of the proposal's steps released to the applicant, such as the consolidated report or final feedback. For the call team, and for the applicant team once released -- whatever the call says about showing reviews -- unless the decision is held for the round's publication.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="24:7"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><input id="__tabbed_24_6" name="__tabbed_24" type="radio" /><input id="__tabbed_24_7" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Path Parameters</label><label for="__tabbed_24_5">Query Parameters</label><label for="__tabbed_24_6">Responses</label><label for="__tabbed_24_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:7"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><input id="__tabbed_23_6" name="__tabbed_23" type="radio" /><input id="__tabbed_23_7" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Path Parameters</label><label for="__tabbed_23_5">Query Parameters</label><label for="__tabbed_23_6">Responses</label><label for="__tabbed_23_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -27731,14 +27287,15 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever sees the proposal; it lists only the reports they read: the call team every one, the applicant team and the call's reviewers and panel members unless the decision is held for the round's publication.</p>
+<p>Users with the staff or support flag, or a site-wide LIST_PROPOSALS grant, see every proposal. Others see the proposals of calls whose organisation's customer they hold LIST_PROPOSALS on, their applicant team's, those they hold a role on, those of calls they manage or organise, a panel member's submitted ones without a blocking conflict of interest, those they review, are assigned, contribute to or hold an evaluator role on, a results reader's once the round is published, and an offering manager's or slot delegate's for their offering's part.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="list-resources-for-a-proposal">List resources for a proposal</h3>
 <p>List resources for a proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="25:7"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><input id="__tabbed_25_6" name="__tabbed_25" type="radio" /><input id="__tabbed_25_7" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Query Parameters</label><label for="__tabbed_25_6">Responses</label><label for="__tabbed_25_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:7"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><input id="__tabbed_24_6" name="__tabbed_24" type="radio" /><input id="__tabbed_24_7" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Path Parameters</label><label for="__tabbed_24_5">Query Parameters</label><label for="__tabbed_24_6">Responses</label><label for="__tabbed_24_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -27962,7 +27519,7 @@
 </div>
 <hr />
 <h3 id="retrieve_2">Retrieve</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="26:6"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><input id="__tabbed_26_6" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Responses</label><label for="__tabbed_26_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:6"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><input id="__tabbed_25_6" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Responses</label><label for="__tabbed_25_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -28170,7 +27727,7 @@
 <hr />
 <h3 id="reviewer-suggestion-candidates">Reviewer suggestion candidates</h3>
 <p>Registered users the caller may suggest as reviewers: those with a published reviewer profile and those in the call's reviewer pool, at most 20, never with their e-mail address. The applicant team, the caller and the proposal's evaluator role holders are left out; a standing conflict of interest is flagged. For the holders of the evaluator role of the active step collecting reviewer suggestions.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="27:7"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><input id="__tabbed_27_2" name="__tabbed_27" type="radio" /><input id="__tabbed_27_3" name="__tabbed_27" type="radio" /><input id="__tabbed_27_4" name="__tabbed_27" type="radio" /><input id="__tabbed_27_5" name="__tabbed_27" type="radio" /><input id="__tabbed_27_6" name="__tabbed_27" type="radio" /><input id="__tabbed_27_7" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">HTTPie</label><label for="__tabbed_27_2">Python</label><label for="__tabbed_27_3">TypeScript</label><label for="__tabbed_27_4">Path Parameters</label><label for="__tabbed_27_5">Query Parameters</label><label for="__tabbed_27_6">Responses</label><label for="__tabbed_27_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:7"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><input id="__tabbed_26_6" name="__tabbed_26" type="radio" /><input id="__tabbed_26_7" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Query Parameters</label><label for="__tabbed_26_6">Responses</label><label for="__tabbed_26_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -28347,14 +27904,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>A holder of the evaluator role contributing to the proposal's active step collecting suggestions searches for reviewers to suggest; never anyone on the applicant team (<code>may_search_candidates</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="role-assignment-candidates">Role assignment candidates</h3>
 <p>Users who may hold the role on the proposal by its eligibility, at most 50 (10 for a role any user may hold), with whether they can be assigned: a conflict of interest on record or another evaluator role on the proposal rules them out. The applicant team is left out. Email, and whether a conflict is on record, are shown to staff and those overseeing the call only -- email for a role any user may hold to staff only; anyone else finds a user by email only by their whole address. For whoever may assign the role.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="28:7"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><input id="__tabbed_28_2" name="__tabbed_28" type="radio" /><input id="__tabbed_28_3" name="__tabbed_28" type="radio" /><input id="__tabbed_28_4" name="__tabbed_28" type="radio" /><input id="__tabbed_28_5" name="__tabbed_28" type="radio" /><input id="__tabbed_28_6" name="__tabbed_28" type="radio" /><input id="__tabbed_28_7" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">HTTPie</label><label for="__tabbed_28_2">Python</label><label for="__tabbed_28_3">TypeScript</label><label for="__tabbed_28_4">Path Parameters</label><label for="__tabbed_28_5">Query Parameters</label><label for="__tabbed_28_6">Responses</label><label for="__tabbed_28_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="27:7"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><input id="__tabbed_27_2" name="__tabbed_27" type="radio" /><input id="__tabbed_27_3" name="__tabbed_27" type="radio" /><input id="__tabbed_27_4" name="__tabbed_27" type="radio" /><input id="__tabbed_27_5" name="__tabbed_27" type="radio" /><input id="__tabbed_27_6" name="__tabbed_27" type="radio" /><input id="__tabbed_27_7" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">HTTPie</label><label for="__tabbed_27_2">Python</label><label for="__tabbed_27_3">TypeScript</label><label for="__tabbed_27_4">Path Parameters</label><label for="__tabbed_27_5">Query Parameters</label><label for="__tabbed_27_6">Responses</label><label for="__tabbed_27_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -28552,14 +28109,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Who holds the evaluator roles on the proposal is read by users with the staff or support flag, those overseeing its call, the holders themselves and the completer of an active assignment step; never by the applicant team (<code>user_can_view_proposal_roles</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="role-assignments">Role assignments</h3>
 <p>Who holds the call's evaluator roles on the proposal. For the call's managers, the holders and the completer of an assignment step; never the applicant team.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="29:7"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><input id="__tabbed_29_6" name="__tabbed_29" type="radio" /><input id="__tabbed_29_7" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Path Parameters</label><label for="__tabbed_29_5">Query Parameters</label><label for="__tabbed_29_6">Responses</label><label for="__tabbed_29_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="28:7"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><input id="__tabbed_28_2" name="__tabbed_28" type="radio" /><input id="__tabbed_28_3" name="__tabbed_28" type="radio" /><input id="__tabbed_28_4" name="__tabbed_28" type="radio" /><input id="__tabbed_28_5" name="__tabbed_28" type="radio" /><input id="__tabbed_28_6" name="__tabbed_28" type="radio" /><input id="__tabbed_28_7" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">HTTPie</label><label for="__tabbed_28_2">Python</label><label for="__tabbed_28_3">TypeScript</label><label for="__tabbed_28_4">Path Parameters</label><label for="__tabbed_28_5">Query Parameters</label><label for="__tabbed_28_6">Responses</label><label for="__tabbed_28_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -28827,14 +28384,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Who holds the evaluator roles on the proposal is read by users with the staff or support flag, those overseeing its call, the holders themselves and the completer of an active assignment step; never by the applicant team (<code>user_can_view_proposal_roles</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="runs">Runs</h3>
 <p>The accepted proposal's extension requests and final report, oldest first. For whoever reads its award; the applicant team reads what was granted once it is decided.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="30:7"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><input id="__tabbed_30_2" name="__tabbed_30" type="radio" /><input id="__tabbed_30_3" name="__tabbed_30" type="radio" /><input id="__tabbed_30_4" name="__tabbed_30" type="radio" /><input id="__tabbed_30_5" name="__tabbed_30" type="radio" /><input id="__tabbed_30_6" name="__tabbed_30" type="radio" /><input id="__tabbed_30_7" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">HTTPie</label><label for="__tabbed_30_2">Python</label><label for="__tabbed_30_3">TypeScript</label><label for="__tabbed_30_4">Path Parameters</label><label for="__tabbed_30_5">Query Parameters</label><label for="__tabbed_30_6">Responses</label><label for="__tabbed_30_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="29:7"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><input id="__tabbed_29_6" name="__tabbed_29" type="radio" /><input id="__tabbed_29_7" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Path Parameters</label><label for="__tabbed_29_5">Query Parameters</label><label for="__tabbed_29_6">Responses</label><label for="__tabbed_29_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29032,14 +28589,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>An accepted proposal's extension requests and final report are read by whoever reads its award (<code>user_can_view_runs</code>): users with the staff or support flag, the call's managers, the managers of the offerings involved, and the applicant team once the award is released.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="retrieve_3">Retrieve</h3>
 <p>Read an extension request or final report, or change what an open extension asks for -- the proposal's team, while its request step runs -- or grants: whoever completes its decision, while that runs.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="31:6"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><input id="__tabbed_31_2" name="__tabbed_31" type="radio" /><input id="__tabbed_31_3" name="__tabbed_31" type="radio" /><input id="__tabbed_31_4" name="__tabbed_31" type="radio" /><input id="__tabbed_31_5" name="__tabbed_31" type="radio" /><input id="__tabbed_31_6" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">HTTPie</label><label for="__tabbed_31_2">Python</label><label for="__tabbed_31_3">TypeScript</label><label for="__tabbed_31_4">Path Parameters</label><label for="__tabbed_31_5">Responses</label><label for="__tabbed_31_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="30:6"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><input id="__tabbed_30_2" name="__tabbed_30" type="radio" /><input id="__tabbed_30_3" name="__tabbed_30" type="radio" /><input id="__tabbed_30_4" name="__tabbed_30" type="radio" /><input id="__tabbed_30_5" name="__tabbed_30" type="radio" /><input id="__tabbed_30_6" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">HTTPie</label><label for="__tabbed_30_2">Python</label><label for="__tabbed_30_3">TypeScript</label><label for="__tabbed_30_4">Path Parameters</label><label for="__tabbed_30_5">Responses</label><label for="__tabbed_30_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29220,14 +28777,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>An accepted proposal's extension requests and final report are read by whoever reads its award (<code>user_can_view_runs</code>): users with the staff or support flag, the call's managers, the managers of the offerings involved, and the applicant team once the award is released.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="step-checklist-responses">Step checklist responses</h3>
 <p>List the contributions to a workflow step with their checklist answers, for the threaded view of the step: one entry per contribution (per person or per requested offering) the caller may read.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="32:7"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><input id="__tabbed_32_6" name="__tabbed_32" type="radio" /><input id="__tabbed_32_7" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Query Parameters</label><label for="__tabbed_32_6">Responses</label><label for="__tabbed_32_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="31:7"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><input id="__tabbed_31_2" name="__tabbed_31" type="radio" /><input id="__tabbed_31_3" name="__tabbed_31" type="radio" /><input id="__tabbed_31_4" name="__tabbed_31" type="radio" /><input id="__tabbed_31_5" name="__tabbed_31" type="radio" /><input id="__tabbed_31_6" name="__tabbed_31" type="radio" /><input id="__tabbed_31_7" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">HTTPie</label><label for="__tabbed_31_2">Python</label><label for="__tabbed_31_3">TypeScript</label><label for="__tabbed_31_4">Path Parameters</label><label for="__tabbed_31_5">Query Parameters</label><label for="__tabbed_31_6">Responses</label><label for="__tabbed_31_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29682,7 +29239,7 @@
 <hr />
 <h3 id="get-a-workflow-steps-checklist-with-questions-and-answers">Get a workflow step's checklist with questions and answers</h3>
 <p>Get a workflow step's checklist with questions and answers.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="33:7"><input checked="checked" id="__tabbed_33_1" name="__tabbed_33" type="radio" /><input id="__tabbed_33_2" name="__tabbed_33" type="radio" /><input id="__tabbed_33_3" name="__tabbed_33" type="radio" /><input id="__tabbed_33_4" name="__tabbed_33" type="radio" /><input id="__tabbed_33_5" name="__tabbed_33" type="radio" /><input id="__tabbed_33_6" name="__tabbed_33" type="radio" /><input id="__tabbed_33_7" name="__tabbed_33" type="radio" /><div class="tabbed-labels"><label for="__tabbed_33_1">HTTPie</label><label for="__tabbed_33_2">Python</label><label for="__tabbed_33_3">TypeScript</label><label for="__tabbed_33_4">Path Parameters</label><label for="__tabbed_33_5">Query Parameters</label><label for="__tabbed_33_6">Responses</label><label for="__tabbed_33_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="32:7"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><input id="__tabbed_32_6" name="__tabbed_32" type="radio" /><input id="__tabbed_32_7" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Query Parameters</label><label for="__tabbed_32_6">Responses</label><label for="__tabbed_32_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29986,7 +29543,7 @@
 <hr />
 <h3 id="step-inputs">Step inputs</h3>
 <p>What the input steps of one of the proposal's workflow steps produced: their contributions with answers, reviews and outcome. For whoever holds the step's work once it has started -- its contributors and completer, or the applicant team on an applicant step, who read the public parts only -- and for those overseeing the call.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="34:7"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><input id="__tabbed_34_2" name="__tabbed_34" type="radio" /><input id="__tabbed_34_3" name="__tabbed_34" type="radio" /><input id="__tabbed_34_4" name="__tabbed_34" type="radio" /><input id="__tabbed_34_5" name="__tabbed_34" type="radio" /><input id="__tabbed_34_6" name="__tabbed_34" type="radio" /><input id="__tabbed_34_7" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">HTTPie</label><label for="__tabbed_34_2">Python</label><label for="__tabbed_34_3">TypeScript</label><label for="__tabbed_34_4">Path Parameters</label><label for="__tabbed_34_5">Query Parameters</label><label for="__tabbed_34_6">Responses</label><label for="__tabbed_34_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="33:7"><input checked="checked" id="__tabbed_33_1" name="__tabbed_33" type="radio" /><input id="__tabbed_33_2" name="__tabbed_33" type="radio" /><input id="__tabbed_33_3" name="__tabbed_33" type="radio" /><input id="__tabbed_33_4" name="__tabbed_33" type="radio" /><input id="__tabbed_33_5" name="__tabbed_33" type="radio" /><input id="__tabbed_33_6" name="__tabbed_33" type="radio" /><input id="__tabbed_33_7" name="__tabbed_33" type="radio" /><div class="tabbed-labels"><label for="__tabbed_33_1">HTTPie</label><label for="__tabbed_33_2">Python</label><label for="__tabbed_33_3">TypeScript</label><label for="__tabbed_33_4">Path Parameters</label><label for="__tabbed_33_5">Query Parameters</label><label for="__tabbed_33_6">Responses</label><label for="__tabbed_33_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30705,14 +30262,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Never from the applicant team, users with the staff or support flag and those overseeing the call (its managers, organisers of its managing organisation, UPDATE_CALL holders) read every step's inputs; once the step has started, whoever holds its work -- its contributors and completer, or the applicant team on an applicant step (step_inputs.can_read_inputs).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="suggested-reviewers">Suggested reviewers</h3>
 <p>The reviewers the proposal's evaluators suggested, merged per suggested person, with who suggested them, where each stands and the conflicts of interest known. For the call's managers and the completer of a step collecting suggestions; never the applicant team. Only staff, support and those overseeing the call read a suggested user's address, and see a typed address matched to its user; the completer reads typed addresses as typed.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="35:7"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><input id="__tabbed_35_2" name="__tabbed_35" type="radio" /><input id="__tabbed_35_3" name="__tabbed_35" type="radio" /><input id="__tabbed_35_4" name="__tabbed_35" type="radio" /><input id="__tabbed_35_5" name="__tabbed_35" type="radio" /><input id="__tabbed_35_6" name="__tabbed_35" type="radio" /><input id="__tabbed_35_7" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">HTTPie</label><label for="__tabbed_35_2">Python</label><label for="__tabbed_35_3">TypeScript</label><label for="__tabbed_35_4">Path Parameters</label><label for="__tabbed_35_5">Query Parameters</label><label for="__tabbed_35_6">Responses</label><label for="__tabbed_35_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="34:7"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><input id="__tabbed_34_2" name="__tabbed_34" type="radio" /><input id="__tabbed_34_3" name="__tabbed_34" type="radio" /><input id="__tabbed_34_4" name="__tabbed_34" type="radio" /><input id="__tabbed_34_5" name="__tabbed_34" type="radio" /><input id="__tabbed_34_6" name="__tabbed_34" type="radio" /><input id="__tabbed_34_7" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">HTTPie</label><label for="__tabbed_34_2">Python</label><label for="__tabbed_34_3">TypeScript</label><label for="__tabbed_34_4">Path Parameters</label><label for="__tabbed_34_5">Query Parameters</label><label for="__tabbed_34_6">Responses</label><label for="__tabbed_34_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30970,14 +30527,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>The proposal's suggested reviewers are read by staff and, unless a conflict of interest is recorded against them, by support, those overseeing its call and the evaluator-role holders completing a step that collects them; never by anyone on the applicant team (<code>may_view</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="unlockable-parts">Unlockable parts</h3>
 <p>The parts of the proposal a request for changes may unlock: the Project details fields the call collects, and its documents, requested resources, team and compliance answers. At a step of an extension request or final report (step_uuid), the run's parts instead: its applicant step's answers, and what an extension asks for.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="36:7"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><input id="__tabbed_36_2" name="__tabbed_36" type="radio" /><input id="__tabbed_36_3" name="__tabbed_36" type="radio" /><input id="__tabbed_36_4" name="__tabbed_36" type="radio" /><input id="__tabbed_36_5" name="__tabbed_36" type="radio" /><input id="__tabbed_36_6" name="__tabbed_36" type="radio" /><input id="__tabbed_36_7" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">HTTPie</label><label for="__tabbed_36_2">Python</label><label for="__tabbed_36_3">TypeScript</label><label for="__tabbed_36_4">Path Parameters</label><label for="__tabbed_36_5">Query Parameters</label><label for="__tabbed_36_6">Responses</label><label for="__tabbed_36_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="35:7"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><input id="__tabbed_35_2" name="__tabbed_35" type="radio" /><input id="__tabbed_35_3" name="__tabbed_35" type="radio" /><input id="__tabbed_35_4" name="__tabbed_35" type="radio" /><input id="__tabbed_35_5" name="__tabbed_35" type="radio" /><input id="__tabbed_35_6" name="__tabbed_35" type="radio" /><input id="__tabbed_35_7" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">HTTPie</label><label for="__tabbed_35_2">Python</label><label for="__tabbed_35_3">TypeScript</label><label for="__tabbed_35_4">Path Parameters</label><label for="__tabbed_35_5">Query Parameters</label><label for="__tabbed_35_6">Responses</label><label for="__tabbed_35_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31100,14 +30657,15 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever sees the proposal reads which of its parts a request for changes may unlock.</p>
+<p>Users with the staff or support flag, or a site-wide LIST_PROPOSALS grant, see every proposal. Others see the proposals of calls whose organisation's customer they hold LIST_PROPOSALS on, their applicant team's, those they hold a role on, those of calls they manage or organise, a panel member's submitted ones without a blocking conflict of interest, those they review, are assigned, contribute to or hold an evaluator role on, a results reader's once the round is published, and an offering manager's or slot delegate's for their offering's part.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="workflow-mail-of-the-proposal-as-sent">Workflow mail of the proposal, as sent</h3>
 <p>The mails among <code>uuid</code> (repeat it for each; from a timeline row's email_log_uuids) that the proposal's workflow sent: subject, body and addresses. For the same readers as workflow-timeline.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="37:7"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><input id="__tabbed_37_2" name="__tabbed_37" type="radio" /><input id="__tabbed_37_3" name="__tabbed_37" type="radio" /><input id="__tabbed_37_4" name="__tabbed_37" type="radio" /><input id="__tabbed_37_5" name="__tabbed_37" type="radio" /><input id="__tabbed_37_6" name="__tabbed_37" type="radio" /><input id="__tabbed_37_7" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">HTTPie</label><label for="__tabbed_37_2">Python</label><label for="__tabbed_37_3">TypeScript</label><label for="__tabbed_37_4">Path Parameters</label><label for="__tabbed_37_5">Query Parameters</label><label for="__tabbed_37_6">Responses</label><label for="__tabbed_37_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="36:7"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><input id="__tabbed_36_2" name="__tabbed_36" type="radio" /><input id="__tabbed_36_3" name="__tabbed_36" type="radio" /><input id="__tabbed_36_4" name="__tabbed_36" type="radio" /><input id="__tabbed_36_5" name="__tabbed_36" type="radio" /><input id="__tabbed_36_6" name="__tabbed_36" type="radio" /><input id="__tabbed_36_7" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">HTTPie</label><label for="__tabbed_36_2">Python</label><label for="__tabbed_36_3">TypeScript</label><label for="__tabbed_36_4">Path Parameters</label><label for="__tabbed_36_5">Query Parameters</label><label for="__tabbed_36_6">Responses</label><label for="__tabbed_36_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31273,14 +30831,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Users with the staff or support flag, and holders of UPDATE_CALL on the proposal's call, its managing organisation or the customer running it who are not on the proposal's applicant team; 404 for anyone else.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="list-all-workflow-step-instances-for-this-proposal">List all workflow step instances for this proposal</h3>
 <p>List all workflow step instances for this proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="38:7"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><input id="__tabbed_38_2" name="__tabbed_38" type="radio" /><input id="__tabbed_38_3" name="__tabbed_38" type="radio" /><input id="__tabbed_38_4" name="__tabbed_38" type="radio" /><input id="__tabbed_38_5" name="__tabbed_38" type="radio" /><input id="__tabbed_38_6" name="__tabbed_38" type="radio" /><input id="__tabbed_38_7" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">HTTPie</label><label for="__tabbed_38_2">Python</label><label for="__tabbed_38_3">TypeScript</label><label for="__tabbed_38_4">Path Parameters</label><label for="__tabbed_38_5">Query Parameters</label><label for="__tabbed_38_6">Responses</label><label for="__tabbed_38_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="37:7"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><input id="__tabbed_37_2" name="__tabbed_37" type="radio" /><input id="__tabbed_37_3" name="__tabbed_37" type="radio" /><input id="__tabbed_37_4" name="__tabbed_37" type="radio" /><input id="__tabbed_37_5" name="__tabbed_37" type="radio" /><input id="__tabbed_37_6" name="__tabbed_37" type="radio" /><input id="__tabbed_37_7" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">HTTPie</label><label for="__tabbed_37_2">Python</label><label for="__tabbed_37_3">TypeScript</label><label for="__tabbed_37_4">Path Parameters</label><label for="__tabbed_37_5">Query Parameters</label><label for="__tabbed_37_6">Responses</label><label for="__tabbed_37_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31796,14 +31354,15 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever sees the proposal; the steps of its post-award runs only for those who read its runs (user_can_view_runs).</p>
+<p>Users with the staff or support flag, or a site-wide LIST_PROPOSALS grant, see every proposal. Others see the proposals of calls whose organisation's customer they hold LIST_PROPOSALS on, their applicant team's, those they hold a role on, those of calls they manage or organise, a panel member's submitted ones without a blocking conflict of interest, those they review, are assigned, contribute to or hold an evaluator role on, a results reader's once the round is published, and an offering manager's or slot delegate's for their offering's part.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="timeline-of-the-proposals-workflow">Timeline of the proposal's workflow</h3>
 <p>The proposal's steps, planned against actual, who completed each, and the workflow mail sent about it: the audience as a role and a count, never an address. For those who configure the proposal's call, staff and support; not for its applicant team.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="39:6"><input checked="checked" id="__tabbed_39_1" name="__tabbed_39" type="radio" /><input id="__tabbed_39_2" name="__tabbed_39" type="radio" /><input id="__tabbed_39_3" name="__tabbed_39" type="radio" /><input id="__tabbed_39_4" name="__tabbed_39" type="radio" /><input id="__tabbed_39_5" name="__tabbed_39" type="radio" /><input id="__tabbed_39_6" name="__tabbed_39" type="radio" /><div class="tabbed-labels"><label for="__tabbed_39_1">HTTPie</label><label for="__tabbed_39_2">Python</label><label for="__tabbed_39_3">TypeScript</label><label for="__tabbed_39_4">Path Parameters</label><label for="__tabbed_39_5">Responses</label><label for="__tabbed_39_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="38:6"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><input id="__tabbed_38_2" name="__tabbed_38" type="radio" /><input id="__tabbed_38_3" name="__tabbed_38" type="radio" /><input id="__tabbed_38_4" name="__tabbed_38" type="radio" /><input id="__tabbed_38_5" name="__tabbed_38" type="radio" /><input id="__tabbed_38_6" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">HTTPie</label><label for="__tabbed_38_2">Python</label><label for="__tabbed_38_3">TypeScript</label><label for="__tabbed_38_4">Path Parameters</label><label for="__tabbed_38_5">Responses</label><label for="__tabbed_38_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -32035,14 +31594,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Users with the staff or support flag, and holders of UPDATE_CALL on the proposal's call, its managing organisation or the customer running it who are not on the proposal's applicant team; 404 for anyone else.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="accept-contribution">Accept contribution</h3>
 <p>Take over a contribution slot handed to the caller. To hand it back, decline it with decline_contribution.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="40:7"><input checked="checked" id="__tabbed_40_1" name="__tabbed_40" type="radio" /><input id="__tabbed_40_2" name="__tabbed_40" type="radio" /><input id="__tabbed_40_3" name="__tabbed_40" type="radio" /><input id="__tabbed_40_4" name="__tabbed_40" type="radio" /><input id="__tabbed_40_5" name="__tabbed_40" type="radio" /><input id="__tabbed_40_6" name="__tabbed_40" type="radio" /><input id="__tabbed_40_7" name="__tabbed_40" type="radio" /><div class="tabbed-labels"><label for="__tabbed_40_1">HTTPie</label><label for="__tabbed_40_2">Python</label><label for="__tabbed_40_3">TypeScript</label><label for="__tabbed_40_4">Path Parameters</label><label for="__tabbed_40_5">Request Body (required)</label><label for="__tabbed_40_6">Responses</label><label for="__tabbed_40_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="39:7"><input checked="checked" id="__tabbed_39_1" name="__tabbed_39" type="radio" /><input id="__tabbed_39_2" name="__tabbed_39" type="radio" /><input id="__tabbed_39_3" name="__tabbed_39" type="radio" /><input id="__tabbed_39_4" name="__tabbed_39" type="radio" /><input id="__tabbed_39_5" name="__tabbed_39" type="radio" /><input id="__tabbed_39_6" name="__tabbed_39" type="radio" /><input id="__tabbed_39_7" name="__tabbed_39" type="radio" /><div class="tabbed-labels"><label for="__tabbed_39_1">HTTPie</label><label for="__tabbed_39_2">Python</label><label for="__tabbed_39_3">TypeScript</label><label for="__tabbed_39_4">Path Parameters</label><label for="__tabbed_39_5">Request Body (required)</label><label for="__tabbed_39_6">Responses</label><label for="__tabbed_39_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -32341,14 +31900,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Only the person the contribution is handed to, while it awaits their acceptance on an active step; they reach the proposal before it is otherwise visible to them.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="manually-advance-a-workflow-that-is-awaiting-call-manager-confirmation">Manually advance a workflow that is awaiting call-manager confirmation</h3>
 <p>Manually advance a workflow that is awaiting call-manager confirmation.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="41:6"><input checked="checked" id="__tabbed_41_1" name="__tabbed_41" type="radio" /><input id="__tabbed_41_2" name="__tabbed_41" type="radio" /><input id="__tabbed_41_3" name="__tabbed_41" type="radio" /><input id="__tabbed_41_4" name="__tabbed_41" type="radio" /><input id="__tabbed_41_5" name="__tabbed_41" type="radio" /><input id="__tabbed_41_6" name="__tabbed_41" type="radio" /><div class="tabbed-labels"><label for="__tabbed_41_1">HTTPie</label><label for="__tabbed_41_2">Python</label><label for="__tabbed_41_3">TypeScript</label><label for="__tabbed_41_4">Path Parameters</label><label for="__tabbed_41_5">Responses</label><label for="__tabbed_41_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="40:6"><input checked="checked" id="__tabbed_40_1" name="__tabbed_40" type="radio" /><input id="__tabbed_40_2" name="__tabbed_40" type="radio" /><input id="__tabbed_40_3" name="__tabbed_40" type="radio" /><input id="__tabbed_40_4" name="__tabbed_40" type="radio" /><input id="__tabbed_40_5" name="__tabbed_40" type="radio" /><input id="__tabbed_40_6" name="__tabbed_40" type="radio" /><div class="tabbed-labels"><label for="__tabbed_40_1">HTTPie</label><label for="__tabbed_40_2">Python</label><label for="__tabbed_40_3">TypeScript</label><label for="__tabbed_40_4">Path Parameters</label><label for="__tabbed_40_5">Responses</label><label for="__tabbed_40_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -32477,7 +32036,7 @@
 <hr />
 <h3 id="attach-document-to-proposal">Attach document to proposal</h3>
 <p>Attach document to proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="42:7"><input checked="checked" id="__tabbed_42_1" name="__tabbed_42" type="radio" /><input id="__tabbed_42_2" name="__tabbed_42" type="radio" /><input id="__tabbed_42_3" name="__tabbed_42" type="radio" /><input id="__tabbed_42_4" name="__tabbed_42" type="radio" /><input id="__tabbed_42_5" name="__tabbed_42" type="radio" /><input id="__tabbed_42_6" name="__tabbed_42" type="radio" /><input id="__tabbed_42_7" name="__tabbed_42" type="radio" /><div class="tabbed-labels"><label for="__tabbed_42_1">HTTPie</label><label for="__tabbed_42_2">Python</label><label for="__tabbed_42_3">TypeScript</label><label for="__tabbed_42_4">Path Parameters</label><label for="__tabbed_42_5">Request Body (required)</label><label for="__tabbed_42_6">Responses</label><label for="__tabbed_42_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="41:7"><input checked="checked" id="__tabbed_41_1" name="__tabbed_41" type="radio" /><input id="__tabbed_41_2" name="__tabbed_41" type="radio" /><input id="__tabbed_41_3" name="__tabbed_41" type="radio" /><input id="__tabbed_41_4" name="__tabbed_41" type="radio" /><input id="__tabbed_41_5" name="__tabbed_41" type="radio" /><input id="__tabbed_41_6" name="__tabbed_41" type="radio" /><input id="__tabbed_41_7" name="__tabbed_41" type="radio" /><div class="tabbed-labels"><label for="__tabbed_41_1">HTTPie</label><label for="__tabbed_41_2">Python</label><label for="__tabbed_41_3">TypeScript</label><label for="__tabbed_41_4">Path Parameters</label><label for="__tabbed_41_5">Request Body (required)</label><label for="__tabbed_41_6">Responses</label><label for="__tabbed_41_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -32616,7 +32175,7 @@
 <hr />
 <h3 id="awarded-resources_1">Awarded resources</h3>
 <p>Add an item to the award. Call managers only, while the allocation decision is in progress.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="43:7"><input checked="checked" id="__tabbed_43_1" name="__tabbed_43" type="radio" /><input id="__tabbed_43_2" name="__tabbed_43" type="radio" /><input id="__tabbed_43_3" name="__tabbed_43" type="radio" /><input id="__tabbed_43_4" name="__tabbed_43" type="radio" /><input id="__tabbed_43_5" name="__tabbed_43" type="radio" /><input id="__tabbed_43_6" name="__tabbed_43" type="radio" /><input id="__tabbed_43_7" name="__tabbed_43" type="radio" /><div class="tabbed-labels"><label for="__tabbed_43_1">HTTPie</label><label for="__tabbed_43_2">Python</label><label for="__tabbed_43_3">TypeScript</label><label for="__tabbed_43_4">Path Parameters</label><label for="__tabbed_43_5">Request Body</label><label for="__tabbed_43_6">Responses</label><label for="__tabbed_43_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="42:7"><input checked="checked" id="__tabbed_42_1" name="__tabbed_42" type="radio" /><input id="__tabbed_42_2" name="__tabbed_42" type="radio" /><input id="__tabbed_42_3" name="__tabbed_42" type="radio" /><input id="__tabbed_42_4" name="__tabbed_42" type="radio" /><input id="__tabbed_42_5" name="__tabbed_42" type="radio" /><input id="__tabbed_42_6" name="__tabbed_42" type="radio" /><input id="__tabbed_42_7" name="__tabbed_42" type="radio" /><div class="tabbed-labels"><label for="__tabbed_42_1">HTTPie</label><label for="__tabbed_42_2">Python</label><label for="__tabbed_42_3">TypeScript</label><label for="__tabbed_42_4">Path Parameters</label><label for="__tabbed_42_5">Request Body</label><label for="__tabbed_42_6">Responses</label><label for="__tabbed_42_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -32873,7 +32432,7 @@
 <hr />
 <h3 id="cancel-change-request">Cancel change request</h3>
 <p>Call off an open request for changes to the applicant: the step is its actor's again, with its full duration. For whoever made the request, the call's managers and organizers, and staff.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="44:7"><input checked="checked" id="__tabbed_44_1" name="__tabbed_44" type="radio" /><input id="__tabbed_44_2" name="__tabbed_44" type="radio" /><input id="__tabbed_44_3" name="__tabbed_44" type="radio" /><input id="__tabbed_44_4" name="__tabbed_44" type="radio" /><input id="__tabbed_44_5" name="__tabbed_44" type="radio" /><input id="__tabbed_44_6" name="__tabbed_44" type="radio" /><input id="__tabbed_44_7" name="__tabbed_44" type="radio" /><div class="tabbed-labels"><label for="__tabbed_44_1">HTTPie</label><label for="__tabbed_44_2">Python</label><label for="__tabbed_44_3">TypeScript</label><label for="__tabbed_44_4">Path Parameters</label><label for="__tabbed_44_5">Request Body (required)</label><label for="__tabbed_44_6">Responses</label><label for="__tabbed_44_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="43:7"><input checked="checked" id="__tabbed_43_1" name="__tabbed_43" type="radio" /><input id="__tabbed_43_2" name="__tabbed_43" type="radio" /><input id="__tabbed_43_3" name="__tabbed_43" type="radio" /><input id="__tabbed_43_4" name="__tabbed_43" type="radio" /><input id="__tabbed_43_5" name="__tabbed_43" type="radio" /><input id="__tabbed_43_6" name="__tabbed_43" type="radio" /><input id="__tabbed_43_7" name="__tabbed_43" type="radio" /><div class="tabbed-labels"><label for="__tabbed_43_1">HTTPie</label><label for="__tabbed_43_2">Python</label><label for="__tabbed_43_3">TypeScript</label><label for="__tabbed_43_4">Path Parameters</label><label for="__tabbed_43_5">Request Body (required)</label><label for="__tabbed_43_6">Responses</label><label for="__tabbed_43_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -33079,14 +32638,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Of those who read the request: who made it, unless on the applicant team; users with the staff flag; and the call's managers and organisers driving its workflow, unless on the applicant team (user_oversees_contributions).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="complete-workflow-step">Complete workflow step</h3>
 <p>Complete an active workflow step with an outcome: the one step_uuid names, as several steps of a stage may be active at once.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="45:7"><input checked="checked" id="__tabbed_45_1" name="__tabbed_45" type="radio" /><input id="__tabbed_45_2" name="__tabbed_45" type="radio" /><input id="__tabbed_45_3" name="__tabbed_45" type="radio" /><input id="__tabbed_45_4" name="__tabbed_45" type="radio" /><input id="__tabbed_45_5" name="__tabbed_45" type="radio" /><input id="__tabbed_45_6" name="__tabbed_45" type="radio" /><input id="__tabbed_45_7" name="__tabbed_45" type="radio" /><div class="tabbed-labels"><label for="__tabbed_45_1">HTTPie</label><label for="__tabbed_45_2">Python</label><label for="__tabbed_45_3">TypeScript</label><label for="__tabbed_45_4">Path Parameters</label><label for="__tabbed_45_5">Request Body (required)</label><label for="__tabbed_45_6">Responses</label><label for="__tabbed_45_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="44:7"><input checked="checked" id="__tabbed_44_1" name="__tabbed_44" type="radio" /><input id="__tabbed_44_2" name="__tabbed_44" type="radio" /><input id="__tabbed_44_3" name="__tabbed_44" type="radio" /><input id="__tabbed_44_4" name="__tabbed_44" type="radio" /><input id="__tabbed_44_5" name="__tabbed_44" type="radio" /><input id="__tabbed_44_6" name="__tabbed_44" type="radio" /><input id="__tabbed_44_7" name="__tabbed_44" type="radio" /><div class="tabbed-labels"><label for="__tabbed_44_1">HTTPie</label><label for="__tabbed_44_2">Python</label><label for="__tabbed_44_3">TypeScript</label><label for="__tabbed_44_4">Path Parameters</label><label for="__tabbed_44_5">Request Body (required)</label><label for="__tabbed_44_6">Responses</label><label for="__tabbed_44_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -33292,7 +32851,7 @@
 <hr />
 <h3 id="decline-contribution">Decline contribution</h3>
 <p>Decline a contribution of one's own, or, as a call manager, withdraw an open contribution from the step's work.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="46:7"><input checked="checked" id="__tabbed_46_1" name="__tabbed_46" type="radio" /><input id="__tabbed_46_2" name="__tabbed_46" type="radio" /><input id="__tabbed_46_3" name="__tabbed_46" type="radio" /><input id="__tabbed_46_4" name="__tabbed_46" type="radio" /><input id="__tabbed_46_5" name="__tabbed_46" type="radio" /><input id="__tabbed_46_6" name="__tabbed_46" type="radio" /><input id="__tabbed_46_7" name="__tabbed_46" type="radio" /><div class="tabbed-labels"><label for="__tabbed_46_1">HTTPie</label><label for="__tabbed_46_2">Python</label><label for="__tabbed_46_3">TypeScript</label><label for="__tabbed_46_4">Path Parameters</label><label for="__tabbed_46_5">Request Body (required)</label><label for="__tabbed_46_6">Responses</label><label for="__tabbed_46_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="45:7"><input checked="checked" id="__tabbed_45_1" name="__tabbed_45" type="radio" /><input id="__tabbed_45_2" name="__tabbed_45" type="radio" /><input id="__tabbed_45_3" name="__tabbed_45" type="radio" /><input id="__tabbed_45_4" name="__tabbed_45" type="radio" /><input id="__tabbed_45_5" name="__tabbed_45" type="radio" /><input id="__tabbed_45_6" name="__tabbed_45" type="radio" /><input id="__tabbed_45_7" name="__tabbed_45" type="radio" /><div class="tabbed-labels"><label for="__tabbed_45_1">HTTPie</label><label for="__tabbed_45_2">Python</label><label for="__tabbed_45_3">TypeScript</label><label for="__tabbed_45_4">Path Parameters</label><label for="__tabbed_45_5">Request Body (required)</label><label for="__tabbed_45_6">Responses</label><label for="__tabbed_45_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -33588,14 +33147,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Of those who read the contribution or to whom it is handed: the person it is handed to hands it back; users with the staff flag and the call's managers and organisers, not on the applicant team, withdraw any open one; a contributor declines their own per-person slot.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="delegate-contribution">Delegate contribution</h3>
 <p>Hand a contribution slot to someone the step's delegable_to allows -- an offering manager of the slot's offering, or a holder of an evaluator role on the proposal -- or take it back with a null user_uuid. Its holders and the call's managers may; the person it is handed to accepts or declines it.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="47:7"><input checked="checked" id="__tabbed_47_1" name="__tabbed_47" type="radio" /><input id="__tabbed_47_2" name="__tabbed_47" type="radio" /><input id="__tabbed_47_3" name="__tabbed_47" type="radio" /><input id="__tabbed_47_4" name="__tabbed_47" type="radio" /><input id="__tabbed_47_5" name="__tabbed_47" type="radio" /><input id="__tabbed_47_6" name="__tabbed_47" type="radio" /><input id="__tabbed_47_7" name="__tabbed_47" type="radio" /><div class="tabbed-labels"><label for="__tabbed_47_1">HTTPie</label><label for="__tabbed_47_2">Python</label><label for="__tabbed_47_3">TypeScript</label><label for="__tabbed_47_4">Path Parameters</label><label for="__tabbed_47_5">Request Body (required)</label><label for="__tabbed_47_6">Responses</label><label for="__tabbed_47_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="46:7"><input checked="checked" id="__tabbed_46_1" name="__tabbed_46" type="radio" /><input id="__tabbed_46_2" name="__tabbed_46" type="radio" /><input id="__tabbed_46_3" name="__tabbed_46" type="radio" /><input id="__tabbed_46_4" name="__tabbed_46" type="radio" /><input id="__tabbed_46_5" name="__tabbed_46" type="radio" /><input id="__tabbed_46_6" name="__tabbed_46" type="radio" /><input id="__tabbed_46_7" name="__tabbed_46" type="radio" /><div class="tabbed-labels"><label for="__tabbed_46_1">HTTPie</label><label for="__tabbed_46_2">Python</label><label for="__tabbed_46_3">TypeScript</label><label for="__tabbed_46_4">Path Parameters</label><label for="__tabbed_46_5">Request Body (required)</label><label for="__tabbed_46_6">Responses</label><label for="__tabbed_46_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -33900,14 +33459,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Of those who read the contribution: users with the staff flag and the call's managers and organisers, not on the applicant team, and its holders (the offering's team, the person whose slot it is), on an open slot of an active step that can be handed on (contributions.may_delegate).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="detach-documents-from-proposal">Detach documents from proposal</h3>
 <p>Detach documents from proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="48:7"><input checked="checked" id="__tabbed_48_1" name="__tabbed_48" type="radio" /><input id="__tabbed_48_2" name="__tabbed_48" type="radio" /><input id="__tabbed_48_3" name="__tabbed_48" type="radio" /><input id="__tabbed_48_4" name="__tabbed_48" type="radio" /><input id="__tabbed_48_5" name="__tabbed_48" type="radio" /><input id="__tabbed_48_6" name="__tabbed_48" type="radio" /><input id="__tabbed_48_7" name="__tabbed_48" type="radio" /><div class="tabbed-labels"><label for="__tabbed_48_1">HTTPie</label><label for="__tabbed_48_2">Python</label><label for="__tabbed_48_3">TypeScript</label><label for="__tabbed_48_4">Path Parameters</label><label for="__tabbed_48_5">Request Body (required)</label><label for="__tabbed_48_6">Responses</label><label for="__tabbed_48_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="47:7"><input checked="checked" id="__tabbed_47_1" name="__tabbed_47" type="radio" /><input id="__tabbed_47_2" name="__tabbed_47" type="radio" /><input id="__tabbed_47_3" name="__tabbed_47" type="radio" /><input id="__tabbed_47_4" name="__tabbed_47" type="radio" /><input id="__tabbed_47_5" name="__tabbed_47" type="radio" /><input id="__tabbed_47_6" name="__tabbed_47" type="radio" /><input id="__tabbed_47_7" name="__tabbed_47" type="radio" /><div class="tabbed-labels"><label for="__tabbed_47_1">HTTPie</label><label for="__tabbed_47_2">Python</label><label for="__tabbed_47_3">TypeScript</label><label for="__tabbed_47_4">Path Parameters</label><label for="__tabbed_47_5">Request Body (required)</label><label for="__tabbed_47_6">Responses</label><label for="__tabbed_47_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -34044,7 +33603,7 @@
 <hr />
 <h3 id="set-suggested-reviewers-aside-unless-already-invited">Set suggested reviewers aside, unless already invited</h3>
 <p>Set suggested reviewers aside, unless already invited.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="49:8"><input checked="checked" id="__tabbed_49_1" name="__tabbed_49" type="radio" /><input id="__tabbed_49_2" name="__tabbed_49" type="radio" /><input id="__tabbed_49_3" name="__tabbed_49" type="radio" /><input id="__tabbed_49_4" name="__tabbed_49" type="radio" /><input id="__tabbed_49_5" name="__tabbed_49" type="radio" /><input id="__tabbed_49_6" name="__tabbed_49" type="radio" /><input id="__tabbed_49_7" name="__tabbed_49" type="radio" /><input id="__tabbed_49_8" name="__tabbed_49" type="radio" /><div class="tabbed-labels"><label for="__tabbed_49_1">HTTPie</label><label for="__tabbed_49_2">Python</label><label for="__tabbed_49_3">TypeScript</label><label for="__tabbed_49_4">Path Parameters</label><label for="__tabbed_49_5">Query Parameters</label><label for="__tabbed_49_6">Request Body (required)</label><label for="__tabbed_49_7">Responses</label><label for="__tabbed_49_8">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="48:8"><input checked="checked" id="__tabbed_48_1" name="__tabbed_48" type="radio" /><input id="__tabbed_48_2" name="__tabbed_48" type="radio" /><input id="__tabbed_48_3" name="__tabbed_48" type="radio" /><input id="__tabbed_48_4" name="__tabbed_48" type="radio" /><input id="__tabbed_48_5" name="__tabbed_48" type="radio" /><input id="__tabbed_48_6" name="__tabbed_48" type="radio" /><input id="__tabbed_48_7" name="__tabbed_48" type="radio" /><input id="__tabbed_48_8" name="__tabbed_48" type="radio" /><div class="tabbed-labels"><label for="__tabbed_48_1">HTTPie</label><label for="__tabbed_48_2">Python</label><label for="__tabbed_48_3">TypeScript</label><label for="__tabbed_48_4">Path Parameters</label><label for="__tabbed_48_5">Query Parameters</label><label for="__tabbed_48_6">Request Body (required)</label><label for="__tabbed_48_7">Responses</label><label for="__tabbed_48_8">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -34456,14 +34015,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff and those overseeing the proposal's call, who manage its reviewer pool, turn suggestions into invitations; never anyone on the applicant team, staff included (<code>may_invite</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="invite-suggested-reviewers">Invite suggested reviewers</h3>
 <p>Invite suggested reviewers to the call's reviewer pool, as an invitation by e-mail is sent: the call's response window and the invitation e-mail apply. Each suggestion of the person follows the invitation. A person already in the pool is linked to their entry instead.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="50:7"><input checked="checked" id="__tabbed_50_1" name="__tabbed_50" type="radio" /><input id="__tabbed_50_2" name="__tabbed_50" type="radio" /><input id="__tabbed_50_3" name="__tabbed_50" type="radio" /><input id="__tabbed_50_4" name="__tabbed_50" type="radio" /><input id="__tabbed_50_5" name="__tabbed_50" type="radio" /><input id="__tabbed_50_6" name="__tabbed_50" type="radio" /><input id="__tabbed_50_7" name="__tabbed_50" type="radio" /><div class="tabbed-labels"><label for="__tabbed_50_1">HTTPie</label><label for="__tabbed_50_2">Python</label><label for="__tabbed_50_3">TypeScript</label><label for="__tabbed_50_4">Path Parameters</label><label for="__tabbed_50_5">Request Body (required)</label><label for="__tabbed_50_6">Responses</label><label for="__tabbed_50_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="49:7"><input checked="checked" id="__tabbed_49_1" name="__tabbed_49" type="radio" /><input id="__tabbed_49_2" name="__tabbed_49" type="radio" /><input id="__tabbed_49_3" name="__tabbed_49" type="radio" /><input id="__tabbed_49_4" name="__tabbed_49" type="radio" /><input id="__tabbed_49_5" name="__tabbed_49" type="radio" /><input id="__tabbed_49_6" name="__tabbed_49" type="radio" /><input id="__tabbed_49_7" name="__tabbed_49" type="radio" /><div class="tabbed-labels"><label for="__tabbed_49_1">HTTPie</label><label for="__tabbed_49_2">Python</label><label for="__tabbed_49_3">TypeScript</label><label for="__tabbed_49_4">Path Parameters</label><label for="__tabbed_49_5">Request Body (required)</label><label for="__tabbed_49_6">Responses</label><label for="__tabbed_49_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -34781,14 +34340,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff and those overseeing the proposal's call, who manage its reviewer pool, turn suggestions into invitations; never anyone on the applicant team, staff included (<code>may_invite</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="my-reviewer-suggestions">My reviewer suggestions</h3>
 <p>Suggest a reviewer for the proposal: an existing user or an e-mail address, with a note. Only a holder of the evaluator role of the active step collecting reviewer suggestions, through their own contribution to it.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="51:7"><input checked="checked" id="__tabbed_51_1" name="__tabbed_51" type="radio" /><input id="__tabbed_51_2" name="__tabbed_51" type="radio" /><input id="__tabbed_51_3" name="__tabbed_51" type="radio" /><input id="__tabbed_51_4" name="__tabbed_51" type="radio" /><input id="__tabbed_51_5" name="__tabbed_51" type="radio" /><input id="__tabbed_51_6" name="__tabbed_51" type="radio" /><input id="__tabbed_51_7" name="__tabbed_51" type="radio" /><div class="tabbed-labels"><label for="__tabbed_51_1">HTTPie</label><label for="__tabbed_51_2">Python</label><label for="__tabbed_51_3">TypeScript</label><label for="__tabbed_51_4">Path Parameters</label><label for="__tabbed_51_5">Request Body</label><label for="__tabbed_51_6">Responses</label><label for="__tabbed_51_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="50:7"><input checked="checked" id="__tabbed_50_1" name="__tabbed_50" type="radio" /><input id="__tabbed_50_2" name="__tabbed_50" type="radio" /><input id="__tabbed_50_3" name="__tabbed_50" type="radio" /><input id="__tabbed_50_4" name="__tabbed_50" type="radio" /><input id="__tabbed_50_5" name="__tabbed_50" type="radio" /><input id="__tabbed_50_6" name="__tabbed_50" type="radio" /><input id="__tabbed_50_7" name="__tabbed_50" type="radio" /><div class="tabbed-labels"><label for="__tabbed_50_1">HTTPie</label><label for="__tabbed_50_2">Python</label><label for="__tabbed_50_3">TypeScript</label><label for="__tabbed_50_4">Path Parameters</label><label for="__tabbed_50_5">Request Body</label><label for="__tabbed_50_6">Responses</label><label for="__tabbed_50_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -34998,7 +34557,7 @@
 <hr />
 <h3 id="open-final-report">Open final report</h3>
 <p>Open an accepted proposal's final report ahead of its due date, or for a project without an end date. Call managers and staff.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="52:6"><input checked="checked" id="__tabbed_52_1" name="__tabbed_52" type="radio" /><input id="__tabbed_52_2" name="__tabbed_52" type="radio" /><input id="__tabbed_52_3" name="__tabbed_52" type="radio" /><input id="__tabbed_52_4" name="__tabbed_52" type="radio" /><input id="__tabbed_52_5" name="__tabbed_52" type="radio" /><input id="__tabbed_52_6" name="__tabbed_52" type="radio" /><div class="tabbed-labels"><label for="__tabbed_52_1">HTTPie</label><label for="__tabbed_52_2">Python</label><label for="__tabbed_52_3">TypeScript</label><label for="__tabbed_52_4">Path Parameters</label><label for="__tabbed_52_5">Responses</label><label for="__tabbed_52_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="51:6"><input checked="checked" id="__tabbed_51_1" name="__tabbed_51" type="radio" /><input id="__tabbed_51_2" name="__tabbed_51" type="radio" /><input id="__tabbed_51_3" name="__tabbed_51" type="radio" /><input id="__tabbed_51_4" name="__tabbed_51" type="radio" /><input id="__tabbed_51_5" name="__tabbed_51" type="radio" /><input id="__tabbed_51_6" name="__tabbed_51" type="radio" /><div class="tabbed-labels"><label for="__tabbed_51_1">HTTPie</label><label for="__tabbed_51_2">Python</label><label for="__tabbed_51_3">TypeScript</label><label for="__tabbed_51_4">Path Parameters</label><label for="__tabbed_51_5">Responses</label><label for="__tabbed_51_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -35170,14 +34729,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, and whoever drives the call's workflow without being on the proposal's team, open a final report ahead of time (<code>user_drives_runs</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="preview-the-proposal-as-a-role-of-its-call">Preview the proposal as a role of its call</h3>
 <p>The proposal page as a role of its call sees it now: the real read endpoints answering a synthetic person given the role, in a transaction that is rolled back. No real person is viewed as, nothing is saved and no mail is sent. For the same readers as workflow-timeline.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="53:7"><input checked="checked" id="__tabbed_53_1" name="__tabbed_53" type="radio" /><input id="__tabbed_53_2" name="__tabbed_53" type="radio" /><input id="__tabbed_53_3" name="__tabbed_53" type="radio" /><input id="__tabbed_53_4" name="__tabbed_53" type="radio" /><input id="__tabbed_53_5" name="__tabbed_53" type="radio" /><input id="__tabbed_53_6" name="__tabbed_53" type="radio" /><input id="__tabbed_53_7" name="__tabbed_53" type="radio" /><div class="tabbed-labels"><label for="__tabbed_53_1">HTTPie</label><label for="__tabbed_53_2">Python</label><label for="__tabbed_53_3">TypeScript</label><label for="__tabbed_53_4">Path Parameters</label><label for="__tabbed_53_5">Request Body (required)</label><label for="__tabbed_53_6">Responses</label><label for="__tabbed_53_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="52:7"><input checked="checked" id="__tabbed_52_1" name="__tabbed_52" type="radio" /><input id="__tabbed_52_2" name="__tabbed_52" type="radio" /><input id="__tabbed_52_3" name="__tabbed_52" type="radio" /><input id="__tabbed_52_4" name="__tabbed_52" type="radio" /><input id="__tabbed_52_5" name="__tabbed_52" type="radio" /><input id="__tabbed_52_6" name="__tabbed_52" type="radio" /><input id="__tabbed_52_7" name="__tabbed_52" type="radio" /><div class="tabbed-labels"><label for="__tabbed_52_1">HTTPie</label><label for="__tabbed_52_2">Python</label><label for="__tabbed_52_3">TypeScript</label><label for="__tabbed_52_4">Path Parameters</label><label for="__tabbed_52_5">Request Body (required)</label><label for="__tabbed_52_6">Responses</label><label for="__tabbed_52_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -35377,14 +34936,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Users with the staff or support flag, and holders of UPDATE_CALL on the proposal's call, its managing organisation or the customer running it who are not on the proposal's applicant team; 404 for anyone else.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="provision-awarded-item">Provision awarded item</h3>
 <p>Order an item of an allocated proposal's award again: one that allocation could not order (see its provision_error) or whose order the provider refused. Call managers and staff, once the provider's offering takes orders again.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="54:7"><input checked="checked" id="__tabbed_54_1" name="__tabbed_54" type="radio" /><input id="__tabbed_54_2" name="__tabbed_54" type="radio" /><input id="__tabbed_54_3" name="__tabbed_54" type="radio" /><input id="__tabbed_54_4" name="__tabbed_54" type="radio" /><input id="__tabbed_54_5" name="__tabbed_54" type="radio" /><input id="__tabbed_54_6" name="__tabbed_54" type="radio" /><input id="__tabbed_54_7" name="__tabbed_54" type="radio" /><div class="tabbed-labels"><label for="__tabbed_54_1">HTTPie</label><label for="__tabbed_54_2">Python</label><label for="__tabbed_54_3">TypeScript</label><label for="__tabbed_54_4">Path Parameters</label><label for="__tabbed_54_5">Request Body (required)</label><label for="__tabbed_54_6">Responses</label><label for="__tabbed_54_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="53:7"><input checked="checked" id="__tabbed_53_1" name="__tabbed_53" type="radio" /><input id="__tabbed_53_2" name="__tabbed_53" type="radio" /><input id="__tabbed_53_3" name="__tabbed_53" type="radio" /><input id="__tabbed_53_4" name="__tabbed_53" type="radio" /><input id="__tabbed_53_5" name="__tabbed_53" type="radio" /><input id="__tabbed_53_6" name="__tabbed_53" type="radio" /><input id="__tabbed_53_7" name="__tabbed_53" type="radio" /><div class="tabbed-labels"><label for="__tabbed_53_1">HTTPie</label><label for="__tabbed_53_2">Python</label><label for="__tabbed_53_3">TypeScript</label><label for="__tabbed_53_4">Path Parameters</label><label for="__tabbed_53_5">Request Body (required)</label><label for="__tabbed_53_6">Responses</label><label for="__tabbed_53_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -35622,14 +35181,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, and whoever drives the call's workflow without being on the proposal's team, order an awarded item again (<code>user_drives_runs</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="reject-workflow-step">Reject workflow step</h3>
 <p>Reject the proposal at an active workflow step: the one step_uuid names. Steps running beside it are withdrawn.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="55:7"><input checked="checked" id="__tabbed_55_1" name="__tabbed_55" type="radio" /><input id="__tabbed_55_2" name="__tabbed_55" type="radio" /><input id="__tabbed_55_3" name="__tabbed_55" type="radio" /><input id="__tabbed_55_4" name="__tabbed_55" type="radio" /><input id="__tabbed_55_5" name="__tabbed_55" type="radio" /><input id="__tabbed_55_6" name="__tabbed_55" type="radio" /><input id="__tabbed_55_7" name="__tabbed_55" type="radio" /><div class="tabbed-labels"><label for="__tabbed_55_1">HTTPie</label><label for="__tabbed_55_2">Python</label><label for="__tabbed_55_3">TypeScript</label><label for="__tabbed_55_4">Path Parameters</label><label for="__tabbed_55_5">Request Body (required)</label><label for="__tabbed_55_6">Responses</label><label for="__tabbed_55_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="54:7"><input checked="checked" id="__tabbed_54_1" name="__tabbed_54" type="radio" /><input id="__tabbed_54_2" name="__tabbed_54" type="radio" /><input id="__tabbed_54_3" name="__tabbed_54" type="radio" /><input id="__tabbed_54_4" name="__tabbed_54" type="radio" /><input id="__tabbed_54_5" name="__tabbed_54" type="radio" /><input id="__tabbed_54_6" name="__tabbed_54" type="radio" /><input id="__tabbed_54_7" name="__tabbed_54" type="radio" /><div class="tabbed-labels"><label for="__tabbed_54_1">HTTPie</label><label for="__tabbed_54_2">Python</label><label for="__tabbed_54_3">TypeScript</label><label for="__tabbed_54_4">Path Parameters</label><label for="__tabbed_54_5">Request Body (required)</label><label for="__tabbed_54_6">Responses</label><label for="__tabbed_54_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -35804,7 +35363,7 @@
 <hr />
 <h3 id="release-step-report">Release step report</h3>
 <p>Release the report of a completed assessment step configured to be released, such as a consolidated report or final feedback, to the applicant -- optionally as an edited text. By the step's completer or those overseeing the call; once per step.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="56:7"><input checked="checked" id="__tabbed_56_1" name="__tabbed_56" type="radio" /><input id="__tabbed_56_2" name="__tabbed_56" type="radio" /><input id="__tabbed_56_3" name="__tabbed_56" type="radio" /><input id="__tabbed_56_4" name="__tabbed_56" type="radio" /><input id="__tabbed_56_5" name="__tabbed_56" type="radio" /><input id="__tabbed_56_6" name="__tabbed_56" type="radio" /><input id="__tabbed_56_7" name="__tabbed_56" type="radio" /><div class="tabbed-labels"><label for="__tabbed_56_1">HTTPie</label><label for="__tabbed_56_2">Python</label><label for="__tabbed_56_3">TypeScript</label><label for="__tabbed_56_4">Path Parameters</label><label for="__tabbed_56_5">Request Body (required)</label><label for="__tabbed_56_6">Responses</label><label for="__tabbed_56_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="55:7"><input checked="checked" id="__tabbed_55_1" name="__tabbed_55" type="radio" /><input id="__tabbed_55_2" name="__tabbed_55" type="radio" /><input id="__tabbed_55_3" name="__tabbed_55" type="radio" /><input id="__tabbed_55_4" name="__tabbed_55" type="radio" /><input id="__tabbed_55_5" name="__tabbed_55" type="radio" /><input id="__tabbed_55_6" name="__tabbed_55" type="radio" /><input id="__tabbed_55_7" name="__tabbed_55" type="radio" /><div class="tabbed-labels"><label for="__tabbed_55_1">HTTPie</label><label for="__tabbed_55_2">Python</label><label for="__tabbed_55_3">TypeScript</label><label for="__tabbed_55_4">Path Parameters</label><label for="__tabbed_55_5">Request Body (required)</label><label for="__tabbed_55_6">Responses</label><label for="__tabbed_55_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -36228,14 +35787,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Users with the staff flag; otherwise, never from the applicant team, those overseeing the call (its managers, organisers of its managing organisation) and the completer of a step the applicant does not complete (step_inputs.can_release).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="reopen-contribution">Reopen contribution</h3>
 <p>Reopen a submitted contribution -- one offering's technical assessment, say -- for its contributor to revise and submit again. While its step is active, or completed with the proposal waiting to be advanced by hand, in which case the step becomes active again. Its answers are kept; its outcome counts again once resubmitted. Not for reviews. For the call's managers and organizers, and staff. The applicant is not told.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="57:7"><input checked="checked" id="__tabbed_57_1" name="__tabbed_57" type="radio" /><input id="__tabbed_57_2" name="__tabbed_57" type="radio" /><input id="__tabbed_57_3" name="__tabbed_57" type="radio" /><input id="__tabbed_57_4" name="__tabbed_57" type="radio" /><input id="__tabbed_57_5" name="__tabbed_57" type="radio" /><input id="__tabbed_57_6" name="__tabbed_57" type="radio" /><input id="__tabbed_57_7" name="__tabbed_57" type="radio" /><div class="tabbed-labels"><label for="__tabbed_57_1">HTTPie</label><label for="__tabbed_57_2">Python</label><label for="__tabbed_57_3">TypeScript</label><label for="__tabbed_57_4">Path Parameters</label><label for="__tabbed_57_5">Request Body (required)</label><label for="__tabbed_57_6">Responses</label><label for="__tabbed_57_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="56:7"><input checked="checked" id="__tabbed_56_1" name="__tabbed_56" type="radio" /><input id="__tabbed_56_2" name="__tabbed_56" type="radio" /><input id="__tabbed_56_3" name="__tabbed_56" type="radio" /><input id="__tabbed_56_4" name="__tabbed_56" type="radio" /><input id="__tabbed_56_5" name="__tabbed_56" type="radio" /><input id="__tabbed_56_6" name="__tabbed_56" type="radio" /><input id="__tabbed_56_7" name="__tabbed_56" type="radio" /><div class="tabbed-labels"><label for="__tabbed_56_1">HTTPie</label><label for="__tabbed_56_2">Python</label><label for="__tabbed_56_3">TypeScript</label><label for="__tabbed_56_4">Path Parameters</label><label for="__tabbed_56_5">Request Body (required)</label><label for="__tabbed_56_6">Responses</label><label for="__tabbed_56_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -36455,14 +36014,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Users with the staff flag, and the call's managers and organisers driving its workflow who are not on the applicant team (user_oversees_contributions).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="reopen-decision">Reopen decision</h3>
 <p>Reopen an allocation decision held for the round's publication: the decision step becomes active again with its outcome cleared, and the proposal counts as undecided until it is decided anew. Only before the round's results are published. Nothing is sent to the applicant. The reopen is logged on the proposal's event feed, which the applicant team reads, so the event carries neither the reason nor the outcome taken back.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="58:7"><input checked="checked" id="__tabbed_58_1" name="__tabbed_58" type="radio" /><input id="__tabbed_58_2" name="__tabbed_58" type="radio" /><input id="__tabbed_58_3" name="__tabbed_58" type="radio" /><input id="__tabbed_58_4" name="__tabbed_58" type="radio" /><input id="__tabbed_58_5" name="__tabbed_58" type="radio" /><input id="__tabbed_58_6" name="__tabbed_58" type="radio" /><input id="__tabbed_58_7" name="__tabbed_58" type="radio" /><div class="tabbed-labels"><label for="__tabbed_58_1">HTTPie</label><label for="__tabbed_58_2">Python</label><label for="__tabbed_58_3">TypeScript</label><label for="__tabbed_58_4">Path Parameters</label><label for="__tabbed_58_5">Request Body (required)</label><label for="__tabbed_58_6">Responses</label><label for="__tabbed_58_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="57:7"><input checked="checked" id="__tabbed_57_1" name="__tabbed_57" type="radio" /><input id="__tabbed_57_2" name="__tabbed_57" type="radio" /><input id="__tabbed_57_3" name="__tabbed_57" type="radio" /><input id="__tabbed_57_4" name="__tabbed_57" type="radio" /><input id="__tabbed_57_5" name="__tabbed_57" type="radio" /><input id="__tabbed_57_6" name="__tabbed_57" type="radio" /><input id="__tabbed_57_7" name="__tabbed_57" type="radio" /><div class="tabbed-labels"><label for="__tabbed_57_1">HTTPie</label><label for="__tabbed_57_2">Python</label><label for="__tabbed_57_3">TypeScript</label><label for="__tabbed_57_4">Path Parameters</label><label for="__tabbed_57_5">Request Body (required)</label><label for="__tabbed_57_6">Responses</label><label for="__tabbed_57_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -36893,7 +36452,7 @@
 <hr />
 <h3 id="request-changes">Request changes</h3>
 <p>Send a proposal in review back to its applicant to change the parts named, at a step that allows it. The proposal stays in review on the step; the parts become editable for the applicant until the changes are submitted, and the step does not lapse meanwhile. For whoever acts on the step -- the call's managers and organizers, its completer -- and staff; never the applicant team. Changes may be requested again after each submission.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="59:7"><input checked="checked" id="__tabbed_59_1" name="__tabbed_59" type="radio" /><input id="__tabbed_59_2" name="__tabbed_59" type="radio" /><input id="__tabbed_59_3" name="__tabbed_59" type="radio" /><input id="__tabbed_59_4" name="__tabbed_59" type="radio" /><input id="__tabbed_59_5" name="__tabbed_59" type="radio" /><input id="__tabbed_59_6" name="__tabbed_59" type="radio" /><input id="__tabbed_59_7" name="__tabbed_59" type="radio" /><div class="tabbed-labels"><label for="__tabbed_59_1">HTTPie</label><label for="__tabbed_59_2">Python</label><label for="__tabbed_59_3">TypeScript</label><label for="__tabbed_59_4">Path Parameters</label><label for="__tabbed_59_5">Request Body (required)</label><label for="__tabbed_59_6">Responses</label><label for="__tabbed_59_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="58:7"><input checked="checked" id="__tabbed_58_1" name="__tabbed_58" type="radio" /><input id="__tabbed_58_2" name="__tabbed_58" type="radio" /><input id="__tabbed_58_3" name="__tabbed_58" type="radio" /><input id="__tabbed_58_4" name="__tabbed_58" type="radio" /><input id="__tabbed_58_5" name="__tabbed_58" type="radio" /><input id="__tabbed_58_6" name="__tabbed_58" type="radio" /><input id="__tabbed_58_7" name="__tabbed_58" type="radio" /><div class="tabbed-labels"><label for="__tabbed_58_1">HTTPie</label><label for="__tabbed_58_2">Python</label><label for="__tabbed_58_3">TypeScript</label><label for="__tabbed_58_4">Path Parameters</label><label for="__tabbed_58_5">Request Body (required)</label><label for="__tabbed_58_6">Responses</label><label for="__tabbed_58_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37131,14 +36690,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Users with the staff flag, and, never from the applicant team, whoever acts on the step named: the call's managers and organisers driving its workflow, and the step's completer (user_can_request_changes).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="request-extension">Request extension</h3>
 <p>Request an extension of an accepted proposal's allocation: opens an extension run on the call's extension steps. Only the proposal's team, while the proposal is not completed, has no open run, and before the end of the extension window.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="60:7"><input checked="checked" id="__tabbed_60_1" name="__tabbed_60" type="radio" /><input id="__tabbed_60_2" name="__tabbed_60" type="radio" /><input id="__tabbed_60_3" name="__tabbed_60" type="radio" /><input id="__tabbed_60_4" name="__tabbed_60" type="radio" /><input id="__tabbed_60_5" name="__tabbed_60" type="radio" /><input id="__tabbed_60_6" name="__tabbed_60" type="radio" /><input id="__tabbed_60_7" name="__tabbed_60" type="radio" /><div class="tabbed-labels"><label for="__tabbed_60_1">HTTPie</label><label for="__tabbed_60_2">Python</label><label for="__tabbed_60_3">TypeScript</label><label for="__tabbed_60_4">Path Parameters</label><label for="__tabbed_60_5">Request Body</label><label for="__tabbed_60_6">Responses</label><label for="__tabbed_60_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="59:7"><input checked="checked" id="__tabbed_59_1" name="__tabbed_59" type="radio" /><input id="__tabbed_59_2" name="__tabbed_59" type="radio" /><input id="__tabbed_59_3" name="__tabbed_59" type="radio" /><input id="__tabbed_59_4" name="__tabbed_59" type="radio" /><input id="__tabbed_59_5" name="__tabbed_59" type="radio" /><input id="__tabbed_59_6" name="__tabbed_59" type="radio" /><input id="__tabbed_59_7" name="__tabbed_59" type="radio" /><div class="tabbed-labels"><label for="__tabbed_59_1">HTTPie</label><label for="__tabbed_59_2">Python</label><label for="__tabbed_59_3">TypeScript</label><label for="__tabbed_59_4">Path Parameters</label><label for="__tabbed_59_5">Request Body</label><label for="__tabbed_59_6">Responses</label><label for="__tabbed_59_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37349,7 +36908,7 @@
 <hr />
 <h3 id="upload-or-replace-the-purchase-order-of-a-requested-resource">Upload or replace the purchase order of a requested resource</h3>
 <p>Upload or replace the purchase order of a requested resource.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="61:7"><input checked="checked" id="__tabbed_61_1" name="__tabbed_61" type="radio" /><input id="__tabbed_61_2" name="__tabbed_61" type="radio" /><input id="__tabbed_61_3" name="__tabbed_61" type="radio" /><input id="__tabbed_61_4" name="__tabbed_61" type="radio" /><input id="__tabbed_61_5" name="__tabbed_61" type="radio" /><input id="__tabbed_61_6" name="__tabbed_61" type="radio" /><input id="__tabbed_61_7" name="__tabbed_61" type="radio" /><div class="tabbed-labels"><label for="__tabbed_61_1">HTTPie</label><label for="__tabbed_61_2">Python</label><label for="__tabbed_61_3">TypeScript</label><label for="__tabbed_61_4">Path Parameters</label><label for="__tabbed_61_5">Request Body</label><label for="__tabbed_61_6">Responses</label><label for="__tabbed_61_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="60:7"><input checked="checked" id="__tabbed_60_1" name="__tabbed_60" type="radio" /><input id="__tabbed_60_2" name="__tabbed_60" type="radio" /><input id="__tabbed_60_3" name="__tabbed_60" type="radio" /><input id="__tabbed_60_4" name="__tabbed_60" type="radio" /><input id="__tabbed_60_5" name="__tabbed_60" type="radio" /><input id="__tabbed_60_6" name="__tabbed_60" type="radio" /><input id="__tabbed_60_7" name="__tabbed_60" type="radio" /><div class="tabbed-labels"><label for="__tabbed_60_1">HTTPie</label><label for="__tabbed_60_2">Python</label><label for="__tabbed_60_3">TypeScript</label><label for="__tabbed_60_4">Path Parameters</label><label for="__tabbed_60_5">Request Body</label><label for="__tabbed_60_6">Responses</label><label for="__tabbed_60_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37506,7 +37065,7 @@
 <hr />
 <h3 id="create-resource-for-a-proposal">Create resource for a proposal</h3>
 <p>Create resource for a proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="62:7"><input checked="checked" id="__tabbed_62_1" name="__tabbed_62" type="radio" /><input id="__tabbed_62_2" name="__tabbed_62" type="radio" /><input id="__tabbed_62_3" name="__tabbed_62" type="radio" /><input id="__tabbed_62_4" name="__tabbed_62" type="radio" /><input id="__tabbed_62_5" name="__tabbed_62" type="radio" /><input id="__tabbed_62_6" name="__tabbed_62" type="radio" /><input id="__tabbed_62_7" name="__tabbed_62" type="radio" /><div class="tabbed-labels"><label for="__tabbed_62_1">HTTPie</label><label for="__tabbed_62_2">Python</label><label for="__tabbed_62_3">TypeScript</label><label for="__tabbed_62_4">Path Parameters</label><label for="__tabbed_62_5">Request Body</label><label for="__tabbed_62_6">Responses</label><label for="__tabbed_62_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="61:7"><input checked="checked" id="__tabbed_61_1" name="__tabbed_61" type="radio" /><input id="__tabbed_61_2" name="__tabbed_61" type="radio" /><input id="__tabbed_61_3" name="__tabbed_61" type="radio" /><input id="__tabbed_61_4" name="__tabbed_61" type="radio" /><input id="__tabbed_61_5" name="__tabbed_61" type="radio" /><input id="__tabbed_61_6" name="__tabbed_61" type="radio" /><input id="__tabbed_61_7" name="__tabbed_61" type="radio" /><div class="tabbed-labels"><label for="__tabbed_61_1">HTTPie</label><label for="__tabbed_61_2">Python</label><label for="__tabbed_61_3">TypeScript</label><label for="__tabbed_61_4">Path Parameters</label><label for="__tabbed_61_5">Request Body</label><label for="__tabbed_61_6">Responses</label><label for="__tabbed_61_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -37757,7 +37316,7 @@
 <hr />
 <h3 id="revoke-role-assignment">Revoke role assignment</h3>
 <p>Take an evaluator role away. The holder loses the access it gave; the assignment is kept as history. The completer of an assignment step takes away only their own; the call manager anyone's.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="63:7"><input checked="checked" id="__tabbed_63_1" name="__tabbed_63" type="radio" /><input id="__tabbed_63_2" name="__tabbed_63" type="radio" /><input id="__tabbed_63_3" name="__tabbed_63" type="radio" /><input id="__tabbed_63_4" name="__tabbed_63" type="radio" /><input id="__tabbed_63_5" name="__tabbed_63" type="radio" /><input id="__tabbed_63_6" name="__tabbed_63" type="radio" /><input id="__tabbed_63_7" name="__tabbed_63" type="radio" /><div class="tabbed-labels"><label for="__tabbed_63_1">HTTPie</label><label for="__tabbed_63_2">Python</label><label for="__tabbed_63_3">TypeScript</label><label for="__tabbed_63_4">Path Parameters</label><label for="__tabbed_63_5">Request Body (required)</label><label for="__tabbed_63_6">Responses</label><label for="__tabbed_63_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="62:7"><input checked="checked" id="__tabbed_62_1" name="__tabbed_62" type="radio" /><input id="__tabbed_62_2" name="__tabbed_62" type="radio" /><input id="__tabbed_62_3" name="__tabbed_62" type="radio" /><input id="__tabbed_62_4" name="__tabbed_62" type="radio" /><input id="__tabbed_62_5" name="__tabbed_62" type="radio" /><input id="__tabbed_62_6" name="__tabbed_62" type="radio" /><input id="__tabbed_62_7" name="__tabbed_62" type="radio" /><div class="tabbed-labels"><label for="__tabbed_62_1">HTTPie</label><label for="__tabbed_62_2">Python</label><label for="__tabbed_62_3">TypeScript</label><label for="__tabbed_62_4">Path Parameters</label><label for="__tabbed_62_5">Request Body (required)</label><label for="__tabbed_62_6">Responses</label><label for="__tabbed_62_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -38033,14 +37592,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Who holds the evaluator roles on the proposal is read by users with the staff or support flag, those overseeing its call, the holders themselves and the completer of an active assignment step; never by the applicant team (<code>user_can_view_proposal_roles</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="role-assignments_1">Role assignments</h3>
 <p>Assign an evaluator role on the proposal. Call managers at any time, the completer of an assignment step for the role while it runs -- who may make someone the lead only while the role has none, or when they are its lead handing it over. Refused for an ineligible user, a recorded conflict of interest, a member of the applicant team, or one holder too many.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="64:7"><input checked="checked" id="__tabbed_64_1" name="__tabbed_64" type="radio" /><input id="__tabbed_64_2" name="__tabbed_64" type="radio" /><input id="__tabbed_64_3" name="__tabbed_64" type="radio" /><input id="__tabbed_64_4" name="__tabbed_64" type="radio" /><input id="__tabbed_64_5" name="__tabbed_64" type="radio" /><input id="__tabbed_64_6" name="__tabbed_64" type="radio" /><input id="__tabbed_64_7" name="__tabbed_64" type="radio" /><div class="tabbed-labels"><label for="__tabbed_64_1">HTTPie</label><label for="__tabbed_64_2">Python</label><label for="__tabbed_64_3">TypeScript</label><label for="__tabbed_64_4">Path Parameters</label><label for="__tabbed_64_5">Request Body (required)</label><label for="__tabbed_64_6">Responses</label><label for="__tabbed_64_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="63:7"><input checked="checked" id="__tabbed_63_1" name="__tabbed_63" type="radio" /><input id="__tabbed_63_2" name="__tabbed_63" type="radio" /><input id="__tabbed_63_3" name="__tabbed_63" type="radio" /><input id="__tabbed_63_4" name="__tabbed_63" type="radio" /><input id="__tabbed_63_5" name="__tabbed_63" type="radio" /><input id="__tabbed_63_6" name="__tabbed_63" type="radio" /><input id="__tabbed_63_7" name="__tabbed_63" type="radio" /><div class="tabbed-labels"><label for="__tabbed_63_1">HTTPie</label><label for="__tabbed_63_2">Python</label><label for="__tabbed_63_3">TypeScript</label><label for="__tabbed_63_4">Path Parameters</label><label for="__tabbed_63_5">Request Body (required)</label><label for="__tabbed_63_6">Responses</label><label for="__tabbed_63_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -38336,14 +37895,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Who holds the evaluator roles on the proposal is read by users with the staff or support flag, those overseeing its call, the holders themselves and the completer of an active assignment step; never by the applicant team (<code>user_can_view_proposal_roles</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="set-awarded-duration">Set awarded duration</h3>
 <p>Set the project length the award grants, from the call's allowed_duration_months. Call managers only, while the allocation decision is in progress.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="65:7"><input checked="checked" id="__tabbed_65_1" name="__tabbed_65" type="radio" /><input id="__tabbed_65_2" name="__tabbed_65" type="radio" /><input id="__tabbed_65_3" name="__tabbed_65" type="radio" /><input id="__tabbed_65_4" name="__tabbed_65" type="radio" /><input id="__tabbed_65_5" name="__tabbed_65" type="radio" /><input id="__tabbed_65_6" name="__tabbed_65" type="radio" /><input id="__tabbed_65_7" name="__tabbed_65" type="radio" /><div class="tabbed-labels"><label for="__tabbed_65_1">HTTPie</label><label for="__tabbed_65_2">Python</label><label for="__tabbed_65_3">TypeScript</label><label for="__tabbed_65_4">Path Parameters</label><label for="__tabbed_65_5">Request Body (required)</label><label for="__tabbed_65_6">Responses</label><label for="__tabbed_65_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="64:7"><input checked="checked" id="__tabbed_64_1" name="__tabbed_64" type="radio" /><input id="__tabbed_64_2" name="__tabbed_64" type="radio" /><input id="__tabbed_64_3" name="__tabbed_64" type="radio" /><input id="__tabbed_64_4" name="__tabbed_64" type="radio" /><input id="__tabbed_64_5" name="__tabbed_64" type="radio" /><input id="__tabbed_64_6" name="__tabbed_64" type="radio" /><input id="__tabbed_64_7" name="__tabbed_64" type="radio" /><div class="tabbed-labels"><label for="__tabbed_64_1">HTTPie</label><label for="__tabbed_64_2">Python</label><label for="__tabbed_64_3">TypeScript</label><label for="__tabbed_64_4">Path Parameters</label><label for="__tabbed_64_5">Request Body (required)</label><label for="__tabbed_64_6">Responses</label><label for="__tabbed_64_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -38498,7 +38057,7 @@
 <hr />
 <h3 id="set-panel">Set panel</h3>
 <p>Move the proposal to another panel of its call, or off any panel. For those who manage the call and the completer of the proposal's running assignment step that assigns a role held through its panel. The chair the workflow assigned from the old panel, who has done nothing on the proposal yet, is revoked with the move; any other holder of a role held through the panel refuses it: revoke them first. When the proposal's assignment step is running, the new panel's chair takes the roles held by the panel's chair. Logged on the proposal's event feed, which the applicant team does not read.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="66:7"><input checked="checked" id="__tabbed_66_1" name="__tabbed_66" type="radio" /><input id="__tabbed_66_2" name="__tabbed_66" type="radio" /><input id="__tabbed_66_3" name="__tabbed_66" type="radio" /><input id="__tabbed_66_4" name="__tabbed_66" type="radio" /><input id="__tabbed_66_5" name="__tabbed_66" type="radio" /><input id="__tabbed_66_6" name="__tabbed_66" type="radio" /><input id="__tabbed_66_7" name="__tabbed_66" type="radio" /><div class="tabbed-labels"><label for="__tabbed_66_1">HTTPie</label><label for="__tabbed_66_2">Python</label><label for="__tabbed_66_3">TypeScript</label><label for="__tabbed_66_4">Path Parameters</label><label for="__tabbed_66_5">Request Body (required)</label><label for="__tabbed_66_6">Responses</label><label for="__tabbed_66_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="65:7"><input checked="checked" id="__tabbed_65_1" name="__tabbed_65" type="radio" /><input id="__tabbed_65_2" name="__tabbed_65" type="radio" /><input id="__tabbed_65_3" name="__tabbed_65" type="radio" /><input id="__tabbed_65_4" name="__tabbed_65" type="radio" /><input id="__tabbed_65_5" name="__tabbed_65" type="radio" /><input id="__tabbed_65_6" name="__tabbed_65" type="radio" /><input id="__tabbed_65_7" name="__tabbed_65" type="radio" /><div class="tabbed-labels"><label for="__tabbed_65_1">HTTPie</label><label for="__tabbed_65_2">Python</label><label for="__tabbed_65_3">TypeScript</label><label for="__tabbed_65_4">Path Parameters</label><label for="__tabbed_65_5">Request Body (required)</label><label for="__tabbed_65_6">Responses</label><label for="__tabbed_65_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -39121,14 +38680,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Staff, whoever may update the proposal's call, and the completer of its running panel-based assignment step move the proposal to another panel; never the applicant team (<code>user_can_set_proposal_panel</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="set-role-lead">Set role lead</h3>
 <p>Mark a holder as the lead of their role, in place of any other. The completer of an assignment step only while the role has no lead, or as its lead handing it over; the call manager always.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="67:7"><input checked="checked" id="__tabbed_67_1" name="__tabbed_67" type="radio" /><input id="__tabbed_67_2" name="__tabbed_67" type="radio" /><input id="__tabbed_67_3" name="__tabbed_67" type="radio" /><input id="__tabbed_67_4" name="__tabbed_67" type="radio" /><input id="__tabbed_67_5" name="__tabbed_67" type="radio" /><input id="__tabbed_67_6" name="__tabbed_67" type="radio" /><input id="__tabbed_67_7" name="__tabbed_67" type="radio" /><div class="tabbed-labels"><label for="__tabbed_67_1">HTTPie</label><label for="__tabbed_67_2">Python</label><label for="__tabbed_67_3">TypeScript</label><label for="__tabbed_67_4">Path Parameters</label><label for="__tabbed_67_5">Request Body (required)</label><label for="__tabbed_67_6">Responses</label><label for="__tabbed_67_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="66:7"><input checked="checked" id="__tabbed_66_1" name="__tabbed_66" type="radio" /><input id="__tabbed_66_2" name="__tabbed_66" type="radio" /><input id="__tabbed_66_3" name="__tabbed_66" type="radio" /><input id="__tabbed_66_4" name="__tabbed_66" type="radio" /><input id="__tabbed_66_5" name="__tabbed_66" type="radio" /><input id="__tabbed_66_6" name="__tabbed_66" type="radio" /><input id="__tabbed_66_7" name="__tabbed_66" type="radio" /><div class="tabbed-labels"><label for="__tabbed_66_1">HTTPie</label><label for="__tabbed_66_2">Python</label><label for="__tabbed_66_3">TypeScript</label><label for="__tabbed_66_4">Path Parameters</label><label for="__tabbed_66_5">Request Body (required)</label><label for="__tabbed_66_6">Responses</label><label for="__tabbed_66_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -39404,14 +38963,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Who holds the evaluator roles on the proposal is read by users with the staff or support flag, those overseeing its call, the holders themselves and the completer of an active assignment step; never by the applicant team (<code>user_can_view_proposal_roles</code>).</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="submit-a-proposal">Submit a proposal</h3>
 <p>Submit a proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="68:6"><input checked="checked" id="__tabbed_68_1" name="__tabbed_68" type="radio" /><input id="__tabbed_68_2" name="__tabbed_68" type="radio" /><input id="__tabbed_68_3" name="__tabbed_68" type="radio" /><input id="__tabbed_68_4" name="__tabbed_68" type="radio" /><input id="__tabbed_68_5" name="__tabbed_68" type="radio" /><input id="__tabbed_68_6" name="__tabbed_68" type="radio" /><div class="tabbed-labels"><label for="__tabbed_68_1">HTTPie</label><label for="__tabbed_68_2">Python</label><label for="__tabbed_68_3">TypeScript</label><label for="__tabbed_68_4">Path Parameters</label><label for="__tabbed_68_5">Responses</label><label for="__tabbed_68_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="67:6"><input checked="checked" id="__tabbed_67_1" name="__tabbed_67" type="radio" /><input id="__tabbed_67_2" name="__tabbed_67" type="radio" /><input id="__tabbed_67_3" name="__tabbed_67" type="radio" /><input id="__tabbed_67_4" name="__tabbed_67" type="radio" /><input id="__tabbed_67_5" name="__tabbed_67" type="radio" /><input id="__tabbed_67_6" name="__tabbed_67" type="radio" /><div class="tabbed-labels"><label for="__tabbed_67_1">HTTPie</label><label for="__tabbed_67_2">Python</label><label for="__tabbed_67_3">TypeScript</label><label for="__tabbed_67_4">Path Parameters</label><label for="__tabbed_67_5">Responses</label><label for="__tabbed_67_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -39509,7 +39068,7 @@
 <hr />
 <h3 id="submit-checklist-answers">Submit checklist answers</h3>
 <p>Submit checklist answers.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="69:7"><input checked="checked" id="__tabbed_69_1" name="__tabbed_69" type="radio" /><input id="__tabbed_69_2" name="__tabbed_69" type="radio" /><input id="__tabbed_69_3" name="__tabbed_69" type="radio" /><input id="__tabbed_69_4" name="__tabbed_69" type="radio" /><input id="__tabbed_69_5" name="__tabbed_69" type="radio" /><input id="__tabbed_69_6" name="__tabbed_69" type="radio" /><input id="__tabbed_69_7" name="__tabbed_69" type="radio" /><div class="tabbed-labels"><label for="__tabbed_69_1">HTTPie</label><label for="__tabbed_69_2">Python</label><label for="__tabbed_69_3">TypeScript</label><label for="__tabbed_69_4">Path Parameters</label><label for="__tabbed_69_5">Request Body (required)</label><label for="__tabbed_69_6">Responses</label><label for="__tabbed_69_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="68:7"><input checked="checked" id="__tabbed_68_1" name="__tabbed_68" type="radio" /><input id="__tabbed_68_2" name="__tabbed_68" type="radio" /><input id="__tabbed_68_3" name="__tabbed_68" type="radio" /><input id="__tabbed_68_4" name="__tabbed_68" type="radio" /><input id="__tabbed_68_5" name="__tabbed_68" type="radio" /><input id="__tabbed_68_6" name="__tabbed_68" type="radio" /><input id="__tabbed_68_7" name="__tabbed_68" type="radio" /><div class="tabbed-labels"><label for="__tabbed_68_1">HTTPie</label><label for="__tabbed_68_2">Python</label><label for="__tabbed_68_3">TypeScript</label><label for="__tabbed_68_4">Path Parameters</label><label for="__tabbed_68_5">Request Body (required)</label><label for="__tabbed_68_6">Responses</label><label for="__tabbed_68_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -39728,7 +39287,7 @@
 <hr />
 <h3 id="submit-changes">Submit changes</h3>
 <p>Submit the changes requested of the applicant, every open request at once: several steps of a stage may each have asked. The parts unlocked are locked again, and each asking step goes back to its actor with its full duration. The proposal keeps its submission time. Returns the requests closed. For those who may submit the proposal.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="70:7"><input checked="checked" id="__tabbed_70_1" name="__tabbed_70" type="radio" /><input id="__tabbed_70_2" name="__tabbed_70" type="radio" /><input id="__tabbed_70_3" name="__tabbed_70" type="radio" /><input id="__tabbed_70_4" name="__tabbed_70" type="radio" /><input id="__tabbed_70_5" name="__tabbed_70" type="radio" /><input id="__tabbed_70_6" name="__tabbed_70" type="radio" /><input id="__tabbed_70_7" name="__tabbed_70" type="radio" /><div class="tabbed-labels"><label for="__tabbed_70_1">HTTPie</label><label for="__tabbed_70_2">Python</label><label for="__tabbed_70_3">TypeScript</label><label for="__tabbed_70_4">Path Parameters</label><label for="__tabbed_70_5">Query Parameters</label><label for="__tabbed_70_6">Responses</label><label for="__tabbed_70_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="69:7"><input checked="checked" id="__tabbed_69_1" name="__tabbed_69" type="radio" /><input id="__tabbed_69_2" name="__tabbed_69" type="radio" /><input id="__tabbed_69_3" name="__tabbed_69" type="radio" /><input id="__tabbed_69_4" name="__tabbed_69" type="radio" /><input id="__tabbed_69_5" name="__tabbed_69" type="radio" /><input id="__tabbed_69_6" name="__tabbed_69" type="radio" /><input id="__tabbed_69_7" name="__tabbed_69" type="radio" /><div class="tabbed-labels"><label for="__tabbed_69_1">HTTPie</label><label for="__tabbed_69_2">Python</label><label for="__tabbed_69_3">TypeScript</label><label for="__tabbed_69_4">Path Parameters</label><label for="__tabbed_69_5">Query Parameters</label><label for="__tabbed_69_6">Responses</label><label for="__tabbed_69_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -40041,7 +39600,7 @@
 <hr />
 <h3 id="submit-contribution">Submit contribution</h3>
 <p>Submit a contribution to a workflow step with its outcome. On a step whose outcome its contributions decide, the last one completes the step.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="71:7"><input checked="checked" id="__tabbed_71_1" name="__tabbed_71" type="radio" /><input id="__tabbed_71_2" name="__tabbed_71" type="radio" /><input id="__tabbed_71_3" name="__tabbed_71" type="radio" /><input id="__tabbed_71_4" name="__tabbed_71" type="radio" /><input id="__tabbed_71_5" name="__tabbed_71" type="radio" /><input id="__tabbed_71_6" name="__tabbed_71" type="radio" /><input id="__tabbed_71_7" name="__tabbed_71" type="radio" /><div class="tabbed-labels"><label for="__tabbed_71_1">HTTPie</label><label for="__tabbed_71_2">Python</label><label for="__tabbed_71_3">TypeScript</label><label for="__tabbed_71_4">Path Parameters</label><label for="__tabbed_71_5">Request Body</label><label for="__tabbed_71_6">Responses</label><label for="__tabbed_71_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="70:7"><input checked="checked" id="__tabbed_70_1" name="__tabbed_70" type="radio" /><input id="__tabbed_70_2" name="__tabbed_70" type="radio" /><input id="__tabbed_70_3" name="__tabbed_70" type="radio" /><input id="__tabbed_70_4" name="__tabbed_70" type="radio" /><input id="__tabbed_70_5" name="__tabbed_70" type="radio" /><input id="__tabbed_70_6" name="__tabbed_70" type="radio" /><input id="__tabbed_70_7" name="__tabbed_70" type="radio" /><div class="tabbed-labels"><label for="__tabbed_70_1">HTTPie</label><label for="__tabbed_70_2">Python</label><label for="__tabbed_70_3">TypeScript</label><label for="__tabbed_70_4">Path Parameters</label><label for="__tabbed_70_5">Request Body</label><label for="__tabbed_70_6">Responses</label><label for="__tabbed_70_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -40366,14 +39925,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>Whoever may fill the contribution (contributions.Access.can_fill): never from the applicant team, users with the staff flag and the call's managers and organisers; otherwise its filler -- the offering's team or the contributor holding the slot, or the person it is handed to once accepted -- while it is open on an active step.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="submit-answers-to-a-workflow-steps-checklist">Submit answers to a workflow step's checklist</h3>
 <p>Submit answers to a workflow step's checklist.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="72:8"><input checked="checked" id="__tabbed_72_1" name="__tabbed_72" type="radio" /><input id="__tabbed_72_2" name="__tabbed_72" type="radio" /><input id="__tabbed_72_3" name="__tabbed_72" type="radio" /><input id="__tabbed_72_4" name="__tabbed_72" type="radio" /><input id="__tabbed_72_5" name="__tabbed_72" type="radio" /><input id="__tabbed_72_6" name="__tabbed_72" type="radio" /><input id="__tabbed_72_7" name="__tabbed_72" type="radio" /><input id="__tabbed_72_8" name="__tabbed_72" type="radio" /><div class="tabbed-labels"><label for="__tabbed_72_1">HTTPie</label><label for="__tabbed_72_2">Python</label><label for="__tabbed_72_3">TypeScript</label><label for="__tabbed_72_4">Path Parameters</label><label for="__tabbed_72_5">Query Parameters</label><label for="__tabbed_72_6">Request Body (required)</label><label for="__tabbed_72_7">Responses</label><label for="__tabbed_72_8">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="71:8"><input checked="checked" id="__tabbed_71_1" name="__tabbed_71" type="radio" /><input id="__tabbed_71_2" name="__tabbed_71" type="radio" /><input id="__tabbed_71_3" name="__tabbed_71" type="radio" /><input id="__tabbed_71_4" name="__tabbed_71" type="radio" /><input id="__tabbed_71_5" name="__tabbed_71" type="radio" /><input id="__tabbed_71_6" name="__tabbed_71" type="radio" /><input id="__tabbed_71_7" name="__tabbed_71" type="radio" /><input id="__tabbed_71_8" name="__tabbed_71" type="radio" /><div class="tabbed-labels"><label for="__tabbed_71_1">HTTPie</label><label for="__tabbed_71_2">Python</label><label for="__tabbed_71_3">TypeScript</label><label for="__tabbed_71_4">Path Parameters</label><label for="__tabbed_71_5">Query Parameters</label><label for="__tabbed_71_6">Request Body (required)</label><label for="__tabbed_71_7">Responses</label><label for="__tabbed_71_8">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -40618,7 +40177,7 @@
 <hr />
 <h3 id="withdraw">Withdraw</h3>
 <p>Withdraw a submitted proposal from evaluation, at its applicant's request. Its unfinished steps are skipped, reviews still being written are closed, unanswered review assignments lapse and the call managers are told. Not available once an award awaits the applicant's answer: declining the award is the way out then.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="73:7"><input checked="checked" id="__tabbed_73_1" name="__tabbed_73" type="radio" /><input id="__tabbed_73_2" name="__tabbed_73" type="radio" /><input id="__tabbed_73_3" name="__tabbed_73" type="radio" /><input id="__tabbed_73_4" name="__tabbed_73" type="radio" /><input id="__tabbed_73_5" name="__tabbed_73" type="radio" /><input id="__tabbed_73_6" name="__tabbed_73" type="radio" /><input id="__tabbed_73_7" name="__tabbed_73" type="radio" /><div class="tabbed-labels"><label for="__tabbed_73_1">HTTPie</label><label for="__tabbed_73_2">Python</label><label for="__tabbed_73_3">TypeScript</label><label for="__tabbed_73_4">Path Parameters</label><label for="__tabbed_73_5">Request Body</label><label for="__tabbed_73_6">Responses</label><label for="__tabbed_73_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="72:7"><input checked="checked" id="__tabbed_72_1" name="__tabbed_72" type="radio" /><input id="__tabbed_72_2" name="__tabbed_72" type="radio" /><input id="__tabbed_72_3" name="__tabbed_72" type="radio" /><input id="__tabbed_72_4" name="__tabbed_72" type="radio" /><input id="__tabbed_72_5" name="__tabbed_72" type="radio" /><input id="__tabbed_72_6" name="__tabbed_72" type="radio" /><input id="__tabbed_72_7" name="__tabbed_72" type="radio" /><div class="tabbed-labels"><label for="__tabbed_72_1">HTTPie</label><label for="__tabbed_72_2">Python</label><label for="__tabbed_72_3">TypeScript</label><label for="__tabbed_72_4">Path Parameters</label><label for="__tabbed_72_5">Request Body</label><label for="__tabbed_72_6">Responses</label><label for="__tabbed_72_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -40743,7 +40302,7 @@
 <hr />
 <h3 id="withdraw-reviewer-suggestion">Withdraw reviewer suggestion</h3>
 <p>Take back one's own reviewer suggestion while it is pending and the step collecting it is active.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="74:7"><input checked="checked" id="__tabbed_74_1" name="__tabbed_74" type="radio" /><input id="__tabbed_74_2" name="__tabbed_74" type="radio" /><input id="__tabbed_74_3" name="__tabbed_74" type="radio" /><input id="__tabbed_74_4" name="__tabbed_74" type="radio" /><input id="__tabbed_74_5" name="__tabbed_74" type="radio" /><input id="__tabbed_74_6" name="__tabbed_74" type="radio" /><input id="__tabbed_74_7" name="__tabbed_74" type="radio" /><div class="tabbed-labels"><label for="__tabbed_74_1">HTTPie</label><label for="__tabbed_74_2">Python</label><label for="__tabbed_74_3">TypeScript</label><label for="__tabbed_74_4">Path Parameters</label><label for="__tabbed_74_5">Request Body (required)</label><label for="__tabbed_74_6">Responses</label><label for="__tabbed_74_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="73:7"><input checked="checked" id="__tabbed_73_1" name="__tabbed_73" type="radio" /><input id="__tabbed_73_2" name="__tabbed_73" type="radio" /><input id="__tabbed_73_3" name="__tabbed_73" type="radio" /><input id="__tabbed_73_4" name="__tabbed_73" type="radio" /><input id="__tabbed_73_5" name="__tabbed_73" type="radio" /><input id="__tabbed_73_6" name="__tabbed_73" type="radio" /><input id="__tabbed_73_7" name="__tabbed_73" type="radio" /><div class="tabbed-labels"><label for="__tabbed_73_1">HTTPie</label><label for="__tabbed_73_2">Python</label><label for="__tabbed_73_3">TypeScript</label><label for="__tabbed_73_4">Path Parameters</label><label for="__tabbed_73_5">Request Body (required)</label><label for="__tabbed_73_6">Responses</label><label for="__tabbed_73_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -40880,7 +40439,7 @@
 <hr />
 <h3 id="withdraw-run">Withdraw run</h3>
 <p>Call off the open extension request or final report. The proposal's team withdraws its own extension request while the request is still being written; the call's managers and staff any open run. Nothing is granted.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="75:7"><input checked="checked" id="__tabbed_75_1" name="__tabbed_75" type="radio" /><input id="__tabbed_75_2" name="__tabbed_75" type="radio" /><input id="__tabbed_75_3" name="__tabbed_75" type="radio" /><input id="__tabbed_75_4" name="__tabbed_75" type="radio" /><input id="__tabbed_75_5" name="__tabbed_75" type="radio" /><input id="__tabbed_75_6" name="__tabbed_75" type="radio" /><input id="__tabbed_75_7" name="__tabbed_75" type="radio" /><div class="tabbed-labels"><label for="__tabbed_75_1">HTTPie</label><label for="__tabbed_75_2">Python</label><label for="__tabbed_75_3">TypeScript</label><label for="__tabbed_75_4">Path Parameters</label><label for="__tabbed_75_5">Request Body</label><label for="__tabbed_75_6">Responses</label><label for="__tabbed_75_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="74:7"><input checked="checked" id="__tabbed_74_1" name="__tabbed_74" type="radio" /><input id="__tabbed_74_2" name="__tabbed_74" type="radio" /><input id="__tabbed_74_3" name="__tabbed_74" type="radio" /><input id="__tabbed_74_4" name="__tabbed_74" type="radio" /><input id="__tabbed_74_5" name="__tabbed_74" type="radio" /><input id="__tabbed_74_6" name="__tabbed_74" type="radio" /><input id="__tabbed_74_7" name="__tabbed_74" type="radio" /><div class="tabbed-labels"><label for="__tabbed_74_1">HTTPie</label><label for="__tabbed_74_2">Python</label><label for="__tabbed_74_3">TypeScript</label><label for="__tabbed_74_4">Path Parameters</label><label for="__tabbed_74_5">Request Body</label><label for="__tabbed_74_6">Responses</label><label for="__tabbed_74_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -41081,14 +40640,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>An accepted proposal's extension requests and final report are read by whoever reads its award (<code>user_can_view_runs</code>): users with the staff or support flag, the call's managers, the managers of the offerings involved, and the applicant team once the award is released.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="update">Update</h3>
 <p>Read, change or remove an item of the award. Changes are for call managers only, while the allocation decision is in progress.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="76:7"><input checked="checked" id="__tabbed_76_1" name="__tabbed_76" type="radio" /><input id="__tabbed_76_2" name="__tabbed_76" type="radio" /><input id="__tabbed_76_3" name="__tabbed_76" type="radio" /><input id="__tabbed_76_4" name="__tabbed_76" type="radio" /><input id="__tabbed_76_5" name="__tabbed_76" type="radio" /><input id="__tabbed_76_6" name="__tabbed_76" type="radio" /><input id="__tabbed_76_7" name="__tabbed_76" type="radio" /><div class="tabbed-labels"><label for="__tabbed_76_1">HTTPie</label><label for="__tabbed_76_2">Python</label><label for="__tabbed_76_3">TypeScript</label><label for="__tabbed_76_4">Path Parameters</label><label for="__tabbed_76_5">Request Body</label><label for="__tabbed_76_6">Responses</label><label for="__tabbed_76_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="75:7"><input checked="checked" id="__tabbed_75_1" name="__tabbed_75" type="radio" /><input id="__tabbed_75_2" name="__tabbed_75" type="radio" /><input id="__tabbed_75_3" name="__tabbed_75" type="radio" /><input id="__tabbed_75_4" name="__tabbed_75" type="radio" /><input id="__tabbed_75_5" name="__tabbed_75" type="radio" /><input id="__tabbed_75_6" name="__tabbed_75" type="radio" /><input id="__tabbed_75_7" name="__tabbed_75" type="radio" /><div class="tabbed-labels"><label for="__tabbed_75_1">HTTPie</label><label for="__tabbed_75_2">Python</label><label for="__tabbed_75_3">TypeScript</label><label for="__tabbed_75_4">Path Parameters</label><label for="__tabbed_75_5">Request Body</label><label for="__tabbed_75_6">Responses</label><label for="__tabbed_75_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -41353,7 +40912,7 @@
 </div>
 <hr />
 <h3 id="update_1">Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="77:7"><input checked="checked" id="__tabbed_77_1" name="__tabbed_77" type="radio" /><input id="__tabbed_77_2" name="__tabbed_77" type="radio" /><input id="__tabbed_77_3" name="__tabbed_77" type="radio" /><input id="__tabbed_77_4" name="__tabbed_77" type="radio" /><input id="__tabbed_77_5" name="__tabbed_77" type="radio" /><input id="__tabbed_77_6" name="__tabbed_77" type="radio" /><input id="__tabbed_77_7" name="__tabbed_77" type="radio" /><div class="tabbed-labels"><label for="__tabbed_77_1">HTTPie</label><label for="__tabbed_77_2">Python</label><label for="__tabbed_77_3">TypeScript</label><label for="__tabbed_77_4">Path Parameters</label><label for="__tabbed_77_5">Request Body</label><label for="__tabbed_77_6">Responses</label><label for="__tabbed_77_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="76:7"><input checked="checked" id="__tabbed_76_1" name="__tabbed_76" type="radio" /><input id="__tabbed_76_2" name="__tabbed_76" type="radio" /><input id="__tabbed_76_3" name="__tabbed_76" type="radio" /><input id="__tabbed_76_4" name="__tabbed_76" type="radio" /><input id="__tabbed_76_5" name="__tabbed_76" type="radio" /><input id="__tabbed_76_6" name="__tabbed_76" type="radio" /><input id="__tabbed_76_7" name="__tabbed_76" type="radio" /><div class="tabbed-labels"><label for="__tabbed_76_1">HTTPie</label><label for="__tabbed_76_2">Python</label><label for="__tabbed_76_3">TypeScript</label><label for="__tabbed_76_4">Path Parameters</label><label for="__tabbed_76_5">Request Body</label><label for="__tabbed_76_6">Responses</label><label for="__tabbed_76_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -41613,7 +41172,7 @@
 <hr />
 <h3 id="partial-update">Partial Update</h3>
 <p>Read, change or remove an item of the award. Changes are for call managers only, while the allocation decision is in progress.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="78:7"><input checked="checked" id="__tabbed_78_1" name="__tabbed_78" type="radio" /><input id="__tabbed_78_2" name="__tabbed_78" type="radio" /><input id="__tabbed_78_3" name="__tabbed_78" type="radio" /><input id="__tabbed_78_4" name="__tabbed_78" type="radio" /><input id="__tabbed_78_5" name="__tabbed_78" type="radio" /><input id="__tabbed_78_6" name="__tabbed_78" type="radio" /><input id="__tabbed_78_7" name="__tabbed_78" type="radio" /><div class="tabbed-labels"><label for="__tabbed_78_1">HTTPie</label><label for="__tabbed_78_2">Python</label><label for="__tabbed_78_3">TypeScript</label><label for="__tabbed_78_4">Path Parameters</label><label for="__tabbed_78_5">Request Body</label><label for="__tabbed_78_6">Responses</label><label for="__tabbed_78_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="77:7"><input checked="checked" id="__tabbed_77_1" name="__tabbed_77" type="radio" /><input id="__tabbed_77_2" name="__tabbed_77" type="radio" /><input id="__tabbed_77_3" name="__tabbed_77" type="radio" /><input id="__tabbed_77_4" name="__tabbed_77" type="radio" /><input id="__tabbed_77_5" name="__tabbed_77" type="radio" /><input id="__tabbed_77_6" name="__tabbed_77" type="radio" /><input id="__tabbed_77_7" name="__tabbed_77" type="radio" /><div class="tabbed-labels"><label for="__tabbed_77_1">HTTPie</label><label for="__tabbed_77_2">Python</label><label for="__tabbed_77_3">TypeScript</label><label for="__tabbed_77_4">Path Parameters</label><label for="__tabbed_77_5">Request Body</label><label for="__tabbed_77_6">Responses</label><label for="__tabbed_77_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -41878,7 +41437,7 @@
 </div>
 <hr />
 <h3 id="partial-update_1">Partial Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="79:7"><input checked="checked" id="__tabbed_79_1" name="__tabbed_79" type="radio" /><input id="__tabbed_79_2" name="__tabbed_79" type="radio" /><input id="__tabbed_79_3" name="__tabbed_79" type="radio" /><input id="__tabbed_79_4" name="__tabbed_79" type="radio" /><input id="__tabbed_79_5" name="__tabbed_79" type="radio" /><input id="__tabbed_79_6" name="__tabbed_79" type="radio" /><input id="__tabbed_79_7" name="__tabbed_79" type="radio" /><div class="tabbed-labels"><label for="__tabbed_79_1">HTTPie</label><label for="__tabbed_79_2">Python</label><label for="__tabbed_79_3">TypeScript</label><label for="__tabbed_79_4">Path Parameters</label><label for="__tabbed_79_5">Request Body</label><label for="__tabbed_79_6">Responses</label><label for="__tabbed_79_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="78:7"><input checked="checked" id="__tabbed_78_1" name="__tabbed_78" type="radio" /><input id="__tabbed_78_2" name="__tabbed_78" type="radio" /><input id="__tabbed_78_3" name="__tabbed_78" type="radio" /><input id="__tabbed_78_4" name="__tabbed_78" type="radio" /><input id="__tabbed_78_5" name="__tabbed_78" type="radio" /><input id="__tabbed_78_6" name="__tabbed_78" type="radio" /><input id="__tabbed_78_7" name="__tabbed_78" type="radio" /><div class="tabbed-labels"><label for="__tabbed_78_1">HTTPie</label><label for="__tabbed_78_2">Python</label><label for="__tabbed_78_3">TypeScript</label><label for="__tabbed_78_4">Path Parameters</label><label for="__tabbed_78_5">Request Body</label><label for="__tabbed_78_6">Responses</label><label for="__tabbed_78_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -42138,7 +41697,7 @@
 <hr />
 <h3 id="partial-update_2">Partial Update</h3>
 <p>Read an extension request or final report, or change what an open extension asks for -- the proposal's team, while its request step runs -- or grants: whoever completes its decision, while that runs.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="80:7"><input checked="checked" id="__tabbed_80_1" name="__tabbed_80" type="radio" /><input id="__tabbed_80_2" name="__tabbed_80" type="radio" /><input id="__tabbed_80_3" name="__tabbed_80" type="radio" /><input id="__tabbed_80_4" name="__tabbed_80" type="radio" /><input id="__tabbed_80_5" name="__tabbed_80" type="radio" /><input id="__tabbed_80_6" name="__tabbed_80" type="radio" /><input id="__tabbed_80_7" name="__tabbed_80" type="radio" /><div class="tabbed-labels"><label for="__tabbed_80_1">HTTPie</label><label for="__tabbed_80_2">Python</label><label for="__tabbed_80_3">TypeScript</label><label for="__tabbed_80_4">Path Parameters</label><label for="__tabbed_80_5">Request Body</label><label for="__tabbed_80_6">Responses</label><label for="__tabbed_80_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="79:7"><input checked="checked" id="__tabbed_79_1" name="__tabbed_79" type="radio" /><input id="__tabbed_79_2" name="__tabbed_79" type="radio" /><input id="__tabbed_79_3" name="__tabbed_79" type="radio" /><input id="__tabbed_79_4" name="__tabbed_79" type="radio" /><input id="__tabbed_79_5" name="__tabbed_79" type="radio" /><input id="__tabbed_79_6" name="__tabbed_79" type="radio" /><input id="__tabbed_79_7" name="__tabbed_79" type="radio" /><div class="tabbed-labels"><label for="__tabbed_79_1">HTTPie</label><label for="__tabbed_79_2">Python</label><label for="__tabbed_79_3">TypeScript</label><label for="__tabbed_79_4">Path Parameters</label><label for="__tabbed_79_5">Request Body</label><label for="__tabbed_79_6">Responses</label><label for="__tabbed_79_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -42361,14 +41920,14 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>This reference does not yet state who may call this operation.</p>
+<p>An accepted proposal's extension requests and final report are read by whoever reads its award (<code>user_can_view_runs</code>): users with the staff or support flag, the call's managers, the managers of the offerings involved, and the applicant team once the award is released.</p>
 </div>
 </div>
 </div>
 <hr />
 <h3 id="delete_1">Delete</h3>
 <p>Read, change or remove an item of the award. Changes are for call managers only, while the allocation decision is in progress.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="81:6"><input checked="checked" id="__tabbed_81_1" name="__tabbed_81" type="radio" /><input id="__tabbed_81_2" name="__tabbed_81" type="radio" /><input id="__tabbed_81_3" name="__tabbed_81" type="radio" /><input id="__tabbed_81_4" name="__tabbed_81" type="radio" /><input id="__tabbed_81_5" name="__tabbed_81" type="radio" /><input id="__tabbed_81_6" name="__tabbed_81" type="radio" /><div class="tabbed-labels"><label for="__tabbed_81_1">HTTPie</label><label for="__tabbed_81_2">Python</label><label for="__tabbed_81_3">TypeScript</label><label for="__tabbed_81_4">Path Parameters</label><label for="__tabbed_81_5">Responses</label><label for="__tabbed_81_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="80:6"><input checked="checked" id="__tabbed_80_1" name="__tabbed_80" type="radio" /><input id="__tabbed_80_2" name="__tabbed_80" type="radio" /><input id="__tabbed_80_3" name="__tabbed_80" type="radio" /><input id="__tabbed_80_4" name="__tabbed_80" type="radio" /><input id="__tabbed_80_5" name="__tabbed_80" type="radio" /><input id="__tabbed_80_6" name="__tabbed_80" type="radio" /><div class="tabbed-labels"><label for="__tabbed_80_1">HTTPie</label><label for="__tabbed_80_2">Python</label><label for="__tabbed_80_3">TypeScript</label><label for="__tabbed_80_4">Path Parameters</label><label for="__tabbed_80_5">Responses</label><label for="__tabbed_80_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -42581,7 +42140,7 @@
 <hr />
 <h3 id="remove-the-purchase-order-of-a-requested-resource">Remove the purchase order of a requested resource</h3>
 <p>Remove the purchase order of a requested resource.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="82:6"><input checked="checked" id="__tabbed_82_1" name="__tabbed_82" type="radio" /><input id="__tabbed_82_2" name="__tabbed_82" type="radio" /><input id="__tabbed_82_3" name="__tabbed_82" type="radio" /><input id="__tabbed_82_4" name="__tabbed_82" type="radio" /><input id="__tabbed_82_5" name="__tabbed_82" type="radio" /><input id="__tabbed_82_6" name="__tabbed_82" type="radio" /><div class="tabbed-labels"><label for="__tabbed_82_1">HTTPie</label><label for="__tabbed_82_2">Python</label><label for="__tabbed_82_3">TypeScript</label><label for="__tabbed_82_4">Path Parameters</label><label for="__tabbed_82_5">Responses</label><label for="__tabbed_82_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="81:6"><input checked="checked" id="__tabbed_81_1" name="__tabbed_81" type="radio" /><input id="__tabbed_81_2" name="__tabbed_81" type="radio" /><input id="__tabbed_81_3" name="__tabbed_81" type="radio" /><input id="__tabbed_81_4" name="__tabbed_81" type="radio" /><input id="__tabbed_81_5" name="__tabbed_81" type="radio" /><input id="__tabbed_81_6" name="__tabbed_81" type="radio" /><div class="tabbed-labels"><label for="__tabbed_81_1">HTTPie</label><label for="__tabbed_81_2">Python</label><label for="__tabbed_81_3">TypeScript</label><label for="__tabbed_81_4">Path Parameters</label><label for="__tabbed_81_5">Responses</label><label for="__tabbed_81_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -42687,7 +42246,7 @@
 </div>
 <hr />
 <h3 id="delete_2">Delete</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="83:6"><input checked="checked" id="__tabbed_83_1" name="__tabbed_83" type="radio" /><input id="__tabbed_83_2" name="__tabbed_83" type="radio" /><input id="__tabbed_83_3" name="__tabbed_83" type="radio" /><input id="__tabbed_83_4" name="__tabbed_83" type="radio" /><input id="__tabbed_83_5" name="__tabbed_83" type="radio" /><input id="__tabbed_83_6" name="__tabbed_83" type="radio" /><div class="tabbed-labels"><label for="__tabbed_83_1">HTTPie</label><label for="__tabbed_83_2">Python</label><label for="__tabbed_83_3">TypeScript</label><label for="__tabbed_83_4">Path Parameters</label><label for="__tabbed_83_5">Responses</label><label for="__tabbed_83_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="82:6"><input checked="checked" id="__tabbed_82_1" name="__tabbed_82" type="radio" /><input id="__tabbed_82_2" name="__tabbed_82" type="radio" /><input id="__tabbed_82_3" name="__tabbed_82" type="radio" /><input id="__tabbed_82_4" name="__tabbed_82" type="radio" /><input id="__tabbed_82_5" name="__tabbed_82" type="radio" /><input id="__tabbed_82_6" name="__tabbed_82" type="radio" /><div class="tabbed-labels"><label for="__tabbed_82_1">HTTPie</label><label for="__tabbed_82_2">Python</label><label for="__tabbed_82_3">TypeScript</label><label for="__tabbed_82_4">Path Parameters</label><label for="__tabbed_82_5">Responses</label><label for="__tabbed_82_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
