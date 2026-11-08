@@ -8364,6 +8364,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#count-the-values-each-filter-can-still-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Count the values each filter can still take
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-plans-for-an-offering" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -18634,6 +18645,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#count-the-values-each-filter-can-still-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Count the values each filter can still take
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-plans-for-an-offering" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -18707,6 +18729,11 @@
 <td style="text-align: left;"><strong>Other Actions</strong></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/marketplace-public-offerings/facets/</code></td>
+<td style="text-align: left;"><a href="#count-the-values-each-filter-can-still-take">Count the values each filter can still take</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
@@ -21637,9 +21664,371 @@
 </div>
 <hr />
 <h2 id="other-actions">Other Actions</h2>
+<h3 id="count-the-values-each-filter-can-still-take">Count the values each filter can still take</h3>
+<p>Accepts the same filters as the list. Each facet is counted under every filter except its own, so its values are those that still have rows given the other selections and search.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Query Parameters</label><label for="__tabbed_3_5">Responses</label><label for="__tabbed_3_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-public-offerings/facets/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.offering_state</span><span class="w"> </span><span class="kn">import</span> <span class="n">OfferingState</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.provider_offering_details_o_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProviderOfferingDetailsOEnum</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_public_offerings</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_public_offerings_facets_list</span> <span class="c1"># (3)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_public_offerings_facets_list</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_state.py"><code>OfferingState</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/provider_offering_details_o_enum.py"><code>ProviderOfferingDetailsOEnum</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_public_offerings/marketplace_public_offerings_facets_list.py"><code>marketplace_public_offerings_facets_list</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplacePublicOfferingsFacetsList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplacePublicOfferingsFacetsList</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accessible</code></td>
+<td>boolean</td>
+<td>Only offerings the current user can order</td>
+</tr>
+<tr>
+<td><code>accessible_via_calls</code></td>
+<td>boolean</td>
+<td>Deprecated: offerings accepted on an active call, regardless of whether a proposal can actually be submitted for them. Use open_for_proposals instead.</td>
+</tr>
+<tr>
+<td><code>allowed_customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>Allowed customer UUID</td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td>string</td>
+<td>Offering attributes (JSON)</td>
+</tr>
+<tr>
+<td><code>billable</code></td>
+<td>boolean</td>
+<td>Billable</td>
+</tr>
+<tr>
+<td><code>can_create_offering_user</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>category_group_uuid</code></td>
+<td>string (uuid)</td>
+<td>Category group UUID</td>
+</tr>
+<tr>
+<td><code>category_uuid</code></td>
+<td>string (uuid)</td>
+<td>Category UUID</td>
+</tr>
+<tr>
+<td><code>consumer_customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>Consumer customer UUID</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>string (date-time)</td>
+<td>Created after</td>
+</tr>
+<tr>
+<td><code>created_before</code></td>
+<td>string (date-time)</td>
+<td>Created before</td>
+</tr>
+<tr>
+<td><code>customer</code></td>
+<td>string (uri)</td>
+<td>Customer URL</td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>Customer UUID</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>Description contains</td>
+</tr>
+<tr>
+<td><code>facet</code></td>
+<td>string</td>
+<td>Comma-separated facet names to compute; all by default.</td>
+</tr>
+<tr>
+<td><code>facet_limit</code></td>
+<td>integer</td>
+<td>Most values returned per facet, by count (default 100, at most 1000).</td>
+</tr>
+<tr>
+<td><code>facet_q</code></td>
+<td>string</td>
+<td>Keep only values whose label contains this text (at most 100 characters).</td>
+</tr>
+<tr>
+<td><code>has_active_terms_of_service</code></td>
+<td>boolean</td>
+<td>Has Active Terms of Service</td>
+</tr>
+<tr>
+<td><code>has_terms_of_service</code></td>
+<td>boolean</td>
+<td>Has Terms of Service</td>
+</tr>
+<tr>
+<td><code>keyword</code></td>
+<td>string</td>
+<td>Keyword</td>
+</tr>
+<tr>
+<td><code>modified</code></td>
+<td>string (date-time)</td>
+<td>Modified after</td>
+</tr>
+<tr>
+<td><code>modified_before</code></td>
+<td>string (date-time)</td>
+<td>Modified before</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Name</td>
+</tr>
+<tr>
+<td><code>name_exact</code></td>
+<td>string</td>
+<td>Name (exact)</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>array</td>
+<td>Ordering<br><br></td>
+</tr>
+<tr>
+<td><code>offering_group_uuid</code></td>
+<td>string (uuid)</td>
+<td>Offering group UUID</td>
+</tr>
+<tr>
+<td><code>open_for_proposals</code></td>
+<td>boolean</td>
+<td>Offerings that can be requested through a call right now: accepted on an active call with a round that is open, and covered by a resource template when the call defines any.</td>
+</tr>
+<tr>
+<td><code>organization_group_uuid</code></td>
+<td>string (uuid)</td>
+<td>Organization group UUID</td>
+</tr>
+<tr>
+<td><code>parent_uuid</code></td>
+<td>string (uuid)</td>
+<td>Parent offering UUID</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td>Project UUID</td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>Search by offering name, slug or description</td>
+</tr>
+<tr>
+<td><code>resource_customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>Resource customer UUID</td>
+</tr>
+<tr>
+<td><code>resource_project_uuid</code></td>
+<td>string (uuid)</td>
+<td>Resource project UUID</td>
+</tr>
+<tr>
+<td><code>scope_uuid</code></td>
+<td>string</td>
+<td>Scope UUID</td>
+</tr>
+<tr>
+<td><code>service_manager_uuid</code></td>
+<td>string (uuid)</td>
+<td>Service manager UUID</td>
+</tr>
+<tr>
+<td><code>shared</code></td>
+<td>boolean</td>
+<td>Shared</td>
+</tr>
+<tr>
+<td><code>slug</code></td>
+<td>string</td>
+<td>Slug</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>array</td>
+<td>Offering state<br><br></td>
+</tr>
+<tr>
+<td><code>tag</code></td>
+<td>array</td>
+<td>Tag UUID (OR logic)</td>
+</tr>
+<tr>
+<td><code>tag_name</code></td>
+<td>array</td>
+<td>Tag name (OR logic)</td>
+</tr>
+<tr>
+<td><code>tag_names_and</code></td>
+<td>string</td>
+<td>Tag names with AND logic (comma-separated)</td>
+</tr>
+<tr>
+<td><code>tags_and</code></td>
+<td>string</td>
+<td>Tag UUIDs with AND logic (comma-separated)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>array</td>
+<td>Offering type</td>
+</tr>
+<tr>
+<td><code>user_has_consent</code></td>
+<td>boolean</td>
+<td>User Has Consent</td>
+</tr>
+<tr>
+<td><code>user_has_offering_user</code></td>
+<td>boolean</td>
+<td>User Has Offering User</td>
+</tr>
+<tr>
+<td><code>uuid_list</code></td>
+<td>string</td>
+<td>Comma-separated offering UUIDs</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<p>The response body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>values</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>values.value</code></td>
+<td>string</td>
+<td>Value to send back as the facet's query parameter.</td>
+</tr>
+<tr>
+<td><code>values.label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>values.count</code></td>
+<td>integer</td>
+<td>Rows matching this value under all other filters.</td>
+</tr>
+<tr>
+<td><code>truncated</code></td>
+<td>boolean</td>
+<td>More values exist than facet_limit; search with facet_q.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Anyone, including anonymous callers.</p>
+<p>Active and paused offerings: shared ones, and those of organizations, projects and offerings where the caller holds a role that have an unarchived plan with no organization groups or one of the caller's. In the hide_inaccessible and require_membership modes of RESTRICTED_OFFERING_VISIBILITY_MODE a shared offering also needs such a plan and no organization groups or one of the caller's, and require_membership shows nothing to a caller without a role. An offering restricted to some roles is hidden from a caller holding none of them, unless they already have a resource of it in a project where they hold a role. Anonymous callers see the shared offerings, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on; staff and support see the shared offerings and every offering with an unarchived plan.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="list-plans-for-an-offering">List plans for an offering</h3>
 <p>Returns a list of plans available for a specific offering. The plans are filtered based on the current user's permissions and organization group memberships.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">HTTPie</label><label for="__tabbed_3_2">Python</label><label for="__tabbed_3_3">TypeScript</label><label for="__tabbed_3_4">Path Parameters</label><label for="__tabbed_3_5">Responses</label><label for="__tabbed_3_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Responses</label><label for="__tabbed_4_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21957,7 +22346,7 @@
 <hr />
 <h3 id="retrieve-a-specific-plan-for-an-offering">Retrieve a specific plan for an offering</h3>
 <p>Returns the details of a specific plan if it is available to the current user for the given offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Responses</label><label for="__tabbed_4_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:6"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Responses</label><label for="__tabbed_5_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>

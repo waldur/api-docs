@@ -9556,7 +9556,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Operations Summary">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core CRUD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core CRUD">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -9619,6 +9630,34 @@
     <span class="md-ellipsis">
       
         Delete a software package
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Actions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#count-the-values-each-filter-can-still-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Count the values each filter can still take
       
     </span>
   </a>
@@ -18574,7 +18613,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Operations Summary">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-crud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core CRUD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core CRUD">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -18648,6 +18698,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#other-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Actions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#count-the-values-each-filter-can-still-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Count the values each filter can still take
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -18676,6 +18754,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align: left;"><strong>Core CRUD</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-software-packages/</code></td>
@@ -18706,9 +18789,20 @@
 <td style="text-align: left;"><code>/api/marketplace-software-packages/{uuid}/</code></td>
 <td style="text-align: left;"><a href="#delete-a-software-package">Delete a software package</a></td>
 </tr>
+<tr>
+<td style="text-align: left;"><strong>Other Actions</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/marketplace-software-packages/facets/</code></td>
+<td style="text-align: left;"><a href="#count-the-values-each-filter-can-still-take">Count the values each filter can still take</a></td>
+</tr>
 </tbody>
 </table>
 <hr />
+<h2 id="core-crud">Core CRUD</h2>
 <h3 id="list-software-packages">List software packages</h3>
 <p>Returns a paginated list of software packages available in the catalogs. Can be filtered by catalog, offering, or various package attributes.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTTPie</label><label for="__tabbed_1_2">Python</label><label for="__tabbed_1_3">TypeScript</label><label for="__tabbed_1_4">Query Parameters</label><label for="__tabbed_1_5">Responses</label><label for="__tabbed_1_6">Authorization</label></div>
@@ -18792,6 +18886,11 @@
 <td>Filter packages by catalog name (case-insensitive partial match)</td>
 </tr>
 <tr>
+<td><code>catalog_name_exact</code></td>
+<td>string</td>
+<td>Filter packages by exact catalog name</td>
+</tr>
+<tr>
 <td><code>catalog_type</code></td>
 <td>string</td>
 <td>Filter packages by catalog type (binary_runtime, source_package, package_manager)<br><br><br><em>Enum: <code>binary_runtime</code>, <code>source_package</code>, <code>package_manager</code></em></td>
@@ -18805,6 +18904,11 @@
 <td><code>catalog_version</code></td>
 <td>string</td>
 <td>Filter packages by catalog version (case-insensitive partial match)</td>
+</tr>
+<tr>
+<td><code>catalog_version_exact</code></td>
+<td>string</td>
+<td>Filter packages by exact catalog version</td>
 </tr>
 <tr>
 <td><code>category</code></td>
@@ -20792,6 +20896,282 @@
 </div>
 <div class="tabbed-block">
 <p>Staff only.</p>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="other-actions">Other Actions</h2>
+<h3 id="count-the-values-each-filter-can-still-take">Count the values each filter can still take</h3>
+<p>Accepts the same filters as the list. Each facet is counted under every filter except its own, so its values are those that still have rows given the other selections and search.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Query Parameters</label><label for="__tabbed_7_5">Responses</label><label for="__tabbed_7_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-software-packages/facets/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.catalog_type_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">CatalogTypeEnum</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.software_package_o_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">SoftwarePackageOEnum</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_software_packages</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_software_packages_facets_list</span> <span class="c1"># (3)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_software_packages_facets_list</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/catalog_type_enum.py"><code>CatalogTypeEnum</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/software_package_o_enum.py"><code>SoftwarePackageOEnum</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_software_packages/marketplace_software_packages_facets_list.py"><code>marketplace_software_packages_facets_list</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceSoftwarePackagesFacetsList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceSoftwarePackagesFacetsList</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>catalog_name</code></td>
+<td>string</td>
+<td>Filter packages by catalog name (case-insensitive partial match)</td>
+</tr>
+<tr>
+<td><code>catalog_name_exact</code></td>
+<td>string</td>
+<td>Filter packages by exact catalog name</td>
+</tr>
+<tr>
+<td><code>catalog_type</code></td>
+<td>string</td>
+<td>Filter packages by catalog type (binary_runtime, source_package, package_manager)<br><br><br><em>Enum: <code>binary_runtime</code>, <code>source_package</code>, <code>package_manager</code></em></td>
+</tr>
+<tr>
+<td><code>catalog_uuid</code></td>
+<td>string (uuid)</td>
+<td>Filter packages from a specific software catalog</td>
+</tr>
+<tr>
+<td><code>catalog_version</code></td>
+<td>string</td>
+<td>Filter packages by catalog version (case-insensitive partial match)</td>
+</tr>
+<tr>
+<td><code>catalog_version_exact</code></td>
+<td>string</td>
+<td>Filter packages by exact catalog version</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>string</td>
+<td>Filter packages by category (e.g., bio, hpc, chemistry)</td>
+</tr>
+<tr>
+<td><code>cpu_family</code></td>
+<td>array</td>
+<td>Filter packages available for any of the given CPU families (e.g., x86_64, aarch64)</td>
+</tr>
+<tr>
+<td><code>cpu_microarchitecture</code></td>
+<td>array</td>
+<td>Filter packages available for any of the given CPU microarchitectures (e.g., generic, amd/zen3, intel/sapphirerapids)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>Filter packages by description (case-insensitive partial match)</td>
+</tr>
+<tr>
+<td><code>extension_name</code></td>
+<td>string</td>
+<td>Filter packages having extensions with a specific name</td>
+</tr>
+<tr>
+<td><code>extension_type</code></td>
+<td>string</td>
+<td>Filter packages having extensions of a specific type (e.g., 'python')</td>
+</tr>
+<tr>
+<td><code>facet</code></td>
+<td>string</td>
+<td>Comma-separated facet names to compute; all by default.</td>
+</tr>
+<tr>
+<td><code>facet_limit</code></td>
+<td>integer</td>
+<td>Most values returned per facet, by count (default 100, at most 1000).</td>
+</tr>
+<tr>
+<td><code>facet_q</code></td>
+<td>string</td>
+<td>Keep only values whose label contains this text (at most 100 characters).</td>
+</tr>
+<tr>
+<td><code>gpu_arch</code></td>
+<td>string</td>
+<td>Filter packages by GPU architecture (e.g., nvidia/cc90)</td>
+</tr>
+<tr>
+<td><code>has_gpu</code></td>
+<td>boolean</td>
+<td>Filter packages that have GPU-enabled builds</td>
+</tr>
+<tr>
+<td><code>has_version</code></td>
+<td>string</td>
+<td>Filter packages that have a specific version</td>
+</tr>
+<tr>
+<td><code>is_extension</code></td>
+<td>boolean</td>
+<td>Filter packages that are extensions of other packages</td>
+</tr>
+<tr>
+<td><code>license</code></td>
+<td>string</td>
+<td>Filter packages by license (e.g., GPL-3.0, MIT)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Filter packages by name (case-insensitive partial match)</td>
+</tr>
+<tr>
+<td><code>name_exact</code></td>
+<td>string</td>
+<td>Filter packages by exact name (case-insensitive)</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>array</td>
+<td>Ordering<br><br></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td>Filter packages available for a specific offering</td>
+</tr>
+<tr>
+<td><code>parent_software_uuid</code></td>
+<td>string (uuid)</td>
+<td>Filter extension packages belonging to a specific parent package</td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>Query packages by name, description, or version (case-insensitive partial match)</td>
+</tr>
+<tr>
+<td><code>toolchain_families_compatibility</code></td>
+<td>string</td>
+<td>Filter packages compatible with a specific toolchain family (e.g., foss_2022b)</td>
+</tr>
+<tr>
+<td><code>toolchain_name</code></td>
+<td>string</td>
+<td>Filter packages by toolchain name (e.g., foss, gfbf)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<p>The response body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>values</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>values.value</code></td>
+<td>string</td>
+<td>Value to send back as the facet's query parameter.</td>
+</tr>
+<tr>
+<td><code>values.label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>values.count</code></td>
+<td>integer</td>
+<td>Rows matching this value under all other filters.</td>
+</tr>
+<tr>
+<td><code>truncated</code></td>
+<td>boolean</td>
+<td>More values exist than facet_limit; search with facet_q.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Any of:</p>
+<ul>
+<li>Any signed-in user.</li>
+<li>Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.</li>
+</ul>
 </div>
 </div>
 </div>
