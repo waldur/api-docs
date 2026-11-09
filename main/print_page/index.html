@@ -511737,7 +511737,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 <hr />
 <h2 id="marketplace-offerings-demo-presets-core-crud">Core CRUD</h2>
 <h3 id="marketplace-offerings-demo-presets-list-demo-presets">List demo presets</h3>
-<p>Returns a list of available demo data presets. Staff access only.</p>
+<p>Returns the demo data presets this deployment offers. Staff access only; answers 404 unless the deployment enables demo presets.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="marketplace-offerings-demo-presets-__tabbed_1_1" name="marketplace-offerings-demo-presets-__tabbed_1" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_1_2" name="marketplace-offerings-demo-presets-__tabbed_1" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_1_3" name="marketplace-offerings-demo-presets-__tabbed_1" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_1_4" name="marketplace-offerings-demo-presets-__tabbed_1" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_1_5" name="marketplace-offerings-demo-presets-__tabbed_1" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_1_6" name="marketplace-offerings-demo-presets-__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="marketplace-offerings-demo-presets-__tabbed_1_1">HTTPie</label><label for="marketplace-offerings-demo-presets-__tabbed_1_2">Python</label><label for="marketplace-offerings-demo-presets-__tabbed_1_3">TypeScript</label><label for="marketplace-offerings-demo-presets-__tabbed_1_4">Query Parameters</label><label for="marketplace-offerings-demo-presets-__tabbed_1_5">Responses</label><label for="marketplace-offerings-demo-presets-__tabbed_1_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -595788,6 +595788,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>from_award</code></td>
+<td>boolean</td>
+<td>Placed by a proposal's award</td>
+</tr>
+<tr>
 <td><code>modified</code></td>
 <td>string (date-time)</td>
 <td>Modified after</td>
@@ -600721,6 +600726,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Customer UUID</td>
 </tr>
 <tr>
+<td><code>from_award</code></td>
+<td>boolean</td>
+<td>Placed by a proposal's award</td>
+</tr>
+<tr>
 <td><code>modified</code></td>
 <td>string (date-time)</td>
 <td>Modified after</td>
@@ -601020,6 +601030,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>facet_q</code></td>
 <td>string</td>
 <td>Keep only values whose label contains this text (at most 100 characters).</td>
+</tr>
+<tr>
+<td><code>from_award</code></td>
+<td>boolean</td>
+<td>Placed by a proposal's award</td>
 </tr>
 <tr>
 <td><code>modified</code></td>
@@ -723690,6 +723705,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>phase</code></td>
+<td>any</td>
+<td>The phase the step runs in: the evaluation before the award, or an extension or closing after it.</td>
+</tr>
+<tr>
 <td><code>status</code></td>
 <td>string</td>
 <td><br><em>Enum: <code>pending</code>, <code>accepted</code>, <code>submitted</code>, <code>declined</code>, <code>withdrawn</code>, <code>expired</code></em></td>
@@ -723904,6 +723924,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>step_key</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>phase</code></td>
+<td>any</td>
+<td>The phase the step runs in: the evaluation before the award, or an extension or closing after it.</td>
 </tr>
 <tr>
 <td><code>status</code></td>
@@ -839666,6 +839691,11 @@ disabled on this viewset, and the change gets its own audit event.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>phase</code></td>
+<td>any</td>
+<td>The phase of the task's step: the evaluation before the award, or an extension or closing after it; null for a task on no step.</td>
+</tr>
+<tr>
 <td><code>due_at</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -839717,7 +839747,7 @@ disabled on this viewset, and the change gets its own audit event.</p>
 <h2 id="uncategorized-proposal-my-tasks-proposal-my-tasks-other-actions">Other Actions</h2>
 <h3 id="uncategorized-proposal-my-tasks-proposal-my-tasks-summarise-the-current-users-open-tasks">Summarise the current user's open tasks</h3>
 <p>How many tasks the list holds, and how many of them are overdue or due soon: the counts the list's <code>due</code> filter narrows it to. Takes the list's offering_uuid and provider_uuid.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_1" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_2" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_3" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_4" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_5" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_1">HTTPie</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_2">Python</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_3">TypeScript</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_4">Responses</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_5">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_1" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_2" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_3" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_4" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_5" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><input id="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_6" name="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_1">HTTPie</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_2">Python</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_3">TypeScript</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_4">Query Parameters</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_5">Responses</label><label for="uncategorized-proposal-my-tasks-proposal-my-tasks-__tabbed_2_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -839773,6 +839803,29 @@ disabled on this viewset, and the change gets its own audit event.</p>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td>Only the tasks about this offering.</td>
+</tr>
+<tr>
+<td><code>provider_uuid</code></td>
+<td>string (uuid)</td>
+<td>Only the tasks about an offering of this provider organization.</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="tabbed-block">
 <p><strong><code>200</code></strong> - </p>
