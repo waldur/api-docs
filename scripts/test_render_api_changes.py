@@ -129,6 +129,38 @@ class RenderPageTest(unittest.TestCase):
         self.assertIn("\n    **`GET /api/things/`**", block)
         self.assertIn("\n    - added", block)
 
+    def test_breaking_changes_list_requests_then_responses_then_enum_values(self):
+        page = render(
+            [
+                change("response-property-enum-value-added", 3, path="/api/a/"),
+                change("response-property-became-nullable", 3, path="/api/b/"),
+                change("request-property-removed", 3, "POST", "/api/c/"),
+                change("new-required-request-property", 3, "POST", "/api/d/"),
+            ]
+        )
+        breaking = page[page.index("## Breaking changes") :]
+        subheadings = [l for l in breaking.splitlines() if l.startswith("### ")]
+        self.assertEqual(
+            subheadings,
+            ["### Requests", "### Responses", "### New values in response enums"],
+        )
+        requests = breaking[: breaking.index("### Responses")]
+        self.assertIn("`POST /api/c/`", requests)
+        self.assertIn("`POST /api/d/`", requests)
+
+    def test_new_response_enum_values_are_collapsed(self):
+        page = render(
+            [
+                change("response-property-enum-value-added", 3, text="added `x`"),
+                change("response-property-enum-value-added", 3, text="added `y`"),
+            ]
+        )
+        block = page[page.index("### New values in response enums") :]
+        self.assertIn('??? note "2 new values in response enums"', block)
+        self.assertIn("\n    - added `x`", block)
+        self.assertNotIn("### Requests", page)
+        self.assertNotIn("### Responses", page)
+
     def test_endpoints_are_labels_not_headings(self):
         page = render([change("response-property-became-nullable", 3)])
         self.assertNotIn("####", page)
@@ -151,9 +183,7 @@ class LoadChangesTest(unittest.TestCase):
     def test_head_operations_are_dropped(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "changelog.json"
-            path.write_text(
-                json.dumps([change("x", 3, "HEAD"), change("x", 3, "GET")])
-            )
+            path.write_text(json.dumps([change("x", 3, "HEAD"), change("x", 3, "GET")]))
             changes = rac.load_changes(path)
         self.assertEqual([c["operation"] for c in changes], ["GET"])
 
@@ -164,6 +194,97 @@ class LoadChangesTest(unittest.TestCase):
             for content in ("[]", "null", ""):
                 path.write_text(content)
                 self.assertEqual(rac.load_changes(path), [])
+
+
+class MergeMediaTypesTest(unittest.TestCase):
+    TEXT = "removed the request property `name`"
+
+    def body_change(self, media_type, text=None, path="/api/things/"):
+        return change(
+            "request-property-removed",
+            3,
+            "POST",
+            path,
+            text=f"{text or self.TEXT} (media type: {media_type})",
+        )
+
+    def test_change_for_every_request_media_type_is_listed_once(self):
+        merged = rac.merge_media_types(
+            [
+                self.body_change("application/json"),
+                self.body_change("application/x-www-form-urlencoded"),
+                self.body_change("multipart/form-data"),
+            ]
+        )
+        self.assertEqual([c["text"] for c in merged], [self.TEXT])
+
+    def test_change_for_some_media_types_names_them(self):
+        merged = rac.merge_media_types(
+            [
+                self.body_change("application/json"),
+                self.body_change("multipart/form-data"),
+            ]
+        )
+        self.assertEqual(
+            [c["text"] for c in merged],
+            [f"{self.TEXT} (media types: application/json, multipart/form-data)"],
+        )
+
+    def test_media_type_followed_by_another_note_is_merged(self):
+        text = "added the new optional request property `x` (media type: {}) (shared schema: `Y`)"
+        merged = rac.merge_media_types(
+            [
+                change("new-optional-request-property", 1, "POST", text=text.format(m))
+                for m in sorted(rac.REQUEST_MEDIA_TYPES)
+            ]
+        )
+        self.assertEqual(
+            [c["text"] for c in merged],
+            ["added the new optional request property `x` (shared schema: `Y`)"],
+        )
+
+    def test_change_for_one_media_type_keeps_it(self):
+        merged = rac.merge_media_types([self.body_change("application/json")])
+        self.assertEqual(
+            [c["text"] for c in merged], [f"{self.TEXT} (media type: application/json)"]
+        )
+
+    def test_different_changes_are_not_merged(self):
+        merged = rac.merge_media_types(
+            [
+                self.body_change("application/json"),
+                self.body_change("application/json", text="removed `other`"),
+                self.body_change("application/json", path="/api/else/"),
+                change("response-property-became-nullable", 3, text=self.TEXT),
+            ]
+        )
+        self.assertEqual(len(merged), 4)
+
+    def test_order_follows_the_first_occurrence(self):
+        merged = rac.merge_media_types(
+            [
+                self.body_change("application/json", text="first"),
+                self.body_change("application/json", text="second"),
+                self.body_change("multipart/form-data", text="first"),
+            ]
+        )
+        self.assertEqual(
+            [c["text"].split(" (")[0] for c in merged], ["first", "second"]
+        )
+
+    def test_summary_counts_merged_changes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "changelog.json"
+            path.write_text(
+                json.dumps(
+                    [
+                        self.body_change(media_type)
+                        for media_type in sorted(rac.REQUEST_MEDIA_TYPES)
+                    ]
+                )
+            )
+            page = render(rac.load_changes(path))
+        self.assertIn("| Breaking | 1 in 1 endpoints |", page)
 
 
 class RenderIndexTest(unittest.TestCase):

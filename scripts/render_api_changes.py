@@ -9,7 +9,9 @@ so this script renders the page instead:
 
 - a summary of how many changes of each kind the release brings;
 - removed and added endpoints;
-- breaking changes, counted by kind and then listed by endpoint;
+- breaking changes, counted by kind, then listed by endpoint: changes to
+  requests first, then to responses, and new values in response enums last,
+  collapsed;
 - warnings, listed by endpoint;
 - everything else, collapsed.
 
@@ -17,7 +19,9 @@ Description-only edits are not changelog entries in oasdiff, so they never show
 up here; the full structural diff (`oasdiff diff`) is linked for those.
 
 ``HEAD`` operations are left out: Django serves one for every ``GET`` and the
-schema mirrors it, so each ``GET`` change would otherwise be listed twice.
+schema mirrors it, so each ``GET`` change would otherwise be listed twice. For
+the same reason a request-body change, which oasdiff reports once per media
+type the endpoint accepts, is listed once.
 
 Usage:
 
@@ -52,6 +56,22 @@ METHOD_ORDER = {
 GENERAL = "General"
 
 DIFF_PAGE_RE = re.compile(r"^waldur-openapi-schema-(\d+(?:\.\d+)*)-diff\.md$")
+
+# Usually last in the text, but oasdiff can follow it with other notes, such as
+# "(shared schema: ...)".
+MEDIA_TYPE_RE = re.compile(r" ?\(media type: ([^)]+)\)")
+
+# The request media types every DRF endpoint with a body accepts. A change
+# reported for all of them is listed once with no media type; one reported for
+# only some names them.
+REQUEST_MEDIA_TYPES = frozenset(
+    {"application/json", "application/x-www-form-urlencoded", "multipart/form-data"}
+)
+
+# Breaking changes are listed in this order, each group under its own heading.
+REQUESTS = "Requests"
+RESPONSES = "Responses"
+RESPONSE_ENUM_VALUES = "New values in response enums"
 
 
 def is_endpoint_removal(change) -> bool:
@@ -94,7 +114,58 @@ def escape(text: str) -> str:
 def load_changes(path: Path) -> list:
     # oasdiff prints `[]` for identical schemas; be lenient about empty output.
     changes = json.loads(path.read_text(encoding="utf-8") or "null") or []
-    return [change for change in changes if change.get("operation") != "HEAD"]
+    return merge_media_types(
+        [change for change in changes if change.get("operation") != "HEAD"]
+    )
+
+
+def merge_media_types(changes) -> list:
+    """List a change once when oasdiff reports it once per request media type.
+
+    A request-body change comes once for each media type the endpoint accepts,
+    with the type in a trailing "(media type: ...)". Entries that differ only in
+    that suffix become one, in the position of the first; it names the media
+    types unless they are all of ``REQUEST_MEDIA_TYPES``.
+    """
+    merged = {}
+    for change in changes:
+        match = MEDIA_TYPE_RE.search(change["text"])
+        text = MEDIA_TYPE_RE.sub("", change["text"]) if match else change["text"]
+        key = (
+            change["id"],
+            change["level"],
+            change.get("operation"),
+            change.get("path"),
+            text,
+        )
+        if key not in merged:
+            merged[key] = (dict(change, text=text), [])
+        if match:
+            merged[key][1].append(match.group(1))
+
+    result = []
+    for entry, media_types in merged.values():
+        if media_types and set(media_types) != REQUEST_MEDIA_TYPES:
+            label = "media type" if len(media_types) == 1 else "media types"
+            entry["text"] += f" ({label}: {', '.join(media_types)})"
+        result.append(entry)
+    return result
+
+
+def breaking_group(change) -> str:
+    """Which part of the breaking changes ``change`` is listed in.
+
+    Requests come first: a client that sends what used to be valid now gets an
+    error. Responses next: a client may fail on what it now receives. A new
+    value in a response enum breaks only a client that validates enums
+    strictly, and such changes are the bulk of most releases, so they come last.
+    """
+    change_id = change["id"]
+    if change_id.startswith("response-"):
+        if change_id.endswith("enum-value-added"):
+            return RESPONSE_ENUM_VALUES
+        return RESPONSES
+    return REQUESTS
 
 
 def group_by_endpoint(changes) -> dict:
@@ -114,9 +185,7 @@ def render_by_endpoint(changes, indent: str = "") -> list:
     grouped = group_by_endpoint(changes)
     for endpoint in sorted(grouped, key=endpoint_key):
         lines += [f"{indent}**{endpoint_title(endpoint)}**", ""]
-        lines += [
-            f"{indent}- {escape(change['text'])}" for change in grouped[endpoint]
-        ]
+        lines += [f"{indent}- {escape(change['text'])}" for change in grouped[endpoint]]
         lines.append("")
     return lines
 
@@ -133,9 +202,7 @@ def kind_label(change_id: str) -> str:
     return change_id.replace("-", " ").capitalize()
 
 
-def render_page(
-    changes, version, previous, oasdiff_version, full_diff=None
-) -> str:
+def render_page(changes, version, previous, oasdiff_version, full_diff=None) -> str:
     removed = [c for c in changes if is_endpoint_removal(c)]
     added = [c for c in changes if c["id"] == ENDPOINT_ADDED]
     listed_elsewhere = {id(c) for c in removed + added}
@@ -204,7 +271,26 @@ def render_page(
             for kind, count in sorted(kinds.items(), key=lambda kv: (-kv[1], kv[0]))
         ]
         lines.append("")
-        lines += render_by_endpoint(breaking_rest)
+
+        groups = defaultdict(list)
+        for change in breaking_rest:
+            groups[breaking_group(change)].append(change)
+        if groups[REQUESTS]:
+            lines += [f"### {REQUESTS}", ""] + render_by_endpoint(groups[REQUESTS])
+        if groups[RESPONSES]:
+            lines += [f"### {RESPONSES}", ""] + render_by_endpoint(groups[RESPONSES])
+        if groups[RESPONSE_ENUM_VALUES]:
+            count = len(groups[RESPONSE_ENUM_VALUES])
+            lines += [
+                f"### {RESPONSE_ENUM_VALUES}",
+                "",
+                "A response can now hold an enum value it could not before. "
+                "This breaks only a client that rejects unknown values.",
+                "",
+                f'??? note "{count:,} new values in response enums"',
+                "",
+            ]
+            lines += render_by_endpoint(groups[RESPONSE_ENUM_VALUES], indent="    ")
 
     if warnings_rest:
         lines += ["## Warnings", ""] + render_by_endpoint(warnings_rest)
