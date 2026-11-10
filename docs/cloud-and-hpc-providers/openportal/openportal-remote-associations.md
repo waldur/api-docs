@@ -76,6 +76,13 @@
     | `uuid` | string (uuid) |
     | `allocation` | string (uri) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -144,5 +151,12 @@
     |---|---|
     | `uuid` | string (uuid) |
     | `allocation` | string (uri) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

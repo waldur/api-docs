@@ -96,6 +96,13 @@
     | `fixed_usage` | integer (int64) |  |
     | `scope` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Usage of organizations and projects the caller's roles reach, as the organization and project lists show them. Staff and support see all.
+
 ---
 
 ### Retrieve an aggregated category component usage record
@@ -182,5 +189,12 @@ Returns the details of a single aggregated usage record for a category component
     | `reported_usage` | integer (int64) |  |
     | `fixed_usage` | integer (int64) |  |
     | `scope` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Usage of organizations and projects the caller's roles reach, as the organization and project lists show them. Staff and support see all.
 
 ---

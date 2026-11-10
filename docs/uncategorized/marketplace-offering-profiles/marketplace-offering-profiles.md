@@ -93,6 +93,11 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -170,6 +175,11 @@
     | `offerings_count` | integer |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -256,6 +266,11 @@
     | `offerings_count` | integer |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -354,6 +369,11 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -445,6 +465,11 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -509,6 +534,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -609,6 +639,11 @@
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Remove role
@@ -704,5 +739,10 @@
     | `offerings_count` | integer |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

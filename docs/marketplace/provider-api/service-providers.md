@@ -159,6 +159,13 @@ Returns a paginated list of course project accounts that have access to resource
     | `error_message` | string |
     | `error_traceback` | string |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_COURSE_ACCOUNTS` on the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List customer projects of a service provider
@@ -264,6 +271,7 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `science_domain_uuid` | string (uuid) |  | Science domain UUID |
     | `science_sub_domain_uuid` | string (uuid) |  | Science sub-domain UUID |
     | `slug` | string |  | Slug |
+    | `user_role` | string |  | Role name or UUID; narrows user_uuid_with_active_role to that role and its organization copies. |
     | `user_uuid_with_active_role` | string (uuid) |  | Filter projects where the given user has a role. |
 
 
@@ -282,6 +290,13 @@ Returns a paginated list of projects belonging to a specific customer that have 
     | `resources_count` | integer |  |
     | `users_count` | integer |  |
     | `billing_price_estimate` | any |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_CUSTOMER_PROJECTS` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -413,6 +428,13 @@ Returns a paginated list of customers who have consumed resources from the speci
     | `users.email` | string (email) |
     | `users.image` | string (uri) |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_CUSTOMERS` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get the structured GLAuth tree of the provider's shared accounts
@@ -522,6 +544,13 @@ The same directory as the provider's `glauth_users_config`, as a structured JSON
     | `robot_accounts.ssh_keys` | array of strings |  |
     | `warnings` | array of strings | Disagreements between the offerings that could not be merged. |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` or `CUSTOMER.MANAGER` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get the GLAuth configuration of the provider's shared accounts
@@ -588,6 +617,13 @@ One GLAuth config for the offerings of this provider that use provider accounts,
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` or `CUSTOMER.MANAGER` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -696,6 +732,13 @@ Returns a paginated list of SSH public keys for all users who have consumed reso
     | `is_shared` | boolean |
     | `type` | string |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_KEYS` on the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List service providers
@@ -801,6 +844,11 @@ Returns a paginated list of service providers.
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
+
+=== "Authorization"
+
+    Any signed-in user, and anyone at all when ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### List users and their roles in a scope
@@ -879,6 +927,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `role` | array | Role UUID or name. Repeat to filter by several roles. |
+    | `role_template` | array | Role name. Matches that role and organization copies of it. Repeat to match several. Omit to leave the role filter unchanged. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -907,6 +956,11 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
     | `source` | string |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
 
 ---
 
@@ -1064,6 +1118,7 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -1123,6 +1178,13 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     | `offering_group_uuid` | string (uuid) |  |
     | `offering_group_title` | string |  |
     | `service_provider_can_create_offering_user` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Billable, shared offerings of this service provider that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
 
 ---
 
@@ -1245,6 +1307,13 @@ Returns a paginated list of all billable, shared offerings provided by the speci
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Billable, shared offerings of this service provider that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
+
 ---
 
 ### List project permissions of a service provider
@@ -1332,7 +1401,7 @@ Returns a paginated list of project permissions for all projects that have consu
     | `role_name` | string | Role name contains |
     | `role_uuid` | string (uuid) | Role UUID |
     | `scope_name` | string | Scope name |
-    | `scope_type` | string | Scope type |
+    | `scope_type` | string | Scope type, as returned in scope_type: customer, project, offering, service_provider, call_organizer, call, proposal, resource, resource_project or global. A content type model name also matches. |
     | `scope_uuid` | string | Scope UUID |
     | `user` | string (uuid) |  |
     | `user_slug` | string | User slug contains |
@@ -1368,6 +1437,13 @@ Returns a paginated list of project permissions for all projects that have consu
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_uuid` | string (uuid) |  |
     | `user_email` | string (email) |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_PROJECT_PERMISSIONS` on the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1480,6 +1556,13 @@ Returns a paginated list of project service accounts that have access to resourc
     | `customer_name` | string |
     | `customer_abbreviation` | string |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_SERVICE_ACCOUNTS` on the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List projects of a service provider
@@ -1579,6 +1662,7 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `science_domain_uuid` | string (uuid) | Science domain UUID |
     | `science_sub_domain_uuid` | string (uuid) | Science sub-domain UUID |
     | `slug` | string | Slug |
+    | `user_role` | string | Role name or UUID; narrows user_uuid_with_active_role to that role and its organization copies. |
     | `user_uuid_with_active_role` | string (uuid) | Filter projects where the given user has a role. |
 
 
@@ -1621,6 +1705,11 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -1634,6 +1723,9 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -1648,6 +1740,13 @@ Returns a paginated list of all projects that have consumed resources from the s
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_PROJECTS` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1752,6 +1851,11 @@ Returns details of a specific service provider.
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
+
+=== "Authorization"
+
+    Any signed-in user, and anyone at all when ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Get service provider revenue
@@ -1831,9 +1935,19 @@ Returns monthly revenue data for the last year for the service provider.
     
     | Field | Type | Description |
     |---|---|---|
-    | `total` | integer | Total revenue amount |
+    | `total` | number (double) | Total revenue amount |
     | `year` | integer | Invoice year |
     | `month` | integer | Invoice month |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - Requires `SERVICE_PROVIDER.GET_REVENUE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1918,6 +2032,13 @@ Returns a paginated list of customers who have robot accounts for resources mana
     | `name` | string | Name of the entity |
     | `uuid` | string (uuid) | UUID of the entity |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.GET_ROBOT_ACCOUNT_CUSTOMERS` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List projects with robot accounts
@@ -2001,6 +2122,13 @@ Returns a paginated list of projects which have robot accounts for resources man
     | `name` | string | Name of the entity |
     | `uuid` | string (uuid) | UUID of the entity |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.GET_ROBOT_ACCOUNT_PROJECTS` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get service provider statistics
@@ -2078,6 +2206,16 @@ Returns various statistics for the service provider, such as number of active ca
     | `unresolved_tickets` | integer | Number of unresolved support tickets |
     | `pending_orders` | integer | Number of pending orders |
     | `erred_resources` | integer | Number of resources in error state |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - Requires `SERVICE_PROVIDER.GET_STATISTICS` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2221,6 +2359,13 @@ Returns a paginated list of customers that a specified user has access to within
     | `users.email` | string (email) |
     | `users.image` | string (uri) |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_USER_CUSTOMERS` on the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Report username conflicts before adopting provider accounts
@@ -2319,6 +2464,13 @@ Lists every user whose offering accounts at this provider disagree about the use
     | `candidates.offering_uuids` | array of strings |
     | `candidates.has_active_resources` | boolean |
     | `candidates.home_directories` | array of strings |
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2459,6 +2611,13 @@ Returns a paginated list of all users who have consumed resources from the speci
     | `identity_source` | string | Indicates what identity provider was used. |
     | `active_isds` | array of strings | List of ISDs that have asserted this user exists. User is deactivated when this becomes empty. |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_USERS` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get service provider API secret code
@@ -2528,6 +2687,11 @@ Returns the API secret code for a service provider. Requires service provider ow
     | Field | Type | Description |
     |---|---|---|
     | `api_secret_code` | string | API secret code for authenticating service provider requests |
+
+
+=== "Authorization"
+
+    Reading the code takes SERVICE_PROVIDER.GET_API_SECRET_CODE on the service provider's organization or site-wide; any other method generates a new one and takes SERVICE_PROVIDER.GENERATE_API_SECRET_CODE in the same places. Staff pass both.
 
 ---
 
@@ -2612,6 +2776,13 @@ Returns a summary of all compliance checklists used by this service provider wit
     | `checklist_name` | string |
     | `questions_count` | integer |
     | `offerings_count` | integer |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_CUSTOMERS` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2700,6 +2871,13 @@ Returns compliance overview statistics for all offerings managed by this service
     | `completed_users` | integer |
     | `pending_users` | integer |
     | `compliance_rate` | number (double) |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_CUSTOMERS` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2794,6 +2972,13 @@ Returns a list of offering users with their compliance status for this service p
     | `last_updated` | string (date-time) |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.LIST_CUSTOMERS` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Preview a change of the provider's account options
@@ -2882,14 +3067,14 @@ Shows what a change of the provider's account options would do, without saving i
     |---|---|---|
     | `account_options` | object |  |
     | `account_options.current` | object |  |
-    | `account_options.current.account_scope` | any | Where accounts are held: 'offering' keeps one account per offering (the historical behaviour); 'provider' shares one account per user across the provider's offerings. |
+    | `account_options.current.account_scope` | any | Where accounts are held: 'offering' keeps one account per offering (the historical behavior); 'provider' shares one account per user across the provider's offerings. |
     | `account_options.current.username_generation_policy` | any | How the usernames of offering users are generated. |
     | `account_options.current.username_anonymized_prefix` | string | Prefix for anonymized usernames; the name is the prefix followed by the account's POSIX UID. |
     | `account_options.current.homedir_prefix` | string | Prefix of each account's home directory; the username follows. |
     | `account_options.current.login_shell` | string | Login shell assigned to GLAuth/LDAP accounts. |
     | `account_options.current.project_groups_enabled` | boolean | Give every project with a resource on this provider's offerings one POSIX group, with a GID from the provider's POSIX ID pool (its group GID range when set). Turning it on also creates the groups of projects already using the provider. |
     | `account_options.proposed` | object |  |
-    | `account_options.proposed.account_scope` | any | Where accounts are held: 'offering' keeps one account per offering (the historical behaviour); 'provider' shares one account per user across the provider's offerings. |
+    | `account_options.proposed.account_scope` | any | Where accounts are held: 'offering' keeps one account per offering (the historical behavior); 'provider' shares one account per user across the provider's offerings. |
     | `account_options.proposed.username_generation_policy` | any | How the usernames of offering users are generated. |
     | `account_options.proposed.username_anonymized_prefix` | string | Prefix for anonymized usernames; the name is the prefix followed by the account's POSIX UID. |
     | `account_options.proposed.homedir_prefix` | string | Prefix of each account's home directory; the username follows. |
@@ -2951,6 +3136,13 @@ Shows what a change of the provider's account options would do, without saving i
     | `provider_accounts_kept` | integer |  |
     | `accounts_keeping_home_or_shell` | integer |  |
     | `username_conflicts` | integer | People whose usernames disagree across offerings. Non-zero blocks switching to per service provider accounts. |
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3050,13 +3242,18 @@ Assigns a specific role to a user within the current scope. An optional expirati
     **`400`** - Validation error, for example when trying to add a user to a terminated project.
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Adopt provider-level accounts
 
 Backs every offering account at this provider with one provider-level account per user, so a person resolves to a single username and POSIX identity across the provider's offerings.
 
-Users whose accounts already agree are adopted without input. A user whose accounts disagree must be given a surviving username in 'resolutions', keyed by user UUID — see the 'username_conflicts' action. The call is refused while any conflict is unresolved, rather than adopting part of the provider and leaving the rest on the old per-offering behaviour.
+Users whose accounts already agree are adopted without input. A user whose accounts disagree must be given a surviving username in 'resolutions', keyed by user UUID — see the 'username_conflicts' action. The call is refused while any conflict is unresolved, rather than adopting part of the provider and leaving the rest on the old per-offering behavior.
 
 
 === "HTTPie"
@@ -3134,6 +3331,13 @@ Users whose accounts already agree are adopted without input. A user whose accou
     |---|---|---|
     | `adopted` | integer | Provider accounts created. |
     | `backed` | integer | Offering accounts now reading through a provider account. |
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3241,6 +3445,13 @@ Creates a new service provider profile for a customer.
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.REGISTER` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Revoke a role from a user
@@ -3331,6 +3542,11 @@ Removes a specific role from a user within the current scope. This effectively r
     **`200`** - Role revoked successfully.
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Generate site agent configuration
@@ -3418,6 +3634,13 @@ Generates a YAML configuration file for waldur-site-agent based on selected SLUR
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.GET_API_SECRET_CODE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3507,6 +3730,13 @@ Sets or updates the offering-specific username for a user across all offerings m
 
     **`201`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.SET_OFFERINGS_USERNAME` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3601,6 +3831,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     |---|---|
     | `expiration_time` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Generate new service provider API secret code
@@ -3670,6 +3905,11 @@ Generates a new API secret code for a service provider, invalidating the old one
     | Field | Type | Description |
     |---|---|---|
     | `api_secret_code` | string | API secret code for authenticating service provider requests |
+
+
+=== "Authorization"
+
+    Reading the code takes SERVICE_PROVIDER.GET_API_SECRET_CODE on the service provider's organization or site-wide; any other method generates a new one and takes SERVICE_PROVIDER.GENERATE_API_SECRET_CODE in the same places. Staff pass both.
 
 ---
 
@@ -3788,6 +4028,13 @@ Updates an existing service provider profile.
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a service provider
@@ -3898,6 +4145,13 @@ Partially updates an existing service provider profile.
     | `allowed_domains` | array of strings | List of allowed domains for offering endpoints. Only staff can modify this field.  |
     | `account_options` | any | Account settings for this provider's offerings, under the same keys as an offering's plugin options. Each applies to every offering that does not set its own; project_groups_enabled is the provider's own. Updated key by key: an omitted key is kept, and a blank value removes it. |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete a service provider
@@ -3964,5 +4218,12 @@ Deletes a service provider profile. Only possible if there are no active offerin
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

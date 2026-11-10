@@ -92,7 +92,14 @@
     | `observable_objects.object_id` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `source_ip` | any | An IPv4 or IPv6 address. |
+    | `source_ip` | string (ipv4) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own subscriptions; staff and global support see every subscription.
 
 ---
 
@@ -173,7 +180,14 @@
     | `observable_objects.object_id` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `source_ip` | any | An IPv4 or IPv6 address. |
+    | `source_ip` | string (ipv4) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own subscriptions; staff and global support see every subscription.
 
 ---
 
@@ -261,7 +275,12 @@ DEPRECATED: superseded by the unified EventConsumer path (POST /api/event-consum
     | `observable_objects.object_id` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
-    | `source_ip` | any | An IPv4 or IPv6 address. |
+    | `source_ip` | string (ipv4) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -379,6 +398,16 @@ Create a RabbitMQ queue for receiving events for a specific offering and object 
     | `vhost` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - The caller's own subscription.
+        - Staff.
+    - The caller holds a role on the offering, on its organization or service provider, or on the project it belongs to, or a site-wide grant to list offerings; staff and global support name any offering. An identity manager of an ISD names any active, paused or unavailable offering.
+
 ---
 
 ### Delete
@@ -443,5 +472,13 @@ Create a RabbitMQ queue for receiving events for a specific offering and object 
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own subscription.
+    - Staff.
 
 ---

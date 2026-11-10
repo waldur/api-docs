@@ -148,6 +148,11 @@ Returns the full changelog for a specific release version.
     | `since_previous.plugin_analysis` | object (free-form) |
     | `component_activity` | object (free-form) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ## Other Actions
@@ -294,6 +299,11 @@ Returns merged delta entries between two arbitrary versions. Useful for seeing w
     | `releases.since_previous.plugin_analysis` | object (free-form) |
     | `releases.component_activity` | object (free-form) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get changelog delta for a version
@@ -428,6 +438,11 @@ Returns only the incremental changes since the previous version (since_previous 
     | `since_previous.plugin_analysis` | object (free-form) |
     | `component_activity` | object (free-form) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get pending changelog
@@ -555,6 +570,11 @@ Returns the changelog entries this deployment has not seen yet, grouped by each 
     | `releases.since_previous.plugin_analysis` | object (free-form) |
     | `releases.component_activity` | object (free-form) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### List changelog releases
@@ -619,5 +639,10 @@ Returns every release in the changelog index, newest first, each marked as the r
     | `releases.has_breaking` | boolean |  |
     | `releases.has_security` | boolean |  |
     | `releases.max_security_urgency` | string |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

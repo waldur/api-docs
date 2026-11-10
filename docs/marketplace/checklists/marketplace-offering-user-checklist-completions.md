@@ -107,6 +107,13 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Checklist completions of the offering users that the offering user list (/api/marketplace-offering-users/) shows the caller.
+
 ---
 
 ### Retrieve a checklist completion
@@ -194,5 +201,12 @@ Returns the details of a specific checklist completion for an offering user.
     | `review_notes` | string | Notes from the reviewer |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Checklist completions of the offering users that the offering user list (/api/marketplace-offering-users/) shows the caller.
 
 ---

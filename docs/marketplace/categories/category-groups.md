@@ -87,6 +87,14 @@ Returns a paginated list of category groups.
     | `description` | string |
     | `icon` | string (uri) |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Retrieve a category group
@@ -170,6 +178,14 @@ Returns details of a specific category group.
     | `description` | string |
     | `icon` | string (uri) |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Create a category group
@@ -252,6 +268,11 @@ Creates a new category group. Requires staff permissions.
     | `title` | string |
     | `description` | string |
     | `icon` | string (uri) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -347,6 +368,11 @@ Updates an existing category group. Requires staff permissions.
     | `description` | string |
     | `icon` | string (uri) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update a category group
@@ -435,6 +461,11 @@ Partially updates an existing category group. Requires staff permissions.
     | `description` | string |
     | `icon` | string (uri) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a category group
@@ -501,5 +532,10 @@ Deletes a category group. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

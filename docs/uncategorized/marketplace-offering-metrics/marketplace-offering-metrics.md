@@ -104,6 +104,13 @@
     | `state` | any |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Metrics of offerings where the caller holds a role, or holds one on the offering's organization or service provider; and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -184,6 +191,13 @@
     | `project_aggregation` | any | How the figures of a project's resources combine. An average is unweighted: every resource counts once. |
     | `state` | any |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Metrics of offerings where the caller holds a role, or holds one on the offering's organization or service provider; and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all.
 
 ---
 
@@ -278,6 +292,11 @@
     | `project_aggregation` | any | How the figures of a project's resources combine. An average is unweighted: every resource counts once. |
     | `state` | any |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE on the offering the request names, on its organization or on its service provider.
 
 ---
 
@@ -384,6 +403,13 @@
     | `state` | any |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -480,6 +506,13 @@
     | `state` | any |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -544,6 +577,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -631,6 +671,13 @@ Stop collecting and hide the metric from consuming projects.
     | `state` | any |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Refuse new points; what was reported stays visible
@@ -714,6 +761,13 @@ Refuse new points; what was reported stays visible.
     | `state` | any |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete everything an archived metric collected, then the metric
@@ -780,6 +834,13 @@ Delete everything an archived metric collected, then the metric.
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -861,5 +922,12 @@ Delete everything an archived metric collected, then the metric.
     | `project_aggregation` | any | How the figures of a project's resources combine. An average is unweighted: every resource counts once. |
     | `state` | any |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

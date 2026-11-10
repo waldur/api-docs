@@ -114,6 +114,13 @@
     | `payment_profiles.is_active` | boolean |
     | `billing_price_estimate` | any |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -201,5 +208,12 @@
     | `payment_profiles.payment_type_display` | string |
     | `payment_profiles.is_active` | boolean |
     | `billing_price_estimate` | any |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

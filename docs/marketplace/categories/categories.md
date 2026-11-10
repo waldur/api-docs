@@ -122,7 +122,7 @@ Returns a paginated list of marketplace categories.
     | `columns.index` | integer | Index allows to reorder columns. |
     | `columns.title` | string | Title is rendered as column header. |
     | `columns.attribute` | string | Resource attribute is rendered as table cell. |
-    | `columns.widget` | any | Widget field allows to customise table cell rendering. |
+    | `columns.widget` | any | Widget field allows to customize table cell rendering. |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -132,6 +132,14 @@ Returns a paginated list of marketplace categories.
     | `articles.title` | string |  |
     | `articles.url` | string (uri) |  |
     | `group` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
 
 ---
 
@@ -240,7 +248,7 @@ Returns details of a specific marketplace category.
     | `columns.index` | integer | Index allows to reorder columns. |
     | `columns.title` | string | Title is rendered as column header. |
     | `columns.attribute` | string | Resource attribute is rendered as table cell. |
-    | `columns.widget` | any | Widget field allows to customise table cell rendering. |
+    | `columns.widget` | any | Widget field allows to customize table cell rendering. |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -250,6 +258,14 @@ Returns details of a specific marketplace category.
     | `articles.title` | string |  |
     | `articles.url` | string (uri) |  |
     | `group` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
 
 ---
 
@@ -361,7 +377,7 @@ Creates a new marketplace category. Requires staff permissions.
     | `columns.index` | integer | Index allows to reorder columns. |
     | `columns.title` | string | Title is rendered as column header. |
     | `columns.attribute` | string | Resource attribute is rendered as table cell. |
-    | `columns.widget` | any | Widget field allows to customise table cell rendering. |
+    | `columns.widget` | any | Widget field allows to customize table cell rendering. |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -371,6 +387,11 @@ Creates a new marketplace category. Requires staff permissions.
     | `articles.title` | string |  |
     | `articles.url` | string (uri) |  |
     | `group` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -493,7 +514,7 @@ Updates an existing marketplace category. Requires staff permissions.
     | `columns.index` | integer | Index allows to reorder columns. |
     | `columns.title` | string | Title is rendered as column header. |
     | `columns.attribute` | string | Resource attribute is rendered as table cell. |
-    | `columns.widget` | any | Widget field allows to customise table cell rendering. |
+    | `columns.widget` | any | Widget field allows to customize table cell rendering. |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -503,6 +524,11 @@ Updates an existing marketplace category. Requires staff permissions.
     | `articles.title` | string |  |
     | `articles.url` | string (uri) |  |
     | `group` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -619,7 +645,7 @@ Partially updates an existing marketplace category. Requires staff permissions.
     | `columns.index` | integer | Index allows to reorder columns. |
     | `columns.title` | string | Title is rendered as column header. |
     | `columns.attribute` | string | Resource attribute is rendered as table cell. |
-    | `columns.widget` | any | Widget field allows to customise table cell rendering. |
+    | `columns.widget` | any | Widget field allows to customize table cell rendering. |
     | `components` | array of objects |  |
     | `components.type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `components.name` | string | Display name for the measured unit, for example, Floating IP. |
@@ -629,6 +655,11 @@ Partially updates an existing marketplace category. Requires staff permissions.
     | `articles.title` | string |  |
     | `articles.url` | string (uri) |  |
     | `group` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -696,5 +727,10 @@ Deletes a marketplace category. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

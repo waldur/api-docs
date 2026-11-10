@@ -129,6 +129,11 @@
     | `affiliation_type` | string | <br>_Enum: `employment`, `education`, `visiting`, `honorary`, `consulting`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -210,6 +215,11 @@
     | `is_primary` | boolean |  |
     | `affiliation_type` | string | <br>_Enum: `employment`, `education`, `visiting`, `honorary`, `consulting`_ |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -297,6 +307,11 @@
     | `last_active_date` | string (date) | When last worked in this area |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -374,6 +389,11 @@
     | `years_experience` | integer |  |
     | `last_active_date` | string (date) | When last worked in this area |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -464,6 +484,11 @@
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -545,6 +570,11 @@
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Get ORCID OAuth authorization URL
@@ -614,6 +644,11 @@ Get ORCID OAuth authorization URL.
     | Field | Type |
     |---|---|
     | `authorization_url` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -742,6 +777,11 @@ Get ORCID OAuth authorization URL.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Get or create reviewer profile for the current user
@@ -849,6 +889,11 @@ Get or create reviewer profile for the current user.
     | `available_for_reviews` | boolean | Whether reviewer is currently accepting review requests |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -969,6 +1014,11 @@ Get or create reviewer profile for the current user.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Affiliations
@@ -1074,6 +1124,11 @@ Get or create reviewer profile for the current user.
     | `affiliation_type` | string | <br>_Enum: `employment`, `education`, `visiting`, `honorary`, `consulting`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Expertise
@@ -1170,6 +1225,11 @@ Get or create reviewer profile for the current user.
     | `years_experience` | integer |  |
     | `last_active_date` | string (date) | When last worked in this area |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -1280,6 +1340,11 @@ Get or create reviewer profile for the current user.
     | `external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -1421,6 +1486,11 @@ Complete ORCID OAuth connection with authorization code.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Create
@@ -1544,6 +1614,11 @@ Complete ORCID OAuth connection with authorization code.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Disconnect ORCID from profile
@@ -1629,6 +1704,11 @@ Disconnect ORCID from profile.
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Import publications from ORCID or other sources
@@ -1711,6 +1791,11 @@ Import publications from ORCID or other sources.
     | Field | Type |
     |---|---|
     | `imported_count` | integer |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -1837,6 +1922,11 @@ Get or create reviewer profile for the current user.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Publish
@@ -1912,6 +2002,11 @@ Publish reviewer profile for discovery by call managers. Warning: Publishing mak
     | `is_published` | boolean |
     | `published_at` | string (date-time) |
     | `warning` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -1999,6 +2094,11 @@ Sync profile data from ORCID.
     | `imported` | object (free-form) |
     | `last_sync` | string (date-time) |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Unpublish reviewer profile to remove it from discovery
@@ -2073,6 +2173,11 @@ Unpublish reviewer profile to remove it from discovery.
     |---|---|
     | `is_published` | boolean |
     | `detail` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -2182,6 +2287,11 @@ Unpublish reviewer profile to remove it from discovery.
     | `affiliation_type` | string | <br>_Enum: `employment`, `education`, `visiting`, `honorary`, `consulting`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Update
@@ -2281,6 +2391,11 @@ Unpublish reviewer profile to remove it from discovery.
     | `years_experience` | integer |  |
     | `last_active_date` | string (date) | When last worked in this area |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -2394,6 +2509,11 @@ Unpublish reviewer profile to remove it from discovery.
     | `external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -2529,6 +2649,11 @@ Unpublish reviewer profile to remove it from discovery.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Check if user can update a reviewer profile.
+
 ---
 
 ### Partial Update
@@ -2631,6 +2756,11 @@ Unpublish reviewer profile to remove it from discovery.
     | `affiliation_type` | string | <br>_Enum: `employment`, `education`, `visiting`, `honorary`, `consulting`_ |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Partial Update
@@ -2724,6 +2854,11 @@ Unpublish reviewer profile to remove it from discovery.
     | `years_experience` | integer |  |
     | `last_active_date` | string (date) | When last worked in this area |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -2825,6 +2960,11 @@ Unpublish reviewer profile to remove it from discovery.
     | `external_ids` | object (free-form) | External identifiers: {"semantic_scholar": "...", "pubmed": "..."} |
     | `is_excluded_from_matching` | boolean | User can exclude old papers from expertise matching |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -2950,6 +3090,11 @@ Get or create reviewer profile for the current user.
     | `available_for_reviews` | boolean | Whether reviewer is currently accepting review requests |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -3085,6 +3230,11 @@ Get or create reviewer profile for the current user.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Check if user can update a reviewer profile.
+
 ---
 
 ### Delete
@@ -3152,6 +3302,11 @@ Get or create reviewer profile for the current user.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -3221,6 +3376,11 @@ Get or create reviewer profile for the current user.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Delete
@@ -3289,6 +3449,11 @@ Get or create reviewer profile for the current user.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Delete
@@ -3353,5 +3518,10 @@ Get or create reviewer profile for the current user.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Check if user can update a reviewer profile.
 
 ---

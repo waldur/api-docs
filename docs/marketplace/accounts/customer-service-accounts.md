@@ -104,6 +104,13 @@
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Service accounts, except closed ones, of organizations where the caller holds SERVICE_ACCOUNT.MANAGE on the organization or site-wide. Staff and support see all.
+
 ---
 
 ### Retrieve a service account
@@ -187,6 +194,13 @@
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Service accounts, except closed ones, of organizations where the caller holds SERVICE_ACCOUNT.MANAGE on the organization or site-wide. Staff and support see all.
+
 ---
 
 ### Create a customer service account
@@ -253,9 +267,7 @@ Creates a new service account scoped to a specific customer (organization). This
 
     | Field | Type | Required |
     |---|---|---|
-    | `username` | string |  |
     | `description` | string |  |
-    | `error_traceback` | string |  |
     | `email` | string (email) |  |
     | `preferred_identifier` | string |  |
     | `customer` | string (uuid) | ✓ |
@@ -283,6 +295,13 @@ Creates a new service account scoped to a specific customer (organization). This
     | `customer` | string (uuid) |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -359,9 +378,7 @@ Creates a new service account scoped to a specific customer (organization). This
 
     | Field | Type | Required |
     |---|---|---|
-    | `username` | string |  |
     | `description` | string |  |
-    | `error_traceback` | string |  |
     | `email` | string (email) |  |
     | `preferred_identifier` | string |  |
     | `customer` | string (uuid) | ✓ |
@@ -389,6 +406,13 @@ Creates a new service account scoped to a specific customer (organization). This
     | `customer` | string (uuid) |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -459,9 +483,7 @@ Creates a new service account scoped to a specific customer (organization). This
 
     | Field | Type | Required |
     |---|---|---|
-    | `username` | string |  |
     | `description` | string |  |
-    | `error_traceback` | string |  |
     | `email` | string (email) |  |
     | `preferred_identifier` | string |  |
     | `customer` | string (uuid) |  |
@@ -489,6 +511,13 @@ Creates a new service account scoped to a specific customer (organization). This
     | `customer` | string (uuid) |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -556,6 +585,13 @@ Deactivates a customer service account and revokes its API key.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -644,5 +680,12 @@ Generates a new API key for the service account, immediately invalidating the ol
     | `customer` | string (uuid) |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_ACCOUNT.MANAGE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

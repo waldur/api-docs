@@ -122,6 +122,11 @@
     | `is_expired` | boolean |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -236,6 +241,11 @@
     | `items_declined_count` | integer | Count of declined items. |
     | `is_expired` | boolean |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -364,6 +374,13 @@
     | `is_expired` | boolean |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -491,6 +508,13 @@
     | `is_expired` | boolean |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -555,6 +579,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -628,6 +659,13 @@ Cancel this assignment batch.
     | Field | Type |
     |---|---|
     | `message` | string |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -718,6 +756,13 @@ Extend or modify the expiration date for an assignment batch. Can reactivate exp
     | `expires_at` | string (date-time) | The updated expiration date. |
     | `status` | string | Current status of the batch. |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Send this assignment batch invitation to the reviewer
@@ -800,5 +845,12 @@ Send this assignment batch invitation to the reviewer.
     |---|---|
     | `detail` | string |
     | `expires_at` | string (date-time) |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

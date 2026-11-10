@@ -223,6 +223,11 @@
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
     | `details` | object (free-form) | Extra details from authentication backend. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -388,6 +393,11 @@
     | `deactivation_reason` | string | Reason why the user was deactivated. Visible to staff and support. |
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
     | `details` | object (free-form) | Extra details from authentication backend. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -593,6 +603,11 @@
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
     | `details` | object (free-form) | Extra details from authentication backend. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Synchronize user details from eduTEAMS
@@ -657,6 +672,14 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The user account the request is for.
 
 ---
 
@@ -728,6 +751,11 @@ Staff-only action that pulls the user's attributes from the configured external 
     |---|---|
     | `detail` | string |
     | `changed_fields` | array of strings |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -812,6 +840,16 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `status` | string |
     | `message` | string |
     | `provider_action_type` | string |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
 
 ---
 
@@ -1028,6 +1066,14 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
     | `details` | object (free-form) | Extra details from authentication backend. |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The user account the request is for.
+
 ---
 
 ### Partial Update
@@ -1233,6 +1279,14 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
     | `details` | object (free-form) | Extra details from authentication backend. |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The user account the request is for.
+
 ---
 
 ### Delete
@@ -1298,6 +1352,11 @@ Staff-only action to trigger recalculation of user actions for a specific user.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Other Actions
@@ -1359,6 +1418,11 @@ Returns counts shown on the general dashboard for the current user: pending perm
     | `pending_permission_requests` | integer |
     | `active_invitations` | integer |
     | `pending_onboarding_applications` | integer |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -1476,6 +1540,11 @@ Returns a typed feed of actions the current user should take, aggregating pendin
     | `actions.metadata` | object (free-form) |
     | `actions.route_name` | string |
     | `actions.route_params` | object (free-form) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -1597,6 +1666,16 @@ Shows historical log of who has accessed the user's profile data. Regular users 
     | `ip_address` | any | An IPv4 or IPv6 address. |
     | `context` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any signed-in user.
+    - Any of:
+        - The user account the request is for.
+        - Staff or support.
+
 ---
 
 ### Get user data access visibility
@@ -1701,6 +1780,16 @@ Shows who has access to the user's profile data. Includes administrative access 
     | `summary.total_organizational_access` | integer |
     | `summary.total_provider_access` | integer |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any signed-in user.
+    - Any of:
+        - The user account the request is for.
+        - Staff or support.
+
 ---
 
 ### Get object state at a specific timestamp
@@ -1796,6 +1885,11 @@ Returns the state of the object as it was at the specified timestamp. Only acces
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1910,6 +2004,11 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get identity bridge status for a user
@@ -1984,6 +2083,14 @@ Returns diagnostic information about a user's identity bridge state: active ISDs
     | `stale_attributes` | array of strings |
     | `effective_bridge_fields` | array of strings |
     | `is_federated` | boolean |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Any signed-in user.
+    - Staff.
 
 ---
 
@@ -2125,6 +2232,11 @@ Get current user details, including authentication token and profile completenes
     | `details` | object (free-form) | Extra details from authentication backend. |
     | `profile_completeness` | any |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Check profile completeness
@@ -2184,6 +2296,11 @@ Check if user profile is complete with all mandatory attributes.
     | `missing_fields` | array of strings | List of mandatory fields that are missing. |
     | `mandatory_fields` | array of strings | List of all mandatory fields. |
     | `enforcement_enabled` | boolean | Whether enforcement of mandatory attributes is enabled. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -2257,6 +2374,14 @@ Check if user profile is complete with all mandatory attributes.
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Any signed-in user.
+    - Staff.
 
 ---
 
@@ -2353,6 +2478,14 @@ Returns aggregated counts of users by active/inactive status. Staff or support o
     | `status` | string |
     | `count` | integer |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any signed-in user.
+    - Staff or support.
+
 ---
 
 ### Get user counts by preferred language
@@ -2447,6 +2580,14 @@ Returns aggregated counts of users by preferred language. Staff or support only.
     |---|---|
     | `language` | string |
     | `count` | integer |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Any signed-in user.
+    - Staff or support.
 
 ---
 
@@ -2543,6 +2684,14 @@ Returns user registration counts aggregated by month. Staff or support only.
     | `month` | string |
     | `count` | integer |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any signed-in user.
+    - Staff or support.
+
 ---
 
 ### Cancel email change request
@@ -2609,6 +2758,14 @@ Cancel email update request
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The user account the request is for.
 
 ---
 
@@ -2695,6 +2852,14 @@ Allows to change email for user.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The user account the request is for.
+
 ---
 
 ### Change user password
@@ -2780,6 +2945,16 @@ Allows staff user to change password for any user.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
+
 ---
 
 ### Confirm email change
@@ -2854,6 +3029,11 @@ Confirm email update using code
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Anyone with the code of an email change request that has not expired, which is emailed to the new address; no sign-in.
+
 ---
 
 ### Refresh user auth token
@@ -2927,6 +3107,16 @@ Confirm email update using code
     | `user_is_active` | boolean | Designates whether this user should be treated as active. Unselect this instead of deleting accounts. |
     | `user_token_lifetime` | integer | Token lifetime in seconds. |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
+
 ---
 
 ### Remove user password
@@ -2994,6 +3184,16 @@ Allows staff user to remove password for any user, making it unusable.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
+
 ---
 
 ### Trigger SCIM synchronization for all users
@@ -3050,6 +3250,11 @@ Staff-only action to queue SCIM synchronization for all users.
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -3121,5 +3326,15 @@ Staff-only action to send a pending actions digest notification to a specific us
     |---|---|
     | `status` | string |
     | `message` | string |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
 
 ---

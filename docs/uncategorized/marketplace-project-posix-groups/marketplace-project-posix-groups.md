@@ -97,4 +97,9 @@ Returns every POSIX group GID a project has been assigned, across all offerings:
     | `members` | array of strings |
     | `member_count` | integer |
 
+
+=== "Authorization"
+
+    Staff, support, and who holds a role in the project the project_uuid query parameter names or in its organization.
+
 ---

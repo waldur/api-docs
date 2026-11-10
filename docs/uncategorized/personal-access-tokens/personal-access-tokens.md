@@ -97,6 +97,13 @@
     | `use_count` | integer |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own personal access tokens.
+
 ---
 
 ### Retrieve
@@ -178,6 +185,13 @@
     | `last_used_ip` | any | An IPv4 or IPv6 address. |
     | `use_count` | integer |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own personal access tokens.
 
 ---
 
@@ -276,6 +290,11 @@
     | `expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    A token for the caller, who must be allowed personal access tokens. Only staff may give it STAFF.ACCESS, and only staff or support SUPPORT.ACCESS; unless the caller is staff, each entity it is bound to needs one of its permissions held there or on an entity above it. Not with a personal access token, and for staff and support under passkey enforcement only from a passkey-verified session.
+
 ---
 
 ### Revoke a personal access token
@@ -341,6 +360,11 @@
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    The caller's own token; not with a personal access token.
+
 ---
 
 ## Other Actions
@@ -348,7 +372,7 @@
 
 ### List entity types the caller can bind each permission to
 
-For each permission, which TYPE_MAP keys the caller could bind a PAT to.
+For each permission, which scope types the caller could bind a PAT to.
 
 Drives the create-PAT frontend's type picker. For staff users every
 type is offered for every permission (they bypass UserRole checks).
@@ -418,6 +442,11 @@ descendants at request time).
     |---|---|
     | `permission` | string |
     | `types` | array of strings |
+
+
+=== "Authorization"
+
+    The entity types where the caller's own roles grant each permission; every type for staff.
 
 ---
 
@@ -492,6 +521,11 @@ create serializer would accept.
     |---|---|
     | `permission` | string |
     | `description` | string |
+
+
+=== "Authorization"
+
+    The permissions the caller's own roles let them give a token; every one for staff.
 
 ---
 
@@ -572,6 +606,11 @@ Atomically revoke the old token and create a new one with the same scopes and bi
     | `allowed_networks` | array of strings |  |
     | `expires_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    The caller's own token; not with a personal access token, and for staff and support under passkey enforcement only from a passkey-verified session.
 
 ---
 
@@ -677,5 +716,10 @@ disabled on this viewset, and the change gets its own audit event.
     | `last_used_ip` | any | An IPv4 or IPv6 address. |
     | `use_count` | integer |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    The caller's own token; not with a personal access token.
 
 ---

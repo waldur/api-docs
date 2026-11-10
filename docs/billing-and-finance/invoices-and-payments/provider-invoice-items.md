@@ -121,6 +121,13 @@
     | `backend_uuid` | string (uuid) |  |
     | `credit` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Invoice items of resources of offerings of organizations where the caller holds SERVICE_PROVIDER.GET_REVENUE, on the organization, on its service provider or site-wide. Staff see all.
+
 ---
 
 ### Retrieve
@@ -228,5 +235,12 @@
     | `billing_type` | string |  |
     | `backend_uuid` | string (uuid) |  |
     | `credit` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Invoice items of resources of offerings of organizations where the caller holds SERVICE_PROVIDER.GET_REVENUE, on the organization, on its service provider or site-wide. Staff see all.
 
 ---

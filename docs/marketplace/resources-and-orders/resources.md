@@ -28,7 +28,6 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/update_options/` | [Update resource options](#update-resource-options) |
 | **Data & Reporting** | | |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/details/` | [Get resource details](#get-resource-details) |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/glauth_users_config/` | [Get GLauth user configuration for a resource](#get-glauth-user-configuration-for-a-resource) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/offering_for_subresources/` | [List offerings for sub-resources](#list-offerings-for-sub-resources) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/offering/` | [Get offering details](#get-offering-details) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/plan_periods/` | [List resource plan periods](#list-resource-plan-periods) |
@@ -37,7 +36,6 @@
 | **Naming** | | |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/suggest_name/` | [Suggest a resource name](#suggest-a-resource-name) |
 | **Other Actions** | | |
-| <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/glauth_tree/` | [Get structured GLauth tree for a resource](#get-structured-glauth-tree-for-a-resource) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-resources/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/add_user/` | [Grant a role to a user](#grant-a-role-to-a-user) |
@@ -47,6 +45,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/reallocate_limits/` | [Reallocate resource limits](#reallocate-resource-limits) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/restore/` | [Restore](#restore) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/set_end_date/` | [Set end date of the resource](#set-end-date-of-the-resource) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-resources/{uuid}/set_spending_limits/` | [Set resource spending limits](#set-resource-spending-limits) |
 
 ---
 ## Core CRUD
@@ -238,16 +237,28 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
+    | `terminated_at` | string (date-time) | When the resource was terminated. Unlike end_date, which is the planned date, this is the moment it happened. It stays set during a restore and is cleared once the resource is OK again, so check the state before reading it as the end of a live resource. Empty if the date is not known. |
     | `username` | string |  |
     | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
+    | `prepaid_total_component_types` | array of strings | Component types whose limit_usage covers the whole subscription, so the UI shows their limit as the monthly limit times the months ordered. Empty unless the offering shows prepaid limits as a total (display_prepaid_limits_as_total). |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
     | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
+    | `usage_limit_resumes_at` | string (date-time) | When the spending limits that restrict the resource reset and the restriction lifts. Empty when no spending limit restricts the resource, when a limit-based component's limit does too, or while a reached total limit holds it: a total never resets, so the restriction lifts only when that limit is raised or cleared. |
+    | `spending_limits` | object (free-form) | Spending limits on usage-based components, per period. Changed with the set_spending_limits action. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `spending_limit_status.last_reported_at` | string (date-time) | When usage of the component was last reported. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | object (free-form) |  |
@@ -279,6 +290,7 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
     | `offering_components.default_limit` | number (double) |  |
+    | `offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offering_components.factor` | integer |  |
     | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
@@ -291,6 +303,14 @@ Returns a paginated list of resources accessible to the current user as a servic
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
     | `offering_account_settings` | any |  |
+    | `display_limits` | object (free-form) | Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
 
 ---
 
@@ -370,6 +390,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `role` | array | Role UUID or name. Repeat to filter by several roles. |
+    | `role_template` | array | Role name. Matches that role and organization copies of it. Repeat to match several. Omit to leave the role filter unchanged. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -398,6 +419,11 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
     | `source` | string |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
 
 ---
 
@@ -543,16 +569,28 @@ Returns details of a specific resource accessible to the consumer.
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
+    | `terminated_at` | string (date-time) | When the resource was terminated. Unlike end_date, which is the planned date, this is the moment it happened. It stays set during a restore and is cleared once the resource is OK again, so check the state before reading it as the end of a live resource. Empty if the date is not known. |
     | `username` | string |  |
     | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
+    | `prepaid_total_component_types` | array of strings | Component types whose limit_usage covers the whole subscription, so the UI shows their limit as the monthly limit times the months ordered. Empty unless the offering shows prepaid limits as a total (display_prepaid_limits_as_total). |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
     | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
+    | `usage_limit_resumes_at` | string (date-time) | When the spending limits that restrict the resource reset and the restriction lifts. Empty when no spending limit restricts the resource, when a limit-based component's limit does too, or while a reached total limit holds it: a total never resets, so the restriction lifts only when that limit is raised or cleared. |
+    | `spending_limits` | object (free-form) | Spending limits on usage-based components, per period. Changed with the set_spending_limits action. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `spending_limit_status.last_reported_at` | string (date-time) | When usage of the component was last reported. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | object (free-form) |  |
@@ -584,6 +622,7 @@ Returns details of a specific resource accessible to the consumer.
     | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
     | `offering_components.default_limit` | number (double) |  |
+    | `offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offering_components.factor` | integer |  |
     | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
@@ -596,6 +635,14 @@ Returns details of a specific resource accessible to the consumer.
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
     | `offering_account_settings` | any |  |
+    | `display_limits` | object (free-form) | Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
 
 ---
 
@@ -667,11 +714,16 @@ Schedules a task to pull the latest data for the resource from its backend.
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Anyone who may see the resource. It only schedules a refresh from the backend.
+
 ---
 
 ### Unlink a resource (staff only)
 
-Forcefully deletes a marketplace resource and its related plugin resource from the database. This action does not schedule operations on the backend and is intended for cleaning up resources stuck in transitioning states. Requires staff permissions.
+Schedules forced deletion of a marketplace resource and its related plugin resource from the database. This action does not schedule operations on the backend and is intended for cleaning up resources stuck in transitioning states. The resource keeps its state until the deletion finishes. If the deletion fails, it is rolled back and the resource is left in the Erred state with the error recorded. Requires staff permissions.
 
 
 === "HTTPie"
@@ -731,13 +783,18 @@ Forcefully deletes a marketplace resource and its related plugin resource from t
 
 === "Responses"
 
-    **`204`** - No response body
+    **`202`** - No response body
     
     
     ---
     
     **`403`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -832,6 +889,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     |---|---|
     | `expiration_time` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to change roles in the scope's type (CALL.UPDATE_PERMISSION, CUSTOMER.UPDATE_PERMISSION, OFFERING.UPDATE_PERMISSION, PROJECT.UPDATE_PERMISSION, PROPOSAL.UPDATE_PERMISSION, RESOURCE.UPDATE_PERMISSION, RESOURCE_PROJECT.UPDATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Update a consumer resource
@@ -924,6 +986,13 @@ Updates the name, description, or end date of a resource.
     | `description` | string |  |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.UPDATE` on the project, the project's customer, the offering or the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a consumer resource
@@ -1010,6 +1079,13 @@ Partially updates the name, description, or end date of a resource.
     | `description` | string |  |
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.UPDATE` on the project, the project's customer, the offering or the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## State Management
@@ -1095,6 +1171,11 @@ Sets the 'downscaled' flag for a resource. Requires staff permissions.
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Set paused flag for resource
@@ -1177,6 +1258,11 @@ Sets the 'paused' flag for a resource. Requires staff permissions.
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Terminate a resource
@@ -1258,6 +1344,13 @@ Creates a marketplace order to terminate the resource. This action is asynchrono
     | Field | Type | Description |
     |---|---|---|
     | `order_uuid` | string (uuid) | UUID of the created or updated order |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.TERMINATE` on the project, the project's customer or the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1415,16 +1508,28 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
+    | `terminated_at` | string (date-time) | When the resource was terminated. Unlike end_date, which is the planned date, this is the moment it happened. It stays set during a restore and is cleared once the resource is OK again, so check the state before reading it as the end of a live resource. Empty if the date is not known. |
     | `username` | string |  |
     | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
+    | `prepaid_total_component_types` | array of strings | Component types whose limit_usage covers the whole subscription, so the UI shows their limit as the monthly limit times the months ordered. Empty unless the offering shows prepaid limits as a total (display_prepaid_limits_as_total). |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
     | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
+    | `usage_limit_resumes_at` | string (date-time) | When the spending limits that restrict the resource reset and the restriction lifts. Empty when no spending limit restricts the resource, when a limit-based component's limit does too, or while a reached total limit holds it: a total never resets, so the restriction lifts only when that limit is raised or cleared. |
+    | `spending_limits` | object (free-form) | Spending limits on usage-based components, per period. Changed with the set_spending_limits action. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `spending_limit_status.last_reported_at` | string (date-time) | When usage of the component was last reported. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | object (free-form) |  |
@@ -1456,6 +1561,7 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
     | `offering_components.default_limit` | number (double) |  |
+    | `offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offering_components.factor` | integer |  |
     | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
@@ -1468,6 +1574,12 @@ Moves a resource and its associated data to a different project. Requires staff 
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
     | `offering_account_settings` | any |  |
+    | `display_limits` | object (free-form) | Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1560,6 +1672,17 @@ Creates a renewal order to extend the subscription period of a prepaid resource.
     |---|---|---|
     | `order_uuid` | string (uuid) | UUID of the created or updated order |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if user has consented to Terms of Service for the resource's offering.
+    - Requires `RESOURCE.SET_LIMITS` on the project or the project's customer.
+    - Authorize the order a resource action is about to create.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set end date of the resource by staff
@@ -1638,6 +1761,11 @@ Deprecated: Use set_end_date instead. Allows a staff user to set or update the e
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1720,6 +1848,11 @@ Sets the 'restrict_member_access' flag for a resource. Requires staff permission
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1809,6 +1942,13 @@ Updates the slug of a resource. Requires staff or the RESOURCE.SET_SLUG permissi
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.SET_SLUG` on the project, the project's customer, the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Switch resource plan
@@ -1896,6 +2036,17 @@ Creates a marketplace order to switch the billing plan for a resource. This acti
     | Field | Type | Description |
     |---|---|---|
     | `order_uuid` | string (uuid) | UUID of the created or updated order |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if user has consented to Terms of Service for the resource's offering.
+    - Requires `RESOURCE.SET_PLAN` on the project or the project's customer.
+    - Authorize the order a resource action is about to create.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1986,6 +2137,17 @@ Creates a marketplace order to update the limits (e.g., CPU, RAM) for a resource
     | Field | Type | Description |
     |---|---|---|
     | `order_uuid` | string (uuid) | UUID of the created or updated order |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if user has consented to Terms of Service for the resource's offering.
+    - Requires `RESOURCE.SET_LIMITS` on the project or the project's customer.
+    - Authorize the order a resource action is about to create.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2082,6 +2244,17 @@ Updates the options of a resource. If the offering is configured to create order
     **`409`** - No response body
     
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if user has consented to Terms of Service for the resource's offering.
+    - Requires `RESOURCE.UPDATE_OPTIONS` on the project, the project's customer or the offering's customer.
+    - Order authorization for resource option changes.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Data & Reporting
@@ -2162,75 +2335,12 @@ Returns the detailed representation of the backend resource associated with the 
     **`404`** - 
     
 
----
 
-### Get GLauth user configuration for a resource
+=== "Authorization"
 
-
-        This endpoint provides a GLauth configuration file for the users associated with the project of this resource.
-        It is intended for use by an external agent to synchronize user data from Waldur to GLauth.
-        
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/glauth_users_config/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_resources import marketplace_resources_glauth_users_config_retrieve # (1)
+    Any signed-in user.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = marketplace_resources_glauth_users_config_retrieve.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`marketplace_resources_glauth_users_config_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_glauth_users_config_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceResourcesGlauthUsersConfigRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceResourcesGlauthUsersConfigRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
 
 ---
 
@@ -2305,6 +2415,13 @@ Returns a list of offerings that can be provisioned as sub-resources of the curr
     |---|---|---|
     | `uuid` | string (uuid) | UUID of the offering |
     | `type` | string | Type of the offering |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
 
 ---
 
@@ -2399,7 +2516,7 @@ Returns details of the offering connected to the requested object.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -2455,6 +2572,7 @@ Returns details of the offering connected to the requested object.
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -2486,6 +2604,7 @@ Returns details of the offering connected to the requested object.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -2615,8 +2734,6 @@ Returns details of the offering connected to the requested object.
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
-    | `google_calendar_is_public` | boolean |  |
-    | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
     | `promotion_campaigns.uuid` | string (uuid) |  |
     | `promotion_campaigns.name` | string |  |
@@ -2628,6 +2745,13 @@ Returns details of the offering connected to the requested object.
     | `promotion_campaigns.description` | string |  |
     | `promotion_campaigns.months` | integer | How many months in a row should the related service (when activated) get special deal (0 for indefinitely until active) |
     | `promotion_campaigns.service_provider` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
 
 ---
 
@@ -2717,6 +2841,13 @@ Returns a list of active and future plan periods for the resource. Each period i
     | `components.missing_usage_policy` | any | What to record when no usage is reported for the following billing period. |
     | `components.recurring` | boolean | Deprecated, use missing_usage_policy instead. True when the reported value is reused every month until changed. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
+
 ---
 
 ### Get resource team
@@ -2804,6 +2935,13 @@ Returns project users for this resource, including project roles and offering-sp
     | `expiration_time` | string (date-time) |  |
     | `offering_user_username` | string |  |
     | `offering_user_state` | any |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the resource itself; with a role granting CUSTOMER.VIEW_TEAM on the resource's organization; with a role granting PROJECT.VIEW_TEAM on any project of that organization; or with OFFERING.UPDATE on the resource's offering, on the offering's organization or on its service provider. A role on one of the resource's resource projects is not enough.
+    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
 
 ---
 
@@ -2966,6 +3104,11 @@ One row per user (deduplicated) with their direct Resource role and a nested `re
     | `resource_projects.sync_message` | string |  |
     | `resource_projects.sync_reported_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
+
 ---
 
 ## Naming
@@ -3052,118 +3195,15 @@ Generates a suggested name for a new resource based on the project and offering.
     |---|---|
     | `name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user, for a project they can see and an offering they may order.
+
 ---
 
 ## Other Actions
 
-
-### Get structured GLauth tree for a resource
-
-Structured JSON tree (offering, groups, users, robot accounts) scoped to one resource's project. Source of truth for the `glauth_users_config` TOML on this viewset.
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/glauth_tree/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.marketplace_resources import marketplace_resources_glauth_tree_retrieve # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = marketplace_resources_glauth_tree_retrieve.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`marketplace_resources_glauth_tree_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_glauth_tree_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { marketplaceResourcesGlauthTreeRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await marketplaceResourcesGlauthTreeRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `offering` | object |
-    | `offering.uuid` | string |
-    | `offering.name` | string |
-    | `offering.slug` | string |
-    | `groups` | array of objects |
-    | `groups.gid` | integer |
-    | `groups.name` | string |
-    | `groups.kind` | string |
-    | `groups.scope` | object |
-    | `groups.scope.type` | string |
-    | `groups.scope.uuid` | string |
-    | `groups.scope.name` | string |
-    | `groups.scope.slug` | string |
-    | `groups.scope.resource_uuid` | string |
-    | `groups.role` | string |
-    | `groups.members` | array of strings |
-    | `users` | array of objects |
-    | `users.username` | string |
-    | `users.uidnumber` | integer |
-    | `users.disabled` | boolean |
-    | `users.personal_group` | integer |
-    | `users.mail` | string |
-    | `users.givenname` | string |
-    | `users.sn` | string |
-    | `users.login_shell` | string |
-    | `users.home_dir` | string |
-    | `users.ssh_keys` | array of strings |
-    | `users.memberships` | array of objects |
-    | `users.memberships.gid` | integer |
-    | `users.memberships.group_name` | string |
-    | `users.memberships.kind` | string |
-    | `users.memberships.role` | string |
-    | `robot_accounts` | array of objects |
-    | `robot_accounts.username` | string |
-    | `robot_accounts.uidnumber` | integer |
-    | `robot_accounts.personal_group` | integer |
-    | `robot_accounts.login_shell` | string |
-    | `robot_accounts.home_dir` | string |
-    | `robot_accounts.ssh_keys` | array of strings |
-
----
 
 ### Get object state at a specific timestamp
 
@@ -3258,6 +3298,11 @@ Returns the state of the object as it was at the specified timestamp. Only acces
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -3397,6 +3442,11 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Grant a role to a user
@@ -3495,6 +3545,11 @@ Assigns a specific role to a user within the current scope. An optional expirati
     **`400`** - Validation error, for example when trying to add a user to a terminated project.
     
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to grant roles in the scope's type (CALL.CREATE_PERMISSION, CUSTOMER.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, PROPOSAL.MANAGE, RESOURCE.CREATE_PERMISSION, RESOURCE_PROJECT.CREATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Adjust resource start and end dates (staff only)
@@ -3588,6 +3643,11 @@ Updates both the originating order's start_date and the resource's end_date in o
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Revoke a role from a user
@@ -3677,6 +3737,11 @@ Removes a specific role from a user within the current scope. This effectively r
 
     **`200`** - Role revoked successfully.
     
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to revoke roles in the scope's type (CALL.DELETE_PERMISSION, CUSTOMER.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, PROPOSAL.DELETE_PERMISSION, RESOURCE.DELETE_PERMISSION, RESOURCE_PROJECT.DELETE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -3780,6 +3845,13 @@ Removes a specific role from a user within the current scope. This effectively r
     | `remaining_days` | integer |
     | `new_end_date` | string (date) |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.SET_LIMITS` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Reallocate resource limits
@@ -3874,6 +3946,17 @@ Creates marketplace orders to reallocate limits from source resource to target r
     |---|---|---|
     | `source_order_uuid` | string (uuid) | UUID of the source order for limit reallocation |
     | `target_order_uuids` | array of string (uuid)s | List of UUIDs for target orders receiving the reallocated limits |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if user has consented to Terms of Service for the resource's offering.
+    - Requires `RESOURCE.SET_LIMITS` on the project or the project's customer.
+    - Authorize the order a resource action is about to create.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3970,6 +4053,13 @@ Creates marketplace orders to reallocate limits from source resource to target r
     |---|---|---|
     | `order_uuid` | string (uuid) | UUID of the created or updated order |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.SET_STATE` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set end date of the resource
@@ -4048,5 +4138,110 @@ Allows a consumer (customer owner) to set or update the end date for a resource.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.SET_END_DATE` on the project's customer or the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
+---
+
+### Set resource spending limits
+
+Replaces the spending limits of the resource's usage-based components at once, with no order or provider approval. Each value must be within the provider's maximum. The usage-limit restriction is re-evaluated immediately.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_spending_limits/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      spending_limits:='{}'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.resource_spending_limits_request import ResourceSpendingLimitsRequest # (1)
+    from waldur_api_client.api.marketplace_resources import marketplace_resources_set_spending_limits # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = ResourceSpendingLimitsRequest(
+        spending_limits={}
+    )
+    response = marketplace_resources_set_spending_limits.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`ResourceSpendingLimitsRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_spending_limits_request.py)
+    2.  **API Source:** [`marketplace_resources_set_spending_limits`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resources/marketplace_resources_set_spending_limits.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceResourcesSetSpendingLimits } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceResourcesSetSpendingLimits({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "spending_limits": {}
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `spending_limits` | object (free-form) | ✓ | The resource's spending limits, replacing the current ones: {component_type: {period: amount}}. A missing or null period clears that limit; an empty object clears them all. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `spending_limits` | object (free-form) | The resource's spending limits, replacing the current ones: {component_type: {period: amount}}. A missing or null period clears that limit; an empty object clears them all. |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if user has consented to Terms of Service for the resource's offering.
+    - Requires `RESOURCE.SET_LIMITS` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

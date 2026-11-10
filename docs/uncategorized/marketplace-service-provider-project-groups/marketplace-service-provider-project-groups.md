@@ -115,6 +115,13 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Groups of service providers whose organization the caller owns, of service providers where they hold CUSTOMER.MANAGER, and of the providers of the offerings, other than archived ones, where they hold OFFERING.MANAGER. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -200,6 +207,13 @@
     | `members` | array of strings | Sorted usernames of the live accounts at the provider of the users holding an active role in the project. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Groups of service providers whose organization the caller owns, of service providers where they hold CUSTOMER.MANAGER, and of the providers of the offerings, other than archived ones, where they hold OFFERING.MANAGER. Staff and support see all.
 
 ---
 
@@ -306,6 +320,13 @@ Create the service provider's group for a project, pinned to a GID the directory
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    For the `service_provider` named in the request, the `CUSTOMER.OWNER` role on its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Other Actions
@@ -390,6 +411,13 @@ Projects with a resource or an order, in any state, on an offering of the servic
     | `customer_uuid` | string (uuid) |  |
     | `customer_name` | string |  |
     | `group_name` | string | The project's group at the provider, if it has one. |
+
+
+=== "Authorization"
+
+    For the `service_provider_uuid` named in the request, the `CUSTOMER.OWNER` role on its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -521,6 +549,13 @@ Pin the groups of several projects in one step, e.g. the groups a directory held
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    For the `service_provider` named in the request, the `CUSTOMER.OWNER` role on its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set the GID of a POSIX project group
@@ -627,5 +662,12 @@ Move the group to another GID, e.g. one assigned outside Waldur. The previous GI
     | `members` | array of strings | Sorted usernames of the live accounts at the provider of the users holding an active role in the project. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

@@ -85,6 +85,11 @@ Get a list of instance availability zones.
     | `settings` | string (uri) |  |
     | `available` | boolean | Indicates whether this availability zone is available for instance provisioning |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Get instance availability zone details
@@ -158,5 +163,10 @@ Retrieve details of a specific instance availability zone.
     | `name` | string |  |
     | `settings` | string (uri) |  |
     | `available` | boolean | Indicates whether this availability zone is available for instance provisioning |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

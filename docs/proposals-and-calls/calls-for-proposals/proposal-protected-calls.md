@@ -37,6 +37,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/reviewer-pool/` | [List reviewer pool members for a call](#list-reviewer-pool-members-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/` | [List rounds for a call](#list-rounds-for-a-call) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/rounds/{obj_uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/stats/` | [Proposal, review and workflow step counts per call and round](#proposal-review-and-workflow-step-counts-per-call-and-round) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/step_checklists/` | [Step checklists](#step-checklists) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/suggestions/` | [List all reviewer suggestions for this call with affinity scores](#list-all-reviewer-suggestions-for-this-call-with-affinity-scores) |
 | <span class="http-badge http-get">GET</span> | `/api/proposal-protected-calls/{uuid}/workflow_steps/` | [List workflow steps for a call](#list-workflow-steps-for-a-call) |
@@ -212,6 +213,7 @@
     | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
     | `offerings.components.default_limit` | number (double) |  |
+    | `offerings.components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offerings.components.factor` | integer |  |
     | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
@@ -276,6 +278,7 @@
     | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
     | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
+    | `resource_templates.requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `resource_templates.requested_offering_components.factor` | integer |  |
     | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
@@ -303,6 +306,7 @@
     | `proposal_field_config.field_supporting_documentation` | string | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |
     | `reference_code` | string |  |
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
@@ -326,11 +330,16 @@
     | `proposal_field_metadata.usage` | array of strings |  |
     | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
     | `order_author` | any | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
+    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
     | `order_author_user_uuid` | string (uuid) |  |
     | `order_author_user_name` | string |  |
-    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -453,6 +462,7 @@
     | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
     | `offerings.components.default_limit` | number (double) |  |
+    | `offerings.components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offerings.components.factor` | integer |  |
     | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
@@ -517,6 +527,7 @@
     | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
     | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
+    | `resource_templates.requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `resource_templates.requested_offering_components.factor` | integer |  |
     | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
@@ -544,6 +555,7 @@
     | `proposal_field_config.field_supporting_documentation` | string | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |
     | `reference_code` | string |  |
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
@@ -567,11 +579,16 @@
     | `proposal_field_metadata.usage` | array of strings |  |
     | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
     | `order_author` | any | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
+    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
     | `order_author_user_uuid` | string (uuid) |  |
     | `order_author_user_name` | string |  |
-    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -656,6 +673,7 @@
     | `proposal_field_config.field_supporting_documentation` | string |  | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any |  | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any |  | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any |  | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |  |
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
@@ -669,8 +687,8 @@
     | `user_assurance_levels` | array of strings |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
     | `order_author` | any |  | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) |  | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
-    | `carry_over_drafts` | boolean |  | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `order_author_user` | string (uuid) |  | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
+    | `carry_over_drafts` | boolean |  | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any |  | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
 
 
@@ -726,6 +744,7 @@
     | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
     | `offerings.components.default_limit` | number (double) |  |
+    | `offerings.components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offerings.components.factor` | integer |  |
     | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
@@ -790,6 +809,7 @@
     | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
     | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
+    | `resource_templates.requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `resource_templates.requested_offering_components.factor` | integer |  |
     | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
@@ -817,6 +837,7 @@
     | `proposal_field_config.field_supporting_documentation` | string | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |
     | `reference_code` | string |  |
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
@@ -840,11 +861,16 @@
     | `proposal_field_metadata.usage` | array of strings |  |
     | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
     | `order_author` | any | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
+    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
     | `order_author_user_uuid` | string (uuid) |  |
     | `order_author_user_name` | string |  |
-    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -945,6 +971,13 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `skipped_proposals.proposal_name` | string |  |
     | `skipped_proposals.reason` | string |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update
@@ -1039,6 +1072,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `proposal_field_config.field_supporting_documentation` | string |  | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any |  | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any |  | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any |  | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |  |
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
@@ -1052,8 +1086,8 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `user_assurance_levels` | array of strings |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
     | `order_author` | any |  | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) |  | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
-    | `carry_over_drafts` | boolean |  | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `order_author_user` | string (uuid) |  | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
+    | `carry_over_drafts` | boolean |  | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any |  | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
 
 
@@ -1109,6 +1143,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
     | `offerings.components.default_limit` | number (double) |  |
+    | `offerings.components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offerings.components.factor` | integer |  |
     | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
@@ -1173,6 +1208,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
     | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
+    | `resource_templates.requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `resource_templates.requested_offering_components.factor` | integer |  |
     | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
@@ -1200,6 +1236,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `proposal_field_config.field_supporting_documentation` | string | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |
     | `reference_code` | string |  |
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
@@ -1223,11 +1260,18 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `proposal_field_metadata.usage` | array of strings |  |
     | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
     | `order_author` | any | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
+    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
     | `order_author_user_uuid` | string (uuid) |  |
     | `order_author_user_name` | string |  |
-    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1313,6 +1357,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `proposal_field_config.field_supporting_documentation` | string |  | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any |  | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any |  | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any |  | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |  |
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
@@ -1326,8 +1371,8 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `user_assurance_levels` | array of strings |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
     | `order_author` | any |  | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) |  | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
-    | `carry_over_drafts` | boolean |  | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `order_author_user` | string (uuid) |  | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
+    | `carry_over_drafts` | boolean |  | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any |  | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
 
 
@@ -1383,6 +1428,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
     | `offerings.components.default_limit` | number (double) |  |
+    | `offerings.components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offerings.components.factor` | integer |  |
     | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
@@ -1447,6 +1493,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
     | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
+    | `resource_templates.requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `resource_templates.requested_offering_components.factor` | integer |  |
     | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
@@ -1474,6 +1521,7 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `proposal_field_config.field_supporting_documentation` | string | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |
     | `reference_code` | string |  |
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
@@ -1497,11 +1545,18 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
     | `proposal_field_metadata.usage` | array of strings |  |
     | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
     | `order_author` | any | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
+    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
     | `order_author_user_uuid` | string (uuid) |  |
     | `order_author_user_name` | string |  |
-    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1567,6 +1622,13 @@ Create a manual assignment batch for a specific reviewer. This allows call manag
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1649,6 +1711,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `role` | array | Role UUID or name. Repeat to filter by several roles. |
+    | `role_template` | array | Role name. Matches that role and organization copies of it. Repeat to match several. Omit to leave the role filter unchanged. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -1677,6 +1740,11 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
     | `source` | string |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
 
 ---
 
@@ -1776,6 +1844,11 @@ Assigns a specific role to a user within the current scope. An optional expirati
     **`400`** - Validation error, for example when trying to add a user to a terminated project.
     
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to grant roles in the scope's type (CALL.CREATE_PERMISSION, CUSTOMER.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, PROPOSAL.MANAGE, RESOURCE.CREATE_PERMISSION, RESOURCE_PROJECT.CREATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Revoke a role from a user
@@ -1865,6 +1938,11 @@ Removes a specific role from a user within the current scope. This effectively r
 
     **`200`** - Role revoked successfully.
     
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to revoke roles in the scope's type (CALL.DELETE_PERMISSION, CUSTOMER.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, PROPOSAL.DELETE_PERMISSION, RESOURCE.DELETE_PERMISSION, RESOURCE_PROJECT.DELETE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -1958,6 +2036,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     | Field | Type |
     |---|---|
     | `expiration_time` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to change roles in the scope's type (CALL.UPDATE_PERMISSION, CUSTOMER.UPDATE_PERMISSION, OFFERING.UPDATE_PERMISSION, PROJECT.UPDATE_PERMISSION, PROPOSAL.UPDATE_PERMISSION, RESOURCE.UPDATE_PERMISSION, RESOURCE_PROJECT.UPDATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -2054,6 +2137,16 @@ Get affinity matrix for reviewer-proposal matching.
     | `results.coi_severity` | string |
     | `results.coi_status` | string |
     | `results.source` | string |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2152,6 +2245,11 @@ Get available compliance checklists for call creation/editing.
     | `category_name` | string |
     | `category_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Check if user has CREATE_CALL permission on call managing organization.
+
 ---
 
 ### Get COI configuration for this call
@@ -2239,6 +2337,16 @@ Get COI configuration for this call.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Compliance overview
@@ -2316,6 +2424,16 @@ Get compliance overview for call manager showing all proposals and their complia
     | `proposals.created_by_uuid` | string (uuid) |
     | `proposals.compliance` | any |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get summary statistics of conflicts for this call
@@ -2388,6 +2506,16 @@ Get summary statistics of conflicts for this call.
     | `by_status` | object (free-form) |
     | `by_severity` | object (free-form) |
     | `by_type` | object (free-form) |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2517,6 +2645,16 @@ List all conflicts of interest detected for this call.
     | `conflicting_organization_name` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get call manager dashboard stats
@@ -2576,6 +2714,11 @@ Returns counts for the call manager dashboard: pending assessments, active calls
     | `active_calls` | integer |
     | `reviews_due_soon` | integer |
     | `reviews_due_within_days` | integer |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -2656,6 +2799,16 @@ Download the call's proposals as CSV, one row per proposal, with one column per 
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Export reviews
@@ -2735,6 +2888,16 @@ Download the call's reviews as CSV, one row per review. The reviewer's private c
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2820,6 +2983,16 @@ Get or update matching configuration for this call.
     | `bid_weight` | number (double) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2933,6 +3106,7 @@ List offerings for a call.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -2951,6 +3125,11 @@ List offerings for a call.
     | `created_by_name` | string |  |
     | `approved_by_name` | string |  |
     | `description` | string |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -3053,6 +3232,7 @@ List offerings for a call.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -3071,6 +3251,11 @@ List offerings for a call.
     | `created_by_name` | string |  |
     | `approved_by_name` | string |  |
     | `description` | string |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -3179,6 +3364,13 @@ Get detailed compliance answers for a specific proposal (call managers only).
     | `user_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3292,6 +3484,16 @@ Get proposed reviewer-proposal assignments.
     | `deployed_by_name` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List resource templates for a call
@@ -3401,6 +3603,7 @@ List resource templates for a call.
     | `requested_offering_components.max_available_limit` | number (double) |  |
     | `requested_offering_components.is_boolean` | boolean |  |
     | `requested_offering_components.default_limit` | number (double) |  |
+    | `requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `requested_offering_components.factor` | integer |  |
     | `requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `requested_offering_components.is_prepaid` | boolean |  |
@@ -3414,6 +3617,11 @@ List resource templates for a call.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -3514,6 +3722,7 @@ List resource templates for a call.
     | `requested_offering_components.max_available_limit` | number (double) |  |
     | `requested_offering_components.is_boolean` | boolean |  |
     | `requested_offering_components.default_limit` | number (double) |  |
+    | `requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `requested_offering_components.factor` | integer |  |
     | `requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `requested_offering_components.is_prepaid` | boolean |  |
@@ -3527,6 +3736,11 @@ List resource templates for a call.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -3641,6 +3855,16 @@ List reviewer pool members for a call.
     | `overridden_by_name` | string |  |
     | `overridden_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List rounds for a call
@@ -3752,6 +3976,11 @@ List rounds for a call.
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -3853,6 +4082,116 @@ List rounds for a call.
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
+---
+
+### Proposal, review and workflow step counts per call and round
+
+Proposal, review and workflow step counts per call and round.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/proposal-protected-calls/a1b2c3d4-e5f6-7890-abcd-ef1234567890/stats/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.proposal_protected_calls import proposal_protected_calls_stats_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = proposal_protected_calls_stats_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`proposal_protected_calls_stats_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_stats_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { proposalProtectedCallsStatsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await proposalProtectedCallsStatsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `call` | object |  |
+    | `call.proposals` | object (free-form) | Proposals by state (accepted = awarded), plus total. |
+    | `call.reviews` | object (free-form) | Reviews by state, plus total. |
+    | `call.admin_approved` | integer | Proposals whose administrative check completed as eligible. |
+    | `call.missing_admin_checks` | integer | Proposals whose administrative check is active or expired. |
+    | `call.missing_reviews` | integer | Proposals in expert review below the step's minimum reviews. |
+    | `call.overdue_reviews` | integer | Reviews still in review past their deadline. |
+    | `call.steps` | array of objects | Proposals per current workflow step, over the enabled steps. |
+    | `call.steps.step` | string |  |
+    | `call.steps.label` | string |  |
+    | `call.steps.count` | integer |  |
+    | `rounds` | array of objects |  |
+    | `rounds.proposals` | object (free-form) | Proposals by state (accepted = awarded), plus total. |
+    | `rounds.reviews` | object (free-form) | Reviews by state, plus total. |
+    | `rounds.admin_approved` | integer | Proposals whose administrative check completed as eligible. |
+    | `rounds.missing_admin_checks` | integer | Proposals whose administrative check is active or expired. |
+    | `rounds.missing_reviews` | integer | Proposals in expert review below the step's minimum reviews. |
+    | `rounds.overdue_reviews` | integer | Reviews still in review past their deadline. |
+    | `rounds.steps` | array of objects | Proposals per current workflow step, over the enabled steps. |
+    | `rounds.steps.step` | string |  |
+    | `rounds.steps.label` | string |  |
+    | `rounds.steps.count` | integer |  |
+    | `rounds.uuid` | string (uuid) |  |
+    | `rounds.slug` | string |  |
+    | `rounds.start_time` | string (date-time) |  |
+    | `rounds.cutoff_time` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Step checklists
@@ -3938,6 +4277,11 @@ List checklists that can be attached to a workflow step (WORKFLOW_STEP-typed). A
     | `name` | string |
     | `description` | string |
     | `checklist_type` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -4067,6 +4411,16 @@ List all reviewer suggestions for this call with affinity scores.
     | `source_type_display` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List workflow steps for a call
@@ -4186,6 +4540,11 @@ List workflow steps for a call.
     | `responsible_users.email` | string (email) |  |
     | `responsible_users.is_panel_chair` | boolean |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -4295,6 +4654,11 @@ List workflow steps for a call.
     | `responsible_users.email` | string (email) |  |
     | `responsible_users.is_panel_chair` | boolean |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Activate a call
@@ -4365,6 +4729,13 @@ Activate a call.
     |---|---|
     | `message` | string |
 
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Archive a call
@@ -4434,6 +4805,13 @@ Archive a call.
     | Field | Type |
     |---|---|
     | `message` | string |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4521,6 +4899,13 @@ Attach documents to call.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Compute affinity scores for all reviewer-proposal pairs
@@ -4591,6 +4976,13 @@ Compute affinity scores for all reviewer-proposal pairs.
     |---|---|
     | `computed_count` | integer |
     | `message` | string |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4676,6 +5068,13 @@ Detach documents from call.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4772,6 +5171,13 @@ Trigger automated COI detection for all reviewer-proposal pairs.
     | `completed_at` | string (date-time) |  |
     | `error_message` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4916,6 +5322,7 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
     | `offerings.components.default_limit` | number (double) |  |
+    | `offerings.components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offerings.components.factor` | integer |  |
     | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
@@ -4980,6 +5387,7 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
     | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
+    | `resource_templates.requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `resource_templates.requested_offering_components.factor` | integer |  |
     | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
@@ -5007,6 +5415,7 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `proposal_field_config.field_supporting_documentation` | string | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |
     | `reference_code` | string |  |
     | `compliance_checklist` | string (uuid) | Compliance checklist that proposals must complete before submission |
@@ -5030,11 +5439,18 @@ Duplicate a call. The new call inherits the source call's configuration (offerin
     | `proposal_field_metadata.usage` | array of strings |  |
     | `has_proposals` | boolean | Whether any proposal has been submitted to this call. Used by the frontend to gate slug-template and checklist fields. |
     | `order_author` | any | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
+    | `order_author_user` | string (uuid) | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
     | `order_author_user_uuid` | string (uuid) |  |
     | `order_author_user_name` | string |  |
-    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `carry_over_drafts` | boolean | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
+
+
+=== "Authorization"
+
+    Requires `CALL.CREATE` on the manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5130,6 +5546,13 @@ Export the call's configuration as a portable document that import_call can recr
     | `export_timestamp` | string (date-time) |  |
     | `warnings` | array of strings | Parts that could not be exported, such as unreadable documents. |
 
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Generate assignments
@@ -5218,6 +5641,13 @@ Generate assignment batches for reviewers. Uses the affinity matrix and COI reco
     | `skipped_proposals.proposal_uuid` | string (uuid) |  |
     | `skipped_proposals.proposal_name` | string |  |
     | `skipped_proposals.reason` | string |  |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5308,11 +5738,18 @@ Generate reviewer suggestions with configurable matching source.
     | `source_used` | string |
     | `suggestions` | array of strings |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Import call configuration
 
-Create a draft call under the given call managing organisation from a document produced by export_call. References that cannot be resolved by name on this portal are skipped and reported in warnings. The import is atomic.
+Create a draft call under the given call managing organization from a document produced by export_call. References that cannot be resolved by name on this portal are skipped and reported in warnings. The import is atomic.
 
 
 === "HTTPie"
@@ -5377,7 +5814,7 @@ Create a draft call under the given call managing organisation from a document p
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `manager` | string (uuid) | ✓ | Call managing organisation that will own the imported call. |
+    | `manager` | string (uuid) | ✓ | Call managing organization that will own the imported call. |
     | `name` | string |  | Name for the imported call. Defaults to the exported name. |
     | `call_data` | object (free-form) | ✓ | Exported call document, as a mapping or a YAML string. |
     | `import_documents` | boolean |  | <br>_Constraints: default: `True`_ |
@@ -5400,6 +5837,11 @@ Create a draft call under the given call managing organisation from a document p
     | `call_name` | string |
     | `imported_sections` | array of strings |
     | `warnings` | array of strings |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -5522,6 +5964,13 @@ Invite a reviewer by email address. Creates an invitation that requires the revi
     | `override_reason` | string | Reason for manager override of invitation status. |
     | `overridden_by_name` | string |  |
     | `overridden_at` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5671,6 +6120,16 @@ Invite reviewers to join the call's reviewer pool.
     | `overridden_by_name` | string |  |
     | `overridden_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Create offering for a call
@@ -5792,6 +6251,7 @@ Create offering for a call.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -5810,6 +6270,13 @@ Create offering for a call.
     | `created_by_name` | string |  |
     | `approved_by_name` | string |  |
     | `description` | string |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5935,6 +6402,7 @@ Create resource template for a call.
     | `requested_offering_components.max_available_limit` | number (double) |  |
     | `requested_offering_components.is_boolean` | boolean |  |
     | `requested_offering_components.default_limit` | number (double) |  |
+    | `requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `requested_offering_components.factor` | integer |  |
     | `requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `requested_offering_components.is_prepaid` | boolean |  |
@@ -5948,6 +6416,13 @@ Create resource template for a call.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -6034,6 +6509,13 @@ Mark proposal compliance as reviewed by call manager.
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -6193,6 +6675,13 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
 
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Close
@@ -6290,6 +6779,7 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `proposal_field_config.field_supporting_documentation` | string |  | <br>_Enum: `hidden`, `optional`, `required`_ |
     | `evaluation_start` | any |  | When a submitted proposal's evaluation starts: on submission, or for all proposals of a round together at its cut-off. Cannot be changed while the call has proposals submitted or in review. |
     | `publish_results` | any |  | When applicants learn the allocation decision: immediately, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any |  | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
     | `created_by` | string (uri) |  |  |
     | `reference_code` | string |  |  |
     | `compliance_checklist` | string (uuid) |  | Compliance checklist that proposals must complete before submission |
@@ -6303,8 +6793,8 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
     | `user_assurance_levels` | array of strings |  | List of required assurance URIs (REFEDS). User must have ALL of these. |
     | `applicant_visibility_config` | any |  |  |
     | `order_author` | any |  | Whose name the orders for resources granted by this call carry. |
-    | `order_author_user` | string (uuid) |  | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organisation managing it. |
-    | `carry_over_drafts` | boolean |  | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being cancelled. Without a later round the draft is cancelled either way. |
+    | `order_author_user` | string (uuid) |  | The person orders are attributed to when the author is a named contact. Must hold a role on this call or on the organization managing it. |
+    | `carry_over_drafts` | boolean |  | Whether a draft still open when its round's cut-off passes moves on to the call's next round instead of being canceled. Without a later round the draft is canceled either way. |
     | `undecided_at_round_completion` | any |  | What completing a round does with its proposals that still have no decision: refuse to complete the round, or reject them. A round may override it. |
 
 
@@ -6312,6 +6802,13 @@ Create multiple rounds on a call at a fixed cadence. Spacing is controlled by ``
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Requires `CALL.CLOSE_ROUNDS` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -6431,6 +6928,13 @@ Close a round whose results have been published. Refused while a decision of the
     | `detail` | string |  |
     | `held_decisions_count` | integer | Decisions of the round whose release failed at publication and that were never announced. Present when completing is refused because of them; publish the results again to retry them. |
     | `undecided_count` | integer | Proposals of the round without a decision. Present when completing is refused because of them under the refuse rule. |
+
+
+=== "Authorization"
+
+    Requires `CALL.CLOSE_ROUNDS` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -6560,6 +7064,13 @@ Publish all allocation decisions of an ended round at once: announce every held 
     | `detail` | string |  |
     | `undecided_count` | integer | Proposals of the round without a decision. Present when publishing is refused because of them; publish with force and a reason to go ahead anyway. |
 
+
+=== "Authorization"
+
+    Requires `CALL.CLOSE_ROUNDS` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Record adoption
@@ -6662,6 +7173,13 @@ Record that the round's results were adopted: the date, a note and optionally th
     | `adoption_note` | string |  |
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
+
+
+=== "Authorization"
+
+    Requires `CALL.CLOSE_ROUNDS` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -6788,6 +7306,13 @@ Create a round for a call.
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
 
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Start deciding
@@ -6891,6 +7416,13 @@ Move an ended round from evaluating to deciding: its proposals have been evaluat
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
 
+
+=== "Authorization"
+
+    Requires `CALL.CLOSE_ROUNDS` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Send all draft assignment batches for this call
@@ -6974,6 +7506,13 @@ Send all draft assignment batches for this call.
     | `batches_sent` | integer |
     | `skipped` | integer |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Send invitations to all confirmed suggestions
@@ -7043,6 +7582,13 @@ Send invitations to all confirmed suggestions.
     | Field | Type |
     |---|---|
     | `invitations_sent` | integer |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7187,6 +7733,13 @@ Create or update a workflow step for a call.
     | `responsible_users.email` | string (email) |  |
     | `responsible_users.is_panel_chair` | boolean |  |
 
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update
@@ -7309,6 +7862,7 @@ Create or update a workflow step for a call.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -7327,6 +7881,13 @@ Create or update a workflow step for a call.
     | `created_by_name` | string |  |
     | `approved_by_name` | string |  |
     | `description` | string |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7453,6 +8014,7 @@ Create or update a workflow step for a call.
     | `requested_offering_components.max_available_limit` | number (double) |  |
     | `requested_offering_components.is_boolean` | boolean |  |
     | `requested_offering_components.default_limit` | number (double) |  |
+    | `requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `requested_offering_components.factor` | integer |  |
     | `requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `requested_offering_components.is_prepaid` | boolean |  |
@@ -7466,6 +8028,13 @@ Create or update a workflow step for a call.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7592,6 +8161,13 @@ Create or update a workflow step for a call.
     | `adoption_note` | string |  |
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7737,6 +8313,13 @@ Create or update a workflow step for a call.
     | `responsible_users.email` | string (email) |  |
     | `responsible_users.is_panel_chair` | boolean |  |
 
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get COI configuration for this call
@@ -7847,6 +8430,16 @@ Get COI configuration for this call.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get or update matching configuration for this call
@@ -7953,6 +8546,16 @@ Get or update matching configuration for this call.
     | `bid_weight` | number (double) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Global support, for reads.
+    - Requires `PROPOSAL.MANAGE_REVIEW` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8069,6 +8672,7 @@ Get or update matching configuration for this call.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -8087,6 +8691,13 @@ Get or update matching configuration for this call.
     | `created_by_name` | string |  |
     | `approved_by_name` | string |  |
     | `description` | string |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8204,6 +8815,7 @@ Get or update matching configuration for this call.
     | `requested_offering_components.max_available_limit` | number (double) |  |
     | `requested_offering_components.is_boolean` | boolean |  |
     | `requested_offering_components.default_limit` | number (double) |  |
+    | `requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `requested_offering_components.factor` | integer |  |
     | `requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `requested_offering_components.is_prepaid` | boolean |  |
@@ -8217,6 +8829,13 @@ Get or update matching configuration for this call.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8334,6 +8953,13 @@ Get or update matching configuration for this call.
     | `adoption_note` | string |  |
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8472,6 +9098,13 @@ Get or update matching configuration for this call.
     | `responsible_users.email` | string (email) |  |
     | `responsible_users.is_panel_chair` | boolean |  |
 
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -8573,6 +9206,7 @@ Get or update matching configuration for this call.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -8591,6 +9225,13 @@ Get or update matching configuration for this call.
     | `created_by_name` | string |  |
     | `approved_by_name` | string |  |
     | `description` | string |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8691,6 +9332,7 @@ Get or update matching configuration for this call.
     | `requested_offering_components.max_available_limit` | number (double) |  |
     | `requested_offering_components.is_boolean` | boolean |  |
     | `requested_offering_components.default_limit` | number (double) |  |
+    | `requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `requested_offering_components.factor` | integer |  |
     | `requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `requested_offering_components.is_prepaid` | boolean |  |
@@ -8704,6 +9346,13 @@ Get or update matching configuration for this call.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8805,6 +9454,13 @@ Get or update matching configuration for this call.
     | `adoption_note` | string |  |
     | `adoption_document` | string (uri) |  |
     | `undecided_at_round_completion` | any | Overrides the call's rule for proposals still without a decision when the round is completed. Empty: the call's rule applies. |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8914,5 +9570,12 @@ Get or update matching configuration for this call.
     | `responsible_users.full_name` | string |  |
     | `responsible_users.email` | string (email) |  |
     | `responsible_users.is_panel_chair` | boolean |  |
+
+
+=== "Authorization"
+
+    Requires `CALL.UPDATE` on the object or its manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

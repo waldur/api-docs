@@ -88,6 +88,11 @@ and at least one enabled notification type. Requires staff permissions.
     | `emails_sent_last_week` | integer |  |
     | `last_email_sent_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Get circuit breaker state
@@ -165,6 +170,11 @@ Requires staff permissions.
     | `state_history.from_state` | string | Previous state |
     | `state_history.to_state` | string | New state |
     | `state_history.reason` | string | Reason for state change |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -247,6 +257,11 @@ Requires staff permissions.
     |---|---|---|
     | `error` | string | Error message describing what went wrong |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Get message state cache statistics
@@ -314,6 +329,11 @@ Requires staff permissions.
     | `cache_ttl` | integer | Cache TTL in seconds |
     | `description` | string | Cache description |
     | `filter` | any | Applied filters |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -391,6 +411,11 @@ Requires staff permissions.
     | `avg_publish_time_ms` | number (double) | Average message publish latency in milliseconds |
     | `last_publish_time` | number (double) | Unix timestamp of last publish attempt |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Get pubsub system health overview
@@ -456,6 +481,11 @@ Requires staff permissions.
     | `circuit_breaker` | any | Circuit breaker summary |
     | `metrics` | any | Publishing metrics summary |
     | `last_updated` | string (date-time) | Timestamp when overview was generated |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -536,6 +566,11 @@ Requires staff permissions.
     |---|---|---|
     | `error` | string | Error message describing what went wrong |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Test the SMTP connection
@@ -598,6 +633,11 @@ Requires staff permissions.
     | `success` | boolean |  |
     | `latency_ms` | integer | Time to open the connection, in milliseconds |
     | `error` | string | Failure reason, empty on success |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -679,6 +719,11 @@ Defaults to the address of the requesting user. Requires staff permissions.
     **`400`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Reset circuit breaker
@@ -741,6 +786,11 @@ Requires staff permissions.
     | `status` | string | Operation status |
     | `state` | string | New circuit breaker state after reset |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Reset publishing metrics
@@ -799,5 +849,10 @@ Requires staff permissions.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

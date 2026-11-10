@@ -148,6 +148,13 @@
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -263,6 +270,13 @@
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -389,6 +403,13 @@
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Synchronize resource state
@@ -467,6 +488,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -535,6 +563,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -672,6 +705,13 @@ Delete resource from the database without scheduling operations on backend
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -794,6 +834,13 @@ Delete resource from the database without scheduling operations on backend
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -858,6 +905,13 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -945,6 +999,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Set limits for allocation
@@ -1030,6 +1089,11 @@ Set limits for allocation
     **`202`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -1099,5 +1163,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

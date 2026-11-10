@@ -103,6 +103,13 @@
     | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -188,6 +195,13 @@
     | `allocation_units_mapping` | object (free-form) | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
     | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -306,6 +320,14 @@ Create ProjectTemplate object
     | `allocation_units_mapping` | object (free-form) | The mapping of credits to allocation units, i.e. how many allocation units to award per credit allocated. |
     | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An owner of the provider organization named in the request. The organization the template's projects are placed in, and its offerings, must be ones the caller's roles reach; global support has no wider reach here.
 
 ---
 
@@ -436,6 +458,11 @@ Update ProjectTemplate object (full update)
     | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
 
+
+=== "Authorization"
+
+    Permission class for staff or project class owners.
+
 ---
 
 ### Partially update ProjectTemplate object
@@ -547,6 +574,11 @@ Partially update ProjectTemplate object
     | `role_mapping` | object (free-form) | The mapping of role names from the remote portal to role information in this portal for users in projects created in this class. |
     | `role_mapping_data` | object (free-form) | Serialize the role mapping dictionary returned by get_role_mapping() |
 
+
+=== "Authorization"
+
+    Permission class for staff or project class owners.
+
 ---
 
 ### Delete
@@ -611,6 +643,11 @@ Partially update ProjectTemplate object
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -681,5 +718,10 @@ Delete ProjectTemplate object
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Permission class for staff or project class owners.
 
 ---

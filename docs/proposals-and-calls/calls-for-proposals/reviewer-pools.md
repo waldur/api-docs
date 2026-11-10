@@ -123,6 +123,11 @@
     | `overridden_by_name` | string |  |
     | `overridden_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -223,6 +228,11 @@
     | `overridden_by_name` | string |  |
     | `overridden_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Partial Update
@@ -302,6 +312,13 @@
     | Field | Type | Description |
     |---|---|---|
     | `max_assignments` | integer | Maximum number of proposals that can be assigned to this reviewer |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -400,6 +417,11 @@ Accept a pool invitation (authenticated users only).
     | `message` | string |
     | `profile_url` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Decline a pool invitation (authenticated users only)
@@ -487,6 +509,11 @@ Decline a pool invitation (authenticated users only).
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -608,6 +635,13 @@ Force-accept a pool invitation (manager override).
     | `overridden_by_name` | string |  |
     | `overridden_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Resend invitation
@@ -709,5 +743,12 @@ Send a pending or expired pool invitation again. The invitation returns to pendi
     | `override_reason` | string | Reason for manager override of invitation status. |
     | `overridden_by_name` | string |  |
     | `overridden_at` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

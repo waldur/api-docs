@@ -102,6 +102,11 @@
     | `state` | any |
     | `send_at` | string (date) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -186,6 +191,11 @@
     | `emails` | object (free-form) |
     | `state` | any |
     | `send_at` | string (date) |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -278,6 +288,11 @@
     | `emails` | object (free-form) |
     | `state` | any |
     | `send_at` | string (date) |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -382,6 +397,11 @@
     | `state` | any |
     | `send_at` | string (date) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Partial Update
@@ -472,6 +492,11 @@
     | `state` | any |
     | `send_at` | string (date) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Delete
@@ -536,6 +561,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -602,6 +632,11 @@
     | `customers.uuid` | string (uuid) |
     | `customers.name` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Schedule
@@ -667,6 +702,11 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Send
@@ -731,5 +771,10 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

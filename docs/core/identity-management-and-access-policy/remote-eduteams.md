@@ -83,4 +83,12 @@ Allows to pull user details from remote eduTEAMS instance.
     |---|---|
     | `uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - An identity manager (`is_identity_manager`), with a personal access token of any scopes: a token narrows only the staff and support flags.
+
 ---

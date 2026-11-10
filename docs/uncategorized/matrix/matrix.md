@@ -8,10 +8,12 @@
 | <span class="http-badge http-get">GET</span> | `/api/matrix/exports/{uuid}/download/{kind}/` | [Download a Matrix history export file](#download-a-matrix-history-export-file) |
 | <span class="http-badge http-get">GET</span> | `/api/matrix/exports/` | [List Matrix Exports](#list-matrix-exports) |
 | <span class="http-badge http-get">GET</span> | `/api/matrix/exports/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/matrix/rooms/{uuid}/commands/` | [List the bot commands the caller can use in the room](#list-the-bot-commands-the-caller-can-use-in-the-room) |
 | <span class="http-badge http-get">GET</span> | `/api/matrix/rooms/eligible_projects/` | [List projects the caller can create a Matrix room for](#list-projects-the-caller-can-create-a-matrix-room-for) |
 | <span class="http-badge http-get">GET</span> | `/api/matrix/rooms/` | [List Matrix Rooms](#list-matrix-rooms) |
 | <span class="http-badge http-get">GET</span> | `/api/matrix/rooms/{uuid}/members/` | [List room members](#list-room-members) |
 | <span class="http-badge http-get">GET</span> | `/api/matrix/rooms/{uuid}/` | [Retrieve](#retrieve) |
+| <span class="http-badge http-get">GET</span> | `/api/matrix/ticket-drafts/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/matrix/credentials/password/` | [Generate a Matrix password](#generate-a-matrix-password) |
 | <span class="http-badge http-post">POST</span> | `/api/matrix/credentials/recovery-key/` | [Show the recovery key of chat encryption](#show-the-recovery-key-of-chat-encryption) |
 | <span class="http-badge http-post">POST</span> | `/api/matrix/crypto/escrow/` | [Escrow the recovery key of chat encryption](#escrow-the-recovery-key-of-chat-encryption) |
@@ -27,6 +29,8 @@
 | <span class="http-badge http-post">POST</span> | `/api/matrix/rooms/{uuid}/retry/` | [Retry a stuck or failed room operation](#retry-a-stuck-or-failed-room-operation) |
 | <span class="http-badge http-post">POST</span> | `/api/matrix/rooms/{uuid}/sync_members/` | [Force sync room membership with project members](#force-sync-room-membership-with-project-members) |
 | <span class="http-badge http-post">POST</span> | `/api/matrix/session/` | [Start a Matrix web chat session](#start-a-matrix-web-chat-session) |
+| <span class="http-badge http-post">POST</span> | `/api/matrix/ticket-drafts/{uuid}/cancel/` | [Cancel the draft](#cancel-the-draft) |
+| <span class="http-badge http-post">POST</span> | `/api/matrix/ticket-drafts/{uuid}/create_issue/` | [Create the draft's support ticket](#create-the-drafts-support-ticket) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/matrix/rooms/{uuid}/` | [Delete](#delete) |
 
 ---
@@ -87,6 +91,11 @@ Returns what an external Matrix client needs to sign the authenticated user in, 
     | `method` | string |
     | `homeserver_url` | string |
     | `matrix_user_id` | string |
+
+
+=== "Authorization"
+
+    The caller's own Matrix account, created if missing.
 
 ---
 
@@ -155,6 +164,11 @@ Returns what an external Matrix client needs to sign the authenticated user in, 
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    History exports of rooms the caller manages: MATRIX_ROOM.CREATE on the room's project or organization. Staff and support see all. A personal access token reaches only its bindings, and needs the support scope or MATRIX_ROOM.CREATE.
 
 ---
 
@@ -242,6 +256,13 @@ Returns what an external Matrix client needs to sign the authenticated user in, 
     | `completed_at` | string (date-time) |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    History exports of rooms the caller manages: MATRIX_ROOM.CREATE on the room's project or organization. Staff and support see all. A personal access token reaches only its bindings, and needs the support scope or MATRIX_ROOM.CREATE.
+
 ---
 
 ### Retrieve
@@ -323,6 +344,108 @@ Returns what an external Matrix client needs to sign the authenticated user in, 
     | `completed_at` | string (date-time) |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    History exports of rooms the caller manages: MATRIX_ROOM.CREATE on the room's project or organization. Staff and support see all. A personal access token reaches only its bindings, and needs the support scope or MATRIX_ROOM.CREATE.
+
+---
+
+### List the bot commands the caller can use in the room
+
+Every bot command, and whether the caller can use it in this room now; where not, a short reason. The bot refuses with the same checks. `!ticket send` and `!ticket cancel` are available only while the caller has an open ticket draft in the room.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/matrix/rooms/a1b2c3d4-e5f6-7890-abcd-ef1234567890/commands/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.matrix_room_state_enum import MatrixRoomStateEnum # (1)
+    from waldur_api_client.api.matrix import matrix_rooms_commands_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = matrix_rooms_commands_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`MatrixRoomStateEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/matrix_room_state_enum.py)
+    2.  **API Source:** [`matrix_rooms_commands_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/matrix/matrix_rooms_commands_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { matrixRoomsCommandsList } from 'waldur-js-client';
+    
+    try {
+      const response = await matrixRoomsCommandsList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `member` | boolean | Only rooms the current user is a member of |
+    | `project_uuid` | string (uuid) | Project UUID |
+    | `state` | string | _Enum: `creating`, `active`, `disabling`, `archived`, `error`_ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `name` | string | As typed after `!`, e.g. `ticket send`. |
+    | `description` | string |  |
+    | `hint` | string | Arguments: `[optional]`, `<required>`. |
+    | `available` | boolean |  |
+    | `reason` | string | Why the command is not available; blank if it is. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rooms of projects and organizations where the caller holds a role, and of the projects of organizations where the caller holds MATRIX_ROOM.CREATE; staff and support see all.
+
 ---
 
 ### List projects the caller can create a Matrix room for
@@ -399,6 +522,11 @@ Returns projects where the caller holds MATRIX_ROOM.CREATE on the project or its
     | `name` | string |
     | `customer_uuid` | string |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Lists the projects the caller may create a room for: MATRIX_ROOM.CREATE on the project or its organization; staff and support see all.
 
 ---
 
@@ -487,8 +615,16 @@ Returns projects where the caller holds MATRIX_ROOM.CREATE on the project or its
     | `members.matrix_user_id` | string |  |
     | `members.membership_state` | string |  |
     | `current_user_membership_state` | string |  |
+    | `bot_user_id` | string | The Matrix user ID of Waldur's bot in the room: only its events carry Waldur's blocks. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rooms of projects and organizations where the caller holds a role, and of the projects of organizations where the caller holds MATRIX_ROOM.CREATE; staff and support see all.
 
 ---
 
@@ -582,6 +718,11 @@ Returns projects where the caller holds MATRIX_ROOM.CREATE on the project or its
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    Members of a room the caller sees. Rooms of projects and organizations where the caller holds a role, and of the projects of organizations where the caller holds MATRIX_ROOM.CREATE; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -666,8 +807,108 @@ Returns projects where the caller holds MATRIX_ROOM.CREATE on the project or its
     | `members.matrix_user_id` | string |  |
     | `members.membership_state` | string |  |
     | `current_user_membership_state` | string |  |
+    | `bot_user_id` | string | The Matrix user ID of Waldur's bot in the room: only its events carry Waldur's blocks. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rooms of projects and organizations where the caller holds a role, and of the projects of organizations where the caller holds MATRIX_ROOM.CREATE; staff and support see all.
+
+---
+
+### Retrieve
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/matrix/ticket-drafts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.matrix import matrix_ticket_drafts_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = matrix_ticket_drafts_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`matrix_ticket_drafts_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/matrix/matrix_ticket_drafts_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { matrixTicketDraftsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await matrixTicketDraftsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `uuid` | string |
+    | `state` | any |
+    | `title` | string |
+    | `description` | string |
+    | `request_type` | string |
+    | `priority` | string |
+    | `project_uuid` | string |
+    | `project_name` | string |
+    | `customer_uuid` | string |
+    | `customer_name` | string |
+    | `resource_uuid` | string |
+    | `resource_name` | string |
+    | `resource_offering_name` | string |
+    | `helpdesk` | string |
+    | `expires_at` | string (date-time) |
+    | `issue_uuid` | string |
+    | `issue_key` | string |
+    | `issue_url` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Drafts the caller requested, in project rooms, while Matrix chat is enabled. Retrieve also needs a role that still puts the caller in the room: one on the project, or MATRIX_ROOM.CREATE on its organization.
 
 ---
 
@@ -748,6 +989,11 @@ Sets a new random password on the authenticated user's Matrix account and return
     **`503`** - The homeserver did not set it: either the Waldur bot is not a homeserver admin yet, the homeserver's admin API is not reachable or the account is a homeserver admin's, which needs an operator, or the homeserver failed and a later try may succeed. The detail says which.
     
 
+
+=== "Authorization"
+
+    The caller's own Matrix account, created if missing. Any authentication is accepted, including a scoped personal access token or a staff member impersonating the user; see #1080.
+
 ---
 
 ### Show the recovery key of chat encryption
@@ -819,6 +1065,11 @@ Returns the caller's escrowed recovery key, so that another Matrix client, such 
     
     **`503`** - The homeserver could not be asked.
     
+
+
+=== "Authorization"
+
+    Refuses delegated callers (see _is_delegated). A permission rather than a check in the view, so a refused request is answered before the throttle and does not use up the user's own rate limit.
 
 ---
 
@@ -911,6 +1162,11 @@ Stores the caller's new secret-storage recovery key. Only the holder of a curren
     |---|---|
     | `state` | string |
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Refuses delegated callers (see _is_delegated). A permission rather than a check in the view, so a refused request is answered before the throttle and does not use up the user's own rate limit.
 
 ---
 
@@ -1010,6 +1266,11 @@ Admits one browser at a time to setting up the caller's end-to-end encryption (`
     **`503`** - The homeserver could not be asked, or the bot is not a homeserver admin (needed for a reset).
     
 
+
+=== "Authorization"
+
+    Refuses delegated callers (see _is_delegated). A permission rather than a check in the view, so a refused request is answered before the throttle and does not use up the user's own rate limit.
+
 ---
 
 ### Release the lease to set up or reset chat encryption
@@ -1088,6 +1349,11 @@ Ends the caller's lease once its setup or reset is done, or has failed, so anoth
     
     **`404`** - Chat disabled.
     
+
+
+=== "Authorization"
+
+    Refuses delegated callers (see _is_delegated). A permission rather than a check in the view, so a refused request is answered before the throttle and does not use up the user's own rate limit.
 
 ---
 
@@ -1180,8 +1446,19 @@ Ends the caller's lease once its setup or reset is done, or has failed, so anoth
     | `members.matrix_user_id` | string |  |
     | `members.membership_state` | string |  |
     | `current_user_membership_state` | string |  |
+    | `bot_user_id` | string | The Matrix user ID of Waldur's bot in the room: only its events carry Waldur's blocks. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Requires `MATRIX_ROOM.CREATE` on the project or the project's customer.
+    - Staff or support.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1279,8 +1556,14 @@ Ends the caller's lease once its setup or reset is done, or has failed, so anoth
     | `members.matrix_user_id` | string |  |
     | `members.membership_state` | string |  |
     | `current_user_membership_state` | string |  |
+    | `bot_user_id` | string | The Matrix user ID of Waldur's bot in the room: only its events carry Waldur's blocks. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1384,6 +1667,11 @@ Ends the caller's lease once its setup or reset is done, or has failed, so anoth
     | `completed_at` | string (date-time) |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Whoever may create a room manages it day to day, syncing its members and exporting its history, and so does support. That is as far as either goes: the room's lifecycle is staff's.
+
 ---
 
 ### Join a chat room as staff
@@ -1470,8 +1758,14 @@ Staff self-join: provisions the caller, adds them with a Moderator badge (power 
     | `members.matrix_user_id` | string |  |
     | `members.membership_state` | string |  |
     | `current_user_membership_state` | string |  |
+    | `bot_user_id` | string | The Matrix user ID of Waldur's bot in the room: only its events carry Waldur's blocks. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1559,8 +1853,14 @@ Staff self-leave: posts a bot announcement and removes the caller from the room.
     | `members.matrix_user_id` | string |  |
     | `members.membership_state` | string |  |
     | `current_user_membership_state` | string |  |
+    | `bot_user_id` | string | The Matrix user ID of Waldur's bot in the room: only its events carry Waldur's blocks. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1641,6 +1941,11 @@ Returns the Matrix room ID to a current member of the room, accepting their pend
     
     **`409`** - The room is not active.
     
+
+
+=== "Authorization"
+
+    A room the caller sees, of which the caller is a current member, invited or joined. A role that reaches the room is not enough.
 
 ---
 
@@ -1726,8 +2031,14 @@ Returns the Matrix room ID to a current member of the room, accepting their pend
     | `members.matrix_user_id` | string |  |
     | `members.membership_state` | string |  |
     | `current_user_membership_state` | string |  |
+    | `bot_user_id` | string | The Matrix user ID of Waldur's bot in the room: only its events carry Waldur's blocks. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1813,8 +2124,14 @@ Returns the Matrix room ID to a current member of the room, accepting their pend
     | `members.matrix_user_id` | string |  |
     | `members.membership_state` | string |  |
     | `current_user_membership_state` | string |  |
+    | `bot_user_id` | string | The Matrix user ID of Waldur's bot in the room: only its events carry Waldur's blocks. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1880,6 +2197,11 @@ Returns the Matrix room ID to a current member of the room, accepting their pend
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Whoever may create a room manages it day to day, syncing its members and exporting its history, and so does support. That is as far as either goes: the room's lifecycle is staff's.
 
 ---
 
@@ -1954,6 +2276,173 @@ Signs the caller in to Matrix on a new web device and returns short-lived tokens
     **`503`** - The homeserver could not start a session: either it failed and a later try may succeed, or the user's Matrix account is locked, which needs an operator. The detail says which.
     
 
+
+=== "Authorization"
+
+    The caller's own Matrix account, created if missing. Any authentication is accepted, including a scoped personal access token or a staff member impersonating the user; see #1080.
+
+---
+
+### Cancel the draft
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/matrix/ticket-drafts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/cancel/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.matrix import matrix_ticket_drafts_cancel # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = matrix_ticket_drafts_cancel.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`matrix_ticket_drafts_cancel`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/matrix/matrix_ticket_drafts_cancel.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { matrixTicketDraftsCancel } from 'waldur-js-client';
+    
+    try {
+      const response = await matrixTicketDraftsCancel({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`204`** - No response body
+    
+
+
+=== "Authorization"
+
+    A draft the caller requested, while a role still puts them in the room: one on the room's project, or MATRIX_ROOM.CREATE on its organization.
+
+---
+
+### Create the draft's support ticket
+
+Create the pending draft's ticket as its requester, through the support API, and post its key in the room's thread. The draft is then sent: a second call, or one for a canceled or expired draft, gets 404.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/matrix/ticket-drafts/a1b2c3d4-e5f6-7890-abcd-ef1234567890/create_issue/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.matrix_ticket_draft_create_issue_request import MatrixTicketDraftCreateIssueRequest # (1)
+    from waldur_api_client.api.matrix import matrix_ticket_drafts_create_issue # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = MatrixTicketDraftCreateIssueRequest()
+    response = matrix_ticket_drafts_create_issue.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`MatrixTicketDraftCreateIssueRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/matrix_ticket_draft_create_issue_request.py)
+    2.  **API Source:** [`matrix_ticket_drafts_create_issue`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/matrix/matrix_ticket_drafts_create_issue.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { matrixTicketDraftsCreateIssue } from 'waldur-js-client';
+    
+    try {
+      const response = await matrixTicketDraftsCreateIssue({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `summary` | string |  | Replaces the draft's title. |
+    | `description` | string |  | Replaces the draft's description. |
+    | `type` | string |  | Replaces the draft's request type. |
+    | `resource_uuid` | string |  | Replaces the draft's resource: one of the room's project, or blank or null for none. |
+
+
+=== "Responses"
+
+    **`201`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `issue_uuid` | string |
+    | `issue_key` | string |
+    | `issue_url` | string |
+
+
+=== "Authorization"
+
+    A draft the caller requested, while a role still puts them in the room: one on the room's project, or MATRIX_ROOM.CREATE on its organization.
+
 ---
 
 ### Delete
@@ -2018,5 +2507,10 @@ Signs the caller in to Matrix on a new web device and returns short-lived tokens
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

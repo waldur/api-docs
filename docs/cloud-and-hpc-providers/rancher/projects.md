@@ -94,6 +94,13 @@
     | `namespaces.uuid` | string (uuid) |
     | `namespaces.name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -172,6 +179,13 @@
     | `namespaces.url` | string (uri) |
     | `namespaces.uuid` | string (uuid) |
     | `namespaces.name` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -257,5 +271,12 @@ Returns project's secrets.
     |---|---|
     | `name` | string |
     | `id` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

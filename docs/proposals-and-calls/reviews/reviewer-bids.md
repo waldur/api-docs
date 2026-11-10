@@ -106,6 +106,11 @@
     | `submitted_at` | string (date-time) |  |
     | `modified_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -186,6 +191,11 @@
     | `comment` | string | Optional comment explaining the bid |
     | `submitted_at` | string (date-time) |  |
     | `modified_at` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -279,6 +289,11 @@
     | `comment` | string | Optional comment explaining the bid |
     | `submitted_at` | string (date-time) |  |
     | `modified_at` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -384,6 +399,11 @@
     | `submitted_at` | string (date-time) |  |
     | `modified_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Partial Update
@@ -479,6 +499,11 @@
     | `submitted_at` | string (date-time) |  |
     | `modified_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Delete
@@ -543,6 +568,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -637,6 +667,11 @@ Get my bids for a specific call.
     | `submitted_at` | string (date-time) |  |
     | `modified_at` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Submit multiple bids at once
@@ -716,6 +751,11 @@ Submit multiple bids at once.
     | Field | Type |
     |---|---|
     | `submitted` | integer |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -811,5 +851,10 @@ Submit a bid on a proposal.
     | `comment` | string | Optional comment explaining the bid |
     | `submitted_at` | string (date-time) |  |
     | `modified_at` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

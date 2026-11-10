@@ -65,7 +65,7 @@
 
     | Name | Type | Description |
     |---|---|---|
-    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`, `workflow_step`_ |
+    | `checklist_type` | string | Type of compliance this checklist addresses<br><br><br>_Enum: `project_compliance`, `proposal_compliance`, `offering_compliance`, `project_metadata`, `onboarding_customer`, `onboarding_intent`, `workflow_step`, `feedback`_ |
     | `checklist_uuid` | string (uuid) |  |
     | `has_onboarding_mapping` | boolean | Filter questions that have onboarding metadata mapping |
     | `page` | integer | A page number within the paginated result set. |
@@ -117,6 +117,13 @@
     | `checklist_uuid` | string (uuid) |  |
     | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -221,6 +228,13 @@
     | `checklist_uuid` | string (uuid) |  |
     | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -356,6 +370,11 @@
     | `checklist_uuid` | string (uuid) |  |
     | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -503,6 +522,11 @@
     | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -643,6 +667,11 @@
     | `checklist_type` | string |  |
     | `checklist` | string (uri) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -707,5 +736,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

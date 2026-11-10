@@ -72,7 +72,8 @@
     from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
     from waldur_api_client.models.proposal_states import ProposalStates # (2)
     from waldur_api_client.models.responsible_role_enum import ResponsibleRoleEnum # (3)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_list # (4)
+    from waldur_api_client.models.step_enum import StepEnum # (4)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -87,7 +88,8 @@
     1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
     2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
     3.  **Model Source:** [`ResponsibleRoleEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/responsible_role_enum.py)
-    4.  **API Source:** [`proposal_proposals_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_list.py)
+    4.  **Model Source:** [`StepEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/step_enum.py)
+    5.  **API Source:** [`proposal_proposals_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_list.py)
 
 === "TypeScript"
 
@@ -122,6 +124,7 @@
     | `round_uuid` | string (uuid) |  |
     | `slug` | string | Slug |
     | `state` | array |  |
+    | `workflow_step` | array | Current workflow step<br><br> |
 
 
 === "Responses"
@@ -195,6 +198,11 @@
     | `awaiting_manual_advance` | boolean |  |
     | `decision_held` | boolean |  |
     | `workflow_step` | any | Current active workflow step for this proposal. |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -325,6 +333,11 @@
     | `awaiting_manual_advance` | boolean |  |
     | `decision_held` | boolean |  |
     | `workflow_step` | any | Current active workflow step for this proposal. |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -471,6 +484,11 @@
     | `decision_held` | boolean |  |
     | `workflow_step` | any | Current active workflow step for this proposal. |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Update project details of a proposal
@@ -559,6 +577,11 @@ Update project details of a proposal.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Edit a proposal's own content: its creator, its managers and administrators (PROPOSAL.UPDATE), and staff.
+
 ---
 
 ### Delete
@@ -623,6 +646,11 @@ Update project details of a proposal.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Submit or delete a proposal: its creator, its managers (PROPOSAL.MANAGE), and staff.
 
 ---
 
@@ -705,6 +733,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `role` | array | Role UUID or name. Repeat to filter by several roles. |
+    | `role_template` | array | Role name. Matches that role and organization copies of it. Repeat to match several. Omit to leave the role filter unchanged. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -733,6 +762,11 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
     | `source` | string |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
 
 ---
 
@@ -832,6 +866,11 @@ Assigns a specific role to a user within the current scope. An optional expirati
     **`400`** - Validation error, for example when trying to add a user to a terminated project.
     
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to grant roles in the scope's type (CALL.CREATE_PERMISSION, CUSTOMER.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, PROPOSAL.MANAGE, RESOURCE.CREATE_PERMISSION, RESOURCE_PROJECT.CREATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Revoke a role from a user
@@ -921,6 +960,11 @@ Removes a specific role from a user within the current scope. This effectively r
 
     **`200`** - Role revoked successfully.
     
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to revoke roles in the scope's type (CALL.DELETE_PERMISSION, CUSTOMER.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, PROPOSAL.DELETE_PERMISSION, RESOURCE.DELETE_PERMISSION, RESOURCE_PROJECT.DELETE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -1015,6 +1059,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     |---|---|
     | `expiration_time` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to change roles in the scope's type (CALL.UPDATE_PERMISSION, CUSTOMER.UPDATE_PERMISSION, OFFERING.UPDATE_PERMISSION, PROJECT.UPDATE_PERMISSION, PROPOSAL.UPDATE_PERMISSION, RESOURCE.UPDATE_PERMISSION, RESOURCE_PROJECT.UPDATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ## Other Actions
@@ -1022,7 +1071,7 @@ Updates the expiration time for a user's existing role in the current scope. Thi
 
 ### Awarded resources
 
-List what the allocation decision awards the proposal. Staff, support, the call's managers and organisers, and the managers of the offerings involved see it at any time; the applicant team once the decision is released.
+List what the allocation decision awards the proposal. Staff, support, the call's managers and organizers, and the managers of the offerings involved see it at any time; the applicant team once the decision is released.
 
 
 === "HTTPie"
@@ -1113,6 +1162,11 @@ List what the allocation decision awards the proposal. Staff, support, the call'
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    ActionsPermission check for the awarded resources endpoints.
+
 ---
 
 ### Retrieve
@@ -1199,6 +1253,11 @@ Read, change or remove an item of the award. Changes are for call managers only,
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    ActionsPermission check for the awarded resources endpoints.
 
 ---
 
@@ -1317,6 +1376,11 @@ Get checklist with questions and existing answers.
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -1437,6 +1501,11 @@ Get checklist with questions and existing answers including review logic (review
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Restrict the review view of a checklist -- the answers that trigger a review, the review triggers and notes -- to whoever manages the call for compliance checklists (a call manager, or an organiser through the managing organisation, as for compliance_overview; support may read), and to MANAGE_PROPOSAL_REVIEW holders on the call otherwise.
 
 ---
 
@@ -1579,6 +1648,11 @@ Get checklist template for creating new objects.
     **`404`** - 
     
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Get checklist completion status with review triggers (reviewers only)
@@ -1672,6 +1746,11 @@ Get checklist completion status with review triggers (reviewers only).
     **`404`** - 
     
 
+
+=== "Authorization"
+
+    Restrict the review view of a checklist -- the answers that trigger a review, the review triggers and notes -- to whoever manages the call for compliance checklists (a call manager, or an organiser through the managing organisation, as for compliance_overview; support may read), and to MANAGE_PROPOSAL_REVIEW holders on the call otherwise.
+
 ---
 
 ### Get checklist completion status
@@ -1759,6 +1838,13 @@ Get checklist completion status.
     **`404`** - 
     
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.UPDATE` on the object.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get submitter dashboard stats
@@ -1821,6 +1907,11 @@ Returns counts of the current user's own proposals grouped by state, covering bo
     | `accepted` | integer |
     | `rejected` | integer |
     | `canceled` | integer |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -1918,6 +2009,11 @@ List resources for a proposal.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
 
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
+
 ---
 
 ### Retrieve
@@ -2004,6 +2100,11 @@ List resources for a proposal.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
 
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
+
 ---
 
 ### Step checklist responses
@@ -2028,7 +2129,8 @@ List a workflow step's checklist answers grouped by reviewer, for the threaded t
     from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
     from waldur_api_client.models.proposal_states import ProposalStates # (2)
     from waldur_api_client.models.responsible_role_enum import ResponsibleRoleEnum # (3)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_step_checklist_responses_list # (4)
+    from waldur_api_client.models.step_enum import StepEnum # (4)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_step_checklist_responses_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2047,7 +2149,8 @@ List a workflow step's checklist answers grouped by reviewer, for the threaded t
     1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
     2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
     3.  **Model Source:** [`ResponsibleRoleEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/responsible_role_enum.py)
-    4.  **API Source:** [`proposal_proposals_step_checklist_responses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_responses_list.py)
+    4.  **Model Source:** [`StepEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/step_enum.py)
+    5.  **API Source:** [`proposal_proposals_step_checklist_responses_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_step_checklist_responses_list.py)
 
 === "TypeScript"
 
@@ -2096,6 +2199,7 @@ List a workflow step's checklist answers grouped by reviewer, for the threaded t
     | `slug` | string |  | Slug |
     | `state` | array |  |  |
     | `step` | string | ✓ | Workflow step key (e.g. technical_assessment). |
+    | `workflow_step` | array |  | Current workflow step<br><br> |
 
 
 === "Responses"
@@ -2121,6 +2225,11 @@ List a workflow step's checklist answers grouped by reviewer, for the threaded t
     
     **`400`** - 
     
+
+
+=== "Authorization"
+
+    ActionsPermission check for the threaded technical-assessment responses.
 
 ---
 
@@ -2241,6 +2350,11 @@ Get a workflow step's checklist with questions and answers.
     **`400`** - 
     
 
+
+=== "Authorization"
+
+    ActionsPermission check for the step_checklist GET action.
+
 ---
 
 ### List all workflow step instances for this proposal
@@ -2264,7 +2378,8 @@ List all workflow step instances for this proposal.
     from waldur_api_client.models.proposal_o_enum import ProposalOEnum # (1)
     from waldur_api_client.models.proposal_states import ProposalStates # (2)
     from waldur_api_client.models.responsible_role_enum import ResponsibleRoleEnum # (3)
-    from waldur_api_client.api.proposal_proposals import proposal_proposals_workflow_states_list # (4)
+    from waldur_api_client.models.step_enum import StepEnum # (4)
+    from waldur_api_client.api.proposal_proposals import proposal_proposals_workflow_states_list # (5)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
@@ -2282,7 +2397,8 @@ List all workflow step instances for this proposal.
     1.  **Model Source:** [`ProposalOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_o_enum.py)
     2.  **Model Source:** [`ProposalStates`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py)
     3.  **Model Source:** [`ResponsibleRoleEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/responsible_role_enum.py)
-    4.  **API Source:** [`proposal_proposals_workflow_states_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_workflow_states_list.py)
+    4.  **Model Source:** [`StepEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/step_enum.py)
+    5.  **API Source:** [`proposal_proposals_workflow_states_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_proposals/proposal_proposals_workflow_states_list.py)
 
 === "TypeScript"
 
@@ -2327,6 +2443,7 @@ List all workflow step instances for this proposal.
     | `round_uuid` | string (uuid) |  |
     | `slug` | string | Slug |
     | `state` | array |  |
+    | `workflow_step` | array | Current workflow step<br><br> |
 
 
 === "Responses"
@@ -2355,6 +2472,11 @@ List all workflow step instances for this proposal.
     | `duration_in_days` | integer |  |
     | `is_required` | boolean |  |
     | `checklist_status` | any |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -2427,6 +2549,11 @@ Manually advance a workflow that is awaiting call-manager confirmation.
     | `detail` | string |  |
     | `proposal_state` | string | New proposal state when the workflow terminates. |
     | `next_step` | string | Identifier of the step that just became active. |
+
+
+=== "Authorization"
+
+    Only call managers (or staff) may manually advance a workflow.
 
 ---
 
@@ -2506,6 +2633,11 @@ Attach document to proposal.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
 
 ---
 
@@ -2607,6 +2739,11 @@ Add an item to the award. Call managers only, while the allocation decision is i
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    ActionsPermission check for the awarded resources endpoints.
+
 ---
 
 ### Complete the current workflow step with an outcome
@@ -2703,6 +2840,11 @@ Complete the current workflow step with an outcome.
     | `proposal_state` | string | New proposal state when the workflow terminates. |
     | `next_step` | string | Identifier of the step that just became active. |
 
+
+=== "Authorization"
+
+    ActionsPermission check for complete/reject workflow step actions.
+
 ---
 
 ### Detach documents from proposal
@@ -2787,6 +2929,11 @@ Detach documents from proposal.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
 
 ---
 
@@ -2881,6 +3028,11 @@ Reject the proposal at the current workflow step.
     |---|---|
     | `detail` | string |
     | `proposal_state` | string |
+
+
+=== "Authorization"
+
+    ActionsPermission check for complete/reject workflow step actions.
 
 ---
 
@@ -2988,6 +3140,11 @@ Reopen an allocation decision held for the round's publication: the decision ste
     | `is_required` | boolean |  |
     | `checklist_status` | any |  |
 
+
+=== "Authorization"
+
+    ActionsPermission check for reopening a held allocation decision.
+
 ---
 
 ### Upload or replace the purchase order of a requested resource
@@ -3074,6 +3231,11 @@ Upload or replace the purchase order of a requested resource.
     |---|---|
     | `attachment` | string (uri) |
     | `purchase_order_reference` | string |
+
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
 
 ---
 
@@ -3177,6 +3339,11 @@ Create resource for a proposal.
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
 
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
+
 ---
 
 ### Submit a proposal
@@ -3243,6 +3410,11 @@ Submit a proposal.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Submit or delete a proposal: its creator, its managers (PROPOSAL.MANAGE), and staff.
 
 ---
 
@@ -3349,6 +3521,11 @@ Submit checklist answers.
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Answer a proposal's checklist: those who may edit the proposal (PROPOSAL.UPDATE), only while it is a draft; staff at any time.
 
 ---
 
@@ -3463,6 +3640,11 @@ Submit answers to a workflow step's checklist.
     **`400`** - 
     
 
+
+=== "Authorization"
+
+    ActionsPermission check for the submit_step_checklist_answers action.
+
 ---
 
 ### Update
@@ -3565,6 +3747,11 @@ Read, change or remove an item of the award. Changes are for call managers only,
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    ActionsPermission check for the awarded resources endpoints.
 
 ---
 
@@ -3669,6 +3856,11 @@ Read, change or remove an item of the award. Changes are for call managers only,
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
 
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
+
 ---
 
 ### Partial Update
@@ -3771,6 +3963,11 @@ Read, change or remove an item of the award. Changes are for call managers only,
     | `created_by_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    ActionsPermission check for the awarded resources endpoints.
 
 ---
 
@@ -3875,6 +4072,11 @@ Read, change or remove an item of the award. Changes are for call managers only,
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
 
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
+
 ---
 
 ### Delete
@@ -3962,6 +4164,11 @@ Read, change or remove an item of the award. Changes are for call managers only,
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    ActionsPermission check for the awarded resources endpoints.
+
 ---
 
 ### Remove the purchase order of a requested resource
@@ -4031,6 +4238,11 @@ Remove the purchase order of a requested resource.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
 
 ---
 
@@ -4117,5 +4329,10 @@ Remove the purchase order of a requested resource.
     | `description` | string |  |
     | `created_by` | string (uri) |  |
     | `created_by_name` | string |  |
+
+
+=== "Authorization"
+
+    Change a proposal's requested resources and documents.
 
 ---

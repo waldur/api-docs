@@ -195,6 +195,9 @@ Upload OpenAPI schema and schema diff to docs:
 .deploy_base:
   stage: deploy
   image: registry.hpc.ut.ee/mirror/library/python:3.13-bookworm
+  # One gh-pages writer at a time: concurrent deploys race, and the loser's
+  # rejected push leaves an unpushed commit behind (see below).
+  resource_group: gh-pages
   before_script:
     - git config --global user.name "$GITLAB_USER_NAME"
     - git config --global user.email "$GITLAB_USER_EMAIL"
@@ -202,6 +205,11 @@ Upload OpenAPI schema and schema diff to docs:
     - git remote set-url origin "https://gitlab-ci-token:${GITLAB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
     # Fetch all branches to ensure mike can access the gh-pages branch
     - git fetch origin
+    # Runners reuse build directories, so a local gh-pages left by an earlier
+    # job (e.g. one whose push was rejected) survives into this one and mike
+    # refuses to deploy: "gh-pages has diverged from origin/gh-pages".
+    # Reset it to the remote; HEAD is detached, so gh-pages is never checked out.
+    - git fetch origin +gh-pages:gh-pages
   script:
     - pip install uv
     - uv sync --all-extras --dev

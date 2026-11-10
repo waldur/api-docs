@@ -21,6 +21,8 @@
 | <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/{uuid}/checklist/` | [Get checklist with questions and existing answers](#get-checklist-with-questions-and-existing-answers) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/checklist-template/` | [Get checklist template for creating new objects](#get-checklist-template-for-creating-new-objects) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/{uuid}/completion_status/` | [Get checklist completion status](#get-checklist-completion-status) |
+| <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
+| <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/{uuid}/history/` | [Get version history](#get-version-history) |
 | <span class="http-badge http-get">GET</span> | `/api/openportal-unmanaged-projects/{uuid}/stats/` | [Get project resource usage statistics](#get-project-resource-usage-statistics) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/{uuid}/move_project/` | [Move project to another customer](#move-project-to-another-customer) |
 | <span class="http-badge http-post">POST</span> | `/api/openportal-unmanaged-projects/{uuid}/recover/` | [Recover a soft-deleted project](#recover-a-soft-deleted-project) |
@@ -117,6 +119,7 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `science_domain_uuid` | string (uuid) | Science domain UUID |
     | `science_sub_domain_uuid` | string (uuid) | Science sub-domain UUID |
     | `slug` | string | Slug |
+    | `user_role` | string | Role name or UUID; narrows user_uuid_with_active_role to that role and its organization copies. |
     | `user_uuid` | string (uuid) | Filter by user UUID. |
     | `user_uuid_with_active_role` | string (uuid) | Filter projects where the given user has a role. |
 
@@ -160,6 +163,11 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -173,6 +181,9 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -187,6 +198,13 @@ Retrieve a list of projects. The list is filtered based on the user's permission
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -296,6 +314,11 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -309,6 +332,9 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -323,6 +349,13 @@ Fetch the details of a specific project by its UUID. Users can access details of
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -410,6 +443,9 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `user_email_patterns` | array of strings |  |  |
     | `user_affiliations` | array of strings |  |  |
     | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -451,6 +487,11 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -464,6 +505,9 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -478,6 +522,11 @@ A new project can be created by users with staff privilege (is_staff=True) or cu
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    Staff, or a holder of PROJECT.CREATE on the organization the request names, there or site-wide, who also sees that organization: through a role on it or on one of its projects, or as global support. Setting end_date also needs PROJECT.DELETE on that organization, so with PROJECT_END_DATE_MANDATORY on (off by default) creating needs both.
 
 ---
 
@@ -557,6 +606,13 @@ Assigns the project to a single affiliation (or clears it when null).
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `PROJECT.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -655,6 +711,9 @@ Update the details of a project. Requires project administrator or customer owne
     | `user_email_patterns` | array of strings |  |  |
     | `user_affiliations` | array of strings |  |  |
     | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -696,6 +755,11 @@ Update the details of a project. Requires project administrator or customer owne
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -709,6 +773,9 @@ Update the details of a project. Requires project administrator or customer owne
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -723,6 +790,13 @@ Update the details of a project. Requires project administrator or customer owne
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    Requires `PROJECT.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -797,7 +871,6 @@ Partially update the details of a project. Requires project administrator or cus
     |---|---|---|---|
     | `name` | string |  |  |
     | `slug` | string |  | URL-friendly identifier. Editable by staff; on create also by holders of PROJECT.SET_SLUG on the organization, otherwise ignored. |
-    | `customer` | string (uri) |  |  |
     | `description` | string |  | Project description (HTML content will be sanitized) |
     | `type` | string (uri) |  |  |
     | `backend_id` | string |  |  |
@@ -812,6 +885,9 @@ Partially update the details of a project. Requires project administrator or cus
     | `user_email_patterns` | array of strings |  |  |
     | `user_affiliations` | array of strings |  |  |
     | `user_identity_sources` | array of strings |  |  |
+    | `user_nationalities` | array of strings |  | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings |  | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings |  | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation_uuid` | string (uuid) |  |  |
     | `science_sub_domain` | string (uuid) |  |  |
 
@@ -853,6 +929,11 @@ Partially update the details of a project. Requires project administrator or cus
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -866,6 +947,9 @@ Partially update the details of a project. Requires project administrator or cus
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -880,6 +964,13 @@ Partially update the details of a project. Requires project administrator or cus
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    Requires `PROJECT.UPDATE` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -947,6 +1038,13 @@ Delete a project. If the project has any active resources, the deletion request 
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `PROJECT.DELETE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1029,6 +1127,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `role` | array | Role UUID or name. Repeat to filter by several roles. |
+    | `role_template` | array | Role name. Matches that role and organization copies of it. Repeat to match several. Omit to leave the role filter unchanged. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -1057,6 +1156,11 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
     | `source` | string |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
 
 ---
 
@@ -1156,6 +1260,11 @@ Assigns a specific role to a user within the current scope. An optional expirati
     **`400`** - Validation error, for example when trying to add a user to a terminated project.
     
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to grant roles in the scope's type (CALL.CREATE_PERMISSION, CUSTOMER.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, PROPOSAL.MANAGE, RESOURCE.CREATE_PERMISSION, RESOURCE_PROJECT.CREATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Revoke a role from a user
@@ -1245,6 +1354,11 @@ Removes a specific role from a user within the current scope. This effectively r
 
     **`200`** - Role revoked successfully.
     
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to revoke roles in the scope's type (CALL.DELETE_PERMISSION, CUSTOMER.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, PROPOSAL.DELETE_PERMISSION, RESOURCE.DELETE_PERMISSION, RESOURCE_PROJECT.DELETE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -1338,6 +1452,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     | Field | Type |
     |---|---|
     | `expiration_time` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to change roles in the scope's type (CALL.UPDATE_PERMISSION, CUSTOMER.UPDATE_PERMISSION, OFFERING.UPDATE_PERMISSION, PROJECT.UPDATE_PERMISSION, PROPOSAL.UPDATE_PERMISSION, RESOURCE.UPDATE_PERMISSION, RESOURCE_PROJECT.UPDATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -1459,6 +1578,11 @@ Get checklist with questions and existing answers.
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Staff and global support, the organization's owners, the project's managers, administrators and members, and holders of PROJECT.UPDATE_METADATA or PROJECT.UPDATE on the project, its organization or site-wide.
 
 ---
 
@@ -1601,6 +1725,11 @@ Get checklist template for creating new objects.
     **`404`** - 
     
 
+
+=== "Authorization"
+
+    Staff, or PROJECT.CREATE on the organization named by parent_uuid: the template is shown on the form that creates a project there.
+
 ---
 
 ### Get checklist completion status
@@ -1687,6 +1816,234 @@ Get checklist completion status.
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Staff and global support, the organization's owners, the project's managers, administrators and members, and holders of PROJECT.UPDATE_METADATA or PROJECT.UPDATE on the project, its organization or site-wide.
+
+---
+
+### Get object state at a specific timestamp
+
+Returns the state of the object as it was at the specified timestamp. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openportal-unmanaged-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/at/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      timestamp=="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_history_at_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openportal_unmanaged_projects_history_at_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        timestamp="string-value"
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openportal_unmanaged_projects_history_at_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_history_at_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openportalUnmanagedProjectsHistoryAtRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await openportalUnmanagedProjectsHistoryAtRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      query: {
+        "timestamp": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `timestamp` | string | ✓ | ISO 8601 timestamp to query the object state at |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+    
+    ---
+    
+    **`400`** - 
+    
+    
+    ---
+    
+    **`404`** - 
+    
+
+
+=== "Authorization"
+
+    Staff or support only.
+
+---
+
+### Get version history
+
+Returns the version history for this object. Only accessible by staff and support users.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/openportal-unmanaged-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/history/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.marketplace_provider_customer_project_o_enum import MarketplaceProviderCustomerProjectOEnum # (1)
+    from waldur_api_client.api.openportal_unmanaged_projects import openportal_unmanaged_projects_history_list # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openportal_unmanaged_projects_history_list.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **Model Source:** [`MarketplaceProviderCustomerProjectOEnum`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/marketplace_provider_customer_project_o_enum.py)
+    2.  **API Source:** [`openportal_unmanaged_projects_history_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_unmanaged_projects/openportal_unmanaged_projects_history_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openportalUnmanagedProjectsHistoryList } from 'waldur-js-client';
+    
+    try {
+      const response = await openportalUnmanagedProjectsHistoryList({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Query Parameters"
+
+    | Name | Type | Description |
+    |---|---|---|
+    | `accounting_is_running` | boolean | Filter by whether accounting is running. |
+    | `affiliation_name` | string | Affiliation name |
+    | `affiliation_uuid` | array | Affiliation UUID |
+    | `backend_id` | string |  |
+    | `can_admin` | boolean | Return a list of projects where current user is admin. |
+    | `can_manage` | boolean | Return a list of projects where current user is manager or a customer owner. |
+    | `conceal_finished_projects` | boolean | Conceal finished projects |
+    | `created` | string (date-time) | Created after |
+    | `created_after` | string | Filter versions created after this timestamp (ISO 8601) |
+    | `created_before` | string | Filter versions created before this timestamp (ISO 8601) |
+    | `current_user_has_role` | array | Multiple values may be separated by commas. |
+    | `customer` | array | Multiple values may be separated by commas. |
+    | `customer_abbreviation` | string | Customer abbreviation |
+    | `customer_name` | string | Customer name |
+    | `customer_native_name` | string | Customer native name |
+    | `description` | string | Description |
+    | `has_affiliation` | boolean | Filter projects that have an affiliation. |
+    | `is_removed` | boolean | Is removed |
+    | `modified` | string (date-time) | Modified after |
+    | `modified_before` | string (date-time) | Modified before |
+    | `name` | string | Name |
+    | `name_exact` | string | Name (exact) |
+    | `o` | array | Ordering<br><br> |
+    | `page` | integer | A page number within the paginated result set. |
+    | `page_size` | integer | Number of results to return per page. |
+    | `query` | string | Filter by name, slug, UUID, backend ID or resource effective ID |
+    | `science_domain_uuid` | string (uuid) | Science domain UUID |
+    | `science_sub_domain_uuid` | string (uuid) | Science sub-domain UUID |
+    | `slug` | string | Slug |
+    | `user_role` | string | Role name or UUID; narrows user_uuid_with_active_role to that role and its organization copies. |
+    | `user_uuid` | string (uuid) | Filter by user UUID. |
+    | `user_uuid_with_active_role` | string (uuid) | Filter projects where the given user has a role. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `id` | integer | Version ID |
+    | `revision_date` | string (date-time) | When this revision was created |
+    | `revision_user` | object (free-form) | User who created this revision |
+    | `revision_comment` | string | Comment describing the revision |
+    | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1777,6 +2134,13 @@ Provides statistics about the resource usage (e.g., CPU, RAM, storage) for all r
     | `components.limit` | integer |  |
     | `components.offering_name` | string |  |
     | `components.offering_uuid` | string (uuid) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -1899,6 +2263,11 @@ Moves a project and its associated resources to a different customer. You can ch
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -1912,6 +2281,9 @@ Moves a project and its associated resources to a different customer. You can ch
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -1926,6 +2298,11 @@ Moves a project and its associated resources to a different customer. You can ch
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    Check if user can move a project. Staff users can always move projects, unless they act through a token without staff access: that token's scopes and bindings decide, as for anyone else's. Regular users can move projects if they have CREATE_PROJECT permission in BOTH the source and target organizations.
 
 ---
 
@@ -2040,6 +2417,11 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -2053,6 +2435,9 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -2067,6 +2452,13 @@ Recovers a soft-deleted (terminated) project, making it active again. Provides o
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    Requires `PROJECT.CREATE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2155,6 +2547,13 @@ Updates the slug of a project. Requires staff or the PROJECT.SET_SLUG permission
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `PROJECT.SET_SLUG` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2255,5 +2654,10 @@ Submit checklist answers.
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Staff, the organization's owners, the project's managers, and holders of PROJECT.UPDATE_METADATA on the project, its organization or site-wide.
 
 ---

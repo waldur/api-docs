@@ -88,4 +88,9 @@
     | `uuid` | string (uuid) |
     | `name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user, for an organization whose list shows it to them (404 otherwise). It lists the organizations consuming that organization's offerings through resources the provider resource view shows the caller.
+
 ---

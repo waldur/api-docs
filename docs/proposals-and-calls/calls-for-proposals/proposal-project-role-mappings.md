@@ -84,6 +84,11 @@
     | `proposal_role` | string |
     | `project_role` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -157,6 +162,11 @@
     | `call_name` | string |
     | `proposal_role` | string |
     | `project_role` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -243,6 +253,11 @@
     | `call_name` | string |
     | `proposal_role` | string |
     | `project_role` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -341,6 +356,11 @@
     | `proposal_role` | string |
     | `project_role` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Partial Update
@@ -429,6 +449,11 @@
     | `proposal_role` | string |
     | `project_role` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Delete
@@ -493,5 +518,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

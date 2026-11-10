@@ -30,6 +30,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/openstack-instances/{uuid}/placement_allocations/` | [Get Placement allocations for the instance](#get-placement-allocations-for-the-instance) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/change_flavor/` | [Change instance flavor](#change-instance-flavor) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/diagnose_connectivity/` | [Diagnose connectivity](#diagnose-connectivity) |
+| <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/hard_reboot/` | [Hard reboot instance](#hard-reboot-instance) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/rescue/` | [Rescue instance](#rescue-instance) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/set_erred/` | [Mark resource as ERRED](#mark-resource-as-erred) |
 | <span class="http-badge http-post">POST</span> | `/api/openstack-instances/{uuid}/set_metadata/` | [Set instance metadata](#set-instance-metadata) |
@@ -207,15 +208,11 @@ Get a list of VM instances.
     | `security_groups.rules.id` | integer |  |
     | `security_groups.description` | string |  |
     | `security_groups.state` | string |  |
-    | `server_group` | object |  |
-    | `server_group.url` | string (uri) |  |
-    | `server_group.name` | string |  |
-    | `server_group.policy` | any | Server group policy determining the rules for scheduling servers in this group |
-    | `server_group.state` | string |  |
+    | `server_group` | any |  |
     | `floating_ips` | array of objects |  |
     | `floating_ips.url` | string (uri) |  |
     | `floating_ips.uuid` | string (uuid) |  |
-    | `floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `floating_ips.port_fixed_ips` | array of objects |  |
     | `floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -318,6 +315,13 @@ Get a list of VM instances.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -466,15 +470,11 @@ Retrieve details of a specific VM instance.
     | `security_groups.rules.id` | integer |  |
     | `security_groups.description` | string |  |
     | `security_groups.state` | string |  |
-    | `server_group` | object |  |
-    | `server_group.url` | string (uri) |  |
-    | `server_group.name` | string |  |
-    | `server_group.policy` | any | Server group policy determining the rules for scheduling servers in this group |
-    | `server_group.state` | string |  |
+    | `server_group` | any |  |
     | `floating_ips` | array of objects |  |
     | `floating_ips.url` | string (uri) |  |
     | `floating_ips.uuid` | string (uuid) |  |
-    | `floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `floating_ips.port_fixed_ips` | array of objects |  |
     | `floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -578,6 +578,13 @@ Retrieve details of a specific VM instance.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Synchronize resource state
@@ -656,6 +663,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -724,6 +738,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -882,15 +901,11 @@ Update an existing VM instance.
     | `security_groups.rules.id` | integer |  |
     | `security_groups.description` | string |  |
     | `security_groups.state` | string |  |
-    | `server_group` | object |  |
-    | `server_group.url` | string (uri) |  |
-    | `server_group.name` | string |  |
-    | `server_group.policy` | any | Server group policy determining the rules for scheduling servers in this group |
-    | `server_group.state` | string |  |
+    | `server_group` | any |  |
     | `floating_ips` | array of objects |  |
     | `floating_ips.url` | string (uri) |  |
     | `floating_ips.uuid` | string (uuid) |  |
-    | `floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `floating_ips.port_fixed_ips` | array of objects |  |
     | `floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -993,6 +1008,13 @@ Update an existing VM instance.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1145,15 +1167,11 @@ Update specific fields of a VM instance.
     | `security_groups.rules.id` | integer |  |
     | `security_groups.description` | string |  |
     | `security_groups.state` | string |  |
-    | `server_group` | object |  |
-    | `server_group.url` | string (uri) |  |
-    | `server_group.name` | string |  |
-    | `server_group.policy` | any | Server group policy determining the rules for scheduling servers in this group |
-    | `server_group.state` | string |  |
+    | `server_group` | any |  |
     | `floating_ips` | array of objects |  |
     | `floating_ips.url` | string (uri) |  |
     | `floating_ips.uuid` | string (uuid) |  |
-    | `floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `floating_ips.port_fixed_ips` | array of objects |  |
     | `floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -1257,6 +1275,13 @@ Update specific fields of a VM instance.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## State Management
@@ -1330,6 +1355,13 @@ Restart the instance
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE_POWER` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Start instance
@@ -1400,6 +1432,13 @@ Start the instance
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE_POWER` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Stop instance
@@ -1469,6 +1508,13 @@ Stop the instance
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE_POWER` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1547,6 +1593,11 @@ Get console log for the instance
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Staff; and, while ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS is on, holders of OPENSTACK_INSTANCE.CONSOLE_ACCESS on the instance's project or organization.
+
 ---
 
 ### Get console URL
@@ -1616,6 +1667,11 @@ Get console url for the instance
     | Field | Type |
     |---|---|
     | `url` | string (uri) |
+
+
+=== "Authorization"
+
+    Staff; and, while ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS is on, holders of OPENSTACK_INSTANCE.CONSOLE_ACCESS on the instance's project or organization.
 
 ---
 
@@ -1698,7 +1754,7 @@ Get a list of instance floating IPs
     |---|---|---|
     | `url` | string (uri) |  |
     | `uuid` | string (uuid) |  |
-    | `address` | any | The public IPv4 address of the floating IP |
+    | `address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `port_fixed_ips` | array of objects |  |
     | `port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -1708,6 +1764,13 @@ Get a list of instance floating IPs
     | `subnet_name` | string |  |
     | `subnet_description` | string |  |
     | `subnet_cidr` | string | Network address in CIDR format (e.g. 192.168.0.0/24 or 2001:db8::/64) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -1857,6 +1920,13 @@ Get a list of instance ports
     | `security_groups.is_usage_based` | boolean |  |
     | `security_groups.is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Create instance backup
@@ -1984,7 +2054,7 @@ Create backup from instance
     | `restorations.floating_ips` | array of objects |  |
     | `restorations.floating_ips.url` | string (uri) |  |
     | `restorations.floating_ips.uuid` | string (uuid) |  |
-    | `restorations.floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `restorations.floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `restorations.floating_ips.port_fixed_ips` | array of objects |  |
     | `restorations.floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `restorations.floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -2167,7 +2237,7 @@ Create backup from instance
     | `instance_floating_ips` | array of objects |  |
     | `instance_floating_ips.url` | string (uri) |  |
     | `instance_floating_ips.uuid` | string (uuid) |  |
-    | `instance_floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `instance_floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `instance_floating_ips.port_fixed_ips` | array of objects |  |
     | `instance_floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `instance_floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -2189,6 +2259,13 @@ Create backup from instance
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2268,6 +2345,11 @@ Get console log for the instance. Same as the GET form, but takes `length` in th
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Staff; and, while ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS is on, holders of OPENSTACK_INSTANCE.CONSOLE_ACCESS on the instance's project or organization.
 
 ---
 
@@ -2363,6 +2445,13 @@ Update allowed address pairs of the instance
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update instance floating IPs
@@ -2447,6 +2536,13 @@ Update floating IPs of the instance
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2546,6 +2642,13 @@ Update ports of the instance
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update instance security groups
@@ -2638,6 +2741,13 @@ Update security groups of the instance
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Other Actions
@@ -2723,6 +2833,11 @@ Return what the OpenStack Placement service records as currently allocated to th
     | `resource_provider_uuid` | string |
     | `resource_provider_name` | string |
     | `resources` | object (free-form) |
+
+
+=== "Authorization"
+
+    Gate provider-side diagnostic endpoints on an instance.
 
 ---
 
@@ -2811,6 +2926,13 @@ Change flavor of the instance
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2901,6 +3023,90 @@ Walks the wiring that connects this instance to the requested target (default 'e
     | `checks.fix_hint` | string |
     | `root_cause` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
+---
+
+### Hard reboot instance
+
+Power-cycle the instance without waiting for the guest OS to shut down. Unlike restart, it also recovers an instance that is in ERROR, paused, suspended or stuck in a soft reboot.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/openstack-instances/a1b2c3d4-e5f6-7890-abcd-ef1234567890/hard_reboot/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.openstack_instances import openstack_instances_hard_reboot # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = openstack_instances_hard_reboot.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`openstack_instances_hard_reboot`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openstack_instances/openstack_instances_hard_reboot.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { openstackInstancesHardReboot } from 'waldur-js-client';
+    
+    try {
+      const response = await openstackInstancesHardReboot({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`202`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE_POWER` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Rescue instance
@@ -2982,6 +3188,13 @@ Boot the instance from a separate rescue image while keeping the original disk a
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE_POWER` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3065,6 +3278,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -3154,6 +3372,13 @@ Replace the instance metadata with the given string key/value pairs. Keys absent
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark resource as OK
@@ -3224,6 +3449,11 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Unrescue instance
@@ -3293,5 +3523,12 @@ Restore the instance from rescue mode.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OPENSTACK_INSTANCE.MANAGE_POWER` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

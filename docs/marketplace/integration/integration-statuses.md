@@ -91,6 +91,13 @@ Returns a paginated list of integration statuses for offerings. This is used to 
     | `offering` | string (uri) |
     | `url` | string (uri) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Statuses of offerings where the caller holds OFFERING.UPDATE on the offering, its organization or its service provider. Staff and support see all.
+
 ---
 
 ### Retrieve an integration status
@@ -164,5 +171,12 @@ Returns the details of a specific integration status, including the agent type, 
     | `last_request_timestamp` | string (date-time) |
     | `offering` | string (uri) |
     | `url` | string (uri) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Statuses of offerings where the caller holds OFFERING.UPDATE on the offering, its organization or its service provider. Staff and support see all.
 
 ---

@@ -93,4 +93,9 @@ Requires support user permissions.
     | `connections.timeout` | integer | Heartbeat timeout in seconds |
     | `connections.client_properties` | any | Client identification properties |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

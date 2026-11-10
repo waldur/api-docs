@@ -145,7 +145,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -201,6 +201,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -232,6 +233,7 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -361,8 +363,6 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
-    | `google_calendar_is_public` | boolean |  |
-    | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
     | `promotion_campaigns.uuid` | string (uuid) |  |
     | `promotion_campaigns.name` | string |  |
@@ -374,6 +374,13 @@ Returns a paginated list of public offerings. The list is filtered to show only 
     | `promotion_campaigns.description` | string |  |
     | `promotion_campaigns.months` | integer | How many months in a row should the related service (when activated) get special deal (0 for indefinitely until active) |
     | `promotion_campaigns.service_provider` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+    
+    Active and paused offerings: shared ones, and those of organizations, projects and offerings where the caller holds a role that have an unarchived plan with no organization groups or one of the caller's. In the hide_inaccessible and require_membership modes of RESTRICTED_OFFERING_VISIBILITY_MODE a shared offering also needs such a plan and no organization groups or one of the caller's, and require_membership shows nothing to a caller without a role. An offering restricted to some roles is hidden from a caller holding none of them, unless they already have a resource of it in a project where they hold a role. Anonymous callers see the shared offerings, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on; staff and support see the shared offerings and every offering with an unarchived plan.
 
 ---
 
@@ -468,7 +475,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -524,6 +531,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -555,6 +563,7 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -684,8 +693,6 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
-    | `google_calendar_is_public` | boolean |  |
-    | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
     | `promotion_campaigns.uuid` | string (uuid) |  |
     | `promotion_campaigns.name` | string |  |
@@ -697,6 +704,13 @@ Returns the details of a specific public offering. Access is granted if the offe
     | `promotion_campaigns.description` | string |  |
     | `promotion_campaigns.months` | integer | How many months in a row should the related service (when activated) get special deal (0 for indefinitely until active) |
     | `promotion_campaigns.service_provider` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+    
+    Active and paused offerings: shared ones, and those of organizations, projects and offerings where the caller holds a role that have an unarchived plan with no organization groups or one of the caller's. In the hide_inaccessible and require_membership modes of RESTRICTED_OFFERING_VISIBILITY_MODE a shared offering also needs such a plan and no organization groups or one of the caller's, and require_membership shows nothing to a caller without a role. An offering restricted to some roles is hidden from a caller holding none of them, unless they already have a resource of it in a project where they hold a role. Anonymous callers see the shared offerings, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on; staff and support see the shared offerings and every offering with an unarchived plan.
 
 ---
 
@@ -814,6 +828,13 @@ Returns a list of plans available for a specific offering. The plans are filtere
     | `plan_type` | string |  |
     | `minimal_price` | string |  |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+    
+    Active and paused offerings: shared ones, and those of organizations, projects and offerings where the caller holds a role that have an unarchived plan with no organization groups or one of the caller's. In the hide_inaccessible and require_membership modes of RESTRICTED_OFFERING_VISIBILITY_MODE a shared offering also needs such a plan and no organization groups or one of the caller's, and require_membership shows nothing to a caller without a role. An offering restricted to some roles is hidden from a caller holding none of them, unless they already have a resource of it in a project where they hold a role. Anonymous callers see the shared offerings, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on; staff and support see the shared offerings and every offering with an unarchived plan.
+
 ---
 
 ### Retrieve a specific plan for an offering
@@ -926,5 +947,12 @@ Returns the details of a specific plan if it is available to the current user fo
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
     | `minimal_price` | string |  |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+    
+    Active and paused offerings: shared ones, and those of organizations, projects and offerings where the caller holds a role that have an unarchived plan with no organization groups or one of the caller's. In the hide_inaccessible and require_membership modes of RESTRICTED_OFFERING_VISIBILITY_MODE a shared offering also needs such a plan and no organization groups or one of the caller's, and require_membership shows nothing to a caller without a role. An offering restricted to some roles is hidden from a caller holding none of them, unless they already have a resource of it in a project where they hold a role. Anonymous callers see the shared offerings, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on; staff and support see the shared offerings and every offering with an unarchived plan.
 
 ---

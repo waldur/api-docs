@@ -137,6 +137,13 @@ Returns a paginated list of plans managed by the provider. The list is filtered 
     | `plan_type` | string |  |
     | `minimal_price` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Plans of offerings of organizations where the caller holds a role. Staff see all.
+
 ---
 
 ### Retrieve a provider plan
@@ -247,6 +254,13 @@ Returns details of a specific plan.
     | `resources_count` | integer |  |
     | `plan_type` | string |  |
     | `minimal_price` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Plans of offerings of organizations where the caller holds a role. Staff see all.
 
 ---
 
@@ -378,6 +392,11 @@ Creates a new billing plan for an offering.
     | `plan_type` | string |  |
     | `minimal_price` | string |  |
 
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.CREATE_PLAN on the organization of the offering named in the request.
+
 ---
 
 ### Update plan component discounts
@@ -473,6 +492,13 @@ Creates a new billing plan for an offering.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_PLAN` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update organization groups for a plan
@@ -551,6 +577,13 @@ Sets the list of organization groups that are allowed to access this plan. If th
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_PLAN` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -637,6 +670,13 @@ Updates the prices for one or more components of a specific plan. If the plan is
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_PLAN` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update plan component quotas
@@ -721,6 +761,13 @@ Updates the quotas (fixed amounts) for one or more components of a specific plan
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_PLAN` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -863,6 +910,13 @@ Updates an existing plan. Note: A plan cannot be updated if it is already used b
     | `plan_type` | string |  |
     | `minimal_price` | string |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_PLAN` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a provider plan
@@ -994,6 +1048,13 @@ Partially updates an existing plan. Note: A plan cannot be updated if it is alre
     | `plan_type` | string |  |
     | `minimal_price` | string |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_PLAN` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete a provider plan
@@ -1060,6 +1121,11 @@ Deletes a plan. This is a hard delete and should be used with caution.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1160,6 +1226,11 @@ Returns the state of the object as it was at the specified timestamp. Only acces
     **`404`** - 
     
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get version history
@@ -1251,6 +1322,11 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get plan usage statistics
@@ -1333,6 +1409,13 @@ Returns aggregated statistics on how many resources are currently using each pla
     | `customer_provider_uuid` | string (uuid) |  |
     | `customer_provider_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Plans of the offerings that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
+
 ---
 
 ### Archive a plan
@@ -1400,6 +1483,13 @@ Marks a plan as archived. Archived plans cannot be used for provisioning new res
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.ARCHIVE_PLAN` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Remove all organization groups from a plan
@@ -1466,5 +1556,12 @@ Removes all organization group associations from this plan, making it accessible
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_PLAN` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

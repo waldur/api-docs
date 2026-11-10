@@ -175,7 +175,6 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `error_updated_at` | string (date-time) |  |
-    | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
     | `attachment` | string (uri) |  |
@@ -234,6 +233,13 @@ Returns a paginated list of orders accessible to the current user. Orders are vi
     | `auto_approved_by_rule_uuid` | string (uuid) |  |
     | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Orders of projects where the caller holds ORDER.LIST on the project or its organization, and orders for offerings where they hold it on the offering, on the offering's organization or on its service provider. Staff, support and holders of it site-wide see all.
 
 ---
 
@@ -351,7 +357,6 @@ Returns the details of a specific order.
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `error_updated_at` | string (date-time) |  |
-    | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
     | `attachment` | string (uri) |  |
@@ -410,6 +415,13 @@ Returns the details of a specific order.
     | `auto_approved_by_rule_uuid` | string (uuid) |  |
     | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Orders of projects where the caller holds ORDER.LIST on the project or its organization, and orders for offerings where they hold it on the offering, on the offering's organization or on its service provider. Staff, support and holders of it site-wide see all.
 
 ---
 
@@ -485,11 +497,12 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `attributes` | any |  | Attributes structure depends on the offering type specified in the parent object. Can also be a generic object for offerings without a specific attributes schema. |
     | `limits` | object (free-form) |  |  |
     | `accepting_terms_of_service` | boolean |  | <br>_Constraints: write-only_ |
-    | `callback_url` | string (uri) |  |  |
+    | `callback_url` | string (uri) |  | Sent by a Waldur that orders from this one through a remote offering: its public order pull endpoint (.../api/remote-waldur-api/pull_order/<its order uuid>). No other URL is accepted. Not stored: order callbacks are off.<br>_Constraints: write-only_ |
     | `request_comment` | string |  |  |
     | `start_date` | string (date) |  | Enables delayed processing of resource provisioning order. |
     | `slug` | string |  | Slug of the new resource. Used when the caller is staff or holds RESOURCE.SET_SLUG on the project, the offering or their organizations; otherwise ignored. |
     | `project` | string (uri) | ✓ |  |
+    | `spending_limits` | object (free-form) |  | Spending limits of the new resource on its usage-based components, per period: {component_type: {period: amount}}. Only the periods each component offers are accepted, up to their maximum.<br>_Constraints: write-only_ |
 
 
 === "Responses"
@@ -537,7 +550,6 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `error_updated_at` | string (date-time) |  |
-    | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
     | `attachment` | string (uri) |  |
@@ -596,6 +608,11 @@ Creates a new order to provision a resource. The order will be placed in a pendi
     | `auto_approved_by_rule_uuid` | string (uuid) |  |
     | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise who holds ORDER.CREATE on the order's project, its organization or site-wide and, for an offering restricted to designated roles, holds one of them in the project or its organization.
 
 ---
 
@@ -669,6 +686,11 @@ Forcefully deletes an order from the database without affecting the backend reso
     **`403`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a pending order
@@ -735,6 +757,13 @@ Deletes an order that is still in a pending state (e.g., `pending-consumer` or `
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ORDER.DESTROY` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -808,6 +837,13 @@ Approves a pending order from the consumer's side (e.g., project manager, custom
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -896,6 +932,13 @@ Approves a pending order from the provider's side. This typically transitions th
     **`409`** - Order is no longer pending provider review.
     
 
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Cancel an order
@@ -962,6 +1005,13 @@ Cancels an order. This is typically only possible for certain offering types (e.
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ORDER.CANCEL` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1043,6 +1093,16 @@ Rejects a pending order from the consumer's side. This moves the order to the 'r
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The order's creator.
+    - Requires `ORDER.REJECT` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1128,6 +1188,13 @@ Rejects a pending order from the provider's side. This moves the order to the 'r
     **`409`** - Order is no longer pending provider review.
     
 
+
+=== "Authorization"
+
+    Requires `ORDER.REJECT` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set order state to done (agent)
@@ -1194,6 +1261,13 @@ Used by external agents (e.g., site agent) to manually transition the order stat
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1276,6 +1350,13 @@ Used by external agents to report a failure during order processing. An error me
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Set order state to executing (agent)
@@ -1342,6 +1423,13 @@ Used by external agents (e.g., site agent) to manually transition the order stat
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1412,6 +1500,13 @@ Allows deleting an attachment from a pending order.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ORDER.CREATE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1501,6 +1596,13 @@ Allows a service provider or staff to set or update the backend ID associated wi
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.SET_BACKEND_ID` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update order attachment
@@ -1582,6 +1684,13 @@ Allows uploading or replacing a file attachment (e.g., a purchase order) for a p
     | Field | Type |
     |---|---|
     | `attachment` | string (uri) |
+
+
+=== "Authorization"
+
+    Requires `ORDER.CREATE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1679,7 +1788,7 @@ Returns details of the offering connected to the requested object.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -1735,6 +1844,7 @@ Returns details of the offering connected to the requested object.
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -1766,6 +1876,7 @@ Returns details of the offering connected to the requested object.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -1895,8 +2006,6 @@ Returns details of the offering connected to the requested object.
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
-    | `google_calendar_is_public` | boolean |  |
-    | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
     | `promotion_campaigns.uuid` | string (uuid) |  |
     | `promotion_campaigns.name` | string |  |
@@ -1908,6 +2017,13 @@ Returns details of the offering connected to the requested object.
     | `promotion_campaigns.description` | string |  |
     | `promotion_campaigns.months` | integer | How many months in a row should the related service (when activated) get special deal (0 for indefinitely until active) |
     | `promotion_campaigns.service_provider` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Orders of projects where the caller holds ORDER.LIST on the project or its organization, and orders for offerings where they hold it on the offering, on the offering's organization or on its service provider. Staff, support and holders of it site-wide see all.
 
 ---
 
@@ -2022,11 +2138,16 @@ Returns the orders created by the current user that are still pending approval o
     | `type` | any |
     | `created` | string (date-time) |
 
+
+=== "Authorization"
+
+    The caller's own orders awaiting approval or processing.
+
 ---
 
 ### Get resource details
 
-Returns details of the resource connected to the requested object.
+Returns details of the resource connected to the requested object, if the consumer or provider resource view shows it to the caller; otherwise 404.
 
 
 === "HTTPie"
@@ -2166,16 +2287,28 @@ Returns details of the resource connected to the requested object.
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
+    | `terminated_at` | string (date-time) | When the resource was terminated. Unlike end_date, which is the planned date, this is the moment it happened. It stays set during a restore and is cleared once the resource is OK again, so check the state before reading it as the end of a live resource. Empty if the date is not known. |
     | `username` | string |  |
     | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
+    | `prepaid_total_component_types` | array of strings | Component types whose limit_usage covers the whole subscription, so the UI shows their limit as the monthly limit times the months ordered. Empty unless the offering shows prepaid limits as a total (display_prepaid_limits_as_total). |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
     | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
+    | `usage_limit_resumes_at` | string (date-time) | When the spending limits that restrict the resource reset and the restriction lifts. Empty when no spending limit restricts the resource, when a limit-based component's limit does too, or while a reached total limit holds it: a total never resets, so the restriction lifts only when that limit is raised or cleared. |
+    | `spending_limits` | object (free-form) | Spending limits on usage-based components, per period. Changed with the set_spending_limits action. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `spending_limit_status.last_reported_at` | string (date-time) | When usage of the component was last reported. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | object (free-form) |  |
@@ -2207,6 +2340,7 @@ Returns details of the resource connected to the requested object.
     | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
     | `offering_components.default_limit` | number (double) |  |
+    | `offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offering_components.factor` | integer |  |
     | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
@@ -2219,6 +2353,14 @@ Returns details of the resource connected to the requested object.
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
     | `offering_account_settings` | any |  |
+    | `display_limits` | object (free-form) | Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced. |
+
+
+=== "Authorization"
+
+    Anyone who may see the requested object, for a resource that the consumer or the provider resource view shows them. Outside staff and support, an organization that limits portal access to some networks, and an offering that conceals subnet-restricted resources, hide the resource from consumers outside the allowed networks; the response is then 404.
+    
+    Orders of projects where the caller holds ORDER.LIST on the project or its organization, and orders for offerings where they hold it on the offering, on the offering's organization or on its service provider. Staff, support and holders of it site-wide see all.
 
 ---
 
@@ -2286,6 +2428,13 @@ Resets an erred order and its resource back to an active state so that the order
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2369,6 +2518,13 @@ Allows a consumer to respond to a provider's message with an optional message an
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Requires `ORDER.SET_CONSUMER_INFO` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2454,6 +2610,13 @@ Allows a service provider to send a message with an optional URL and file attach
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update
@@ -2538,6 +2701,13 @@ Allows a service provider to send a message with an optional URL and file attach
     | `attributes` | object (free-form) |  |
     | `start_date` | string (date) | Enables delayed processing of resource provisioning order. |
 
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -2621,5 +2791,12 @@ Allows a service provider to send a message with an optional URL and file attach
     | `limits` | object (free-form) |  |
     | `attributes` | object (free-form) |  |
     | `start_date` | string (date) | Enables delayed processing of resource provisioning order. |
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

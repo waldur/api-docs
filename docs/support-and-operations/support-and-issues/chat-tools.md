@@ -81,4 +81,12 @@ Execute a tool and return the result.
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    All of:
+    
+    - AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    - The tool must be one the caller's role may use; it acts as the caller.
+
 ---

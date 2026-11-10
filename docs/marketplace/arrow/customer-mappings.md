@@ -108,6 +108,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -186,6 +191,11 @@
     | `is_active` | boolean | Whether this mapping is active |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -269,6 +279,11 @@ Get available Arrow customers that are not yet mapped, with suggestions for Wald
     | `suggestions.suggested_waldur_customer.abbreviation` | string |
     | `suggestions.confidence` | number (double) |
     | `suggestions.existing_mapping` | boolean |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -368,6 +383,11 @@ Get billing and consumption summary for this customer mapping.
     | `recent_billing_syncs.items_count` | integer |
     | `recent_billing_syncs.created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Discover Arrow licenses for this customer and show linkable Waldur resources
@@ -459,6 +479,11 @@ Discover Arrow licenses for this customer and show linkable Waldur resources.
     | `suggestions.license_name` | string |  |
     | `suggestions.confidence` | number (double) | Confidence score (0-1) based on name similarity. |
     | `error` | string |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -559,6 +584,11 @@ Fetch fresh consumption and billing data from Arrow API for this customer.
     | `resources_with_backend_id` | integer | Number of resources with backend_id set (Arrow license reference). |
     | `matched_resources` | integer | Number of resources for which consumption was successfully fetched. |
     | `error` | string |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -665,6 +695,11 @@ Import an Arrow license as a new Waldur resource.
     | `project_name` | string |
     | `success` | boolean |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Link a Waldur resource to an Arrow license by setting its backend_id
@@ -761,6 +796,11 @@ Link a Waldur resource to an Arrow license by setting its backend_id.
     | `previous_backend_id` | string |
     | `success` | boolean |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Sync customer list from Arrow and update arrow_company_name
@@ -828,6 +868,11 @@ Sync customer list from Arrow and update arrow_company_name.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -927,6 +972,11 @@ Sync customer list from Arrow and update arrow_company_name.
     | `is_active` | boolean | Whether this mapping is active |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1035,6 +1085,11 @@ Sync customer list from Arrow and update arrow_company_name.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -1130,6 +1185,11 @@ Sync customer list from Arrow and update arrow_company_name.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -1194,5 +1254,10 @@ Sync customer list from Arrow and update arrow_company_name.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

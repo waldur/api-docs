@@ -7,8 +7,6 @@
 | <span class="http-badge http-get">GET</span> | `/api/lexis-links/` | [List Lexis Links](#list-lexis-links) |
 | <span class="http-badge http-get">GET</span> | `/api/lexis-links/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/lexis-links/` | [Create](#create) |
-| <span class="http-badge http-put">PUT</span> | `/api/lexis-links/{uuid}/` | [Update](#update) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/lexis-links/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/lexis-links/{uuid}/` | [Delete](#delete) |
 
 ---
@@ -99,6 +97,13 @@
     | `customer_name` | string |
     | `heappe_project_id` | integer |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Links of resources in projects or organizations where the caller holds a role, and of resources of offerings whose organization the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -184,6 +189,13 @@
     | `customer_name` | string |
     | `heappe_project_id` | integer |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Links of resources in projects or organizations where the caller holds a role, and of resources of offerings whose organization the caller holds a role on; staff and support see all.
+
 ---
 
 ### Create
@@ -256,199 +268,12 @@
     **`201`** - No response body
     
 
----
 
-### Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PUT \
-      https://api.example.com/api/lexis-links/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.lexis_link_request import LexisLinkRequest # (1)
-    from waldur_api_client.api.lexis_links import lexis_links_update # (2)
+    Requires `LEXIS_LINK.CREATE` on the resource's offering's customer.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = LexisLinkRequest()
-    response = lexis_links_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`LexisLinkRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/lexis_link_request.py)
-    2.  **API Source:** [`lexis_links_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/lexis_links/lexis_links_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { lexisLinksUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await lexisLinksUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `heappe_project_id` | integer |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `robot_account` | string (uri) |
-    | `robot_account_username` | string |
-    | `robot_account_type` | string |
-    | `state` | string |
-    | `resource_uuid` | string (uuid) |
-    | `resource_name` | string |
-    | `resource_type` | string |
-    | `resource_backend_id` | string |
-    | `resource_end_date` | string (date-time) |
-    | `project_uuid` | string (uuid) |
-    | `project_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `heappe_project_id` | integer |
-
----
-
-### Partial Update
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/lexis-links/a1b2c3d4-e5f6-7890-abcd-ef1234567890/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.patched_lexis_link_request import PatchedLexisLinkRequest # (1)
-    from waldur_api_client.api.lexis_links import lexis_links_partial_update # (2)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    
-    body_data = PatchedLexisLinkRequest()
-    response = lexis_links_partial_update.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **Model Source:** [`PatchedLexisLinkRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_lexis_link_request.py)
-    2.  **API Source:** [`lexis_links_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/lexis_links/lexis_links_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { lexisLinksPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await lexisLinksPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Request Body"
-
-    | Field | Type | Required |
-    |---|---|---|
-    | `heappe_project_id` | integer |  |
-
-
-=== "Responses"
-
-    **`200`** - 
-    
-    | Field | Type |
-    |---|---|
-    | `url` | string (uri) |
-    | `uuid` | string (uuid) |
-    | `created` | string (date-time) |
-    | `modified` | string (date-time) |
-    | `robot_account` | string (uri) |
-    | `robot_account_username` | string |
-    | `robot_account_type` | string |
-    | `state` | string |
-    | `resource_uuid` | string (uuid) |
-    | `resource_name` | string |
-    | `resource_type` | string |
-    | `resource_backend_id` | string |
-    | `resource_end_date` | string (date-time) |
-    | `project_uuid` | string (uuid) |
-    | `project_name` | string |
-    | `customer_uuid` | string (uuid) |
-    | `customer_name` | string |
-    | `heappe_project_id` | integer |
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -514,5 +339,12 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `LEXIS_LINK.DELETE` on the object or its robot account's resource's offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

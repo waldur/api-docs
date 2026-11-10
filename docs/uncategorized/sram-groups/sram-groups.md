@@ -81,7 +81,7 @@ SRAM collaborations and groups provisioned into Waldur.
     | `uuid` | string (uuid) |  |
     | `external_id` | string |  |
     | `display_name` | string |  |
-    | `urn` | string | SRAM global URN: '<organisation>:<co>' or '<organisation>:<co>:<group>'. |
+    | `urn` | string | SRAM global URN: '<organization>:<co>' or '<organization>:<co>:<group>'. |
     | `kind` | any |  |
     | `description` | string |  |
     | `labels` | array of strings |  |
@@ -92,6 +92,11 @@ SRAM collaborations and groups provisioned into Waldur.
     | `member_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -164,7 +169,7 @@ SRAM collaborations and groups provisioned into Waldur.
     | `uuid` | string (uuid) |  |
     | `external_id` | string |  |
     | `display_name` | string |  |
-    | `urn` | string | SRAM global URN: '<organisation>:<co>' or '<organisation>:<co>:<group>'. |
+    | `urn` | string | SRAM global URN: '<organization>:<co>' or '<organization>:<co>:<group>'. |
     | `kind` | any |  |
     | `description` | string |  |
     | `labels` | array of strings |  |
@@ -175,5 +180,10 @@ SRAM collaborations and groups provisioned into Waldur.
     | `member_count` | integer |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

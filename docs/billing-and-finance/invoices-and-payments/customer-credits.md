@@ -16,6 +16,8 @@
 | <span class="http-badge http-post">POST</span> | `/api/customer-credits/{uuid}/adjust_withdrawable/` | [Adjust withdrawable](#adjust-withdrawable) |
 | <span class="http-badge http-post">POST</span> | `/api/customer-credits/{uuid}/apply_compensations/` | [Apply compensations](#apply-compensations) |
 | <span class="http-badge http-post">POST</span> | `/api/customer-credits/{uuid}/clear_compensations/` | [Clear compensations](#clear-compensations) |
+| <span class="http-badge http-post">POST</span> | `/api/customer-credits/{uuid}/reclassify/` | [Reclassify](#reclassify) |
+| <span class="http-badge http-post">POST</span> | `/api/customer-credits/{uuid}/top_up/` | [Top up](#top-up) |
 
 ---
 ## Core CRUD
@@ -110,7 +112,16 @@
     | `apply_as_minimal_consumption` | boolean |  |
     | `allocated_to_projects` | number (double) |  |
     | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards. |
+    | `paid_balance` | number (double) | What is left of the customer's prepayments recorded by staff. |
+    | `granted_balance` | number (double) | What is left of staff-granted credit. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -198,7 +209,16 @@
     | `apply_as_minimal_consumption` | boolean |  |
     | `allocated_to_projects` | number (double) |  |
     | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards. |
+    | `paid_balance` | number (double) | What is left of the customer's prepayments recorded by staff. |
+    | `granted_balance` | number (double) | What is left of staff-granted credit. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -296,7 +316,14 @@
     | `apply_as_minimal_consumption` | boolean |  |
     | `allocated_to_projects` | number (double) |  |
     | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards. |
+    | `paid_balance` | number (double) | What is left of the customer's prepayments recorded by staff. |
+    | `granted_balance` | number (double) | What is left of staff-granted credit. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -405,7 +432,14 @@
     | `apply_as_minimal_consumption` | boolean |  |
     | `allocated_to_projects` | number (double) |  |
     | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards. |
+    | `paid_balance` | number (double) | What is left of the customer's prepayments recorded by staff. |
+    | `granted_balance` | number (double) | What is left of staff-granted credit. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -508,7 +542,14 @@
     | `apply_as_minimal_consumption` | boolean |  |
     | `allocated_to_projects` | number (double) |  |
     | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards. |
+    | `paid_balance` | number (double) | What is left of the customer's prepayments recorded by staff. |
+    | `granted_balance` | number (double) | What is left of staff-granted credit. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -574,6 +615,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -666,6 +712,13 @@ Get credit consumption history grouped by month.
     |---|---|
     | `date` | string (date) |
     | `price` | string (decimal) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -777,7 +830,14 @@ Staff adjustment of the withdrawable part of the credit. Records a signed ledger
     | `apply_as_minimal_consumption` | boolean |  |
     | `allocated_to_projects` | number (double) |  |
     | `consumption_last_month` | number (double) |  |
-    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: earnings-typed ledger inflows minus outflows, capped by the current credit value so that staff-granted (promotional) credit is never withdrawable and credit expiry wipes earnings too. |
+    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards. |
+    | `paid_balance` | number (double) | What is left of the customer's prepayments recorded by staff. |
+    | `granted_balance` | number (double) | What is left of staff-granted credit. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -844,6 +904,11 @@ Staff adjustment of the withdrawable part of the credit. Records a signed ledger
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Clear compensations
@@ -908,5 +973,249 @@ Staff adjustment of the withdrawable part of the credit. Records a signed ledger
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
+
+---
+
+### Reclassify
+
+Mark part of the granted credit as paid, e.g. a prepayment that was recorded as a plain credit grant. The credit value does not change; the ledger records the move with the comment.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/customer-credits/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reclassify/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      amount="12.34" \
+      comment="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.credit_reclassification_request import CreditReclassificationRequest # (1)
+    from waldur_api_client.api.customer_credits import customer_credits_reclassify # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CreditReclassificationRequest(
+        amount="12.34",
+        comment="string-value"
+    )
+    response = customer_credits_reclassify.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CreditReclassificationRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/credit_reclassification_request.py)
+    2.  **API Source:** [`customer_credits_reclassify`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_reclassify.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customerCreditsReclassify } from 'waldur-js-client';
+    
+    try {
+      const response = await customerCreditsReclassify({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "amount": "12.34",
+        "comment": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required |
+    |---|---|---|
+    | `amount` | string (decimal) | ✓ |
+    | `comment` | string | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `value` | string (decimal) |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_slug` | string |  |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string (uuid) |  |
+    | `offerings.url` | string (uri) |  |
+    | `offerings.type` | string |  |
+    | `offerings.name` | string |  |
+    | `end_date` | string (date) |  |
+    | `expected_consumption` | string (decimal) |  |
+    | `minimal_consumption` | number (double) |  |
+    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |
+    | `apply_as_minimal_consumption` | boolean |  |
+    | `allocated_to_projects` | number (double) |  |
+    | `consumption_last_month` | number (double) |  |
+    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards. |
+    | `paid_balance` | number (double) | What is left of the customer's prepayments recorded by staff. |
+    | `granted_balance` | number (double) | What is left of staff-granted credit. |
+
+
+=== "Authorization"
+
+    Staff only.
+
+---
+
+### Top up
+
+Record a customer prepayment as paid credit. Raises the credit value and writes a top-up ledger entry with the comment. Unlike granted credit, invoices paid from it count towards the affiliate fee, and it does not expire. A negative amount reverses a top-up, e.g. a bounced payment, and draws on paid credit only.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/customer-credits/a1b2c3d4-e5f6-7890-abcd-ef1234567890/top_up/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      amount="12.34" \
+      comment="string-value"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.credit_top_up_request import CreditTopUpRequest # (1)
+    from waldur_api_client.api.customer_credits import customer_credits_top_up # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = CreditTopUpRequest(
+        amount="12.34",
+        comment="string-value"
+    )
+    response = customer_credits_top_up.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`CreditTopUpRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/credit_top_up_request.py)
+    2.  **API Source:** [`customer_credits_top_up`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/customer_credits/customer_credits_top_up.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { customerCreditsTopUp } from 'waldur-js-client';
+    
+    try {
+      const response = await customerCreditsTopUp({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "amount": "12.34",
+        "comment": "string-value"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `amount` | string (decimal) | ✓ | Positive to record a prepayment, negative to reverse one. |
+    | `comment` | string | ✓ |  |
+    | `payment_reference` | string |  | Bank transfer or payment identifier, kept in the ledger comment. |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `url` | string (uri) |  |
+    | `value` | string (decimal) |  |
+    | `customer` | string (uri) |  |
+    | `customer_name` | string |  |
+    | `customer_uuid` | string (uuid) |  |
+    | `customer_slug` | string |  |
+    | `offerings` | array of objects |  |
+    | `offerings.uuid` | string (uuid) |  |
+    | `offerings.url` | string (uri) |  |
+    | `offerings.type` | string |  |
+    | `offerings.name` | string |  |
+    | `end_date` | string (date) |  |
+    | `expected_consumption` | string (decimal) |  |
+    | `minimal_consumption` | number (double) |  |
+    | `minimal_consumption_logic` | string | <br>_Enum: `fixed`, `linear`_ |
+    | `grace_coefficient` | string (decimal) |  |
+    | `apply_as_minimal_consumption` | boolean |  |
+    | `allocated_to_projects` | number (double) |  |
+    | `consumption_last_month` | number (double) |  |
+    | `withdrawable_balance` | number (double) | Part of the credit that may leave the platform via payouts or transfers: what is left of the earned lots. Granted and paid credit is never withdrawable, and spending earnings on usage lowers it for good, however much credit is granted afterwards. |
+    | `paid_balance` | number (double) | What is left of the customer's prepayments recorded by staff. |
+    | `granted_balance` | number (double) | What is left of staff-granted credit. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

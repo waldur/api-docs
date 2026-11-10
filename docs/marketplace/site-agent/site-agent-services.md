@@ -107,6 +107,13 @@
     | `processors.created` | string (date-time) |  |
     | `processors.modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Services of agent identities of offerings that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all. An identity manager with managed ISDs also sees the services of agent identities they created for offerings in an ISD-allowed state.
+
 ---
 
 ### Retrieve
@@ -193,6 +200,13 @@
     | `processors.created` | string (date-time) |  |
     | `processors.modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Services of agent identities of offerings that provider offerings show the caller: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all. An identity manager with managed ISDs also sees the services of agent identities they created for offerings in an ISD-allowed state.
+
 ---
 
 ### Delete
@@ -257,6 +271,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
 
 ---
 
@@ -341,6 +360,11 @@ Remove agent services that have been inactive for a specified time. Staff only.
     | `items.identity__name` | string |  |
     | `items.state` | string |  |
     | `items.modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -461,6 +485,11 @@ Register a new processor for the agent service
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
+
 ---
 
 ### Update statistics for the agent service
@@ -566,5 +595,10 @@ Update statistics for the agent service
     | `processors.backend_version` | string |  |
     | `processors.created` | string (date-time) |  |
     | `processors.modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff, who holds OFFERING.CREATE on the offering's organization or OFFERING.UPDATE on the offering, or an identity manager with managed ISDs for an offering in an ISD-allowed state; an identity manager only for an agent identity they created.
 
 ---

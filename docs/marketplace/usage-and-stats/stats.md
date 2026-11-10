@@ -128,6 +128,11 @@ Return aggregated usage trends per month.
     | `resource_count` | integer | Number of distinct resources with usage |
     | `component_count` | integer | Number of component usage records |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return component usages for current month
@@ -200,6 +205,11 @@ Return component usages for current month.
     | `offering_country` | string | Country of the offering |
     | `organization_group_name` | string | Name of the organization group |
     | `organization_group_uuid` | string | UUID of the organization group |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -276,6 +286,11 @@ Return component usages per month.
     | `month` | integer | Month of the billing period |
     | `year` | integer | Year of the billing period |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return component usages per project
@@ -346,6 +361,11 @@ Return component usages per project.
     | `component_type` | string | Type of the component |
     | `usage` | integer | Total usage for the component |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Count active resources grouped by offering country
@@ -414,6 +434,11 @@ Count active resources grouped by offering country.
     |---|---|---|
     | `country` | string | Country code of the offering |
     | `count` | integer | Number of offerings in this country |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -486,6 +511,11 @@ Count active resources grouped by offering.
     | `uuid` | string | UUID of the offering |
     | `country` | string | Country of the offering |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Count active resources grouped by organization group
@@ -555,6 +585,11 @@ Count active resources grouped by organization group.
     | `name` | string | Name from the record |
     | `uuid` | string | UUID from the record |
     | `count` | integer | Count value from the record |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -628,6 +663,11 @@ Count projects grouped by provider and industry flag
     | `abbreviation` | string | Customer abbreviation from the record |
     | `is_industry` | string | Industry classification flag |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Count projects grouped by provider and OECD code
@@ -699,6 +739,11 @@ Count projects grouped by provider and OECD code
     | `count` | integer | Count value from the record |
     | `abbreviation` | string | Customer abbreviation from the record |
     | `oecd` | string |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -774,6 +819,11 @@ Count projects of service providers grouped by OECD.
     | `count` | integer | Count value |
     | `oecd_fos_2007_name` | string |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Count projects of service providers
@@ -847,6 +897,11 @@ Count projects of service providers.
     | `customer_organization_group_name` | string | Name of the customer's organization group |
     | `count` | integer | Count value |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Count unique users connected with active resources of service provider
@@ -916,6 +971,11 @@ Count unique users connected with active resources of service provider.
     | `customer_uuid` | string (uuid) | UUID of the customer |
     | `customer_name` | string | Name of the customer |
     | `count_users` | integer | Number of unique users |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -990,6 +1050,11 @@ Count users of service providers.
     | `customer_organization_group_name` | string | Name of the customer's organization group |
     | `count` | integer | Count value |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return count of customer members
@@ -1062,6 +1127,11 @@ Return count of customer members.
     | `count` | integer | Number of members |
     | `has_resources` | boolean | Whether the customer has resources |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return summary statistics for customer members
@@ -1122,6 +1192,11 @@ Return summary statistics for customer members.
     | `organizations_with_resources` | integer | Number of organizations with active resources |
     | `average_members_per_org` | integer | Average number of members per organization |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return summary statistics for offering costs
@@ -1180,6 +1255,11 @@ Return summary statistics for offering costs.
     | `total_cost` | string (decimal) | Total cost of all active resources across all offerings |
     | `offering_count` | integer | Number of offerings with active resources |
     | `average_cost` | string (decimal) | Average cost per offering |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1252,6 +1332,11 @@ Retrieve statistics about the number of offerings, grouped by category and servi
     | `service_provider_name` | string | Name of the service provider |
     | `service_provider_uuid` | string (uuid) | UUID of the service provider |
     | `count` | integer | Number of offerings |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1347,6 +1432,11 @@ Returns aggregated metrics (count, cores, RAM, disk) grouped by the specified di
     | `total_disk_mb` | integer | Total disk in MiB |
     | `total_volume_size_mb` | integer | Total attached volume size in MiB |
     | `total_floating_ips` | integer | Total number of floating IPs |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1462,6 +1552,11 @@ Returns a paginated flat list of all OpenStack instances across all clusters. St
     | `internal_ips` | array of strings | List of internal IP addresses |
     | `external_ips` | array of strings | List of external IP addresses |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Order stats
@@ -1538,6 +1633,11 @@ Return comprehensive order statistics including daily breakdown, state/type aggr
     | `daily.by_state` | object (free-form) | Order counts grouped by state |
     | `daily.by_type` | object (free-form) | Order counts grouped by type |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return project count per organization
@@ -1608,6 +1708,11 @@ Return project count per organization.
     | `uuid` | string | UUID from the record |
     | `count` | integer | Count value from the record |
     | `abbreviation` | string | Customer abbreviation from the record |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1680,6 +1785,11 @@ Return resource count per organization.
     | `count` | integer | Count value from the record |
     | `abbreviation` | string | Customer abbreviation from the record |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return summary statistics for project classification
@@ -1738,6 +1848,11 @@ Return summary statistics for project classification.
     | `total_projects` | integer | Total number of projects |
     | `academic_projects` | integer | Number of academic projects (industry_flag=False) |
     | `industry_projects` | integer | Number of industry projects (industry_flag=True) |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1808,6 +1923,11 @@ Return project creation counts grouped by month.
     | `month` | string | Month in YYYY-MM format |
     | `count` | integer | Number of items created |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Group project limits by industry flag
@@ -1864,6 +1984,11 @@ Group project limits by industry flag.
     | Field | Type | Description |
     |---|---|---|
     | `limits` | object (free-form) | Nested dictionary of resource limits by category and component type |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1922,6 +2047,11 @@ Group project limits by OECD code.
     |---|---|---|
     | `limits` | object (free-form) | Nested dictionary of resource limits by category and component type |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Group project usages by industry flag
@@ -1979,6 +2109,11 @@ Group project usages by industry flag.
     |---|---|---|
     | `usages` | object (free-form) | Nested dictionary of usage values by category and component type |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Group project usages by OECD code
@@ -2035,6 +2170,11 @@ Group project usages by OECD code.
     | Field | Type | Description |
     |---|---|---|
     | `usages` | object (free-form) | Nested dictionary of usage values by category and component type |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2118,6 +2258,11 @@ Return customer statistics for a service provider.
     | `monthly` | array of objects | Monthly customer counts |
     | `monthly.month` | string |  |
     | `monthly.customer_count` | integer |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2203,6 +2348,11 @@ Return offering performance statistics for a service provider.
     | `offerings.plans.limit` | integer |  |
     | `offerings.plans.utilization` | number (double) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return resource statistics for a service provider
@@ -2282,6 +2432,11 @@ Return resource statistics for a service provider.
     | `monthly.month` | string |  |
     | `monthly.count` | integer |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return resource creation counts grouped by month
@@ -2350,6 +2505,11 @@ Return resource creation counts grouped by month.
     |---|---|---|
     | `month` | string | Month in YYYY-MM format |
     | `count` | integer | Number of items created |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2430,6 +2590,11 @@ Get resource provisioning statistics.
     | `avg_provisioning_duration` | number (double) | Average duration in seconds from Executing to Terminal state |
     | `avg_pending_duration` | number (double) | Average duration in seconds from Creation to Executing state |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return resource usage grouped by creator's affiliation
@@ -2501,6 +2666,11 @@ Return resource usage grouped by creator's affiliation.
     | `total_usage` | string (decimal) | Total usage |
     | `total_cost` | string (decimal) | Total cost |
     | `resource_count` | integer | Number of resources |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2578,6 +2748,11 @@ Return resource usage statistics grouped by customer.
     | `usages` | object (free-form) | Component usages keyed by component type |
     | `limits` | object (free-form) | Resource limits keyed by limit name |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return component usages grouped by project members' organization type
@@ -2649,6 +2824,11 @@ Return component usages grouped by project members' organization type.
     | `usage` | string (decimal) | Total usage for this component |
     | `resource_count` | integer | Number of resources |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return summary statistics for resource geographic distribution
@@ -2708,6 +2888,11 @@ Return summary statistics for resource geographic distribution.
     | `countries_count` | integer | Number of countries with active resources |
     | `org_groups_count` | integer | Number of organization groups with active resources |
     | `offerings_count` | integer | Number of offerings with active resources |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2781,6 +2966,11 @@ Return resources limits per offering.
     | `offering_country` | string | Country of the offering |
     | `organization_group_name` | string | Name of the organization group |
     | `organization_group_uuid` | string | UUID of the organization group |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2865,6 +3055,11 @@ Return usage-based resources with no usage reported in the specified billing per
     | `last_usage_date` | string (date-time) | Date of the last usage report |
     | `days_since_last_report` | integer | Number of days since last usage report |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return top service providers by number of active resources
@@ -2937,6 +3132,11 @@ Return top service providers by number of active resources.
     | `resources_count` | integer | Number of active resources |
     | `projects_count` | integer | Number of distinct projects |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Total cost of active resources per offering
@@ -3007,6 +3207,11 @@ Total cost of active resources per offering.
     | `offering_name` | string | Name of the offering |
     | `cost` | number (double) | Total cost for the offering |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return user count grouped by affiliation
@@ -3075,6 +3280,11 @@ Return user count grouped by affiliation.
     |---|---|---|
     | `affiliation` | string | Affiliation name |
     | `count` | integer | Number of users |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -3154,6 +3364,11 @@ Paginated affiliation rows with parsed organization, country, category and ident
     | `identifier` | string |  |
     | `count` | integer | Number of users |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return user count grouped by authentication method
@@ -3222,6 +3437,11 @@ Return user count grouped by authentication method.
     |---|---|---|
     | `method` | string | Authentication method |
     | `count` | integer | Number of users |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -3292,6 +3512,11 @@ Return user count grouped by identity source.
     | `identity_source` | string | Identity source |
     | `count` | integer | Number of users |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return user count grouped by job title
@@ -3360,6 +3585,11 @@ Return user count grouped by job title.
     |---|---|---|
     | `job_title` | string | Job title |
     | `count` | integer | Number of users |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -3430,6 +3660,11 @@ Return user count per nationality.
     | `nationality` | string | Nationality code |
     | `count` | integer | Number of users |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return user count grouped by organization
@@ -3498,6 +3733,11 @@ Return user count grouped by organization.
     |---|---|---|
     | `organization` | string | Organization name |
     | `count` | integer | Number of users |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -3568,6 +3808,11 @@ Return user count grouped by organization type (SCHAC URN).
     | `organization_type` | string | Organization type (SCHAC URN) |
     | `count` | integer | Number of users |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Return user count per residence country
@@ -3636,5 +3881,10 @@ Return user count per residence country.
     |---|---|---|
     | `country_of_residence` | string | Country of residence code |
     | `count` | integer | Number of users |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

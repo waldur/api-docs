@@ -86,6 +86,11 @@
     | `parent` | string (uri) |  |
     | `level` | integer | Depth in hierarchy (0 = root) |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -159,5 +164,10 @@
     | `description` | string |  |
     | `parent` | string (uri) |  |
     | `level` | integer | Depth in hierarchy (0 = root) |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

@@ -87,6 +87,13 @@ Returns a paginated list of resources accessible to the current user.
     | `offering` | string (uri) |
     | `offering_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Default subnets of offerings of organizations where the caller holds a role, and of offerings they hold a role on. Staff and support see all.
+
 ---
 
 ### Retrieve a resource
@@ -160,6 +167,13 @@ Returns details of a specific resource.
     | `description` | string |
     | `offering` | string (uri) |
     | `offering_name` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Default subnets of offerings of organizations where the caller holds a role, and of offerings they hold a role on. Staff and support see all.
 
 ---
 
@@ -244,6 +258,11 @@ Returns details of a specific resource.
     | `description` | string |
     | `offering` | string (uri) |
     | `offering_name` | string |
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING_ACCESS_SUBNET.CREATE on the offering named in the request, its organization or that organization's service provider.
 
 ---
 
@@ -342,6 +361,13 @@ Updates the name, description, or end date of a resource. Requires appropriate p
     | `offering` | string (uri) |
     | `offering_name` | string |
 
+
+=== "Authorization"
+
+    Requires `OFFERING_ACCESS_SUBNET.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a resource
@@ -429,6 +455,13 @@ Partially updates the name, description, or end date of a resource. Requires app
     | `offering` | string (uri) |
     | `offering_name` | string |
 
+
+=== "Authorization"
+
+    Requires `OFFERING_ACCESS_SUBNET.UPDATE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -493,5 +526,12 @@ Partially updates the name, description, or end date of a resource. Requires app
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING_ACCESS_SUBNET.DELETE` on the offering, the offering's customer or the offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

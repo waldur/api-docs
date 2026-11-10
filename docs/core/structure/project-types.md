@@ -80,6 +80,11 @@ Retrieve a list of available project types.
     | `name` | string |
     | `description` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve project type details
@@ -152,5 +157,10 @@ Fetch details of a specific project type by its UUID.
     | `url` | string (uri) |
     | `name` | string |
     | `description` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

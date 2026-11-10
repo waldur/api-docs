@@ -103,6 +103,11 @@
     | `resource_uuid` | string (uuid) |
     | `resource_state` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -185,5 +190,10 @@
     | `resource_name` | string |
     | `resource_uuid` | string (uuid) |
     | `resource_state` | string |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

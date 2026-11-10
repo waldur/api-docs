@@ -108,6 +108,13 @@
     | `reviewed_by_full_name` | string |  |
     | `review_comment` | string | Optional comment provided during review |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Requests on resources of organizations and projects where the caller holds RESOURCE.SET_LIMITS, and requests they made. Staff, support and holders of it site-wide see all.
+
 ---
 
 ### Retrieve
@@ -196,6 +203,13 @@
     | `reviewed_by_full_name` | string |  |
     | `review_comment` | string | Optional comment provided during review |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Requests on resources of organizations and projects where the caller holds RESOURCE.SET_LIMITS, and requests they made. Staff, support and holders of it site-wide see all.
+
 ---
 
 ### Create
@@ -277,6 +291,11 @@
     | `requested_limits` | object (free-form) |
     | `uuid` | string (uuid) |
     | `state` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user other than staff and support, for a resource their roles reach (and a personal access token's bindings, if they use one). Refused with 400 to who may change the limits directly: who holds both RESOURCE.SET_LIMITS and ORDER.CREATE on the resource's project or its organization.
 
 ---
 
@@ -363,6 +382,14 @@ Approve resource limit change request and apply limits via marketplace order.
     |---|---|---|
     | `order_uuid` | string (uuid) | UUID of the created or updated order |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Only users with UPDATE_RESOURCE_LIMITS on customer or project can approve/reject.
+    - Approving a request submits a marketplace order on the requester's behalf, so the approver needs order creation rights as well. Rejecting creates nothing and is deliberately not gated on this.
+
 ---
 
 ### Cancel resource limit change request. Only the creator can cancel
@@ -376,38 +403,28 @@ Cancel resource limit change request. Only the creator can cancel.
     http \
       POST \
       https://api.example.com/api/marketplace-resource-limit-change-requests/a1b2c3d4-e5f6-7890-abcd-ef1234567890/cancel/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      resource="https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/" \
-      requested_limits:='{}'
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
 
     ```python
     from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.models.resource_limit_change_request_request import ResourceLimitChangeRequestRequest # (1)
-    from waldur_api_client.api.marketplace_resource_limit_change_requests import marketplace_resource_limit_change_requests_cancel # (2)
+    from waldur_api_client.api.marketplace_resource_limit_change_requests import marketplace_resource_limit_change_requests_cancel # (1)
     
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    
-    body_data = ResourceLimitChangeRequestRequest(
-        resource="https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        requested_limits={}
-    )
     response = marketplace_resource_limit_change_requests_cancel.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client,
-        body=body_data
+        client=client
     )
     
     print(response)
     ```
     
     
-    1.  **Model Source:** [`ResourceLimitChangeRequestRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_limit_change_request_request.py)
-    2.  **API Source:** [`marketplace_resource_limit_change_requests_cancel`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resource_limit_change_requests/marketplace_resource_limit_change_requests_cancel.py)
+    1.  **API Source:** [`marketplace_resource_limit_change_requests_cancel`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resource_limit_change_requests/marketplace_resource_limit_change_requests_cancel.py)
 
 === "TypeScript"
 
@@ -419,10 +436,6 @@ Cancel resource limit change request. Only the creator can cancel.
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "resource": "https://api.example.com/api/resource/a1b2c3d4-e5f6-7890-abcd-ef1234567890/",
-        "requested_limits": {}
       }
     });
       console.log('Success:', response);
@@ -439,15 +452,6 @@ Cancel resource limit change request. Only the creator can cancel.
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body (required)"
-
-    | Field | Type | Required | Description |
-    |---|---|---|---|
-    | `resource` | string (uri) | ✓ |  |
-    | `requested_limits` | object (free-form) | ✓ |  |
-    | `review_comment` | string |  | Optional comment provided during review |
-
-
 === "Responses"
 
     **`200`** - 
@@ -455,6 +459,11 @@ Cancel resource limit change request. Only the creator can cancel.
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    The request's author.
 
 ---
 
@@ -534,5 +543,10 @@ Reject resource limit change request.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Only users with UPDATE_RESOURCE_LIMITS on customer or project can approve/reject.
 
 ---

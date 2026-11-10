@@ -82,6 +82,11 @@
     | `subject` | string |
     | `body` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -153,6 +158,11 @@
     | `name` | string |
     | `subject` | string |
     | `body` | string |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -240,6 +250,11 @@
     | `name` | string |
     | `subject` | string |
     | `body` | string |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -339,6 +354,11 @@
     | `subject` | string |
     | `body` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Partial Update
@@ -425,6 +445,11 @@
     | `subject` | string |
     | `body` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Delete
@@ -489,5 +514,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

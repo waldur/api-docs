@@ -106,6 +106,7 @@
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -113,11 +114,28 @@
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Keys of resources in projects and organizations where the caller holds a role, and of resources that the provider resource view shows them: Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all. A list leaves out deleted keys unless asked for them by state.
 
 ---
 
@@ -189,6 +207,7 @@
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -196,17 +215,34 @@
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Keys of resources in projects and organizations where the caller holds a role, and of resources that the provider resource view shows them: Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all. A list leaves out deleted keys unless asked for them by state.
 
 ---
 
 ### Request an API key
 
-Asks the site agent to create a key for the resource. Waldur generates nothing: the key appears as Creating and turns OK once the agent reports it. Only on offerings with enable_api_key_provisioning.
+Asks the site agent to create a key for the resource. Waldur generates nothing: the key appears as Creating and turns OK once the agent reports it. Only on offerings with enable_api_key_provisioning, and refused with 409 until the agent has created the resource (it has no backend_id yet).
 
 
 === "HTTPie"
@@ -268,10 +304,12 @@ Asks the site agent to create a key for the resource. Waldur generates nothing: 
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `user` | string (uuid) |  | Assignee. When set, only this user can reveal the key. |
-    | `limits` | object (free-form) |  | Limits per component type; zero or absent means no limit. |
-    | `allowed_models` | array of strings |  | Models the key may call; empty or absent allows every model. |
+    | `description` | string |  | A note telling the key apart from the resource's other keys, such as the environment that uses it. No command to the site agent carries it, so changing it alone issues none and needs no enable_api_key_provisioning. Everyone who can list the key reads it, the provider included. |
+    | `limits` | object (free-form) |  | Month limits per component type; zero or absent means no month limit. Replaces the month limits of spending_limits and keeps the other periods. Not together with spending_limits. |
+    | `spending_limits` | object (free-form) |  | Limits per component type and period, replacing the key's limits; a null amount clears that period's limit. Only where the offering's api_key_limits is not off. A period other than month must be offered on the component and needs the offering's api_key_daily_usage. A limit may not exceed the resource's spending limit for the same period. |
+    | `allowed_models` | array of strings |  | Models the key may call: ["*"] for every model, an empty list for none. Absent, a new key gets none and an edited one keeps its list. |
     | `resource` | string (uuid) | ✓ |  |
+    | `user` | string (uuid) |  | Assignee. When set, only this user can reveal the key. It is held until the key is deleted. |
 
 
 === "Responses"
@@ -284,6 +322,7 @@ Asks the site agent to create a key for the resource. Waldur generates nothing: 
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -291,17 +330,34 @@ Asks the site agent to create a key for the resource. Waldur generates nothing: 
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_CONSUMER_API_KEY` on the resource's project or the resource's project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
 ### Edit an API key
 
-Changes the key's assignee, limits or model allowlist. A change to limits or models is sent to the site agent as an update command, unless the key is paused: resuming it applies them. Only on offerings with enable_api_key_provisioning, except for unassigning the key ({"user": null}).
+Changes the key's limits, model allowlist or description. A change of limits or models is sent to the site agent as an update command, unless the key is paused: resuming it applies them. The key's assignee is set when the key is requested and cannot be changed: an edit that names user, null included, is refused with 400. To hand a key to someone else, request a key for them and delete this one. Only on offerings with enable_api_key_provisioning, except an edit of the description alone: that is saved at once on any offering and in any state but Deleted, sends no command and leaves the key's state as it is.
 
 
 === "HTTPie"
@@ -368,9 +424,10 @@ Changes the key's assignee, limits or model allowlist. A change to limits or mod
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `user` | string (uuid) |  | Assignee. When set, only this user can reveal the key. |
-    | `limits` | object (free-form) |  | Limits per component type; zero or absent means no limit. |
-    | `allowed_models` | array of strings |  | Models the key may call; empty or absent allows every model. |
+    | `description` | string |  | A note telling the key apart from the resource's other keys, such as the environment that uses it. No command to the site agent carries it, so changing it alone issues none and needs no enable_api_key_provisioning. Everyone who can list the key reads it, the provider included. |
+    | `limits` | object (free-form) |  | Month limits per component type; zero or absent means no month limit. Replaces the month limits of spending_limits and keeps the other periods. Not together with spending_limits. |
+    | `spending_limits` | object (free-form) |  | Limits per component type and period, replacing the key's limits; a null amount clears that period's limit. Only where the offering's api_key_limits is not off. A period other than month must be offered on the component and needs the offering's api_key_daily_usage. A limit may not exceed the resource's spending limit for the same period. |
+    | `allowed_models` | array of strings |  | Models the key may call: ["*"] for every model, an empty list for none. Absent, a new key gets none and an edited one keeps its list. |
 
 
 === "Responses"
@@ -383,6 +440,7 @@ Changes the key's assignee, limits or model allowlist. A change to limits or mod
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -390,11 +448,28 @@ Changes the key's assignee, limits or model allowlist. A change to limits or mod
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_CONSUMER_API_KEY` on the resource's project or the resource's project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -466,6 +541,13 @@ Asks the site agent to revoke the key at the backend. Once it has, the key is De
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_CONSUMER_API_KEY` on the resource's project or the resource's project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Other Actions
@@ -473,7 +555,7 @@ Asks the site agent to revoke the key at the backend. Once it has, the key is De
 
 ### Reveal an API key
 
-Returns the decrypted key value. Available to users with resource access (except minimal-visibility viewers); a key with an assignee only to the assignee. Staff and support always. Audit-logged.
+Returns the decrypted key value. Available to members of the resource's project or organization (except minimal-visibility viewers); a key with an assignee only to the assignee. Staff and support are no exception: staff reveal a key by impersonating a user who may. Audit-logged; under impersonation the event names the impersonator.
 
 
 === "HTTPie"
@@ -541,6 +623,7 @@ Returns the decrypted key value. Available to users with resource access (except
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -548,12 +631,27 @@ Returns the decrypted key value. Available to users with resource access (except
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
     | `api_key` | string |  |
+
+
+=== "Authorization"
+
+    Who holds a role in the resource's project or its organization, other than a minimal-visibility viewer; for a key with an assignee, the assignee alone. Staff and support are no exception.
 
 ---
 
@@ -626,6 +724,13 @@ Sums the usage the site agent reported for the resource's keys in the current mo
     |---|---|---|
     | `usages` | object (free-form) | Usage per component type in the current month, summed over the resource's keys, deleted ones included. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Keys of resources in projects and organizations where the caller holds a role, and of resources that the provider resource view shows them: Resources of offerings of organizations where the caller holds any role, of offerings of a service provider they hold a role on, and of offerings they hold a role on. Staff, support and holders of RESOURCE.LIST site-wide see all. A list leaves out deleted keys unless asked for them by state.
+
 ---
 
 ### Pause an API key
@@ -695,6 +800,13 @@ Asks the site agent to stop the backend accepting this key. The key keeps its va
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_CONSUMER_API_KEY` on the resource's project or the resource's project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -783,6 +895,7 @@ Used by the site agent after it generated and applied a key to the backend at pr
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -790,17 +903,34 @@ Used by the site agent after it generated and applied a key to the backend at pr
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_API_KEY` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
 ### Report API key usage
 
-Used by the site agent to report a key's usage so far in a month, per component type. Merged into the key's usage for that month; a later month replaces it, and an earlier one is refused. A key whose usage reaches its limit is paused, and a key paused for its limit is resumed once under it again. Accepted for a deleted key too.
+Used by the site agent to report a key's usage so far in a month, per component type, and its usage per day. A month report is merged into the key's usage for that month; a later month replaces it, and an earlier one is refused. A date reported again replaces its amount, and the month's usage of a component with daily amounts is their sum. A key whose usage reaches a limit is paused, and a key paused for its limit is resumed once under it again. Accepted for a deleted key too.
 
 
 === "HTTPie"
@@ -809,8 +939,7 @@ Used by the site agent to report a key's usage so far in a month, per component 
     http \
       POST \
       https://api.example.com/api/marketplace-resource-api-keys/a1b2c3d4-e5f6-7890-abcd-ef1234567890/report_usage/ \
-      Authorization:"Token YOUR_API_TOKEN" \
-      usages:='{}'
+      Authorization:"Token YOUR_API_TOKEN"
     ```
 
 === "Python"
@@ -824,9 +953,7 @@ Used by the site agent to report a key's usage so far in a month, per component 
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
     
-    body_data = ResourceApiKeyUsageRequest(
-        usages={}
-    )
+    body_data = ResourceApiKeyUsageRequest()
     response = marketplace_resource_api_keys_report_usage.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         client=client,
@@ -850,9 +977,6 @@ Used by the site agent to report a key's usage so far in a month, per component 
       auth: "Token YOUR_API_TOKEN",
       path: {
         "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      },
-      body: {
-        "usages": {}
       }
     });
       console.log('Success:', response);
@@ -869,12 +993,16 @@ Used by the site agent to report a key's usage so far in a month, per component 
     | `uuid` | string (uuid) | ✓ |
 
 
-=== "Request Body (required)"
+=== "Request Body"
 
     | Field | Type | Required | Description |
     |---|---|---|---|
-    | `usages` | object (free-form) | ✓ | The key's usage so far in billing_period, per component type. |
-    | `billing_period` | string (date) |  | Any day of the month the usage belongs to; the current month when omitted. Limits are monthly, so a later month starts them afresh. |
+    | `usages` | object (free-form) |  | The key's usage so far in billing_period, per component type. A figure never drops: one lower than the key holds for the month leaves the higher one. Rejected for a component that has daily amounts in that month. |
+    | `daily_usages` | array of objects |  | The key's usage per UTC date and component type; a date reported again replaces its amount. The month's usage of a component with daily amounts is their sum. Needed for limits other than month and total. Days of a month before the one the key holds raise that month's figure for a total. At most 1000 items, dated from the start of the current year, or of the previous month when that is earlier. |
+    | `daily_usages.type` | string | ✓ | Type of the usage-based component |
+    | `daily_usages.date` | string (date) | ✓ | UTC date the amount was used on |
+    | `daily_usages.amount` | string (decimal) | ✓ | Usage on that date. Replaces the amount reported for it before. |
+    | `billing_period` | string (date) |  | Any day of the month usages belongs to; the current month when omitted. A later month than the key holds starts afresh. An earlier one, from the start of the current year or of the previous month when that is earlier, raises that month's figure for a total limit; older ones are refused. |
 
 
 === "Responses"
@@ -887,6 +1015,7 @@ Used by the site agent to report a key's usage so far in a month, per component 
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -894,11 +1023,28 @@ Used by the site agent to report a key's usage so far in a month, per component 
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_API_KEY` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -970,11 +1116,18 @@ Asks the site agent to accept a paused key again, with the limits and models it 
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_CONSUMER_API_KEY` on the resource's project or the resource's project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Retry a failed API key command
 
-Sends the command that left the key Erred to the site agent again, with the key's current limits and models. An Erred key accepts only this, the same command, or a delete.
+Sends the command that left the key Erred to the site agent again, with the key's current limits and models. An Erred key accepts only this, the same command, or a delete. The key's assignee can retry a failed rotation, and no other command.
 
 
 === "HTTPie"
@@ -1040,11 +1193,21 @@ Sends the command that left the key Erred to the site agent again, with the key'
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Admit the key's assignee, who is already trusted with its value.
+    - Requires `RESOURCE.MANAGE_CONSUMER_API_KEY` on the resource's project or the resource's project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Rotate an API key
 
-Asks the site agent to replace this key's value at the backend. The other keys are untouched (zero downtime).
+Asks the site agent to replace this key's value at the backend. The other keys are untouched (zero downtime). Available to whoever manages the resource's API keys and to the key's assignee.
 
 
 === "HTTPie"
@@ -1109,6 +1272,16 @@ Asks the site agent to replace this key's value at the backend. The other keys a
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Admit the key's assignee, who is already trusted with its value.
+    - Requires `RESOURCE.MANAGE_CONSUMER_API_KEY` on the resource's project or the resource's project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1182,6 +1355,7 @@ Used by the site agent once the backend has revoked the key. The stored value is
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -1189,11 +1363,28 @@ Used by the site agent once the backend has revoked the key. The stored value is
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_API_KEY` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1285,6 +1476,7 @@ Used by the site agent to report that applying the key failed. Stores the error 
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -1292,11 +1484,28 @@ Used by the site agent to report that applying the key failed. Stores the error 
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_API_KEY` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1389,6 +1598,7 @@ Used by the site agent after it applied a requested or rotated key. Replaces the
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -1396,11 +1606,28 @@ Used by the site agent after it applied a requested or rotated key. Replaces the
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_API_KEY` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1474,6 +1701,7 @@ Used by the site agent once the backend accepts a resumed key again, or has appl
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -1481,11 +1709,28 @@ Used by the site agent once the backend accepts a resumed key again, or has appl
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_API_KEY` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1559,6 +1804,7 @@ Used by the site agent once the backend refuses the key.
     | `resource_uuid` | string (uuid) |  |
     | `resource_backend_id` | string |  |
     | `client_id` | string |  |
+    | `description` | string |  |
     | `state` | string | <br>_Enum: `Creating`, `OK`, `Updating`, `Paused`, `Deleting`, `Deleted`, `Erred`_ |
     | `pending_action` | any |  |
     | `modified` | string (date-time) |  |
@@ -1566,10 +1812,27 @@ Used by the site agent once the backend refuses the key.
     | `error_message` | string |  |
     | `user_uuid` | string (uuid) |  |
     | `user_full_name` | string |  |
-    | `limits` | object (free-form) |  |
-    | `allowed_models` | array of strings |  |
+    | `limits` | object (free-form) | The month limits of spending_limits, per component type, for clients that know only monthly limits. |
+    | `spending_limits` | object (free-form) | Limits per component type and period. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `allowed_models` | array of strings | The key's own model list, as chosen. |
+    | `effective_models` | array of strings | The models the key can call: the resource's selection, then the key's list. The site agent applies this one. |
     | `current_usages` | object (free-form) |  |
     | `usage_period` | string (date) |  |
-    | `paused_by_limit` | boolean |  |
+    | `paused_by_limit` | boolean | Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does. |
+    | `limit_resumes_at` | string (date-time) | When every limit that paused the key has reset, so that it resumes without a new usage report. Empty while a reached total limit holds the key: a total never resets, so the key resumes only when that limit is raised or cleared. |
+
+
+=== "Authorization"
+
+    Requires `RESOURCE.MANAGE_API_KEY` on the resource's offering, the resource's offering's customer or the resource's offering's customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

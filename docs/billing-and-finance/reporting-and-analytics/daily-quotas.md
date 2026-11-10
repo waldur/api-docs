@@ -17,7 +17,8 @@
     http \
       GET \
       https://api.example.com/api/daily-quotas/ \
-      Authorization:"Token YOUR_API_TOKEN"
+      Authorization:"Token YOUR_API_TOKEN" \
+      scope=="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
     ```
 
 === "Python"
@@ -29,7 +30,10 @@
     client = AuthenticatedClient(
         base_url="https://api.example.com", token="YOUR_API_TOKEN"
     )
-    response = daily_quotas_retrieve.sync(client=client)
+    response = daily_quotas_retrieve.sync(
+        client=client,
+        scope="https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+    )
     
     print(response)
     ```
@@ -44,7 +48,10 @@
     
     try {
       const response = await dailyQuotasRetrieve({
-      auth: "Token YOUR_API_TOKEN"
+      auth: "Token YOUR_API_TOKEN",
+      query: {
+        "scope": "https://api.example.com/api/scope/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
+      }
     });
       console.log('Success:', response);
     } catch (error) {
@@ -55,17 +62,22 @@
 
 === "Query Parameters"
 
-    | Name | Type | Description |
-    |---|---|---|
-    | `end` | string (date) | End date in format YYYY-MM-DD |
-    | `quota_names` | array | List of quota names |
-    | `scope` | string (uuid) | UUID of the scope object |
-    | `start` | string (date) | Start date in format YYYY-MM-DD |
+    | Name | Type | Required | Description |
+    |---|---|---|---|
+    | `end` | string (date) |  | End date in format YYYY-MM-DD |
+    | `quota_names` | array |  | List of quota names |
+    | `scope` | string (uri) | ✓ | URL of the project or organization |
+    | `start` | string (date) |  | Start date in format YYYY-MM-DD |
 
 
 === "Responses"
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    The scope must be a project or organization that the caller's roles reach; staff and support may name any.
 
 ---

@@ -74,4 +74,9 @@
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Any signed-in user. It counts the resources the caller may see as a consumer: Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them.
+
 ---

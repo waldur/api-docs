@@ -104,6 +104,13 @@
     | `component_limits_set.period_name` | string |  |
     | `component_limits_set.component` | string (uuid) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -189,6 +196,13 @@
     | `component_limits_set.period` | any |  |
     | `component_limits_set.period_name` | string |  |
     | `component_limits_set.component` | string (uuid) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -294,6 +308,11 @@
     | `component_limits_set.period` | any |  |
     | `component_limits_set.period_name` | string |  |
     | `component_limits_set.component` | string (uuid) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -411,6 +430,11 @@
     | `component_limits_set.period_name` | string |  |
     | `component_limits_set.component` | string (uuid) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -515,6 +539,11 @@
     | `component_limits_set.period_name` | string |  |
     | `component_limits_set.component` | string (uuid) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -580,6 +609,11 @@
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Other Actions
@@ -635,5 +669,10 @@
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

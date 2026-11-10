@@ -134,6 +134,11 @@
     | `conflicting_organization_name` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -233,6 +238,11 @@
     | `conflicting_organization` | string (uri) |  |
     | `conflicting_organization_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -347,6 +357,13 @@
     | `conflicting_organization_name` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -459,6 +476,13 @@
     | `conflicting_organization` | string (uri) |  |
     | `conflicting_organization_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -585,6 +609,13 @@ Dismiss a conflict of interest (not a real conflict).
     | `conflicting_organization_name` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Recuse reviewer from the proposal
@@ -707,6 +738,13 @@ Recuse reviewer from the proposal.
     | `conflicting_organization_name` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Waive a conflict with a management plan
@@ -828,5 +866,12 @@ Waive a conflict with a management plan.
     | `conflicting_organization` | string (uri) |  |
     | `conflicting_organization_name` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Requires `PROPOSAL.MANAGE_REVIEW` on the call or the call's manager.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

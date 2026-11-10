@@ -81,6 +81,7 @@ Returns a paginated list of maintenance announcements.
     |---|---|---|
     | `maintenance_type` | integer | Maintenance type |
     | `o` | array | Ordering<br><br> |
+    | `offering_uuid` | string (uuid) | Affected offering UUID |
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `scheduled_end_after` | string (date-time) | Scheduled end after |
@@ -125,9 +126,17 @@ Returns a paginated list of maintenance announcements.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_level_display` | any |  |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_offerings.affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
     | `backend_id` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -222,9 +231,17 @@ Returns the details of a specific maintenance announcement.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_level_display` | any |  |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_offerings.affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
     | `backend_id` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -342,9 +359,17 @@ Creates a new maintenance announcement in the 'Draft' state.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_level_display` | any |  |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_offerings.affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
     | `backend_id` | string |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -473,9 +498,17 @@ Updates an existing maintenance announcement.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_level_display` | any |  |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_offerings.affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
     | `backend_id` | string |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -589,9 +622,17 @@ Partially updates an existing maintenance announcement.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_level_display` | any |  |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+    | `affected_offerings.affected_partitions` | array of strings | Partitions the maintenance takes down; empty means all. A site agent with maintenance sync reserves only these for a partial outage. |
     | `affected_offerings.offering_name` | string |  |
     | `service_provider_name` | string |  |
     | `backend_id` | string |  |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -659,6 +700,13 @@ Deletes a maintenance announcement.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -743,6 +791,13 @@ Returns comprehensive statistics for maintenance announcements including counts 
     | `providers.scheduled` | integer | Scheduled maintenances |
     | `providers.completed` | integer | Completed maintenances |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Cancel the maintenance announcement
@@ -812,6 +867,13 @@ Transitions a 'Draft' or 'Scheduled' maintenance announcement to 'Cancelled'.
     | Field | Type | Description |
     |---|---|---|
     | `detail` | string | Response message describing the action result |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -883,6 +945,13 @@ Transitions an 'In progress' maintenance announcement to 'Completed', indicating
     |---|---|---|
     | `detail` | string | Response message describing the action result |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Schedule/publish the maintenance announcement
@@ -952,6 +1021,13 @@ Transitions a 'Draft' maintenance announcement to the 'Scheduled' state, making 
     | Field | Type | Description |
     |---|---|---|
     | `detail` | string | Response message describing the action result |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1023,6 +1099,13 @@ Transitions a 'Scheduled' maintenance announcement to 'In progress', indicating 
     |---|---|---|
     | `detail` | string | Response message describing the action result |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unschedule/unpublish the maintenance announcement
@@ -1092,5 +1175,12 @@ Transitions a 'Scheduled' maintenance announcement back to the 'Draft' state, hi
     | Field | Type | Description |
     |---|---|---|
     | `detail` | string | Response message describing the action result |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

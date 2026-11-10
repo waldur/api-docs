@@ -86,6 +86,11 @@
     | `call_name` | string |
     | `status` | any |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -161,6 +166,11 @@
     | `call_name` | string |
     | `status` | any |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ## Other Actions
@@ -235,6 +245,11 @@ Returns the rounds in calls managed by the current user that are still open (cut
     | `call_name` | string |
     | `round_name` | string |
     | `due_date` | string (date-time) |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -320,5 +335,10 @@ Return list of reviewers for round.
     | `accepted_proposals` | integer |
     | `rejected_proposals` | integer |
     | `in_review_proposals` | integer |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

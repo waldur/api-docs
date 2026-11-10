@@ -95,6 +95,8 @@
     | `token_url` | string | The endpoint for obtaining auth token. |
     | `auth_url` | string | The endpoint for authorization request flow. |
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
+    | `issuer` | string | The issuer identifier the ID token must carry. |
+    | `jwks_url` | string | The endpoint publishing the keys that sign ID tokens. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
@@ -102,6 +104,11 @@
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
     | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -183,6 +190,8 @@
     | `token_url` | string | The endpoint for obtaining auth token. |
     | `auth_url` | string | The endpoint for authorization request flow. |
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
+    | `issuer` | string | The issuer identifier the ID token must carry. |
+    | `jwks_url` | string | The endpoint publishing the keys that sign ID tokens. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
@@ -190,6 +199,11 @@
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
     | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -205,7 +219,6 @@
       Authorization:"Token YOUR_API_TOKEN" \
       provider="string-value" \
       client_id="string-value" \
-      client_secret="********" \
       discovery_url="string-value" \
       label="string-value"
     ```
@@ -224,7 +237,6 @@
     body_data = IdentityProviderRequest(
         provider="string-value",
         client_id="string-value",
-        client_secret="********",
         discovery_url="string-value",
         label="string-value"
     )
@@ -251,7 +263,6 @@
       body: {
         "provider": "string-value",
         "client_id": "string-value",
-        "client_secret": "********",
         "discovery_url": "string-value",
         "label": "string-value"
       }
@@ -272,7 +283,7 @@
     | `provider` | string | ✓ |  |
     | `is_active` | boolean |  |  |
     | `client_id` | string | ✓ | ID of application used for OAuth authentication. |
-    | `client_secret` | string | ✓ | Application secret key. |
+    | `client_secret` | string |  | Application secret key. |
     | `verify_ssl` | boolean |  |  |
     | `enable_post_logout_redirect` | boolean |  |  |
     | `enable_pkce` | boolean |  |  |
@@ -306,6 +317,8 @@
     | `token_url` | string | The endpoint for obtaining auth token. |
     | `auth_url` | string | The endpoint for authorization request flow. |
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
+    | `issuer` | string | The issuer identifier the ID token must carry. |
+    | `jwks_url` | string | The endpoint publishing the keys that sign ID tokens. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
@@ -313,6 +326,11 @@
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
     | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -328,7 +346,6 @@
       Authorization:"Token YOUR_API_TOKEN" \
       provider="string-value" \
       client_id="string-value" \
-      client_secret="********" \
       discovery_url="string-value" \
       label="string-value"
     ```
@@ -347,7 +364,6 @@
     body_data = IdentityProviderRequest(
         provider="string-value",
         client_id="string-value",
-        client_secret="********",
         discovery_url="string-value",
         label="string-value"
     )
@@ -378,7 +394,6 @@
       body: {
         "provider": "string-value",
         "client_id": "string-value",
-        "client_secret": "********",
         "discovery_url": "string-value",
         "label": "string-value"
       }
@@ -406,7 +421,7 @@
     | `provider` | string | ✓ |  |
     | `is_active` | boolean |  |  |
     | `client_id` | string | ✓ | ID of application used for OAuth authentication. |
-    | `client_secret` | string | ✓ | Application secret key. |
+    | `client_secret` | string |  | Application secret key. |
     | `verify_ssl` | boolean |  |  |
     | `enable_post_logout_redirect` | boolean |  |  |
     | `enable_pkce` | boolean |  |  |
@@ -440,6 +455,8 @@
     | `token_url` | string | The endpoint for obtaining auth token. |
     | `auth_url` | string | The endpoint for authorization request flow. |
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
+    | `issuer` | string | The issuer identifier the ID token must carry. |
+    | `jwks_url` | string | The endpoint publishing the keys that sign ID tokens. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
@@ -447,6 +464,11 @@
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
     | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -556,6 +578,8 @@
     | `token_url` | string | The endpoint for obtaining auth token. |
     | `auth_url` | string | The endpoint for authorization request flow. |
     | `logout_url` | string | The endpoint used to redirect after sign-out. |
+    | `issuer` | string | The issuer identifier the ID token must carry. |
+    | `jwks_url` | string | The endpoint publishing the keys that sign ID tokens. |
     | `label` | string | Human-readable identity provider is label. |
     | `management_url` | string | The endpoint for user details management. |
     | `extra_scope` | string | Space-separated list of scopes to request during authentication. |
@@ -563,6 +587,11 @@
     | `user_claim` | string | The OIDC claim from the userinfo endpoint to be used as the value for the lookup field. |
     | `attribute_mapping` | object (free-form) | A JSON object mapping Waldur User model fields to OIDC claims. Example: {"first_name": "given_name", "last_name": "family_name", "email": "email"} |
     | `extra_fields` | string | Space-separated list of extra fields to persist. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -628,6 +657,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -718,6 +752,11 @@ Fetches OIDC discovery metadata from the provider and returns supported claims, 
     | `waldur_fields.available_claims` | array of strings | Claims from this IdP that match the suggestions |
     | `suggested_scopes` | array of strings | Recommended scopes to request based on claim mappings |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Generate default attribute mapping
@@ -796,5 +835,10 @@ Generates a suggested attribute_mapping configuration based on the claims suppor
     |---|---|---|
     | `attribute_mapping` | object (free-form) | Suggested mapping of Waldur fields to OIDC claims |
     | `extra_scope` | string | Suggested scopes to request (space-separated) |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

@@ -190,6 +190,13 @@ Get a list of networks.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and support see every network. Others see the networks of the projects where they hold a role or whose organization they hold one in, and the networks shared into those projects' tenants. An offering's subnet concealment, which goes by the caller's address and exempts its provider, may hide some of them.
+
 ---
 
 ### Get network details
@@ -340,6 +347,13 @@ Retrieve details of a specific network.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and support see every network. Others see the networks of the projects where they hold a role or whose organization they hold one in, and the networks shared into those projects' tenants. An offering's subnet concealment, which goes by the caller's address and exempts its provider, may hide some of them.
 
 ---
 
@@ -503,6 +517,13 @@ Create a new subnet within the network.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Synchronize resource state
@@ -581,6 +602,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -649,6 +677,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -811,6 +844,13 @@ Update an existing network.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update network
@@ -966,6 +1006,13 @@ Update specific fields of a network.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete network
@@ -1032,6 +1079,13 @@ Delete a network.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1137,6 +1191,13 @@ Create RBAC policy for the network. DEPRECATED: please use the dedicated /api/op
     | `policy_type` | any | Type of access granted - either shared access or external network access |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark resource as ERRED
@@ -1219,6 +1280,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1308,6 +1374,13 @@ Update the Maximum Transmission Unit (MTU) for the network.
     |---|---|
     | `mtu` | integer |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark resource as OK
@@ -1378,6 +1451,11 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete RBAC policy
@@ -1447,5 +1525,12 @@ Delete RBAC policy for the network. DEPRECATED: please use the dedicated /api/op
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

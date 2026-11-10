@@ -13,15 +13,12 @@
 | <span class="http-badge http-get">GET</span> | `/api/support-saved-filters/` | [List Support Saved Filters](#list-support-saved-filters) |
 | <span class="http-badge http-get">GET</span> | `/api/support-saved-filters/{uuid}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-get">GET</span> | `/api/support/settings/atlassian/current_settings/` | [Get current Atlassian settings (masked secrets)](#get-current-atlassian-settings-masked-secrets) |
-| <span class="http-badge http-get">GET</span> | `/api/support/settings/atlassian/` | [List Support Settings Atlassian](#list-support-settings-atlassian) |
-| <span class="http-badge http-get">GET</span> | `/api/support/settings/atlassian/{id}/` | [Retrieve](#retrieve) |
 | <span class="http-badge http-post">POST</span> | `/api/support-canned-responses/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/support-canned-responses/{uuid}/render/` | [Render a canned response with context variables](#render-a-canned-response-with-context-variables) |
 | <span class="http-badge http-post">POST</span> | `/api/support-issue-links/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/support-issue-tags/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/support-provider-webhook/{provider_uuid}/{backend_type}/` | [Webhook](#webhook) |
 | <span class="http-badge http-post">POST</span> | `/api/support-saved-filters/` | [Create](#create) |
-| <span class="http-badge http-post">POST</span> | `/api/support/settings/atlassian/` | [Create](#create) |
 | <span class="http-badge http-post">POST</span> | `/api/support/settings/atlassian/discover_custom_fields/` | [Discover available custom fields](#discover-available-custom-fields) |
 | <span class="http-badge http-post">POST</span> | `/api/support/settings/atlassian/discover_priorities/` | [Discover available priorities](#discover-available-priorities) |
 | <span class="http-badge http-post">POST</span> | `/api/support/settings/atlassian/discover_projects/` | [Discover available Service Desk projects](#discover-available-service-desk-projects) |
@@ -33,17 +30,14 @@
 | <span class="http-badge http-put">PUT</span> | `/api/support-issue-links/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-put">PUT</span> | `/api/support-issue-tags/{uuid}/` | [Update](#update) |
 | <span class="http-badge http-put">PUT</span> | `/api/support-saved-filters/{uuid}/` | [Update](#update) |
-| <span class="http-badge http-put">PUT</span> | `/api/support/settings/atlassian/{id}/` | [Update](#update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/support-canned-responses/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/support-issue-links/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/support-issue-tags/{uuid}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-patch">PATCH</span> | `/api/support-saved-filters/{uuid}/` | [Partial Update](#partial-update) |
-| <span class="http-badge http-patch">PATCH</span> | `/api/support/settings/atlassian/{id}/` | [Partial Update](#partial-update) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/support-canned-responses/{uuid}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/support-issue-links/{uuid}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/support-issue-tags/{uuid}/` | [Delete](#delete) |
 | <span class="http-badge http-delete">DELETE</span> | `/api/support-saved-filters/{uuid}/` | [Delete](#delete) |
-| <span class="http-badge http-delete">DELETE</span> | `/api/support/settings/atlassian/{id}/` | [Delete](#delete) |
 
 ---
 
@@ -121,6 +115,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -195,6 +194,11 @@
     | `is_active` | boolean |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -271,6 +275,11 @@
     | `target_key` | string |
     | `link_type` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -345,6 +354,11 @@
     | `target_key` | string |
     | `link_type` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### List Support Issue Tags
@@ -414,6 +428,11 @@
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `color` | string | Hex color code, e.g. #FF0000. |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -485,6 +504,11 @@
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `color` | string | Hex color code, e.g. #FF0000. |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -560,6 +584,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -634,6 +663,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get current Atlassian settings (masked secrets)
@@ -688,130 +722,10 @@ Get current Atlassian settings (masked secrets).
     **`200`** - No response body
     
 
----
 
-### List Support Settings Atlassian
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/support/settings/atlassian/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support import support_settings_atlassian_list # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = support_settings_atlassian_list.sync(client=client)
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`support_settings_atlassian_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support/support_settings_atlassian_list.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { supportSettingsAtlassianList } from 'waldur-js-client';
-    
-    try {
-      const response = await supportSettingsAtlassianList({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Query Parameters"
-
-    | Name | Type | Description |
-    |---|---|---|
-    | `page` | integer | A page number within the paginated result set. |
-    | `page_size` | integer | Number of results to return per page. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
-### Retrieve
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      GET \
-      https://api.example.com/api/support/settings/atlassian/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support import support_settings_atlassian_retrieve # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = support_settings_atlassian_retrieve.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`support_settings_atlassian_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support/support_settings_atlassian_retrieve.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { supportSettingsAtlassianRetrieve } from 'waldur-js-client';
-    
-    try {
-      const response = await supportSettingsAtlassianRetrieve({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this issue. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
+    Staff only.
 
 ---
 
@@ -901,6 +815,11 @@ Get current Atlassian settings (masked secrets).
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Render a canned response with context variables
@@ -980,6 +899,11 @@ Get current Atlassian settings (masked secrets).
     | Field | Type |
     |---|---|
     | `rendered_text` | string |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1067,6 +991,11 @@ Get current Atlassian settings (masked secrets).
     | `target_key` | string |
     | `link_type` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Create
@@ -1145,6 +1074,11 @@ Get current Atlassian settings (masked secrets).
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `color` | string | Hex color code, e.g. #FF0000. |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -1241,6 +1175,11 @@ Get current Atlassian settings (masked secrets).
     | `comment` | string |
     | `new_status` | string |
 
+
+=== "Authorization"
+
+    No sign-in. The X-Webhook-Secret header must match the webhook secret of the active provider helpdesk named in the URL; a helpdesk without a secret accepts nothing.
+
 ---
 
 ### Create
@@ -1324,57 +1263,10 @@ Get current Atlassian settings (masked secrets).
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
----
 
-### Create
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/support/settings/atlassian/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support import support_settings_atlassian_create # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = support_settings_atlassian_create.sync(client=client)
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`support_settings_atlassian_create`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support/support_settings_atlassian_create.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { supportSettingsAtlassianCreate } from 'waldur-js-client';
-    
-    try {
-      const response = await supportSettingsAtlassianCreate({
-      auth: "Token YOUR_API_TOKEN"
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Responses"
-
-    **`201`** - No response body
-    
+    Staff or support only.
 
 ---
 
@@ -1482,6 +1374,11 @@ Discover available custom fields.
     | `field_type` | string |
     | `required` | boolean |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Discover available priorities
@@ -1585,6 +1482,11 @@ Discover available priorities.
     | `description` | string |
     | `icon_url` | string (uri) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Discover available Service Desk projects
@@ -1687,6 +1589,11 @@ Discover available Service Desk projects.
     | `key` | string |
     | `name` | string |
     | `description` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1795,6 +1702,11 @@ Discover request types for a selected project.
     | `description` | string |
     | `issue_type_id` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Generate preview of settings to be saved
@@ -1901,6 +1813,11 @@ Generate preview of settings to be saved.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -2013,6 +1930,11 @@ Save selected settings to constance.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Validate Atlassian credentials without saving them
@@ -2098,6 +2020,11 @@ Validate Atlassian credentials without saving them.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -2198,6 +2125,11 @@ Validate Atlassian credentials without saving them.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Update
@@ -2295,6 +2227,11 @@ Validate Atlassian credentials without saving them.
     | `target_key` | string |
     | `link_type` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Update
@@ -2384,6 +2321,11 @@ Validate Atlassian credentials without saving them.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `color` | string | Hex color code, e.g. #FF0000. |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2479,70 +2421,15 @@ Validate Atlassian credentials without saving them.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
----
 
-### Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PUT \
-      https://api.example.com/api/support/settings/atlassian/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support import support_settings_atlassian_update # (1)
+    All of:
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = support_settings_atlassian_update.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`support_settings_atlassian_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support/support_settings_atlassian_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { supportSettingsAtlassianUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await supportSettingsAtlassianUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this issue. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
+    - Staff or support.
+    - Any of:
+        - Staff.
+        - The filter's owner.
 
 ---
 
@@ -2634,6 +2521,11 @@ Validate Atlassian credentials without saving them.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Partial Update
@@ -2722,6 +2614,11 @@ Validate Atlassian credentials without saving them.
     | `target_key` | string |
     | `link_type` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Partial Update
@@ -2805,6 +2702,11 @@ Validate Atlassian credentials without saving them.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `color` | string | Hex color code, e.g. #FF0000. |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -2894,70 +2796,15 @@ Validate Atlassian credentials without saving them.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
----
 
-### Partial Update
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      PATCH \
-      https://api.example.com/api/support/settings/atlassian/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support import support_settings_atlassian_partial_update # (1)
+    All of:
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = support_settings_atlassian_partial_update.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`support_settings_atlassian_partial_update`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support/support_settings_atlassian_partial_update.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { supportSettingsAtlassianPartialUpdate } from 'waldur-js-client';
-    
-    try {
-      const response = await supportSettingsAtlassianPartialUpdate({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this issue. |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
+    - Staff or support.
+    - Any of:
+        - Staff.
+        - The filter's owner.
 
 ---
 
@@ -3024,6 +2871,11 @@ Validate Atlassian credentials without saving them.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Delete
@@ -3088,6 +2940,11 @@ Validate Atlassian credentials without saving them.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -3154,6 +3011,11 @@ Validate Atlassian credentials without saving them.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Delete
@@ -3219,69 +3081,14 @@ Validate Atlassian credentials without saving them.
     **`204`** - No response body
     
 
----
 
-### Delete
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      DELETE \
-      https://api.example.com/api/support/settings/atlassian/123/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.support import support_settings_atlassian_destroy # (1)
+    All of:
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = support_settings_atlassian_destroy.sync(
-        id=123,
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`support_settings_atlassian_destroy`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/support/support_settings_atlassian_destroy.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { supportSettingsAtlassianDestroy } from 'waldur-js-client';
-    
-    try {
-      const response = await supportSettingsAtlassianDestroy({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "id": 123
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required | Description |
-    |---|---|---|---|
-    | `id` | integer | ✓ | A unique integer value identifying this issue. |
-
-
-=== "Responses"
-
-    **`204`** - No response body
-    
+    - Staff or support.
+    - Any of:
+        - Staff.
+        - The filter's owner.
 
 ---

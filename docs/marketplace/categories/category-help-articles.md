@@ -84,6 +84,11 @@ Returns a paginated list of all help articles associated with marketplace catego
     | `categories.uuid` | string (uuid) |
     | `categories.title` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve a category help article
@@ -158,6 +163,11 @@ Returns the details of a specific help article, identified by its ID.
     | `categories.url` | string (uri) |
     | `categories.uuid` | string (uuid) |
     | `categories.title` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -246,6 +256,11 @@ Creates a new help article and associates it with one or more categories. Requir
     | `categories.url` | string (uri) |
     | `categories.uuid` | string (uuid) |
     | `categories.title` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -346,6 +361,11 @@ Updates an existing help article. Requires staff permissions.
     | `categories.uuid` | string (uuid) |
     | `categories.title` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update a category help article
@@ -436,6 +456,11 @@ Partially updates an existing help article. Requires staff permissions.
     | `categories.uuid` | string (uuid) |
     | `categories.title` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a category help article
@@ -502,5 +527,10 @@ Deletes a help article. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

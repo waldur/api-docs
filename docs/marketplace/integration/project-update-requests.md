@@ -109,6 +109,13 @@
     | `new_is_industry` | boolean |  |
     | `created_by` | integer |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -200,6 +207,13 @@
     | `new_is_industry` | boolean |  |
     | `created_by` | integer |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ## Other Actions
@@ -282,6 +296,13 @@ Approve project update request
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` or `CUSTOMER.MANAGER` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Reject project update request
@@ -360,5 +381,12 @@ Reject project update request
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` or `CUSTOMER.MANAGER` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

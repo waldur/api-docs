@@ -103,6 +103,11 @@
     | `templates.is_content_overridden` | boolean |  |
     | `context_schema` | object (free-form) | Finds the notification definition in the global NOTIFICATIONS dictionary and returns its 'context' schema. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -184,6 +189,11 @@
     | `templates.original_content` | string |  |
     | `templates.is_content_overridden` | boolean |  |
     | `context_schema` | object (free-form) | Finds the notification definition in the global NOTIFICATIONS dictionary and returns its 'context' schema. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -274,6 +284,11 @@
     | `templates.original_content` | string |  |
     | `templates.is_content_overridden` | boolean |  |
     | `context_schema` | object (free-form) | Finds the notification definition in the global NOTIFICATIONS dictionary and returns its 'context' schema. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -376,6 +391,11 @@
     | `templates.is_content_overridden` | boolean |  |
     | `context_schema` | object (free-form) | Finds the notification definition in the global NOTIFICATIONS dictionary and returns its 'context' schema. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -471,6 +491,11 @@
     | `templates.is_content_overridden` | boolean |  |
     | `context_schema` | object (free-form) | Finds the notification definition in the global NOTIFICATIONS dictionary and returns its 'context' schema. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -535,6 +560,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -604,6 +634,11 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Enable a notification
@@ -668,5 +703,10 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

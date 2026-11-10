@@ -151,6 +151,14 @@ Returns a paginated list of software packages available in the catalogs. Can be 
     | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Retrieve a software package
@@ -265,6 +273,14 @@ Returns the details of a specific software package, including its description, h
     | `versions.extensions` | array of anys |  |
     | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
 
 ---
 
@@ -394,6 +410,11 @@ Creates a new software package within a catalog. Requires staff permissions.
     | `versions.extensions` | array of anys |  |
     | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -535,6 +556,11 @@ Updates an existing software package. Requires staff permissions.
     | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update a software package
@@ -666,6 +692,11 @@ Partially updates an existing software package. Requires staff permissions.
     | `versions.toolchain` | any |  |
     | `versions.toolchain_families_compatibility` | array of anys |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a software package
@@ -732,5 +763,10 @@ Deletes a software package. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

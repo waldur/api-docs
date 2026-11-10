@@ -105,6 +105,13 @@ Returns one row per (offering, component type, billing type) for all non-termina
     | `components.current_period_start` | string (date) |  |
     | `components.current_period_end` | string (date) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ## Other Actions
@@ -215,6 +222,13 @@ Returns the customer's usage of one offering broken down by project. Each projec
     | `projects.buckets.usage` | number (double) |  |
     | `projects.buckets.usage_terminated` | number (double) | Part of usage that came from terminated resources. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get monthly usage buckets for a single offering
@@ -314,5 +328,12 @@ Returns a per-month timeseries of `ComponentUsage` for one offering, restricted 
     | `buckets.billing_period` | string (date) |  |
     | `buckets.usage` | number (double) |  |
     | `buckets.usage_terminated` | number (double) | Part of usage that came from terminated resources. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

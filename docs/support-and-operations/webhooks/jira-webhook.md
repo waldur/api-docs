@@ -110,4 +110,9 @@
     | `changelog.items` | array of anys | List of changelog items |
     | `issue_event_type_name` | string |  |
 
+
+=== "Authorization"
+
+    No sign-in. When JIRA_WEBHOOK_SHARED_SECRET is set, the X-Webhook-Secret header must match it. It is empty by default, and then anyone may call.
+
 ---

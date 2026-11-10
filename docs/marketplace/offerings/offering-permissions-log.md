@@ -77,7 +77,7 @@
     | `role_name` | string | Role name contains |
     | `role_uuid` | string (uuid) | Role UUID |
     | `scope_name` | string | Scope name |
-    | `scope_type` | string | Scope type |
+    | `scope_type` | string | Scope type, as returned in scope_type: customer, project, offering, service_provider, call_organizer, call, proposal, resource, resource_project or global. A content type model name also matches. |
     | `scope_uuid` | string | Scope UUID |
     | `user` | string (uuid) |  |
     | `user_slug` | string | User slug contains |
@@ -110,6 +110,13 @@
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_uuid` | string (uuid) |  |
     | `user_email` | string (email) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Revoked offering manager roles held by the caller, and those on offerings of organizations where the caller holds a role. Staff and support see all.
 
 ---
 
@@ -194,5 +201,12 @@
     | `user_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `user_uuid` | string (uuid) |  |
     | `user_email` | string (email) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Revoked offering manager roles held by the caller, and those on offerings of organizations where the caller holds a role. Staff and support see all.
 
 ---

@@ -94,6 +94,11 @@
     | `attachments.file_size` | integer |
     | `attachments.created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve
@@ -172,6 +177,11 @@
     | `attachments.mime_type` | string |
     | `attachments.file_size` | integer |
     | `attachments.created` | string (date-time) |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -264,6 +274,11 @@
     | `attachments.file_size` | integer |
     | `attachments.created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### This view attaches documents to template
@@ -353,6 +368,11 @@ This view attaches documents to template.
     
     **`400`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -456,6 +476,11 @@ This view attaches documents to template.
     | `attachments.file_size` | integer |
     | `attachments.created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -549,6 +574,11 @@ This view attaches documents to template.
     | `attachments.file_size` | integer |
     | `attachments.created` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -613,6 +643,11 @@ This view attaches documents to template.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -699,5 +734,10 @@ This view attaches documents to template.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

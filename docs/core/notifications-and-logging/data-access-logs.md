@@ -98,6 +98,11 @@
     | `ip_address` | any | An IPv4 or IPv6 address. |
     | `context` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -179,6 +184,11 @@
     | `ip_address` | any | An IPv4 or IPv6 address. |
     | `context` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Delete
@@ -243,5 +253,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

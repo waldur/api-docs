@@ -110,6 +110,13 @@ List all managed projects
     | `project_template_data` | any |  |
     | `local_identifier` | string | The local project identifier in this portal. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve a managed project
@@ -195,6 +202,11 @@ Retrieve a managed project
     | `project_template` | string (uri) |  |
     | `project_template_data` | any |  |
     | `local_identifier` | string | The local project identifier in this portal. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -303,6 +315,11 @@ Append a note to the managed project. Author and timestamp are set automatically
     | `project_template_data` | any |  |
     | `local_identifier` | string | The local project identifier in this portal. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Approve managed project request
@@ -384,6 +401,11 @@ Approve managed project request
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Permission class for staff or service provider owners/managers.
 
 ---
 
@@ -473,6 +495,11 @@ Attach a project to this managed project
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Permission class for staff or service provider owners/managers.
+
 ---
 
 ### Detach the project from this managed project
@@ -542,6 +569,11 @@ Detach the project from this managed project
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Permission class for staff or service provider owners/managers.
 
 ---
 
@@ -625,6 +657,11 @@ Reject managed project request
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Permission class for staff or service provider owners/managers.
+
 ---
 
 ### Delete ManagedProject object
@@ -694,5 +731,10 @@ Delete ManagedProject object
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Permission class for staff or service provider owners/managers.
 
 ---

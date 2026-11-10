@@ -90,6 +90,13 @@
     |---|---|
     | `uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.DRY_RUN_SCRIPT` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Run
@@ -172,5 +179,12 @@
     | Field | Type |
     |---|---|
     | `output` | string |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.DRY_RUN_SCRIPT` on the object or its customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

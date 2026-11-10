@@ -101,6 +101,8 @@
     | `click_count` | integer | Offering click-throughs on this interaction. Populated by the by-session transcript, which annotates it; 0 elsewhere. |
     | `input_tokens` | integer |  |
     | `output_tokens` | integer |  |
+    | `cache_read_tokens` | integer |  |
+    | `cache_write_tokens` | integer |  |
     | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
@@ -114,6 +116,11 @@
     | `last_active_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `feedback` | any |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -188,6 +195,8 @@
     | `click_count` | integer | Offering click-throughs on this interaction. Populated by the by-session transcript, which annotates it; 0 elsewhere. |
     | `input_tokens` | integer |  |
     | `output_tokens` | integer |  |
+    | `cache_read_tokens` | integer |  |
+    | `cache_write_tokens` | integer |  |
     | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
@@ -201,6 +210,11 @@
     | `last_active_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `feedback` | any |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -263,6 +277,11 @@ Returns the site-wide token + request usage accumulated since 00:00 UTC today an
     | `tokens_today` | integer |
     | `tokens_limit` | integer |
     | `resets_at` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -363,6 +382,8 @@ Returns the ordered list of interactions belonging to the given ``session_id``. 
     | `click_count` | integer | Offering click-throughs on this interaction. Populated by the by-session transcript, which annotates it; 0 elsewhere. |
     | `input_tokens` | integer |  |
     | `output_tokens` | integer |  |
+    | `cache_read_tokens` | integer |  |
+    | `cache_write_tokens` | integer |  |
     | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
@@ -376,6 +397,11 @@ Returns the ordered list of interactions belonging to the given ``session_id``. 
     | `last_active_at` | string (date-time) |  |
     | `created` | string (date-time) |  |
     | `feedback` | any |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -464,6 +490,11 @@ Returns one row per user_slug with aggregate counters. Powers the staff Users pa
     | `negative_feedback` | integer |
     | `no_feedback` | integer |
     | `injection_strikes` | integer |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -564,6 +595,8 @@ Returns interactions sharing a ``user_slug`` (Scrypt of originating IP) — acro
     | `click_count` | integer | Offering click-throughs on this interaction. Populated by the by-session transcript, which annotates it; 0 elsewhere. |
     | `input_tokens` | integer |  |
     | `output_tokens` | integer |  |
+    | `cache_read_tokens` | integer |  |
+    | `cache_write_tokens` | integer |  |
     | `offering_uuids` | object (free-form) |  |
     | `result_count` | integer |  |
     | `is_flagged` | boolean |  |
@@ -578,11 +611,16 @@ Returns interactions sharing a ``user_slug`` (Scrypt of originating IP) — acro
     | `created` | string (date-time) |  |
     | `feedback` | any |  |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Conversations grouped by session
 
-One row per anonymous conversation (``session_id``) with aggregate counters, mirroring the authenticated threads table. Honours the same filters as the list endpoint. Read a conversation's transcript via ``by-session/{session_id}``.
+One row per anonymous conversation (``session_id``) with aggregate counters, mirroring the authenticated threads table. Honors the same filters as the list endpoint. Read a conversation's transcript via ``by-session/{session_id}``.
 
 
 === "HTTPie"
@@ -680,14 +718,22 @@ One row per anonymous conversation (``session_id``) with aggregate counters, mir
     | `input_tokens` | integer | Prompt tokens summed over the conversation; 0 for turns predating token tracking. |
     | `output_tokens` | integer | Completion tokens summed over the conversation. |
     | `total_tokens` | integer | input_tokens + output_tokens. Excludes LLM judge spend, which runs on its own budget. |
+    | `cache_read_tokens` | integer | Part of input_tokens served from the provider's prompt cache; null when no turn in the conversation reported it. |
+    | `cache_write_tokens` | integer | Part of input_tokens written to the provider's prompt cache; null when no turn in the conversation reported it. |
+    | `cache_ratio` | number (double) | cache_read_tokens over the input of turns whose provider reported a cache figure; null when none did. |
     | `started` | string (date-time) |  |
     | `last_active` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
 ### Aggregate KPI roll-up
 
-Returns aggregate counters and rates for the anonymous chat flow. Filters are honoured (date range etc.) so the same parameters work as on the list endpoint.
+Returns aggregate counters and rates for the anonymous chat flow. Filters are honored (date range etc.) so the same parameters work as on the list endpoint.
 
 
 === "HTTPie"
@@ -777,8 +823,14 @@ Returns aggregate counters and rates for the anonymous chat flow. Filters are ho
     | `click_through_rate` | number (double) | clicks / interactions; null when no interactions. |
     | `clarification_requests_total` | integer | Interactions where the assistant asked a clarifying question (ask_user) instead of recommending. |
     | `clarification_rate` | number (double) | clarification_requests_total / interactions_total; null when no interactions. |
+    | `searches_total` | integer | Interactions where the assistant searched the catalog (found, empty or failed). Rows predating outcome tracking are excluded. |
+    | `no_result_searches_total` | integer | Search interactions that completed and surfaced no offerings — the signal for catalog gaps and over-restrictive requests. Failed searches are not counted. |
+    | `no_result_rate` | number (double) | no_result_searches_total / searches_total; null when no interaction searched. |
     | `input_tokens_total` | integer | Prompt tokens summed over the filtered turns. Turns recorded before per-interaction token capture contribute nothing, so this understates spend on historical data. |
     | `output_tokens_total` | integer | Completion tokens summed over the filtered turns. |
+    | `cache_read_tokens_total` | integer | Part of input_tokens_total served from the provider's prompt cache; null when no turn reported it. |
+    | `cache_write_tokens_total` | integer | Part of input_tokens_total written to the provider's prompt cache; null when no turn reported it. |
+    | `cache_ratio` | number (double) | cache_read_tokens_total over the input of turns whose provider reported a cache figure; null when none did. |
     | `reviewed_total` | integer | Threads carrying a judge verdict. Always present, unlike the review rates below — zero here is the signal that the nightly pass is off or stalled, so consumers can keep showing the row. |
     | `review_input_tokens_total` | integer | Prompt tokens spent by the LLM judge. Tracked apart from ``input_tokens_total`` because review runs on its own budget. |
     | `review_output_tokens_total` | integer | Completion tokens spent by the LLM judge. |
@@ -790,5 +842,10 @@ Returns aggregate counters and rates for the anonymous chat flow. Filters are ho
     | `daily_volume.date` | string (date) |  |
     | `daily_volume.count` | integer |  |
     | `severity_by_day` | any | Stacked-bar input. Shape: {labels: [iso-date], series: {NONE: [...], LOW: [...], MEDIUM: [...], HIGH: [...], CRITICAL: [...]}} |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

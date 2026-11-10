@@ -98,4 +98,9 @@ Figures for the current and the previous calendar month. A resource has no goals
     | `current` | number (double) |  |
     | `previous` | number (double) |  |
 
+
+=== "Authorization"
+
+    The resource must be of a project where the caller holds a role or of an organization where they do, or of an offering on whose provider side they are; staff and support may name any. Metrics the caller sees, as offering metrics show them, except archived ones. Of a metric the caller sees, who is on the provider side (a role on the offering, its organization or its service provider; staff and support) reads every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.
+
 ---

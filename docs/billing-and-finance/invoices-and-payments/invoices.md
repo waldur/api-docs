@@ -174,6 +174,14 @@
     | `reference_number` | string | Reference number associated with the invoice. |
     | `compensations` | number (double) |  |
     | `incurred_costs` | number (double) |  |
+    | `volume_discounts` | number (double) | What the volume discount lines take off, as a negative amount like `compensations`. Already part of `price` and `incurred_costs`; on an open invoice the lines are estimates. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -321,6 +329,14 @@
     | `reference_number` | string | Reference number associated with the invoice. |
     | `compensations` | number (double) |  |
     | `incurred_costs` | number (double) |  |
+    | `volume_discounts` | number (double) | What the volume discount lines take off, as a negative amount like `compensations`. Already part of `price` and `incurred_costs`; on an open invoice the lines are estimates. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -395,6 +411,11 @@ Analyze invoice trends over time by comparing monthly totals for major customers
     | `customer_periods` | array of objects |
     | `customer_periods.name` | string |
     | `customer_periods.periods` | array of number (double)s |
+
+
+=== "Authorization"
+
+    Invoice totals of the organizations where the caller holds INVOICE.LIST and that the caller's roles reach; staff and support see every organization.
 
 ---
 
@@ -491,6 +512,11 @@ Returns the state of the object as it was at the specified timestamp. Only acces
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -592,6 +618,11 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_user` | object (free-form) | User who created this revision |
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -717,6 +748,13 @@ Retrieve a list of invoice items for the specified invoice.
     | `backend_uuid` | string (uuid) |  |
     | `credit` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Spendings grouped by offerings and filtered by provider
@@ -819,6 +857,13 @@ Spendings grouped by offerings and filtered by provider.
     | `service_provider_name` | string |
     | `service_provider_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Import usage data
@@ -916,6 +961,11 @@ Import component usage items as JSON data for multiple customers. Creates invoic
     | `errors.customer_name` | string |
     | `errors.reason` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark invoice as paid and optionally create payment record with proof of payment
@@ -1002,6 +1052,11 @@ Mark invoice as paid and optionally create payment record with proof of payment.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Send invoice notification
@@ -1071,6 +1126,11 @@ Schedule sending of a notification for the specified invoice.
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1151,6 +1211,11 @@ Set backend ID for invoice.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Set payment URL for invoice
@@ -1230,6 +1295,11 @@ Set payment URL for invoice.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Set reference number for invoice
@@ -1308,5 +1378,10 @@ Set reference number for invoice.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

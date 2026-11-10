@@ -88,6 +88,13 @@
     | `ram` | integer | Memory size in MiB |
     | `disk` | integer | Disk size in MiB |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rows of VMware service settings the caller may use: settings behind an active or paused offering the caller may order from, settings of a VM the caller sees, and settings of organizations in which the caller holds an organization-level role. Staff and support see all.
+
 ---
 
 ### Retrieve
@@ -166,5 +173,12 @@
     | `cores_per_socket` | integer | Number of cores per socket in a VM |
     | `ram` | integer | Memory size in MiB |
     | `disk` | integer | Disk size in MiB |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Rows of VMware service settings the caller may use: settings behind an active or paused offering the caller may order from, settings of a VM the caller sees, and settings of organizations in which the caller holds an organization-level role. Staff and support see all.
 
 ---

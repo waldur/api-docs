@@ -121,6 +121,7 @@
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -139,6 +140,13 @@
     | `description` | string |  |
     | `created_by_name` | string |  |
     | `created_by_email` | string (email) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -238,6 +246,7 @@
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -256,6 +265,13 @@
     | `description` | string |  |
     | `created_by_name` | string |  |
     | `created_by_email` | string (email) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -327,6 +343,13 @@ Accept a requested offering.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.ACCEPT_CALL_REQUEST` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Cancel a requested offering
@@ -393,5 +416,12 @@ Cancel a requested offering.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.ACCEPT_CALL_REQUEST` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

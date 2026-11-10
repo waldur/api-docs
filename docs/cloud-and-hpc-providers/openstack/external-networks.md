@@ -102,6 +102,13 @@ Get a list of provider-level external networks discovered from OpenStack.
     | `subnets.public_ip_range` | string | Public CIDR mapped to this subnet (for carrier-grade NAT overlay) |
     | `subnets.description` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and support see every external network (with a personal access token, only one carrying the staff or support scope). Owners of the organization that owns a cloud's service settings see all of that cloud's; others see the shared external networks of the service settings they can see.
+
 ---
 
 ### Get external network details
@@ -200,5 +207,12 @@ Retrieve details of a specific external network, including its subnets.
     | `subnets.dns_nameservers` | object (free-form) |  |
     | `subnets.public_ip_range` | string | Public CIDR mapped to this subnet (for carrier-grade NAT overlay) |
     | `subnets.description` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and support see every external network (with a personal access token, only one carrying the staff or support scope). Owners of the organization that owns a cloud's service settings see all of that cloud's; others see the shared external networks of the service settings they can see.
 
 ---

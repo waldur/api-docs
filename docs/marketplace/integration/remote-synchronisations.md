@@ -102,6 +102,13 @@
     | `remotelocalcategory_set.local_category_uuid` | string (uuid) |
     | `remotelocalcategory_set.remote_category_name` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -189,6 +196,13 @@
     | `remotelocalcategory_set.local_category_name` | string |
     | `remotelocalcategory_set.local_category_uuid` | string (uuid) |
     | `remotelocalcategory_set.remote_category_name` | string |
+
+
+=== "Authorization"
+
+    Staff only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -308,6 +322,11 @@
     | `remotelocalcategory_set.local_category_name` | string |
     | `remotelocalcategory_set.local_category_uuid` | string (uuid) |
     | `remotelocalcategory_set.remote_category_name` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -439,6 +458,11 @@
     | `remotelocalcategory_set.local_category_uuid` | string (uuid) |
     | `remotelocalcategory_set.remote_category_name` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -547,6 +571,11 @@
     | `remotelocalcategory_set.local_category_uuid` | string (uuid) |
     | `remotelocalcategory_set.remote_category_name` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -611,6 +640,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -702,5 +736,10 @@
     | `remotelocalcategory_set.local_category_name` | string |
     | `remotelocalcategory_set.local_category_uuid` | string (uuid) |
     | `remotelocalcategory_set.remote_category_name` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

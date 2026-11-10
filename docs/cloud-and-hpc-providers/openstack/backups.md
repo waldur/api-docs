@@ -150,7 +150,7 @@ Get a list of instance backups.
     | `restorations.floating_ips` | array of objects |  |
     | `restorations.floating_ips.url` | string (uri) |  |
     | `restorations.floating_ips.uuid` | string (uuid) |  |
-    | `restorations.floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `restorations.floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `restorations.floating_ips.port_fixed_ips` | array of objects |  |
     | `restorations.floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `restorations.floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -333,7 +333,7 @@ Get a list of instance backups.
     | `instance_floating_ips` | array of objects |  |
     | `instance_floating_ips.url` | string (uri) |  |
     | `instance_floating_ips.uuid` | string (uuid) |  |
-    | `instance_floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `instance_floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `instance_floating_ips.port_fixed_ips` | array of objects |  |
     | `instance_floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `instance_floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -355,6 +355,13 @@ Get a list of instance backups.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -472,7 +479,7 @@ Retrieve details of a specific instance backup.
     | `restorations.floating_ips` | array of objects |  |
     | `restorations.floating_ips.url` | string (uri) |  |
     | `restorations.floating_ips.uuid` | string (uuid) |  |
-    | `restorations.floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `restorations.floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `restorations.floating_ips.port_fixed_ips` | array of objects |  |
     | `restorations.floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `restorations.floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -655,7 +662,7 @@ Retrieve details of a specific instance backup.
     | `instance_floating_ips` | array of objects |  |
     | `instance_floating_ips.url` | string (uri) |  |
     | `instance_floating_ips.uuid` | string (uuid) |  |
-    | `instance_floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `instance_floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `instance_floating_ips.port_fixed_ips` | array of objects |  |
     | `instance_floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `instance_floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -677,6 +684,13 @@ Retrieve details of a specific instance backup.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -756,6 +770,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -824,6 +845,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -952,7 +978,7 @@ Update an existing instance backup.
     | `restorations.floating_ips` | array of objects |  |
     | `restorations.floating_ips.url` | string (uri) |  |
     | `restorations.floating_ips.uuid` | string (uuid) |  |
-    | `restorations.floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `restorations.floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `restorations.floating_ips.port_fixed_ips` | array of objects |  |
     | `restorations.floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `restorations.floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -1135,7 +1161,7 @@ Update an existing instance backup.
     | `instance_floating_ips` | array of objects |  |
     | `instance_floating_ips.url` | string (uri) |  |
     | `instance_floating_ips.uuid` | string (uuid) |  |
-    | `instance_floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `instance_floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `instance_floating_ips.port_fixed_ips` | array of objects |  |
     | `instance_floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `instance_floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -1157,6 +1183,13 @@ Update an existing instance backup.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1279,7 +1312,7 @@ Update specific fields of an instance backup.
     | `restorations.floating_ips` | array of objects |  |
     | `restorations.floating_ips.url` | string (uri) |  |
     | `restorations.floating_ips.uuid` | string (uuid) |  |
-    | `restorations.floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `restorations.floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `restorations.floating_ips.port_fixed_ips` | array of objects |  |
     | `restorations.floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `restorations.floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -1462,7 +1495,7 @@ Update specific fields of an instance backup.
     | `instance_floating_ips` | array of objects |  |
     | `instance_floating_ips.url` | string (uri) |  |
     | `instance_floating_ips.uuid` | string (uuid) |  |
-    | `instance_floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `instance_floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `instance_floating_ips.port_fixed_ips` | array of objects |  |
     | `instance_floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `instance_floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -1484,6 +1517,13 @@ Update specific fields of an instance backup.
     | `marketplace_resource_state` | string |  |
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1551,6 +1591,13 @@ Delete an instance backup.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1725,15 +1772,11 @@ Restore instance from backup
     | `security_groups.rules.id` | integer |  |
     | `security_groups.description` | string |  |
     | `security_groups.state` | string |  |
-    | `server_group` | object |  |
-    | `server_group.url` | string (uri) |  |
-    | `server_group.name` | string |  |
-    | `server_group.policy` | any | Server group policy determining the rules for scheduling servers in this group |
-    | `server_group.state` | string |  |
+    | `server_group` | any |  |
     | `floating_ips` | array of objects |  |
     | `floating_ips.url` | string (uri) |  |
     | `floating_ips.uuid` | string (uuid) |  |
-    | `floating_ips.address` | any | The public IPv4 address of the floating IP |
+    | `floating_ips.address` | string (ipv4) | The public IPv4 address of the floating IP |
     | `floating_ips.port_fixed_ips` | array of objects |  |
     | `floating_ips.port_fixed_ips.ip_address` | any | IP address to assign to the port |
     | `floating_ips.port_fixed_ips.subnet_id` | string | ID of the subnet in which to assign the IP address |
@@ -1837,6 +1880,13 @@ Restore instance from backup
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark resource as ERRED
@@ -1920,6 +1970,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -1989,5 +2044,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

@@ -101,6 +101,13 @@
     | `destination_url` | string (uri) |
     | `content_type` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff see every row; support see every row read-only; others see their own.
+
 ---
 
 ### Retrieve
@@ -181,6 +188,13 @@
     | `author_email` | string |
     | `destination_url` | string (uri) |
     | `content_type` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff see every row; support see every row read-only; others see their own.
 
 ---
 
@@ -298,6 +312,11 @@ Note that context depends on event type.
     | `destination_url` | string (uri) |
     | `content_type` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Update
@@ -401,6 +420,14 @@ Note that context depends on event type.
     | `destination_url` | string (uri) |
     | `content_type` | string |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own hook.
+    - Staff.
+
 ---
 
 ### Partial Update
@@ -498,6 +525,14 @@ Note that context depends on event type.
     | `destination_url` | string (uri) |
     | `content_type` | string |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own hook.
+    - Staff.
+
 ---
 
 ### Delete
@@ -562,5 +597,13 @@ Note that context depends on event type.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - The caller's own hook.
+    - Staff.
 
 ---

@@ -96,7 +96,7 @@
     | `role` | any |  |
     | `blocks` | array of objects |  |
     | `blocks.id` | string |  |
-    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `resource_list`, `homeport_nav`, `ask_user_form`, `tool`_ |
+    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `hpc_job`, `chart`, `resource_list`, `homeport_nav`, `ask_user_form`, `tool`_ |
     | `blocks.status` | string |  |
     | `warning` | string |  |
     | `sequence_index` | integer |  |
@@ -104,6 +104,8 @@
     | `created` | string (date-time) |  |
     | `input_tokens` | integer |  |
     | `output_tokens` | integer |  |
+    | `cache_read_tokens` | integer |  |
+    | `cache_write_tokens` | integer |  |
     | `is_flagged` | boolean |  |
     | `severity` | any |  |
     | `injection_categories` | object (free-form) |  |
@@ -113,6 +115,13 @@
     | `feedback_comment` | string | Optional user comment accompanying feedback. |
     | `feedback_category` | any | Category tag when feedback_score is False (thumbs down); null otherwise. |
     | `feedback_submitted_at` | string (date-time) | Timestamp of the most recent feedback submission; overwritten on resubmit. |
+
+
+=== "Authorization"
+
+    AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    
+    Messages of the caller's own threads; staff and support see every message.
 
 ---
 
@@ -184,6 +193,14 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `user_full_name` | string |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    - The caller's own session, created if missing.
 
 ---
 
@@ -258,6 +275,13 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `user_full_name` | string |
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
+
+
+=== "Authorization"
+
+    AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    
+    Staff see every row; support see every row read-only; others see their own.
 
 ---
 
@@ -341,6 +365,13 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `created` | string (date-time) |
     | `modified` | string (date-time) |
 
+
+=== "Authorization"
+
+    AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    
+    Staff see every row; support see every row read-only; others see their own.
+
 ---
 
 ### List Chat System Prompts
@@ -408,10 +439,15 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
     | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -482,10 +518,15 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
     | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -589,6 +630,11 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `total_tokens` | integer |  |
     | `title_gen_input_tokens` | integer |  |
     | `title_gen_output_tokens` | integer |  |
+    | `cache_read_tokens` | integer | Part of input_tokens served from the provider's prompt cache, title generation included. Null when the provider never reported it. |
+    | `cache_write_tokens` | integer | Part of input_tokens written to the provider's prompt cache, title generation included. Null when the provider never reported it. |
+    | `title_gen_cache_read_tokens` | integer |  |
+    | `title_gen_cache_write_tokens` | integer |  |
+    | `cache_ratio` | number (double) | cache_read_tokens / input_tokens, counting only turns whose provider reported a cache figure. Null when none did. |
     | `models_used` | string | Comma-separated distinct LLM models across the thread's messages. More than one when an admin switched AI_ASSISTANT_MODEL mid-thread; blank for threads written before model tracking existed. |
     | `is_flagged` | boolean |  |
     | `max_severity` | any |  |
@@ -597,6 +643,13 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `user_full_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    
+    The caller's own threads; staff and support see every thread.
 
 ---
 
@@ -684,6 +737,11 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `total_tokens` | integer |  |
     | `title_gen_input_tokens` | integer |  |
     | `title_gen_output_tokens` | integer |  |
+    | `cache_read_tokens` | integer | Part of input_tokens served from the provider's prompt cache, title generation included. Null when the provider never reported it. |
+    | `cache_write_tokens` | integer | Part of input_tokens written to the provider's prompt cache, title generation included. Null when the provider never reported it. |
+    | `title_gen_cache_read_tokens` | integer |  |
+    | `title_gen_cache_write_tokens` | integer |  |
+    | `cache_ratio` | number (double) | cache_read_tokens / input_tokens, counting only turns whose provider reported a cache figure. Null when none did. |
     | `models_used` | string | Comma-separated distinct LLM models across the thread's messages. More than one when an admin switched AI_ASSISTANT_MODEL mid-thread; blank for threads written before model tracking existed. |
     | `is_flagged` | boolean |  |
     | `max_severity` | any |  |
@@ -692,6 +750,13 @@ Returns the current user's chat session, creating it if it doesn't exist.
     | `user_full_name` | string |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    
+    The caller's own threads; staff and support see every thread.
 
 ---
 
@@ -792,10 +857,20 @@ would collide with the aggregates below. Visibility comes from
     | `input_tokens_total` | integer |  |
     | `output_tokens_total` | integer |  |
     | `total_tokens` | integer |  |
+    | `cache_read_tokens_total` | integer | Part of input_tokens_total served from the provider's prompt cache; null when no turn reported it. |
+    | `cache_write_tokens_total` | integer | Part of input_tokens_total written to the provider's prompt cache; null when no turn reported it. |
+    | `cache_ratio` | number (double) | cache_read_tokens_total over the input of turns whose provider reported a cache figure; null when none did. |
     | `flagged_total` | integer | Threads carrying at least one flagged message. |
     | `feedback_positive` | integer |  |
     | `feedback_negative` | integer |  |
     | `satisfaction_rate` | number (double) | positive / (positive + negative); null when no human feedback. |
+
+
+=== "Authorization"
+
+    AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    
+    The caller's own threads; staff and support see every thread.
 
 ---
 
@@ -888,7 +963,7 @@ would collide with the aggregates below. Visibility comes from
     | `role` | any |  |
     | `blocks` | array of objects |  |
     | `blocks.id` | string |  |
-    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `resource_list`, `homeport_nav`, `ask_user_form`, `tool`_ |
+    | `blocks.key` | string | <br>_Enum: `markdown`, `code`, `mermaid`, `vm_order`, `hpc_job`, `chart`, `resource_list`, `homeport_nav`, `ask_user_form`, `tool`_ |
     | `blocks.status` | string |  |
     | `warning` | string |  |
     | `sequence_index` | integer |  |
@@ -896,6 +971,8 @@ would collide with the aggregates below. Visibility comes from
     | `created` | string (date-time) |  |
     | `input_tokens` | integer |  |
     | `output_tokens` | integer |  |
+    | `cache_read_tokens` | integer |  |
+    | `cache_write_tokens` | integer |  |
     | `is_flagged` | boolean |  |
     | `severity` | any |  |
     | `injection_categories` | object (free-form) |  |
@@ -905,6 +982,14 @@ would collide with the aggregates below. Visibility comes from
     | `feedback_comment` | string | Optional user comment accompanying feedback. |
     | `feedback_category` | any | Category tag when feedback_score is False (thumbs down); null otherwise. |
     | `feedback_submitted_at` | string (date-time) | Timestamp of the most recent feedback submission; overwritten on resubmit. |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    - A message in one of the caller's own threads.
 
 ---
 
@@ -980,6 +1065,14 @@ would collide with the aggregates below. Visibility comes from
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    - A message continues or edits only a thread of the caller's own; without a thread it starts one.
 
 ---
 
@@ -1060,7 +1153,7 @@ Set this prompt as the active one. Deactivates any currently active prompt.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
 
 
 === "Responses"
@@ -1072,10 +1165,15 @@ Set this prompt as the active one. Deactivates any currently active prompt.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
     | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1143,7 +1241,7 @@ Set this prompt as the active one. Deactivates any currently active prompt.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
 
 
 === "Responses"
@@ -1155,10 +1253,15 @@ Set this prompt as the active one. Deactivates any currently active prompt.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
     | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1239,7 +1342,7 @@ Deactivate this prompt. The system will fall back to Constance overrides or buil
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
 
 
 === "Responses"
@@ -1251,10 +1354,15 @@ Deactivate this prompt. The system will fall back to Constance overrides or buil
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
     | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1322,6 +1430,16 @@ Archive a thread (soft delete).
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    - Any of:
+        - The caller's own thread.
+        - Staff.
 
 ---
 
@@ -1403,6 +1521,14 @@ Request cancellation of the active LLM stream for this thread.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    All of:
+    
+    - AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    - The caller's own thread.
+
 ---
 
 ### Unarchive thread
@@ -1469,6 +1595,16 @@ Restore an archived thread.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - AI_ASSISTANT_ENABLED_ROLES admits the caller: every user, staff and support only, staff only, or no one, as configured.
+    - Any of:
+        - The caller's own thread.
+        - Staff.
 
 ---
 
@@ -1547,7 +1683,7 @@ Restore an archived thread.
     |---|---|---|---|
     | `name` | string | ✓ |  |
     | `description` | string |  |  |
-    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
 
 
 === "Responses"
@@ -1559,10 +1695,15 @@ Restore an archived thread.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
     | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1635,7 +1776,7 @@ Restore an archived thread.
     |---|---|---|---|
     | `name` | string |  |  |
     | `description` | string |  |  |
-    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string |  | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
 
 
 === "Responses"
@@ -1647,10 +1788,15 @@ Restore an archived thread.
     | `uuid` | string (uuid) |  |
     | `name` | string |  |
     | `description` | string |  |
-    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. |
+    | `custom_instructions` | string | Additional instructions injected into the system prompt. Use this for organization-specific context, terminology, FAQ content, or behavioral guidelines. Supports {assistant_name} and {organization} placeholders. |
     | `is_active` | boolean | Whether this prompt is currently used by the AI Assistant. Only one prompt can be active. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1716,5 +1862,10 @@ Restore an archived thread.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

@@ -102,6 +102,13 @@ Retrieve a list of access subnets. Staff and support users can see all subnets, 
     | `scoped_offerings.has_live_resources` | boolean |  |
     | `is_staff_managed` | boolean | Set when staff created the entry. Such entries are read-only for everyone else, regardless of mask width. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve access subnet
@@ -181,6 +188,13 @@ Fetch the details of a specific access subnet by its UUID.
     | `scoped_offerings.name` | string |  |
     | `scoped_offerings.has_live_resources` | boolean |  |
     | `is_staff_managed` | boolean | Set when staff created the entry. Such entries are read-only for everyone else, regardless of mask width. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -275,6 +289,13 @@ Create a new access subnet for a customer.
     | `scoped_offerings.name` | string |  |
     | `scoped_offerings.has_live_resources` | boolean |  |
     | `is_staff_managed` | boolean | Set when staff created the entry. Such entries are read-only for everyone else, regardless of mask width. |
+
+
+=== "Authorization"
+
+    Requires `ACCESS_SUBNET.CREATE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -381,6 +402,13 @@ Update an existing access subnet.
     | `scoped_offerings.has_live_resources` | boolean |  |
     | `is_staff_managed` | boolean | Set when staff created the entry. Such entries are read-only for everyone else, regardless of mask width. |
 
+
+=== "Authorization"
+
+    Requires `ACCESS_SUBNET.UPDATE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update an access subnet
@@ -476,6 +504,13 @@ Partially update an existing access subnet.
     | `scoped_offerings.has_live_resources` | boolean |  |
     | `is_staff_managed` | boolean | Set when staff created the entry. Such entries are read-only for everyone else, regardless of mask width. |
 
+
+=== "Authorization"
+
+    Requires `ACCESS_SUBNET.UPDATE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete an access subnet
@@ -542,6 +577,13 @@ Delete an existing access subnet.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ACCESS_SUBNET.DELETE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -630,5 +672,13 @@ For each of the organization's live resources of an offering that supports acces
     | `resources.addresses.source` | string |
     | `resources.addresses.is_staff_managed` | boolean |
     | `resources.packed` | array of strings |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - A role on the organization that customer_uuid names, from an address within its portal networks; anyone else is answered as if the organization did not exist. Resources of an offering that conceals subnet-restricted resources are left out unless the caller's address is in their access subnets.
 
 ---

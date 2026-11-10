@@ -94,6 +94,11 @@
     | `is_enabled` | boolean |  |
     | `notified_proposal_roles` | array of strings | Only for an applicant audience: names of the proposal roles whose holders are notified. Empty notifies the proposal creator and every member of the proposal team. |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -173,6 +178,11 @@
     | `days_before` | integer | Only for deadline_approaching: how many days before the step's deadline the reminder is sent. |
     | `is_enabled` | boolean |  |
     | `notified_proposal_roles` | array of strings | Only for an applicant audience: names of the proposal roles whose holders are notified. Empty notifies the proposal creator and every member of the proposal team. |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -271,6 +281,11 @@
     | `days_before` | integer | Only for deadline_approaching: how many days before the step's deadline the reminder is sent. |
     | `is_enabled` | boolean |  |
     | `notified_proposal_roles` | array of strings | Only for an applicant audience: names of the proposal roles whose holders are notified. Empty notifies the proposal creator and every member of the proposal team. |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -381,6 +396,11 @@
     | `is_enabled` | boolean |  |
     | `notified_proposal_roles` | array of strings | Only for an applicant audience: names of the proposal roles whose holders are notified. Empty notifies the proposal creator and every member of the proposal team. |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Partial Update
@@ -478,6 +498,11 @@
     | `is_enabled` | boolean |  |
     | `notified_proposal_roles` | array of strings | Only for an applicant audience: names of the proposal roles whose holders are notified. Empty notifies the proposal creator and every member of the proposal team. |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Delete
@@ -542,5 +567,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

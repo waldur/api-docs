@@ -88,6 +88,13 @@
     | `vhost` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Queues of the caller's own subscriptions; staff and global support see every queue.
+
 ---
 
 ### Retrieve
@@ -166,6 +173,13 @@ DEPRECATED: superseded by the unified EventConsumer path (POST /api/event-consum
     | `vhost` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Queues of the caller's own subscriptions; staff and global support see every queue.
+
 ---
 
 ### Delete
@@ -230,5 +244,13 @@ DEPRECATED: superseded by the unified EventConsumer path (POST /api/event-consum
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - A queue of the caller's own subscription.
+    - Staff.
 
 ---

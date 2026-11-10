@@ -86,6 +86,14 @@
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### Retrieve
@@ -160,6 +168,14 @@
     | `created` | string (date-time) |  |
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
 
 ---
 
@@ -243,6 +259,11 @@
     | `created` | string (date-time) |  |
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
+
+
+=== "Authorization"
+
+    Check if user is staff or has service provider role. Used for tag creation - only service providers and staff can create tags.
 
 ---
 
@@ -338,6 +359,11 @@
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
 
+
+=== "Authorization"
+
+    Check if user can update/delete a tag. Staff can manage any tag. Service providers can only manage tags they created.
+
 ---
 
 ### Partial Update
@@ -426,6 +452,11 @@
     | `created_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `created_by_full_name` | string |  |
 
+
+=== "Authorization"
+
+    Check if user can update/delete a tag. Staff can manage any tag. Service providers can only manage tags they created.
+
 ---
 
 ### Delete
@@ -490,5 +521,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Check if user can update/delete a tag. Staff can manage any tag. Service providers can only manage tags they created.
 
 ---

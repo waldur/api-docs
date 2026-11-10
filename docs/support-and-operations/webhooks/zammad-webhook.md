@@ -58,4 +58,9 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    No sign-in. When ZAMMAD_WEBHOOK_SHARED_SECRET is set, the X-Webhook-Secret header must match it. It is empty by default, and then anyone may call.
+
 ---

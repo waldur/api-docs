@@ -81,6 +81,11 @@
     | `customer_uuid` | string |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---
 
 ### Retrieve
@@ -152,6 +157,11 @@
     | `role_name` | string |
     | `customer_uuid` | string |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -236,6 +246,11 @@
     | `customer_uuid` | string |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -300,5 +315,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

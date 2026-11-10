@@ -20,7 +20,7 @@
 | <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/global_stats_performance/` | [Get call performance statistics across all calls](#get-call-performance-statistics-across-all-calls) |
 | <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/global_stats_resource_demand/` | [Get resource demand statistics across all calls and offerings](#get-resource-demand-statistics-across-all-calls-and-offerings) |
 | <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/global_stats_review_progress/` | [Get review progress statistics across all reviewers](#get-review-progress-statistics-across-all-reviewers) |
-| <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/{uuid}/stats/` | [Return statistics for call managing organisation](#return-statistics-for-call-managing-organisation) |
+| <span class="http-badge http-get">GET</span> | `/api/call-managing-organisations/{uuid}/stats/` | [Return statistics for call managing organization](#return-statistics-for-call-managing-organization) |
 
 ---
 ## Core CRUD
@@ -107,6 +107,11 @@
     | `customer_country` | string |
     | `image` | string (uri) |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -185,6 +190,11 @@
     | `customer_native_name` | string |
     | `customer_country` | string |
     | `image` | string (uri) |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -273,6 +283,11 @@
     | `customer_native_name` | string |
     | `customer_country` | string |
     | `image` | string (uri) |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -373,6 +388,13 @@
     | `customer_country` | string |
     | `image` | string (uri) |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -465,6 +487,13 @@
     | `customer_country` | string |
     | `image` | string (uri) |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -529,6 +558,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -611,6 +647,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `role` | array | Role UUID or name. Repeat to filter by several roles. |
+    | `role_template` | array | Role name. Matches that role and organization copies of it. Repeat to match several. Omit to leave the role filter unchanged. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -639,6 +676,11 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
     | `source` | string |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
 
 ---
 
@@ -738,6 +780,11 @@ Assigns a specific role to a user within the current scope. An optional expirati
     **`400`** - Validation error, for example when trying to add a user to a terminated project.
     
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to grant roles in the scope's type (CALL.CREATE_PERMISSION, CUSTOMER.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, PROPOSAL.MANAGE, RESOURCE.CREATE_PERMISSION, RESOURCE_PROJECT.CREATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Revoke a role from a user
@@ -827,6 +874,11 @@ Removes a specific role from a user within the current scope. This effectively r
 
     **`200`** - Role revoked successfully.
     
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to revoke roles in the scope's type (CALL.DELETE_PERMISSION, CUSTOMER.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, PROPOSAL.DELETE_PERMISSION, RESOURCE.DELETE_PERMISSION, RESOURCE_PROJECT.DELETE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -921,6 +973,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     |---|---|
     | `expiration_time` | string (date-time) |
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to change roles in the scope's type (CALL.UPDATE_PERMISSION, CUSTOMER.UPDATE_PERMISSION, OFFERING.UPDATE_PERMISSION, PROJECT.UPDATE_PERMISSION, PROPOSAL.UPDATE_PERMISSION, RESOURCE.UPDATE_PERMISSION, RESOURCE_PROJECT.UPDATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ## Other Actions
@@ -1014,6 +1071,11 @@ Get call performance statistics across all calls.
     | `active_rounds` | integer |
     | `last_submission_date` | string (date) |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Get resource demand statistics across all calls and offerings
@@ -1096,6 +1158,11 @@ Get resource demand statistics across all calls and offerings.
     | `pending_count` | integer |
     | `total_requested_limits` | object (free-form) |
     | `total_approved_limits` | object (free-form) |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---
 
@@ -1181,11 +1248,16 @@ Get review progress statistics across all reviewers.
     | `average_review_time_days` | number (double) |
     | `completion_rate` | number (double) |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
-### Return statistics for call managing organisation
+### Return statistics for call managing organization
 
-Return statistics for call managing organisation.
+Return statistics for call managing organization.
 
 
 === "HTTPie"
@@ -1257,5 +1329,10 @@ Return statistics for call managing organisation.
     | `rounds_closing_in_one_week` | integer |
     | `calls_closing_in_one_week` | integer |
     | `offering_requests_pending` | integer |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

@@ -7,6 +7,7 @@
 | **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/override-settings/` | [Get all overridable settings](#get-all-overridable-settings) |
 | **Other Actions** | | |
+| <span class="http-badge http-get">GET</span> | `/api/override-settings/sources/` | [Get where overridden settings come from](#get-where-overridden-settings-come-from) |
 | <span class="http-badge http-post">POST</span> | `/api/override-settings/` | [Update overridable settings](#update-overridable-settings) |
 
 ---
@@ -15,7 +16,7 @@
 
 ### Get all overridable settings
 
-Returns all settings that can be overridden in the database via the Constance backend. Staff receive every value. Support users receive the same keys, with secret_field values blanked.
+Returns all settings that can be overridden in the database. Staff receive every value. Support users receive the same keys, with secret_field values blanked.
 
 
 === "HTTPie"
@@ -377,6 +378,9 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `METRICS_ARCHIVE_GRACE_DAYS` | integer |
     | `USAGE_POLL_RECORD_RETENTION_MONTHS` | integer |
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |
+    | `FIRECREST_ALLOWED_API_URLS` | string |
+    | `SLURM_MONITOR_ALLOWED_API_URLS` | string |
+    | `OIDC_TOKEN_MAX_IDLE_DAYS` | integer |
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |
     | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of anys |
     | `FEDERATED_IDENTITY_AUTHORITATIVE_ISD` | string |
@@ -388,6 +392,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `ENABLED_REPORTING_SCREENS` | array of anys |
     | `POSIX_ID_POOL_UTILIZATION_THRESHOLD` | integer |
     | `AFFILIATES_ENABLED` | boolean |
+    | `VAT_TAXATION_ENABLED` | boolean |
+    | `VAT_OSS_ENABLED` | boolean |
     | `MATRIX_ENABLED` | boolean |
     | `MATRIX_AUTO_CREATE_PROJECT_ROOMS` | boolean |
     | `MATRIX_HOMESERVER_URL` | string (uri) |
@@ -399,6 +405,8 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `MATRIX_TOKENS_MANAGED_BY` | string |
     | `MATRIX_HISTORY_EXPORT_ENABLED` | boolean |
     | `MATRIX_EXPORT_MEDIA` | boolean |
+    | `MATRIX_TICKET_CONTEXT_MESSAGES` | integer |
+    | `MATRIX_TICKET_DRAFT_TTL_MINUTES` | integer |
     | `MATRIX_HISTORY_EXPORT_RETENTION_DAYS` | integer |
     | `MATRIX_USER_REGISTRATION_SECRET` | string |
     | `MATRIX_USER_ID_FORMAT` | string |
@@ -409,20 +417,100 @@ Returns all settings that can be overridden in the database via the Constance ba
     | `MATRIX_LIVEKIT_URL` | string (uri) |
     | `MATRIX_LIVEKIT_PUBLIC_URL` | string |
     | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |
+    | `API_TOKEN_MAX_LIFETIME_MINUTES` | integer |
     | `PAT_ENABLED` | boolean |
     | `PAT_MAX_LIFETIME_DAYS` | integer |
     | `PAT_MAX_TOKENS_PER_USER` | integer |
     | `PAT_MAX_ACL_ENTRIES` | integer |
     | `PAT_MAX_AUDIT_EVENTS_PER_HOUR` | integer |
+    | `MCP_ENABLED` | boolean |
+    | `MCP_RESOURCE_URLS` | string |
+    | `EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS` | integer |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
 ## Other Actions
 
 
+### Get where overridden settings come from
+
+Lists every setting that has a value of its own or that the deployment manages, with who wrote it last, what re-applies it on every deploy and whether it is locked. A locked setting cannot be changed through /api/override-settings/.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/override-settings/sources/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.override_settings import override_settings_sources_list # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = override_settings_sources_list.sync(client=client)
+    
+    for item in response:
+        print(item)
+    ```
+    
+    
+    1.  **API Source:** [`override_settings_sources_list`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/override_settings/override_settings_sources_list.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { overrideSettingsSourcesList } from 'waldur-js-client';
+    
+    try {
+      const response = await overrideSettingsSourcesList({
+      auth: "Token YOUR_API_TOKEN"
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    The response body is an array of objects, where each object has the following structure:
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `key` | string |  |
+    | `source` | any |  |
+    | `source_detail` | string | File, command or other origin within the source. |
+    | `locked` | boolean | Managed by the deployment: cannot be changed through the API or the Django admin. |
+    | `managed_by` | string | File or command that re-applies the setting on every deploy, so a change made elsewhere does not last. Empty when no deploy does, such as for a value the deployment only seeded. |
+    | `updated_at` | string (date-time) |  |
+    | `updated_by_username` | string |  |
+
+
+=== "Authorization"
+
+    Staff or support only.
+
+---
+
 ### Update overridable settings
 
-Updates one or more settings in the database via the Constance backend. Requires staff permissions. Support users cannot update settings.
+Updates one or more settings in the database. Requires staff permissions. Support users cannot update settings.
 
 
 === "HTTPie"
@@ -789,6 +877,9 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `METRICS_ARCHIVE_GRACE_DAYS` | integer |  |
     | `USAGE_POLL_RECORD_RETENTION_MONTHS` | integer |  |
     | `SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS` | integer |  |
+    | `FIRECREST_ALLOWED_API_URLS` | string |  |
+    | `SLURM_MONITOR_ALLOWED_API_URLS` | string |  |
+    | `OIDC_TOKEN_MAX_IDLE_DAYS` | integer |  |
     | `FEDERATED_IDENTITY_SYNC_ENABLED` | boolean |  |
     | `FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES` | array of anys |  |
     | `FEDERATED_IDENTITY_AUTHORITATIVE_ISD` | string |  |
@@ -800,6 +891,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `ENABLED_REPORTING_SCREENS` | array of anys |  |
     | `POSIX_ID_POOL_UTILIZATION_THRESHOLD` | integer |  |
     | `AFFILIATES_ENABLED` | boolean |  |
+    | `VAT_TAXATION_ENABLED` | boolean |  |
+    | `VAT_OSS_ENABLED` | boolean |  |
     | `MATRIX_ENABLED` | boolean |  |
     | `MATRIX_AUTO_CREATE_PROJECT_ROOMS` | boolean |  |
     | `MATRIX_HOMESERVER_URL` | string (uri) |  |
@@ -811,6 +904,8 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `MATRIX_TOKENS_MANAGED_BY` | string |  |
     | `MATRIX_HISTORY_EXPORT_ENABLED` | boolean |  |
     | `MATRIX_EXPORT_MEDIA` | boolean |  |
+    | `MATRIX_TICKET_CONTEXT_MESSAGES` | integer |  |
+    | `MATRIX_TICKET_DRAFT_TTL_MINUTES` | integer |  |
     | `MATRIX_HISTORY_EXPORT_RETENTION_DAYS` | integer |  |
     | `MATRIX_USER_REGISTRATION_SECRET` | string |  |
     | `MATRIX_USER_ID_FORMAT` | string |  |
@@ -821,16 +916,25 @@ Updates one or more settings in the database via the Constance backend. Requires
     | `MATRIX_LIVEKIT_URL` | string (uri) |  |
     | `MATRIX_LIVEKIT_PUBLIC_URL` | string |  |
     | `SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY` | integer |  |
+    | `API_TOKEN_MAX_LIFETIME_MINUTES` | integer |  |
     | `PAT_ENABLED` | boolean |  |
     | `PAT_MAX_LIFETIME_DAYS` | integer |  |
     | `PAT_MAX_TOKENS_PER_USER` | integer |  |
     | `PAT_MAX_ACL_ENTRIES` | integer |  |
     | `PAT_MAX_AUDIT_EVENTS_PER_HOUR` | integer |  |
+    | `MCP_ENABLED` | boolean |  |
+    | `MCP_RESOURCE_URLS` | string |  |
+    | `EVENT_CONSUMER_EPHEMERAL_IDLE_HOURS` | integer |  |
 
 
 === "Responses"
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

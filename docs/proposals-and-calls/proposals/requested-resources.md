@@ -104,6 +104,11 @@
     | `proposal_name` | string |  |
     | `proposal` | string (uri) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -188,5 +193,10 @@
     | `created_by_name` | string |  |
     | `proposal_name` | string |  |
     | `proposal` | string (uri) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

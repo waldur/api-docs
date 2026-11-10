@@ -69,4 +69,9 @@
     | `by_status` | object (free-form) |
     | `by_priority` | object (free-form) |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

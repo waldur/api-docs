@@ -85,6 +85,11 @@ Get a list of volume availability zones.
     | `settings` | string (uri) |
     | `available` | boolean |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Get volume availability zone details
@@ -158,5 +163,10 @@ Retrieve details of a specific volume availability zone.
     | `name` | string |
     | `settings` | string (uri) |
     | `available` | boolean |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

@@ -79,6 +79,11 @@
     | `description` | string |
     | `icon_url` | string (uri) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -150,5 +155,10 @@
     | `name` | string |
     | `description` | string |
     | `icon_url` | string (uri) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

@@ -58,4 +58,9 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

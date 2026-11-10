@@ -109,6 +109,13 @@
     | `namespace_name` | string |
     | `scale` | integer |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -191,6 +198,13 @@
     | `namespace_uuid` | string (uuid) |
     | `namespace_name` | string |
     | `scale` | integer |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -289,6 +303,13 @@
     | `namespace_uuid` | string (uuid) |
     | `namespace_name` | string |
     | `scale` | integer |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -399,6 +420,16 @@
     | `namespace_name` | string |
     | `scale` | integer |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -499,6 +530,16 @@
     | `namespace_name` | string |
     | `scale` | integer |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -563,6 +604,16 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -635,6 +686,13 @@
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Redeploy
@@ -699,6 +757,16 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -793,5 +861,15 @@
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    - On a cluster provided by a Rancher offering whose deployment mode is managed, only users with the staff flag, whatever their token's scopes; others are refused with 400. On any other cluster this check lets everyone through.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

@@ -85,6 +85,13 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Role groups of the clusters and Rancher projects the caller can see (through a role on the cluster's project or organization); users with the staff or support flag see all of them, whatever their token's scopes.
+
 ---
 
 ### Retrieve
@@ -161,5 +168,12 @@
     | `role` | string (uri) |  |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Role groups of the clusters and Rancher projects the caller can see (through a role on the cluster's project or organization); users with the staff or support flag see all of them, whatever their token's scopes.
 
 ---

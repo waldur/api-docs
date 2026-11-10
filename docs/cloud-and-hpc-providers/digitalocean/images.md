@@ -91,6 +91,11 @@
     | `created_at` | string (date-time) |  |
     | `min_disk_size` | integer | Minimum disk required for a size to use this image |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -169,5 +174,10 @@
     | `is_official` | boolean | Is image provided by DigitalOcean |
     | `created_at` | string (date-time) |  |
     | `min_disk_size` | integer | Minimum disk required for a size to use this image |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

@@ -99,6 +99,13 @@ Returns a paginated list of Terms of Service configurations for offerings. Visib
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Terms of service of offerings of organizations where the caller holds a role and of offerings they hold an active consent to, and the active terms of shared offerings. Staff and support see all.
+
 ---
 
 ### Retrieve a Terms of Service configuration
@@ -181,6 +188,13 @@ Returns the details of a specific Terms of Service configuration.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Terms of service of offerings of organizations where the caller holds a role and of offerings they hold an active consent to, and the active terms of shared offerings. Staff and support see all.
+
 ---
 
 ### Create a Terms of Service configuration
@@ -251,7 +265,7 @@ Creates a new Terms of Service configuration for an offering. Only one active To
     | `terms_of_service` | string |  |  |
     | `terms_of_service_link` | string (uri) |  |  |
     | `version` | string |  |  |
-    | `is_active` | boolean |  |  |
+    | `is_active` | boolean |  | <br>_Constraints: default: `False`_ |
     | `requires_reconsent` | boolean |  | If True, user will be asked to re-consent to the terms of service when the terms of service are updated. |
     | `grace_period_days` | integer |  | Number of days before outdated consents are automatically revoked. Only applies when requires_reconsent=True. |
 
@@ -269,6 +283,11 @@ Creates a new Terms of Service configuration for an offering. Only one active To
     | `is_active` | boolean |  |
     | `requires_reconsent` | boolean | If True, user will be asked to re-consent to the terms of service when the terms of service are updated. |
     | `grace_period_days` | integer | Number of days before outdated consents are automatically revoked. Only applies when requires_reconsent=True. |
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE on the offering named in the request or on its organization.
 
 ---
 
@@ -367,6 +386,13 @@ Updates an existing Terms of Service configuration. Note that some fields like `
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a Terms of Service configuration
@@ -464,6 +490,13 @@ Partially updates an existing Terms of Service configuration.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete a Terms of Service configuration
@@ -530,5 +563,12 @@ Deletes a Terms of Service configuration. This is a hard delete and should be us
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

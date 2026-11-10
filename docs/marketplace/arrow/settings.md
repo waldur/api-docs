@@ -101,6 +101,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -181,6 +186,11 @@
     | `invoice_item_prefix` | string | Prefix for invoice item names (e.g. 'Arrow consumption') |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -299,6 +309,11 @@ Discover Arrow customers and suggest mappings to Waldur customers.
     | `export_types.compatible` | boolean |
     | `export_types.recommended` | boolean |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Preview settings configuration before saving
@@ -387,6 +402,11 @@ Preview settings configuration before saving.
     | `export_type_reference` | string |
     | `classification_filter` | string |
     | `sync_enabled` | boolean |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -477,6 +497,11 @@ Save Arrow settings and customer mappings.
     | `mappings_created` | integer |
     | `message` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Validate Arrow API credentials without saving them
@@ -560,6 +585,11 @@ Validate Arrow API credentials without saving them.
     | `message` | string |  |
     | `error` | string |  |
     | `partner_info` | object (free-form) | Raw partner info data from Arrow API |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -660,6 +690,11 @@ Validate Arrow API credentials without saving them.
     | `invoice_item_prefix` | string | Prefix for invoice item names (e.g. 'Arrow consumption') |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -767,6 +802,11 @@ Validate Arrow API credentials without saving them.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -867,6 +907,11 @@ Validate Arrow API credentials without saving them.
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -931,5 +976,10 @@ Validate Arrow API credentials without saving them.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

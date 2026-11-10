@@ -100,6 +100,13 @@
     | `uuid` | string (uuid) |
     | `name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -169,6 +176,13 @@
     | `url` | string (uri) |
     | `uuid` | string (uuid) |
     | `name` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -264,6 +278,13 @@
     | `status` | string |
     | `upload_url` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Other Actions
@@ -338,5 +359,12 @@
     |---|---|
     | `status` | string |
     | `message` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

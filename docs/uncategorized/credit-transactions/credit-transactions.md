@@ -85,6 +85,9 @@
     | `uuid` | string (uuid) |
     | `created` | string (date-time) |
     | `amount` | string (decimal) |
+    | `granted_change` | string (decimal) |
+    | `paid_change` | string (decimal) |
+    | `earned_change` | string (decimal) |
     | `transaction_type` | string |
     | `transaction_type_display` | string |
     | `comment` | string |
@@ -93,6 +96,13 @@
     | `project_uuid` | string |
     | `project_name` | string |
     | `billing_period` | string (date) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -163,6 +173,9 @@
     | `uuid` | string (uuid) |
     | `created` | string (date-time) |
     | `amount` | string (decimal) |
+    | `granted_change` | string (decimal) |
+    | `paid_change` | string (decimal) |
+    | `earned_change` | string (decimal) |
     | `transaction_type` | string |
     | `transaction_type_display` | string |
     | `comment` | string |
@@ -171,5 +184,12 @@
     | `project_uuid` | string |
     | `project_name` | string |
     | `billing_period` | string (date) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

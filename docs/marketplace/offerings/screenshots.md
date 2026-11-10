@@ -92,6 +92,11 @@
     | `offering` | string (uri) |
     | `customer_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -167,6 +172,11 @@
     | `thumbnail` | string (uri) |
     | `offering` | string (uri) |
     | `customer_uuid` | string (uuid) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -259,6 +269,11 @@
     | `thumbnail` | string (uri) |
     | `offering` | string (uri) |
     | `customer_uuid` | string (uuid) |
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.CREATE_SCREENSHOT on the organization of the offering named in the request.
 
 ---
 
@@ -363,6 +378,13 @@
     | `offering` | string (uri) |
     | `customer_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_SCREENSHOT` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -452,6 +474,13 @@
     | `offering` | string (uri) |
     | `customer_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_SCREENSHOT` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -516,5 +545,12 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.DELETE_SCREENSHOT` on the offering's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

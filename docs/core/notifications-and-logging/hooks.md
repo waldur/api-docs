@@ -73,4 +73,11 @@
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff see every row; support see every row read-only; others see their own.
+
 ---

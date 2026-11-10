@@ -80,4 +80,9 @@
     | `components.billing_type` | any | Billing type for the component |
     | `available_limits` | array of strings |  |
 
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
+
 ---

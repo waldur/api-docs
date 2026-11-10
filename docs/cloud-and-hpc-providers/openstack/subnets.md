@@ -177,6 +177,13 @@ Get a list of subnets.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and support see every subnet; others see the subnets of the networks the network list shows them.
+
 ---
 
 ### Get subnet details
@@ -315,6 +322,13 @@ Retrieve details of a specific subnet.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and support see every subnet; others see the subnets of the networks the network list shows them.
+
 ---
 
 ### Synchronize resource state
@@ -393,6 +407,13 @@ Schedule an asynchronous pull operation to synchronize resource state from the b
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unlink resource
@@ -461,6 +482,11 @@ Delete resource from the database without scheduling operations on backend
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -624,6 +650,13 @@ Update an existing subnet.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update subnet
@@ -780,6 +813,13 @@ Update specific fields of a subnet.
     | `is_usage_based` | boolean |  |
     | `is_limit_based` | boolean |  |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete subnet
@@ -846,6 +886,13 @@ Delete a subnet.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -920,6 +967,13 @@ Connect the subnet to its router: the one chosen when the subnet was created or 
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Disconnect subnet from router
@@ -989,6 +1043,13 @@ Disconnect the subnet from its router. The router is remembered, so connecting a
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1073,6 +1134,11 @@ Manually transition the resource to ERRED state. This is useful for resources st
     |---|---|
     | `detail` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Mark resource as OK
@@ -1142,5 +1208,10 @@ Manually transition the resource to OK state and clear error fields. Staff-only 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

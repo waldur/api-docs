@@ -96,6 +96,13 @@
     | `modified_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `modified_by_full_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -179,6 +186,13 @@
     | `modified_by_uuid` | string (uuid) |  |
     | `modified_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `modified_by_full_name` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -275,6 +289,13 @@
     | `modified_by_uuid` | string (uuid) |  |
     | `modified_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `modified_by_full_name` | string |  |
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -383,6 +404,13 @@
     | `modified_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `modified_by_full_name` | string |  |
 
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -481,6 +509,13 @@
     | `modified_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `modified_by_full_name` | string |  |
 
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -545,5 +580,12 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

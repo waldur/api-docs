@@ -94,6 +94,16 @@
     | `revoked_by_username` | string | Required. 128 characters or fewer. Lowercase letters, numbers and @/./+/-/_ characters |
     | `revocation_reason` | string |  |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Staff.
+    - Not while impersonating another user.
+    
+    Every other user's passkeys; user_uuid narrows them to one user's.
+
 ---
 
 ## Other Actions
@@ -179,5 +189,13 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Staff.
+    - Not while impersonating another user.
 
 ---

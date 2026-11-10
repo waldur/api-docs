@@ -92,6 +92,13 @@
     | `issue_key` | string |
     | `issue_summary` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -168,6 +175,13 @@
     | `user_full_name` | string |
     | `issue_key` | string |
     | `issue_summary` | string |
+
+
+=== "Authorization"
+
+    Staff or support only.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -251,5 +265,10 @@
     | `issue` | string (uri) |
     | `comment` | string |
     | `evaluation` | integer |
+
+
+=== "Authorization"
+
+    Anyone with the signed token from an issue's feedback email, within ISSUE_FEEDBACK_TOKEN_PERIOD days (7 by default) and once per issue; no sign-in. The email is sent when an issue is resolved, if ISSUE_FEEDBACK_ENABLE is on; it is off by default.
 
 ---

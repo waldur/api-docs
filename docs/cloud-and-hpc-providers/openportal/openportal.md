@@ -111,6 +111,14 @@
     | `invited_by` | string |
     | `reason` | string |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - The caller's own short name, or the caller's own email address, which answers for the first active user with that address and a project role; searches by project ID or project name are for staff and support only.
+
 ---
 
 ### List Openportal Accounting Summary
@@ -188,6 +196,13 @@
     | `total_spend` | string (decimal) |
     | `current_month_spend` | string (decimal) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every project; others see projects they hold a role on and projects of organizations they hold a role on.
+
 ---
 
 ### Retrieve
@@ -263,6 +278,13 @@
     | `total_credits` | string (decimal) |
     | `total_spend` | string (decimal) |
     | `current_month_spend` | string (decimal) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every project; others see projects they hold a role on and projects of organizations they hold a role on.
 
 ---
 
@@ -346,6 +368,13 @@
     | `performed_by_uuid` | string (uuid) |  |
     | `note` | string | Optional free-text comment about this event. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every entry; organization owners see entries of managed projects attached to a project of their organization, and entries without a managed project whose identifier and destination each match one of those.
+
 ---
 
 ### Retrieve
@@ -423,6 +452,13 @@
     | `performed_by_uuid` | string (uuid) |  |
     | `note` | string | Optional free-text comment about this event. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every entry; organization owners see entries of managed projects attached to a project of their organization, and entries without a managed project whose identifier and destination each match one of those.
+
 ---
 
 ### Offering mapping
@@ -486,6 +522,11 @@ Map OpenPortal destination strings to Waldur Offering objects. Pass each destina
     | Field | Type |
     |---|---|
     | `*` | any |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -557,6 +598,14 @@ Return the allowed_domains list for a project derived from its AwardDetails. nul
     |---|---|
     | `allowed_domains` | array of strings |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - Any role in the project or in its organization.
+
 ---
 
 ### Project mapping
@@ -620,6 +669,11 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | Field | Type |
     |---|---|
     | `*` | any |
+
+
+=== "Authorization"
+
+    Any signed-in user. Staff and global support resolve every project; others only projects they hold a role on or that belong to an organization they hold a role on. Other identifiers map to null.
 
 ---
 
@@ -703,6 +757,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `report.users` | object (free-form) | UserIdentifier → local_username |
     | `report.daily_reports` | object (free-form) | "YYYY-MM-DD" → DailyStorageReportJson. Absent from JSON when there are no daily snapshots. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every report; others see reports whose OpenPortal project identifier belongs to a project they hold a role on or that belongs to an organization they hold a role on.
+
 ---
 
 ### Retrieve
@@ -781,6 +842,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `report.user_quotas` | object (free-form) | UserIdentifier → (Volume → Quota) |
     | `report.users` | object (free-form) | UserIdentifier → local_username |
     | `report.daily_reports` | object (free-form) | "YYYY-MM-DD" → DailyStorageReportJson. Absent from JSON when there are no daily snapshots. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every report; others see reports whose OpenPortal project identifier belongs to a project they hold a role on or that belongs to an organization they hold a role on.
 
 ---
 
@@ -863,6 +931,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `report.reports` | object (free-form) | "YYYY-MM-DD" → DailyProjectUsageReportJson |
     | `report.users` | object (free-form) | UserIdentifier → local_username. e.g. { "chris.aiproject.brics": "chris.aiproject" } |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every report; others see reports whose OpenPortal project identifier belongs to a project they hold a role on or that belongs to an organization they hold a role on.
+
 ---
 
 ### Retrieve
@@ -939,6 +1014,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `report.project` | string | ProjectIdentifier string e.g. "aiproject.brics" |
     | `report.reports` | object (free-form) | "YYYY-MM-DD" → DailyProjectUsageReportJson |
     | `report.users` | object (free-form) | UserIdentifier → local_username. e.g. { "chris.aiproject.brics": "chris.aiproject" } |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every report; others see reports whose OpenPortal project identifier belongs to a project they hold a role on or that belongs to an organization they hold a role on.
 
 ---
 
@@ -1018,6 +1100,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `is_confirmed` | boolean |  |
     | `note` | string | Optional comment, e.g. 'carrying over 20 unused credits from previous award'. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every entry; others see entries of remote projects whose current project their roles reach.
+
 ---
 
 ### Retrieve
@@ -1094,6 +1183,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `confirmed_at` | string (date-time) | When the remote portal confirmed this allocation.  Null if pending. |
     | `is_confirmed` | boolean |  |
     | `note` | string | Optional comment, e.g. 'carrying over 20 unused credits from previous award'. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every entry; others see entries of remote projects whose current project their roles reach.
 
 ---
 
@@ -1178,6 +1274,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `remote_response` | object (free-form) | Raw response received from the remote portal, if applicable. |
     | `note` | string | Optional free-text comment about this event. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every entry; others see entries of remote projects whose current project their roles reach.
+
 ---
 
 ### Retrieve
@@ -1255,6 +1358,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `remote_project_url` | string (uri) |  |
     | `remote_response` | object (free-form) | Raw response received from the remote portal, if applicable. |
     | `note` | string | Optional free-text comment about this event. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every entry; others see entries of remote projects whose current project their roles reach.
 
 ---
 
@@ -1366,6 +1476,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every remote project; others see remote projects whose current project their roles reach.
+
 ---
 
 ### Retrieve
@@ -1467,6 +1584,13 @@ Map OpenPortal ProjectIdentifier strings to Waldur Project objects. Pass each id
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every remote project; others see remote projects whose current project their roles reach.
+
 ---
 
 ### Get total usage for remote project
@@ -1534,6 +1658,13 @@ Get total usage for remote project
     **`200`** - 
     
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Staff and global support see every remote project; others see remote projects whose current project their roles reach.
+
 ---
 
 ### User mapping
@@ -1597,6 +1728,11 @@ Map OpenPortal UserIdentifier strings (or email addresses) to Waldur User object
     | Field | Type |
     |---|---|
     | `*` | any |
+
+
+=== "Authorization"
+
+    Any signed-in user. Staff and global support resolve every user; others only users associated with an OpenPortal allocation (or, for email addresses, a remote allocation) of a project they hold a role on or that belongs to an organization they hold a role on. Other identifiers map to null.
 
 ---
 
@@ -1719,6 +1855,14 @@ Add note to remote project
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
+
 ---
 
 ### Approve remote project now
@@ -1821,6 +1965,14 @@ Approve remote project now
     | `last_contact_time` | string (date-time) | The most recent time the remote portal acknowledged anything about this project (confirmation, usage report, get_award response, etc.).  Used to detect connectivity issues and to trigger a transition to the STALE state. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
 
 ---
 
@@ -1925,6 +2077,14 @@ Hold remote project indefinitely
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
+
 ---
 
 ### Resend remote project request
@@ -2028,6 +2188,14 @@ Resend remote project request
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
+
 ---
 
 ### Reset remote project to pending
@@ -2130,6 +2298,14 @@ Reset remote project to pending
     | `last_contact_time` | string (date-time) | The most recent time the remote portal acknowledged anything about this project (confirmation, usage report, get_award response, etc.).  Used to detect connectivity issues and to trigger a transition to the STALE state. |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
 
 ---
 
@@ -2252,6 +2428,14 @@ Set allowed domains for remote project
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
+
 ---
 
 ### Set earliest approve date for remote project
@@ -2373,6 +2557,14 @@ Set earliest approve date for remote project
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
+
 ---
 
 ### Set links for remote project
@@ -2491,6 +2683,14 @@ Set links for remote project
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
+
 ---
 
 ### Set membership control for remote project
@@ -2575,5 +2775,13 @@ Set membership control for remote project
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - An owner of the organization of the remote project's current project.
 
 ---

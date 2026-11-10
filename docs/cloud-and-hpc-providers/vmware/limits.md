@@ -78,4 +78,9 @@
     | `max_disk` | integer |
     | `max_disk_total` | integer |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---

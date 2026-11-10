@@ -79,6 +79,11 @@
     | `name` | string |
     | `region` | any |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -149,5 +154,10 @@
     | `uuid` | string (uuid) |
     | `name` | string |
     | `region` | any |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

@@ -81,4 +81,11 @@ List project quotas.
     | `customer_abbreviation` | string |
     | `value` | integer |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Projects or organizations, as the route names, that the caller's roles reach; staff and support see all.
+
 ---

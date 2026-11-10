@@ -117,6 +117,13 @@
     | `date` | string (date-time) |  |
     | `billing_period` | string (date) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve a user-specific component usage record
@@ -215,5 +222,12 @@ Returns the details of a single user-specific component usage record.
     | `component_type` | string | Unique internal name of the measured unit, for example floating_ip. |
     | `date` | string (date-time) |  |
     | `billing_period` | string (date) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

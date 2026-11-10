@@ -127,6 +127,13 @@
     | `home_directory` | string |  |
     | `offering_count` | integer |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Accounts at service providers whose organization the organization list shows the caller, and at service providers where they hold a role. Staff and support see all.
+
 ---
 
 ### Retrieve a service provider account
@@ -227,6 +234,13 @@ Returns one provider account, including its POSIX identity and the number of off
     | `login_shell` | string |  |
     | `home_directory` | string |  |
     | `offering_count` | integer |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Accounts at service providers whose organization the organization list shows the caller, and at service providers where they hold a role. Staff and support see all.
 
 ---
 
@@ -333,6 +347,13 @@ Returns one provider account, including its POSIX identity and the number of off
     | `home_directory` | string |  |
     | `offering_count` | integer |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update a service provider account
@@ -438,6 +459,13 @@ Returns one provider account, including its POSIX identity and the number of off
     | `home_directory` | string |  |
     | `offering_count` | integer |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete a service provider account
@@ -504,5 +532,12 @@ Refused while offering accounts still read through this record.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_USER` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

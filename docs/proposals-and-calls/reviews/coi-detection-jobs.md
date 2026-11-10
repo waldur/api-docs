@@ -97,6 +97,11 @@
     | `error_message` | string |  |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---
 
 ### Retrieve
@@ -178,5 +183,10 @@
     | `completed_at` | string (date-time) |  |
     | `error_message` | string |  |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

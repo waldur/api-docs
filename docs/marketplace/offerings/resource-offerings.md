@@ -88,4 +88,9 @@
     | `name` | string |
     | `uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Any signed-in user. It lists the offerings of the category's non-terminated resources that the caller sees as a consumer: Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all.
+
 ---

@@ -85,6 +85,11 @@ Returns a paginated list of all sections. Sections are used to group attributes 
     | `category_title` | string |  |
     | `is_standalone` | boolean | Whether section is rendered as a separate tab. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve a section
@@ -160,6 +165,11 @@ Returns the details of a specific section, identified by its key.
     | `category` | string (uri) |  |
     | `category_title` | string |  |
     | `is_standalone` | boolean | Whether section is rendered as a separate tab. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -252,6 +262,11 @@ Creates a new section within a category. Requires staff permissions.
     | `category` | string (uri) |  |
     | `category_title` | string |  |
     | `is_standalone` | boolean | Whether section is rendered as a separate tab. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -356,6 +371,11 @@ Updates an existing section. Requires staff permissions.
     | `category_title` | string |  |
     | `is_standalone` | boolean | Whether section is rendered as a separate tab. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partially update a section
@@ -447,6 +467,11 @@ Partially updates an existing section. Requires staff permissions.
     | `category_title` | string |  |
     | `is_standalone` | boolean | Whether section is rendered as a separate tab. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete a section
@@ -513,5 +538,10 @@ Deletes a section. Requires staff permissions.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

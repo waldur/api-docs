@@ -87,6 +87,13 @@
     | `shortname` | string | A short, unique name for the project. It will be used to form the local username of any users in the project on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `allowed_destinations` | string | A comma-separated list of allowable destinations of instances that              can be attached to this project. For example, a project may only allow              'brics.aip1.*', meaning that only instances that start with 'brics.aip1.'              can be attached to this project. |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -156,6 +163,13 @@
     | `project` | string (uri) |  |
     | `shortname` | string | A short, unique name for the project. It will be used to form the local username of any users in the project on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `allowed_destinations` | string | A comma-separated list of allowable destinations of instances that              can be attached to this project. For example, a project may only allow              'brics.aip1.*', meaning that only instances that start with 'brics.aip1.'              can be attached to this project. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -235,6 +249,11 @@
     | `project` | string (uri) |  |
     | `shortname` | string | A short, unique name for the project. It will be used to form the local username of any users in the project on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `allowed_destinations` | string | A comma-separated list of allowable destinations of instances that              can be attached to this project. For example, a project may only allow              'brics.aip1.*', meaning that only instances that start with 'brics.aip1.'              can be attached to this project. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -326,6 +345,16 @@
     | `shortname` | string | A short, unique name for the project. It will be used to form the local username of any users in the project on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `allowed_destinations` | string | A comma-separated list of allowable destinations of instances that              can be attached to this project. For example, a project may only allow              'brics.aip1.*', meaning that only instances that start with 'brics.aip1.'              can be attached to this project. |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
+
 ---
 
 ### Partial Update
@@ -410,6 +439,16 @@
     | `shortname` | string | A short, unique name for the project. It will be used to form the local username of any users in the project on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `allowed_destinations` | string | A comma-separated list of allowable destinations of instances that              can be attached to this project. For example, a project may only allow              'brics.aip1.*', meaning that only instances that start with 'brics.aip1.'              can be attached to this project. |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
+
 ---
 
 ### Delete
@@ -474,6 +513,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -570,6 +614,16 @@ Set allowed destinations for project
     | `shortname` | string | A short, unique name for the project. It will be used to form the local username of any users in the project on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `allowed_destinations` | string | A comma-separated list of allowable destinations of instances that              can be attached to this project. For example, a project may only allow              'brics.aip1.*', meaning that only instances that start with 'brics.aip1.'              can be attached to this project. |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
+
 ---
 
 ### Set shortname for project
@@ -661,5 +715,15 @@ Set shortname for project
     | `project` | string (uri) |  |
     | `shortname` | string | A short, unique name for the project. It will be used to form the local username of any users in the project on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `allowed_destinations` | string | A comma-separated list of allowable destinations of instances that              can be attached to this project. For example, a project may only allow              'brics.aip1.*', meaning that only instances that start with 'brics.aip1.'              can be attached to this project. |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
 
 ---

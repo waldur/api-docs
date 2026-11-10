@@ -73,4 +73,9 @@ Receives event transactions from the Matrix homeserver. Authenticated via hs_tok
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Only the homeserver: the request carries MATRIX_APPSERVICE_HS_TOKEN as its bearer token. No Waldur authentication. While Matrix chat is disabled, any caller gets 200 and the call does nothing.
+
 ---

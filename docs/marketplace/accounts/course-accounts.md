@@ -114,6 +114,13 @@ Returns a paginated list of course accounts accessible to the current user.
     | `error_message` | string |
     | `error_traceback` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Course accounts of projects where the caller holds PROJECT.COURSE_ACCOUNT_MANAGE on the project or site-wide. Staff and support see all.
+
 ---
 
 ### Retrieve a course account
@@ -201,6 +208,13 @@ Returns the details of a specific course account.
     | `description` | string |
     | `error_message` | string |
     | `error_traceback` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Course accounts of projects where the caller holds PROJECT.COURSE_ACCOUNT_MANAGE on the project or site-wide. Staff and support see all.
 
 ---
 
@@ -298,6 +312,13 @@ Creates a new temporary course account within a specified course project.
     | `description` | string |
     | `error_message` | string |
     | `error_traceback` | string |
+
+
+=== "Authorization"
+
+    Requires `PROJECT.COURSE_ACCOUNT_MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -424,6 +445,13 @@ Creates multiple course accounts within a specified course project in a single r
     | `error_message` | string |
     | `error_traceback` | string |
 
+
+=== "Authorization"
+
+    Requires `PROJECT.COURSE_ACCOUNT_MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete (close) a course account
@@ -511,6 +539,13 @@ Deletes a course account, which triggers a 'close' operation in the backend.
     | `description` | string |
     | `error_message` | string |
     | `error_traceback` | string |
+
+
+=== "Authorization"
+
+    Requires `PROJECT.COURSE_ACCOUNT_MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -600,5 +635,12 @@ Deletes a course account, which triggers a 'close' operation in the backend.
     | `description` | string |
     | `error_message` | string |
     | `error_traceback` | string |
+
+
+=== "Authorization"
+
+    Requires `PROJECT.COURSE_ACCOUNT_MANAGE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

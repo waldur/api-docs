@@ -86,6 +86,11 @@
     | `required_answer_value` | any |
     | `operator` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -160,6 +165,11 @@
     | `depends_on_question_name` | string |
     | `required_answer_value` | any |
     | `operator` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -248,6 +258,11 @@
     | `depends_on_question_name` | string |
     | `required_answer_value` | any |
     | `operator` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -348,6 +363,11 @@
     | `required_answer_value` | any |
     | `operator` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -438,6 +458,11 @@
     | `required_answer_value` | any |
     | `operator` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -502,5 +527,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

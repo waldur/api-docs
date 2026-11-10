@@ -220,6 +220,13 @@ Get a list of routers.
     | `is_limit_based` | boolean |  |
     | `offering_external_ips` | array of strings |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Get router details
@@ -419,6 +426,13 @@ Retrieve details of a specific router.
     | `is_limit_based` | boolean |  |
     | `offering_external_ips` | array of strings |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Create router
@@ -505,6 +519,13 @@ Create a new router.
     | `project` | string (uri) |  |
     | `service_settings` | string (uri) |  |
 
+
+=== "Authorization"
+
+    For the `tenant` named in the request, one of these roles: `CUSTOMER.OWNER` on its customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on its project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete router
@@ -571,6 +592,13 @@ Delete a router.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -670,6 +698,11 @@ Returns a merged list of external networks available for this router's tenant, f
     | `subnets.name` | string |
     | `subnets.cidr` | string |
 
+
+=== "Authorization"
+
+    Whoever sees the router, as retrieve shows it. It lists the shared external networks of the router's cloud (all of them for staff and owners of the organization that owns the cloud) and the networks shared into its tenant as external.
+
 ---
 
 ### Effective routes for this router
@@ -754,6 +787,13 @@ Compose the router's routing table from three sources: the default route inherit
     | `routes.external_network_uuid` | string |  |
     | `routes.external_network_name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Add router interface
@@ -837,6 +877,13 @@ Add interface to router. Either subnet or port must be provided.
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Remove external gateway
@@ -906,6 +953,13 @@ Remove the external gateway from this router.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OPENSTACK_ROUTER.MANAGE_GATEWAY` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -990,6 +1044,13 @@ Remove interface from router. Either subnet or port must be provided.
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark router as ERRED
@@ -1072,6 +1133,11 @@ Manually transition the router to ERRED state. This is useful for routers stuck 
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1165,6 +1231,13 @@ Set an external network as the gateway for this router. Advanced options (SNAT c
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Requires `OPENSTACK_ROUTER.MANAGE_GATEWAY` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark router as OK
@@ -1234,6 +1307,11 @@ Manually transition the router to OK state and clear error fields. Staff-only op
     | Field | Type |
     |---|---|
     | `detail` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -1324,5 +1402,12 @@ Define or overwrite the static routes for the router.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` on the customer; `PROJECT.MANAGER` or `PROJECT.ADMIN` on the project.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

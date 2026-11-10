@@ -127,4 +127,9 @@ Returns a flat, paginated list of changelog entries for all pending versions, or
     | `results.release_date` | string |
     | `results.release_type` | string |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

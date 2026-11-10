@@ -88,6 +88,11 @@
     | `regions.uuid` | string (uuid) |  |
     | `regions.name` | string |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Retrieve
@@ -165,5 +170,10 @@
     | `regions.url` | string (uri) |  |
     | `regions.uuid` | string (uuid) |  |
     | `regions.name` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---

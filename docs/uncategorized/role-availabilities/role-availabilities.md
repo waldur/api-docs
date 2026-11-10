@@ -65,7 +65,7 @@
     | `page_size` | integer | Number of results to return per page. |
     | `role_name` | string | Role name contains |
     | `role_uuid` | string (uuid) | Role UUID |
-    | `scope_type` | string | Scope content type (e.g. 'offering', 'customer') |
+    | `scope_type` | string | Scope type, as returned in scope_type: customer, project, offering, service_provider, call_organizer, call, proposal, resource, resource_project or global. A content type model name also matches. |
 
 
 === "Responses"
@@ -86,6 +86,13 @@
     | `is_profile_managed` | boolean |
     | `profile_uuid` | string |
     | `profile_name` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Every binding to staff; none to anyone else.
 
 ---
 
@@ -164,6 +171,13 @@
     | `profile_uuid` | string |
     | `profile_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Every binding to staff; none to anyone else.
+
 ---
 
 ### Delete
@@ -228,5 +242,10 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

@@ -99,4 +99,9 @@
     | `questions.subquestions.showIf` | string |
     | `questions.showSubquestionIf` | string |
 
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
+
 ---

@@ -69,4 +69,9 @@
     | `subscriptions.uuid` | string (uuid) |  |
     | `subscriptions.source_ip` | any | An IPv4 or IPv6 address. |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

@@ -86,6 +86,13 @@
     | `shortname` | string | A short, unique name for you. It will be used to form your local username on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `user` | string (uri) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -154,6 +161,13 @@
     |---|---|---|
     | `shortname` | string | A short, unique name for you. It will be used to form your local username on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `user` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -231,6 +245,11 @@
     |---|---|---|
     | `shortname` | string | A short, unique name for you. It will be used to form your local username on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `user` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -320,6 +339,16 @@
     | `shortname` | string | A short, unique name for you. It will be used to form your local username on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `user` | string (uri) |  |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
+
 ---
 
 ### Partial Update
@@ -402,6 +431,16 @@
     | `shortname` | string | A short, unique name for you. It will be used to form your local username on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `user` | string (uri) |  |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
+
 ---
 
 ### Delete
@@ -467,6 +506,11 @@
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Other Actions
@@ -527,6 +571,11 @@ Retrieve UserInfo for current user
     |---|---|---|
     | `shortname` | string | A short, unique name for you. It will be used to form your local username on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `user` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
 
 ---
 
@@ -617,5 +666,15 @@ Set shortname for user
     |---|---|---|
     | `shortname` | string | A short, unique name for you. It will be used to form your local username on any systems. Should only contain lower-case letters and digits and must start with a letter. |
     | `user` | string (uri) |  |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Any of:
+        - Staff.
+        - The user account the request is for.
+    - Staff.
 
 ---

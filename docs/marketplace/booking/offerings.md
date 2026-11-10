@@ -4,17 +4,10 @@
 
 | Method | Endpoint | Description |
 |:--- |:--- |:--- |
-| **Core CRUD** | | |
 | <span class="http-badge http-get">GET</span> | `/api/booking-offerings/` | [List Booking Offerings](#list-booking-offerings) |
 | <span class="http-badge http-get">GET</span> | `/api/booking-offerings/{uuid}/` | [Retrieve](#retrieve) |
-| **Other Actions** | | |
-| <span class="http-badge http-post">POST</span> | `/api/booking-offerings/{uuid}/google_calendar_sync/` | [Google calendar sync](#google-calendar-sync) |
-| <span class="http-badge http-post">POST</span> | `/api/booking-offerings/{uuid}/share_google_calendar/` | [Share google calendar](#share-google-calendar) |
-| <span class="http-badge http-post">POST</span> | `/api/booking-offerings/{uuid}/unshare_google_calendar/` | [Unshare google calendar](#unshare-google-calendar) |
 
 ---
-## Core CRUD
-
 
 ### List Booking Offerings
 
@@ -97,7 +90,7 @@
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -153,6 +146,7 @@
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -184,6 +178,7 @@
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -312,10 +307,13 @@
     | `user_has_offering_user` | boolean |  |
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
-    | `googlecalendar` | object |  |
-    | `googlecalendar.backend_id` | string |  |
-    | `googlecalendar.public` | boolean |  |
-    | `googlecalendar.http_link` | string |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Booking offerings of organizations the caller owns; staff see all.
 
 ---
 
@@ -408,7 +406,7 @@
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -464,6 +462,7 @@
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -495,6 +494,7 @@
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -623,207 +623,12 @@
     | `user_has_offering_user` | boolean |  |
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
-    | `googlecalendar` | object |  |
-    | `googlecalendar.backend_id` | string |  |
-    | `googlecalendar.public` | boolean |  |
-    | `googlecalendar.http_link` | string |  |
-
----
-
-## Other Actions
 
 
-### Google calendar sync
+=== "Authorization"
 
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/booking-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/google_calendar_sync/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.booking_offerings import booking_offerings_google_calendar_sync # (1)
+    Any signed-in user.
     
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = booking_offerings_google_calendar_sync.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`booking_offerings_google_calendar_sync`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/booking_offerings/booking_offerings_google_calendar_sync.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { bookingOfferingsGoogleCalendarSync } from 'waldur-js-client';
-    
-    try {
-      const response = await bookingOfferingsGoogleCalendarSync({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
-### Share google calendar
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/booking-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/share_google_calendar/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.booking_offerings import booking_offerings_share_google_calendar # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = booking_offerings_share_google_calendar.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`booking_offerings_share_google_calendar`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/booking_offerings/booking_offerings_share_google_calendar.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { bookingOfferingsShareGoogleCalendar } from 'waldur-js-client';
-    
-    try {
-      const response = await bookingOfferingsShareGoogleCalendar({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
-
----
-
-### Unshare google calendar
-
-
-=== "HTTPie"
-
-    ```bash
-    http \
-      POST \
-      https://api.example.com/api/booking-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/unshare_google_calendar/ \
-      Authorization:"Token YOUR_API_TOKEN"
-    ```
-
-=== "Python"
-
-    ```python
-    from waldur_api_client.client import AuthenticatedClient
-    from waldur_api_client.api.booking_offerings import booking_offerings_unshare_google_calendar # (1)
-    
-    client = AuthenticatedClient(
-        base_url="https://api.example.com", token="YOUR_API_TOKEN"
-    )
-    response = booking_offerings_unshare_google_calendar.sync(
-        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        client=client
-    )
-    
-    print(response)
-    ```
-    
-    
-    1.  **API Source:** [`booking_offerings_unshare_google_calendar`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/booking_offerings/booking_offerings_unshare_google_calendar.py)
-
-=== "TypeScript"
-
-    ```typescript
-    import { bookingOfferingsUnshareGoogleCalendar } from 'waldur-js-client';
-    
-    try {
-      const response = await bookingOfferingsUnshareGoogleCalendar({
-      auth: "Token YOUR_API_TOKEN",
-      path: {
-        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-      }
-    });
-      console.log('Success:', response);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-    ```
-
-
-=== "Path Parameters"
-
-    | Name | Type | Required |
-    |---|---|---|
-    | `uuid` | string (uuid) | ✓ |
-
-
-=== "Responses"
-
-    **`200`** - No response body
-    
+    Booking offerings of organizations the caller owns; staff see all.
 
 ---

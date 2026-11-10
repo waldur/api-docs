@@ -69,4 +69,9 @@
     | `last_health_check` | string (date-time) |
     | `failed_routing_count` | integer |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

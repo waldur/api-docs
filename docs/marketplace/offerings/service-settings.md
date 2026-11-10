@@ -101,6 +101,13 @@
     | `scope_uuid` | string (uuid) |  |
     | `options` | object (free-form) |  |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -190,5 +197,12 @@
     | `scope` | string |  |
     | `scope_uuid` | string (uuid) |  |
     | `options` | object (free-form) |  |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

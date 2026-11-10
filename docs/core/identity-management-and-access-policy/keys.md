@@ -107,6 +107,13 @@
     | `is_shared` | boolean |
     | `type` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own keys and every shared key; staff and global support see all keys.
+
 ---
 
 ### Retrieve
@@ -193,6 +200,13 @@
     | `is_shared` | boolean |
     | `type` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    The caller's own keys and every shared key; staff and global support see all keys.
+
 ---
 
 ### Create
@@ -278,6 +292,11 @@
     | `is_shared` | boolean |
     | `type` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+
 ---
 
 ### Delete
@@ -342,6 +361,14 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff.
+    - The caller's own SSH key, unless it is shared.
 
 ---
 
@@ -442,6 +469,11 @@ Returns the state of the object as it was at the specified timestamp. Only acces
     **`404`** - 
     
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Get version history
@@ -541,5 +573,10 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_user` | object (free-form) | User who created this revision |
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

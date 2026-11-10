@@ -94,6 +94,11 @@
     | `order` | integer | Display order. First type (lowest order) is the default. |
     | `is_synced` | boolean | Returns True if the request type was synced from a backend. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -169,6 +174,11 @@
     | `is_active` | boolean | Whether this request type is available for issue creation. |
     | `order` | integer | Display order. First type (lowest order) is the default. |
     | `is_synced` | boolean | Returns True if the request type was synced from a backend. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -258,6 +268,11 @@
     | `is_active` | boolean | Whether this request type is available for issue creation. |
     | `order` | integer | Display order. First type (lowest order) is the default. |
     | `is_synced` | boolean | Returns True if the request type was synced from a backend. |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -359,6 +374,11 @@
     | `order` | integer | Display order. First type (lowest order) is the default. |
     | `is_synced` | boolean | Returns True if the request type was synced from a backend. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -450,6 +470,11 @@
     | `order` | integer | Display order. First type (lowest order) is the default. |
     | `is_synced` | boolean | Returns True if the request type was synced from a backend. |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -514,6 +539,11 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -588,6 +618,11 @@ Activate a request type so it appears in issue creation.
     |---|---|
     | `status` | string |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Deactivate a request type so it no longer appears in issue creation
@@ -657,6 +692,11 @@ Deactivate a request type so it no longer appears in issue creation.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -736,5 +776,10 @@ Bulk update order for multiple request types.
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

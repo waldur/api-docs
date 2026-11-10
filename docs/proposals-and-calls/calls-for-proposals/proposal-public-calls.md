@@ -140,6 +140,7 @@
     | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
     | `offerings.components.default_limit` | number (double) |  |
+    | `offerings.components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offerings.components.factor` | integer |  |
     | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
@@ -204,6 +205,7 @@
     | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
     | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
+    | `resource_templates.requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `resource_templates.requested_offering_components.factor` | integer |  |
     | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
@@ -227,6 +229,12 @@
     | `proposal_field_config` | any |  |
     | `evaluation_start` | any | When a submitted proposal's evaluation starts: at once on submission, or for every proposal of a round together at the round's cut-off. Cannot be changed while proposals are submitted or in review. |
     | `publish_results` | any | When applicants learn the allocation decision: as soon as it is made, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -349,6 +357,7 @@
     | `offerings.components.max_available_limit` | number (double) |  |
     | `offerings.components.is_boolean` | boolean |  |
     | `offerings.components.default_limit` | number (double) |  |
+    | `offerings.components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offerings.components.factor` | integer |  |
     | `offerings.components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offerings.components.is_prepaid` | boolean |  |
@@ -413,6 +422,7 @@
     | `resource_templates.requested_offering_components.max_available_limit` | number (double) |  |
     | `resource_templates.requested_offering_components.is_boolean` | boolean |  |
     | `resource_templates.requested_offering_components.default_limit` | number (double) |  |
+    | `resource_templates.requested_offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `resource_templates.requested_offering_components.factor` | integer |  |
     | `resource_templates.requested_offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `resource_templates.requested_offering_components.is_prepaid` | boolean |  |
@@ -436,6 +446,12 @@
     | `proposal_field_config` | any |  |
     | `evaluation_start` | any | When a submitted proposal's evaluation starts: at once on submission, or for every proposal of a round together at the round's cut-off. Cannot be changed while proposals are submitted or in review. |
     | `publish_results` | any | When applicants learn the allocation decision: as soon as it is made, or for every proposal of a round together when a call manager publishes the round's results. Cannot be changed while decisions are held. |
+    | `resource_template_selection_mode` | any | Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests. |
+
+
+=== "Authorization"
+
+    Anyone, including anonymous callers.
 
 ---
 
@@ -510,5 +526,10 @@ Check if the current user is eligible to submit proposals to this call.
     |---|---|
     | `is_eligible` | boolean |
     | `restrictions` | array of strings |
+
+
+=== "Authorization"
+
+    This reference does not yet state who may call this operation.
 
 ---

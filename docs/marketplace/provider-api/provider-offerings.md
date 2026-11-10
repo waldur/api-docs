@@ -85,12 +85,14 @@
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/glauth_tree/` | [Get structured GLauth tree for an offering](#get-structured-glauth-tree-for-an-offering) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/at/` | [Get object state at a specific timestamp](#get-object-state-at-a-specific-timestamp) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/history/` | [Get version history](#get-version-history) |
+| <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/maintenance_reservations/` | [Maintenance reservations the cluster should hold](#maintenance-reservations-the-cluster-should-hold) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/state_counters/` | [Get offering resource and user state counters](#get-offering-resource-and-user-state-counters) |
 | <span class="http-badge http-get">GET</span> | `/api/marketplace-provider-offerings/{uuid}/user-attribute-config/` | [Get user attribute config](#get-user-attribute-config) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/add_qos/` | [Add a QoS profile to an offering](#add-a-qos-profile-to-an-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/check_unique_backend_id/` | [Check if backend_id is unique](#check-if-backend_id-is-unique) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/delete_tags/` | [Delete tags for offering](#delete-tags-for-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/export_offering/` | [Export offering data](#export-offering-data) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/import_maintenance_reservations/` | [Import the cluster's maintenance reservations as drafts](#import-the-clusters-maintenance-reservations-as-drafts) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/import_offering/` | [Import offering data](#import-offering-data) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_available/` | [Mark an offering as available](#mark-an-offering-as-available) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/make_unavailable/` | [Mark an offering as unavailable](#mark-an-offering-as-unavailable) |
@@ -100,6 +102,7 @@
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/set_profile/` | [Bind / unbind offering to a service profile](#bind--unbind-offering-to-a-service-profile) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/switch_billing_mode/` | [Switch billing mode for builtin components](#switch-billing-mode-for-builtin-components) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_backend_id_rules/` | [Update offering backend_id rules](#update-offering-backend_id-rules) |
+| <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_endpoint/` | [Update an access endpoint of an offering](#update-an-access-endpoint-of-an-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_tags/` | [Update tags for offering](#update-tags-for-offering) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/update_type/` | [Swap offering type](#swap-offering-type) |
 | <span class="http-badge http-post">POST</span> | `/api/marketplace-provider-offerings/{uuid}/upload_markdown_image/` | [Upload markdown image](#upload-markdown-image) |
@@ -240,7 +243,7 @@ Returns a paginated list of offerings for the provider.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -296,6 +299,7 @@ Returns a paginated list of offerings for the provider.
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -327,6 +331,7 @@ Returns a paginated list of offerings for the provider.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -460,8 +465,13 @@ Returns a paginated list of offerings for the provider.
     | `integration_status.status` | string |  |
     | `integration_status.last_request_timestamp` | string (date-time) |  |
     | `integration_status.service_name` | string |  |
-    | `google_calendar_is_public` | boolean |  |
-    | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
 
 ---
 
@@ -556,7 +566,7 @@ Returns details of a specific provider offering.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -612,6 +622,7 @@ Returns details of a specific provider offering.
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -643,6 +654,7 @@ Returns details of a specific provider offering.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -776,8 +788,13 @@ Returns details of a specific provider offering.
     | `integration_status.status` | string |  |
     | `integration_status.last_request_timestamp` | string (date-time) |  |
     | `integration_status.service_name` | string |  |
-    | `google_calendar_is_public` | boolean |  |
-    | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
 
 ---
 
@@ -884,6 +901,7 @@ Creates a new provider offering.
     | `components.max_available_limit` | number (double) |  |  |
     | `components.is_boolean` | boolean |  |  |
     | `components.default_limit` | number (double) |  |  |
+    | `components.spending_limit_periods` | object (free-form) |  | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.is_prepaid` | boolean |  |  |
     | `components.overage_component` | string (uuid) |  |  |
     | `components.min_prepaid_duration` | integer |  |  |
@@ -893,7 +911,7 @@ Creates a new provider offering.
     | `components.max_renewal_duration` | integer |  | Maximum number of months allowed for a renewal. |
     | `components.renewal_duration_step` | integer |  | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `plugin_options` | object |  |  |
-    | `plugin_options.account_scope` | any |  | Where accounts are held: 'offering' keeps one account per offering (the historical behaviour); 'provider' shares one account per user across the provider's offerings. |
+    | `plugin_options.account_scope` | any |  | Where accounts are held: 'offering' keeps one account per offering (the historical behavior); 'provider' shares one account per user across the provider's offerings. |
     | `plugin_options.username_generation_policy` | any |  | How the usernames of offering users are generated. |
     | `plugin_options.username_anonymized_prefix` | string |  | Prefix for anonymized usernames; the name is the prefix followed by the account's POSIX UID. |
     | `plugin_options.homedir_prefix` | string |  | Prefix of each account's home directory; the username follows. |
@@ -950,6 +968,9 @@ Creates a new provider offering.
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
+    | `plugin_options.instance_metrics_enabled` | boolean |  | Collect custom metrics of the instances in tenants of this offering and show them to their projects. |
+    | `plugin_options.instance_metrics` | array of strings |  | Instance and volume metrics shown to projects; empty shows all of them. |
+    | `plugin_options.instance_metrics_poll_interval_minutes` | integer |  | Minutes between custom metrics polls of each instance in tenants of this offering (default: 360). |
     | `plugin_options.billing_source` | any |  | Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes). |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
@@ -989,8 +1010,15 @@ Creates a new provider offering.
     | `plugin_options.account_name_generation_policy` | any |  | Slurm account name generation policy |
     | `plugin_options.enable_display_of_order_actions_for_service_provider` | boolean |  | Enable display of order actions for service provider<br>_Constraints: default: `True`_ |
     | `plugin_options.slurm_periodic_policy_enabled` | boolean |  | Enable SLURM periodic usage policy configuration. When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.<br>_Constraints: default: `False`_ |
+    | `plugin_options.slurm_maintenance_sync_enabled` | boolean |  | When enabled, the site agent turns published maintenance announcements for this offering into Slurm MAINT reservations (full outage: all nodes; partial outage: the named partitions), so the scheduler holds back jobs that would run into them, and imports maintenance reservations made on the cluster as draft announcements.<br>_Constraints: default: `False`_ |
     | `plugin_options.enforce_qos` | boolean |  | When enabled, the site agent enforces the offering's QoS selection by granting the chosen QoS on the SLURM association (QosLevel/DefaultQOS). When disabled (default), QoS is informational only — profiles are shown and the selection is recorded on the resource, but the agent does not touch SLURM QoS. The agent config may override this per deployment.<br>_Constraints: default: `False`_ |
     | `plugin_options.enable_api_key_provisioning` | boolean |  | Declares that the site agent can govern resource API keys one by one: request, assign, limit, pause, resume and delete them. Without it a resource's keys can only be revealed and rotated. Nothing checks the claim: turn it on only if the agent's backend supports per-key commands (such as the Envoy AI Gateway); on one that does not (such as Ceph S3) every such command errs. |
+    | `plugin_options.api_key_limits` | boolean |  | Lets consumers set spending limits on API keys one by one. On unless set to false; needs enable_api_key_provisioning. Turned off, no new key limit is accepted, and limits keys already hold stay until cleared. |
+    | `plugin_options.api_key_daily_usage` | boolean |  | Declares that the site agent reports each API key's usage per day. Only then are keys offered the day and week periods, and the quarter and year, that a component offers to resources; month, and total where the component offers it, are offered without it, as they need no usage per day. Off unless set; needs enable_api_key_provisioning. Nothing checks the claim: turn it on only if the agent reports per-key daily usage, or those limits are never reached. |
+    | `plugin_options.firecrest_api_url` | string (uri) |  | FirecREST v2 API URL users of this SLURM offering work through (jobs, files, cluster status). Must also be listed in the FIRECREST_ALLOWED_API_URLS setting. Leave empty to run no jobs through Waldur; with a slurm-monitor URL the workspace is then read-only. |
+    | `plugin_options.firecrest_system_name` | string |  | Name of the cluster in FirecREST's systems list. |
+    | `plugin_options.slurm_monitor_api_url` | string (uri) |  | slurm-monitor API URL (ending in /api/v2) with the cluster's per-job samples (GPU, CPU, memory over time). Must also be listed in the SLURM_MONITOR_ALLOWED_API_URLS setting. Leave empty to hide job performance. Without FirecREST, the allocations get a read-only workspace from it: jobs, their performance, job statistics and software. |
+    | `plugin_options.slurm_monitor_cluster_name` | string |  | Name of the cluster in slurm-monitor (Sonar's cluster name). |
     | `plugin_options.auto_approve_marketplace_script` | boolean |  | If set to False, all orders require manual provider approval, including for service provider owners and staff<br>_Constraints: default: `True`_ |
     | `plugin_options.highlight_backend_id_display` | boolean |  | Defines if backend_id should be shown more prominently by the UI<br>_Constraints: default: `False`_ |
     | `plugin_options.backend_id_display_label` | string |  | Label used by UI for showing value of the backend_id<br>_Constraints: default: `Backend ID`_ |
@@ -999,6 +1027,7 @@ Creates a new provider offering.
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
     | `plugin_options.show_ssh_key_loss_warning` | boolean |  | Show a warning about unrecoverable loss of the SSH private key on the OpenStack instance order form.<br>_Constraints: default: `False`_ |
     | `plugin_options.hide_api_keys_tab` | boolean |  | Hide the API keys tab on resources of this offering. |
+    | `plugin_options.display_prepaid_limits_as_total` | boolean |  | If set to True, the UI shows each prepaid component as the total for the whole subscription (the monthly amount times the months ordered) instead of a monthly amount, and the resource's limit_usage sums its usage over the whole subscription. Ordering and billing do not change. |
     | `vendor_details` | string |  |  |
     | `getting_started` | string |  |  |
     | `integration_guide` | string |  |  |
@@ -1051,7 +1080,7 @@ Creates a new provider offering.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -1107,6 +1136,7 @@ Creates a new provider offering.
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -1138,6 +1168,7 @@ Creates a new provider offering.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -1271,8 +1302,11 @@ Creates a new provider offering.
     | `integration_status.status` | string |  |
     | `integration_status.last_request_timestamp` | string (date-time) |  |
     | `integration_status.service_name` | string |  |
-    | `google_calendar_is_public` | boolean |  |
-    | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.CREATE on the organization named in the request.
 
 ---
 
@@ -1340,6 +1374,16 @@ Deletes a provider offering. Only possible for offerings in a Draft state with n
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if non-staff users are allowed to manage offering lifecycle.
+    - Requires `OFFERING.DELETE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1415,6 +1459,16 @@ Activates a draft or paused offering, making it available for ordering.
     | `detail` | string |
     | `state` | string |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if non-staff users are allowed to manage offering lifecycle.
+    - Requires `OFFERING.CREATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Archive an offering
@@ -1486,6 +1540,16 @@ Archives an offering, making it permanently unavailable for new orders.
     | `detail` | string |
     | `state` | string |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if non-staff users are allowed to manage offering lifecycle.
+    - Requires `OFFERING.ARCHIVE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Move an offering to draft
@@ -1556,6 +1620,16 @@ Moves an active or paused offering back to the draft state for editing.
     |---|---|
     | `detail` | string |
     | `state` | string |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if non-staff users are allowed to manage offering lifecycle.
+    - Requires `OFFERING.CREATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1640,6 +1714,16 @@ Pauses an active offering, preventing new orders from being created.
     | `detail` | string |
     | `state` | string |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if non-staff users are allowed to manage offering lifecycle.
+    - Requires `OFFERING.PAUSE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Unpause an offering
@@ -1710,6 +1794,16 @@ Resumes a paused offering, making it available for ordering again.
     |---|---|
     | `detail` | string |
     | `state` | string |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if non-staff users are allowed to manage offering lifecycle.
+    - Requires `OFFERING.UNPAUSE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1796,6 +1890,13 @@ Resumes a paused offering, making it available for ordering again.
 
     **`200`** - 
     
+
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` or `CUSTOMER.MANAGER` on the customer; `OFFERING.MANAGER` on the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -1944,6 +2045,11 @@ Returns a paginated list of course accounts for projects that have resources of 
     | `error_message` | string |
     | `error_traceback` | string |
 
+
+=== "Authorization"
+
+    Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
+
 ---
 
 ### List customer service accounts for an offering
@@ -2087,6 +2193,11 @@ Returns a paginated list of customer-level service accounts for customers who ha
     | `customer` | string (uuid) |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
 
 ---
 
@@ -2261,6 +2372,13 @@ Returns a paginated list of users who have access to resources of this offering.
     | `is_admin_deactivated` | boolean | Designates that the user was deactivated by an administrator and must not be reactivated automatically by the role-sync task. Visible to staff and support. |
     | `details` | object (free-form) | Extra details from authentication backend. |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List project service accounts for an offering
@@ -2408,6 +2526,11 @@ Returns a paginated list of project-level service accounts for projects that hav
     | `customer_name` | string |
     | `customer_abbreviation` | string |
 
+
+=== "Authorization"
+
+    Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
+
 ---
 
 ### List users and their roles in a scope
@@ -2486,6 +2609,7 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `page` | integer | A page number within the paginated result set. |
     | `page_size` | integer | Number of results to return per page. |
     | `role` | array | Role UUID or name. Repeat to filter by several roles. |
+    | `role_template` | array | Role name. Matches that role and organization copies of it. Repeat to match several. Omit to leave the role filter unchanged. |
     | `search_string` | string | Search string for user |
     | `user` | string (uuid) | User UUID |
     | `user_slug` | string | User slug |
@@ -2514,6 +2638,11 @@ Retrieves a list of users who have a role within a specific scope (e.g., a proje
     | `created_by_full_name` | string |  |
     | `created_by_uuid` | string (uuid) |  |
     | `source` | string |  |
+
+
+=== "Authorization"
+
+    Staff and support. Otherwise a caller with an active role on the scope itself, when the scope is neither an organization nor a project; with a role granting CUSTOMER.VIEW_TEAM on the scope's organization; or with a role granting PROJECT.VIEW_TEAM on any project of that organization. For a resource or resource project, also a caller with OFFERING.UPDATE on its offering or on the offering's organization. A view may let in others who oversee the scope.
 
 ---
 
@@ -2596,6 +2725,11 @@ Checks if a specified user has access to any non-terminated resource of this off
     | Field | Type |
     |---|---|
     | `has_access` | boolean |
+
+
+=== "Authorization"
+
+    Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
 
 ---
 
@@ -2695,6 +2829,11 @@ Assigns a specific role to a user within the current scope. An optional expirati
     **`400`** - Validation error, for example when trying to add a user to a terminated project.
     
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to grant roles in the scope's type (CALL.CREATE_PERMISSION, CUSTOMER.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, PROPOSAL.MANAGE, RESOURCE.CREATE_PERMISSION, RESOURCE_PROJECT.CREATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Revoke a role from a user
@@ -2785,6 +2924,11 @@ Removes a specific role from a user within the current scope. This effectively r
     **`200`** - Role revoked successfully.
     
 
+
+=== "Authorization"
+
+    Staff, or who holds the permission to revoke roles in the scope's type (CALL.DELETE_PERMISSION, CUSTOMER.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, PROPOSAL.DELETE_PERMISSION, RESOURCE.DELETE_PERMISSION, RESOURCE_PROJECT.DELETE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
+
 ---
 
 ### Refresh offering user usernames
@@ -2854,6 +2998,13 @@ Triggers a refresh of usernames for all non-restricted users associated with thi
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_INTEGRATION` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -2947,6 +3098,11 @@ Updates the expiration time for a user's existing role in the current scope. Thi
     | Field | Type |
     |---|---|
     | `expiration_time` | string (date-time) |
+
+
+=== "Authorization"
+
+    Staff, or who holds the permission to change roles in the scope's type (CALL.UPDATE_PERMISSION, CUSTOMER.UPDATE_PERMISSION, OFFERING.UPDATE_PERMISSION, PROJECT.UPDATE_PERMISSION, PROPOSAL.UPDATE_PERMISSION, RESOURCE.UPDATE_PERMISSION, RESOURCE_PROJECT.UPDATE_PERMISSION) on the scope's organization, on the scope itself or site-wide; a site-wide grant does not reach an organization's or a service provider's team. A view may also let those who oversee the scope do so for some roles. Only staff and holders on the organization or site-wide may change their own role in a scope below the organization.
 
 ---
 
@@ -3090,6 +3246,13 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update user attribute config
@@ -3231,6 +3394,13 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `is_default` | boolean | Return True if this is a default (unsaved) config. |
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3374,6 +3544,13 @@ Creates or updates the user attribute configuration for this offering. This dete
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete user attribute config
@@ -3440,6 +3617,13 @@ Deletes the user attribute configuration for this offering. The offering will fa
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3542,6 +3726,7 @@ Adds a new custom component to an offering.
     | `max_available_limit` | number (double) |  |  |
     | `is_boolean` | boolean |  |  |
     | `default_limit` | number (double) |  |  |
+    | `spending_limit_periods` | object (free-form) |  | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `is_prepaid` | boolean |  |  |
     | `overage_component` | string (uuid) |  |  |
     | `min_prepaid_duration` | integer |  |  |
@@ -3556,6 +3741,13 @@ Adds a new custom component to an offering.
 
     **`201`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_COMPONENTS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3641,6 +3833,13 @@ Removes a custom component from an offering. Built-in components cannot be remov
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_COMPONENTS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3744,6 +3943,7 @@ Updates the properties of a specific component within an offering.
     | `max_available_limit` | number (double) |  |  |
     | `is_boolean` | boolean |  |  |
     | `default_limit` | number (double) |  |  |
+    | `spending_limit_periods` | object (free-form) |  | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `is_prepaid` | boolean |  |  |
     | `overage_component` | string (uuid) |  |  |
     | `min_prepaid_duration` | integer |  |  |
@@ -3758,6 +3958,13 @@ Updates the properties of a specific component within an offering.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_COMPONENTS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -3906,6 +4113,13 @@ Adds a new partition configuration to an offering.
     | `qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `req_resv` | boolean | Require reservation for job allocation |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Add a software catalog to an offering
@@ -4001,6 +4215,13 @@ Associates a software catalog with an offering and configures enabled CPU archit
     |---|---|---|
     | `uuid` | string (uuid) | UUID of the software catalog |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Remove a partition from an offering
@@ -4086,6 +4307,13 @@ Removes a partition configuration from an offering.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Remove a software catalog from an offering
@@ -4170,6 +4398,13 @@ Disassociates a software catalog from an offering.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4306,6 +4541,13 @@ Updates the configuration of an existing partition associated with an offering.
     | `qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `req_resv` | boolean | Require reservation for job allocation |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update software catalog configuration
@@ -4403,6 +4645,13 @@ Updates the configuration of a software catalog associated with an offering, suc
     | `partition` | string (uuid) |  |
     | `partition_name` | string |  |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Endpoints
@@ -4421,7 +4670,7 @@ Adds a new access endpoint (URL) to an offering.
       https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/add_endpoint/ \
       Authorization:"Token YOUR_API_TOKEN" \
       name="my-awesome-marketplace-provider-offering" \
-      url="string-value"
+      url="https://api.example.com/api/url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
     ```
 
 === "Python"
@@ -4437,7 +4686,7 @@ Adds a new access endpoint (URL) to an offering.
     
     body_data = NestedEndpointRequest(
         name="my-awesome-marketplace-provider-offering",
-        url="string-value"
+        url="https://api.example.com/api/url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
     )
     response = marketplace_provider_offerings_add_endpoint.sync(
         uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -4465,7 +4714,7 @@ Adds a new access endpoint (URL) to an offering.
       },
       body: {
         "name": "my-awesome-marketplace-provider-offering",
-        "url": "string-value"
+        "url": "https://api.example.com/api/url/a1b2c3d4-e5f6-7890-abcd-ef1234567890/"
       }
     });
       console.log('Success:', response);
@@ -4487,7 +4736,7 @@ Adds a new access endpoint (URL) to an offering.
     | Field | Type | Required | Description |
     |---|---|---|---|
     | `name` | string | ✓ |  |
-    | `url` | string | ✓ | URL of the access endpoint |
+    | `url` | string (uri) | ✓ | URL of the access endpoint |
 
 
 === "Responses"
@@ -4497,6 +4746,13 @@ Adds a new access endpoint (URL) to an offering.
     | Field | Type | Description |
     |---|---|---|
     | `uuid` | string (uuid) | UUID of the access endpoint |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.ADD_ENDPOINT` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -4583,6 +4839,13 @@ Deletes an existing access endpoint from an offering by its UUID.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.DELETE_ENDPOINT` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ## Attachments and Images
@@ -4653,6 +4916,11 @@ Deletes the main image of an offering.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE_THUMBNAIL on the offering's organization while the offering is active, draft, paused or unavailable.
+
 ---
 
 ### Delete offering thumbnail
@@ -4719,6 +4987,11 @@ Deletes the thumbnail image of an offering.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE_THUMBNAIL on the offering's organization while the offering is active, draft, paused or unavailable.
 
 ---
 
@@ -4805,6 +5078,11 @@ Uploads or replaces the main image for an offering.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE_THUMBNAIL on the offering's organization while the offering is active, draft, paused or unavailable.
+
 ---
 
 ### Update offering thumbnail
@@ -4890,6 +5168,11 @@ Uploads or replaces the thumbnail image for an offering.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.UPDATE_THUMBNAIL on the offering's organization while the offering is active, draft, paused or unavailable.
+
 ---
 
 ## Configuration & Updates
@@ -4959,6 +5242,13 @@ Removes all organization group associations from this offering, making it access
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5066,7 +5356,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `default_access_subnets` | array of objects |  |
     | `default_access_subnets.uuid` | string (uuid) |  |
     | `default_access_subnets.inet` | string |  |
@@ -5122,6 +5412,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `qos_profiles.max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `qos_profiles.max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `qos_profiles.min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `qos_profiles.max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `qos_profiles.flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
     | `customer` | string (uri) |  |
     | `customer_uuid` | string (uuid) |  |
@@ -5153,6 +5444,7 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `components.max_available_limit` | number (double) |  |
     | `components.is_boolean` | boolean |  |
     | `components.default_limit` | number (double) |  |
+    | `components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `components.factor` | integer |  |
     | `components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `components.is_prepaid` | boolean |  |
@@ -5282,8 +5574,6 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `is_accessible` | boolean |  |
     | `open_for_proposals` | boolean |  |
     | `config_drive_default` | boolean |  |
-    | `google_calendar_is_public` | boolean |  |
-    | `google_calendar_link` | string | Get the Google Calendar link for an offering. |
     | `promotion_campaigns` | array of objects |  |
     | `promotion_campaigns.uuid` | string (uuid) |  |
     | `promotion_campaigns.name` | string |  |
@@ -5295,6 +5585,11 @@ Moves an offering to a different service provider. Requires staff permissions.
     | `promotion_campaigns.description` | string |  |
     | `promotion_campaigns.months` | integer | How many months in a row should the related service (when activated) get special deal (0 for indefinitely until active) |
     | `promotion_campaigns.service_provider` | string (uri) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -5375,6 +5670,13 @@ Updates the backend-specific metadata for an offering.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update offering attributes
@@ -5441,6 +5743,13 @@ Updates the attributes of an offering.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_ATTRIBUTES` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5520,6 +5829,13 @@ Associates a compliance checklist with an offering.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_OPTIONS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5605,6 +5921,13 @@ Updates the category of an offering.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_DESCRIPTION` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5700,7 +6023,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `secret_options.api_url` | string |  | API URL |
     | `secret_options.token` | string |  | Waldur access token |
     | `secret_options.customer_uuid` | string |  | Organization UUID |
-    | `secret_options.backend_url` | string |  |  |
+    | `secret_options.backend_url` | string (uri) |  |  |
     | `secret_options.username` | string |  |  |
     | `secret_options.password` | string |  |  |
     | `secret_options.cloud_init_template` | string |  | Cloud-init template for Rancher cluster node initialization |
@@ -5725,7 +6048,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `secret_options.k8s_version` | string |  | Kubernetes version |
     | `secret_options.node_disk_driver` | any |  | OpenStack disk driver for Rancher nodes |
     | `plugin_options` | object |  |  |
-    | `plugin_options.account_scope` | any |  | Where accounts are held: 'offering' keeps one account per offering (the historical behaviour); 'provider' shares one account per user across the provider's offerings. |
+    | `plugin_options.account_scope` | any |  | Where accounts are held: 'offering' keeps one account per offering (the historical behavior); 'provider' shares one account per user across the provider's offerings. |
     | `plugin_options.username_generation_policy` | any |  | How the usernames of offering users are generated. |
     | `plugin_options.username_anonymized_prefix` | string |  | Prefix for anonymized usernames; the name is the prefix followed by the account's POSIX UID. |
     | `plugin_options.homedir_prefix` | string |  | Prefix of each account's home directory; the username follows. |
@@ -5782,6 +6105,9 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.snapshot_size_limit_gb` | integer |  | Default limit for snapshot size in GB |
     | `plugin_options.lbaas_enabled` | boolean |  | If True, Octavia LBaaS (load balancers) is intended to be available for tenants from this offering. |
     | `plugin_options.usage_poll_interval_minutes` | integer |  | Interval in minutes between usage polling for this offering (default: 60) |
+    | `plugin_options.instance_metrics_enabled` | boolean |  | Collect custom metrics of the instances in tenants of this offering and show them to their projects. |
+    | `plugin_options.instance_metrics` | array of strings |  | Instance and volume metrics shown to projects; empty shows all of them. |
+    | `plugin_options.instance_metrics_poll_interval_minutes` | integer |  | Minutes between custom metrics polls of each instance in tenants of this offering (default: 360). |
     | `plugin_options.billing_source` | any |  | Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes). |
     | `plugin_options.heappe_cluster_id` | string |  | HEAppE cluster id |
     | `plugin_options.heappe_local_base_path` | string |  | HEAppE local base path |
@@ -5821,8 +6147,15 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.account_name_generation_policy` | any |  | Slurm account name generation policy |
     | `plugin_options.enable_display_of_order_actions_for_service_provider` | boolean |  | Enable display of order actions for service provider<br>_Constraints: default: `True`_ |
     | `plugin_options.slurm_periodic_policy_enabled` | boolean |  | Enable SLURM periodic usage policy configuration. When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.<br>_Constraints: default: `False`_ |
+    | `plugin_options.slurm_maintenance_sync_enabled` | boolean |  | When enabled, the site agent turns published maintenance announcements for this offering into Slurm MAINT reservations (full outage: all nodes; partial outage: the named partitions), so the scheduler holds back jobs that would run into them, and imports maintenance reservations made on the cluster as draft announcements.<br>_Constraints: default: `False`_ |
     | `plugin_options.enforce_qos` | boolean |  | When enabled, the site agent enforces the offering's QoS selection by granting the chosen QoS on the SLURM association (QosLevel/DefaultQOS). When disabled (default), QoS is informational only — profiles are shown and the selection is recorded on the resource, but the agent does not touch SLURM QoS. The agent config may override this per deployment.<br>_Constraints: default: `False`_ |
     | `plugin_options.enable_api_key_provisioning` | boolean |  | Declares that the site agent can govern resource API keys one by one: request, assign, limit, pause, resume and delete them. Without it a resource's keys can only be revealed and rotated. Nothing checks the claim: turn it on only if the agent's backend supports per-key commands (such as the Envoy AI Gateway); on one that does not (such as Ceph S3) every such command errs. |
+    | `plugin_options.api_key_limits` | boolean |  | Lets consumers set spending limits on API keys one by one. On unless set to false; needs enable_api_key_provisioning. Turned off, no new key limit is accepted, and limits keys already hold stay until cleared. |
+    | `plugin_options.api_key_daily_usage` | boolean |  | Declares that the site agent reports each API key's usage per day. Only then are keys offered the day and week periods, and the quarter and year, that a component offers to resources; month, and total where the component offers it, are offered without it, as they need no usage per day. Off unless set; needs enable_api_key_provisioning. Nothing checks the claim: turn it on only if the agent reports per-key daily usage, or those limits are never reached. |
+    | `plugin_options.firecrest_api_url` | string (uri) |  | FirecREST v2 API URL users of this SLURM offering work through (jobs, files, cluster status). Must also be listed in the FIRECREST_ALLOWED_API_URLS setting. Leave empty to run no jobs through Waldur; with a slurm-monitor URL the workspace is then read-only. |
+    | `plugin_options.firecrest_system_name` | string |  | Name of the cluster in FirecREST's systems list. |
+    | `plugin_options.slurm_monitor_api_url` | string (uri) |  | slurm-monitor API URL (ending in /api/v2) with the cluster's per-job samples (GPU, CPU, memory over time). Must also be listed in the SLURM_MONITOR_ALLOWED_API_URLS setting. Leave empty to hide job performance. Without FirecREST, the allocations get a read-only workspace from it: jobs, their performance, job statistics and software. |
+    | `plugin_options.slurm_monitor_cluster_name` | string |  | Name of the cluster in slurm-monitor (Sonar's cluster name). |
     | `plugin_options.auto_approve_marketplace_script` | boolean |  | If set to False, all orders require manual provider approval, including for service provider owners and staff<br>_Constraints: default: `True`_ |
     | `plugin_options.highlight_backend_id_display` | boolean |  | Defines if backend_id should be shown more prominently by the UI<br>_Constraints: default: `False`_ |
     | `plugin_options.backend_id_display_label` | string |  | Label used by UI for showing value of the backend_id<br>_Constraints: default: `Backend ID`_ |
@@ -5831,6 +6164,7 @@ Updates the backend integration settings for an offering, including plugin optio
     | `plugin_options.disabled_resource_actions` | array of strings |  | List of disabled marketplace resource actions for this offering. |
     | `plugin_options.show_ssh_key_loss_warning` | boolean |  | Show a warning about unrecoverable loss of the SSH private key on the OpenStack instance order form.<br>_Constraints: default: `False`_ |
     | `plugin_options.hide_api_keys_tab` | boolean |  | Hide the API keys tab on resources of this offering. |
+    | `plugin_options.display_prepaid_limits_as_total` | boolean |  | If set to True, the UI shows each prepaid component as the total for the whole subscription (the monthly amount times the months ordered) instead of a monthly amount, and the resource's limit_usage sums its usage over the whole subscription. Ordering and billing do not change. |
     | `service_attributes` | object (free-form) |  |  |
     | `backend_id` | string |  |  |
 
@@ -5839,6 +6173,13 @@ Updates the backend integration settings for an offering, including plugin optio
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_INTEGRATION` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -5929,6 +6270,13 @@ Updates the geographical location (latitude and longitude) of an offering.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_LOCATION` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update offering options
@@ -6016,6 +6364,13 @@ Updates the order form options for an offering.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_OPTIONS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update organization groups for offering
@@ -6094,6 +6449,13 @@ Sets the list of organization groups that can access this offering.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -6190,6 +6552,16 @@ Updates the overview fields of an offering, such as name, description, and getti
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    - While ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT is off, only staff may change an offering that is not a draft.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update offering resource options
@@ -6276,6 +6648,13 @@ Updates the resource report form options for an offering.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_OPTIONS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -6418,6 +6797,17 @@ Returns monthly usage statistics for the components of an offering within a spec
     | `type` | string |
     | `name` | string |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - Requires `SERVICE_PROVIDER.GET_STATISTICS` on the customer or the customer's service provider.
+    - Requires `ORDER.LIST` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get costs for an offering
@@ -6552,6 +6942,16 @@ Returns monthly cost data for an offering within a specified date range.
     | `price` | number (double) | Price amount excluding tax |
     | `tax` | number (double) | Tax amount |
     | `total` | number (double) | Total amount including tax |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - Requires `SERVICE_PROVIDER.GET_REVENUE` on the customer or the customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -6690,11 +7090,21 @@ Returns a paginated list of customers who have resources for this offering.
     | `phone_number` | string |
     | `email` | string (email) |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - Requires `SERVICE_PROVIDER.LIST_CUSTOMERS` on the customer or the customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### List offerings grouped by provider
 
-Returns a paginated list of active, shared offerings grouped by their service provider.
+Returns a paginated list of active, shared offerings grouped by their service provider. Only offerings the caller may see in the public offerings list are included.
 
 
 === "HTTPie"
@@ -6809,6 +7219,14 @@ Returns a paginated list of active, shared offerings grouped by their service pr
     | `offerings.offering_name` | string | Name of the offering |
     | `offerings.offering_uuid` | string (uuid) | UUID of the offering |
 
+
+=== "Authorization"
+
+    Any of:
+    
+    - Any signed-in user.
+    - Anonymous callers too, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on.
+
 ---
 
 ### List customer projects for an offering
@@ -6922,6 +7340,11 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `project_metadata.question` | string | Question description. |
     | `project_metadata.question_type` | string |  |
     | `project_metadata.answer` | any | Human-readable answer value; select-type option UUIDs are resolved to their labels. |
+    | `project_metadata.min_value` | string (decimal) |  |
+    | `project_metadata.max_value` | string (decimal) |  |
+    | `project_metadata.likert_scale_length` | integer |  |
+    | `project_metadata.likert_low_label` | string |  |
+    | `project_metadata.likert_high_label` | string |  |
     | `project_metadata.modified` | string (date-time) | When this answer was last saved. |
     | `max_service_accounts` | integer | Maximum number of service accounts allowed |
     | `kind` | any |  |
@@ -6935,6 +7358,9 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `user_email_patterns` | array of strings |  |
     | `user_affiliations` | array of strings |  |
     | `user_identity_sources` | array of strings |  |
+    | `user_nationalities` | array of strings | Allowed nationality codes (ISO 3166-1 alpha-2). User must have one. |
+    | `user_organization_types` | array of strings | Allowed organization type URNs (SCHAC). User must match one. |
+    | `user_assurance_levels` | array of strings | Required assurance URIs (REFEDS). User must have all of these. |
     | `affiliation` | any |  |
     | `affiliation_uuid` | string (uuid) |  |
     | `affiliation_name` | string |  |
@@ -6949,6 +7375,13 @@ Returns a paginated list of projects that have consumed resources of this offeri
     | `marketplace_resource_count` | object (free-form) |  |
     | `billing_price_estimate` | any |  |
     | `has_metrics` | boolean |  |
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7071,7 +7504,6 @@ Returns a paginated list of orders associated with a specific offering.
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `error_updated_at` | string (date-time) |  |
-    | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
     | `attachment` | string (uri) |  |
@@ -7130,6 +7562,16 @@ Returns a paginated list of orders associated with a specific offering.
     | `auto_approved_by_rule_uuid` | string (uuid) |  |
     | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - One of these roles: `OFFERING.MANAGER` on the offering; `CUSTOMER.OWNER` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7250,7 +7692,6 @@ Returns details of a specific order associated with an offering.
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `error_updated_at` | string (date-time) |  |
-    | `callback_url` | string (uri) |  |
     | `completed_at` | string (date-time) |  |
     | `request_comment` | string |  |
     | `attachment` | string (uri) |  |
@@ -7309,6 +7750,16 @@ Returns details of a specific order associated with an offering.
     | `auto_approved_by_rule_uuid` | string (uuid) |  |
     | `auto_approved_cost_limit_snapshot` | string (decimal) |  |
     | `issue` | any |  |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - One of these roles: `OFFERING.MANAGER` on the offering; `CUSTOMER.OWNER` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7380,6 +7831,16 @@ Returns basic statistics for an offering, such as the number of active resources
     |---|---|
     | `resources_count` | integer |
     | `customers_count` | integer |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - Requires `SERVICE_PROVIDER.GET_STATISTICS` on the customer or the customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7468,6 +7929,13 @@ Returns comprehensive Terms of Service consent statistics for this offering, inc
     | `accepted_consents_over_time.date` | string (date) | Date of the data point |
     | `accepted_consents_over_time.count` | integer | Count for the date |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
+
 ---
 
 ## Remote Actions & Sync
@@ -7554,6 +8022,11 @@ Returns a paginated list of resources that can be imported for this offering.
     | `name` | string | Name of the resource |
     | `type` | string | Type of the resource |
     | `description` | string | Description of the resource |
+
+
+=== "Authorization"
+
+    Staff. For an offering that is not shared, also who holds RESOURCE.LIST_IMPORTABLE on the offering's project or organization.
 
 ---
 
@@ -7714,16 +8187,28 @@ Imports a backend resource into the marketplace.
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
+    | `terminated_at` | string (date-time) | When the resource was terminated. Unlike end_date, which is the planned date, this is the moment it happened. It stays set during a restore and is cleared once the resource is OK again, so check the state before reading it as the end of a live resource. Empty if the date is not known. |
     | `username` | string |  |
     | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
+    | `prepaid_total_component_types` | array of strings | Component types whose limit_usage covers the whole subscription, so the UI shows their limit as the monthly limit times the months ordered. Empty unless the offering shows prepaid limits as a total (display_prepaid_limits_as_total). |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
     | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
+    | `usage_limit_resumes_at` | string (date-time) | When the spending limits that restrict the resource reset and the restriction lifts. Empty when no spending limit restricts the resource, when a limit-based component's limit does too, or while a reached total limit holds it: a total never resets, so the restriction lifts only when that limit is raised or cleared. |
+    | `spending_limits` | object (free-form) | Spending limits on usage-based components, per period. Changed with the set_spending_limits action. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `spending_limit_status.last_reported_at` | string (date-time) | When usage of the component was last reported. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | object (free-form) |  |
@@ -7755,6 +8240,7 @@ Imports a backend resource into the marketplace.
     | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
     | `offering_components.default_limit` | number (double) |  |
+    | `offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offering_components.factor` | integer |  |
     | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
@@ -7767,6 +8253,12 @@ Imports a backend resource into the marketplace.
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
     | `offering_account_settings` | any |  |
+    | `display_limits` | object (free-form) | Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced. |
+
+
+=== "Authorization"
+
+    Staff. For an offering that is not shared, also who holds RESOURCE.LIST_IMPORTABLE on the offering's project or organization.
 
 ---
 
@@ -7834,6 +8326,13 @@ Schedules a synchronization task to pull the latest data for the offering's serv
 
     **`202`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_COMPONENTS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7904,6 +8403,13 @@ Requests connected site agents to run a full reconciliation of all resources bel
     | Field | Type |
     |---|---|
     | `status` | string |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_INTEGRATION` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -7986,6 +8492,16 @@ Returns the access subnets consumers defined for the offering, in two forms: 'ex
     | `expanded.offering_name` | string |
     | `packed` | array of strings |
     | `defaults` | array of strings |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - One of these roles: `OFFERING.MANAGER` on the offering; `CUSTOMER.OWNER` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8076,6 +8592,11 @@ Returns the combined access-subnet allow-list of the given offerings: 'expanded'
     | `organization_subnets.description` | string |
     | `organization_subnets.customer_uuid` | string |
     | `organization_subnets.customer_name` | string |
+
+
+=== "Authorization"
+
+    Staff and support, or who is an offering manager of, or an owner of the organization of, every offering the request names.
 
 ---
 
@@ -8178,6 +8699,11 @@ The POSIX ID pool that governs this offering: its own override pool if present, 
     | `uid_utilization` | number (double) |  |
     | `gid_utilization` | number (double) |  |
     | `group_gid_utilization` | number (double) |  |
+
+
+=== "Authorization"
+
+    Anyone the provider offering list shows the offering to, with no further check. It shows: Offerings of organizations where the caller holds a role, of service providers they hold a role on and of projects they hold a role in, and offerings they hold a role on. Staff, support and holders of OFFERING.LIST site-wide see all.
 
 ---
 
@@ -8287,6 +8813,13 @@ Returns the same set of users, groups and robot accounts as `glauth_users_config
     | `robot_accounts.home_dir` | string |
     | `robot_accounts.ssh_keys` | array of strings |
 
+
+=== "Authorization"
+
+    One of these roles: `CUSTOMER.OWNER` or `CUSTOMER.MANAGER` on the customer; `OFFERING.MANAGER` on the offering.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get object state at a specific timestamp
@@ -8382,6 +8915,11 @@ Returns the state of the object as it was at the specified timestamp. Only acces
     
     **`404`** - 
     
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---
 
@@ -8517,6 +9055,99 @@ Returns the version history for this object. Only accessible by staff and suppor
     | `revision_comment` | string | Comment describing the revision |
     | `serialized_data` | object (free-form) | Serialized model fields at this revision |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
+---
+
+### Maintenance reservations the cluster should hold
+
+For site agents with maintenance sync enabled on the offering (plugin option slurm_maintenance_sync_enabled): the Slurm MAINT reservations that published maintenance announcements call for. The agent creates, updates and removes reservations named with `prefix` to match this list and leaves every other reservation alone.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      GET \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/maintenance_reservations/ \
+      Authorization:"Token YOUR_API_TOKEN"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_maintenance_reservations_retrieve # (1)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    response = marketplace_provider_offerings_maintenance_reservations_retrieve.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **API Source:** [`marketplace_provider_offerings_maintenance_reservations_retrieve`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_maintenance_reservations_retrieve.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsMaintenanceReservationsRetrieve } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsMaintenanceReservationsRetrieve({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `enabled` | boolean | Maintenance sync is enabled for the offering. |
+    | `prefix` | string | Reservations with this name prefix are Waldur's to manage. |
+    | `reservations` | array of objects |  |
+    | `reservations.name` | string | Slurm reservation name to use. |
+    | `reservations.maintenance_uuid` | string (uuid) |  |
+    | `reservations.maintenance_name` | string |  |
+    | `reservations.state` | string |  |
+    | `reservations.impact_level` | string |  |
+    | `reservations.start` | string (date-time) |  |
+    | `reservations.end` | string (date-time) |  |
+    | `reservations.partitions` | array of strings | Partitions to reserve; empty means all nodes. |
+    | `reservations.flags` | array of strings |  |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_INTEGRATION` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Get offering resource and user state counters
@@ -8591,6 +9222,17 @@ Returns resource and offering-user counts grouped by state for the given offerin
     | `users` | array of objects |
     | `users.state` | string |
     | `users.count` | integer |
+
+
+=== "Authorization"
+
+    Any of:
+    
+    - Staff or support.
+    - Requires `SERVICE_PROVIDER.GET_STATISTICS` on the customer or the customer's service provider.
+    - Requires `ORDER.LIST` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8695,6 +9337,11 @@ Returns the user attribute configuration for this offering, which determines whi
     | `offering_uuid` | string (uuid) |  |
     | `offering_name` | string |  |
 
+
+=== "Authorization"
+
+    The owner, as before, or whoever manages the offering's users.
+
 ---
 
 ### Add a QoS profile to an offering
@@ -8789,6 +9436,7 @@ Adds a new Quality of Service profile to an offering.
     | `max_tres_per_node` | string |  | Max TRES per node (MaxTRESPerNode) |
     | `max_tres_per_user` | string |  | Max TRES per user (MaxTRESPerUser) |
     | `min_tres_per_job` | string |  | Min TRES per job (MinTRESPerJob) |
+    | `max_tres_mins_per_job` | string |  | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `flags` | string |  | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
 
 
@@ -8816,7 +9464,15 @@ Adds a new Quality of Service profile to an offering.
     | `max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -8910,6 +9566,13 @@ Checks if the provided backend_id has been used in resources of this offering or
     | `is_valid_format` | boolean | Whether the backend ID matches the offering's format regex (null if no rules configured) |
     | `errors` | array of strings | List of validation error messages |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete tags for offering
@@ -8976,6 +9639,13 @@ Removes all tag associations from this offering.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -9074,6 +9744,117 @@ Exports an offering and all its connected parts to YAML format. Allows configura
     | `exported_components` | array of strings | List of exported component types |
     | `export_timestamp` | string (date-time) | Timestamp when the export was completed |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
+---
+
+### Import the cluster's maintenance reservations as drafts
+
+Site agents report the MAINT reservations made on the cluster; each becomes a draft maintenance announcement for the provider to review and publish. Reservations named with the Waldur prefix are ignored. Only when maintenance sync is enabled on the offering.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/import_maintenance_reservations/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      reservations:='[]'
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.maintenance_reservation_import_request import MaintenanceReservationImportRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_import_maintenance_reservations # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = MaintenanceReservationImportRequest(
+        reservations=[]
+    )
+    response = marketplace_provider_offerings_import_maintenance_reservations.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`MaintenanceReservationImportRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/maintenance_reservation_import_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_import_maintenance_reservations`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_import_maintenance_reservations.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsImportMaintenanceReservations } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsImportMaintenanceReservations({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "reservations": []
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `reservations` | array of objects | ✓ |  |
+    | `reservations.name` | string | ✓ |  |
+    | `reservations.start` | string (date-time) | ✓ |  |
+    | `reservations.end` | string (date-time) | ✓ |  |
+    | `reservations.partitions` | array of strings |  | Affected partitions; empty means the whole cluster. |
+    | `reservations.node_list` | string |  | <br>_Constraints: default: ``_ |
+    | `reservations.flags` | array of strings |  |  |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type |
+    |---|---|
+    | `created` | array of strings |
+    | `updated` | array of strings |
+    | `unchanged` | array of strings |
+    | `skipped` | array of strings |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_INTEGRATION` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Import offering data
@@ -9168,6 +9949,11 @@ Imports an offering and all its connected parts from YAML format. Allows configu
     | `warnings` | array of strings | List of warnings encountered during import |
     | `import_timestamp` | string (date-time) | Timestamp when the import was completed |
 
+
+=== "Authorization"
+
+    Check if user has permission to create offerings via import.
+
 ---
 
 ### Mark an offering as available
@@ -9239,6 +10025,16 @@ Marks an unavailable offering as available.
     | `detail` | string |
     | `state` | string |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if non-staff users are allowed to manage offering lifecycle.
+    - Requires `OFFERING.PAUSE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Mark an offering as unavailable
@@ -9309,6 +10105,16 @@ Marks an active offering as unavailable, blocking all operations on its resource
     |---|---|
     | `detail` | string |
     | `state` | string |
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Check if non-staff users are allowed to manage offering lifecycle.
+    - Requires `OFFERING.PAUSE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -9395,6 +10201,13 @@ Removes a Quality of Service profile from an offering.
     **`204`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Assign or clear the offering group
@@ -9479,6 +10292,16 @@ Sets the offering's ``offering_group`` FK. Pass ``offering_group: <uuid>`` to as
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    - While ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT is off, only staff may change an offering that is not a draft.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -9605,6 +10428,13 @@ Replaces the QoS allow-list (SLURM AllowQos gate) of a partition. An empty list 
     | `qos_options.is_default` | boolean | Default QOS for this partition (seeds SLURM DefaultQOS). |
     | `req_resv` | boolean | Require reservation for job allocation |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Bind / unbind offering to a service profile
@@ -9683,6 +10513,13 @@ Sets the offering's `profile` FK. Pass `profile: <uuid>` to bind, or `profile: n
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -9769,6 +10606,13 @@ Switches all builtin components between monthly (LIMIT), prepaid (ONE_TIME + is_
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_COMPONENTS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update offering backend_id rules
@@ -9847,6 +10691,112 @@ Configure validation rules for resource backend_id: format regex and uniqueness 
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_OPTIONS` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
+---
+
+### Update an access endpoint of an offering
+
+Updates the name and/or URL of an existing access endpoint of an offering, identified by its UUID.
+
+
+=== "HTTPie"
+
+    ```bash
+    http \
+      POST \
+      https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/update_endpoint/ \
+      Authorization:"Token YOUR_API_TOKEN" \
+      uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    ```
+
+=== "Python"
+
+    ```python
+    from waldur_api_client.client import AuthenticatedClient
+    from waldur_api_client.models.update_endpoint_request import UpdateEndpointRequest # (1)
+    from waldur_api_client.api.marketplace_provider_offerings import marketplace_provider_offerings_update_endpoint # (2)
+    
+    client = AuthenticatedClient(
+        base_url="https://api.example.com", token="YOUR_API_TOKEN"
+    )
+    
+    body_data = UpdateEndpointRequest(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    )
+    response = marketplace_provider_offerings_update_endpoint.sync(
+        uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        client=client,
+        body=body_data
+    )
+    
+    print(response)
+    ```
+    
+    
+    1.  **Model Source:** [`UpdateEndpointRequest`](https://github.com/waldur/py-client/blob/main/waldur_api_client/models/update_endpoint_request.py)
+    2.  **API Source:** [`marketplace_provider_offerings_update_endpoint`](https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_update_endpoint.py)
+
+=== "TypeScript"
+
+    ```typescript
+    import { marketplaceProviderOfferingsUpdateEndpoint } from 'waldur-js-client';
+    
+    try {
+      const response = await marketplaceProviderOfferingsUpdateEndpoint({
+      auth: "Token YOUR_API_TOKEN",
+      path: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
+      body: {
+        "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      }
+    });
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    ```
+
+
+=== "Path Parameters"
+
+    | Name | Type | Required |
+    |---|---|---|
+    | `uuid` | string (uuid) | ✓ |
+
+
+=== "Request Body (required)"
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `uuid` | string (uuid) | ✓ | UUID of the access endpoint |
+    | `name` | string |  |  |
+    | `url` | string (uri) |  | URL of the access endpoint |
+
+
+=== "Responses"
+
+    **`200`** - 
+    
+    | Field | Type | Description |
+    |---|---|---|
+    | `uuid` | string (uuid) |  |
+    | `name` | string |  |
+    | `url` | string (uri) | URL of the access endpoint |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE_ENDPOINT` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -9927,11 +10877,18 @@ Sets the list of tags for this offering.
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    The `CUSTOMER.OWNER` role on the customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Swap offering type
 
-Changes the offering's `type` between Marketplace.Basic and the site-agent type (Marketplace.Slurm). Both plugins share the same data shape (the site-agent processors inherit from Basic and only delegate the send paths to the external agent), so the swap is safe in either direction. Refused if the offering's current type is not in the swappable set.
+Changes the offering's `type` between Marketplace.Basic and the site-agent type (Marketplace.SiteAgent; the legacy name Marketplace.Slurm is accepted). Both plugins share the same data shape (the site-agent processors inherit from Basic and only delegate the send paths to the external agent), so the swap is safe in either direction. Refused if the offering's current type is not in the swappable set.
 
 
 === "HTTPie"
@@ -10011,6 +10968,16 @@ Changes the offering's `type` between Marketplace.Basic and the site-agent type 
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    All of:
+    
+    - Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    - While ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT is off, only staff may change an offering that is not a draft.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -10100,6 +11067,16 @@ Uploads an image for embedding in offering markdown descriptions. Requires ENABL
     |---|---|---|
     | `url` | string (uri) | Absolute URL of the uploaded image for markdown embedding. |
 
+
+=== "Authorization"
+
+    All of:
+    
+    - The route is open only while ENABLE_MARKDOWN_IMAGE_UPLOAD is on.
+    - Requires `OFFERING.UPDATE_DESCRIPTION` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Update a QoS profile of an offering
@@ -10185,6 +11162,7 @@ Updates an existing Quality of Service profile of an offering.
     | `max_tres_per_node` | string |  | Max TRES per node (MaxTRESPerNode) |
     | `max_tres_per_user` | string |  | Max TRES per user (MaxTRESPerUser) |
     | `min_tres_per_job` | string |  | Min TRES per job (MinTRESPerJob) |
+    | `max_tres_mins_per_job` | string |  | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `flags` | string |  | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
 
 
@@ -10212,6 +11190,14 @@ Updates an existing Quality of Service profile of an offering.
     | `max_tres_per_node` | string | Max TRES per node (MaxTRESPerNode) |
     | `max_tres_per_user` | string | Max TRES per user (MaxTRESPerUser) |
     | `min_tres_per_job` | string | Min TRES per job (MinTRESPerJob) |
+    | `max_tres_mins_per_job` | string | Max TRES-minutes per job (MaxTRESMinsPerJob) |
     | `flags` | string | Comma-separated QOS flags (e.g. DenyOnLimit, OverPartQOS) |
+
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

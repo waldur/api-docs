@@ -146,16 +146,28 @@
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
+    | `terminated_at` | string (date-time) | When the resource was terminated. Unlike end_date, which is the planned date, this is the moment it happened. It stays set during a restore and is cleared once the resource is OK again, so check the state before reading it as the end of a live resource. Empty if the date is not known. |
     | `username` | string |  |
     | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
+    | `prepaid_total_component_types` | array of strings | Component types whose limit_usage covers the whole subscription, so the UI shows their limit as the monthly limit times the months ordered. Empty unless the offering shows prepaid limits as a total (display_prepaid_limits_as_total). |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
     | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
+    | `usage_limit_resumes_at` | string (date-time) | When the spending limits that restrict the resource reset and the restriction lifts. Empty when no spending limit restricts the resource, when a limit-based component's limit does too, or while a reached total limit holds it: a total never resets, so the restriction lifts only when that limit is raised or cleared. |
+    | `spending_limits` | object (free-form) | Spending limits on usage-based components, per period. Changed with the set_spending_limits action. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `spending_limit_status.last_reported_at` | string (date-time) | When usage of the component was last reported. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | object (free-form) |  |
@@ -187,6 +199,7 @@
     | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
     | `offering_components.default_limit` | number (double) |  |
+    | `offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offering_components.factor` | integer |  |
     | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
@@ -199,6 +212,14 @@
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
     | `offering_account_settings` | any |  |
+    | `display_limits` | object (free-form) | Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
 
 ---
 
@@ -342,16 +363,28 @@
     | `end_date` | string (date) | The date is inclusive. Once reached, a resource will be scheduled for termination. |
     | `end_date_requested_by` | string (uri) |  |
     | `end_date_updated_at` | string (date-time) | Timestamp of the last end_date change. |
+    | `terminated_at` | string (date-time) | When the resource was terminated. Unlike end_date, which is the planned date, this is the moment it happened. It stays set during a restore and is cleared once the resource is OK again, so check the state before reading it as the end of a live resource. Empty if the date is not known. |
     | `username` | string |  |
     | `limit_usage` | object (free-form) | Dictionary mapping limit-based component types to their consumed usage. Sums the ComponentUsage rows of the component's current period (the monthly billing period unless the component defines a longer limit_period), i.e. the period's high-watermark rather than the instantaneous current_usages value. |
+    | `prepaid_total_component_types` | array of strings | Component types whose limit_usage covers the whole subscription, so the UI shows their limit as the monthly limit times the months ordered. Empty unless the offering shows prepaid limits as a total (display_prepaid_limits_as_total). |
     | `downscaled` | boolean |  |
     | `restrict_member_access` | boolean |  |
     | `paused` | boolean |  |
     | `usage_limit_restriction` | any | Which restriction (paused or downscaled) was automatically applied because reported usage reached a component limit. Empty when no such restriction is active. Used so the automatic lift never clears a restriction that was set for another reason. |
+    | `usage_limit_resumes_at` | string (date-time) | When the spending limits that restrict the resource reset and the restriction lifts. Empty when no spending limit restricts the resource, when a limit-based component's limit does too, or while a reached total limit holds it: a total never resets, so the restriction lifts only when that limit is raised or cleared. |
+    | `spending_limits` | object (free-form) | Spending limits on usage-based components, per period. Changed with the set_spending_limits action. |
+    | `spending_limit_status` | array of objects |  |
+    | `spending_limit_status.component_type` | string |  |
+    | `spending_limit_status.period` | string | <br>_Enum: `day`, `week`, `month`, `quarter`, `year`, `total`_ |
+    | `spending_limit_status.limit` | number (double) |  |
+    | `spending_limit_status.used` | number (double) | Usage reported in the current period. |
+    | `spending_limit_status.resets_at` | string (date-time) | When the current period ends and its usage starts from zero. Null for total, which never resets. |
+    | `spending_limit_status.reached` | boolean |  |
+    | `spending_limit_status.last_reported_at` | string (date-time) | When usage of the component was last reported. |
     | `endpoints` | array of objects |  |
     | `endpoints.uuid` | string (uuid) |  |
     | `endpoints.name` | string |  |
-    | `endpoints.url` | string | URL of the access endpoint |
+    | `endpoints.url` | string (uri) | URL of the access endpoint |
     | `error_message` | string |  |
     | `error_traceback` | string |  |
     | `options` | object (free-form) |  |
@@ -383,6 +416,7 @@
     | `offering_components.max_available_limit` | number (double) |  |
     | `offering_components.is_boolean` | boolean |  |
     | `offering_components.default_limit` | number (double) |  |
+    | `offering_components.spending_limit_periods` | object (free-form) | Periods (day, week, month, quarter, year, total) for which customers can set a spending limit on this usage-based component; total counts all the usage since the resource started and never resets. Day and week need the integration to report usage per day. Empty when customers cannot set spending limits. |
     | `offering_components.factor` | integer |  |
     | `offering_components.is_builtin` | boolean | The API's older name for ``billed_per_plan``.  It used to ask the plugin registry whether this component's type is one the plugin declares, which left out the OpenStack per-volume-type quotas: they are created by the volume type sync rather than declared, so the API called them provider components while the billing resolver treated them as builtin. Reading the stored flag makes the two agree. |
     | `offering_components.is_prepaid` | boolean |  |
@@ -395,6 +429,14 @@
     | `offering_components.renewal_duration_step` | integer | Step size in months for renewal. Only multiples of this value (starting from min_renewal_duration) are valid. Defaults to 1. |
     | `has_api_keys` | boolean | Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource. |
     | `offering_account_settings` | any |  |
+    | `display_limits` | object (free-form) | Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced. |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.
 
 ---
 
@@ -529,5 +571,12 @@
     | `labels` | object (free-form) |  |
     | `annotations` | object (free-form) |  |
     | `runtime_state` | string |  |
+
+
+=== "Authorization"
+
+    Requires `ORDER.APPROVE` on the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

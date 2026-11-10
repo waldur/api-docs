@@ -98,6 +98,13 @@ Returns a paginated list of reusable templates for maintenance announcements.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve a maintenance announcement template
@@ -181,6 +188,13 @@ Returns the details of a specific maintenance announcement template.
     | `affected_offerings.offering_uuid` | string (uuid) |  |
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -278,6 +292,13 @@ Creates a new reusable template for maintenance announcements, including a defau
     | `affected_offerings.offering_uuid` | string (uuid) |  |
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider or the service provider's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---
 
@@ -387,6 +408,13 @@ Updates an existing maintenance announcement template.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partially update a maintenance announcement template
@@ -486,6 +514,13 @@ Partially updates an existing maintenance announcement template.
     | `affected_offerings.impact_level` | any | Expected impact on this offering |
     | `affected_offerings.impact_description` | string | Specific description of how this offering will be affected |
 
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete a maintenance announcement template
@@ -552,5 +587,12 @@ Deletes a maintenance announcement template.
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT` on the service provider's customer or the service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

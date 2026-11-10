@@ -85,6 +85,11 @@
     | `body` | string |
     | `emails` | array of string (email)s |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---
 
 ### Retrieve
@@ -157,5 +162,10 @@
     | `subject` | string |
     | `body` | string |
     | `emails` | array of string (email)s |
+
+
+=== "Authorization"
+
+    Staff or support only.
 
 ---

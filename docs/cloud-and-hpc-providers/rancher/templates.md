@@ -97,6 +97,13 @@
     | `catalog_name` | string |
     | `versions` | array of strings |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -178,5 +185,12 @@
     | `default_version` | string |
     | `catalog_name` | string |
     | `versions` | array of strings |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---

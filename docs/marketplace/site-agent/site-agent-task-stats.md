@@ -75,4 +75,9 @@ Get Celery task status for agent-related tasks. Support users only.
     | `reserved_tasks.name` | string |  |
     | `error` | string | Error message if task inspection failed |
 
+
+=== "Authorization"
+
+    Staff or support only.
+
 ---

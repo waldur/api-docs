@@ -84,7 +84,7 @@ Get a list of all permissions for the current user. Staff and support users can 
     | `role_name` | string | Role name contains |
     | `role_uuid` | string (uuid) | Role UUID |
     | `scope_name` | string | Scope name |
-    | `scope_type` | string | Scope type |
+    | `scope_type` | string | Scope type, as returned in scope_type: customer, project, offering, service_provider, call_organizer, call, proposal, resource, resource_project or global. A content type model name also matches. |
     | `scope_uuid` | string | Scope UUID |
     | `show_inactive` | boolean | Staff/support only. Include revoked (inactive) role grants in addition to active ones. Ignored for other users, who only ever see their own active roles. |
     | `user` | string (uuid) |  |
@@ -127,6 +127,13 @@ Get a list of all permissions for the current user. Staff and support users can 
     | `customer_name` | string |
     | `resource_uuid` | string (uuid) |
     | `project_uuid` | string (uuid) |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Every grant to staff and support, the list only active ones unless show_inactive=true. Anyone else sees their own active grants, except those on an organization, or a project of one, that limits portal access to networks the caller's address is outside.
 
 ---
 
@@ -223,6 +230,13 @@ Retrieve the details of a specific user permission grant by its UUID.
     | `resource_uuid` | string (uuid) |
     | `project_uuid` | string (uuid) |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Every grant to staff and support, the list only active ones unless show_inactive=true. Anyone else sees their own active grants, except those on an organization, or a project of one, that limits portal access to networks the caller's address is outside.
+
 ---
 
 ## Other Actions
@@ -305,6 +319,11 @@ Restores a previously revoked user role grant, reinstating the associated permis
     **`200`** - Role restored successfully.
     
 
+
+=== "Authorization"
+
+    Staff, or a holder of the team permission for the grant's scope type (CUSTOMER.CREATE_PERMISSION, PROJECT.CREATE_PERMISSION, OFFERING.CREATE_PERMISSION, ...) on the scope or on its organization, among the grants the caller sees.
+
 ---
 
 ### Revoke a user role
@@ -383,5 +402,10 @@ Revokes a specific user role grant, deactivating the associated permissions imme
 
     **`200`** - Role revoked successfully.
     
+
+
+=== "Authorization"
+
+    Staff, or a holder of the team permission for the grant's scope type (CUSTOMER.DELETE_PERMISSION, PROJECT.DELETE_PERMISSION, OFFERING.DELETE_PERMISSION, ...) on the scope or on its organization, among the grants the caller sees.
 
 ---

@@ -103,6 +103,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -185,6 +190,11 @@
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ## Data
@@ -262,6 +272,11 @@ Get vendor names from Arrow catalog API (IAAS category).
     |---|---|
     | `value` | string |
     | `label` | string |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -364,6 +379,11 @@ Get vendor names from Arrow catalog API (IAAS category).
     | `is_active` | boolean | Whether this mapping is active |
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---
 
@@ -475,6 +495,11 @@ Get vendor names from Arrow catalog API (IAAS category).
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Partial Update
@@ -573,6 +598,11 @@ Get vendor names from Arrow catalog API (IAAS category).
     | `created` | string (date-time) |  |
     | `modified` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Delete
@@ -637,5 +667,10 @@ Get vendor names from Arrow catalog API (IAAS category).
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

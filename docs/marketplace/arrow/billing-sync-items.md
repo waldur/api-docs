@@ -96,6 +96,11 @@
     | `quantity` | string (decimal) | Quantity |
     | `created` | string (date-time) |  |
 
+
+=== "Authorization"
+
+    Staff only.
+
 ---
 
 ### Retrieve
@@ -178,5 +183,10 @@
     | `description` | string | Line item description |
     | `quantity` | string (decimal) | Quantity |
     | `created` | string (date-time) |  |
+
+
+=== "Authorization"
+
+    Staff only.
 
 ---

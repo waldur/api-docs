@@ -103,6 +103,13 @@
     | `reviewed_by_full_name` | string |  |
     | `review_comment` | string | Optional comment provided during review |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -186,6 +193,13 @@
     | `reviewed_by_uuid` | string (uuid) |  |
     | `reviewed_by_full_name` | string |  |
     | `review_comment` | string | Optional comment provided during review |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -271,6 +285,11 @@
     | `uuid` | string (uuid) |  |
     | `state` | string |  |
 
+
+=== "Authorization"
+
+    A caller who sees the project the request names through a role (any role on the project, PROJECT.LIST on its organization or site-wide, or a role on one of its resources) or as global support, and who may not change its end date directly: not staff, and without PROJECT.UPDATE on the project, its organization or site-wide.
+
 ---
 
 ## Other Actions
@@ -353,6 +372,13 @@ Approve project end date change request
     **`200`** - No response body
     
 
+
+=== "Authorization"
+
+    Requires `PROJECT.UPDATE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Cancel project end date change request. Only the creator can cancel
@@ -419,6 +445,11 @@ Cancel project end date change request. Only the creator can cancel.
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    The request's author.
 
 ---
 
@@ -498,5 +529,12 @@ Reject project end date change request
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `PROJECT.UPDATE` on the project or the project's customer.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

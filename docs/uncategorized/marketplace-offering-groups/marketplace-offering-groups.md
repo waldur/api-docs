@@ -90,6 +90,13 @@
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -174,6 +181,13 @@
     | `customer` | string (uri) |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
 
 ---
 
@@ -263,6 +277,11 @@
     | `customer` | string (uri) |
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
+
+
+=== "Authorization"
+
+    Staff, or who holds OFFERING.CREATE on the organization named in the request or on its service provider.
 
 ---
 
@@ -364,6 +383,13 @@
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Partial Update
@@ -454,6 +480,13 @@
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Requires `OFFERING.UPDATE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
+
 ---
 
 ### Delete
@@ -518,5 +551,12 @@
 
     **`204`** - No response body
     
+
+
+=== "Authorization"
+
+    Requires `OFFERING.DELETE` on the object, its customer or its customer's service provider.
+    
+    A request acting as staff always meets the permission and role requirements.
 
 ---

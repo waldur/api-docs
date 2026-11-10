@@ -93,6 +93,13 @@
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ### Retrieve
@@ -169,6 +176,13 @@
     | `customer_uuid` | string (uuid) |
     | `customer_name` | string |
 
+
+=== "Authorization"
+
+    Any signed-in user.
+    
+    Returns only objects the caller holds a role on; staff and support see all.
+
 ---
 
 ## Other Actions
@@ -236,5 +250,10 @@
 
     **`200`** - No response body
     
+
+
+=== "Authorization"
+
+    Who sees the review: staff, global support, and holders of CUSTOMER.LIST_PERMISSION_REVIEWS on its organization or site-wide.
 
 ---
