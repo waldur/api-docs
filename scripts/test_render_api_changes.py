@@ -80,11 +80,52 @@ class RenderPageTest(unittest.TestCase):
             requests,
         )
         self.assertEqual(page.count(text), 1)
-        self.assertNotIn("/api/things-0/", page)
         # Other changes are still listed by endpoint, after the folded ones.
         self.assertLess(
             requests.index("On many endpoints"), requests.index("`POST /api/a/`")
         )
+
+    def test_folded_change_keeps_its_endpoints_in_a_collapsed_block(self):
+        text = "removed the request property `backend_id`"
+        many = [
+            change(
+                "request-property-removed", 3, "POST", f"/api/things-{n:02}/", text=text
+            )
+            for n in range(rac.FOLD_MIN_ENDPOINTS)
+        ]
+        page = render(list(reversed(many)))
+        item = page[page.index(f"- {text}") :].split("\n\n\n")[0]
+        lines = item.splitlines()
+        self.assertEqual(lines[0], f"- {text} ({rac.FOLD_MIN_ENDPOINTS} endpoints)")
+        # Nested under the list item: the block one level in, its list two.
+        self.assertEqual(
+            lines[2], f'    ??? note "The {rac.FOLD_MIN_ENDPOINTS} endpoints"'
+        )
+        self.assertEqual(
+            [line for line in lines if line.startswith("        - ")],
+            [
+                f"        - `POST /api/things-{n:02}/`"
+                for n in range(rac.FOLD_MIN_ENDPOINTS)
+            ],
+        )
+        # Each endpoint is named once: in the block, not again by endpoint.
+        self.assertEqual(page.count("`POST /api/things-00/`"), 1)
+
+    def test_folded_change_in_a_collapsed_section_nests_one_level_deeper(self):
+        text = "added the optional property `x` to the response"
+        many = [
+            change(
+                "response-optional-property-added", 1, "GET", f"/api/t-{n}/", text=text
+            )
+            for n in range(rac.FOLD_MIN_ENDPOINTS)
+        ]
+        page = render(many)
+        other = page[page.index("## Other changes") :]
+        self.assertIn(f"\n    - {text} ({rac.FOLD_MIN_ENDPOINTS} endpoints)\n", other)
+        self.assertIn(
+            f'\n        ??? note "The {rac.FOLD_MIN_ENDPOINTS} endpoints"\n', other
+        )
+        self.assertIn("\n            - `GET /api/t-0/`\n", other)
 
     def test_change_on_fewer_endpoints_is_listed_by_endpoint(self):
         text = "removed the request property `x`"

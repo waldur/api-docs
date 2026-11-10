@@ -215,7 +215,10 @@ def render_by_endpoint(changes, indent: str = "") -> list:
 
     A change made the same way on ``FOLD_MIN_ENDPOINTS`` or more endpoints is
     listed once, first, with the number of endpoints: renaming a security scheme
-    in 8.1.0 removed it from 2,207 endpoints in one go.
+    in 8.1.0 removed it from 2,207 endpoints in one go. Its endpoints follow in
+    a collapsed block nested in the list item, because an integrator needs to
+    know which ones a breaking change hits (``backend_id`` removed from 11
+    request bodies in 8.1.4).
     """
     endpoints_by_change = defaultdict(set)
     for change in changes:
@@ -232,9 +235,21 @@ def render_by_endpoint(changes, indent: str = "") -> list:
     if folded:
         lines += [f"{indent}**{MANY_ENDPOINTS}**", ""]
         for key in sorted(folded, key=lambda k: (-len(endpoints_by_change[k]), k[1])):
-            count = len(endpoints_by_change[key])
-            lines.append(f"{indent}- {escape(key[1])} ({count:,} endpoints)")
-        lines.append("")
+            endpoints = sorted(endpoints_by_change[key], key=endpoint_key)
+            count = len(endpoints)
+            # The block is part of the list item: indented one level under it,
+            # its content one level more.
+            lines += [
+                f"{indent}- {escape(key[1])} ({count:,} endpoints)",
+                "",
+                f'{indent}    ??? note "The {count:,} endpoints"',
+                "",
+            ]
+            lines += [
+                f"{indent}        - {endpoint_title(endpoint)}"
+                for endpoint in endpoints
+            ]
+            lines.append("")
 
     grouped = group_by_endpoint(
         [c for c in changes if (c["id"], c["text"]) not in folded]
@@ -297,7 +312,7 @@ def render_page(changes, version, previous, oasdiff_version, full_diff=None) -> 
         "A `HEAD` change that repeats the `GET` change of its path is left out. "
         f"A change made the same way on {FOLD_MIN_ENDPOINTS} or more endpoints "
         f"is listed once, under *{MANY_ENDPOINTS}*, with the number of "
-        "endpoints.",
+        "endpoints; open it to see which.",
         "",
         "| Changes | Count |",
         "|---|---:|",
