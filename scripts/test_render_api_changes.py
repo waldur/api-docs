@@ -165,9 +165,16 @@ class RenderPageTest(unittest.TestCase):
         page = render([change("response-property-became-nullable", 3)])
         self.assertNotIn("####", page)
 
-    def test_angle_brackets_are_escaped(self):
-        page = render([change("x", 3, text="pattern `^<a>$` was set")])
-        self.assertIn("`^&lt;a>$`", page)
+    def test_angle_brackets_in_code_spans_are_left_alone(self):
+        # Markdown shows a code span literally, so `&lt;` there would be
+        # printed as is (seen on GET /api/event-consumers/ in 8.1.3).
+        page = render([change("x", 3, text="type changed to `array<string>`")])
+        self.assertIn("- type changed to `array<string>`", page)
+        self.assertNotIn("&lt;", page)
+
+    def test_angle_brackets_outside_code_spans_are_escaped(self):
+        page = render([change("x", 3, text="pattern <a> set on `a<b>`")])
+        self.assertIn("- pattern &lt;a> set on `a<b>`", page)
 
     def test_full_diff_link_is_optional(self):
         self.assertIn("[full schema diff](full/x-diff-full.md)", render([]))

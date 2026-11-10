@@ -18,6 +18,11 @@ so this script renders the page instead:
 Description-only edits are not changelog entries in oasdiff, so they never show
 up here; the full structural diff (`oasdiff diff`) is linked for those.
 
+Severity is oasdiff's, with the overrides in `oasdiff-severity-levels.txt`
+(passed as `--severity-levels`): removed request fields, query parameters and
+optional response fields are breaking for Waldur clients, and the page's
+explanation of "breaking" says so. Run oasdiff with that file.
+
 ``HEAD`` operations are left out: Django serves one for every ``GET`` and the
 schema mirrors it, so each ``GET`` change would otherwise be listed twice. For
 the same reason a request-body change, which oasdiff reports once per media
@@ -102,13 +107,21 @@ def endpoint_title(endpoint) -> str:
     return f"`{method} {path}`"
 
 
+CODE_SPAN_RE = re.compile(r"(`[^`]*`)")
+
+
 def escape(text: str) -> str:
     """Keep change texts from being read as HTML by Markdown.
 
-    oasdiff quotes names and values in backticks already; a stray ``<`` (a
-    pattern, a description) is the only thing that can break the page.
+    oasdiff quotes names and values in backticks, and Markdown shows a code
+    span literally: escaping a ``<`` there would put ``&lt;`` on the page
+    (``array<string>``). Only a ``<`` outside a code span is escaped.
     """
-    return text.replace("<", "&lt;").strip()
+    parts = CODE_SPAN_RE.split(text)
+    return "".join(
+        part if index % 2 else part.replace("<", "&lt;")
+        for index, part in enumerate(parts)
+    ).strip()
 
 
 def load_changes(path: Path) -> list:
@@ -226,10 +239,14 @@ def render_page(changes, version, previous, oasdiff_version, full_diff=None) -> 
         f"**{version}**, computed from the two releases' OpenAPI schemas with "
         f"[oasdiff](https://github.com/oasdiff/oasdiff) {oasdiff_version}.",
         "",
-        "**Breaking** changes can break an existing client: a removed endpoint "
-        "or field, a request field that became required or stricter, a "
-        "response that can now hold values it could not before (a new enum "
-        "value, a wider type, a field that became optional or nullable). "
+        "**Breaking** changes can break an existing client: a removed endpoint, "
+        "field or query parameter, a request field that became required or "
+        "stricter, a response that can now hold values it could not before (a "
+        "new enum value, a wider type, a field that became optional or "
+        "nullable). A removed request field or query parameter is not rejected, "
+        "but ignored: the client's value is silently dropped. A removed response "
+        "field is breaking even where the schema marks it optional, which it "
+        "does only because a client may ask for a subset of fields. "
         "**Warnings** may break a client, depending on how it uses the field. "
         "`HEAD` operations are left out: each mirrors its `GET`.",
         "",

@@ -119,7 +119,16 @@ Generate OpenAPI schema diff:
         PREV_VERSION=${PREV_VERSION#waldur-openapi-schema-}
         echo "$PREV_VERSION" > previous-version.txt
         # Classified changes, rendered into the API changes page by the upload job.
-        /usr/bin/oasdiff changelog -f json "$PREV_SCHEMA" waldur-openapi-schema.yaml > openapi-changelog.json
+        # oasdiff-severity-levels.txt (no comments allowed in it) makes removals
+        # breaking that oasdiff rates lower but that break Waldur clients:
+        # - request-property-removed, request-parameter-removed (WARN): DRF
+        #   ignores an unknown field or query parameter, so the client's value
+        #   is silently dropped and a filter stops filtering;
+        # - response-optional-property-removed (INFO): make_fields_optional in
+        #   waldur-mastermind marks response properties optional on endpoints
+        #   with the `field` parameter only because a client may ask for a
+        #   subset; a removed one is gone for every client that reads it.
+        /usr/bin/oasdiff changelog -f json --severity-levels oasdiff-severity-levels.txt "$PREV_SCHEMA" waldur-openapi-schema.yaml > openapi-changelog.json
         # Every difference, description edits included, for the linked full page.
         /usr/bin/oasdiff diff -f markup "$PREV_SCHEMA" waldur-openapi-schema.yaml > openapi-diff-full.md
         sed -i "1i # Full OpenAPI schema diff - ${RELEASE_VERSION}\n\nEvery difference between the ${PREV_VERSION} and ${RELEASE_VERSION} schemas. [API changes in ${RELEASE_VERSION}](../waldur-openapi-schema-${RELEASE_VERSION}-diff.md) summarises them, breaking changes first.\n" openapi-diff-full.md
