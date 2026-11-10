@@ -39,11 +39,63 @@ class RenderPageTest(unittest.TestCase):
                 change("response-optional-property-added", 1),
             ]
         )
-        self.assertIn("| Breaking | 3 in 3 endpoints |", page)
+        # The removed endpoint is breaking too, but has its own row.
+        self.assertIn(
+            "| Breaking, besides removed endpoints | 2 in 2 endpoints |", page
+        )
         self.assertIn("| Warnings | 1 |", page)
         self.assertIn("| Endpoints removed | 1 |", page)
         self.assertIn("| Endpoints added | 1 |", page)
         self.assertIn("| Other changes | 1 |", page)
+
+    def test_breaking_row_adds_up_with_the_kind_table(self):
+        page = render(
+            [
+                change("api-path-removed-without-deprecation", 3, path="/api/old/"),
+                change("api-removed-without-deprecation", 3, "DELETE", "/api/gone/"),
+                change("response-property-became-nullable", 3, path="/api/a/"),
+                change("request-property-removed", 3, "POST", "/api/b/"),
+            ]
+        )
+        kinds = page[page.index("| Kind | Count |") :].split("\n\n")[0]
+        total = sum(
+            int(line.rsplit("|", 2)[1].strip().replace(",", ""))
+            for line in kinds.splitlines()[2:]
+        )
+        self.assertEqual(total, 2)
+        self.assertIn(
+            "| Breaking, besides removed endpoints | 2 in 2 endpoints |", page
+        )
+
+    def test_change_on_many_endpoints_is_listed_once(self):
+        text = "the endpoint scheme security `tokenAuth` was removed from the API"
+        many = [
+            change("api-security-removed", 3, "GET", f"/api/things-{n}/", text=text)
+            for n in range(rac.FOLD_MIN_ENDPOINTS)
+        ]
+        page = render(many + [change("request-property-removed", 3, "POST", "/api/a/")])
+        requests = page[page.index("### Requests") :]
+        self.assertIn(
+            f"**On many endpoints**\n\n- {text} ({rac.FOLD_MIN_ENDPOINTS} endpoints)",
+            requests,
+        )
+        self.assertEqual(page.count(text), 1)
+        self.assertNotIn("/api/things-0/", page)
+        # Other changes are still listed by endpoint, after the folded ones.
+        self.assertLess(
+            requests.index("On many endpoints"), requests.index("`POST /api/a/`")
+        )
+
+    def test_change_on_fewer_endpoints_is_listed_by_endpoint(self):
+        text = "removed the request property `x`"
+        page = render(
+            [
+                change("request-property-removed", 3, "POST", f"/api/t-{n}/", text=text)
+                for n in range(rac.FOLD_MIN_ENDPOINTS - 1)
+            ]
+        )
+        self.assertNotIn("**On many endpoints**", page)
+        self.assertEqual(page.count(text), rac.FOLD_MIN_ENDPOINTS - 1)
 
     def test_sections_come_in_severity_order(self):
         page = render(
@@ -187,7 +239,36 @@ class RenderPageTest(unittest.TestCase):
 
 
 class LoadChangesTest(unittest.TestCase):
-    def test_head_operations_are_dropped(self):
+    def test_head_change_that_repeats_get_is_dropped(self):
+        changes = rac.drop_mirrored_heads(
+            [change("x", 3, "HEAD"), change("x", 3, "GET")]
+        )
+        self.assertEqual([c["operation"] for c in changes], ["GET"])
+
+    def test_head_change_of_its_own_is_kept(self):
+        # A HEAD added to an existing GET, or one that is an existence check,
+        # has no GET change to repeat.
+        changes = rac.drop_mirrored_heads(
+            [
+                change("endpoint-added", 1, "HEAD", "/api/debug/x/"),
+                change("x", 3, "HEAD", "/api/a/", text="only on HEAD"),
+                change("x", 3, "GET", "/api/a/", text="only on GET"),
+                change("x", 3, "HEAD", "/api/b/"),
+                change("x", 3, "GET", "/api/c/"),
+            ]
+        )
+        self.assertEqual(
+            [(c["operation"], c["path"]) for c in changes],
+            [
+                ("HEAD", "/api/debug/x/"),
+                ("HEAD", "/api/a/"),
+                ("GET", "/api/a/"),
+                ("HEAD", "/api/b/"),
+                ("GET", "/api/c/"),
+            ],
+        )
+
+    def test_load_changes_drops_mirrored_heads(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "changelog.json"
             path.write_text(json.dumps([change("x", 3, "HEAD"), change("x", 3, "GET")]))
@@ -291,21 +372,23 @@ class MergeMediaTypesTest(unittest.TestCase):
                 )
             )
             page = render(rac.load_changes(path))
-        self.assertIn("| Breaking | 1 in 1 endpoints |", page)
+        self.assertIn(
+            "| Breaking, besides removed endpoints | 1 in 1 endpoints |", page
+        )
 
 
 class RenderIndexTest(unittest.TestCase):
     def test_lists_release_pages_newest_first(self):
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)
-            for name in (
-                "waldur-openapi-schema-8.1.3-diff.md",
-                "waldur-openapi-schema-8.1.10-diff.md",
-                "waldur-openapi-schema-7.9.0-diff.md",
-                "index.md",
-                ".pages",
+            for name, content in (
+                ("waldur-openapi-schema-8.1.3-diff.md", "# API changes in 8.1.3\n"),
+                ("waldur-openapi-schema-8.1.10-diff.md", "# API changes in 8.1.10\n"),
+                ("waldur-openapi-schema-7.9.0-diff.md", "# API changes in 7.9.0\n"),
+                ("index.md", ""),
+                (".pages", ""),
             ):
-                (directory / name).write_text("")
+                (directory / name).write_text(content)
             (directory / "full").mkdir()
             index = rac.render_index(directory)
         entries = [line for line in index.splitlines() if line.startswith("- [")]
@@ -317,6 +400,24 @@ class RenderIndexTest(unittest.TestCase):
                 "- [7.9.0](waldur-openapi-schema-7.9.0-diff.md)",
             ],
         )
+
+    def test_marks_pages_that_hold_only_the_structural_diff(self):
+        # Pages published before this renderer have oasdiff's own title.
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            (directory / "waldur-openapi-schema-8.1.5-diff.md").write_text(
+                "# API changes in 8.1.5\n\nSummary\n"
+            )
+            (directory / "waldur-openapi-schema-8.1.4-diff.md").write_text(
+                "# OpenAPI schema diff - 8.1.4\n\n## For version 8.1.4\n"
+            )
+            index = rac.render_index(directory)
+        self.assertIn("- [8.1.5](waldur-openapi-schema-8.1.5-diff.md)\n", index)
+        self.assertIn(
+            "- [8.1.4](waldur-openapi-schema-8.1.4-diff.md) (full structural diff only)",
+            index,
+        )
+        self.assertNotIn("8.1.3", index)
 
 
 if __name__ == "__main__":

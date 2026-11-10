@@ -23,10 +23,15 @@ Severity is oasdiff's, with the overrides in `oasdiff-severity-levels.txt`
 optional response fields are breaking for Waldur clients, and the page's
 explanation of "breaking" says so. Run oasdiff with that file.
 
-``HEAD`` operations are left out: Django serves one for every ``GET`` and the
-schema mirrors it, so each ``GET`` change would otherwise be listed twice. For
-the same reason a request-body change, which oasdiff reports once per media
-type the endpoint accepts, is listed once.
+A ``HEAD`` change that repeats a ``GET`` change of the same path is left out:
+Django serves a ``HEAD`` for every ``GET`` and the schema mirrors it, so the
+change would otherwise be listed twice. A ``HEAD`` that is not such a mirror --
+a ``HEAD`` added to an existing ``GET``, or one with its own meaning such as the
+existence check on ``/api/openportal-managed-projects/{identifier}/{destination}/``
+-- keeps its changes. For the same reason a request-body change, which oasdiff
+reports once per media type the endpoint accepts, is listed once, and a change
+made the same way on many endpoints (a renamed security scheme, a field of a
+shared serializer) is listed once with the number of endpoints.
 
 Usage:
 
@@ -72,6 +77,10 @@ MEDIA_TYPE_RE = re.compile(r" ?\(media type: ([^)]+)\)")
 REQUEST_MEDIA_TYPES = frozenset(
     {"application/json", "application/x-www-form-urlencoded", "multipart/form-data"}
 )
+
+# A change made the same way on this many endpoints is listed once.
+FOLD_MIN_ENDPOINTS = 10
+MANY_ENDPOINTS = "On many endpoints"
 
 # Breaking changes are listed in this order, each group under its own heading.
 REQUESTS = "Requests"
@@ -127,9 +136,19 @@ def escape(text: str) -> str:
 def load_changes(path: Path) -> list:
     # oasdiff prints `[]` for identical schemas; be lenient about empty output.
     changes = json.loads(path.read_text(encoding="utf-8") or "null") or []
-    return merge_media_types(
-        [change for change in changes if change.get("operation") != "HEAD"]
-    )
+    return merge_media_types(drop_mirrored_heads(changes))
+
+
+def drop_mirrored_heads(changes) -> list:
+    """Leave out each ``HEAD`` change that repeats a ``GET`` change of its path."""
+
+    def key(change):
+        return (change["id"], change["level"], change.get("path"), change["text"])
+
+    get_changes = {key(c) for c in changes if c.get("operation") == "GET"}
+    return [
+        c for c in changes if c.get("operation") != "HEAD" or key(c) not in get_changes
+    ]
 
 
 def merge_media_types(changes) -> list:
@@ -193,9 +212,33 @@ def render_by_endpoint(changes, indent: str = "") -> list:
 
     Labels, not headings: a release touches hundreds of endpoints, and a heading
     each would bury the page's five sections in its table of contents.
+
+    A change made the same way on ``FOLD_MIN_ENDPOINTS`` or more endpoints is
+    listed once, first, with the number of endpoints: renaming a security scheme
+    in 8.1.0 removed it from 2,207 endpoints in one go.
     """
+    endpoints_by_change = defaultdict(set)
+    for change in changes:
+        endpoints_by_change[(change["id"], change["text"])].add(
+            (change.get("operation"), change.get("path"))
+        )
+    folded = {
+        key
+        for key, endpoints in endpoints_by_change.items()
+        if len(endpoints) >= FOLD_MIN_ENDPOINTS
+    }
+
     lines = []
-    grouped = group_by_endpoint(changes)
+    if folded:
+        lines += [f"{indent}**{MANY_ENDPOINTS}**", ""]
+        for key in sorted(folded, key=lambda k: (-len(endpoints_by_change[k]), k[1])):
+            count = len(endpoints_by_change[key])
+            lines.append(f"{indent}- {escape(key[1])} ({count:,} endpoints)")
+        lines.append("")
+
+    grouped = group_by_endpoint(
+        [c for c in changes if (c["id"], c["text"]) not in folded]
+    )
     for endpoint in sorted(grouped, key=endpoint_key):
         lines += [f"{indent}**{endpoint_title(endpoint)}**", ""]
         lines += [f"{indent}- {escape(change['text'])}" for change in grouped[endpoint]]
@@ -228,8 +271,10 @@ def render_page(changes, version, previous, oasdiff_version, full_diff=None) -> 
     warnings_rest = [c for c in warnings if id(c) not in listed_elsewhere]
     info_rest = [c for c in info if id(c) not in listed_elsewhere]
 
+    # Removed endpoints have their own row, so the breaking row counts the rest
+    # and adds up with the table under "Breaking changes".
     breaking_endpoints = {
-        (c.get("operation"), c.get("path")) for c in breaking if c.get("operation")
+        (c.get("operation"), c.get("path")) for c in breaking_rest if c.get("operation")
     }
 
     lines = [
@@ -247,12 +292,17 @@ def render_page(changes, version, previous, oasdiff_version, full_diff=None) -> 
         "but ignored: the client's value is silently dropped. A removed response "
         "field is breaking even where the schema marks it optional, which it "
         "does only because a client may ask for a subset of fields. "
-        "**Warnings** may break a client, depending on how it uses the field. "
-        "`HEAD` operations are left out: each mirrors its `GET`.",
+        "**Warnings** may break a client, depending on how it uses the field.",
+        "",
+        "A `HEAD` change that repeats the `GET` change of its path is left out. "
+        f"A change made the same way on {FOLD_MIN_ENDPOINTS} or more endpoints "
+        f"is listed once, under *{MANY_ENDPOINTS}*, with the number of "
+        "endpoints.",
         "",
         "| Changes | Count |",
         "|---|---:|",
-        f"| Breaking | {len(breaking):,} in {len(breaking_endpoints):,} endpoints |",
+        f"| Breaking, besides removed endpoints | {len(breaking_rest):,} in "
+        f"{len(breaking_endpoints):,} endpoints |",
         f"| Warnings | {len(warnings):,} |",
         f"| Endpoints removed | {len(removed):,} |",
         f"| Endpoints added | {len(added):,} |",
@@ -324,29 +374,37 @@ def render_page(changes, version, previous, oasdiff_version, full_diff=None) -> 
     return "\n".join(lines).rstrip() + "\n"
 
 
+PAGE_TITLE_PREFIX = "# API changes in "
+FULL_DIFF_ONLY = " (full structural diff only)"
+
+
 def render_index(directory: Path) -> str:
-    versions = sorted(
-        (
-            match.group(1)
-            for match in (DIFF_PAGE_RE.match(p.name) for p in directory.iterdir())
-            if match
-        ),
-        key=version_key,
-        reverse=True,
-    )
+    """List the release pages newest first.
+
+    A page rendered before this script existed holds only oasdiff's structural
+    diff; it is told apart by its title and marked as such, so the index stays
+    right whichever releases have been regenerated.
+    """
+    pages = {}
+    for path in directory.iterdir():
+        match = DIFF_PAGE_RE.match(path.name)
+        if match:
+            title = path.read_text(encoding="utf-8").split("\n", 1)[0]
+            pages[match.group(1)] = title.startswith(PAGE_TITLE_PREFIX)
     lines = [
         "# API changes",
         "",
         "What changed in the Waldur REST API in each release, computed from the "
-        "OpenAPI schemas of that release and the one before it. Breaking "
-        "changes are listed first.",
-        "",
-        "Pages up to 8.1.3 show the full structural diff only.",
+        "OpenAPI schemas of that release and the one before it. Each page opens "
+        "with a summary and lists breaking changes first; pages marked *full "
+        "structural diff only* were published before that and list every "
+        "difference by endpoint.",
         "",
     ]
     lines += [
         f"- [{version}](waldur-openapi-schema-{version}-diff.md)"
-        for version in versions
+        + ("" if pages[version] else FULL_DIFF_ONLY)
+        for version in sorted(pages, key=version_key, reverse=True)
     ]
     return "\n".join(lines) + "\n"
 
