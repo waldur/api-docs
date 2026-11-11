@@ -237434,6 +237434,10 @@ Requires staff permissions.</p>
 <td>integer</td>
 </tr>
 <tr>
+<td><code>ONBOARDING_NOTIFICATION_EMAILS</code></td>
+<td>string</td>
+</tr>
+<tr>
 <td><code>ONBOARDING_ARIREGISTER_BASE_URL</code></td>
 <td>string (uri)</td>
 </tr>
@@ -239314,6 +239318,11 @@ Requires staff permissions.</p>
 <tr>
 <td><code>ONBOARDING_VERIFICATION_EXPIRY_HOURS</code></td>
 <td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ONBOARDING_NOTIFICATION_EMAILS</code></td>
+<td>string</td>
 <td></td>
 </tr>
 <tr>
@@ -694188,7 +694197,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff or support flag, and holders of a site-wide CALL.LIST grant, see every entry. Others see the entries addressed to them, and those of calls they hold the call manager role on, or any role on the call's managing organisation or on its customer.</p>
+<p>Users with the staff or support flag, and holders of a site-wide CALL.LIST grant, see every entry. Others see the entries addressed to them, and those of calls whose review they manage: PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation, as the pool's management endpoints require. Other roles on the managing organisation's customer see none.</p>
 </div>
 </div>
 </div>
@@ -694477,7 +694486,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff or support flag, and holders of a site-wide CALL.LIST grant, see every entry. Others see the entries addressed to them, and those of calls they hold the call manager role on, or any role on the call's managing organisation or on its customer.</p>
+<p>Users with the staff or support flag, and holders of a site-wide CALL.LIST grant, see every entry. Others see the entries addressed to them, and those of calls whose review they manage: PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation, as the pool's management endpoints require. Other roles on the managing organisation's customer see none.</p>
 </div>
 </div>
 </div>
@@ -726977,7 +726986,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff flag see every disclosure. Others see their own, and those of calls they hold the call manager role on, or any role on the call's managing organisation or on its customer.</p>
+<p>Users with the staff flag see every disclosure. Others see their own, and those of calls whose review they manage (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation).</p>
 </div>
 </div>
 </div>
@@ -727221,7 +727230,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff flag see every disclosure. Others see their own, and those of calls they hold the call manager role on, or any role on the call's managing organisation or on its customer.</p>
+<p>Users with the staff flag see every disclosure. Others see their own, and those of calls whose review they manage (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation).</p>
 </div>
 </div>
 </div>
@@ -727926,7 +727935,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff or support flag, and holders of a site-wide CALL.LIST grant, see every conflict. Others see those about themselves as reviewer, and those of calls they hold the call manager role on, or any role on the call's managing organisation or on its customer, except on proposals they apply with.</p>
+<p>Users with the staff or support flag, and holders of a site-wide CALL.LIST grant, see every conflict. Others see those about themselves as reviewer, and those of calls whose review they manage (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation), except on proposals they apply with.</p>
 </div>
 </div>
 </div>
@@ -728205,7 +728214,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff or support flag, and holders of a site-wide CALL.LIST grant, see every conflict. Others see those about themselves as reviewer, and those of calls they hold the call manager role on, or any role on the call's managing organisation or on its customer, except on proposals they apply with.</p>
+<p>Users with the staff or support flag, and holders of a site-wide CALL.LIST grant, see every conflict. Others see those about themselves as reviewer, and those of calls whose review they manage (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation), except on proposals they apply with.</p>
 </div>
 </div>
 </div>
@@ -730436,7 +730445,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>The caller's own bids, and bids on calls they manage, calls run by an organization they hold any role on, and calls of a call-managing organisation they hold a role on; users with the staff flag see all.</p>
+<p>The caller's own bids, and bids on calls whose review they manage (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation); users with the staff flag see all.</p>
 </div>
 </div>
 </div>
@@ -730615,7 +730624,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>The caller's own bids, and bids on calls they manage, calls run by an organization they hold any role on, and calls of a call-managing organisation they hold a role on; users with the staff flag see all.</p>
+<p>The caller's own bids, and bids on calls whose review they manage (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation); users with the staff flag see all.</p>
 </div>
 </div>
 </div>
@@ -734134,7 +734143,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff flag see every profile. Others see their own, and those of reviewers who accepted a place in the pool of a call they hold the call manager role on -- of any call with the support flag or a site-wide CALL.LIST grant.</p>
+<p>Users with the staff flag see every profile. Others see their own, and those of reviewers who accepted a place in the pool of a call whose review they manage: PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation, as the reviewer pool endpoints require -- of any call with the support flag or a site-wide CALL.LIST grant.</p>
 </div>
 </div>
 </div>
@@ -734862,7 +734871,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff flag see every profile. Others see their own, and those of reviewers who accepted a place in the pool of a call they hold the call manager role on -- of any call with the support flag or a site-wide CALL.LIST grant.</p>
+<p>Users with the staff flag see every profile. Others see their own, and those of reviewers who accepted a place in the pool of a call whose review they manage: PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation, as the reviewer pool endpoints require -- of any call with the support flag or a site-wide CALL.LIST grant.</p>
 </div>
 </div>
 </div>
@@ -741167,7 +741176,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Suggestions for calls the caller manages, calls run by an organization they hold any role on, and calls of a call-managing organisation they hold a role on; users with the staff or support flag and holders of a site-wide CALL.LIST grant see all.</p>
+<p>Suggestions for calls whose review the caller manages (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation); users with the staff or support flag and holders of a site-wide CALL.LIST grant see all.</p>
 </div>
 </div>
 </div>
@@ -741446,7 +741455,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Suggestions for calls the caller manages, calls run by an organization they hold any role on, and calls of a call-managing organisation they hold a role on; users with the staff or support flag and holders of a site-wide CALL.LIST grant see all.</p>
+<p>Suggestions for calls whose review the caller manages (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation); users with the staff or support flag and holders of a site-wide CALL.LIST grant see all.</p>
 </div>
 </div>
 </div>
@@ -741857,7 +741866,8 @@ If no workers are available, fields will be <code>null</code>.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>A request acting as staff, the call's managers, and holders of any role on the organization that runs the call's managing organisation.</p>
+<p>Requires <code>PROPOSAL.MANAGE_REVIEW</code> on the call or the call's manager.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -742165,7 +742175,8 @@ If no workers are available, fields will be <code>null</code>.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>A request acting as staff, the call's managers, and holders of any role on the organization that runs the call's managing organisation.</p>
+<p>Requires <code>PROPOSAL.MANAGE_REVIEW</code> on the call or the call's manager.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>

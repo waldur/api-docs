@@ -19222,7 +19222,7 @@
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Suggestions for calls the caller manages, calls run by an organization they hold any role on, and calls of a call-managing organisation they hold a role on; users with the staff or support flag and holders of a site-wide CALL.LIST grant see all.</p>
+<p>Suggestions for calls whose review the caller manages (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation); users with the staff or support flag and holders of a site-wide CALL.LIST grant see all.</p>
 </div>
 </div>
 </div>
@@ -19501,7 +19501,7 @@
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Suggestions for calls the caller manages, calls run by an organization they hold any role on, and calls of a call-managing organisation they hold a role on; users with the staff or support flag and holders of a site-wide CALL.LIST grant see all.</p>
+<p>Suggestions for calls whose review the caller manages (PROPOSAL.MANAGE_REVIEW on the call or on its managing organisation); users with the staff or support flag and holders of a site-wide CALL.LIST grant see all.</p>
 </div>
 </div>
 </div>
@@ -19912,7 +19912,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>A request acting as staff, the call's managers, and holders of any role on the organization that runs the call's managing organisation.</p>
+<p>Requires <code>PROPOSAL.MANAGE_REVIEW</code> on the call or the call's manager.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
@@ -20220,7 +20221,8 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>A request acting as staff, the call's managers, and holders of any role on the organization that runs the call's managing organisation.</p>
+<p>Requires <code>PROPOSAL.MANAGE_REVIEW</code> on the call or the call's manager.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
 </div>
