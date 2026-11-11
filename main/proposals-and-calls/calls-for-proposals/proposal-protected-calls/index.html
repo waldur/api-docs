@@ -23400,6 +23400,11 @@
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -24498,6 +24503,11 @@
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -24925,6 +24935,12 @@
 <td>any</td>
 <td></td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td></td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 <tr>
 <td><code>created_by</code></td>
@@ -25844,6 +25860,11 @@
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -26503,6 +26524,12 @@
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td></td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -27418,6 +27445,11 @@
 <td><code>resource_template_selection_mode</code></td>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 <tr>
 <td><code>created_by</code></td>
@@ -27851,6 +27883,12 @@
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td></td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -28766,6 +28804,11 @@
 <td><code>resource_template_selection_mode</code></td>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 <tr>
 <td><code>created_by</code></td>
@@ -40745,6 +40788,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>steps.automatic_decision_guard</code></td>
+<td>any</td>
+<td>What stops an unsuitable proposal before the automatic decision awards it; null unless the step decides automatically.</td>
+</tr>
+<tr>
 <td><code>steps.allocation_time</code></td>
 <td>string</td>
 <td></td>
@@ -43443,6 +43491,11 @@
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td>Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date).</td>
@@ -44044,6 +44097,11 @@
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>
@@ -46566,6 +46624,11 @@
 <td><code>resource_template_selection_mode</code></td>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 <tr>
 <td><code>created_by</code></td>
@@ -52550,6 +52613,12 @@
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td></td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -57440,6 +57509,12 @@
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td></td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td></td>
@@ -57778,6 +57853,11 @@
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>
@@ -61064,6 +61144,12 @@
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td></td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td></td>
@@ -61402,6 +61488,11 @@
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>
@@ -65326,6 +65417,12 @@
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td></td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td></td>
@@ -65664,6 +65761,11 @@
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>
@@ -68397,6 +68499,11 @@
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>

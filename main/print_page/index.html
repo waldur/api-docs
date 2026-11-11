@@ -154197,6 +154197,11 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
 </tr>
 <tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
+</tr>
+<tr>
 <td><code>offering_account_settings</code></td>
 <td>any</td>
 <td></td>
@@ -154993,6 +154998,11 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <td><code>has_api_keys</code></td>
 <td>boolean</td>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
+</tr>
+<tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
 </tr>
 <tr>
 <td><code>offering_account_settings</code></td>
@@ -485428,6 +485438,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
 </tr>
 <tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
+</tr>
+<tr>
 <td><code>offering_account_settings</code></td>
 <td>any</td>
 <td></td>
@@ -486274,6 +486289,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>has_api_keys</code></td>
 <td>boolean</td>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
+</tr>
+<tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
 </tr>
 <tr>
 <td><code>offering_account_settings</code></td>
@@ -511961,7 +511981,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-demo-presets/info/{name}/</code></td>
-<td style="text-align: left;"><a href="#marketplace-offerings-demo-presets-get-demo-preset-details">Get demo preset details</a></td>
+<td style="text-align: left;"><a href="#marketplace-offerings-demo-presets-preview-a-demo-preset">Preview a demo preset</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -512101,8 +512121,8 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <hr />
 <h2 id="marketplace-offerings-demo-presets-other-actions">Other Actions</h2>
-<h3 id="marketplace-offerings-demo-presets-get-demo-preset-details">Get demo preset details</h3>
-<p>Returns detailed information about a specific demo preset. Staff access only.</p>
+<h3 id="marketplace-offerings-demo-presets-preview-a-demo-preset">Preview a demo preset</h3>
+<p>Returns what loading the preset would do: its users, organizations, projects, resources and offerings, the settings and features a load with cleanup first would change, and warnings about what would not work afterwards. Secret values and the passwords of staff and support users are never returned. Staff access only.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="marketplace-offerings-demo-presets-__tabbed_2_1" name="marketplace-offerings-demo-presets-__tabbed_2" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_2_2" name="marketplace-offerings-demo-presets-__tabbed_2" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_2_3" name="marketplace-offerings-demo-presets-__tabbed_2" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_2_4" name="marketplace-offerings-demo-presets-__tabbed_2" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_2_5" name="marketplace-offerings-demo-presets-__tabbed_2" type="radio" /><input id="marketplace-offerings-demo-presets-__tabbed_2_6" name="marketplace-offerings-demo-presets-__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="marketplace-offerings-demo-presets-__tabbed_2_1">HTTPie</label><label for="marketplace-offerings-demo-presets-__tabbed_2_2">Python</label><label for="marketplace-offerings-demo-presets-__tabbed_2_3">TypeScript</label><label for="marketplace-offerings-demo-presets-__tabbed_2_4">Path Parameters</label><label for="marketplace-offerings-demo-presets-__tabbed_2_5">Responses</label><label for="marketplace-offerings-demo-presets-__tabbed_2_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -512199,32 +512219,229 @@ If no workers are available, fields will be <code>null</code>.</p>
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>name</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>title</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>description</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>version</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>entity_counts</code></td>
 <td>object (free-form)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>scenarios</code></td>
 <td>array of strings</td>
+<td></td>
+</tr>
+<tr>
+<td><code>overlay</code></td>
+<td>string</td>
+<td>The deployment's overlay preset imported after this one, if any.</td>
+</tr>
+<tr>
+<td><code>users</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.username</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.email</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.full_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.is_staff</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.is_support</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.is_active</code></td>
+<td>boolean</td>
+<td>An inactive user is imported but cannot log in.</td>
+</tr>
+<tr>
+<td><code>users.password</code></td>
+<td>string</td>
+<td>The preset's password for this user. Never given for staff, support or inactive users, or for the overlay's users.</td>
+</tr>
+<tr>
+<td><code>users.roles</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.roles.role</code></td>
+<td>string</td>
+<td>Role name, such as CUSTOMER.OWNER.</td>
+</tr>
+<tr>
+<td><code>users.roles.scope_type</code></td>
+<td>string</td>
+<td>Type of the role's scope, such as structure.customer.</td>
+</tr>
+<tr>
+<td><code>users.roles.scope_name</code></td>
+<td>string</td>
+<td>Name of the role's scope in the preset.</td>
+</tr>
+<tr>
+<td><code>organizations</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>organizations.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>organizations.projects</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>organizations.projects.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>organizations.projects.resources</code></td>
+<td>array of strings</td>
+<td>Names of the project's resources.</td>
+</tr>
+<tr>
+<td><code>offerings</code></td>
+<td>array of objects</td>
+<td>The preset's offerings, grouped by type and category.</td>
+</tr>
+<tr>
+<td><code>offerings.type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.category</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.names</code></td>
+<td>array of strings</td>
+<td></td>
+</tr>
+<tr>
+<td><code>overlay_contents</code></td>
+<td>any</td>
+<td>What the deployment's overlay preset adds after this one.</td>
+</tr>
+<tr>
+<td><code>settings_changes</code></td>
+<td>array of objects</td>
+<td>Settings the load changes, and every setting the preset sets.</td>
+</tr>
+<tr>
+<td><code>settings_changes.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings_changes.current_value</code></td>
+<td>object (free-form)</td>
+<td>Null for a secret.</td>
+</tr>
+<tr>
+<td><code>settings_changes.new_value</code></td>
+<td>object (free-form)</td>
+<td>Value after the load. Null for a secret.</td>
+</tr>
+<tr>
+<td><code>settings_changes.source</code></td>
+<td>any</td>
+<td>Where the value after the load comes from: the preset, the deployment's overlay preset, the setting's default, or the deployment, which owns the setting.</td>
+</tr>
+<tr>
+<td><code>settings_changes.changed</code></td>
+<td>boolean</td>
+<td>Whether the load changes the value.</td>
+</tr>
+<tr>
+<td><code>settings_changes.skipped</code></td>
+<td>boolean</td>
+<td>The preset sets a setting the deployment owns; it keeps its value.</td>
+</tr>
+<tr>
+<td><code>settings_changes.secret</code></td>
+<td>boolean</td>
+<td>Values of secrets are never shown.</td>
+</tr>
+<tr>
+<td><code>feature_changes</code></td>
+<td>array of objects</td>
+<td>Features the load changes, and every feature the preset sets.</td>
+</tr>
+<tr>
+<td><code>feature_changes.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>feature_changes.current_value</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>feature_changes.new_value</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>feature_changes.source</code></td>
+<td>any</td>
+<td>Where the value after the load comes from.</td>
+</tr>
+<tr>
+<td><code>feature_changes.changed</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>array of strings</td>
+<td>What would not work after the load, such as a feature whose deployment configuration is missing.</td>
 </tr>
 </tbody>
 </table>
@@ -545298,6 +545515,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
 </tr>
 <tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
+</tr>
+<tr>
 <td><code>offering_account_settings</code></td>
 <td>any</td>
 <td></td>
@@ -568125,6 +568347,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
 </tr>
 <tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
+</tr>
+<tr>
 <td><code>offering_account_settings</code></td>
 <td>any</td>
 <td></td>
@@ -575636,6 +575863,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
 </tr>
 <tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
+</tr>
+<tr>
 <td><code>offering_account_settings</code></td>
 <td>any</td>
 <td></td>
@@ -576433,6 +576665,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>has_api_keys</code></td>
 <td>boolean</td>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
+</tr>
+<tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
 </tr>
 <tr>
 <td><code>offering_account_settings</code></td>
@@ -582738,6 +582975,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>has_api_keys</code></td>
 <td>boolean</td>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
+</tr>
+<tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
 </tr>
 <tr>
 <td><code>offering_account_settings</code></td>
@@ -602390,6 +602632,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
 </tr>
 <tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
+</tr>
+<tr>
 <td><code>offering_account_settings</code></td>
 <td>any</td>
 <td></td>
@@ -604371,6 +604618,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
 </tr>
 <tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
+</tr>
+<tr>
 <td><code>offering_account_settings</code></td>
 <td>any</td>
 <td></td>
@@ -605429,6 +605681,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>has_api_keys</code></td>
 <td>boolean</td>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
+</tr>
+<tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
 </tr>
 <tr>
 <td><code>offering_account_settings</code></td>
@@ -607402,6 +607659,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>has_api_keys</code></td>
 <td>boolean</td>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
+</tr>
+<tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
 </tr>
 <tr>
 <td><code>offering_account_settings</code></td>
@@ -616255,6 +616517,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>has_api_keys</code></td>
 <td>boolean</td>
 <td>Whether the resource owns any API keys, so the portal can offer key management without knowing which backend serves the resource.</td>
+</tr>
+<tr>
+<td><code>api_key_counts</code></td>
+<td>object (free-form)</td>
+<td>How many keys the resource has in each state, deleted ones left out, as {state: count}. States with no keys are absent.</td>
 </tr>
 <tr>
 <td><code>offering_account_settings</code></td>
@@ -646285,6 +646552,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -647383,6 +647655,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -647810,6 +648087,12 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>any</td>
 <td></td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td></td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 <tr>
 <td><code>created_by</code></td>
@@ -648729,6 +649012,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -649388,6 +649676,12 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td></td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -650303,6 +650597,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>resource_template_selection_mode</code></td>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 <tr>
 <td><code>created_by</code></td>
@@ -650736,6 +651035,12 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td></td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -651651,6 +651956,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>resource_template_selection_mode</code></td>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 <tr>
 <td><code>created_by</code></td>
@@ -663630,6 +663940,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>steps.automatic_decision_guard</code></td>
+<td>any</td>
+<td>What stops an unsuitable proposal before the automatic decision awards it; null unless the step decides automatically.</td>
+</tr>
+<tr>
 <td><code>steps.allocation_time</code></td>
 <td>string</td>
 <td></td>
@@ -666328,6 +666643,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td>Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date).</td>
@@ -666929,6 +667249,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>
@@ -669451,6 +669776,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>resource_template_selection_mode</code></td>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 <tr>
 <td><code>created_by</code></td>
@@ -675435,6 +675765,12 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
 <tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td></td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
+<tr>
 <td><code>created_by</code></td>
 <td>string (uri)</td>
 <td></td>
@@ -680325,6 +680661,12 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td></td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td></td>
@@ -680663,6 +681005,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>
@@ -683949,6 +684296,12 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td></td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td></td>
@@ -684287,6 +684640,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>
@@ -688211,6 +688569,12 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td></td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td></td>
@@ -688549,6 +688913,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>decides_automatically</code></td>
 <td>boolean</td>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
+</tr>
+<tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
 </tr>
 <tr>
 <td><code>allocation_time</code></td>
@@ -691284,6 +691653,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>Allocation decision: approve on reaching this step, as the system, with the award as requested; fall back to the completer when the approval is refused.</td>
 </tr>
 <tr>
+<td><code>automatic_decision_guard</code></td>
+<td>any</td>
+<td>Automatic decision: what stops an unsuitable proposal -- an enabled earlier step that can reject it (earlier_step), or a person at the provider acting on every order the award places, on every accepted offering of the call (provider_fulfilment).</td>
+</tr>
+<tr>
 <td><code>allocation_time</code></td>
 <td>any</td>
 <td>Allocation decision: when a granted proposal takes effect — immediately (on_decision) or on the round's allocation date (fixed_date).</td>
@@ -692436,6 +692810,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -693307,6 +693686,11 @@ If no workers are available, fields will be <code>null</code>.</p>
 <td><code>resource_template_selection_mode</code></td>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 </tbody>
 </table>
@@ -775253,6 +775637,11 @@ their status stays whatever the remote service desk last told us.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>steps.automatic_decision_guard</code></td>
+<td>any</td>
+<td>What stops an unsuitable proposal before the automatic decision awards it; null unless the step decides automatically.</td>
+</tr>
+<tr>
 <td><code>steps.allocation_time</code></td>
 <td>string</td>
 <td></td>
@@ -818790,7 +819179,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-resource-api-keys/usage_totals/</code></td>
-<td style="text-align: left;"><a href="#uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-total-api-key-usage-of-a-resource">Total API key usage of a resource</a></td>
+<td style="text-align: left;"><a href="#uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-total-api-key-usage-of-a-resource-offering-or-provider">Total API key usage of a resource, offering or provider</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -818876,10 +819265,12 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.resource_api_key_action</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceApiKeyAction</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.resource_api_key_state</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceApiKeyState</span> <span class="c1"># (2)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_resource_api_keys</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_resource_api_keys_list</span> <span class="c1"># (3)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.resource_api_key_status_o_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceApiKeyStatusOEnum</span> <span class="c1"># (3)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_resource_api_keys</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_resource_api_keys_list</span> <span class="c1"># (4)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
@@ -818892,6 +819283,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <ol>
 <li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_api_key_action.py"><code>ResourceApiKeyAction</code></a></li>
 <li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_api_key_state.py"><code>ResourceApiKeyState</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_api_key_status_o_enum.py"><code>ResourceApiKeyStatusOEnum</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resource_api_keys/marketplace_resource_api_keys_list.py"><code>marketplace_resource_api_keys_list</code></a></li>
 </ol>
 </div>
@@ -818928,6 +819320,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>Consumer organization UUID</td>
+</tr>
+<tr>
 <td><code>has_pending_action</code></td>
 <td>boolean</td>
 <td>Has a pending command</td>
@@ -818936,6 +819333,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>modified_before</code></td>
 <td>string (date-time)</td>
 <td>Modified before</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>array</td>
+<td>Ordering<br><br></td>
 </tr>
 <tr>
 <td><code>offering_uuid</code></td>
@@ -818953,9 +819355,24 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td>Number of results to return per page.</td>
 </tr>
 <tr>
+<td><code>paused_by_limit</code></td>
+<td>boolean</td>
+<td>Paused by a spending limit</td>
+</tr>
+<tr>
 <td><code>pending_action</code></td>
 <td>array</td>
 <td>Pending command<br><br></td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td>Project UUID</td>
+</tr>
+<tr>
+<td><code>provider_uuid</code></td>
+<td>string (uuid)</td>
+<td>Keys of resources of the offerings of this service provider organization, to callers the provider resource list shows those resources to.</td>
 </tr>
 <tr>
 <td><code>resource_uuid</code></td>
@@ -818998,9 +819415,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -819111,6 +819573,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -819242,9 +819709,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -819355,6 +819867,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -819532,9 +820049,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -819645,6 +820207,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -819824,9 +820391,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -819937,6 +820549,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -820183,9 +820800,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -820298,6 +820960,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
+</tr>
+<tr>
 <td><code>paused_by_limit</code></td>
 <td>boolean</td>
 <td>Waldur paused the key because its usage reached a limit. Such a key is resumed automatically once its usage is under its limits again: when the period of the limit resets, or when a limit is raised. A total limit never resets, so only raising or clearing it does.</td>
@@ -820321,20 +820988,18 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 </div>
 <hr />
-<h3 id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-total-api-key-usage-of-a-resource">Total API key usage of a resource</h3>
-<p>Sums the usage the site agent reported for the resource's keys in the current month, per component type. Deleted keys are included, so deleting a key leaves the total unchanged.</p>
+<h3 id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-total-api-key-usage-of-a-resource-offering-or-provider">Total API key usage of a resource, offering or provider</h3>
+<p>Sums the usage the site agent reported in the current month for the keys of a resource, an offering or a service provider, per component type, and their estimated cost. Deleted keys are included, so deleting a key leaves the totals unchanged. One of resource_uuid, offering_uuid and provider_uuid is required; the other list filters narrow the keys summed. Per-component sums are only comparable within one offering; estimated_cost adds up across offerings.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_1" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_2" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_3" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_4" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_5" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_6" name="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_1">HTTPie</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_2">Python</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_3">TypeScript</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_4">Query Parameters</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_5">Responses</label><label for="uncategorized-marketplace-resource-api-keys-marketplace-resource-api-keys-__tabbed_7_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/marketplace-resource-api-keys/usage_totals/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">resource_uuid</span><span class="o">==</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -820350,19 +821015,22 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_resource_api_keys</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_resource_api_keys_usage_totals_retrieve</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.resource_api_key_action</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceApiKeyAction</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.resource_api_key_state</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceApiKeyState</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.resource_api_key_status_o_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceApiKeyStatusOEnum</span> <span class="c1"># (3)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_resource_api_keys</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_resource_api_keys_usage_totals_retrieve</span> <span class="c1"># (4)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_resource_api_keys_usage_totals_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
-    <span class="n">resource_uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_resource_api_keys_usage_totals_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_api_key_action.py"><code>ResourceApiKeyAction</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_api_key_state.py"><code>ResourceApiKeyState</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_api_key_status_o_enum.py"><code>ResourceApiKeyStatusOEnum</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_resource_api_keys/marketplace_resource_api_keys_usage_totals_retrieve.py"><code>marketplace_resource_api_keys_usage_totals_retrieve</code></a></li>
 </ol>
 </div>
@@ -820376,17 +821044,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceResourceApiKeysUsageTotalsRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceResourceApiKeysUsageTotalsRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceResourceApiKeysUsageTotalsRetrieve</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;resource_uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
 <span class="p">});</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -820400,14 +821062,69 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <tr>
 <th>Name</th>
 <th>Type</th>
-<th>Required</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>Consumer organization UUID</td>
+</tr>
+<tr>
+<td><code>has_pending_action</code></td>
+<td>boolean</td>
+<td>Has a pending command</td>
+</tr>
+<tr>
+<td><code>modified_before</code></td>
+<td>string (date-time)</td>
+<td>Modified before</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>array</td>
+<td>Ordering<br><br></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td>One of resource_uuid, offering_uuid and provider_uuid is required.</td>
+</tr>
+<tr>
+<td><code>paused_by_limit</code></td>
+<td>boolean</td>
+<td>Paused by a spending limit</td>
+</tr>
+<tr>
+<td><code>pending_action</code></td>
+<td>array</td>
+<td>Pending command<br><br></td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td>Project UUID</td>
+</tr>
+<tr>
+<td><code>provider_uuid</code></td>
+<td>string (uuid)</td>
+<td>One of resource_uuid, offering_uuid and provider_uuid is required.</td>
+</tr>
+<tr>
 <td><code>resource_uuid</code></td>
 <td>string (uuid)</td>
-<td>✓</td>
+<td>One of resource_uuid, offering_uuid and provider_uuid is required.</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>array</td>
+<td>API key state<br><br></td>
+</tr>
+<tr>
+<td><code>user_uuid</code></td>
+<td>string (uuid)</td>
+<td>Assignee UUID</td>
 </tr>
 </tbody>
 </table>
@@ -820426,7 +821143,12 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <tr>
 <td><code>usages</code></td>
 <td>object (free-form)</td>
-<td>Usage per component type in the current month, summed over the resource's keys, deleted ones included.</td>
+<td>Usage per component type in the current month, summed over the keys, deleted ones included. Only comparable within one offering.</td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>The keys' estimated cost this month, summed. Unlike the usages it adds up across offerings.</td>
 </tr>
 </tbody>
 </table>
@@ -820697,9 +821419,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -820810,6 +821577,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -821001,9 +821773,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -821114,6 +821931,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -821593,9 +822415,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -821706,6 +822573,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -821877,9 +822749,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -821990,6 +822907,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -822166,9 +823088,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -822279,6 +823246,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -822411,9 +823383,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -822524,6 +823541,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>
@@ -822656,9 +823678,54 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>resource_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>resource_backend_id</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>string</td>
+<td>The consuming organization.</td>
+</tr>
+<tr>
+<td><code>project_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_plan_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_spending_limits</code></td>
+<td>object (free-form)</td>
+<td>The resource's spending limits, per component and period, which cap every key of the resource.</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
@@ -822769,6 +823836,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>usage_period</code></td>
 <td>string (date)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>estimated_cost</code></td>
+<td>string (decimal)</td>
+<td>What the key's usage this month costs at the unit prices of the resource's plan, without discounts or credits. Zero until the first usage report of the month; recomputed on every report.</td>
 </tr>
 <tr>
 <td><code>paused_by_limit</code></td>

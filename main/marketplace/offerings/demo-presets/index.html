@@ -8129,10 +8129,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-demo-preset-details" class="md-nav__link">
+  <a href="#preview-a-demo-preset" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Get demo preset details
+        Preview a demo preset
       
     </span>
   </a>
@@ -18784,10 +18784,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-demo-preset-details" class="md-nav__link">
+  <a href="#preview-a-demo-preset" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Get demo preset details
+        Preview a demo preset
       
     </span>
   </a>
@@ -18856,7 +18856,7 @@
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-demo-presets/info/{name}/</code></td>
-<td style="text-align: left;"><a href="#get-demo-preset-details">Get demo preset details</a></td>
+<td style="text-align: left;"><a href="#preview-a-demo-preset">Preview a demo preset</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -18996,8 +18996,8 @@
 </div>
 <hr />
 <h2 id="other-actions">Other Actions</h2>
-<h3 id="get-demo-preset-details">Get demo preset details</h3>
-<p>Returns detailed information about a specific demo preset. Staff access only.</p>
+<h3 id="preview-a-demo-preset">Preview a demo preset</h3>
+<p>Returns what loading the preset would do: its users, organizations, projects, resources and offerings, the settings and features a load with cleanup first would change, and warnings about what would not work afterwards. Secret values and the passwords of staff and support users are never returned. Staff access only.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">HTTPie</label><label for="__tabbed_2_2">Python</label><label for="__tabbed_2_3">TypeScript</label><label for="__tabbed_2_4">Path Parameters</label><label for="__tabbed_2_5">Responses</label><label for="__tabbed_2_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -19094,32 +19094,229 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>name</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>title</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>description</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>version</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>entity_counts</code></td>
 <td>object (free-form)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>scenarios</code></td>
 <td>array of strings</td>
+<td></td>
+</tr>
+<tr>
+<td><code>overlay</code></td>
+<td>string</td>
+<td>The deployment's overlay preset imported after this one, if any.</td>
+</tr>
+<tr>
+<td><code>users</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.username</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.email</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.full_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.is_staff</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.is_support</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.is_active</code></td>
+<td>boolean</td>
+<td>An inactive user is imported but cannot log in.</td>
+</tr>
+<tr>
+<td><code>users.password</code></td>
+<td>string</td>
+<td>The preset's password for this user. Never given for staff, support or inactive users, or for the overlay's users.</td>
+</tr>
+<tr>
+<td><code>users.roles</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>users.roles.role</code></td>
+<td>string</td>
+<td>Role name, such as CUSTOMER.OWNER.</td>
+</tr>
+<tr>
+<td><code>users.roles.scope_type</code></td>
+<td>string</td>
+<td>Type of the role's scope, such as structure.customer.</td>
+</tr>
+<tr>
+<td><code>users.roles.scope_name</code></td>
+<td>string</td>
+<td>Name of the role's scope in the preset.</td>
+</tr>
+<tr>
+<td><code>organizations</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>organizations.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>organizations.projects</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>organizations.projects.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>organizations.projects.resources</code></td>
+<td>array of strings</td>
+<td>Names of the project's resources.</td>
+</tr>
+<tr>
+<td><code>offerings</code></td>
+<td>array of objects</td>
+<td>The preset's offerings, grouped by type and category.</td>
+</tr>
+<tr>
+<td><code>offerings.type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.category</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offerings.names</code></td>
+<td>array of strings</td>
+<td></td>
+</tr>
+<tr>
+<td><code>overlay_contents</code></td>
+<td>any</td>
+<td>What the deployment's overlay preset adds after this one.</td>
+</tr>
+<tr>
+<td><code>settings_changes</code></td>
+<td>array of objects</td>
+<td>Settings the load changes, and every setting the preset sets.</td>
+</tr>
+<tr>
+<td><code>settings_changes.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings_changes.current_value</code></td>
+<td>object (free-form)</td>
+<td>Null for a secret.</td>
+</tr>
+<tr>
+<td><code>settings_changes.new_value</code></td>
+<td>object (free-form)</td>
+<td>Value after the load. Null for a secret.</td>
+</tr>
+<tr>
+<td><code>settings_changes.source</code></td>
+<td>any</td>
+<td>Where the value after the load comes from: the preset, the deployment's overlay preset, the setting's default, or the deployment, which owns the setting.</td>
+</tr>
+<tr>
+<td><code>settings_changes.changed</code></td>
+<td>boolean</td>
+<td>Whether the load changes the value.</td>
+</tr>
+<tr>
+<td><code>settings_changes.skipped</code></td>
+<td>boolean</td>
+<td>The preset sets a setting the deployment owns; it keeps its value.</td>
+</tr>
+<tr>
+<td><code>settings_changes.secret</code></td>
+<td>boolean</td>
+<td>Values of secrets are never shown.</td>
+</tr>
+<tr>
+<td><code>feature_changes</code></td>
+<td>array of objects</td>
+<td>Features the load changes, and every feature the preset sets.</td>
+</tr>
+<tr>
+<td><code>feature_changes.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>feature_changes.current_value</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>feature_changes.new_value</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>feature_changes.source</code></td>
+<td>any</td>
+<td>Where the value after the load comes from.</td>
+</tr>
+<tr>
+<td><code>feature_changes.changed</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>array of strings</td>
+<td>What would not work after the load, such as a feature whose deployment configuration is missing.</td>
 </tr>
 </tbody>
 </table>

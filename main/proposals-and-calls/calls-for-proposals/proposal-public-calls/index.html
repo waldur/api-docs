@@ -19776,6 +19776,11 @@
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
 </tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -20647,6 +20652,11 @@
 <td><code>resource_template_selection_mode</code></td>
 <td>any</td>
 <td>Whether a proposal may request several of the call's resource templates or at most one of them. Cannot be set to single while a draft proposal holds several resource requests.</td>
+</tr>
+<tr>
+<td><code>project_name_template</code></td>
+<td>string</td>
+<td>Name given to the project an accepted proposal creates. Placeholders: {proposal_name}, {proposal_slug}, {call_prefix}, {call_slug}, {call_name}, {round_start}, {round_slug}, {org_slug}, {year}. Empty means {call_prefix} - {round_start} - {proposal_name}.</td>
 </tr>
 </tbody>
 </table>
