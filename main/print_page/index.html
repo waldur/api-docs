@@ -574490,7 +574490,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 </div>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-upload-markdown-image">Upload markdown image</h3>
-<p>Uploads an image for embedding in offering markdown descriptions. Requires ENABLE_MARKDOWN_IMAGE_UPLOAD Constance setting.</p>
+<p>Uploads an image for embedding in offering markdown descriptions. Requires the ENABLE_MARKDOWN_IMAGE_UPLOAD setting.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="93:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_93_1" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_2" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_3" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_4" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_5" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_6" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_7" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_93_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -747042,7 +747042,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 <tr>
 <td><code>daily_system_default</code></td>
 <td>integer</td>
-<td>Get system default daily token limit from constance config.</td>
+<td>Get system default daily token limit setting.</td>
 </tr>
 <tr>
 <td><code>weekly_limit</code></td>
@@ -747067,7 +747067,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 <tr>
 <td><code>weekly_system_default</code></td>
 <td>integer</td>
-<td>Get system default weekly token limit from constance config.</td>
+<td>Get system default weekly token limit setting.</td>
 </tr>
 <tr>
 <td><code>monthly_limit</code></td>
@@ -747092,7 +747092,7 @@ If no workers are available, fields will be <code>null</code>.</p>
 <tr>
 <td><code>monthly_system_default</code></td>
 <td>integer</td>
-<td>Get system default monthly token limit from constance config.</td>
+<td>Get system default monthly token limit setting.</td>
 </tr>
 </tbody>
 </table>
@@ -750054,7 +750054,7 @@ would collide with the aggregates below. Visibility comes from
 </div>
 <hr />
 <h3 id="support-and-operations-support-and-issues-chat-deactivate-the-active-system-prompt">Deactivate the active system prompt</h3>
-<p>Deactivate this prompt. The system will fall back to Constance overrides or built-in defaults.</p>
+<p>Deactivate this prompt. The system will fall back to the system prompt setting or built-in defaults.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="14:7"><input checked="checked" id="support-and-operations-support-and-issues-chat-__tabbed_14_1" name="support-and-operations-support-and-issues-chat-__tabbed_14" type="radio" /><input id="support-and-operations-support-and-issues-chat-__tabbed_14_2" name="support-and-operations-support-and-issues-chat-__tabbed_14" type="radio" /><input id="support-and-operations-support-and-issues-chat-__tabbed_14_3" name="support-and-operations-support-and-issues-chat-__tabbed_14" type="radio" /><input id="support-and-operations-support-and-issues-chat-__tabbed_14_4" name="support-and-operations-support-and-issues-chat-__tabbed_14" type="radio" /><input id="support-and-operations-support-and-issues-chat-__tabbed_14_5" name="support-and-operations-support-and-issues-chat-__tabbed_14" type="radio" /><input id="support-and-operations-support-and-issues-chat-__tabbed_14_6" name="support-and-operations-support-and-issues-chat-__tabbed_14" type="radio" /><input id="support-and-operations-support-and-issues-chat-__tabbed_14_7" name="support-and-operations-support-and-issues-chat-__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="support-and-operations-support-and-issues-chat-__tabbed_14_1">HTTPie</label><label for="support-and-operations-support-and-issues-chat-__tabbed_14_2">Python</label><label for="support-and-operations-support-and-issues-chat-__tabbed_14_3">TypeScript</label><label for="support-and-operations-support-and-issues-chat-__tabbed_14_4">Path Parameters</label><label for="support-and-operations-support-and-issues-chat-__tabbed_14_5">Request Body (required)</label><label for="support-and-operations-support-and-issues-chat-__tabbed_14_6">Responses</label><label for="support-and-operations-support-and-issues-chat-__tabbed_14_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -760310,7 +760310,7 @@ their status stays whatever the remote service desk last told us.</p>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/support/settings/atlassian/save_settings/</code></td>
-<td style="text-align: left;"><a href="#support-and-operations-support-and-issues-support-save-selected-settings-to-constance">Save selected settings to constance</a></td>
+<td style="text-align: left;"><a href="#support-and-operations-support-and-issues-support-save-selected-settings">Save selected settings</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -763794,8 +763794,8 @@ their status stays whatever the remote service desk last told us.</p>
 </div>
 </div>
 <hr />
-<h3 id="support-and-operations-support-and-issues-support-save-selected-settings-to-constance">Save selected settings to constance</h3>
-<p>Save selected settings to constance.</p>
+<h3 id="support-and-operations-support-and-issues-support-save-selected-settings">Save selected settings</h3>
+<p>Save selected settings.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="21:6"><input checked="checked" id="support-and-operations-support-and-issues-support-__tabbed_21_1" name="support-and-operations-support-and-issues-support-__tabbed_21" type="radio" /><input id="support-and-operations-support-and-issues-support-__tabbed_21_2" name="support-and-operations-support-and-issues-support-__tabbed_21" type="radio" /><input id="support-and-operations-support-and-issues-support-__tabbed_21_3" name="support-and-operations-support-and-issues-support-__tabbed_21" type="radio" /><input id="support-and-operations-support-and-issues-support-__tabbed_21_4" name="support-and-operations-support-and-issues-support-__tabbed_21" type="radio" /><input id="support-and-operations-support-and-issues-support-__tabbed_21_5" name="support-and-operations-support-and-issues-support-__tabbed_21" type="radio" /><input id="support-and-operations-support-and-issues-support-__tabbed_21_6" name="support-and-operations-support-and-issues-support-__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="support-and-operations-support-and-issues-support-__tabbed_21_1">HTTPie</label><label for="support-and-operations-support-and-issues-support-__tabbed_21_2">Python</label><label for="support-and-operations-support-and-issues-support-__tabbed_21_3">TypeScript</label><label for="support-and-operations-support-and-issues-support-__tabbed_21_4">Request Body (required)</label><label for="support-and-operations-support-and-issues-support-__tabbed_21_5">Responses</label><label for="support-and-operations-support-and-issues-support-__tabbed_21_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
