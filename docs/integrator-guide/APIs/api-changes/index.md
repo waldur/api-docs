@@ -1,0 +1,27 @@
+# API changes
+
+What changed in the Waldur REST API in each release, computed from the OpenAPI schemas of that release and the one before it. Each page opens with a summary and lists breaking changes first; pages marked *full structural diff only* were published before that and list every difference by endpoint.
+
+- [8.1.4](waldur-openapi-schema-8.1.4-diff.md) (full structural diff only)
+- [8.1.3](waldur-openapi-schema-8.1.3-diff.md) (full structural diff only)
+- [8.1.2](waldur-openapi-schema-8.1.2-diff.md) (full structural diff only)
+- [8.1.0](waldur-openapi-schema-8.1.0-diff.md) (full structural diff only)
+- [8.0.9](waldur-openapi-schema-8.0.9-diff.md) (full structural diff only)
+- [8.0.8](waldur-openapi-schema-8.0.8-diff.md) (full structural diff only)
+- [8.0.7](waldur-openapi-schema-8.0.7-diff.md) (full structural diff only)
+- [8.0.6](waldur-openapi-schema-8.0.6-diff.md) (full structural diff only)
+- [8.0.5](waldur-openapi-schema-8.0.5-diff.md) (full structural diff only)
+- [8.0.4](waldur-openapi-schema-8.0.4-diff.md) (full structural diff only)
+- [8.0.3](waldur-openapi-schema-8.0.3-diff.md) (full structural diff only)
+- [8.0.2](waldur-openapi-schema-8.0.2-diff.md) (full structural diff only)
+- [8.0.1](waldur-openapi-schema-8.0.1-diff.md) (full structural diff only)
+- [8.0.0](waldur-openapi-schema-8.0.0-diff.md) (full structural diff only)
+- [7.9.8](waldur-openapi-schema-7.9.8-diff.md) (full structural diff only)
+- [7.9.7](waldur-openapi-schema-7.9.7-diff.md) (full structural diff only)
+- [7.9.6](waldur-openapi-schema-7.9.6-diff.md) (full structural diff only)
+- [7.9.5](waldur-openapi-schema-7.9.5-diff.md) (full structural diff only)
+- [7.9.4](waldur-openapi-schema-7.9.4-diff.md) (full structural diff only)
+- [7.9.3](waldur-openapi-schema-7.9.3-diff.md) (full structural diff only)
+- [7.9.2](waldur-openapi-schema-7.9.2-diff.md) (full structural diff only)
+- [7.9.1](waldur-openapi-schema-7.9.1-diff.md) (full structural diff only)
+- [7.9.0](waldur-openapi-schema-7.9.0-diff.md) (full structural diff only)
