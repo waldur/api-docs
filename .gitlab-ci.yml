@@ -5,6 +5,9 @@ include:
 variables:
   GIT_DEPTH: 0
   UV_CACHE_DIR: "$CI_PROJECT_DIR/.uv-cache"
+  # Pinned: the API changes pages are rendered from oasdiff's changelog, whose
+  # checks and wording change between releases. Bump deliberately.
+  OASDIFF_VERSION: "v1.34.1"
 
 cache:
   key:
@@ -69,10 +72,20 @@ Fetch OpenAPI schema:
     # Without RELEASE_VERSION the shared template fetches develop's schema
     - !reference [.nightly-rules, rules]
 
+Test API changes renderer:
+  stage: build
+  image: registry.hpc.ut.ee/mirror/library/python:3.13-bookworm
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - scripts/**/*
+  script:
+    - python3 -m unittest discover -s scripts -p 'test_*.py' -v
+
 Generate OpenAPI schema diff:
   stage: build
   image:
-    name: registry.hpc.ut.ee/mirror/tufin/oasdiff:latest
+    name: registry.hpc.ut.ee/mirror/tufin/oasdiff:${OASDIFF_VERSION}
     entrypoint: [""]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline" && $RELEASE_VERSION =~ /^\d+\.\d+\.\d+$/'
@@ -87,21 +100,45 @@ Generate OpenAPI schema diff:
     - npm install -g markdownlint-cli
   script:
     - |
-      # Find previous schema from local docs/API/
-      PREV_SCHEMA=$(ls docs/API/waldur-openapi-schema-*.yaml 2>/dev/null | sort -V | tail -n1 || echo "")
-      echo "Previous schema found: $PREV_SCHEMA"
+      # Compare with the newest release below this one, not simply the newest
+      # schema in docs/API/: a retried pipeline finds this release's own schema
+      # already committed (and diffed it against itself), and a patch release
+      # of an older line finds newer ones.
+      CURRENT="docs/API/waldur-openapi-schema-${RELEASE_VERSION}.yaml"
+      PREV_SCHEMA=""
+      for schema in $( { ls docs/API/waldur-openapi-schema-*.yaml 2>/dev/null; echo "$CURRENT"; } | sort -uV ); do
+        [ "$schema" = "$CURRENT" ] && break
+        PREV_SCHEMA="$schema"
+      done
+      echo "Previous schema: ${PREV_SCHEMA:-none}"
     - |
       if [ -z "$PREV_SCHEMA" ]; then
         echo "No previous schema found. Skipping diff generation."
-        echo "No previous schema found. Skipping diff generation." > openapi-diff.md
       else
-        /usr/bin/oasdiff diff -f markup $PREV_SCHEMA waldur-openapi-schema.yaml > openapi-diff.md
-        sed -i "1i # OpenAPI schema diff - ${RELEASE_VERSION}\n\n## For version ${RELEASE_VERSION}" openapi-diff.md
-        markdownlint --disable MD041 MD035 --fix openapi-diff.md || true
+        PREV_VERSION=$(basename "$PREV_SCHEMA" .yaml)
+        PREV_VERSION=${PREV_VERSION#waldur-openapi-schema-}
+        echo "$PREV_VERSION" > previous-version.txt
+        # Classified changes, rendered into the API changes page by the upload job.
+        # oasdiff-severity-levels.txt (no comments allowed in it) makes removals
+        # breaking that oasdiff rates lower but that break Waldur clients:
+        # - request-property-removed, request-parameter-removed (WARN): DRF
+        #   ignores an unknown field or query parameter, so the client's value
+        #   is silently dropped and a filter stops filtering;
+        # - response-optional-property-removed (INFO): make_fields_optional in
+        #   waldur-mastermind marks response properties optional on endpoints
+        #   with the `field` parameter only because a client may ask for a
+        #   subset; a removed one is gone for every client that reads it.
+        /usr/bin/oasdiff changelog -f json --severity-levels oasdiff-severity-levels.txt "$PREV_SCHEMA" waldur-openapi-schema.yaml > openapi-changelog.json
+        # Every difference, description edits included, for the linked full page.
+        /usr/bin/oasdiff diff -f markup "$PREV_SCHEMA" waldur-openapi-schema.yaml > openapi-diff-full.md
+        sed -i "1i # Full OpenAPI schema diff - ${RELEASE_VERSION}\n\nEvery difference between the ${PREV_VERSION} and ${RELEASE_VERSION} schemas. [API changes in ${RELEASE_VERSION}](../waldur-openapi-schema-${RELEASE_VERSION}-diff.md) summarises them, breaking changes first.\n" openapi-diff-full.md
+        markdownlint --disable MD041 MD035 --fix openapi-diff-full.md || true
       fi
   artifacts:
     paths:
-      - openapi-diff.md
+      - previous-version.txt
+      - openapi-changelog.json
+      - openapi-diff-full.md
       - waldur-openapi-schema.yaml
     expire_in: 1 day
 
@@ -126,13 +163,23 @@ Upload OpenAPI schema and schema diff to docs:
     # Copy new schema and diffs
     - mkdir -p docs/API
     - cp waldur-openapi-schema.yaml docs/API/waldur-openapi-schema-${RELEASE_VERSION}.yaml
-    - mkdir -p docs/integrator-guide/APIs/api-changes
+    - API_CHANGES=docs/integrator-guide/APIs/api-changes
+    - mkdir -p "$API_CHANGES/full"
     - |
-      if [ -s "openapi-diff.md" ]; then
-        cp openapi-diff.md docs/integrator-guide/APIs/api-changes/waldur-openapi-schema-${RELEASE_VERSION}-diff.md
+      if [ -s previous-version.txt ]; then
+        FULL_DIFF="full/waldur-openapi-schema-${RELEASE_VERSION}-diff-full.md"
+        cp openapi-diff-full.md "$API_CHANGES/$FULL_DIFF"
+        python3 scripts/render_api_changes.py page \
+          --changelog openapi-changelog.json \
+          --version "$RELEASE_VERSION" \
+          --previous "$(cat previous-version.txt)" \
+          --oasdiff-version "$OASDIFF_VERSION" \
+          --full-diff "$FULL_DIFF" \
+          -o "$API_CHANGES/waldur-openapi-schema-${RELEASE_VERSION}-diff.md"
       else
-        echo "No API changes detected, skipping diff file upload"
+        echo "No previous schema, so no API changes page for ${RELEASE_VERSION}"
       fi
+    - python3 scripts/render_api_changes.py index --dir "$API_CHANGES"
 
     # Commit and push changes
     - git add docs/

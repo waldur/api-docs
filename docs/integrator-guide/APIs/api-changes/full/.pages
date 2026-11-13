@@ -1,0 +1,3 @@
+# Full schema diffs are linked from each release's API changes page; listing
+# them in the navigation as well would double its length.
+hide: true
