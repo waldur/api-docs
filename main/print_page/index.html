@@ -183368,7 +183368,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </tr>
 <tr>
 <td><code>resource_end_date</code></td>
-<td>string (date-time)</td>
+<td>string (date)</td>
 </tr>
 <tr>
 <td><code>project_uuid</code></td>
@@ -183548,7 +183548,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </tr>
 <tr>
 <td><code>resource_end_date</code></td>
-<td>string (date-time)</td>
+<td>string (date)</td>
 </tr>
 <tr>
 <td><code>project_uuid</code></td>
@@ -200173,15 +200173,16 @@ deliverable and writable -- see waldur_core.logging.availability.</p>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.hooks</span><span class="w"> </span><span class="kn">import</span> <span class="n">hooks_list</span> <span class="c1"># (1)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
@@ -200189,7 +200190,8 @@ deliverable and writable -- see waldur_core.logging.availability.</p>
 <span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">hooks_list</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/hooks/hooks_list.py"><code>hooks_list</code></a></li>
@@ -200276,7 +200278,7 @@ deliverable and writable -- see waldur_core.logging.availability.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
@@ -238094,6 +238096,10 @@ Requires staff permissions.</p>
 <td>integer</td>
 </tr>
 <tr>
+<td><code>AI_ASSISTANT_SHOW_REASONING</code></td>
+<td>boolean</td>
+</tr>
+<tr>
 <td><code>AI_ASSISTANT_INJECTION_ALLOWLIST</code></td>
 <td>string</td>
 </tr>
@@ -240026,6 +240032,11 @@ Requires staff permissions.</p>
 <tr>
 <td><code>AI_ASSISTANT_STREAM_TIMEOUT_SECONDS</code></td>
 <td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>AI_ASSISTANT_SHOW_REASONING</code></td>
+<td>boolean</td>
 <td></td>
 </tr>
 <tr>
@@ -459924,7 +459935,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - </p>
 </div>
 <div class="tabbed-block">
 <p>The caller's own offering accounts.</p>
@@ -590803,7 +590814,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </tr>
 <tr>
 <td><code>project_end_date</code></td>
-<td>string (date-time)</td>
+<td>string (date)</td>
 <td></td>
 </tr>
 <tr>
@@ -662739,7 +662750,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -663087,7 +663098,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -675993,7 +676004,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -676748,7 +676759,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -677745,7 +677756,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -678132,7 +678143,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -678537,7 +678548,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -679215,7 +679226,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -684398,7 +684409,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -688689,7 +688700,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -691732,7 +691743,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>proposals.reviews</code></td>
 <td>array of anys</td>
-<td>Return serialized reviews based on user permissions and visibility settings. - Staff, call managers, and reviewers see all reviews. - Submitters see submitted reviews if visibility is enabled.</td>
+<td>Return serialized reviews based on user permissions and visibility settings. - Staff and call managers see all reviews. - Reviewers see their own reviews only, as on /api/proposal-reviews/   (filter_reviews_for_user): reviewers judge independently. - Submitters see submitted reviews if visibility is enabled.</td>
 </tr>
 <tr>
 <td><code>proposals.approved_by_name</code></td>
@@ -712497,12 +712508,12 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>ready_to_complete</code></td>
 <td>boolean</td>
-<td>For whoever may complete the active step: every contribution is in and its completion gates are met, so it waits only for them. False for everyone else.</td>
+<td>For whoever may complete the active step: every contribution is in and its completion gates are met, so it waits only for them. The minimum score threshold counts only for those who read score_gate. False for everyone else.</td>
 </tr>
 <tr>
 <td><code>score_gate</code></td>
 <td>any</td>
-<td>The active step's score against its minimum score threshold, before anyone decides: below it, only declining is possible. Null without a threshold, once the step is no longer active, and for readers outside the call team.</td>
+<td>The active step's score against its minimum score threshold, before anyone decides: below it, only declining is possible. Null without a threshold, once the step is no longer active, and for readers outside the call team, the step's own evaluators included.</td>
 </tr>
 <tr>
 <td><code>decided_automatically</code></td>
@@ -716930,12 +716941,12 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>ready_to_complete</code></td>
 <td>boolean</td>
-<td>For whoever may complete the active step: every contribution is in and its completion gates are met, so it waits only for them. False for everyone else.</td>
+<td>For whoever may complete the active step: every contribution is in and its completion gates are met, so it waits only for them. The minimum score threshold counts only for those who read score_gate. False for everyone else.</td>
 </tr>
 <tr>
 <td><code>score_gate</code></td>
 <td>any</td>
-<td>The active step's score against its minimum score threshold, before anyone decides: below it, only declining is possible. Null without a threshold, once the step is no longer active, and for readers outside the call team.</td>
+<td>The active step's score against its minimum score threshold, before anyone decides: below it, only declining is possible. Null without a threshold, once the step is no longer active, and for readers outside the call team, the step's own evaluators included.</td>
 </tr>
 <tr>
 <td><code>decided_automatically</code></td>
@@ -717588,12 +717599,12 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>ready_to_complete</code></td>
 <td>boolean</td>
-<td>For whoever may complete the active step: every contribution is in and its completion gates are met, so it waits only for them. False for everyone else.</td>
+<td>For whoever may complete the active step: every contribution is in and its completion gates are met, so it waits only for them. The minimum score threshold counts only for those who read score_gate. False for everyone else.</td>
 </tr>
 <tr>
 <td><code>score_gate</code></td>
 <td>any</td>
-<td>The active step's score against its minimum score threshold, before anyone decides: below it, only declining is possible. Null without a threshold, once the step is no longer active, and for readers outside the call team.</td>
+<td>The active step's score against its minimum score threshold, before anyone decides: below it, only declining is possible. Null without a threshold, once the step is no longer active, and for readers outside the call team, the step's own evaluators included.</td>
 </tr>
 <tr>
 <td><code>decided_automatically</code></td>
@@ -745683,7 +745694,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - Average evaluation, rounded to two decimals; null when there is no feedback.</p>
 </div>
 <div class="tabbed-block">
 <p>Staff or support only.</p>
@@ -745768,7 +745779,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - </p>
 </div>
 <div class="tabbed-block">
 <p>Staff or support only.</p>
@@ -747857,7 +747868,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>blocks.key</code></td>
 <td>string</td>
-<td><br><em>Enum: <code>markdown</code>, <code>code</code>, <code>mermaid</code>, <code>vm_order</code>, <code>hpc_job</code>, <code>chart</code>, <code>resource_list</code>, <code>homeport_nav</code>, <code>ask_user_form</code>, <code>tool</code></em></td>
+<td><br><em>Enum: <code>markdown</code>, <code>code</code>, <code>mermaid</code>, <code>vm_order</code>, <code>hpc_job</code>, <code>chart</code>, <code>resource_list</code>, <code>homeport_nav</code>, <code>ask_user_form</code>, <code>tool</code>, <code>reasoning</code>, <code>narration</code></em></td>
 </tr>
 <tr>
 <td><code>blocks.status</code></td>
@@ -749681,7 +749692,7 @@ would collide with the aggregates below. Visibility comes from
 <tr>
 <td><code>blocks.key</code></td>
 <td>string</td>
-<td><br><em>Enum: <code>markdown</code>, <code>code</code>, <code>mermaid</code>, <code>vm_order</code>, <code>hpc_job</code>, <code>chart</code>, <code>resource_list</code>, <code>homeport_nav</code>, <code>ask_user_form</code>, <code>tool</code></em></td>
+<td><br><em>Enum: <code>markdown</code>, <code>code</code>, <code>mermaid</code>, <code>vm_order</code>, <code>hpc_job</code>, <code>chart</code>, <code>resource_list</code>, <code>homeport_nav</code>, <code>ask_user_form</code>, <code>tool</code>, <code>reasoning</code>, <code>narration</code></em></td>
 </tr>
 <tr>
 <td><code>blocks.status</code></td>
@@ -761811,7 +761822,113 @@ their status stays whatever the remote service desk last told us.</p>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p><strong><code>200</code></strong> - No response body</p>
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ATLASSIAN_API_URL</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_PROJECT_ID</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_VERIFY_SSL</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_USE_OLD_API</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_ISSUE_TYPES</code></td>
+<td>array of strings</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_CUSTOM_ISSUE_FIELD_MAPPING_ENABLED</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_REPORTER_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_IMPACT_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_ORGANISATION_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_PROJECT_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_AFFECTED_RESOURCE_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_CALLER_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_TEMPLATE_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_SLA_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_RESOLUTION_SLA_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_SATISFACTION_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_REQUEST_FEEDBACK_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_WALDUR_BACKEND_ID_FIELD</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_DEFAULT_OFFERING_ISSUE_TYPE</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_EMAIL</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_USERNAME</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>ATLASSIAN_OAUTH2_CLIENT_ID</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>auth_method</code></td>
+<td>any</td>
+</tr>
+<tr>
+<td><code>auth_configured</code></td>
+<td>boolean</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="tabbed-block">
 <p>Staff only.</p>
