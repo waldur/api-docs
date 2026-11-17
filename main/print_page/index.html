@@ -54313,7 +54313,7 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/openportal-managed-projects/{identifier}/{destination}/approve/</code></td>
-<td style="text-align: left;"><a href="#cloud-and-hpc-providers-openportal-openportal-managed-projects-approve-managed-project-request">Approve managed project request</a></td>
+<td style="text-align: left;"><a href="#cloud-and-hpc-providers-openportal-openportal-managed-projects-approve">Approve</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -54328,7 +54328,7 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/openportal-managed-projects/{identifier}/{destination}/reject/</code></td>
-<td style="text-align: left;"><a href="#cloud-and-hpc-providers-openportal-openportal-managed-projects-reject-managed-project-request">Reject managed project request</a></td>
+<td style="text-align: left;"><a href="#cloud-and-hpc-providers-openportal-openportal-managed-projects-reject">Reject</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-delete">DELETE</span></td>
@@ -54558,6 +54558,16 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td>string</td>
 <td>The local project identifier in this portal.</td>
 </tr>
+<tr>
+<td><code>approved_credits</code></td>
+<td>string (decimal)</td>
+<td>Credits last approved, by a local reviewer or within the project template's approval limit. Allocation increases are measured against this.</td>
+</tr>
+<tr>
+<td><code>pending_allocation</code></td>
+<td>string (decimal)</td>
+<td>Credits of an allocation increase waiting for review. Every other change to the award has been applied.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -54749,6 +54759,16 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td><code>local_identifier</code></td>
 <td>string</td>
 <td>The local project identifier in this portal.</td>
+</tr>
+<tr>
+<td><code>approved_credits</code></td>
+<td>string (decimal)</td>
+<td>Credits last approved, by a local reviewer or within the project template's approval limit. Allocation increases are measured against this.</td>
+</tr>
+<tr>
+<td><code>pending_allocation</code></td>
+<td>string (decimal)</td>
+<td>Credits of an allocation increase waiting for review. Every other change to the award has been applied.</td>
 </tr>
 </tbody>
 </table>
@@ -54981,6 +55001,16 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td>string</td>
 <td>The local project identifier in this portal.</td>
 </tr>
+<tr>
+<td><code>approved_credits</code></td>
+<td>string (decimal)</td>
+<td>Credits last approved, by a local reviewer or within the project template's approval limit. Allocation increases are measured against this.</td>
+</tr>
+<tr>
+<td><code>pending_allocation</code></td>
+<td>string (decimal)</td>
+<td>Credits of an allocation increase waiting for review. Every other change to the award has been applied.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -54990,8 +55020,8 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 </div>
 </div>
 <hr />
-<h3 id="cloud-and-hpc-providers-openportal-openportal-managed-projects-approve-managed-project-request">Approve managed project request</h3>
-<p>Approve managed project request</p>
+<h3 id="cloud-and-hpc-providers-openportal-openportal-managed-projects-approve">Approve</h3>
+<p>Approve managed project request. Applies no more than the allocation waiting at the time of approval; send expected_allocation to refuse the approval (409) if that figure is no longer the one the reviewer saw.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_1" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_2" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_3" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_4" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_5" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_6" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_7" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_1">HTTPie</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_2">Python</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_3">TypeScript</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_4">Path Parameters</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_5">Request Body</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_6">Responses</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_4_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -55022,14 +55052,14 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.review_comment_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReviewCommentRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.managed_project_approve_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ManagedProjectApproveRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openportal_managed_projects</span><span class="w"> </span><span class="kn">import</span> <span class="n">openportal_managed_projects_approve</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">ReviewCommentRequest</span><span class="p">()</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">ManagedProjectApproveRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">openportal_managed_projects_approve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">destination</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
     <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
@@ -55040,7 +55070,7 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/review_comment_request.py"><code>ReviewCommentRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/managed_project_approve_request.py"><code>ManagedProjectApproveRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_managed_projects/openportal_managed_projects_approve.py"><code>openportal_managed_projects_approve</code></a></li>
 </ol>
 </div>
@@ -55116,6 +55146,12 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td>string</td>
 <td></td>
 <td>Optional comment for review</td>
+</tr>
+<tr>
+<td><code>expected_allocation</code></td>
+<td>string (decimal)</td>
+<td></td>
+<td>The allocation, in credits, the reviewer is approving: the managed project's pending_allocation when an allocation increase is waiting, otherwise the credits of the requested allocation. The approval is refused with 409 if the figure has changed since. Whether or not it is sent, no more than the figure waiting at the time of approval is applied: a later increase waits for review again. Omitting it approves whatever figure is waiting when the request arrives, which may be higher than the one the reviewer saw.</td>
 </tr>
 </tbody>
 </table>
@@ -55390,8 +55426,8 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 </div>
 </div>
 <hr />
-<h3 id="cloud-and-hpc-providers-openportal-openportal-managed-projects-reject-managed-project-request">Reject managed project request</h3>
-<p>Reject managed project request</p>
+<h3 id="cloud-and-hpc-providers-openportal-openportal-managed-projects-reject">Reject</h3>
+<p>Reject managed project request. For a live award pending only for an allocation increase, only the increase is declined: the award goes back to approved with the credits it has.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:7"><input checked="checked" id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_1" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_2" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_3" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_4" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_5" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_6" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7" type="radio" /><input id="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_7" name="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_1">HTTPie</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_2">Python</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_3">TypeScript</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_4">Path Parameters</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_5">Request Body</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_6">Responses</label><label for="cloud-and-hpc-providers-openportal-openportal-managed-projects-__tabbed_7_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
