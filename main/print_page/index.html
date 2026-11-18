@@ -237612,6 +237612,10 @@ Requires staff permissions.</p>
 <td>string (uri)</td>
 </tr>
 <tr>
+<td><code>LOGIN_LOGO_DARK</code></td>
+<td>string (uri)</td>
+</tr>
+<tr>
 <td><code>LOGIN_LOGO_MULTILINGUAL</code></td>
 <td>object (free-form)</td>
 </tr>
@@ -239364,6 +239368,11 @@ Requires staff permissions.</p>
 </tr>
 <tr>
 <td><code>LOGIN_LOGO</code></td>
+<td>string (binary)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>LOGIN_LOGO_DARK</code></td>
 <td>string (binary)</td>
 <td></td>
 </tr>
@@ -515985,7 +515994,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <hr />
 <h3 id="marketplace-offerings-offering-terms-of-service-create-a-terms-of-service-configuration">Create a Terms of Service configuration</h3>
-<p>Creates a new Terms of Service configuration for an offering. Only one active ToS configuration is allowed per offering.</p>
+<p>Creates a new Terms of Service configuration for an offering. Only one active ToS configuration is allowed per offering: creating an active one deactivates the currently active one.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="marketplace-offerings-offering-terms-of-service-__tabbed_3_1" name="marketplace-offerings-offering-terms-of-service-__tabbed_3" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_3_2" name="marketplace-offerings-offering-terms-of-service-__tabbed_3" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_3_3" name="marketplace-offerings-offering-terms-of-service-__tabbed_3" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_3_4" name="marketplace-offerings-offering-terms-of-service-__tabbed_3" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_3_5" name="marketplace-offerings-offering-terms-of-service-__tabbed_3" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_3_6" name="marketplace-offerings-offering-terms-of-service-__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="marketplace-offerings-offering-terms-of-service-__tabbed_3_1">HTTPie</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_3_2">Python</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_3_3">TypeScript</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_3_4">Request Body (required)</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_3_5">Responses</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_3_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -516180,7 +516189,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <hr />
 <h3 id="marketplace-offerings-offering-terms-of-service-update-a-terms-of-service-configuration">Update a Terms of Service configuration</h3>
-<p>Updates an existing Terms of Service configuration. Note that some fields like <code>version</code> and <code>requires_reconsent</code> are protected and cannot be changed after creation.</p>
+<p>Updates an existing Terms of Service configuration. Note that some fields like <code>version</code> and <code>requires_reconsent</code> are protected and cannot be changed after creation. Activating a configuration deactivates the offering's currently active one.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="marketplace-offerings-offering-terms-of-service-__tabbed_4_1" name="marketplace-offerings-offering-terms-of-service-__tabbed_4" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_4_2" name="marketplace-offerings-offering-terms-of-service-__tabbed_4" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_4_3" name="marketplace-offerings-offering-terms-of-service-__tabbed_4" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_4_4" name="marketplace-offerings-offering-terms-of-service-__tabbed_4" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_4_5" name="marketplace-offerings-offering-terms-of-service-__tabbed_4" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_4_6" name="marketplace-offerings-offering-terms-of-service-__tabbed_4" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_4_7" name="marketplace-offerings-offering-terms-of-service-__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="marketplace-offerings-offering-terms-of-service-__tabbed_4_1">HTTPie</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_4_2">Python</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_4_3">TypeScript</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_4_4">Path Parameters</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_4_5">Request Body</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_4_6">Responses</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_4_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -516402,7 +516411,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <hr />
 <h3 id="marketplace-offerings-offering-terms-of-service-partially-update-a-terms-of-service-configuration">Partially update a Terms of Service configuration</h3>
-<p>Partially updates an existing Terms of Service configuration.</p>
+<p>Partially updates an existing Terms of Service configuration. Activating a configuration deactivates the offering's currently active one.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="marketplace-offerings-offering-terms-of-service-__tabbed_5_1" name="marketplace-offerings-offering-terms-of-service-__tabbed_5" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_5_2" name="marketplace-offerings-offering-terms-of-service-__tabbed_5" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_5_3" name="marketplace-offerings-offering-terms-of-service-__tabbed_5" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_5_4" name="marketplace-offerings-offering-terms-of-service-__tabbed_5" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_5_5" name="marketplace-offerings-offering-terms-of-service-__tabbed_5" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_5_6" name="marketplace-offerings-offering-terms-of-service-__tabbed_5" type="radio" /><input id="marketplace-offerings-offering-terms-of-service-__tabbed_5_7" name="marketplace-offerings-offering-terms-of-service-__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="marketplace-offerings-offering-terms-of-service-__tabbed_5_1">HTTPie</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_5_2">Python</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_5_3">TypeScript</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_5_4">Path Parameters</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_5_5">Request Body</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_5_6">Responses</label><label for="marketplace-offerings-offering-terms-of-service-__tabbed_5_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
