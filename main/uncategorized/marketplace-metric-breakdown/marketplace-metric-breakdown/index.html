@@ -14059,10 +14059,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#break-a-metric-figure-down-by-an-attribute-or-by-resource" class="md-nav__link">
+  <a href="#break-a-metric-figure-down-by-attributes-or-by-resource" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Break a metric figure down by an attribute or by resource
+        Break a metric figure down by attributes or by resource
       
     </span>
   </a>
@@ -19067,10 +19067,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#break-a-metric-figure-down-by-an-attribute-or-by-resource" class="md-nav__link">
+  <a href="#break-a-metric-figure-down-by-attributes-or-by-resource" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Break a metric figure down by an attribute or by resource
+        Break a metric figure down by attributes or by resource
       
     </span>
   </a>
@@ -19113,12 +19113,12 @@
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-metric-breakdown/</code></td>
-<td style="text-align: left;"><a href="#break-a-metric-figure-down-by-an-attribute-or-by-resource">Break a metric figure down by an attribute or by resource</a></td>
+<td style="text-align: left;"><a href="#break-a-metric-figure-down-by-attributes-or-by-resource">Break a metric figure down by attributes or by resource</a></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h3 id="break-a-metric-figure-down-by-an-attribute-or-by-resource">Break a metric figure down by an attribute or by resource</h3>
+<h3 id="break-a-metric-figure-down-by-attributes-or-by-resource">Break a metric figure down by attributes or by resource</h3>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTTPie</label><label for="__tabbed_1_2">Python</label><label for="__tabbed_1_3">TypeScript</label><label for="__tabbed_1_4">Query Parameters</label><label for="__tabbed_1_5">Responses</label><label for="__tabbed_1_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -19225,7 +19225,7 @@
 <td><code>group_by</code></td>
 <td>string</td>
 <td>✓</td>
-<td>An attribute the metric declares, or 'resource' to break a project's figure down by its resources.</td>
+<td>An attribute the metric declares, several of them comma-separated to break the figure down by their combinations, or 'resource' to break a project's figure down by its resources.</td>
 </tr>
 <tr>
 <td><code>offering_metric_uuid</code></td>
@@ -19269,7 +19269,7 @@
 <tr>
 <td><code>value</code></td>
 <td>object (free-form)</td>
-<td>The attribute's value, or the resource's name when broken down by resource.</td>
+<td>The attribute's value; a map of each attribute to its value when broken down by several; or the resource's name when broken down by resource.</td>
 </tr>
 <tr>
 <td><code>figure</code></td>
