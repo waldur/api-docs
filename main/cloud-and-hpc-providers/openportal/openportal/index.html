@@ -2113,10 +2113,32 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#storage-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-total-usage-for-remote-project" class="md-nav__link">
     <span class="md-ellipsis">
       
         Get total usage for remote project
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage report
       
     </span>
   </a>
@@ -19573,10 +19595,32 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#storage-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-total-usage-for-remote-project" class="md-nav__link">
     <span class="md-ellipsis">
       
         Get total usage for remote project
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage report
       
     </span>
   </a>
@@ -19818,8 +19862,18 @@
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/openportal-remote-projects/{uuid}/storage-report/</code></td>
+<td style="text-align: left;"><a href="#storage-report">Storage report</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/openportal-remote-projects/{uuid}/total-usage/</code></td>
 <td style="text-align: left;"><a href="#get-total-usage-for-remote-project">Get total usage for remote project</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/openportal-remote-projects/{uuid}/usage-report/</code></td>
+<td style="text-align: left;"><a href="#usage-report">Usage report</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
@@ -22983,9 +23037,187 @@
 </div>
 </div>
 <hr />
+<h3 id="storage-report">Storage report</h3>
+<p>Storage snapshots of the award over a date range, across every project it has been attached to. Each project contributes only the snapshots taken while the award was attached there; on the day the award moved, the project it moved to claims the whole day. The report's top level is the latest snapshot in range. A window on a project the caller cannot see is listed without its project, but with its start and end dates, and still counts in full; its snapshots keep project-level storage but lose their per-user quotas and user mapping. Unless staff or support, the caller sees per-user storage only for windows on projects they can see. The report is labeled with the award's identifier (with none, the local identifier of the latest project it was attached to): its project, and the project part of every user identifier in it, are rewritten to that, so user identifiers read <user>.<award identifier>, which is a remote portal's identifier and matches no local user. Match users by their local username (the values of the report's users mapping) instead.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:7"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><input id="__tabbed_19_6" name="__tabbed_19" type="radio" /><input id="__tabbed_19_7" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Path Parameters</label><label for="__tabbed_19_5">Query Parameters</label><label for="__tabbed_19_6">Responses</label><label for="__tabbed_19_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/openportal-remote-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/storage-report/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openportal_remote_projects</span><span class="w"> </span><span class="kn">import</span> <span class="n">openportal_remote_projects_storage_report_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">openportal_remote_projects_storage_report_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_remote_projects/openportal_remote_projects_storage_report_retrieve.py"><code>openportal_remote_projects_storage_report_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openportalRemoteProjectsStorageReportRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openportalRemoteProjectsStorageReportRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>end</code></td>
+<td>string (date)</td>
+<td>Last day to include. Defaults to today. A start after the end gives an empty report.</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>string (date)</td>
+<td>First day to include. Defaults to when the award was first attached.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td>string (date)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>string (date)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>latest</code></td>
+<td>string (date-time)</td>
+<td>When the latest snapshot in range was taken. Null if none was.</td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td>any</td>
+<td>The combined OpenPortal ProjectStorageReport. Its top level is the latest snapshot in range; daily_reports holds the others. Null if the award has no identifier and no attachment to report under.</td>
+</tr>
+<tr>
+<td><code>windows</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>windows.project_uuid</code></td>
+<td>string (uuid)</td>
+<td>Null if the project was deleted or the caller cannot see it.</td>
+</tr>
+<tr>
+<td><code>windows.project_name</code></td>
+<td>string</td>
+<td>Null if the project was deleted or the caller cannot see it.</td>
+</tr>
+<tr>
+<td><code>windows.start</code></td>
+<td>string (date)</td>
+<td>Null if when the award arrived was not recorded.</td>
+</tr>
+<tr>
+<td><code>windows.end</code></td>
+<td>string (date)</td>
+<td>Inclusive. Null while still attached.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Any signed-in user.</p>
+<p>Staff and global support see every remote project; others see remote projects whose current project their roles reach.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="get-total-usage-for-remote-project">Get total usage for remote project</h3>
 <p>Get total usage for remote project</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:6"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><input id="__tabbed_19_3" name="__tabbed_19" type="radio" /><input id="__tabbed_19_4" name="__tabbed_19" type="radio" /><input id="__tabbed_19_5" name="__tabbed_19" type="radio" /><input id="__tabbed_19_6" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">HTTPie</label><label for="__tabbed_19_2">Python</label><label for="__tabbed_19_3">TypeScript</label><label for="__tabbed_19_4">Path Parameters</label><label for="__tabbed_19_5">Responses</label><label for="__tabbed_19_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:6"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><input id="__tabbed_20_6" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Path Parameters</label><label for="__tabbed_20_5">Responses</label><label for="__tabbed_20_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23082,9 +23314,187 @@
 </div>
 </div>
 <hr />
+<h3 id="usage-report">Usage report</h3>
+<p>Usage of the award over a date range, across every project it has been attached to. Each project's usage counts only for the days the award was attached there; on the day the award moved, the project it moved to claims the whole day. A window on a project the caller cannot see is listed without its project, but with its start and end dates, and still counts in full; its per-user usage is folded into unattributed usage, so that its users' usernames and usage are not shown. Unless staff or support, the caller sees per-user usage only for windows on projects they can see. The report is labeled with the award's identifier (with none, the local identifier of the latest project it was attached to): its project, and the project part of every user identifier in it, are rewritten to that, so user identifiers read <user>.<award identifier>, which is a remote portal's identifier and matches no local user. Match users by their local username (the values of the report's users mapping, and the keys of each day's usage) instead.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:7"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><input id="__tabbed_21_7" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Query Parameters</label><label for="__tabbed_21_6">Responses</label><label for="__tabbed_21_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/openportal-remote-projects/a1b2c3d4-e5f6-7890-abcd-ef1234567890/usage-report/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.openportal_remote_projects</span><span class="w"> </span><span class="kn">import</span> <span class="n">openportal_remote_projects_usage_report_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">openportal_remote_projects_usage_report_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/openportal_remote_projects/openportal_remote_projects_usage_report_retrieve.py"><code>openportal_remote_projects_usage_report_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openportalRemoteProjectsUsageReportRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">openportalRemoteProjectsUsageReportRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>end</code></td>
+<td>string (date)</td>
+<td>Last day to include. Defaults to today. A start after the end gives an empty report.</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>string (date)</td>
+<td>First day to include. Defaults to when the award was first attached.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td>string (date)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>string (date)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>total_hours</code></td>
+<td>number (double)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td>any</td>
+<td>The combined OpenPortal ProjectUsageReport. Null if the award has no identifier and no attachment to report under.</td>
+</tr>
+<tr>
+<td><code>windows</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>windows.project_uuid</code></td>
+<td>string (uuid)</td>
+<td>Null if the project was deleted or the caller cannot see it.</td>
+</tr>
+<tr>
+<td><code>windows.project_name</code></td>
+<td>string</td>
+<td>Null if the project was deleted or the caller cannot see it.</td>
+</tr>
+<tr>
+<td><code>windows.start</code></td>
+<td>string (date)</td>
+<td>Null if when the award arrived was not recorded.</td>
+</tr>
+<tr>
+<td><code>windows.end</code></td>
+<td>string (date)</td>
+<td>Inclusive. Null while still attached.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Any signed-in user.</p>
+<p>Staff and global support see every remote project; others see remote projects whose current project their roles reach.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="user-mapping">User mapping</h3>
 <p>Map OpenPortal UserIdentifier strings (or email addresses) to Waldur User objects. Pass each value as a repeated 'identifier' query parameter. If the values contain '@' they are treated as email addresses (used for cached reports from remote portals); otherwise they are treated as UserIdentifier strings (used for local OpenPortal resources). Returns a dict keyed by the supplied string; unknown values map to null. Staff and support see all users; regular users may only look up users who share a project with them.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:6"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><input id="__tabbed_20_6" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Query Parameters</label><label for="__tabbed_20_5">Responses</label><label for="__tabbed_20_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:6"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><input id="__tabbed_22_6" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Query Parameters</label><label for="__tabbed_22_5">Responses</label><label for="__tabbed_22_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23184,7 +23594,7 @@
 <hr />
 <h3 id="add-note-to-remote-project">Add note to remote project</h3>
 <p>Add note to remote project</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:7"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><input id="__tabbed_21_7" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Request Body (required)</label><label for="__tabbed_21_6">Responses</label><label for="__tabbed_21_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:7"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><input id="__tabbed_23_6" name="__tabbed_23" type="radio" /><input id="__tabbed_23_7" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Path Parameters</label><label for="__tabbed_23_5">Request Body (required)</label><label for="__tabbed_23_6">Responses</label><label for="__tabbed_23_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23506,7 +23916,7 @@
 <hr />
 <h3 id="approve-remote-project-now">Approve remote project now</h3>
 <p>Approve remote project now</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:6"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><input id="__tabbed_22_3" name="__tabbed_22" type="radio" /><input id="__tabbed_22_4" name="__tabbed_22" type="radio" /><input id="__tabbed_22_5" name="__tabbed_22" type="radio" /><input id="__tabbed_22_6" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">HTTPie</label><label for="__tabbed_22_2">Python</label><label for="__tabbed_22_3">TypeScript</label><label for="__tabbed_22_4">Path Parameters</label><label for="__tabbed_22_5">Responses</label><label for="__tabbed_22_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:6"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><input id="__tabbed_24_6" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Path Parameters</label><label for="__tabbed_24_5">Responses</label><label for="__tabbed_24_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23789,7 +24199,7 @@
 <hr />
 <h3 id="hold-remote-project-indefinitely">Hold remote project indefinitely</h3>
 <p>Hold remote project indefinitely</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="23:6"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><input id="__tabbed_23_3" name="__tabbed_23" type="radio" /><input id="__tabbed_23_4" name="__tabbed_23" type="radio" /><input id="__tabbed_23_5" name="__tabbed_23" type="radio" /><input id="__tabbed_23_6" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">HTTPie</label><label for="__tabbed_23_2">Python</label><label for="__tabbed_23_3">TypeScript</label><label for="__tabbed_23_4">Path Parameters</label><label for="__tabbed_23_5">Responses</label><label for="__tabbed_23_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:6"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><input id="__tabbed_25_6" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Responses</label><label for="__tabbed_25_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -24072,7 +24482,7 @@
 <hr />
 <h3 id="resend-remote-project-request">Resend remote project request</h3>
 <p>Resend remote project request</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="24:6"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><input id="__tabbed_24_3" name="__tabbed_24" type="radio" /><input id="__tabbed_24_4" name="__tabbed_24" type="radio" /><input id="__tabbed_24_5" name="__tabbed_24" type="radio" /><input id="__tabbed_24_6" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">HTTPie</label><label for="__tabbed_24_2">Python</label><label for="__tabbed_24_3">TypeScript</label><label for="__tabbed_24_4">Path Parameters</label><label for="__tabbed_24_5">Responses</label><label for="__tabbed_24_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:6"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><input id="__tabbed_26_6" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Responses</label><label for="__tabbed_26_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -24355,7 +24765,7 @@
 <hr />
 <h3 id="reset-remote-project-to-pending">Reset remote project to pending</h3>
 <p>Reset remote project to pending</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="25:6"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><input id="__tabbed_25_3" name="__tabbed_25" type="radio" /><input id="__tabbed_25_4" name="__tabbed_25" type="radio" /><input id="__tabbed_25_5" name="__tabbed_25" type="radio" /><input id="__tabbed_25_6" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">HTTPie</label><label for="__tabbed_25_2">Python</label><label for="__tabbed_25_3">TypeScript</label><label for="__tabbed_25_4">Path Parameters</label><label for="__tabbed_25_5">Responses</label><label for="__tabbed_25_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="27:6"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><input id="__tabbed_27_2" name="__tabbed_27" type="radio" /><input id="__tabbed_27_3" name="__tabbed_27" type="radio" /><input id="__tabbed_27_4" name="__tabbed_27" type="radio" /><input id="__tabbed_27_5" name="__tabbed_27" type="radio" /><input id="__tabbed_27_6" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">HTTPie</label><label for="__tabbed_27_2">Python</label><label for="__tabbed_27_3">TypeScript</label><label for="__tabbed_27_4">Path Parameters</label><label for="__tabbed_27_5">Responses</label><label for="__tabbed_27_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -24638,7 +25048,7 @@
 <hr />
 <h3 id="set-allowed-domains-for-remote-project">Set allowed domains for remote project</h3>
 <p>Set allowed domains for remote project</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="26:7"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><input id="__tabbed_26_3" name="__tabbed_26" type="radio" /><input id="__tabbed_26_4" name="__tabbed_26" type="radio" /><input id="__tabbed_26_5" name="__tabbed_26" type="radio" /><input id="__tabbed_26_6" name="__tabbed_26" type="radio" /><input id="__tabbed_26_7" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">HTTPie</label><label for="__tabbed_26_2">Python</label><label for="__tabbed_26_3">TypeScript</label><label for="__tabbed_26_4">Path Parameters</label><label for="__tabbed_26_5">Request Body (required)</label><label for="__tabbed_26_6">Responses</label><label for="__tabbed_26_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="28:7"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><input id="__tabbed_28_2" name="__tabbed_28" type="radio" /><input id="__tabbed_28_3" name="__tabbed_28" type="radio" /><input id="__tabbed_28_4" name="__tabbed_28" type="radio" /><input id="__tabbed_28_5" name="__tabbed_28" type="radio" /><input id="__tabbed_28_6" name="__tabbed_28" type="radio" /><input id="__tabbed_28_7" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">HTTPie</label><label for="__tabbed_28_2">Python</label><label for="__tabbed_28_3">TypeScript</label><label for="__tabbed_28_4">Path Parameters</label><label for="__tabbed_28_5">Request Body (required)</label><label for="__tabbed_28_6">Responses</label><label for="__tabbed_28_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -24960,7 +25370,7 @@
 <hr />
 <h3 id="set-earliest-approve-date-for-remote-project">Set earliest approve date for remote project</h3>
 <p>Set earliest approve date for remote project</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="27:7"><input checked="checked" id="__tabbed_27_1" name="__tabbed_27" type="radio" /><input id="__tabbed_27_2" name="__tabbed_27" type="radio" /><input id="__tabbed_27_3" name="__tabbed_27" type="radio" /><input id="__tabbed_27_4" name="__tabbed_27" type="radio" /><input id="__tabbed_27_5" name="__tabbed_27" type="radio" /><input id="__tabbed_27_6" name="__tabbed_27" type="radio" /><input id="__tabbed_27_7" name="__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="__tabbed_27_1">HTTPie</label><label for="__tabbed_27_2">Python</label><label for="__tabbed_27_3">TypeScript</label><label for="__tabbed_27_4">Path Parameters</label><label for="__tabbed_27_5">Request Body (required)</label><label for="__tabbed_27_6">Responses</label><label for="__tabbed_27_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="29:7"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><input id="__tabbed_29_6" name="__tabbed_29" type="radio" /><input id="__tabbed_29_7" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Path Parameters</label><label for="__tabbed_29_5">Request Body (required)</label><label for="__tabbed_29_6">Responses</label><label for="__tabbed_29_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -25282,7 +25692,7 @@
 <hr />
 <h3 id="set-links-for-remote-project">Set links for remote project</h3>
 <p>Set links for remote project</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="28:7"><input checked="checked" id="__tabbed_28_1" name="__tabbed_28" type="radio" /><input id="__tabbed_28_2" name="__tabbed_28" type="radio" /><input id="__tabbed_28_3" name="__tabbed_28" type="radio" /><input id="__tabbed_28_4" name="__tabbed_28" type="radio" /><input id="__tabbed_28_5" name="__tabbed_28" type="radio" /><input id="__tabbed_28_6" name="__tabbed_28" type="radio" /><input id="__tabbed_28_7" name="__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="__tabbed_28_1">HTTPie</label><label for="__tabbed_28_2">Python</label><label for="__tabbed_28_3">TypeScript</label><label for="__tabbed_28_4">Path Parameters</label><label for="__tabbed_28_5">Request Body</label><label for="__tabbed_28_6">Responses</label><label for="__tabbed_28_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="30:7"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><input id="__tabbed_30_2" name="__tabbed_30" type="radio" /><input id="__tabbed_30_3" name="__tabbed_30" type="radio" /><input id="__tabbed_30_4" name="__tabbed_30" type="radio" /><input id="__tabbed_30_5" name="__tabbed_30" type="radio" /><input id="__tabbed_30_6" name="__tabbed_30" type="radio" /><input id="__tabbed_30_7" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">HTTPie</label><label for="__tabbed_30_2">Python</label><label for="__tabbed_30_3">TypeScript</label><label for="__tabbed_30_4">Path Parameters</label><label for="__tabbed_30_5">Request Body</label><label for="__tabbed_30_6">Responses</label><label for="__tabbed_30_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -25607,7 +26017,7 @@
 <hr />
 <h3 id="set-membership-control-for-remote-project">Set membership control for remote project</h3>
 <p>Set membership control for remote project</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="29:7"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><input id="__tabbed_29_6" name="__tabbed_29" type="radio" /><input id="__tabbed_29_7" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Path Parameters</label><label for="__tabbed_29_5">Request Body (required)</label><label for="__tabbed_29_6">Responses</label><label for="__tabbed_29_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="31:7"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><input id="__tabbed_31_2" name="__tabbed_31" type="radio" /><input id="__tabbed_31_3" name="__tabbed_31" type="radio" /><input id="__tabbed_31_4" name="__tabbed_31" type="radio" /><input id="__tabbed_31_5" name="__tabbed_31" type="radio" /><input id="__tabbed_31_6" name="__tabbed_31" type="radio" /><input id="__tabbed_31_7" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">HTTPie</label><label for="__tabbed_31_2">Python</label><label for="__tabbed_31_3">TypeScript</label><label for="__tabbed_31_4">Path Parameters</label><label for="__tabbed_31_5">Request Body (required)</label><label for="__tabbed_31_6">Responses</label><label for="__tabbed_31_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>

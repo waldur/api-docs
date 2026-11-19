@@ -31050,6 +31050,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>reviews.rejection_cause</code></td>
+<td>any</td>
+<td>Why a rejected review was closed: declined by the reviewer, expired at its deadline, withdrawn when the reviewer joined the proposal team, or closed when the proposal was decided. Empty on reviews not rejected, and on those rejected before this was recorded.</td>
+</tr>
+<tr>
 <td><code>reviews.review_end_date</code></td>
 <td>string (date-time)</td>
 <td>When the review is due, or None when nothing sets a deadline.  The deadline of the step the review contributes to. A review whose step has none -- not started yet, or with no duration -- falls back to the round's review duration from its creation, as before steps had deadlines. A review created by accepting an assignment is also due no earlier than its assignment batch's deadline, so extending the batch deadline moves the deadline of the reviews accepted from it.</td>

@@ -20504,6 +20504,12 @@
 </thead>
 <tbody>
 <tr>
+<td><code>active_during</code></td>
+<td>string</td>
+<td></td>
+<td>Return projects active during a year (YYYY) or a month (YYYY-MM): started on or before the period's last day (start date, or creation date when there is none) and with no end date or one after the period's first day.</td>
+</tr>
+<tr>
 <td><code>affiliation_name</code></td>
 <td>string</td>
 <td></td>
@@ -20588,6 +20594,24 @@
 <td>Description</td>
 </tr>
 <tr>
+<td><code>end_date_after</code></td>
+<td>string (date)</td>
+<td></td>
+<td>Return projects whose end date is on or after the given date.</td>
+</tr>
+<tr>
+<td><code>end_date_before</code></td>
+<td>string (date)</td>
+<td></td>
+<td>Return projects whose end date is on or before the given date.</td>
+</tr>
+<tr>
+<td><code>ended</code></td>
+<td>boolean</td>
+<td></td>
+<td>true: projects whose end date is today or earlier. false: projects with no end date or one after today.</td>
+</tr>
+<tr>
 <td><code>field</code></td>
 <td>array</td>
 <td></td>
@@ -20598,6 +20622,12 @@
 <td>boolean</td>
 <td></td>
 <td>Filter projects that have an affiliation.</td>
+</tr>
+<tr>
+<td><code>in_grace</code></td>
+<td>boolean</td>
+<td></td>
+<td>true: projects that have ended but whose end date plus grace period (the project's, else the organization's, else none) is after today. false: all other projects.</td>
 </tr>
 <tr>
 <td><code>is_removed</code></td>
@@ -20676,6 +20706,24 @@
 <td>string</td>
 <td></td>
 <td>Slug</td>
+</tr>
+<tr>
+<td><code>start_date_after</code></td>
+<td>string (date)</td>
+<td></td>
+<td>Return projects whose start date is on or after the given date.</td>
+</tr>
+<tr>
+<td><code>start_date_before</code></td>
+<td>string (date)</td>
+<td></td>
+<td>Return projects whose start date is on or before the given date.</td>
+</tr>
+<tr>
+<td><code>started</code></td>
+<td>boolean</td>
+<td></td>
+<td>true: projects with no start date or one not after today. false: projects whose start date is after today.</td>
 </tr>
 <tr>
 <td><code>user_role</code></td>
@@ -24524,6 +24572,11 @@
 </thead>
 <tbody>
 <tr>
+<td><code>active_during</code></td>
+<td>string</td>
+<td>Return projects active during a year (YYYY) or a month (YYYY-MM): started on or before the period's last day (start date, or creation date when there is none) and with no end date or one after the period's first day.</td>
+</tr>
+<tr>
 <td><code>affiliation_name</code></td>
 <td>string</td>
 <td>Affiliation name</td>
@@ -24594,6 +24647,21 @@
 <td>Description</td>
 </tr>
 <tr>
+<td><code>end_date_after</code></td>
+<td>string (date)</td>
+<td>Return projects whose end date is on or after the given date.</td>
+</tr>
+<tr>
+<td><code>end_date_before</code></td>
+<td>string (date)</td>
+<td>Return projects whose end date is on or before the given date.</td>
+</tr>
+<tr>
+<td><code>ended</code></td>
+<td>boolean</td>
+<td>true: projects whose end date is today or earlier. false: projects with no end date or one after today.</td>
+</tr>
+<tr>
 <td><code>field</code></td>
 <td>array</td>
 <td></td>
@@ -24602,6 +24670,11 @@
 <td><code>has_affiliation</code></td>
 <td>boolean</td>
 <td>Filter projects that have an affiliation.</td>
+</tr>
+<tr>
+<td><code>in_grace</code></td>
+<td>boolean</td>
+<td>true: projects that have ended but whose end date plus grace period (the project's, else the organization's, else none) is after today. false: all other projects.</td>
 </tr>
 <tr>
 <td><code>is_removed</code></td>
@@ -24662,6 +24735,21 @@
 <td><code>slug</code></td>
 <td>string</td>
 <td>Slug</td>
+</tr>
+<tr>
+<td><code>start_date_after</code></td>
+<td>string (date)</td>
+<td>Return projects whose start date is on or after the given date.</td>
+</tr>
+<tr>
+<td><code>start_date_before</code></td>
+<td>string (date)</td>
+<td>Return projects whose start date is on or before the given date.</td>
+</tr>
+<tr>
+<td><code>started</code></td>
+<td>boolean</td>
+<td>true: projects with no start date or one not after today. false: projects whose start date is after today.</td>
 </tr>
 <tr>
 <td><code>user_role</code></td>
