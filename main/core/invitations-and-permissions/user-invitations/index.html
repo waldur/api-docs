@@ -21130,7 +21130,7 @@
 </div>
 <hr />
 <h3 id="accept-an-invitation">Accept an invitation</h3>
-<p>Accepts an invitation for the currently authenticated user. This grants the user the specified role in the invitation's scope. Staff may pass <code>user</code> to accept it for that user instead, for example from a service account that registers users elsewhere; the user's email must match the invitation.</p>
+<p>Accepts an invitation for the currently authenticated user. This grants the user the specified role in the invitation's scope. Staff may pass <code>user</code> to accept it for that user instead, for example from a service account that registers users elsewhere; the user's email must match the invitation unless <code>allow_email_mismatch</code> is set, for a caller that has verified the person's identity itself.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:7"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><input id="__tabbed_8_7" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Request Body</label><label for="__tabbed_8_6">Responses</label><label for="__tabbed_8_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -21242,7 +21242,13 @@
 <td><code>user</code></td>
 <td>string (uuid)</td>
 <td></td>
-<td>Staff only. Accept the invitation for this user instead of the caller. The user's email must match the invitation. Empty, null or the caller's own uuid accepts for the caller.</td>
+<td>Staff only. Accept the invitation for this user instead of the caller. The user's email must match the invitation unless allow_email_mismatch is set. Empty, null or the caller's own uuid accepts for the caller.</td>
+</tr>
+<tr>
+<td><code>allow_email_mismatch</code></td>
+<td>boolean</td>
+<td></td>
+<td>Only with user. Accept even though the user's email differs from the invitation's, for a caller that has verified the person's identity itself. Has no effect while ENABLE_STRICT_CHECK_ACCEPTING_INVITATION is on. The role-granted event records the bypass in email_check_bypassed, invitation_uuid and invitation_email.</td>
 </tr>
 </tbody>
 </table>

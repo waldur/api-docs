@@ -25580,6 +25580,12 @@
 <td>Bare hostnames of login nodes included in outbound SCIM entitlements when enable_scim_entitlements is set. Each entry is a DNS hostname only (for example login.example.org): stored lowercased, with no ssh:// URL, user@host, or host:port. These are not access links and do not appear in the resource access dropdown.</td>
 </tr>
 <tr>
+<td><code>plugin_options.scim_login_port</code></td>
+<td>integer</td>
+<td></td>
+<td>SSH port clients should use for every host in scim_login_nodes. When unset, clients use port 22. Outbound SCIM entitlements carry the hostname only and ignore this value.</td>
+</tr>
+<tr>
 <td><code>plugin_options.enable_resource_access_subnets</code></td>
 <td>boolean</td>
 <td></td>
@@ -38389,6 +38395,12 @@
 <td>array of strings</td>
 <td></td>
 <td>Bare hostnames of login nodes included in outbound SCIM entitlements when enable_scim_entitlements is set. Each entry is a DNS hostname only (for example login.example.org): stored lowercased, with no ssh:// URL, user@host, or host:port. These are not access links and do not appear in the resource access dropdown.</td>
+</tr>
+<tr>
+<td><code>plugin_options.scim_login_port</code></td>
+<td>integer</td>
+<td></td>
+<td>SSH port clients should use for every host in scim_login_nodes. When unset, clients use port 22. Outbound SCIM entitlements carry the hostname only and ignore this value.</td>
 </tr>
 <tr>
 <td><code>plugin_options.enable_resource_access_subnets</code></td>
