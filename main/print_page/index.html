@@ -155261,6 +155261,11 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offering_components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -156062,6 +156067,11 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <td><code>offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>offering_components.is_boolean</code></td>
@@ -484003,6 +484013,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -485294,6 +485309,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
@@ -486937,6 +486957,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offering_components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -487788,6 +487813,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>offering_components.is_boolean</code></td>
@@ -522052,6 +522082,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -523404,6 +523439,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
@@ -547014,6 +547054,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offering_components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -548693,6 +548738,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -550017,6 +550067,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -551003,6 +551058,12 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td>number (double)</td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td></td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
@@ -552553,6 +552614,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
@@ -558646,6 +558712,12 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>limit_increase_only</code></td>
+<td>boolean</td>
+<td></td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -559086,6 +559158,12 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td>number (double)</td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td><code>limit_increase_only</code></td>
+<td>boolean</td>
+<td></td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>is_boolean</code></td>
@@ -562276,6 +562354,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
@@ -569981,6 +570064,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offering_components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -577497,6 +577585,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offering_components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -578299,6 +578392,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>offering_components.is_boolean</code></td>
@@ -582303,6 +582401,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -584609,6 +584712,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>offering_components.is_boolean</code></td>
@@ -590996,6 +591104,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
@@ -602348,6 +602461,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -604354,6 +604472,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offering_components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -606340,6 +606463,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offering_components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -607403,6 +607531,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>offering_components.is_boolean</code></td>
@@ -609381,6 +609514,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>offering_components.is_boolean</code></td>
@@ -611425,6 +611563,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
@@ -618239,6 +618382,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>offering_components.is_boolean</code></td>
@@ -647829,6 +647977,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offerings.components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offerings.components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -648157,6 +648310,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>resource_templates.requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>resource_templates.requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>resource_templates.requested_offering_components.is_boolean</code></td>
@@ -648942,6 +649100,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offerings.components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offerings.components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -649270,6 +649433,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>resource_templates.requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>resource_templates.requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>resource_templates.requested_offering_components.is_boolean</code></td>
@@ -650321,6 +650489,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offerings.components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offerings.components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -650649,6 +650822,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>resource_templates.requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>resource_templates.requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>resource_templates.requested_offering_components.is_boolean</code></td>
@@ -651930,6 +652108,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offerings.components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offerings.components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -652258,6 +652441,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>resource_templates.requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>resource_templates.requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>resource_templates.requested_offering_components.is_boolean</code></td>
@@ -653311,6 +653499,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offerings.components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offerings.components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -653639,6 +653832,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>resource_templates.requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>resource_templates.requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>resource_templates.requested_offering_components.is_boolean</code></td>
@@ -658364,6 +658562,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -658860,6 +659063,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
@@ -663061,6 +663269,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>requested_offering_components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -663397,6 +663610,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>requested_offering_components.is_boolean</code></td>
@@ -671261,6 +671479,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offerings.components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offerings.components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -671589,6 +671812,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>resource_templates.requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>resource_templates.requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>resource_templates.requested_offering_components.is_boolean</code></td>
@@ -675033,6 +675261,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -676386,6 +676619,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>requested_offering_components.is_boolean</code></td>
@@ -684579,6 +684817,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -685964,6 +686207,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>requested_offering_components.is_boolean</code></td>
@@ -689021,6 +689269,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -690340,6 +690593,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>requested_offering_components.is_boolean</code></td>
@@ -692426,6 +692684,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -693509,6 +693772,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>requested_offering_components.is_boolean</code></td>
@@ -695040,6 +695308,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offerings.components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offerings.components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -695368,6 +695641,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>resource_templates.requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>resource_templates.requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>resource_templates.requested_offering_components.is_boolean</code></td>
@@ -695917,6 +696195,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>offerings.components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>offerings.components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -696245,6 +696528,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>resource_templates.requested_offering_components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>resource_templates.requested_offering_components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>resource_templates.requested_offering_components.is_boolean</code></td>
@@ -726144,6 +726432,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
+</tr>
+<tr>
 <td><code>components.is_boolean</code></td>
 <td>boolean</td>
 <td></td>
@@ -726621,6 +726914,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>components.max_available_limit</code></td>
 <td>number (double)</td>
 <td></td>
+</tr>
+<tr>
+<td><code>components.limit_increase_only</code></td>
+<td>boolean</td>
+<td>If set, a consumer cannot lower this component's limit below the resource's current limit.</td>
 </tr>
 <tr>
 <td><code>components.is_boolean</code></td>
