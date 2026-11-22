@@ -9413,6 +9413,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#list-the-secrets-of-a-generated-site-agent-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List the secrets of a generated site agent configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update-a-users-role-expiration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -19923,6 +19934,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#list-the-secrets-of-a-generated-site-agent-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List the secrets of a generated site agent configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update-a-users-role-expiration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -20174,6 +20196,11 @@
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/marketplace-service-providers/{uuid}/set_offerings_username/</code></td>
 <td style="text-align: left;"><a href="#set-offering-username-for-a-user">Set offering username for a user</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-service-providers/{uuid}/site_agent_config_secrets/</code></td>
+<td style="text-align: left;"><a href="#list-the-secrets-of-a-generated-site-agent-configuration">List the secrets of a generated site agent configuration</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -28983,7 +29010,7 @@
 </div>
 <hr />
 <h3 id="generate-site-agent-configuration">Generate site agent configuration</h3>
-<p>Generates a YAML configuration file for waldur-site-agent based on selected SLURM offerings. The configuration includes offering details, components, backend settings, and optionally SLURM periodic usage policy settings. Secrets are shown as placeholders that need to be filled in.</p>
+<p>Generates a YAML configuration file for waldur-site-agent based on selected site agent offerings. The configuration includes offering details, the agent roles, event and backend settings, components, and optionally SLURM periodic usage policy settings. Secrets are never included: each is left as a placeholder (secret_format) and listed in the header; site_agent_config_secrets lists them as data.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="32:7"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><input id="__tabbed_32_6" name="__tabbed_32" type="radio" /><input id="__tabbed_32_7" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Request Body (required)</label><label for="__tabbed_32_6">Responses</label><label for="__tabbed_32_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -29126,6 +29153,12 @@
 <td>string</td>
 <td></td>
 <td>Timezone for the site agent<br><em>Constraints: default: <code>UTC</code></em></td>
+</tr>
+<tr>
+<td><code>secret_format</code></td>
+<td>any</td>
+<td></td>
+<td>How a secret is left for the operator. 'comment': an empty value with a '# SECRET:' comment. 'env': a ${VARIABLE} reference, for filling the file in with envsubst or a similar tool; the agent does not expand variables itself. Offerings with no agent roles set keep the earlier placeholders in 'comment' format.<br><em>Constraints: default: <code>comment</code></em></td>
 </tr>
 </tbody>
 </table>
@@ -29292,9 +29325,288 @@
 </div>
 </div>
 <hr />
+<h3 id="list-the-secrets-of-a-generated-site-agent-configuration">List the secrets of a generated site agent configuration</h3>
+<p>The secrets the operator adds to the configuration that generate_site_agent_config returns for the same request: the Waldur API token of each offering and the secret settings of its backends, with where each goes and whether the file holds a placeholder for it.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="34:8"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><input id="__tabbed_34_2" name="__tabbed_34" type="radio" /><input id="__tabbed_34_3" name="__tabbed_34" type="radio" /><input id="__tabbed_34_4" name="__tabbed_34" type="radio" /><input id="__tabbed_34_5" name="__tabbed_34" type="radio" /><input id="__tabbed_34_6" name="__tabbed_34" type="radio" /><input id="__tabbed_34_7" name="__tabbed_34" type="radio" /><input id="__tabbed_34_8" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">HTTPie</label><label for="__tabbed_34_2">Python</label><label for="__tabbed_34_3">TypeScript</label><label for="__tabbed_34_4">Path Parameters</label><label for="__tabbed_34_5">Query Parameters</label><label for="__tabbed_34_6">Request Body (required)</label><label for="__tabbed_34_7">Responses</label><label for="__tabbed_34_8">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-service-providers/a1b2c3d4-e5f6-7890-abcd-ef1234567890/site_agent_config_secrets/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>offering_uuids:<span class="o">=</span><span class="s1">&#39;[]&#39;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.call_managing_organisation_o_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">CallManagingOrganisationOEnum</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.site_agent_config_generation_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">SiteAgentConfigGenerationRequest</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_service_providers</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_service_providers_site_agent_config_secrets</span> <span class="c1"># (3)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">SiteAgentConfigGenerationRequest</span><span class="p">(</span>
+    <span class="n">offering_uuids</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_service_providers_site_agent_config_secrets</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/call_managing_organisation_o_enum.py"><code>CallManagingOrganisationOEnum</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/site_agent_config_generation_request.py"><code>SiteAgentConfigGenerationRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_service_providers/marketplace_service_providers_site_agent_config_secrets.py"><code>marketplace_service_providers_site_agent_config_secrets</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceServiceProvidersSiteAgentConfigSecrets</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceServiceProvidersSiteAgentConfigSecrets</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;offering_uuids&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>created</code></td>
+<td>string (date-time)</td>
+<td>Created after</td>
+</tr>
+<tr>
+<td><code>created_before</code></td>
+<td>string (date-time)</td>
+<td>Created before</td>
+</tr>
+<tr>
+<td><code>customer</code></td>
+<td>string (uri)</td>
+<td>Customer URL</td>
+</tr>
+<tr>
+<td><code>customer_keyword</code></td>
+<td>string</td>
+<td>Customer keyword (name, abbreviation or native name)</td>
+</tr>
+<tr>
+<td><code>customer_uuid</code></td>
+<td>string (uuid)</td>
+<td>Customer UUID</td>
+</tr>
+<tr>
+<td><code>modified</code></td>
+<td>string (date-time)</td>
+<td>Modified after</td>
+</tr>
+<tr>
+<td><code>modified_before</code></td>
+<td>string (date-time)</td>
+<td>Modified before</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>array</td>
+<td>Ordering<br><br></td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>integer</td>
+<td>A page number within the paginated result set.</td>
+</tr>
+<tr>
+<td><code>page_size</code></td>
+<td>integer</td>
+<td>Number of results to return per page.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>offering_uuids</code></td>
+<td>array of string (uuid)s</td>
+<td>✓</td>
+<td>List of SLURM offering UUIDs to include in configuration</td>
+</tr>
+<tr>
+<td><code>include_policy_settings</code></td>
+<td>boolean</td>
+<td></td>
+<td>Include SLURM periodic usage policy settings in configuration<br><em>Constraints: default: <code>True</code></em></td>
+</tr>
+<tr>
+<td><code>waldur_api_url</code></td>
+<td>string (uri)</td>
+<td></td>
+<td>Waldur API URL (defaults to current server URL)</td>
+</tr>
+<tr>
+<td><code>timezone</code></td>
+<td>string</td>
+<td></td>
+<td>Timezone for the site agent<br><em>Constraints: default: <code>UTC</code></em></td>
+</tr>
+<tr>
+<td><code>secret_format</code></td>
+<td>any</td>
+<td></td>
+<td>How a secret is left for the operator. 'comment': an empty value with a '# SECRET:' comment. 'env': a ${VARIABLE} reference, for filling the file in with envsubst or a similar tool; the agent does not expand variables itself. Offerings with no agent roles set keep the earlier placeholders in 'comment' format.<br><em>Constraints: default: <code>comment</code></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<p>The response body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>field</code></td>
+<td>string</td>
+<td>Where the secret goes in the offering, such as waldur_api_token or backend_settings.ldap.bind_password.</td>
+</tr>
+<tr>
+<td><code>backend</code></td>
+<td>string</td>
+<td>The backend that reads it; null for the offering's own fields.</td>
+</tr>
+<tr>
+<td><code>requirement</code></td>
+<td>any</td>
+<td>required_with_parent: needed once the block it sits in is set.</td>
+</tr>
+<tr>
+<td><code>in_file</code></td>
+<td>boolean</td>
+<td>Whether the file has a placeholder for it; otherwise it is only listed, to be added where it applies.</td>
+</tr>
+<tr>
+<td><code>env_var</code></td>
+<td>string</td>
+<td>The variable the placeholder names, with secret_format=env.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Requires <code>SERVICE_PROVIDER.GET_API_SECRET_CODE</code> on the customer.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="update-a-users-role-expiration">Update a user's role expiration</h3>
 <p>Updates the expiration time for a user's existing role in the current scope. This is useful for extending or shortening the duration of a permission. To make a role permanent, set expiration_time to null.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="34:7"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><input id="__tabbed_34_2" name="__tabbed_34" type="radio" /><input id="__tabbed_34_3" name="__tabbed_34" type="radio" /><input id="__tabbed_34_4" name="__tabbed_34" type="radio" /><input id="__tabbed_34_5" name="__tabbed_34" type="radio" /><input id="__tabbed_34_6" name="__tabbed_34" type="radio" /><input id="__tabbed_34_7" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">HTTPie</label><label for="__tabbed_34_2">Python</label><label for="__tabbed_34_3">TypeScript</label><label for="__tabbed_34_4">Path Parameters</label><label for="__tabbed_34_5">Request Body (required)</label><label for="__tabbed_34_6">Responses</label><label for="__tabbed_34_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="35:7"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><input id="__tabbed_35_2" name="__tabbed_35" type="radio" /><input id="__tabbed_35_3" name="__tabbed_35" type="radio" /><input id="__tabbed_35_4" name="__tabbed_35" type="radio" /><input id="__tabbed_35_5" name="__tabbed_35" type="radio" /><input id="__tabbed_35_6" name="__tabbed_35" type="radio" /><input id="__tabbed_35_7" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">HTTPie</label><label for="__tabbed_35_2">Python</label><label for="__tabbed_35_3">TypeScript</label><label for="__tabbed_35_4">Path Parameters</label><label for="__tabbed_35_5">Request Body (required)</label><label for="__tabbed_35_6">Responses</label><label for="__tabbed_35_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29461,7 +29773,7 @@
 <hr />
 <h3 id="generate-new-service-provider-api-secret-code">Generate new service provider API secret code</h3>
 <p>Generates a new API secret code for a service provider, invalidating the old one. Requires service provider owner permission.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="35:6"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><input id="__tabbed_35_2" name="__tabbed_35" type="radio" /><input id="__tabbed_35_3" name="__tabbed_35" type="radio" /><input id="__tabbed_35_4" name="__tabbed_35" type="radio" /><input id="__tabbed_35_5" name="__tabbed_35" type="radio" /><input id="__tabbed_35_6" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">HTTPie</label><label for="__tabbed_35_2">Python</label><label for="__tabbed_35_3">TypeScript</label><label for="__tabbed_35_4">Path Parameters</label><label for="__tabbed_35_5">Responses</label><label for="__tabbed_35_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="36:6"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><input id="__tabbed_36_2" name="__tabbed_36" type="radio" /><input id="__tabbed_36_3" name="__tabbed_36" type="radio" /><input id="__tabbed_36_4" name="__tabbed_36" type="radio" /><input id="__tabbed_36_5" name="__tabbed_36" type="radio" /><input id="__tabbed_36_6" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">HTTPie</label><label for="__tabbed_36_2">Python</label><label for="__tabbed_36_3">TypeScript</label><label for="__tabbed_36_4">Path Parameters</label><label for="__tabbed_36_5">Responses</label><label for="__tabbed_36_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29575,7 +29887,7 @@
 <hr />
 <h3 id="update-a-service-provider">Update a service provider</h3>
 <p>Updates an existing service provider profile.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="36:7"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><input id="__tabbed_36_2" name="__tabbed_36" type="radio" /><input id="__tabbed_36_3" name="__tabbed_36" type="radio" /><input id="__tabbed_36_4" name="__tabbed_36" type="radio" /><input id="__tabbed_36_5" name="__tabbed_36" type="radio" /><input id="__tabbed_36_6" name="__tabbed_36" type="radio" /><input id="__tabbed_36_7" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">HTTPie</label><label for="__tabbed_36_2">Python</label><label for="__tabbed_36_3">TypeScript</label><label for="__tabbed_36_4">Path Parameters</label><label for="__tabbed_36_5">Request Body (required)</label><label for="__tabbed_36_6">Responses</label><label for="__tabbed_36_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="37:7"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><input id="__tabbed_37_2" name="__tabbed_37" type="radio" /><input id="__tabbed_37_3" name="__tabbed_37" type="radio" /><input id="__tabbed_37_4" name="__tabbed_37" type="radio" /><input id="__tabbed_37_5" name="__tabbed_37" type="radio" /><input id="__tabbed_37_6" name="__tabbed_37" type="radio" /><input id="__tabbed_37_7" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">HTTPie</label><label for="__tabbed_37_2">Python</label><label for="__tabbed_37_3">TypeScript</label><label for="__tabbed_37_4">Path Parameters</label><label for="__tabbed_37_5">Request Body (required)</label><label for="__tabbed_37_6">Responses</label><label for="__tabbed_37_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29881,7 +30193,7 @@
 <hr />
 <h3 id="partially-update-a-service-provider">Partially update a service provider</h3>
 <p>Partially updates an existing service provider profile.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="37:7"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><input id="__tabbed_37_2" name="__tabbed_37" type="radio" /><input id="__tabbed_37_3" name="__tabbed_37" type="radio" /><input id="__tabbed_37_4" name="__tabbed_37" type="radio" /><input id="__tabbed_37_5" name="__tabbed_37" type="radio" /><input id="__tabbed_37_6" name="__tabbed_37" type="radio" /><input id="__tabbed_37_7" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">HTTPie</label><label for="__tabbed_37_2">Python</label><label for="__tabbed_37_3">TypeScript</label><label for="__tabbed_37_4">Path Parameters</label><label for="__tabbed_37_5">Request Body</label><label for="__tabbed_37_6">Responses</label><label for="__tabbed_37_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="38:7"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><input id="__tabbed_38_2" name="__tabbed_38" type="radio" /><input id="__tabbed_38_3" name="__tabbed_38" type="radio" /><input id="__tabbed_38_4" name="__tabbed_38" type="radio" /><input id="__tabbed_38_5" name="__tabbed_38" type="radio" /><input id="__tabbed_38_6" name="__tabbed_38" type="radio" /><input id="__tabbed_38_7" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">HTTPie</label><label for="__tabbed_38_2">Python</label><label for="__tabbed_38_3">TypeScript</label><label for="__tabbed_38_4">Path Parameters</label><label for="__tabbed_38_5">Request Body</label><label for="__tabbed_38_6">Responses</label><label for="__tabbed_38_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30169,7 +30481,7 @@
 <hr />
 <h3 id="delete-a-service-provider">Delete a service provider</h3>
 <p>Deletes a service provider profile. Only possible if there are no active offerings.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="38:6"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><input id="__tabbed_38_2" name="__tabbed_38" type="radio" /><input id="__tabbed_38_3" name="__tabbed_38" type="radio" /><input id="__tabbed_38_4" name="__tabbed_38" type="radio" /><input id="__tabbed_38_5" name="__tabbed_38" type="radio" /><input id="__tabbed_38_6" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">HTTPie</label><label for="__tabbed_38_2">Python</label><label for="__tabbed_38_3">TypeScript</label><label for="__tabbed_38_4">Path Parameters</label><label for="__tabbed_38_5">Responses</label><label for="__tabbed_38_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="39:6"><input checked="checked" id="__tabbed_39_1" name="__tabbed_39" type="radio" /><input id="__tabbed_39_2" name="__tabbed_39" type="radio" /><input id="__tabbed_39_3" name="__tabbed_39" type="radio" /><input id="__tabbed_39_4" name="__tabbed_39" type="radio" /><input id="__tabbed_39_5" name="__tabbed_39" type="radio" /><input id="__tabbed_39_6" name="__tabbed_39" type="radio" /><div class="tabbed-labels"><label for="__tabbed_39_1">HTTPie</label><label for="__tabbed_39_2">Python</label><label for="__tabbed_39_3">TypeScript</label><label for="__tabbed_39_4">Path Parameters</label><label for="__tabbed_39_5">Responses</label><label for="__tabbed_39_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>

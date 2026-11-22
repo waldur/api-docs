@@ -32025,7 +32025,7 @@
 </div>
 <hr />
 <h3 id="export-proposals">Export proposals</h3>
-<p>Download the call's proposals as CSV, one row per proposal, with one column per requested offering component. The column set is derived from the call, so it is the same for every row and between exports of the same call.</p>
+<p>Download the call's proposals as CSV or as an Excel workbook, one row per proposal, with one column per requested offering component. The column set is derived from the call, so it is the same for every row and between exports of the same call.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="20:7"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><input id="__tabbed_20_4" name="__tabbed_20" type="radio" /><input id="__tabbed_20_5" name="__tabbed_20" type="radio" /><input id="__tabbed_20_6" name="__tabbed_20" type="radio" /><input id="__tabbed_20_7" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">HTTPie</label><label for="__tabbed_20_2">Python</label><label for="__tabbed_20_3">TypeScript</label><label for="__tabbed_20_4">Path Parameters</label><label for="__tabbed_20_5">Query Parameters</label><label for="__tabbed_20_6">Responses</label><label for="__tabbed_20_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -32051,9 +32051,11 @@
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.proposal_states</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProposalStates</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_protected_calls</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_protected_calls_export_proposals</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.query_file_format_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">QueryFileFormatEnum</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_protected_calls</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_protected_calls_export_proposals</span> <span class="c1"># (3)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
@@ -32067,6 +32069,7 @@
 </code></pre></div></td></tr></table></div>
 <ol>
 <li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_states.py"><code>ProposalStates</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/query_file_format_enum.py"><code>QueryFileFormatEnum</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_export_proposals.py"><code>proposal_protected_calls_export_proposals</code></a></li>
 </ol>
 </div>
@@ -32132,6 +32135,11 @@
 <td>Limit the export to one applicant.</td>
 </tr>
 <tr>
+<td><code>file_format</code></td>
+<td>string</td>
+<td>csv (the default) or xlsx, an Excel workbook of the same header and rows. Named file_format because a bare <code>format</code> is read by the API itself.<br><em>Enum: <code>csv</code>, <code>xlsx</code></em></td>
+</tr>
+<tr>
 <td><code>proposal_name</code></td>
 <td>string</td>
 <td>Limit the export to proposals whose name contains this text — the list's search box. Named proposal_name because a bare <code>name</code> is read by the call's own filterset.</td>
@@ -32169,7 +32177,7 @@
 </div>
 <hr />
 <h3 id="export-reviews">Export reviews</h3>
-<p>Download the call's reviews as CSV, one row per review. The reviewer's private comment is never included: the export is open to call managers, and the review API keeps that field from them.</p>
+<p>Download the call's reviews as CSV or as an Excel workbook, one row per review. The reviewer's private comment is never included: the export is open to call managers, and the review API keeps that field from them.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="21:7"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><input id="__tabbed_21_3" name="__tabbed_21" type="radio" /><input id="__tabbed_21_4" name="__tabbed_21" type="radio" /><input id="__tabbed_21_5" name="__tabbed_21" type="radio" /><input id="__tabbed_21_6" name="__tabbed_21" type="radio" /><input id="__tabbed_21_7" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">HTTPie</label><label for="__tabbed_21_2">Python</label><label for="__tabbed_21_3">TypeScript</label><label for="__tabbed_21_4">Path Parameters</label><label for="__tabbed_21_5">Query Parameters</label><label for="__tabbed_21_6">Responses</label><label for="__tabbed_21_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -32195,9 +32203,11 @@
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.proposal_review_state_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProposalReviewStateEnum</span> <span class="c1"># (1)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_protected_calls</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_protected_calls_export_reviews</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.query_file_format_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">QueryFileFormatEnum</span> <span class="c1"># (2)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_protected_calls</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_protected_calls_export_reviews</span> <span class="c1"># (3)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
@@ -32211,6 +32221,7 @@
 </code></pre></div></td></tr></table></div>
 <ol>
 <li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/proposal_review_state_enum.py"><code>ProposalReviewStateEnum</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/query_file_format_enum.py"><code>QueryFileFormatEnum</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_protected_calls/proposal_protected_calls_export_reviews.py"><code>proposal_protected_calls_export_reviews</code></a></li>
 </ol>
 </div>
@@ -32270,6 +32281,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>file_format</code></td>
+<td>string</td>
+<td>csv (the default) or xlsx, an Excel workbook of the same header and rows. Named file_format because a bare <code>format</code> is read by the API itself.<br><em>Enum: <code>csv</code>, <code>xlsx</code></em></td>
+</tr>
 <tr>
 <td><code>proposal_name</code></td>
 <td>string</td>
@@ -49862,7 +49878,7 @@
 </div>
 <hr />
 <h3 id="notify-proposals">Notify proposals</h3>
-<p>Email the applicants of selected proposals of this call. One message per recipient per proposal, sent asynchronously; each proposal gets an event recording it.</p>
+<p>Email the applicants or the reviewers of selected proposals of this call. One message per recipient per proposal, sent asynchronously; each proposal gets an event recording it. Each reviewer of a proposal's reviews in progress or submitted is written to separately, with a link to their own review; that event is read by the call team, staff and support, not by the applicant team.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="81:7"><input checked="checked" id="__tabbed_81_1" name="__tabbed_81" type="radio" /><input id="__tabbed_81_2" name="__tabbed_81" type="radio" /><input id="__tabbed_81_3" name="__tabbed_81" type="radio" /><input id="__tabbed_81_4" name="__tabbed_81" type="radio" /><input id="__tabbed_81_5" name="__tabbed_81" type="radio" /><input id="__tabbed_81_6" name="__tabbed_81" type="radio" /><input id="__tabbed_81_7" name="__tabbed_81" type="radio" /><div class="tabbed-labels"><label for="__tabbed_81_1">HTTPie</label><label for="__tabbed_81_2">Python</label><label for="__tabbed_81_3">TypeScript</label><label for="__tabbed_81_4">Path Parameters</label><label for="__tabbed_81_5">Request Body (required)</label><label for="__tabbed_81_6">Responses</label><label for="__tabbed_81_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -49998,7 +50014,7 @@
 <td><code>proposal_uuids</code></td>
 <td>array of string (uuid)s</td>
 <td>✓</td>
-<td>Proposals of this call whose applicants receive the message</td>
+<td>Proposals of this call whose applicants or reviewers receive the message</td>
 </tr>
 <tr>
 <td><code>recipients</code></td>
@@ -50040,7 +50056,7 @@
 <tr>
 <td><code>skipped_proposals</code></td>
 <td>array of objects</td>
-<td>Requested proposals that are not part of this call</td>
+<td>Requested proposals not written to, with the reason: not part of this call, or nobody it is addressed to receives mail</td>
 </tr>
 <tr>
 <td><code>skipped_proposals.proposal_uuid</code></td>

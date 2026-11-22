@@ -10805,10 +10805,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reject-a-review-changing-its-state-to-rejected" class="md-nav__link">
+  <a href="#reject" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reject a review, changing its state to REJECTED
+        Reject
       
     </span>
   </a>
@@ -19396,10 +19396,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reject-a-review-changing-its-state-to-rejected" class="md-nav__link">
+  <a href="#reject" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reject a review, changing its state to REJECTED
+        Reject
       
     </span>
   </a>
@@ -19503,7 +19503,7 @@
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/proposal-reviews/{uuid}/reject/</code></td>
-<td style="text-align: left;"><a href="#reject-a-review-changing-its-state-to-rejected">Reject a review, changing its state to REJECTED</a></td>
+<td style="text-align: left;"><a href="#reject">Reject</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -19794,6 +19794,11 @@
 <td><code>summary_private_comment</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>decline_reason</code></td>
+<td>string</td>
+<td>Why the reviewer sent the review back, as they gave it. For the call team only; empty when no reason was given, and on reviews that expired or were withdrawn.</td>
 </tr>
 <tr>
 <td><code>round_uuid</code></td>
@@ -20138,6 +20143,11 @@
 <td><code>summary_private_comment</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>decline_reason</code></td>
+<td>string</td>
+<td>Why the reviewer sent the review back, as they gave it. For the call team only; empty when no reason was given, and on reviews that expired or were withdrawn.</td>
 </tr>
 <tr>
 <td><code>round_uuid</code></td>
@@ -20569,6 +20579,11 @@
 <td><code>summary_private_comment</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>decline_reason</code></td>
+<td>string</td>
+<td>Why the reviewer sent the review back, as they gave it. For the call team only; empty when no reason was given, and on reviews that expired or were withdrawn.</td>
 </tr>
 <tr>
 <td><code>round_uuid</code></td>
@@ -21027,6 +21042,11 @@
 <td></td>
 </tr>
 <tr>
+<td><code>decline_reason</code></td>
+<td>string</td>
+<td>Why the reviewer sent the review back, as they gave it. For the call team only; empty when no reason was given, and on reviews that expired or were withdrawn.</td>
+</tr>
+<tr>
 <td><code>round_uuid</code></td>
 <td>string (uuid)</td>
 <td></td>
@@ -21465,6 +21485,11 @@
 <td><code>summary_private_comment</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>decline_reason</code></td>
+<td>string</td>
+<td>Why the reviewer sent the review back, as they gave it. For the call team only; empty when no reason was given, and on reviews that expired or were withdrawn.</td>
 </tr>
 <tr>
 <td><code>round_uuid</code></td>
@@ -22015,9 +22040,9 @@
 </div>
 </div>
 <hr />
-<h3 id="reject-a-review-changing-its-state-to-rejected">Reject a review, changing its state to REJECTED</h3>
-<p>Reject a review, changing its state to REJECTED.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:6"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Responses</label><label for="__tabbed_9_6">Authorization</label></div>
+<h3 id="reject">Reject</h3>
+<p>Reject a review, changing its state to REJECTED: the reviewer sends back a review they accepted. They may say why; the reason is kept on the review as decline_reason and sent to the call's managers.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:7"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><input id="__tabbed_9_7" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Request Body</label><label for="__tabbed_9_6">Responses</label><label for="__tabbed_9_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -22041,20 +22066,29 @@
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_reviews</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_reviews_reject</span> <span class="c1"># (1)</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.review_reject_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReviewRejectRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.proposal_reviews</span><span class="w"> </span><span class="kn">import</span> <span class="n">proposal_reviews_reject</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">ReviewRejectRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">proposal_reviews_reject</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/review_reject_request.py"><code>ReviewRejectRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/proposal_reviews/proposal_reviews_reject.py"><code>proposal_reviews_reject</code></a></li>
 </ol>
 </div>
@@ -22100,6 +22134,26 @@
 <td><code>uuid</code></td>
 <td>string (uuid)</td>
 <td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reason</code></td>
+<td>string</td>
+<td></td>
+<td>Why the reviewer sends the review back, such as a conflict of interest. Kept on the review as decline_reason and sent to the call's managers.</td>
 </tr>
 </tbody>
 </table>
