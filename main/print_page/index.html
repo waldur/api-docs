@@ -468812,6 +468812,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td style="text-align: left;"><code>/api/admin/arrow/billing-syncs/cleanup_consumption/</code></td>
 <td style="text-align: left;"><a href="#marketplace-arrow-billing-syncs-delete-consumption-records-with-optional-dry-run-preview">Delete consumption records with optional dry-run preview</a></td>
 </tr>
+<tr>
+<td style="text-align: left;"><strong>Other Actions</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/admin/arrow/billing-syncs/billing_changes_job/</code></td>
+<td style="text-align: left;"><a href="#marketplace-arrow-billing-syncs-state-and-report-of-a-billing-changes-job">State and report of a Billing changes job</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/admin/arrow/billing-syncs/billing_changes/</code></td>
+<td style="text-align: left;"><a href="#marketplace-arrow-billing-syncs-billing-changes">Billing changes</a></td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -471597,6 +471612,310 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 </div>
 </div>
+<hr />
+<h2 id="marketplace-arrow-billing-syncs-other-actions">Other Actions</h2>
+<h3 id="marketplace-arrow-billing-syncs-state-and-report-of-a-billing-changes-job">State and report of a Billing changes job</h3>
+<p>State and report of a Billing changes job.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:6"><input checked="checked" id="marketplace-arrow-billing-syncs-__tabbed_18_1" name="marketplace-arrow-billing-syncs-__tabbed_18" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_18_2" name="marketplace-arrow-billing-syncs-__tabbed_18" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_18_3" name="marketplace-arrow-billing-syncs-__tabbed_18" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_18_4" name="marketplace-arrow-billing-syncs-__tabbed_18" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_18_5" name="marketplace-arrow-billing-syncs-__tabbed_18" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_18_6" name="marketplace-arrow-billing-syncs-__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="marketplace-arrow-billing-syncs-__tabbed_18_1">HTTPie</label><label for="marketplace-arrow-billing-syncs-__tabbed_18_2">Python</label><label for="marketplace-arrow-billing-syncs-__tabbed_18_3">TypeScript</label><label for="marketplace-arrow-billing-syncs-__tabbed_18_4">Query Parameters</label><label for="marketplace-arrow-billing-syncs-__tabbed_18_5">Responses</label><label for="marketplace-arrow-billing-syncs-__tabbed_18_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/admin/arrow/billing-syncs/billing_changes_job/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">job_id</span><span class="o">==</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin_arrow_billing_syncs_billing_changes_job_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">admin_arrow_billing_syncs_billing_changes_job_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">job_id</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/admin/admin_arrow_billing_syncs_billing_changes_job_retrieve.py"><code>admin_arrow_billing_syncs_billing_changes_job_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">adminArrowBillingSyncsBillingChangesJobRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">adminArrowBillingSyncsBillingChangesJobRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;job_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>job_id</code></td>
+<td>string</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>job_id</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td>any</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Staff only.</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="marketplace-arrow-billing-syncs-billing-changes">Billing changes</h3>
+<p>Start an Arrow billing action as a background job that reports the invoice items it creates, changes or deletes. With dry_run (the default) nothing is kept, so the report is a preview of applying the same action. Poll billing_changes_job for the report.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:6"><input checked="checked" id="marketplace-arrow-billing-syncs-__tabbed_19_1" name="marketplace-arrow-billing-syncs-__tabbed_19" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_19_2" name="marketplace-arrow-billing-syncs-__tabbed_19" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_19_3" name="marketplace-arrow-billing-syncs-__tabbed_19" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_19_4" name="marketplace-arrow-billing-syncs-__tabbed_19" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_19_5" name="marketplace-arrow-billing-syncs-__tabbed_19" type="radio" /><input id="marketplace-arrow-billing-syncs-__tabbed_19_6" name="marketplace-arrow-billing-syncs-__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="marketplace-arrow-billing-syncs-__tabbed_19_1">HTTPie</label><label for="marketplace-arrow-billing-syncs-__tabbed_19_2">Python</label><label for="marketplace-arrow-billing-syncs-__tabbed_19_3">TypeScript</label><label for="marketplace-arrow-billing-syncs-__tabbed_19_4">Request Body (required)</label><label for="marketplace-arrow-billing-syncs-__tabbed_19_5">Responses</label><label for="marketplace-arrow-billing-syncs-__tabbed_19_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/admin/arrow/billing-syncs/billing_changes/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">action</span><span class="o">=</span><span class="s2">&quot;sync_billing&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">year</span><span class="o">=</span><span class="m">123</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">month</span><span class="o">=</span><span class="m">123</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.billing_changes_request_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">BillingChangesRequestRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin_arrow_billing_syncs_billing_changes</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">BillingChangesRequestRequest</span><span class="p">(</span>
+    <span class="n">action</span><span class="o">=</span><span class="s2">&quot;sync_billing&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
+    <span class="n">month</span><span class="o">=</span><span class="mi">123</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">admin_arrow_billing_syncs_billing_changes</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/billing_changes_request_request.py"><code>BillingChangesRequestRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/admin/admin_arrow_billing_syncs_billing_changes.py"><code>admin_arrow_billing_syncs_billing_changes</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">adminArrowBillingSyncsBillingChanges</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">adminArrowBillingSyncsBillingChanges</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;action&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;sync_billing&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;year&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">123</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;month&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">123</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td>string</td>
+<td>✓</td>
+<td><br><em>Enum: <code>sync_billing</code>, <code>sync_consumption</code>, <code>settle_month</code></em></td>
+</tr>
+<tr>
+<td><code>year</code></td>
+<td>integer</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>month</code></td>
+<td>integer</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resource_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td>Limit billing or consumption sync to one resource.</td>
+</tr>
+<tr>
+<td><code>dry_run</code></td>
+<td>boolean</td>
+<td></td>
+<td>Preview the changes and keep nothing; false applies them.<br><em>Constraints: default: <code>True</code></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>202</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>job_id</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td>any</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong><code>409</code></strong> - No response body</p>
+</div>
+<div class="tabbed-block">
+<p>Staff only.</p>
+</div>
+</div>
+</div>
 <hr /></section><section class="print-page" id="marketplace-arrow-consumption-records" heading-number="6.2.3"><h1 id="marketplace-arrow-consumption-records-admin-arrow-consumption-records">Admin Arrow Consumption Records</h1>
 <h2 id="marketplace-arrow-consumption-records-operations-summary">Operations Summary</h2>
 <table>
@@ -472206,7 +472525,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/admin/arrow/customer-mappings/{uuid}/link_resource/</code></td>
-<td style="text-align: left;"><a href="#marketplace-arrow-customer-mappings-link-a-waldur-resource-to-an-arrow-license-by-setting-its-backend_id">Link a Waldur resource to an Arrow license by setting its backend_id</a></td>
+<td style="text-align: left;"><a href="#marketplace-arrow-customer-mappings-link-resource">Link resource</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -473480,7 +473799,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>resources_with_backend_id</code></td>
 <td>integer</td>
-<td>Number of resources with backend_id set (Arrow license reference).</td>
+<td>Number of resources linked to an Arrow license.</td>
 </tr>
 <tr>
 <td><code>matched_resources</code></td>
@@ -473705,8 +474024,8 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 </div>
 <hr />
-<h3 id="marketplace-arrow-customer-mappings-link-a-waldur-resource-to-an-arrow-license-by-setting-its-backend_id">Link a Waldur resource to an Arrow license by setting its backend_id</h3>
-<p>Link a Waldur resource to an Arrow license by setting its backend_id.</p>
+<h3 id="marketplace-arrow-customer-mappings-link-resource">Link resource</h3>
+<p>Link a Waldur resource to an Arrow license (its arrow_license_reference attribute).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:7"><input checked="checked" id="marketplace-arrow-customer-mappings-__tabbed_8_1" name="marketplace-arrow-customer-mappings-__tabbed_8" type="radio" /><input id="marketplace-arrow-customer-mappings-__tabbed_8_2" name="marketplace-arrow-customer-mappings-__tabbed_8" type="radio" /><input id="marketplace-arrow-customer-mappings-__tabbed_8_3" name="marketplace-arrow-customer-mappings-__tabbed_8" type="radio" /><input id="marketplace-arrow-customer-mappings-__tabbed_8_4" name="marketplace-arrow-customer-mappings-__tabbed_8" type="radio" /><input id="marketplace-arrow-customer-mappings-__tabbed_8_5" name="marketplace-arrow-customer-mappings-__tabbed_8" type="radio" /><input id="marketplace-arrow-customer-mappings-__tabbed_8_6" name="marketplace-arrow-customer-mappings-__tabbed_8" type="radio" /><input id="marketplace-arrow-customer-mappings-__tabbed_8_7" name="marketplace-arrow-customer-mappings-__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="marketplace-arrow-customer-mappings-__tabbed_8_1">HTTPie</label><label for="marketplace-arrow-customer-mappings-__tabbed_8_2">Python</label><label for="marketplace-arrow-customer-mappings-__tabbed_8_3">TypeScript</label><label for="marketplace-arrow-customer-mappings-__tabbed_8_4">Path Parameters</label><label for="marketplace-arrow-customer-mappings-__tabbed_8_5">Request Body (required)</label><label for="marketplace-arrow-customer-mappings-__tabbed_8_6">Responses</label><label for="marketplace-arrow-customer-mappings-__tabbed_8_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
