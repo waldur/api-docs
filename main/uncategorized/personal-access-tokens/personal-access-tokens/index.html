@@ -17141,6 +17141,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#list-entities-the-caller-can-restrict-a-token-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List entities the caller can restrict a token to
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-entity-types-the-caller-can-bind-each-permission-to" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -17156,6 +17167,39 @@
     <span class="md-ellipsis">
       
         List available scopes for PAT creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-the-entities-a-templates-token-can-be-bound-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List the entities a template's token can be bound to
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-token-templates-the-caller-can-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List token templates the caller can use
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-dedicated-user-and-its-token-for-a-template-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a dedicated user and its token for a template target
       
     </span>
   </a>
@@ -19330,6 +19374,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#list-entities-the-caller-can-restrict-a-token-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List entities the caller can restrict a token to
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-entity-types-the-caller-can-bind-each-permission-to" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -19345,6 +19400,39 @@
     <span class="md-ellipsis">
       
         List available scopes for PAT creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-the-entities-a-templates-token-can-be-bound-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List the entities a template's token can be bound to
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-token-templates-the-caller-can-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List token templates the caller can use
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-dedicated-user-and-its-token-for-a-template-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a dedicated user and its token for a template target
       
     </span>
   </a>
@@ -19438,6 +19526,11 @@
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/personal-access-tokens/available_binding_entities/</code></td>
+<td style="text-align: left;"><a href="#list-entities-the-caller-can-restrict-a-token-to">List entities the caller can restrict a token to</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/personal-access-tokens/available_binding_targets/</code></td>
 <td style="text-align: left;"><a href="#list-entity-types-the-caller-can-bind-each-permission-to">List entity types the caller can bind each permission to</a></td>
 </tr>
@@ -19445,6 +19538,21 @@
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/personal-access-tokens/available_scopes/</code></td>
 <td style="text-align: left;"><a href="#list-available-scopes-for-pat-creation">List available scopes for PAT creation</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/personal-access-tokens/template_targets/</code></td>
+<td style="text-align: left;"><a href="#list-the-entities-a-templates-token-can-be-bound-to">List the entities a template's token can be bound to</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/personal-access-tokens/templates/</code></td>
+<td style="text-align: left;"><a href="#list-token-templates-the-caller-can-use">List token templates the caller can use</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/personal-access-tokens/agent_user/</code></td>
+<td style="text-align: left;"><a href="#create-a-dedicated-user-and-its-token-for-a-template-target">Create a dedicated user and its token for a template target</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -20199,14 +20307,162 @@
 </div>
 <hr />
 <h2 id="other-actions">Other Actions</h2>
+<h3 id="list-entities-the-caller-can-restrict-a-token-to">List entities the caller can restrict a token to</h3>
+<p>The first matches, for a search-as-you-type picker: entities the
+create endpoint would accept as a binding, before the token's
+permissions are known.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:6"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Query Parameters</label><label for="__tabbed_5_5">Responses</label><label for="__tabbed_5_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/personal-access-tokens/available_binding_entities/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">type</span><span class="o">==</span><span class="s2">&quot;call&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.bindable_entity_type_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">BindableEntityTypeEnum</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.personal_access_tokens</span><span class="w"> </span><span class="kn">import</span> <span class="n">personal_access_tokens_available_binding_entities_list</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">personal_access_tokens_available_binding_entities_list</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="n">BindableEntityTypeEnum</span><span class="o">.</span><span class="n">CALL</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/bindable_entity_type_enum.py"><code>BindableEntityTypeEnum</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/personal_access_tokens/personal_access_tokens_available_binding_entities_list.py"><code>personal_access_tokens_available_binding_entities_list</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">personalAccessTokensAvailableBindingEntitiesList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">personalAccessTokensAvailableBindingEntitiesList</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;call&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>query</code></td>
+<td>string</td>
+<td></td>
+<td>Part of the name to match.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Entity type.<br><em>Enum: <code>call</code>, <code>call_organizer</code>, <code>customer</code>, <code>offering</code>, <code>project</code>, <code>proposal</code>, <code>resource</code>, <code>resource_project</code>, <code>service_provider</code></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<p>The response body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td>string</td>
+<td>Where the entity belongs, such as its organization.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Entities the caller can restrict a token to: those below an entity the caller's own roles are on; any entity for staff and holders of a site-wide grant. Not with a personal access token.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="list-entity-types-the-caller-can-bind-each-permission-to">List entity types the caller can bind each permission to</h3>
 <p>For each permission, which scope types the caller could bind a PAT to.</p>
 <p>Drives the create-PAT frontend's type picker. For staff users every
 type is offered for every permission (they bypass UserRole checks).
-For other users we return only types where they hold an active role
-granting the permission directly (the binding then inherits to
-descendants at request time).</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:6"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Query Parameters</label><label for="__tabbed_5_5">Responses</label><label for="__tabbed_5_6">Authorization</label></div>
+For other users, the type a role granting the permission is held on
+and the types below it (an organization's projects, offerings and
+resources, say), as the create serializer accepts a binding below the
+role; every type for a permission held site-wide.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Query Parameters</label><label for="__tabbed_6_5">Responses</label><label for="__tabbed_6_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20322,7 +20578,7 @@ descendants at request time).</p>
 For other users only the permissions granted by their active roles are
 offered, plus SUPPORT.ACCESS for support users — mirroring what the
 create serializer would accept.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Query Parameters</label><label for="__tabbed_6_5">Responses</label><label for="__tabbed_6_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Query Parameters</label><label for="__tabbed_7_5">Responses</label><label for="__tabbed_7_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20432,9 +20688,656 @@ create serializer would accept.</p>
 </div>
 </div>
 <hr />
+<h3 id="list-the-entities-a-templates-token-can-be-bound-to">List the entities a template's token can be bound to</h3>
+<p>Entities where the caller holds every scope the template requires,
+with the optional features they can add on each.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:6"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Query Parameters</label><label for="__tabbed_8_5">Responses</label><label for="__tabbed_8_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/personal-access-tokens/template_targets/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">template</span><span class="o">==</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.personal_access_tokens</span><span class="w"> </span><span class="kn">import</span> <span class="n">personal_access_tokens_template_targets_list</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">personal_access_tokens_template_targets_list</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/personal_access_tokens/personal_access_tokens_template_targets_list.py"><code>personal_access_tokens_template_targets_list</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">personalAccessTokensTemplateTargetsList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">personalAccessTokensTemplateTargetsList</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;template&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+<td>Part of the entity's name to match.</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>integer</td>
+<td></td>
+<td>A page number within the paginated result set.</td>
+</tr>
+<tr>
+<td><code>page_size</code></td>
+<td>integer</td>
+<td></td>
+<td>Number of results to return per page.</td>
+</tr>
+<tr>
+<td><code>template</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Key of the template.</td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+<td>Only the entity with this UUID, of any type.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<p>The response body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td>string</td>
+<td>Where the entity belongs, such as an offering's organization.</td>
+</tr>
+<tr>
+<td><code>features</code></td>
+<td>array of strings</td>
+<td>Optional features of the template the caller can add here.</td>
+</tr>
+<tr>
+<td><code>suggested_username</code></td>
+<td>string</td>
+<td>Staff only, where the template takes a dedicated user for this type of target: the username agent_user gives one when none is chosen. Empty otherwise.</td>
+</tr>
+<tr>
+<td><code>staff_access</code></td>
+<td>boolean</td>
+<td>Staff only: the caller holds no role that would do here, so the token works only with STAFF.ACCESS added to its scopes. Such a token cannot be restricted: bindings is empty, and it can do everything the caller can as staff.</td>
+</tr>
+<tr>
+<td><code>bindings</code></td>
+<td>array of objects</td>
+<td>What to bind the token to (its allowed_scopes) for it to work on this target.</td>
+</tr>
+<tr>
+<td><code>bindings.type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bindings.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>The entities where the caller's own roles, or site-wide grants, hold every scope the template requires. Not with a personal access token.</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="list-token-templates-the-caller-can-use">List token templates the caller can use</h3>
+<p>Suggested scopes for known integrations, such as the site agent.</p>
+<p>A template is listed only when the caller can bind a token from it to
+an entity where it would work. A token is still created with explicit
+scopes; a template grants nothing by itself.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:5"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Responses</label><label for="__tabbed_9_5">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/personal-access-tokens/templates/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.personal_access_tokens</span><span class="w"> </span><span class="kn">import</span> <span class="n">personal_access_tokens_templates_list</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">personal_access_tokens_templates_list</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/personal_access_tokens/personal_access_tokens_templates_list.py"><code>personal_access_tokens_templates_list</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">personalAccessTokensTemplatesList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">personalAccessTokensTemplatesList</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<p>The response body is an array of objects, where each object has the following structure:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>required_scopes</code></td>
+<td>array of strings</td>
+<td></td>
+</tr>
+<tr>
+<td><code>optional_features</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>optional_features.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>optional_features.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>optional_features.description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>optional_features.scopes</code></td>
+<td>array of strings</td>
+<td></td>
+</tr>
+<tr>
+<td><code>binding_types</code></td>
+<td>array of strings</td>
+<td>Entity types a token from this template is bound to.</td>
+</tr>
+<tr>
+<td><code>default_lifetime_days</code></td>
+<td>integer</td>
+<td>Suggested lifetime, capped by the site's maximum token lifetime.</td>
+</tr>
+<tr>
+<td><code>dedicated_user_types</code></td>
+<td>array of strings</td>
+<td>Target types staff can create a dedicated user for, whose token is restricted to the target (agent_user).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Token templates the caller can bind somewhere a token from them works: where the caller's own roles, or site-wide grants, hold every scope the template requires. Not with a personal access token.</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="create-a-dedicated-user-and-its-token-for-a-template-target">Create a dedicated user and its token for a template target</h3>
+<p>Staff: create a user that only holds the template's role on the
+target (an offering's manager, for a site agent), and a token for it
+with the template's scopes, restricted to the target.</p>
+<p>Unlike a staff user's own token, which works there only with
+STAFF.ACCESS and then reaches everything, this one reaches the target
+alone. The user has no usable password; it exists for the token.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:7"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><input id="__tabbed_10_5" name="__tabbed_10" type="radio" /><input id="__tabbed_10_6" name="__tabbed_10" type="radio" /><input id="__tabbed_10_7" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">HTTPie</label><label for="__tabbed_10_2">Python</label><label for="__tabbed_10_3">TypeScript</label><label for="__tabbed_10_4">Header Parameters</label><label for="__tabbed_10_5">Request Body (required)</label><label for="__tabbed_10_6">Responses</label><label for="__tabbed_10_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/personal-access-tokens/agent_user/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">template</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">target_type</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">target_uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-personal-access-tokens-agent-user&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">expires_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.dedicated_user_token_create_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">DedicatedUserTokenCreateRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.personal_access_tokens</span><span class="w"> </span><span class="kn">import</span> <span class="n">personal_access_tokens_agent_user</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">DedicatedUserTokenCreateRequest</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
+    <span class="n">target_type</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
+    <span class="n">target_uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-personal-access-tokens-agent-user&quot;</span><span class="p">,</span>
+    <span class="n">expires_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">personal_access_tokens_agent_user</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/dedicated_user_token_create_request.py"><code>DedicatedUserTokenCreateRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/personal_access_tokens/personal_access_tokens_agent_user.py"><code>personal_access_tokens_agent_user</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">personalAccessTokensAgentUser</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">personalAccessTokensAgentUser</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;template&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;target_type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;target_uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-personal-access-tokens-agent-user&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;expires_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X-Reauthentication-Grant</code></td>
+<td>string</td>
+<td>A re-authentication grant for this change, from /api/reauthentication/password/ or /api/reauthentication/passkey/. Without a valid one, a change that needs it is refused with a 401 challenge.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>template</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>target_type</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>target_uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>string</td>
+<td></td>
+<td>Of the new user; derived from the target when left out.</td>
+</tr>
+<tr>
+<td><code>features</code></td>
+<td>array of strings</td>
+<td></td>
+<td>Keys of the template's optional features to add.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>expires_at</code></td>
+<td>string (date-time)</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>allowed_networks</code></td>
+<td>array of strings</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>201</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>token</code></td>
+<td>string</td>
+<td>Plaintext token — shown only once.</td>
+</tr>
+<tr>
+<td><code>scopes</code></td>
+<td>array of strings</td>
+<td></td>
+</tr>
+<tr>
+<td><code>allowed_scopes</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>allowed_scopes.type</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>allowed_scopes.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>allowed_scopes.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>allowed_networks</code></td>
+<td>array of strings</td>
+<td></td>
+</tr>
+<tr>
+<td><code>expires_at</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>string (date-time)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>user_uuid</code></td>
+<td>string (uuid)</td>
+<td>The new user the token is for.</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong><code>401</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td>string</td>
+<td>Always reauthentication_required.</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>any</td>
+<td>The change that needs a grant.</td>
+</tr>
+<tr>
+<td><code>methods</code></td>
+<td>array of strings</td>
+<td>The methods this user can obtain a grant with.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Staff only, from a re-authenticated session (passkey-verified under enforcement); not with a personal access token. Creates a user with the template's role on the target and a token for it restricted to the target.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="rotate-a-personal-access-token">Rotate a personal access token</h3>
 <p>Atomically revoke the old token and create a new one with the same scopes and bindings.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:7"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><input id="__tabbed_7_7" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Path Parameters</label><label for="__tabbed_7_5">Header Parameters</label><label for="__tabbed_7_6">Responses</label><label for="__tabbed_7_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:7"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><input id="__tabbed_11_5" name="__tabbed_11" type="radio" /><input id="__tabbed_11_6" name="__tabbed_11" type="radio" /><input id="__tabbed_11_7" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">HTTPie</label><label for="__tabbed_11_2">Python</label><label for="__tabbed_11_3">TypeScript</label><label for="__tabbed_11_4">Path Parameters</label><label for="__tabbed_11_5">Header Parameters</label><label for="__tabbed_11_6">Responses</label><label for="__tabbed_11_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20657,7 +21560,7 @@ re-authentication grant, as creating a token does. That includes an
 empty list, which means from anywhere.</p>
 <p>A dedicated action rather than PATCH: update/partial_update stay
 disabled on this viewset, and the change gets its own audit event.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:8"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><input id="__tabbed_8_7" name="__tabbed_8" type="radio" /><input id="__tabbed_8_8" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Header Parameters</label><label for="__tabbed_8_6">Request Body (required)</label><label for="__tabbed_8_7">Responses</label><label for="__tabbed_8_8">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:8"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><input id="__tabbed_12_3" name="__tabbed_12" type="radio" /><input id="__tabbed_12_4" name="__tabbed_12" type="radio" /><input id="__tabbed_12_5" name="__tabbed_12" type="radio" /><input id="__tabbed_12_6" name="__tabbed_12" type="radio" /><input id="__tabbed_12_7" name="__tabbed_12" type="radio" /><input id="__tabbed_12_8" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">HTTPie</label><label for="__tabbed_12_2">Python</label><label for="__tabbed_12_3">TypeScript</label><label for="__tabbed_12_4">Path Parameters</label><label for="__tabbed_12_5">Header Parameters</label><label for="__tabbed_12_6">Request Body (required)</label><label for="__tabbed_12_7">Responses</label><label for="__tabbed_12_8">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>

@@ -21906,7 +21906,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>Requires <code>SERVICE_PROVIDER.LIST_KEYS</code> on the service provider's customer.</p>
+<p>Any of:</p>
+<ul>
+<li>Requires <code>SERVICE_PROVIDER.LIST_KEYS</code> on the service provider's customer.</li>
+<li>SERVICE_PROVIDER.LIST_KEYS on one of the provider's offerings, for the keys of that offering's users only.</li>
+</ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
@@ -22428,6 +22432,11 @@
 <tr>
 <td><code>user_image</code></td>
 <td>string (uri)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>user_is_service_account</code></td>
+<td>boolean</td>
 <td></td>
 </tr>
 <tr>
