@@ -798913,7 +798913,7 @@ is loaded.</p>
 </div>
 <hr />
 <h3 id="uncategorized-identity-bridge-identity-bridge-push-user-attributes-from-an-isd">Push user attributes from an ISD</h3>
-<p>Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Creates or updates a user based on username (CUID). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds. Only staff may push staff, support or identity manager accounts.</p>
+<p>Allows Identity Service Domains (ISDs) to push user attributes to Waldur. Creates or updates a user based on username (CUID). Requires FEDERATED_IDENTITY_SYNC_ENABLED to be True. Caller must be staff or an identity manager with the declared source in managed_isds. Only staff may change staff, support or identity manager accounts: anyone else pushing an existing one gets it back unchanged (<code>created</code> false, no <code>updated_fields</code>).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="uncategorized-identity-bridge-identity-bridge-__tabbed_3_1" name="uncategorized-identity-bridge-identity-bridge-__tabbed_3" type="radio" /><input id="uncategorized-identity-bridge-identity-bridge-__tabbed_3_2" name="uncategorized-identity-bridge-identity-bridge-__tabbed_3" type="radio" /><input id="uncategorized-identity-bridge-identity-bridge-__tabbed_3_3" name="uncategorized-identity-bridge-identity-bridge-__tabbed_3" type="radio" /><input id="uncategorized-identity-bridge-identity-bridge-__tabbed_3_4" name="uncategorized-identity-bridge-identity-bridge-__tabbed_3" type="radio" /><input id="uncategorized-identity-bridge-identity-bridge-__tabbed_3_5" name="uncategorized-identity-bridge-identity-bridge-__tabbed_3" type="radio" /><input id="uncategorized-identity-bridge-identity-bridge-__tabbed_3_6" name="uncategorized-identity-bridge-identity-bridge-__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="uncategorized-identity-bridge-identity-bridge-__tabbed_3_1">HTTPie</label><label for="uncategorized-identity-bridge-identity-bridge-__tabbed_3_2">Python</label><label for="uncategorized-identity-bridge-identity-bridge-__tabbed_3_3">TypeScript</label><label for="uncategorized-identity-bridge-identity-bridge-__tabbed_3_4">Request Body (required)</label><label for="uncategorized-identity-bridge-identity-bridge-__tabbed_3_5">Responses</label><label for="uncategorized-identity-bridge-identity-bridge-__tabbed_3_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -799201,7 +799201,7 @@ is loaded.</p>
 <p>Any of:</p>
 <ul>
 <li>Staff.</li>
-<li>An identity manager (<code>is_identity_manager</code>) whose <code>managed_isds</code> include the request's <code>source</code>, with a personal access token of any scopes. Only staff may push or remove staff, support or identity manager accounts.</li>
+<li>An identity manager (<code>is_identity_manager</code>) whose <code>managed_isds</code> include the request's <code>source</code>, with a personal access token of any scopes. Only staff may change or remove staff, support or identity manager accounts.</li>
 </ul>
 </div>
 </div>
@@ -799348,7 +799348,7 @@ is loaded.</p>
 <p>Any of:</p>
 <ul>
 <li>Staff.</li>
-<li>An identity manager (<code>is_identity_manager</code>) whose <code>managed_isds</code> include the request's <code>source</code>, with a personal access token of any scopes. Only staff may push or remove staff, support or identity manager accounts.</li>
+<li>An identity manager (<code>is_identity_manager</code>) whose <code>managed_isds</code> include the request's <code>source</code>, with a personal access token of any scopes. Only staff may change or remove staff, support or identity manager accounts.</li>
 </ul>
 </div>
 </div>
@@ -803615,7 +803615,7 @@ is loaded.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>With resource_uuid: The resource must be of a project where the caller holds a role or of an organization where they do, or of an offering on whose provider side they are; staff and support may name any. It must be of the metric's offering. Otherwise: The project must be one where the caller holds a role or of an organization where they do; staff and support may name any. Metrics of offerings where the caller holds a role, or holds one on the offering's organization or service provider; and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all. Of a metric the caller sees, who is on the provider side (a role on the offering, its organization or its service provider; staff and support) reads every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.</p>
+<p>With resource_uuid: The resource must be of a project where the caller holds a role or of an organization where they do, or of an offering on whose provider side they are; staff and support may name any. Any other gets a 404, as a missing one does. It must be of the metric's offering. Otherwise: The project must be one where the caller holds a role or of an organization where they do; staff and support may name any. Any other gets a 404, as a missing one does. Metrics of offerings on whose provider side the caller is (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE); and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all. Of a metric the caller sees, who is on the provider side, staff and support read every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.</p>
 </div>
 </div>
 </div>
@@ -803873,7 +803873,7 @@ is loaded.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Global definitions, and those private to organizations where the caller holds a role or to service providers they hold a role on. Staff and support see all.</p>
+<p>Global definitions, and those private to organizations where the caller holds a role, or whose service provider they hold OFFERING.CREATE on, as managing them needs. Staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -804052,7 +804052,7 @@ is loaded.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Global definitions, and those private to organizations where the caller holds a role or to service providers they hold a role on. Staff and support see all.</p>
+<p>Global definitions, and those private to organizations where the caller holds a role, or whose service provider they hold OFFERING.CREATE on, as managing them needs. Staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -805180,7 +805180,7 @@ is loaded.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Goals of metrics the caller sees, as offering metrics show them: the offerings' default goals, and goals of projects where the caller holds a role or of organizations where they do, or of offerings of organizations or service providers where they hold a role. Staff and support see all.</p>
+<p>Goals of metrics the caller sees, as offering metrics show them: the offerings' default goals, and goals of projects where the caller holds a role or of organizations where they do, or of offerings on whose provider side they are (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE). Staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -805334,7 +805334,7 @@ is loaded.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Goals of metrics the caller sees, as offering metrics show them: the offerings' default goals, and goals of projects where the caller holds a role or of organizations where they do, or of offerings of organizations or service providers where they hold a role. Staff and support see all.</p>
+<p>Goals of metrics the caller sees, as offering metrics show them: the offerings' default goals, and goals of projects where the caller holds a role or of organizations where they do, or of offerings on whose provider side they are (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE). Staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -805532,7 +805532,7 @@ is loaded.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>Staff. For a project's goal, also who holds PROJECT.UPDATE on the project or its organization; for an offering's default goal, who holds OFFERING.UPDATE on the offering, its organization or its service provider. The metric must not be archived.</p>
+<p>Staff. For a project's goal, also who holds PROJECT.UPDATE on the project or its organization; for an offering's default goal, who holds OFFERING.UPDATE on the offering, its organization or its service provider. The metric must be one the caller sees, as offering metrics show them, and not archived; any other answers as a missing one.</p>
 </div>
 </div>
 </div>
@@ -807339,7 +807339,7 @@ is loaded.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>Metrics of offerings where the caller holds a role, or holds one on the offering's organization or service provider; and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all. Of a metric the caller sees, who is on the provider side (a role on the offering, its organization or its service provider; staff and support) reads every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.</p>
+<p>Metrics of offerings on whose provider side the caller is (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE); and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all. Of a metric the caller sees, who is on the provider side, staff and support read every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do. With resource_uuid: The resource must be of a project where the caller holds a role or of an organization where they do, or of an offering on whose provider side they are; staff and support may name any. Any other gets a 404, as a missing one does. It must be of the metric's offering. With project_uuid: The project must be one where the caller holds a role or of an organization where they do; staff and support may name any. Any other gets a 404, as a missing one does.</p>
 </div>
 </div>
 </div>
@@ -811963,7 +811963,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Metrics of offerings where the caller holds a role, or holds one on the offering's organization or service provider; and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all.</p>
+<p>Metrics of offerings on whose provider side the caller is (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE); and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -812142,7 +812142,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Metrics of offerings where the caller holds a role, or holds one on the offering's organization or service provider; and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all.</p>
+<p>Metrics of offerings on whose provider side the caller is (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE); and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all.</p>
 </div>
 </div>
 </div>
@@ -816416,7 +816416,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>An instance or volume resource whose metrics the caller sees: staff, support, its consumer (a role in its project or organization) or its provider (a role in the offering's organization or service provider, or on the offering). Others get a 404.</p>
+<p>An instance or volume resource whose metrics the caller sees: staff, support, its consumer (a role in its project or organization) or its provider (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE). Others get a 404.</p>
 </div>
 </div>
 </div>
@@ -816574,7 +816574,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <div class="tabbed-block">
 <p>All of:</p>
 <ul>
-<li>An instance or volume resource whose metrics the caller sees: staff, support, its consumer (a role in its project or organization) or its provider (a role in the offering's organization or service provider, or on the offering). Others get a 404.</li>
+<li>An instance or volume resource whose metrics the caller sees: staff, support, its consumer (a role in its project or organization) or its provider (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE). Others get a 404.</li>
 <li>OPENSTACK_INSTANCE.MANAGE on the project or organization of the instance whose reads cover the resource (for a volume, the instance it is attached to); staff pass.</li>
 </ul>
 </div>
@@ -816785,7 +816785,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <div class="tabbed-block">
 <p>All of:</p>
 <ul>
-<li>An instance or volume resource whose metrics the caller sees: staff, support, its consumer (a role in its project or organization) or its provider (a role in the offering's organization or service provider, or on the offering). Others get a 404.</li>
+<li>An instance or volume resource whose metrics the caller sees: staff, support, its consumer (a role in its project or organization) or its provider (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE). Others get a 404.</li>
 <li>OPENSTACK_INSTANCE.MANAGE on the project or organization of the instance whose reads cover the resource (for a volume, the instance it is attached to); staff pass.</li>
 </ul>
 </div>
@@ -816944,7 +816944,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <div class="tabbed-block">
 <p>All of:</p>
 <ul>
-<li>An instance or volume resource whose metrics the caller sees: staff, support, its consumer (a role in its project or organization) or its provider (a role in the offering's organization or service provider, or on the offering). Others get a 404.</li>
+<li>An instance or volume resource whose metrics the caller sees: staff, support, its consumer (a role in its project or organization) or its provider (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE). Others get a 404.</li>
 <li>OPENSTACK_INSTANCE.MANAGE on the project or organization of the instance whose reads cover the resource (for a volume, the instance it is attached to); staff pass.</li>
 </ul>
 </div>
@@ -819746,7 +819746,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>The project must be one where the caller holds a role or of an organization where they do; staff and support may name any. Metrics the caller sees, as offering metrics show them, except archived ones. Of a metric the caller sees, who is on the provider side (a role on the offering, its organization or its service provider; staff and support) reads every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.</p>
+<p>The project must be one where the caller holds a role or of an organization where they do; staff and support may name any. Any other gets a 404, as a missing one does. Metrics the caller sees, as offering metrics show them, except archived ones. Of a metric the caller sees, who is on the provider side, staff and support read every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.</p>
 </div>
 </div>
 </div>
@@ -833462,7 +833462,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>The resource must be of a project where the caller holds a role or of an organization where they do, or of an offering on whose provider side they are; staff and support may name any. Metrics the caller sees, as offering metrics show them, except archived ones. Of a metric the caller sees, who is on the provider side (a role on the offering, its organization or its service provider; staff and support) reads every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.</p>
+<p>The resource must be of a project where the caller holds a role or of an organization where they do, or of an offering on whose provider side they are; staff and support may name any. Any other gets a 404, as a missing one does. Metrics the caller sees, as offering metrics show them, except archived ones. Of a metric the caller sees, who is on the provider side, staff and support read every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.</p>
 </div>
 </div>
 </div>

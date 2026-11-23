@@ -19388,7 +19388,7 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>Metrics of offerings where the caller holds a role, or holds one on the offering's organization or service provider; and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all. Of a metric the caller sees, who is on the provider side (a role on the offering, its organization or its service provider; staff and support) reads every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do.</p>
+<p>Metrics of offerings on whose provider side the caller is (a role in the offering's organization, or one on the offering or its service provider that grants RESOURCE.SET_USAGE); and, unless archived, metrics of offerings that a resource, not terminated, of a project where the caller holds a role, or of an organization where they do, uses. Staff and support see all. Of a metric the caller sees, who is on the provider side, staff and support read every resource's data, anyone else only that of resources of projects where they hold a role or of organizations where they do. With resource_uuid: The resource must be of a project where the caller holds a role or of an organization where they do, or of an offering on whose provider side they are; staff and support may name any. Any other gets a 404, as a missing one does. It must be of the metric's offering. With project_uuid: The project must be one where the caller holds a role or of an organization where they do; staff and support may name any. Any other gets a 404, as a missing one does.</p>
 </div>
 </div>
 </div>
