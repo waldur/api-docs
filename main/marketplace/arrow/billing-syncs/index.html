@@ -19877,6 +19877,11 @@
 <td>Number of results to return per page.</td>
 </tr>
 <tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>Search by Arrow company, Waldur organization, Arrow reference or statement</td>
+</tr>
+<tr>
 <td><code>report_period</code></td>
 <td>string</td>
 <td></td>
@@ -21485,6 +21490,11 @@
 <td>Number of results to return per page.</td>
 </tr>
 <tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>Search by Arrow company, Waldur organization, Arrow reference or statement</td>
+</tr>
+<tr>
 <td><code>report_period</code></td>
 <td>string</td>
 <td></td>
@@ -21682,7 +21692,7 @@
 <td><code>classification</code></td>
 <td>string</td>
 <td></td>
-<td></td>
+<td>Classification to keep (e.g. IAAS); empty keeps every line. Defaults to the settings' classification filter.</td>
 </tr>
 </tbody>
 </table>
@@ -22505,28 +22515,44 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>dry_run</code></td>
 <td>boolean</td>
+<td></td>
 </tr>
 <tr>
 <td><code>records_to_delete</code></td>
 <td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>records_deleted</code></td>
 <td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>compensation_items_affected</code></td>
 <td>integer</td>
+<td></td>
 </tr>
 <tr>
 <td><code>invoice_items_affected</code></td>
 <td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>records_kept_issued</code></td>
+<td>integer</td>
+<td>Records left in place because their charge is on an issued invoice</td>
+</tr>
+<tr>
+<td><code>records_kept_imported</code></td>
+<td>integer</td>
+<td>Records left in place because an import settled their month</td>
 </tr>
 </tbody>
 </table>

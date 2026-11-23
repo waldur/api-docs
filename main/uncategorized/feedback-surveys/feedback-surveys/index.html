@@ -19589,16 +19589,6 @@
 <td>Markdown text shown above the questions.</td>
 </tr>
 <tr>
-<td><code>checklist</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>checklist_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>starts_at</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -19762,16 +19752,6 @@
 <td>Markdown text shown above the questions.</td>
 </tr>
 <tr>
-<td><code>checklist</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>checklist_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>starts_at</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -19806,6 +19786,116 @@
 <td>integer</td>
 <td>Days the prompt stays hidden after it is shown or postponed.</td>
 </tr>
+<tr>
+<td><code>questions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_type</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>boolean</code>, <code>single_select</code>, <code>multi_select</code>, <code>text_input</code>, <code>text_area</code>, <code>number</code>, <code>date</code>, <code>phone_number</code>, <code>year</code>, <code>email</code>, <code>url</code>, <code>country</code>, <code>rating</code>, <code>datetime</code>, <code>likert</code>, <code>rich_text</code></em></td>
+</tr>
+<tr>
+<td><code>questions.required</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.user_guidance</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.min_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.max_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_scale_length</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_low_label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_high_label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_allow_na</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_char_limit</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_toolbar_level</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>minimal</code>, <code>standard</code>, <code>extended</code></em></td>
+</tr>
+<tr>
+<td><code>questions.dependency_logic_operator</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>and</code>, <code>or</code></em></td>
+</tr>
+<tr>
+<td><code>questions.options</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions.depends_on</code></td>
+<td>string</td>
+<td>Key of the question it depends on.</td>
+</tr>
+<tr>
+<td><code>questions.conditions.operator</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
+</tr>
+<tr>
+<td><code>questions.conditions.required_answer_value</code></td>
+<td>any</td>
+<td>For a select question, option keys instead of option UUIDs.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -19826,13 +19916,11 @@
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/feedback-surveys/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-feedback-survey&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">checklist</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">starts_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">ends_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">audience_query</span><span class="o">=</span>null
@@ -19858,18 +19946,16 @@
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.feedback_survey_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeedbackSurveyRequest</span> <span class="c1"># (1)</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.feedback_survey_detail_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeedbackSurveyDetailRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.feedback_surveys</span><span class="w"> </span><span class="kn">import</span> <span class="n">feedback_surveys_create</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">FeedbackSurveyRequest</span><span class="p">(</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">FeedbackSurveyDetailRequest</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-feedback-survey&quot;</span><span class="p">,</span>
-    <span class="n">checklist</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
     <span class="n">starts_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="p">,</span>
     <span class="n">ends_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="p">,</span>
     <span class="n">audience_query</span><span class="o">=</span><span class="n">null</span>
@@ -19882,7 +19968,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/feedback_survey_request.py"><code>FeedbackSurveyRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/feedback_survey_detail_request.py"><code>FeedbackSurveyDetailRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/feedback_surveys/feedback_surveys_create.py"><code>feedback_surveys_create</code></a></li>
 </ol>
 </div>
@@ -19902,15 +19988,13 @@
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">feedbackSurveysCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">feedbackSurveysCreate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">feedbackSurveysCreate</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-feedback-survey&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;checklist&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;starts_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;ends_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;audience_query&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
@@ -19944,12 +20028,6 @@
 <td>string</td>
 <td></td>
 <td>Markdown text shown above the questions.</td>
-</tr>
-<tr>
-<td><code>checklist</code></td>
-<td>string (uuid)</td>
-<td>✓</td>
-<td></td>
 </tr>
 <tr>
 <td><code>starts_at</code></td>
@@ -19987,6 +20065,138 @@
 <td></td>
 <td>Days the prompt stays hidden after it is shown or postponed.</td>
 </tr>
+<tr>
+<td><code>questions</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.key</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.description</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_type</code></td>
+<td>string</td>
+<td>✓</td>
+<td><br><em>Enum: <code>boolean</code>, <code>single_select</code>, <code>multi_select</code>, <code>text_input</code>, <code>text_area</code>, <code>number</code>, <code>date</code>, <code>phone_number</code>, <code>year</code>, <code>email</code>, <code>url</code>, <code>country</code>, <code>rating</code>, <code>datetime</code>, <code>likert</code>, <code>rich_text</code></em></td>
+</tr>
+<tr>
+<td><code>questions.required</code></td>
+<td>boolean</td>
+<td></td>
+<td><br><em>Constraints: default: <code>False</code></em></td>
+</tr>
+<tr>
+<td><code>questions.user_guidance</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Constraints: default: ``</em></td>
+</tr>
+<tr>
+<td><code>questions.min_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.max_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_scale_length</code></td>
+<td>any</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_low_label</code></td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_high_label</code></td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_allow_na</code></td>
+<td>boolean</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_char_limit</code></td>
+<td>integer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_toolbar_level</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Enum: <code>minimal</code>, <code>standard</code>, <code>extended</code></em></td>
+</tr>
+<tr>
+<td><code>questions.dependency_logic_operator</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Enum: <code>and</code>, <code>or</code></em></td>
+</tr>
+<tr>
+<td><code>questions.options</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.key</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.label</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions.depends_on</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Key of the question it depends on.</td>
+</tr>
+<tr>
+<td><code>questions.conditions.operator</code></td>
+<td>string</td>
+<td>✓</td>
+<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
+</tr>
+<tr>
+<td><code>questions.conditions.required_answer_value</code></td>
+<td>any</td>
+<td>✓</td>
+<td>For a select question, option keys instead of option UUIDs.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -20020,16 +20230,6 @@
 <td><code>intro</code></td>
 <td>string</td>
 <td>Markdown text shown above the questions.</td>
-</tr>
-<tr>
-<td><code>checklist</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>checklist_name</code></td>
-<td>string</td>
-<td></td>
 </tr>
 <tr>
 <td><code>starts_at</code></td>
@@ -20066,11 +20266,121 @@
 <td>integer</td>
 <td>Days the prompt stays hidden after it is shown or postponed.</td>
 </tr>
+<tr>
+<td><code>questions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_type</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>boolean</code>, <code>single_select</code>, <code>multi_select</code>, <code>text_input</code>, <code>text_area</code>, <code>number</code>, <code>date</code>, <code>phone_number</code>, <code>year</code>, <code>email</code>, <code>url</code>, <code>country</code>, <code>rating</code>, <code>datetime</code>, <code>likert</code>, <code>rich_text</code></em></td>
+</tr>
+<tr>
+<td><code>questions.required</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.user_guidance</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.min_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.max_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_scale_length</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_low_label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_high_label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_allow_na</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_char_limit</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_toolbar_level</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>minimal</code>, <code>standard</code>, <code>extended</code></em></td>
+</tr>
+<tr>
+<td><code>questions.dependency_logic_operator</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>and</code>, <code>or</code></em></td>
+</tr>
+<tr>
+<td><code>questions.options</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions.depends_on</code></td>
+<td>string</td>
+<td>Key of the question it depends on.</td>
+</tr>
+<tr>
+<td><code>questions.conditions.operator</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
+</tr>
+<tr>
+<td><code>questions.conditions.required_answer_value</code></td>
+<td>any</td>
+<td>For a select question, option keys instead of option UUIDs.</td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="tabbed-block">
-<p>Staff only.</p>
+<p>Staff or support only.</p>
 </div>
 </div>
 </div>
@@ -20086,13 +20396,11 @@
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>PUT<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>https://api.example.com/api/feedback-surveys/a1b2c3d4-e5f6-7890-abcd-ef1234567890/<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-feedback-survey&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">checklist</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">starts_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">ends_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">audience_query</span><span class="o">=</span>null
@@ -20119,18 +20427,16 @@
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.feedback_survey_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeedbackSurveyRequest</span> <span class="c1"># (1)</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.feedback_survey_detail_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeedbackSurveyDetailRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.feedback_surveys</span><span class="w"> </span><span class="kn">import</span> <span class="n">feedback_surveys_update</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">FeedbackSurveyRequest</span><span class="p">(</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">FeedbackSurveyDetailRequest</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-feedback-survey&quot;</span><span class="p">,</span>
-    <span class="n">checklist</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
     <span class="n">starts_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="p">,</span>
     <span class="n">ends_at</span><span class="o">=</span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="p">,</span>
     <span class="n">audience_query</span><span class="o">=</span><span class="n">null</span>
@@ -20144,7 +20450,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/feedback_survey_request.py"><code>FeedbackSurveyRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/feedback_survey_detail_request.py"><code>FeedbackSurveyDetailRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/feedback_surveys/feedback_surveys_update.py"><code>feedback_surveys_update</code></a></li>
 </ol>
 </div>
@@ -20167,8 +20473,7 @@
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">feedbackSurveysUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">feedbackSurveysUpdate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
 
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">feedbackSurveysUpdate</span><span class="p">({</span>
@@ -20178,7 +20483,6 @@
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-feedback-survey&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;checklist&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;starts_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;ends_at&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2023-10-01T12:00:00Z&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;audience_query&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
@@ -20232,12 +20536,6 @@
 <td>Markdown text shown above the questions.</td>
 </tr>
 <tr>
-<td><code>checklist</code></td>
-<td>string (uuid)</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
 <td><code>starts_at</code></td>
 <td>string (date-time)</td>
 <td>✓</td>
@@ -20272,6 +20570,138 @@
 <td>integer</td>
 <td></td>
 <td>Days the prompt stays hidden after it is shown or postponed.</td>
+</tr>
+<tr>
+<td><code>questions</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.key</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.description</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_type</code></td>
+<td>string</td>
+<td>✓</td>
+<td><br><em>Enum: <code>boolean</code>, <code>single_select</code>, <code>multi_select</code>, <code>text_input</code>, <code>text_area</code>, <code>number</code>, <code>date</code>, <code>phone_number</code>, <code>year</code>, <code>email</code>, <code>url</code>, <code>country</code>, <code>rating</code>, <code>datetime</code>, <code>likert</code>, <code>rich_text</code></em></td>
+</tr>
+<tr>
+<td><code>questions.required</code></td>
+<td>boolean</td>
+<td></td>
+<td><br><em>Constraints: default: <code>False</code></em></td>
+</tr>
+<tr>
+<td><code>questions.user_guidance</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Constraints: default: ``</em></td>
+</tr>
+<tr>
+<td><code>questions.min_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.max_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_scale_length</code></td>
+<td>any</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_low_label</code></td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_high_label</code></td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_allow_na</code></td>
+<td>boolean</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_char_limit</code></td>
+<td>integer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_toolbar_level</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Enum: <code>minimal</code>, <code>standard</code>, <code>extended</code></em></td>
+</tr>
+<tr>
+<td><code>questions.dependency_logic_operator</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Enum: <code>and</code>, <code>or</code></em></td>
+</tr>
+<tr>
+<td><code>questions.options</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.key</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.label</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions.depends_on</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Key of the question it depends on.</td>
+</tr>
+<tr>
+<td><code>questions.conditions.operator</code></td>
+<td>string</td>
+<td>✓</td>
+<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
+</tr>
+<tr>
+<td><code>questions.conditions.required_answer_value</code></td>
+<td>any</td>
+<td>✓</td>
+<td>For a select question, option keys instead of option UUIDs.</td>
 </tr>
 </tbody>
 </table>
@@ -20308,16 +20738,6 @@
 <td>Markdown text shown above the questions.</td>
 </tr>
 <tr>
-<td><code>checklist</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>checklist_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>starts_at</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -20352,11 +20772,121 @@
 <td>integer</td>
 <td>Days the prompt stays hidden after it is shown or postponed.</td>
 </tr>
+<tr>
+<td><code>questions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_type</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>boolean</code>, <code>single_select</code>, <code>multi_select</code>, <code>text_input</code>, <code>text_area</code>, <code>number</code>, <code>date</code>, <code>phone_number</code>, <code>year</code>, <code>email</code>, <code>url</code>, <code>country</code>, <code>rating</code>, <code>datetime</code>, <code>likert</code>, <code>rich_text</code></em></td>
+</tr>
+<tr>
+<td><code>questions.required</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.user_guidance</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.min_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.max_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_scale_length</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_low_label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_high_label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_allow_na</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_char_limit</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_toolbar_level</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>minimal</code>, <code>standard</code>, <code>extended</code></em></td>
+</tr>
+<tr>
+<td><code>questions.dependency_logic_operator</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>and</code>, <code>or</code></em></td>
+</tr>
+<tr>
+<td><code>questions.options</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions.depends_on</code></td>
+<td>string</td>
+<td>Key of the question it depends on.</td>
+</tr>
+<tr>
+<td><code>questions.conditions.operator</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
+</tr>
+<tr>
+<td><code>questions.conditions.required_answer_value</code></td>
+<td>any</td>
+<td>For a select question, option keys instead of option UUIDs.</td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="tabbed-block">
-<p>Staff only.</p>
+<p>Staff or support only.</p>
 </div>
 </div>
 </div>
@@ -20391,14 +20921,14 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.patched_feedback_survey_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">PatchedFeedbackSurveyRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.patched_feedback_survey_detail_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">PatchedFeedbackSurveyDetailRequest</span> <span class="c1"># (1)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.feedback_surveys</span><span class="w"> </span><span class="kn">import</span> <span class="n">feedback_surveys_partial_update</span> <span class="c1"># (2)</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
     <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
 <span class="p">)</span>
 
-<span class="n">body_data</span> <span class="o">=</span> <span class="n">PatchedFeedbackSurveyRequest</span><span class="p">()</span>
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">PatchedFeedbackSurveyDetailRequest</span><span class="p">()</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">feedback_surveys_partial_update</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
     <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
     <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
@@ -20408,7 +20938,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_feedback_survey_request.py"><code>PatchedFeedbackSurveyRequest</code></a></li>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/patched_feedback_survey_detail_request.py"><code>PatchedFeedbackSurveyDetailRequest</code></a></li>
 <li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/feedback_surveys/feedback_surveys_partial_update.py"><code>feedback_surveys_partial_update</code></a></li>
 </ol>
 </div>
@@ -20482,12 +21012,6 @@
 <td>Markdown text shown above the questions.</td>
 </tr>
 <tr>
-<td><code>checklist</code></td>
-<td>string (uuid)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td><code>starts_at</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -20522,6 +21046,138 @@
 <td>integer</td>
 <td></td>
 <td>Days the prompt stays hidden after it is shown or postponed.</td>
+</tr>
+<tr>
+<td><code>questions</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.key</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.description</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_type</code></td>
+<td>string</td>
+<td>✓</td>
+<td><br><em>Enum: <code>boolean</code>, <code>single_select</code>, <code>multi_select</code>, <code>text_input</code>, <code>text_area</code>, <code>number</code>, <code>date</code>, <code>phone_number</code>, <code>year</code>, <code>email</code>, <code>url</code>, <code>country</code>, <code>rating</code>, <code>datetime</code>, <code>likert</code>, <code>rich_text</code></em></td>
+</tr>
+<tr>
+<td><code>questions.required</code></td>
+<td>boolean</td>
+<td></td>
+<td><br><em>Constraints: default: <code>False</code></em></td>
+</tr>
+<tr>
+<td><code>questions.user_guidance</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Constraints: default: ``</em></td>
+</tr>
+<tr>
+<td><code>questions.min_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.max_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_scale_length</code></td>
+<td>any</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_low_label</code></td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_high_label</code></td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_allow_na</code></td>
+<td>boolean</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_char_limit</code></td>
+<td>integer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_toolbar_level</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Enum: <code>minimal</code>, <code>standard</code>, <code>extended</code></em></td>
+</tr>
+<tr>
+<td><code>questions.dependency_logic_operator</code></td>
+<td>string</td>
+<td></td>
+<td><br><em>Enum: <code>and</code>, <code>or</code></em></td>
+</tr>
+<tr>
+<td><code>questions.options</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.key</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.label</code></td>
+<td>string</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions</code></td>
+<td>array of objects</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions.depends_on</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Key of the question it depends on.</td>
+</tr>
+<tr>
+<td><code>questions.conditions.operator</code></td>
+<td>string</td>
+<td>✓</td>
+<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
+</tr>
+<tr>
+<td><code>questions.conditions.required_answer_value</code></td>
+<td>any</td>
+<td>✓</td>
+<td>For a select question, option keys instead of option UUIDs.</td>
 </tr>
 </tbody>
 </table>
@@ -20558,16 +21214,6 @@
 <td>Markdown text shown above the questions.</td>
 </tr>
 <tr>
-<td><code>checklist</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>checklist_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td><code>starts_at</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -20602,11 +21248,121 @@
 <td>integer</td>
 <td>Days the prompt stays hidden after it is shown or postponed.</td>
 </tr>
+<tr>
+<td><code>questions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.description</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.question_type</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>boolean</code>, <code>single_select</code>, <code>multi_select</code>, <code>text_input</code>, <code>text_area</code>, <code>number</code>, <code>date</code>, <code>phone_number</code>, <code>year</code>, <code>email</code>, <code>url</code>, <code>country</code>, <code>rating</code>, <code>datetime</code>, <code>likert</code>, <code>rich_text</code></em></td>
+</tr>
+<tr>
+<td><code>questions.required</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.user_guidance</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.min_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.max_value</code></td>
+<td>string (decimal)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_scale_length</code></td>
+<td>any</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_low_label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_high_label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.likert_allow_na</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_char_limit</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.rich_text_toolbar_level</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>minimal</code>, <code>standard</code>, <code>extended</code></em></td>
+</tr>
+<tr>
+<td><code>questions.dependency_logic_operator</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>and</code>, <code>or</code></em></td>
+</tr>
+<tr>
+<td><code>questions.options</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.key</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.options.label</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>questions.conditions.depends_on</code></td>
+<td>string</td>
+<td>Key of the question it depends on.</td>
+</tr>
+<tr>
+<td><code>questions.conditions.operator</code></td>
+<td>string</td>
+<td><br><em>Enum: <code>equals</code>, <code>not_equals</code>, <code>contains</code>, <code>in</code>, <code>not_in</code></em></td>
+</tr>
+<tr>
+<td><code>questions.conditions.required_answer_value</code></td>
+<td>any</td>
+<td>For a select question, option keys instead of option UUIDs.</td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="tabbed-block">
-<p>Staff only.</p>
+<p>Staff or support only.</p>
 </div>
 </div>
 </div>
@@ -20703,7 +21459,7 @@
 <p><strong><code>204</code></strong> - No response body</p>
 </div>
 <div class="tabbed-block">
-<p>Staff only.</p>
+<p>Staff or support only.</p>
 </div>
 </div>
 </div>

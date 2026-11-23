@@ -47604,7 +47604,11 @@
 <p><strong><code>400</code></strong> - The offering is not a site agent offering.</p>
 </div>
 <div class="tabbed-block">
-<p>Requires <code>OFFERING.UPDATE_INTEGRATION</code> on the object, its customer or its customer's service provider.</p>
+<p>Any of:</p>
+<ul>
+<li>Requires <code>OFFERING.UPDATE_INTEGRATION</code> on the object, its customer or its customer's service provider.</li>
+<li>Requires <code>OFFERING.MANAGE_AGENT</code> on the object or its customer.</li>
+</ul>
 <p>A request acting as staff always meets the permission and role requirements.</p>
 </div>
 </div>
