@@ -84840,6 +84840,11 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td>Project UUID</td>
 </tr>
 <tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>Search by name, address or mapped public IP</td>
+</tr>
+<tr>
 <td><code>runtime_state</code></td>
 <td>string</td>
 <td></td>
@@ -113643,7 +113648,7 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <tr>
 <td><code>query</code></td>
 <td>string</td>
-<td>Search by name, MAC address or backend ID</td>
+<td>Search by name, MAC address, backend ID, fixed IP, floating IP or its mapped public IP</td>
 </tr>
 <tr>
 <td><code>status</code></td>
@@ -113869,6 +113874,26 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td><code>floating_ips</code></td>
 <td>array of string (uri)s</td>
 <td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses</code></td>
+<td>array of objects</td>
+<td>Floating IPs associated with the port, with the public IP each one is mapped to, if any</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.address</code></td>
+<td>string (ipv4)</td>
+<td>The public IPv4 address of the floating IP</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.external_address</code></td>
+<td>any</td>
+<td>Optional address that maps to floating IP's address in external networks</td>
 </tr>
 <tr>
 <td><code>device_id</code></td>
@@ -114293,6 +114318,26 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td><code>floating_ips</code></td>
 <td>array of string (uri)s</td>
 <td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses</code></td>
+<td>array of objects</td>
+<td>Floating IPs associated with the port, with the public IP each one is mapped to, if any</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.address</code></td>
+<td>string (ipv4)</td>
+<td>The public IPv4 address of the floating IP</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.external_address</code></td>
+<td>any</td>
+<td>Optional address that maps to floating IP's address in external networks</td>
 </tr>
 <tr>
 <td><code>device_id</code></td>
@@ -114773,6 +114818,26 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td><code>floating_ips</code></td>
 <td>array of string (uri)s</td>
 <td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses</code></td>
+<td>array of objects</td>
+<td>Floating IPs associated with the port, with the public IP each one is mapped to, if any</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.address</code></td>
+<td>string (ipv4)</td>
+<td>The public IPv4 address of the floating IP</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.external_address</code></td>
+<td>any</td>
+<td>Optional address that maps to floating IP's address in external networks</td>
 </tr>
 <tr>
 <td><code>device_id</code></td>
@@ -115827,6 +115892,26 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>floating_ip_addresses</code></td>
+<td>array of objects</td>
+<td>Floating IPs associated with the port, with the public IP each one is mapped to, if any</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.address</code></td>
+<td>string (ipv4)</td>
+<td>The public IPv4 address of the floating IP</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.external_address</code></td>
+<td>any</td>
+<td>Optional address that maps to floating IP's address in external networks</td>
+</tr>
+<tr>
 <td><code>device_id</code></td>
 <td>string</td>
 <td>ID of device (instance, router etc) to which this port is connected</td>
@@ -116271,6 +116356,26 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td><code>floating_ips</code></td>
 <td>array of string (uri)s</td>
 <td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses</code></td>
+<td>array of objects</td>
+<td>Floating IPs associated with the port, with the public IP each one is mapped to, if any</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.address</code></td>
+<td>string (ipv4)</td>
+<td>The public IPv4 address of the floating IP</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.external_address</code></td>
+<td>any</td>
+<td>Optional address that maps to floating IP's address in external networks</td>
 </tr>
 <tr>
 <td><code>device_id</code></td>
@@ -117225,6 +117330,26 @@ which only upgrades your CPU and RAM. This option is reversible.</p>
 <td><code>floating_ips</code></td>
 <td>array of string (uri)s</td>
 <td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses</code></td>
+<td>array of objects</td>
+<td>Floating IPs associated with the port, with the public IP each one is mapped to, if any</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.address</code></td>
+<td>string (ipv4)</td>
+<td>The public IPv4 address of the floating IP</td>
+</tr>
+<tr>
+<td><code>floating_ip_addresses.external_address</code></td>
+<td>any</td>
+<td>Optional address that maps to floating IP's address in external networks</td>
 </tr>
 <tr>
 <td><code>device_id</code></td>
@@ -154992,7 +155117,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -155112,7 +155237,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -155800,7 +155925,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -155920,7 +156045,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -487260,7 +487385,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -487380,7 +487505,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -488118,7 +488243,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -488238,7 +488363,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -547361,7 +547486,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -547481,7 +547606,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -570477,7 +570602,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -570597,7 +570722,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -575733,7 +575858,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 </table>
 </div>
 <div class="tabbed-block">
-<p>Check if user has permission to create offerings via import.</p>
+<p>All of:</p>
+<ul>
+<li>Check if user has permission to create offerings via import.</li>
+<li>Overwriting an existing offering also takes what updating its overview does: UPDATE_OFFERING on it, its organization or its service provider, and while ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT is off, staff unless it is a draft.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -578975,7 +579104,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -579095,7 +579224,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -579784,7 +579913,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -579904,7 +580033,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -580930,7 +581059,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -580959,7 +581088,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -581096,7 +581225,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -581125,7 +581254,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -586109,7 +586238,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -586229,7 +586358,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -586848,7 +586977,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>downscaled</code></td>
@@ -587805,7 +587934,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -587933,7 +588062,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -588065,7 +588194,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -590450,7 +590579,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>resources_count</code></td>
@@ -606180,7 +606309,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -606300,7 +606429,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -608171,7 +608300,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -608291,7 +608420,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -609246,7 +609375,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -609366,7 +609495,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -610254,7 +610383,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -610283,7 +610412,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -610420,7 +610549,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -610449,7 +610578,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -611229,7 +611358,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -611349,7 +611478,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -612007,7 +612136,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -617551,7 +617680,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>downscaled</code></td>
@@ -617707,7 +617836,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>end_date</code></td>
 <td>string (date)</td>
 <td></td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 </tbody>
 </table>
@@ -620097,7 +620226,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -620217,7 +620346,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -818065,7 +818194,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff flag see every template; those holding OFFERING.CREATE on some organization see the published ones; anyone else sees none.</p>
+<p>Staff see every template, a personal access token only with the staff scope; those holding OFFERING.CREATE on some organization see the published ones, a token only with OFFERING.CREATE among its permissions; anyone else sees none.</p>
 </div>
 </div>
 </div>
@@ -818274,7 +818403,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Users with the staff flag see every template; those holding OFFERING.CREATE on some organization see the published ones; anyone else sees none.</p>
+<p>Staff see every template, a personal access token only with the staff scope; those holding OFFERING.CREATE on some organization see the published ones, a token only with OFFERING.CREATE among its permissions; anyone else sees none.</p>
 </div>
 </div>
 </div>

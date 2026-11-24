@@ -44170,7 +44170,7 @@
 <tr>
 <td><code>project_end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, all project resource will be scheduled for termination.</td>
+<td>The project's resources are scheduled for termination on this date plus the grace period, if one is configured. Offerings that disable the grace period terminate them on this date.</td>
 </tr>
 <tr>
 <td><code>project_effective_end_date</code></td>
@@ -44290,7 +44290,7 @@
 <tr>
 <td><code>end_date</code></td>
 <td>string (date)</td>
-<td>The date is inclusive. Once reached, a resource will be scheduled for termination.</td>
+<td>The resource is scheduled for termination on this date, so the day before is the last full day of use.</td>
 </tr>
 <tr>
 <td><code>end_date_requested_by</code></td>
@@ -49426,7 +49426,11 @@
 </table>
 </div>
 <div class="tabbed-block">
-<p>Check if user has permission to create offerings via import.</p>
+<p>All of:</p>
+<ul>
+<li>Check if user has permission to create offerings via import.</li>
+<li>Overwriting an existing offering also takes what updating its overview does: UPDATE_OFFERING on it, its organization or its service provider, and while ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT is off, staff unless it is a draft.</li>
+</ul>
 </div>
 </div>
 </div>
