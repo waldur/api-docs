@@ -155410,6 +155410,11 @@ On successful completion the task will synchronize quotas with the backend.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>customer_abbreviation</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_requires_reconsent</code></td>
 <td>boolean</td>
 <td>Check if the current user needs to re-consent for this resource's offering.</td>
@@ -156214,6 +156219,11 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </tr>
 <tr>
 <td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_abbreviation</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -487678,6 +487688,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>customer_abbreviation</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_requires_reconsent</code></td>
 <td>boolean</td>
 <td>Check if the current user needs to re-consent for this resource's offering.</td>
@@ -488532,6 +488547,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 </tr>
 <tr>
 <td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_abbreviation</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -547779,6 +547799,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>customer_abbreviation</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_requires_reconsent</code></td>
 <td>boolean</td>
 <td>Check if the current user needs to re-consent for this resource's offering.</td>
@@ -570895,6 +570920,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>customer_abbreviation</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_requires_reconsent</code></td>
 <td>boolean</td>
 <td>Check if the current user needs to re-consent for this resource's offering.</td>
@@ -579397,6 +579427,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>customer_abbreviation</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_requires_reconsent</code></td>
 <td>boolean</td>
 <td>Check if the current user needs to re-consent for this resource's offering.</td>
@@ -580202,6 +580237,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 </tr>
 <tr>
 <td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_abbreviation</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -586527,6 +586567,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 </tr>
 <tr>
 <td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_abbreviation</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -606602,6 +606647,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>customer_abbreviation</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_requires_reconsent</code></td>
 <td>boolean</td>
 <td>Check if the current user needs to re-consent for this resource's offering.</td>
@@ -608593,6 +608643,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>customer_abbreviation</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_requires_reconsent</code></td>
 <td>boolean</td>
 <td>Check if the current user needs to re-consent for this resource's offering.</td>
@@ -609664,6 +609719,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 </tr>
 <tr>
 <td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_abbreviation</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -611647,6 +611707,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 </tr>
 <tr>
 <td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_abbreviation</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -620515,6 +620580,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 </tr>
 <tr>
 <td><code>customer_slug</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_abbreviation</code></td>
 <td>string</td>
 <td></td>
 </tr>
@@ -813895,6 +813965,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
+</tr>
+<tr>
 <td><code>created</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -814072,6 +814147,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>state</code></td>
 <td>any</td>
 <td></td>
+</tr>
+<tr>
+<td><code>last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
 </tr>
 <tr>
 <td><code>created</code></td>
@@ -814290,6 +814370,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>state</code></td>
 <td>any</td>
 <td></td>
+</tr>
+<tr>
+<td><code>last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
 </tr>
 <tr>
 <td><code>created</code></td>
@@ -814535,6 +814620,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
+</tr>
+<tr>
 <td><code>created</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -814759,6 +814849,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>state</code></td>
 <td>any</td>
 <td></td>
+</tr>
+<tr>
+<td><code>last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
 </tr>
 <tr>
 <td><code>created</code></td>
@@ -815040,6 +815135,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
+</tr>
+<tr>
 <td><code>created</code></td>
 <td>string (date-time)</td>
 <td></td>
@@ -815218,6 +815318,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>state</code></td>
 <td>any</td>
 <td></td>
+</tr>
+<tr>
+<td><code>last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
 </tr>
 <tr>
 <td><code>created</code></td>
@@ -815496,6 +815601,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>state</code></td>
 <td>any</td>
 <td></td>
+</tr>
+<tr>
+<td><code>last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
 </tr>
 <tr>
 <td><code>created</code></td>
@@ -823470,6 +823580,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>offering_metric.state</code></td>
 <td>any</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_metric.last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
 </tr>
 <tr>
 <td><code>offering_metric.created</code></td>
@@ -837201,6 +837316,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>offering_metric.state</code></td>
 <td>any</td>
 <td></td>
+</tr>
+<tr>
+<td><code>offering_metric.last_reported_at</code></td>
+<td>string (date-time)</td>
+<td>When a point for this metric was last accepted, to within a minute; empty if none ever was.</td>
 </tr>
 <tr>
 <td><code>offering_metric.created</code></td>
