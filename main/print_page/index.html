@@ -457267,6 +457267,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>user_is_active</code></td>
+<td>boolean</td>
+<td>Whether the Waldur account is active. Deactivating the account does not change this offering user's state.</td>
+</tr>
+<tr>
 <td><code>is_restricted</code></td>
 <td>boolean</td>
 <td>Signal to service if the user account is restricted or not</td>
@@ -457684,6 +457689,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>customer_name</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>user_is_active</code></td>
+<td>boolean</td>
+<td>Whether the Waldur account is active. Deactivating the account does not change this offering user's state.</td>
 </tr>
 <tr>
 <td><code>is_restricted</code></td>
@@ -458105,6 +458115,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>customer_name</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>user_is_active</code></td>
+<td>boolean</td>
+<td>Whether the Waldur account is active. Deactivating the account does not change this offering user's state.</td>
 </tr>
 <tr>
 <td><code>is_restricted</code></td>
@@ -458845,6 +458860,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>user_is_active</code></td>
+<td>boolean</td>
+<td>Whether the Waldur account is active. Deactivating the account does not change this offering user's state.</td>
+</tr>
+<tr>
 <td><code>is_restricted</code></td>
 <td>boolean</td>
 <td>Signal to service if the user account is restricted or not</td>
@@ -459289,6 +459309,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>customer_name</code></td>
 <td>string</td>
 <td></td>
+</tr>
+<tr>
+<td><code>user_is_active</code></td>
+<td>boolean</td>
+<td>Whether the Waldur account is active. Deactivating the account does not change this offering user's state.</td>
 </tr>
 <tr>
 <td><code>is_restricted</code></td>
@@ -582564,6 +582589,16 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>user_active_isds</code></td>
 <td>array of strings</td>
 <td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+</tr>
+<tr>
+<td><code>user_first_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>user_last_name</code></td>
+<td>string</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -830594,6 +830629,16 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>user_active_isds</code></td>
 <td>array of strings</td>
 <td>List of ISDs that have asserted this user exists. User is deactivated when this becomes empty.</td>
+</tr>
+<tr>
+<td><code>user_first_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>user_last_name</code></td>
+<td>string</td>
+<td></td>
 </tr>
 </tbody>
 </table>
