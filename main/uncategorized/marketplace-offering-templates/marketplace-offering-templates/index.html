@@ -15221,6 +15221,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#create-an-offering-from-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an offering from the template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -19571,6 +19582,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#create-an-offering-from-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an offering from the template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -19705,6 +19727,11 @@
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/marketplace-offering-templates/</code></td>
 <td style="text-align: left;"><a href="#create">Create</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-offering-templates/{uuid}/create_offering/</code></td>
+<td style="text-align: left;"><a href="#create-an-offering-from-the-template">Create an offering from the template</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-put">PUT</span></td>
@@ -19932,6 +19959,16 @@
 <td><code>parameters.paths</code></td>
 <td>array of strings</td>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
+</tr>
+<tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
 </tr>
 <tr>
 <td><code>configuration_findings</code></td>
@@ -20166,6 +20203,16 @@
 <td><code>parameters.paths</code></td>
 <td>array of strings</td>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
+</tr>
+<tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
 </tr>
 <tr>
 <td><code>configuration_findings</code></td>
@@ -20453,6 +20500,16 @@
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -20516,8 +20573,327 @@
 </div>
 </div>
 <hr />
-<h3 id="update">Update</h3>
+<h3 id="create-an-offering-from-the-template">Create an offering from the template</h3>
+<p>Create a draft offering for an organization from the template's current version: its document with the parameters filled in, imported as import_offering imports. Each parameter takes the value given or its default; a missing required value or a value that does not fit its declaration is refused, under parameters.<key>. The offering records the template, its version and the parameter values, and keeps no link to the template: a later edit of the template changes nothing in it. With dry_run, everything is checked and the filled-in document returned, and nothing is created. The site-agent consistency rules check the filled-in document: an error finding refuses the create, under findings; a dry run returns every finding.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><input id="__tabbed_4_7" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Request Body (required)</label><label for="__tabbed_4_6">Responses</label><label for="__tabbed_4_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-offering-templates/a1b2c3d4-e5f6-7890-abcd-ef1234567890/create_offering/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">customer</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">category</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-marketplace-offering-template&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.offering_template_create_offering_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OfferingTemplateCreateOfferingRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_offering_templates</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_offering_templates_create_offering</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">OfferingTemplateCreateOfferingRequest</span><span class="p">(</span>
+    <span class="n">customer</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-marketplace-offering-template&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_offering_templates_create_offering</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_template_create_offering_request.py"><code>OfferingTemplateCreateOfferingRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_templates/marketplace_offering_templates_create_offering.py"><code>marketplace_offering_templates_create_offering</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceOfferingTemplatesCreateOffering</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceOfferingTemplatesCreateOffering</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;customer&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;category&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-marketplace-offering-template&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>customer</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+<td>The organization the offering is created for.</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+<td>The category the offering is listed in.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Name of the new offering.</td>
+</tr>
+<tr>
+<td><code>parameters</code></td>
+<td>object (free-form)</td>
+<td></td>
+<td>A value for each of the template's parameters, by key. A parameter left out takes its default.</td>
+</tr>
+<tr>
+<td><code>dry_run</code></td>
+<td>boolean</td>
+<td></td>
+<td>Check everything and report what would be created, creating nothing.<br><em>Constraints: default: <code>False</code></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dry_run</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td>The new offering; null on a dry run.</td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>parameters</code></td>
+<td>object (free-form)</td>
+<td>The value of every parameter, defaults included.</td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td>object (free-form)</td>
+<td>The template's document with the parameters filled in: what the offering is created from, in the import_offering format.</td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>array of strings</td>
+<td>What the import of the document reported.</td>
+</tr>
+<tr>
+<td><code>findings</code></td>
+<td>array of objects</td>
+<td>What the site-agent consistency rules find in the filled-in document, errors first. A create with an error is refused.</td>
+</tr>
+<tr>
+<td><code>findings.rule</code></td>
+<td>any</td>
+<td>The rule that found it.</td>
+</tr>
+<tr>
+<td><code>findings.severity</code></td>
+<td>any</td>
+<td>error: the agent cannot work as configured, and creating an offering from a template is refused. warning: worth a look.</td>
+</tr>
+<tr>
+<td><code>findings.field</code></td>
+<td>string</td>
+<td>Dotted path into the offering document, list items by index, such as components.0.type or agent_configuration.backend_settings.cluster_name.</td>
+</tr>
+<tr>
+<td><code>findings.message</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong><code>201</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dry_run</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td>The new offering; null on a dry run.</td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>parameters</code></td>
+<td>object (free-form)</td>
+<td>The value of every parameter, defaults included.</td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td>object (free-form)</td>
+<td>The template's document with the parameters filled in: what the offering is created from, in the import_offering format.</td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>array of strings</td>
+<td>What the import of the document reported.</td>
+</tr>
+<tr>
+<td><code>findings</code></td>
+<td>array of objects</td>
+<td>What the site-agent consistency rules find in the filled-in document, errors first. A create with an error is refused.</td>
+</tr>
+<tr>
+<td><code>findings.rule</code></td>
+<td>any</td>
+<td>The rule that found it.</td>
+</tr>
+<tr>
+<td><code>findings.severity</code></td>
+<td>any</td>
+<td>error: the agent cannot work as configured, and creating an offering from a template is refused. warning: worth a look.</td>
+</tr>
+<tr>
+<td><code>findings.field</code></td>
+<td>string</td>
+<td>Dotted path into the offering document, list items by index, such as components.0.type or agent_configuration.backend_settings.cluster_name.</td>
+</tr>
+<tr>
+<td><code>findings.message</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Who sees the template, holding OFFERING.CREATE on the organization named in the request: as import_offering.</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="update">Update</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><input id="__tabbed_5_7" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Request Body (required)</label><label for="__tabbed_5_6">Responses</label><label for="__tabbed_5_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -20763,6 +21139,16 @@
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -20827,7 +21213,7 @@
 </div>
 <hr />
 <h3 id="partial-update">Partial Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><input id="__tabbed_5_7" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Request Body</label><label for="__tabbed_5_6">Responses</label><label for="__tabbed_5_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:7"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><input id="__tabbed_6_7" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Request Body</label><label for="__tabbed_6_6">Responses</label><label for="__tabbed_6_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21049,6 +21435,16 @@
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -21113,7 +21509,7 @@
 </div>
 <hr />
 <h3 id="delete">Delete</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Responses</label><label for="__tabbed_6_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Path Parameters</label><label for="__tabbed_7_5">Responses</label><label for="__tabbed_7_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21212,7 +21608,7 @@
 <h2 id="other-actions">Other Actions</h2>
 <h3 id="list-the-offering-template-presets">List the offering template presets</h3>
 <p>The offering templates shipped with this portal: starting points for a template, with whether a template already holds the name each would be loaded under.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:5"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">HTTPie</label><label for="__tabbed_7_2">Python</label><label for="__tabbed_7_3">TypeScript</label><label for="__tabbed_7_4">Responses</label><label for="__tabbed_7_5">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:5"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Responses</label><label for="__tabbed_8_5">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21344,6 +21740,16 @@
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>name_taken</code></td>
 <td>boolean</td>
 <td>An offering template already holds the name this preset would be loaded under: rename or delete it to load the preset.</td>
@@ -21359,7 +21765,7 @@
 <hr />
 <h3 id="list-the-templates-versions">List the template's versions</h3>
 <p>Every version of the template's document, oldest first.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:6"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">HTTPie</label><label for="__tabbed_8_2">Python</label><label for="__tabbed_8_3">TypeScript</label><label for="__tabbed_8_4">Path Parameters</label><label for="__tabbed_8_5">Responses</label><label for="__tabbed_8_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:6"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Path Parameters</label><label for="__tabbed_9_5">Responses</label><label for="__tabbed_9_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -21490,7 +21896,7 @@
 <hr />
 <h3 id="load-offering-template-presets">Load offering template presets</h3>
 <p>Create an offering template from each preset given: a copy that keeps no link to the preset. Refused, with nothing created, when a template already holds the name a preset would be loaded under. The templates are published only if publish is set.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:6"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">HTTPie</label><label for="__tabbed_9_2">Python</label><label for="__tabbed_9_3">TypeScript</label><label for="__tabbed_9_4">Request Body (required)</label><label for="__tabbed_9_5">Responses</label><label for="__tabbed_9_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:6"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><input id="__tabbed_10_5" name="__tabbed_10" type="radio" /><input id="__tabbed_10_6" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">HTTPie</label><label for="__tabbed_10_2">Python</label><label for="__tabbed_10_3">TypeScript</label><label for="__tabbed_10_4">Request Body (required)</label><label for="__tabbed_10_5">Responses</label><label for="__tabbed_10_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>

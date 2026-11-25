@@ -485895,6 +485895,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_has_consent</code></td>
 <td>boolean</td>
 <td></td>
@@ -487190,6 +487205,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -523978,6 +524008,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_has_consent</code></td>
 <td>boolean</td>
 <td></td>
@@ -525334,6 +525379,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -549071,6 +549131,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/marketplace-provider-offerings/{uuid}/template_diff/</code></td>
+<td style="text-align: left;"><a href="#marketplace-provider-api-provider-offerings-compare-the-offering-with-its-offering-template">Compare the offering with its offering template</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-provider-offerings/{uuid}/user-attribute-config/</code></td>
 <td style="text-align: left;"><a href="#marketplace-provider-api-provider-offerings-get-user-attribute-config">Get user attribute config</a></td>
 </tr>
@@ -550684,6 +550749,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
 <td><code>integration_status</code></td>
 <td>array of objects</td>
 <td></td>
@@ -552010,6 +552090,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -554631,6 +554726,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -564361,6 +564471,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -574883,9 +575008,179 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 </div>
 <hr />
+<h3 id="marketplace-provider-api-provider-offerings-compare-the-offering-with-its-offering-template">Compare the offering with its offering template</h3>
+<p>Where the offering differs from the offering template it was created from: from the version it was created from, and from the template's latest version, both filled in with the parameter values the offering was created with (a parameter added since takes its default). Only what the template sets is compared, and the offering's name is not. The agent configuration is compared only for who may see the integration settings. Refused for an offering not created from a template, or whose template was deleted.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="78:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_78_1" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_2" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_3" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_4" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_5" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_6" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_78_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-provider-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/template_diff/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_provider_offerings</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_provider_offerings_template_diff_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_provider_offerings_template_diff_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_offerings/marketplace_provider_offerings_template_diff_retrieve.py"><code>marketplace_provider_offerings_template_diff_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceProviderOfferingsTemplateDiffRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceProviderOfferingsTemplateDiffRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td>The version the offering was created from.</td>
+</tr>
+<tr>
+<td><code>latest_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>created_version_differences</code></td>
+<td>array of objects</td>
+<td>Differences from the version the offering was created from.</td>
+</tr>
+<tr>
+<td><code>created_version_differences.path</code></td>
+<td>string</td>
+<td>Where the offering differs, such as components[cpu].unit_factor: list items are named by their type, name or version.</td>
+</tr>
+<tr>
+<td><code>created_version_differences.template</code></td>
+<td>object (free-form)</td>
+<td>What the template sets; null when it has none.</td>
+</tr>
+<tr>
+<td><code>created_version_differences.offering</code></td>
+<td>object (free-form)</td>
+<td>What the offering has; null when it has none.</td>
+</tr>
+<tr>
+<td><code>latest_version_differences</code></td>
+<td>array of objects</td>
+<td></td>
+</tr>
+<tr>
+<td><code>latest_version_differences.path</code></td>
+<td>string</td>
+<td>Where the offering differs, such as components[cpu].unit_factor: list items are named by their type, name or version.</td>
+</tr>
+<tr>
+<td><code>latest_version_differences.template</code></td>
+<td>object (free-form)</td>
+<td>What the template sets; null when it has none.</td>
+</tr>
+<tr>
+<td><code>latest_version_differences.offering</code></td>
+<td>object (free-form)</td>
+<td>What the offering has; null when it has none.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Requires <code>OFFERING.UPDATE</code> on the object, its customer or its customer's service provider.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="marketplace-provider-api-provider-offerings-get-user-attribute-config">Get user attribute config</h3>
 <p>Returns the user attribute configuration for this offering, which determines which user attributes are exposed to the service provider.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="78:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_78_1" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_2" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_3" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_4" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_5" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_6" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_78_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="79:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_79_1" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_2" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_3" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_4" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_5" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_6" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_79_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -575164,7 +575459,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-add-a-qos-profile-to-an-offering">Add a QoS profile to an offering</h3>
 <p>Adds a new Quality of Service profile to an offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="79:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_79_1" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_2" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_3" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_4" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_5" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_6" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_79_7" name="marketplace-provider-api-provider-offerings-__tabbed_79" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_79_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_79_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="80:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_80_1" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_2" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_3" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_4" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_5" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_6" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_7" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_80_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -575511,7 +575806,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-check-if-backend_id-is-unique">Check if backend_id is unique</h3>
 <p>Checks if the provided backend_id has been used in resources of this offering or all offerings of the same customer. Returns true if unique, false if already used.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="80:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_80_1" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_2" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_3" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_4" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_5" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_6" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_80_7" name="marketplace-provider-api-provider-offerings-__tabbed_80" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_80_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_80_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="81:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_81_1" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_2" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_3" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_4" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_5" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_6" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_7" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_81_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -575693,7 +575988,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-delete-tags-for-offering">Delete tags for offering</h3>
 <p>Removes all tag associations from this offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="81:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_81_1" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_2" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_3" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_4" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_5" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_81_6" name="marketplace-provider-api-provider-offerings-__tabbed_81" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_81_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_81_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="82:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_82_1" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_2" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_3" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_4" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_5" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_6" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_82_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -575792,7 +576087,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-export-offering-data">Export offering data</h3>
 <p>Exports an offering and all its connected parts to YAML format. Allows configuration of which components to include in the export.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="82:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_82_1" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_2" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_3" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_4" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_5" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_6" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_82_7" name="marketplace-provider-api-provider-offerings-__tabbed_82" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_82_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_82_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="83:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_83_1" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_2" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_3" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_4" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_5" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_6" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_7" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_83_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -576022,7 +576317,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-import-the-clusters-maintenance-reservations-as-drafts">Import the cluster's maintenance reservations as drafts</h3>
 <p>Site agents report the MAINT reservations made on the cluster; each becomes a draft maintenance announcement for the provider to review and publish. Reservations named with the Waldur prefix are ignored. Only when maintenance sync is enabled on the offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="83:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_83_1" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_2" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_3" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_4" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_5" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_6" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_83_7" name="marketplace-provider-api-provider-offerings-__tabbed_83" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_83_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_83_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="84:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_84_1" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_2" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_3" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_4" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_5" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_6" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_7" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_84_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -576224,7 +576519,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-import-offering-data">Import offering data</h3>
 <p>Imports an offering and all its connected parts from YAML format. Allows configuration of which components to import and how to handle conflicts. Imported offerings are always created in DRAFT state for security.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="84:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_84_1" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_2" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_3" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_4" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_5" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_84_6" name="marketplace-provider-api-provider-offerings-__tabbed_84" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_84_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_4">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_84_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="85:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_85_1" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_2" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_3" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_4" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_5" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_6" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_85_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_4">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -576455,7 +576750,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-mark-an-offering-as-available">Mark an offering as available</h3>
 <p>Marks an unavailable offering as available.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="85:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_85_1" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_2" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_3" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_4" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_5" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_85_6" name="marketplace-provider-api-provider-offerings-__tabbed_85" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_85_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_85_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="86:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_86_1" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_2" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_3" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_4" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_5" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_6" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_86_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -576576,7 +576871,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-mark-an-offering-as-unavailable">Mark an offering as unavailable</h3>
 <p>Marks an active offering as unavailable, blocking all operations on its resources.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="86:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_86_1" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_2" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_3" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_4" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_5" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_86_6" name="marketplace-provider-api-provider-offerings-__tabbed_86" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_86_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_86_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="87:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_87_1" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_2" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_3" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_4" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_5" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_6" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_87_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -576697,7 +576992,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-remove-a-qos-profile-from-an-offering">Remove a QoS profile from an offering</h3>
 <p>Removes a Quality of Service profile from an offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="87:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_87_1" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_2" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_3" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_4" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_5" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_6" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_87_7" name="marketplace-provider-api-provider-offerings-__tabbed_87" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_87_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_87_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="88:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_88_1" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_2" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_3" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_4" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_5" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_6" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_7" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_88_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -576835,7 +577130,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-save-the-offering-as-an-offering-template">Save the offering as an offering template</h3>
 <p>Save the offering's setup -- options, plugin options, agent configuration, components, plans, endpoints and terms of service -- as a new, unpublished offering template. Secrets, organization groups, screenshots and files are left out. The values that tie the offering to its site (its backend ID, access and endpoint URLs, the cluster name, account prefixes and service URLs in the agent configuration) are removed and declared as required parameters. Staff only.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="88:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_88_1" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_2" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_3" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_4" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_5" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_6" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_88_7" name="marketplace-provider-api-provider-offerings-__tabbed_88" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_88_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_88_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="89:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_89_1" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_2" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_3" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_4" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_5" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_6" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_7" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_89_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -577039,6 +577334,16 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -577104,7 +577409,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-assign-or-clear-the-offering-group">Assign or clear the offering group</h3>
 <p>Sets the offering's <code>offering_group</code> FK. Pass <code>offering_group: &lt;uuid&gt;</code> to assign a group, or <code>offering_group: null</code> to clear it. The group must belong to the same customer as the offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="89:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_89_1" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_2" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_3" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_4" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_5" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_6" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_89_7" name="marketplace-provider-api-provider-offerings-__tabbed_89" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_89_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_89_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="90:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_90_1" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_2" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_3" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_4" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_5" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_6" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_7" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_90_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -577248,7 +577553,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-set-the-qos-allow-list-of-a-partition">Set the QoS allow-list of a partition</h3>
 <p>Replaces the QoS allow-list (SLURM AllowQos gate) of a partition. An empty list permits all of the offering's QoS.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="90:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_90_1" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_2" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_3" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_4" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_5" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_6" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_90_7" name="marketplace-provider-api-provider-offerings-__tabbed_90" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_90_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_90_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="91:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_91_1" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_2" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_3" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_4" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_5" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_6" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_7" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_91_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -577578,7 +577883,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-bind-unbind-offering-to-a-service-profile">Bind / unbind offering to a service profile</h3>
 <p>Sets the offering's <code>profile</code> FK. Pass <code>profile: &lt;uuid&gt;</code> to bind, or <code>profile: null</code> to unbind. Requires UPDATE_OFFERING permission on the offering's customer (service-provider owners and staff). Triggers async reconciliation of RoleAvailability rows on this offering against the profile's role catalog (or wipes them on unbind).</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="91:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_91_1" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_2" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_3" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_4" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_5" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_6" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_91_7" name="marketplace-provider-api-provider-offerings-__tabbed_91" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_91_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_91_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="92:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_92_1" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_2" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_3" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_4" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_5" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_6" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_7" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_92_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -577706,7 +578011,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-switch-billing-mode-for-builtin-components">Switch billing mode for builtin components</h3>
 <p>Switches all builtin components between monthly (LIMIT), prepaid (ONE_TIME + is_prepaid), and usage-based billing modes. Works for any offering type that has registered builtin components.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="92:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_92_1" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_2" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_3" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_4" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_5" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_6" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_92_7" name="marketplace-provider-api-provider-offerings-__tabbed_92" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_92_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_92_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="93:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_93_1" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_2" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_3" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_4" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_5" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_6" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_7" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_93_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -577846,7 +578151,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-update-offering-backend_id-rules">Update offering backend_id rules</h3>
 <p>Configure validation rules for resource backend_id: format regex and uniqueness scope.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="93:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_93_1" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_2" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_3" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_4" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_5" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_6" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_93_7" name="marketplace-provider-api-provider-offerings-__tabbed_93" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_93_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_93_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="94:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_94_1" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_2" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_3" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_4" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_5" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_6" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_7" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_94_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -577974,7 +578279,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-update-an-access-endpoint-of-an-offering">Update an access endpoint of an offering</h3>
 <p>Updates the name and/or URL of an existing access endpoint of an offering, identified by its UUID.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="94:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_94_1" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_2" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_3" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_4" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_5" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_6" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_94_7" name="marketplace-provider-api-provider-offerings-__tabbed_94" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_94_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_94_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="95:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_95_1" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_2" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_3" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_4" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_5" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_6" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_7" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_95_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -578152,7 +578457,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-update-tags-for-offering">Update tags for offering</h3>
 <p>Sets the list of tags for this offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="95:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_95_1" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_2" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_3" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_4" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_5" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_6" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_95_7" name="marketplace-provider-api-provider-offerings-__tabbed_95" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_95_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_95_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="96:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_96_1" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_2" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_3" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_4" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_5" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_6" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_7" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_96_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -578278,7 +578583,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-swap-offering-type">Swap offering type</h3>
 <p>Changes the offering's <code>type</code> between Marketplace.Basic and the site-agent type (Marketplace.SiteAgent; the legacy name Marketplace.Slurm is accepted). Both plugins share the same data shape (the site-agent processors inherit from Basic and only delegate the send paths to the external agent), so the swap is safe in either direction. Refused if the offering's current type is not in the swappable set.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="96:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_96_1" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_2" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_3" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_4" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_5" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_6" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_96_7" name="marketplace-provider-api-provider-offerings-__tabbed_96" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_96_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_96_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="97:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_97_1" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_2" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_3" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_4" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_5" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_6" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_7" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_97_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -578420,7 +578725,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-upload-markdown-image">Upload markdown image</h3>
 <p>Uploads an image for embedding in offering markdown descriptions. Requires the ENABLE_MARKDOWN_IMAGE_UPLOAD setting.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="97:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_97_1" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_2" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_3" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_4" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_5" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_6" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_97_7" name="marketplace-provider-api-provider-offerings-__tabbed_97" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_97_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_97_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="98:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_98_1" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_2" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_3" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_4" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_5" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_6" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_7" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_98_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_5">Request Body (required)</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -578578,7 +578883,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-update-a-qos-profile-of-an-offering">Update a QoS profile of an offering</h3>
 <p>Updates an existing Quality of Service profile of an offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="98:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_98_1" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_2" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_3" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_4" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_5" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_6" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_98_7" name="marketplace-provider-api-provider-offerings-__tabbed_98" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_98_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_98_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="99:7"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_99_1" name="marketplace-provider-api-provider-offerings-__tabbed_99" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_99_2" name="marketplace-provider-api-provider-offerings-__tabbed_99" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_99_3" name="marketplace-provider-api-provider-offerings-__tabbed_99" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_99_4" name="marketplace-provider-api-provider-offerings-__tabbed_99" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_99_5" name="marketplace-provider-api-provider-offerings-__tabbed_99" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_99_6" name="marketplace-provider-api-provider-offerings-__tabbed_99" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_99_7" name="marketplace-provider-api-provider-offerings-__tabbed_99" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_99_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_99_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_99_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_99_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_99_5">Request Body</label><label for="marketplace-provider-api-provider-offerings-__tabbed_99_6">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_99_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -585571,6 +585876,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -605952,6 +606272,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
 <td><code>user_has_consent</code></td>
 <td>boolean</td>
 <td></td>
@@ -615078,6 +615413,21 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_uuid</code></td>
+<td>string (uuid)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -820800,6 +821150,11 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td style="text-align: left;"><a href="#uncategorized-marketplace-offering-templates-marketplace-offering-templates-create">Create</a></td>
 </tr>
 <tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-offering-templates/{uuid}/create_offering/</code></td>
+<td style="text-align: left;"><a href="#uncategorized-marketplace-offering-templates-marketplace-offering-templates-create-an-offering-from-the-template">Create an offering from the template</a></td>
+</tr>
+<tr>
 <td style="text-align: left;"><span class="http-badge http-put">PUT</span></td>
 <td style="text-align: left;"><code>/api/marketplace-offering-templates/{uuid}/</code></td>
 <td style="text-align: left;"><a href="#uncategorized-marketplace-offering-templates-marketplace-offering-templates-update">Update</a></td>
@@ -821025,6 +821380,16 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>parameters.paths</code></td>
 <td>array of strings</td>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
+</tr>
+<tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
 </tr>
 <tr>
 <td><code>configuration_findings</code></td>
@@ -821259,6 +821624,16 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td><code>parameters.paths</code></td>
 <td>array of strings</td>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
+</tr>
+<tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
 </tr>
 <tr>
 <td><code>configuration_findings</code></td>
@@ -821546,6 +821921,16 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -821609,8 +821994,327 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 </div>
 <hr />
-<h3 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-update">Update</h3>
+<h3 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-create-an-offering-from-the-template">Create an offering from the template</h3>
+<p>Create a draft offering for an organization from the template's current version: its document with the parameters filled in, imported as import_offering imports. Each parameter takes the value given or its default; a missing required value or a value that does not fit its declaration is refused, under parameters.<key>. The offering records the template, its version and the parameter values, and keeps no link to the template: a later edit of the template changes nothing in it. With dry_run, everything is checked and the filled-in document returned, and nothing is created. The site-agent consistency rules check the filled-in document: an error finding refuses the create, under findings; a dry run returns every finding.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_7" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_4">Path Parameters</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_5">Request Body (required)</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_6">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_4_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-offering-templates/a1b2c3d4-e5f6-7890-abcd-ef1234567890/create_offering/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">customer</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">category</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-marketplace-offering-template&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.offering_template_create_offering_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OfferingTemplateCreateOfferingRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_offering_templates</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_offering_templates_create_offering</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">OfferingTemplateCreateOfferingRequest</span><span class="p">(</span>
+    <span class="n">customer</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-awesome-marketplace-offering-template&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_offering_templates_create_offering</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_template_create_offering_request.py"><code>OfferingTemplateCreateOfferingRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_templates/marketplace_offering_templates_create_offering.py"><code>marketplace_offering_templates_create_offering</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceOfferingTemplatesCreateOffering</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceOfferingTemplatesCreateOffering</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;customer&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;category&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-awesome-marketplace-offering-template&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>customer</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+<td>The organization the offering is created for.</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+<td>The category the offering is listed in.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Name of the new offering.</td>
+</tr>
+<tr>
+<td><code>parameters</code></td>
+<td>object (free-form)</td>
+<td></td>
+<td>A value for each of the template's parameters, by key. A parameter left out takes its default.</td>
+</tr>
+<tr>
+<td><code>dry_run</code></td>
+<td>boolean</td>
+<td></td>
+<td>Check everything and report what would be created, creating nothing.<br><em>Constraints: default: <code>False</code></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dry_run</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td>The new offering; null on a dry run.</td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>parameters</code></td>
+<td>object (free-form)</td>
+<td>The value of every parameter, defaults included.</td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td>object (free-form)</td>
+<td>The template's document with the parameters filled in: what the offering is created from, in the import_offering format.</td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>array of strings</td>
+<td>What the import of the document reported.</td>
+</tr>
+<tr>
+<td><code>findings</code></td>
+<td>array of objects</td>
+<td>What the site-agent consistency rules find in the filled-in document, errors first. A create with an error is refused.</td>
+</tr>
+<tr>
+<td><code>findings.rule</code></td>
+<td>any</td>
+<td>The rule that found it.</td>
+</tr>
+<tr>
+<td><code>findings.severity</code></td>
+<td>any</td>
+<td>error: the agent cannot work as configured, and creating an offering from a template is refused. warning: worth a look.</td>
+</tr>
+<tr>
+<td><code>findings.field</code></td>
+<td>string</td>
+<td>Dotted path into the offering document, list items by index, such as components.0.type or agent_configuration.backend_settings.cluster_name.</td>
+</tr>
+<tr>
+<td><code>findings.message</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong><code>201</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dry_run</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>offering_uuid</code></td>
+<td>string (uuid)</td>
+<td>The new offering; null on a dry run.</td>
+</tr>
+<tr>
+<td><code>offering_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>template_version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>parameters</code></td>
+<td>object (free-form)</td>
+<td>The value of every parameter, defaults included.</td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td>object (free-form)</td>
+<td>The template's document with the parameters filled in: what the offering is created from, in the import_offering format.</td>
+</tr>
+<tr>
+<td><code>warnings</code></td>
+<td>array of strings</td>
+<td>What the import of the document reported.</td>
+</tr>
+<tr>
+<td><code>findings</code></td>
+<td>array of objects</td>
+<td>What the site-agent consistency rules find in the filled-in document, errors first. A create with an error is refused.</td>
+</tr>
+<tr>
+<td><code>findings.rule</code></td>
+<td>any</td>
+<td>The rule that found it.</td>
+</tr>
+<tr>
+<td><code>findings.severity</code></td>
+<td>any</td>
+<td>error: the agent cannot work as configured, and creating an offering from a template is refused. warning: worth a look.</td>
+</tr>
+<tr>
+<td><code>findings.field</code></td>
+<td>string</td>
+<td>Dotted path into the offering document, list items by index, such as components.0.type or agent_configuration.backend_settings.cluster_name.</td>
+</tr>
+<tr>
+<td><code>findings.message</code></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Who sees the template, holding OFFERING.CREATE on the organization named in the request: as import_offering.</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-update">Update</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_7" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_4">Path Parameters</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_5">Request Body (required)</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_6">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -821856,6 +822560,16 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -821920,7 +822634,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 <hr />
 <h3 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-partial-update">Partial Update</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:7"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_7" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_4">Path Parameters</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_5">Request Body</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_6">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_5_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:7"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_7" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_4">Path Parameters</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_5">Request Body</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_6">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -822142,6 +822856,16 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -822206,7 +822930,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 </div>
 <hr />
 <h3 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-delete">Delete</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_4">Path Parameters</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_5">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_6_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:6"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_4">Path Parameters</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_5">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -822305,7 +823029,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <h2 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-other-actions">Other Actions</h2>
 <h3 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-list-the-offering-template-presets">List the offering template presets</h3>
 <p>The offering templates shipped with this portal: starting points for a template, with whether a template already holds the name each would be loaded under.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:5"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_4">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_7_5">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:5"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_4">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_5">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -822437,6 +823161,16 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <td>Dotted paths into the document that the value fills, such as offering.backend_id; digits address list items.</td>
 </tr>
 <tr>
+<td><code>parameters.choices</code></td>
+<td>array of objects</td>
+<td>The values allowed, when the parameter is limited to some.</td>
+</tr>
+<tr>
+<td><code>parameters.pattern</code></td>
+<td>string</td>
+<td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
 <td><code>name_taken</code></td>
 <td>boolean</td>
 <td>An offering template already holds the name this preset would be loaded under: rename or delete it to load the preset.</td>
@@ -822452,7 +823186,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <hr />
 <h3 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-list-the-templates-versions">List the template's versions</h3>
 <p>Every version of the template's document, oldest first.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:6"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_4">Path Parameters</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_5">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_8_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:6"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_4">Path Parameters</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_5">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -822583,7 +823317,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <hr />
 <h3 id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-load-offering-template-presets">Load offering template presets</h3>
 <p>Create an offering template from each preset given: a copy that keeps no link to the preset. Refused, with nothing created, when a template already holds the name a preset would be loaded under. The templates are published only if publish is set.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:6"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_4">Request Body (required)</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_5">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_9_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:6"><input checked="checked" id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_1" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_2" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_3" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_4" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_5" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10" type="radio" /><input id="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_6" name="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_1">HTTPie</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_2">Python</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_3">TypeScript</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_4">Request Body (required)</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_5">Responses</label><label for="uncategorized-marketplace-offering-templates-marketplace-offering-templates-__tabbed_10_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
