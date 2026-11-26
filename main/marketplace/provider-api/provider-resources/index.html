@@ -9375,6 +9375,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reveal-the-value-of-a-secret-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reveal the value of a secret option
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-resource-state-to-erred" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -9500,6 +9511,17 @@
     <span class="md-ellipsis">
       
         Report per-member sync statuses for a resource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-the-value-of-a-secret-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set the value of a secret option
       
     </span>
   </a>
@@ -20315,6 +20337,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reveal-the-value-of-a-secret-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reveal the value of a secret option
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-resource-state-to-erred" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -20440,6 +20473,17 @@
     <span class="md-ellipsis">
       
         Report per-member sync statuses for a resource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-the-value-of-a-secret-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set the value of a secret option
       
     </span>
   </a>
@@ -20713,6 +20757,11 @@
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-provider-resources/{uuid}/reveal_option_secret/</code></td>
+<td style="text-align: left;"><a href="#reveal-the-value-of-a-secret-option">Reveal the value of a secret option</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/marketplace-provider-resources/{uuid}/set_as_erred/</code></td>
 <td style="text-align: left;"><a href="#set-resource-state-to-erred">Set resource state to erred</a></td>
 </tr>
@@ -20770,6 +20819,11 @@
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/marketplace-provider-resources/{uuid}/set_membership_sync_statuses/</code></td>
 <td style="text-align: left;"><a href="#report-per-member-sync-statuses-for-a-resource">Report per-member sync statuses for a resource</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-provider-resources/{uuid}/set_option_secret/</code></td>
+<td style="text-align: left;"><a href="#set-the-value-of-a-secret-option">Set the value of a secret option</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -21838,6 +21892,11 @@
 <td>object (free-form)</td>
 <td>Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced.</td>
 </tr>
+<tr>
+<td><code>option_secrets</code></td>
+<td>object (free-form)</td>
+<td>Whether each secret option of the offering is set, by option name. Never the value; the reveal_option_secret action returns it to whom may read it.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -22651,6 +22710,11 @@
 <td><code>display_limits</code></td>
 <td>object (free-form)</td>
 <td>Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced.</td>
+</tr>
+<tr>
+<td><code>option_secrets</code></td>
+<td>object (free-form)</td>
+<td>Whether each secret option of the offering is set, by option name. Never the value; the reveal_option_secret action returns it to whom may read it.</td>
 </tr>
 </tbody>
 </table>
@@ -29007,6 +29071,11 @@
 <td>object (free-form)</td>
 <td>Resource option values shown as the limits of usage-based components. Display only: not stored in limits, billed or enforced.</td>
 </tr>
+<tr>
+<td><code>option_secrets</code></td>
+<td>object (free-form)</td>
+<td>Whether each secret option of the offering is set, by option name. Never the value; the reveal_option_secret action returns it to whom may read it.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -29312,9 +29381,172 @@
 </div>
 </div>
 <hr />
+<h3 id="reveal-the-value-of-a-secret-option">Reveal the value of a secret option</h3>
+<p>Lets the service provider or its site agent read the value of one of the resource's secret options, such as a VPN pre-shared key to configure its end of a tunnel. The response must not be cached. Audited, naming any impersonator.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="29:7"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><input id="__tabbed_29_6" name="__tabbed_29" type="radio" /><input id="__tabbed_29_7" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Path Parameters</label><label for="__tabbed_29_5">Request Body (required)</label><label for="__tabbed_29_6">Responses</label><label for="__tabbed_29_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reveal_option_secret/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">option_name</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.resource_option_secret_name_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceOptionSecretNameRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_provider_resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_provider_resources_reveal_option_secret</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">ResourceOptionSecretNameRequest</span><span class="p">(</span>
+    <span class="n">option_name</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_provider_resources_reveal_option_secret</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_option_secret_name_request.py"><code>ResourceOptionSecretNameRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_reveal_option_secret.py"><code>marketplace_provider_resources_reveal_option_secret</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceProviderResourcesRevealOptionSecret</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceProviderResourcesRevealOptionSecret</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;option_name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>option_name</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Name of a secret option of the offering.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>option_name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>The secret in plain text.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong><code>409</code></strong> - No response body</p>
+</div>
+<div class="tabbed-block">
+<p>Requires <code>RESOURCE.UPDATE_OPTIONS</code> on the offering or the offering's customer.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="set-resource-state-to-erred">Set resource state to erred</h3>
 <p>Allows a service provider to manually set the state of a resource to 'erred'. An error message and traceback can be provided.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="29:7"><input checked="checked" id="__tabbed_29_1" name="__tabbed_29" type="radio" /><input id="__tabbed_29_2" name="__tabbed_29" type="radio" /><input id="__tabbed_29_3" name="__tabbed_29" type="radio" /><input id="__tabbed_29_4" name="__tabbed_29" type="radio" /><input id="__tabbed_29_5" name="__tabbed_29" type="radio" /><input id="__tabbed_29_6" name="__tabbed_29" type="radio" /><input id="__tabbed_29_7" name="__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="__tabbed_29_1">HTTPie</label><label for="__tabbed_29_2">Python</label><label for="__tabbed_29_3">TypeScript</label><label for="__tabbed_29_4">Path Parameters</label><label for="__tabbed_29_5">Request Body</label><label for="__tabbed_29_6">Responses</label><label for="__tabbed_29_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="30:7"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><input id="__tabbed_30_2" name="__tabbed_30" type="radio" /><input id="__tabbed_30_3" name="__tabbed_30" type="radio" /><input id="__tabbed_30_4" name="__tabbed_30" type="radio" /><input id="__tabbed_30_5" name="__tabbed_30" type="radio" /><input id="__tabbed_30_6" name="__tabbed_30" type="radio" /><input id="__tabbed_30_7" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">HTTPie</label><label for="__tabbed_30_2">Python</label><label for="__tabbed_30_3">TypeScript</label><label for="__tabbed_30_4">Path Parameters</label><label for="__tabbed_30_5">Request Body</label><label for="__tabbed_30_6">Responses</label><label for="__tabbed_30_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29445,7 +29677,7 @@
 <hr />
 <h3 id="set-resource-state-to-ok">Set resource state to OK</h3>
 <p>Allows a service provider to manually set the state of a resource to 'OK', clearing any previous error messages.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="30:6"><input checked="checked" id="__tabbed_30_1" name="__tabbed_30" type="radio" /><input id="__tabbed_30_2" name="__tabbed_30" type="radio" /><input id="__tabbed_30_3" name="__tabbed_30" type="radio" /><input id="__tabbed_30_4" name="__tabbed_30" type="radio" /><input id="__tabbed_30_5" name="__tabbed_30" type="radio" /><input id="__tabbed_30_6" name="__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="__tabbed_30_1">HTTPie</label><label for="__tabbed_30_2">Python</label><label for="__tabbed_30_3">TypeScript</label><label for="__tabbed_30_4">Path Parameters</label><label for="__tabbed_30_5">Responses</label><label for="__tabbed_30_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="31:6"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><input id="__tabbed_31_2" name="__tabbed_31" type="radio" /><input id="__tabbed_31_3" name="__tabbed_31" type="radio" /><input id="__tabbed_31_4" name="__tabbed_31" type="radio" /><input id="__tabbed_31_5" name="__tabbed_31" type="radio" /><input id="__tabbed_31_6" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">HTTPie</label><label for="__tabbed_31_2">Python</label><label for="__tabbed_31_3">TypeScript</label><label for="__tabbed_31_4">Path Parameters</label><label for="__tabbed_31_5">Responses</label><label for="__tabbed_31_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29544,7 +29776,7 @@
 <hr />
 <h3 id="set-resource-backend-id">Set resource backend ID</h3>
 <p>Allows a service provider to set or update the backend ID for a resource, linking it to an external system's identifier.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="31:7"><input checked="checked" id="__tabbed_31_1" name="__tabbed_31" type="radio" /><input id="__tabbed_31_2" name="__tabbed_31" type="radio" /><input id="__tabbed_31_3" name="__tabbed_31" type="radio" /><input id="__tabbed_31_4" name="__tabbed_31" type="radio" /><input id="__tabbed_31_5" name="__tabbed_31" type="radio" /><input id="__tabbed_31_6" name="__tabbed_31" type="radio" /><input id="__tabbed_31_7" name="__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="__tabbed_31_1">HTTPie</label><label for="__tabbed_31_2">Python</label><label for="__tabbed_31_3">TypeScript</label><label for="__tabbed_31_4">Path Parameters</label><label for="__tabbed_31_5">Request Body</label><label for="__tabbed_31_6">Responses</label><label for="__tabbed_31_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="32:7"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><input id="__tabbed_32_6" name="__tabbed_32" type="radio" /><input id="__tabbed_32_7" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Request Body</label><label for="__tabbed_32_6">Responses</label><label for="__tabbed_32_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29684,7 +29916,7 @@
 <hr />
 <h3 id="set-resource-backend-metadata">Set resource backend metadata</h3>
 <p>Allows a service provider to set or update the backend-specific metadata for a resource.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="32:7"><input checked="checked" id="__tabbed_32_1" name="__tabbed_32" type="radio" /><input id="__tabbed_32_2" name="__tabbed_32" type="radio" /><input id="__tabbed_32_3" name="__tabbed_32" type="radio" /><input id="__tabbed_32_4" name="__tabbed_32" type="radio" /><input id="__tabbed_32_5" name="__tabbed_32" type="radio" /><input id="__tabbed_32_6" name="__tabbed_32" type="radio" /><input id="__tabbed_32_7" name="__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="__tabbed_32_1">HTTPie</label><label for="__tabbed_32_2">Python</label><label for="__tabbed_32_3">TypeScript</label><label for="__tabbed_32_4">Path Parameters</label><label for="__tabbed_32_5">Request Body (required)</label><label for="__tabbed_32_6">Responses</label><label for="__tabbed_32_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="33:7"><input checked="checked" id="__tabbed_33_1" name="__tabbed_33" type="radio" /><input id="__tabbed_33_2" name="__tabbed_33" type="radio" /><input id="__tabbed_33_3" name="__tabbed_33" type="radio" /><input id="__tabbed_33_4" name="__tabbed_33" type="radio" /><input id="__tabbed_33_5" name="__tabbed_33" type="radio" /><input id="__tabbed_33_6" name="__tabbed_33" type="radio" /><input id="__tabbed_33_7" name="__tabbed_33" type="radio" /><div class="tabbed-labels"><label for="__tabbed_33_1">HTTPie</label><label for="__tabbed_33_2">Python</label><label for="__tabbed_33_3">TypeScript</label><label for="__tabbed_33_4">Path Parameters</label><label for="__tabbed_33_5">Request Body (required)</label><label for="__tabbed_33_6">Responses</label><label for="__tabbed_33_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29836,7 +30068,7 @@
 <hr />
 <h3 id="set-downscaled-flag-for-resource">Set downscaled flag for resource</h3>
 <p>Sets the 'downscaled' flag for a resource. Requires staff permissions.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="33:7"><input checked="checked" id="__tabbed_33_1" name="__tabbed_33" type="radio" /><input id="__tabbed_33_2" name="__tabbed_33" type="radio" /><input id="__tabbed_33_3" name="__tabbed_33" type="radio" /><input id="__tabbed_33_4" name="__tabbed_33" type="radio" /><input id="__tabbed_33_5" name="__tabbed_33" type="radio" /><input id="__tabbed_33_6" name="__tabbed_33" type="radio" /><input id="__tabbed_33_7" name="__tabbed_33" type="radio" /><div class="tabbed-labels"><label for="__tabbed_33_1">HTTPie</label><label for="__tabbed_33_2">Python</label><label for="__tabbed_33_3">TypeScript</label><label for="__tabbed_33_4">Path Parameters</label><label for="__tabbed_33_5">Request Body</label><label for="__tabbed_33_6">Responses</label><label for="__tabbed_33_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="34:7"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><input id="__tabbed_34_2" name="__tabbed_34" type="radio" /><input id="__tabbed_34_3" name="__tabbed_34" type="radio" /><input id="__tabbed_34_4" name="__tabbed_34" type="radio" /><input id="__tabbed_34_5" name="__tabbed_34" type="radio" /><input id="__tabbed_34_6" name="__tabbed_34" type="radio" /><input id="__tabbed_34_7" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">HTTPie</label><label for="__tabbed_34_2">Python</label><label for="__tabbed_34_3">TypeScript</label><label for="__tabbed_34_4">Path Parameters</label><label for="__tabbed_34_5">Request Body</label><label for="__tabbed_34_6">Responses</label><label for="__tabbed_34_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -29975,7 +30207,7 @@
 <hr />
 <h3 id="set-resource-effective-id">Set resource effective ID</h3>
 <p>Allows a service provider to set or update the effective ID for a resource. The effective ID represents the backend identifier assigned by a downstream provider in federated Waldur deployments.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="34:7"><input checked="checked" id="__tabbed_34_1" name="__tabbed_34" type="radio" /><input id="__tabbed_34_2" name="__tabbed_34" type="radio" /><input id="__tabbed_34_3" name="__tabbed_34" type="radio" /><input id="__tabbed_34_4" name="__tabbed_34" type="radio" /><input id="__tabbed_34_5" name="__tabbed_34" type="radio" /><input id="__tabbed_34_6" name="__tabbed_34" type="radio" /><input id="__tabbed_34_7" name="__tabbed_34" type="radio" /><div class="tabbed-labels"><label for="__tabbed_34_1">HTTPie</label><label for="__tabbed_34_2">Python</label><label for="__tabbed_34_3">TypeScript</label><label for="__tabbed_34_4">Path Parameters</label><label for="__tabbed_34_5">Request Body</label><label for="__tabbed_34_6">Responses</label><label for="__tabbed_34_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="35:7"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><input id="__tabbed_35_2" name="__tabbed_35" type="radio" /><input id="__tabbed_35_3" name="__tabbed_35" type="radio" /><input id="__tabbed_35_4" name="__tabbed_35" type="radio" /><input id="__tabbed_35_5" name="__tabbed_35" type="radio" /><input id="__tabbed_35_6" name="__tabbed_35" type="radio" /><input id="__tabbed_35_7" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">HTTPie</label><label for="__tabbed_35_2">Python</label><label for="__tabbed_35_3">TypeScript</label><label for="__tabbed_35_4">Path Parameters</label><label for="__tabbed_35_5">Request Body</label><label for="__tabbed_35_6">Responses</label><label for="__tabbed_35_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30115,7 +30347,7 @@
 <hr />
 <h3 id="set-end-date-of-the-resource">Set end date of the resource</h3>
 <p>Allows a service provider to set or update the end date for a resource.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="35:7"><input checked="checked" id="__tabbed_35_1" name="__tabbed_35" type="radio" /><input id="__tabbed_35_2" name="__tabbed_35" type="radio" /><input id="__tabbed_35_3" name="__tabbed_35" type="radio" /><input id="__tabbed_35_4" name="__tabbed_35" type="radio" /><input id="__tabbed_35_5" name="__tabbed_35" type="radio" /><input id="__tabbed_35_6" name="__tabbed_35" type="radio" /><input id="__tabbed_35_7" name="__tabbed_35" type="radio" /><div class="tabbed-labels"><label for="__tabbed_35_1">HTTPie</label><label for="__tabbed_35_2">Python</label><label for="__tabbed_35_3">TypeScript</label><label for="__tabbed_35_4">Path Parameters</label><label for="__tabbed_35_5">Request Body</label><label for="__tabbed_35_6">Responses</label><label for="__tabbed_35_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="36:7"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><input id="__tabbed_36_2" name="__tabbed_36" type="radio" /><input id="__tabbed_36_3" name="__tabbed_36" type="radio" /><input id="__tabbed_36_4" name="__tabbed_36" type="radio" /><input id="__tabbed_36_5" name="__tabbed_36" type="radio" /><input id="__tabbed_36_6" name="__tabbed_36" type="radio" /><input id="__tabbed_36_7" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">HTTPie</label><label for="__tabbed_36_2">Python</label><label for="__tabbed_36_3">TypeScript</label><label for="__tabbed_36_4">Path Parameters</label><label for="__tabbed_36_5">Request Body</label><label for="__tabbed_36_6">Responses</label><label for="__tabbed_36_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30243,7 +30475,7 @@
 <hr />
 <h3 id="set-end-date-by-provider">Set end date by provider</h3>
 <p>Deprecated: Use set_end_date instead. Allows a service provider to set or update the end date for a resource.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="36:7"><input checked="checked" id="__tabbed_36_1" name="__tabbed_36" type="radio" /><input id="__tabbed_36_2" name="__tabbed_36" type="radio" /><input id="__tabbed_36_3" name="__tabbed_36" type="radio" /><input id="__tabbed_36_4" name="__tabbed_36" type="radio" /><input id="__tabbed_36_5" name="__tabbed_36" type="radio" /><input id="__tabbed_36_6" name="__tabbed_36" type="radio" /><input id="__tabbed_36_7" name="__tabbed_36" type="radio" /><div class="tabbed-labels"><label for="__tabbed_36_1">HTTPie</label><label for="__tabbed_36_2">Python</label><label for="__tabbed_36_3">TypeScript</label><label for="__tabbed_36_4">Path Parameters</label><label for="__tabbed_36_5">Request Body</label><label for="__tabbed_36_6">Responses</label><label for="__tabbed_36_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="37:7"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><input id="__tabbed_37_2" name="__tabbed_37" type="radio" /><input id="__tabbed_37_3" name="__tabbed_37" type="radio" /><input id="__tabbed_37_4" name="__tabbed_37" type="radio" /><input id="__tabbed_37_5" name="__tabbed_37" type="radio" /><input id="__tabbed_37_6" name="__tabbed_37" type="radio" /><input id="__tabbed_37_7" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">HTTPie</label><label for="__tabbed_37_2">Python</label><label for="__tabbed_37_3">TypeScript</label><label for="__tabbed_37_4">Path Parameters</label><label for="__tabbed_37_5">Request Body</label><label for="__tabbed_37_6">Responses</label><label for="__tabbed_37_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30375,7 +30607,7 @@
 <hr />
 <h3 id="set-end-date-of-the-resource-by-staff">Set end date of the resource by staff</h3>
 <p>Deprecated: Use set_end_date instead. Allows a staff user to set or update the end date for a resource.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="37:7"><input checked="checked" id="__tabbed_37_1" name="__tabbed_37" type="radio" /><input id="__tabbed_37_2" name="__tabbed_37" type="radio" /><input id="__tabbed_37_3" name="__tabbed_37" type="radio" /><input id="__tabbed_37_4" name="__tabbed_37" type="radio" /><input id="__tabbed_37_5" name="__tabbed_37" type="radio" /><input id="__tabbed_37_6" name="__tabbed_37" type="radio" /><input id="__tabbed_37_7" name="__tabbed_37" type="radio" /><div class="tabbed-labels"><label for="__tabbed_37_1">HTTPie</label><label for="__tabbed_37_2">Python</label><label for="__tabbed_37_3">TypeScript</label><label for="__tabbed_37_4">Path Parameters</label><label for="__tabbed_37_5">Request Body</label><label for="__tabbed_37_6">Responses</label><label for="__tabbed_37_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="38:7"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><input id="__tabbed_38_2" name="__tabbed_38" type="radio" /><input id="__tabbed_38_3" name="__tabbed_38" type="radio" /><input id="__tabbed_38_4" name="__tabbed_38" type="radio" /><input id="__tabbed_38_5" name="__tabbed_38" type="radio" /><input id="__tabbed_38_6" name="__tabbed_38" type="radio" /><input id="__tabbed_38_7" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">HTTPie</label><label for="__tabbed_38_2">Python</label><label for="__tabbed_38_3">TypeScript</label><label for="__tabbed_38_4">Path Parameters</label><label for="__tabbed_38_5">Request Body</label><label for="__tabbed_38_6">Responses</label><label for="__tabbed_38_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30502,7 +30734,7 @@
 <hr />
 <h3 id="set-resource-access-endpoints">Set resource access endpoints</h3>
 <p>Allows a service provider to replace the set of access endpoints (name + URL) reported for a resource. Used to surface dynamic per-resource endpoints (e.g. an inference API) in the UI.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="38:7"><input checked="checked" id="__tabbed_38_1" name="__tabbed_38" type="radio" /><input id="__tabbed_38_2" name="__tabbed_38" type="radio" /><input id="__tabbed_38_3" name="__tabbed_38" type="radio" /><input id="__tabbed_38_4" name="__tabbed_38" type="radio" /><input id="__tabbed_38_5" name="__tabbed_38" type="radio" /><input id="__tabbed_38_6" name="__tabbed_38" type="radio" /><input id="__tabbed_38_7" name="__tabbed_38" type="radio" /><div class="tabbed-labels"><label for="__tabbed_38_1">HTTPie</label><label for="__tabbed_38_2">Python</label><label for="__tabbed_38_3">TypeScript</label><label for="__tabbed_38_4">Path Parameters</label><label for="__tabbed_38_5">Request Body (required)</label><label for="__tabbed_38_6">Responses</label><label for="__tabbed_38_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="39:7"><input checked="checked" id="__tabbed_39_1" name="__tabbed_39" type="radio" /><input id="__tabbed_39_2" name="__tabbed_39" type="radio" /><input id="__tabbed_39_3" name="__tabbed_39" type="radio" /><input id="__tabbed_39_4" name="__tabbed_39" type="radio" /><input id="__tabbed_39_5" name="__tabbed_39" type="radio" /><input id="__tabbed_39_6" name="__tabbed_39" type="radio" /><input id="__tabbed_39_7" name="__tabbed_39" type="radio" /><div class="tabbed-labels"><label for="__tabbed_39_1">HTTPie</label><label for="__tabbed_39_2">Python</label><label for="__tabbed_39_3">TypeScript</label><label for="__tabbed_39_4">Path Parameters</label><label for="__tabbed_39_5">Request Body (required)</label><label for="__tabbed_39_6">Responses</label><label for="__tabbed_39_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30668,7 +30900,7 @@
 <hr />
 <h3 id="set-resource-limits">Set resource limits</h3>
 <p>Allows a service provider to directly set the limits for a resource. This is typically used for administrative changes or backend synchronization, bypassing the normal order process.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="39:7"><input checked="checked" id="__tabbed_39_1" name="__tabbed_39" type="radio" /><input id="__tabbed_39_2" name="__tabbed_39" type="radio" /><input id="__tabbed_39_3" name="__tabbed_39" type="radio" /><input id="__tabbed_39_4" name="__tabbed_39" type="radio" /><input id="__tabbed_39_5" name="__tabbed_39" type="radio" /><input id="__tabbed_39_6" name="__tabbed_39" type="radio" /><input id="__tabbed_39_7" name="__tabbed_39" type="radio" /><div class="tabbed-labels"><label for="__tabbed_39_1">HTTPie</label><label for="__tabbed_39_2">Python</label><label for="__tabbed_39_3">TypeScript</label><label for="__tabbed_39_4">Path Parameters</label><label for="__tabbed_39_5">Request Body (required)</label><label for="__tabbed_39_6">Responses</label><label for="__tabbed_39_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="40:7"><input checked="checked" id="__tabbed_40_1" name="__tabbed_40" type="radio" /><input id="__tabbed_40_2" name="__tabbed_40" type="radio" /><input id="__tabbed_40_3" name="__tabbed_40" type="radio" /><input id="__tabbed_40_4" name="__tabbed_40" type="radio" /><input id="__tabbed_40_5" name="__tabbed_40" type="radio" /><input id="__tabbed_40_6" name="__tabbed_40" type="radio" /><input id="__tabbed_40_7" name="__tabbed_40" type="radio" /><div class="tabbed-labels"><label for="__tabbed_40_1">HTTPie</label><label for="__tabbed_40_2">Python</label><label for="__tabbed_40_3">TypeScript</label><label for="__tabbed_40_4">Path Parameters</label><label for="__tabbed_40_5">Request Body (required)</label><label for="__tabbed_40_6">Responses</label><label for="__tabbed_40_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -30822,7 +31054,7 @@
 <hr />
 <h3 id="report-per-member-sync-statuses-for-a-resource">Report per-member sync statuses for a resource</h3>
 <p>Complete report from the site agent: afterwards the resource's stored member sync statuses are exactly the submitted set. Only the differences are written; unchanged statuses are left as they are, and the report time is recorded once per resource. Requires the offering to opt in via the enable_membership_sync_status plugin option. Entries whose user cannot be resolved are skipped and echoed back in the response instead of failing the whole report.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="40:7"><input checked="checked" id="__tabbed_40_1" name="__tabbed_40" type="radio" /><input id="__tabbed_40_2" name="__tabbed_40" type="radio" /><input id="__tabbed_40_3" name="__tabbed_40" type="radio" /><input id="__tabbed_40_4" name="__tabbed_40" type="radio" /><input id="__tabbed_40_5" name="__tabbed_40" type="radio" /><input id="__tabbed_40_6" name="__tabbed_40" type="radio" /><input id="__tabbed_40_7" name="__tabbed_40" type="radio" /><div class="tabbed-labels"><label for="__tabbed_40_1">HTTPie</label><label for="__tabbed_40_2">Python</label><label for="__tabbed_40_3">TypeScript</label><label for="__tabbed_40_4">Path Parameters</label><label for="__tabbed_40_5">Request Body (required)</label><label for="__tabbed_40_6">Responses</label><label for="__tabbed_40_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="41:7"><input checked="checked" id="__tabbed_41_1" name="__tabbed_41" type="radio" /><input id="__tabbed_41_2" name="__tabbed_41" type="radio" /><input id="__tabbed_41_3" name="__tabbed_41" type="radio" /><input id="__tabbed_41_4" name="__tabbed_41" type="radio" /><input id="__tabbed_41_5" name="__tabbed_41" type="radio" /><input id="__tabbed_41_6" name="__tabbed_41" type="radio" /><input id="__tabbed_41_7" name="__tabbed_41" type="radio" /><div class="tabbed-labels"><label for="__tabbed_41_1">HTTPie</label><label for="__tabbed_41_2">Python</label><label for="__tabbed_41_3">TypeScript</label><label for="__tabbed_41_4">Path Parameters</label><label for="__tabbed_41_5">Request Body (required)</label><label for="__tabbed_41_6">Responses</label><label for="__tabbed_41_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31027,9 +31259,187 @@
 </div>
 </div>
 <hr />
+<h3 id="set-the-value-of-a-secret-option">Set the value of a secret option</h3>
+<p>Lets the service provider or its site agent store, or replace, the value of one of the resource's secret options, encrypted, whoever the option's source. The value is never returned; the response says whether it is set. Audited.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="42:7"><input checked="checked" id="__tabbed_42_1" name="__tabbed_42" type="radio" /><input id="__tabbed_42_2" name="__tabbed_42" type="radio" /><input id="__tabbed_42_3" name="__tabbed_42" type="radio" /><input id="__tabbed_42_4" name="__tabbed_42" type="radio" /><input id="__tabbed_42_5" name="__tabbed_42" type="radio" /><input id="__tabbed_42_6" name="__tabbed_42" type="radio" /><input id="__tabbed_42_7" name="__tabbed_42" type="radio" /><div class="tabbed-labels"><label for="__tabbed_42_1">HTTPie</label><label for="__tabbed_42_2">Python</label><label for="__tabbed_42_3">TypeScript</label><label for="__tabbed_42_4">Path Parameters</label><label for="__tabbed_42_5">Request Body (required)</label><label for="__tabbed_42_6">Responses</label><label for="__tabbed_42_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-provider-resources/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_option_secret/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">option_name</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.resource_option_secret_set_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResourceOptionSecretSetRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_provider_resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_provider_resources_set_option_secret</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">ResourceOptionSecretSetRequest</span><span class="p">(</span>
+    <span class="n">option_name</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_provider_resources_set_option_secret</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/resource_option_secret_set_request.py"><code>ResourceOptionSecretSetRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_provider_resources/marketplace_provider_resources_set_option_secret.py"><code>marketplace_provider_resources_set_option_secret</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceProviderResourcesSetOptionSecret</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceProviderResourcesSetOptionSecret</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;option_name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;value&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>option_name</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Name of a secret option of the offering.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>✓</td>
+<td>The secret, checked against the option's length limits; on a single line unless the option is multiline. Never returned.<br><em>Constraints: write-only</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is_set</code></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>any</td>
+<td>Who set it: the customer or the provider. Null when not set.</td>
+</tr>
+<tr>
+<td><code>modified</code></td>
+<td>string (date-time)</td>
+<td>When it was last set. Null when not set.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Requires <code>RESOURCE.UPDATE_OPTIONS</code> on the offering or the offering's customer.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="set-paused-flag-for-resource">Set paused flag for resource</h3>
 <p>Sets the 'paused' flag for a resource. Requires staff permissions.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="41:7"><input checked="checked" id="__tabbed_41_1" name="__tabbed_41" type="radio" /><input id="__tabbed_41_2" name="__tabbed_41" type="radio" /><input id="__tabbed_41_3" name="__tabbed_41" type="radio" /><input id="__tabbed_41_4" name="__tabbed_41" type="radio" /><input id="__tabbed_41_5" name="__tabbed_41" type="radio" /><input id="__tabbed_41_6" name="__tabbed_41" type="radio" /><input id="__tabbed_41_7" name="__tabbed_41" type="radio" /><div class="tabbed-labels"><label for="__tabbed_41_1">HTTPie</label><label for="__tabbed_41_2">Python</label><label for="__tabbed_41_3">TypeScript</label><label for="__tabbed_41_4">Path Parameters</label><label for="__tabbed_41_5">Request Body</label><label for="__tabbed_41_6">Responses</label><label for="__tabbed_41_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="43:7"><input checked="checked" id="__tabbed_43_1" name="__tabbed_43" type="radio" /><input id="__tabbed_43_2" name="__tabbed_43" type="radio" /><input id="__tabbed_43_3" name="__tabbed_43" type="radio" /><input id="__tabbed_43_4" name="__tabbed_43" type="radio" /><input id="__tabbed_43_5" name="__tabbed_43" type="radio" /><input id="__tabbed_43_6" name="__tabbed_43" type="radio" /><input id="__tabbed_43_7" name="__tabbed_43" type="radio" /><div class="tabbed-labels"><label for="__tabbed_43_1">HTTPie</label><label for="__tabbed_43_2">Python</label><label for="__tabbed_43_3">TypeScript</label><label for="__tabbed_43_4">Path Parameters</label><label for="__tabbed_43_5">Request Body</label><label for="__tabbed_43_6">Responses</label><label for="__tabbed_43_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31168,7 +31578,7 @@
 <hr />
 <h3 id="set-restrict-member-access-flag">Set restrict member access flag</h3>
 <p>Sets the 'restrict_member_access' flag for a resource. Requires staff permissions.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="42:7"><input checked="checked" id="__tabbed_42_1" name="__tabbed_42" type="radio" /><input id="__tabbed_42_2" name="__tabbed_42" type="radio" /><input id="__tabbed_42_3" name="__tabbed_42" type="radio" /><input id="__tabbed_42_4" name="__tabbed_42" type="radio" /><input id="__tabbed_42_5" name="__tabbed_42" type="radio" /><input id="__tabbed_42_6" name="__tabbed_42" type="radio" /><input id="__tabbed_42_7" name="__tabbed_42" type="radio" /><div class="tabbed-labels"><label for="__tabbed_42_1">HTTPie</label><label for="__tabbed_42_2">Python</label><label for="__tabbed_42_3">TypeScript</label><label for="__tabbed_42_4">Path Parameters</label><label for="__tabbed_42_5">Request Body</label><label for="__tabbed_42_6">Responses</label><label for="__tabbed_42_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="44:7"><input checked="checked" id="__tabbed_44_1" name="__tabbed_44" type="radio" /><input id="__tabbed_44_2" name="__tabbed_44" type="radio" /><input id="__tabbed_44_3" name="__tabbed_44" type="radio" /><input id="__tabbed_44_4" name="__tabbed_44" type="radio" /><input id="__tabbed_44_5" name="__tabbed_44" type="radio" /><input id="__tabbed_44_6" name="__tabbed_44" type="radio" /><input id="__tabbed_44_7" name="__tabbed_44" type="radio" /><div class="tabbed-labels"><label for="__tabbed_44_1">HTTPie</label><label for="__tabbed_44_2">Python</label><label for="__tabbed_44_3">TypeScript</label><label for="__tabbed_44_4">Path Parameters</label><label for="__tabbed_44_5">Request Body</label><label for="__tabbed_44_6">Responses</label><label for="__tabbed_44_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31307,7 +31717,7 @@
 <hr />
 <h3 id="set-resource-slug">Set resource slug</h3>
 <p>Updates the slug of a resource. Requires staff or the RESOURCE.SET_SLUG permission, which no role holds unless the deployment grants it. Other than staff, a holder cannot change the slug once the resource's creation order is executing or the resource exists in the backend.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="43:7"><input checked="checked" id="__tabbed_43_1" name="__tabbed_43" type="radio" /><input id="__tabbed_43_2" name="__tabbed_43" type="radio" /><input id="__tabbed_43_3" name="__tabbed_43" type="radio" /><input id="__tabbed_43_4" name="__tabbed_43" type="radio" /><input id="__tabbed_43_5" name="__tabbed_43" type="radio" /><input id="__tabbed_43_6" name="__tabbed_43" type="radio" /><input id="__tabbed_43_7" name="__tabbed_43" type="radio" /><div class="tabbed-labels"><label for="__tabbed_43_1">HTTPie</label><label for="__tabbed_43_2">Python</label><label for="__tabbed_43_3">TypeScript</label><label for="__tabbed_43_4">Path Parameters</label><label for="__tabbed_43_5">Request Body (required)</label><label for="__tabbed_43_6">Responses</label><label for="__tabbed_43_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="45:7"><input checked="checked" id="__tabbed_45_1" name="__tabbed_45" type="radio" /><input id="__tabbed_45_2" name="__tabbed_45" type="radio" /><input id="__tabbed_45_3" name="__tabbed_45" type="radio" /><input id="__tabbed_45_4" name="__tabbed_45" type="radio" /><input id="__tabbed_45_5" name="__tabbed_45" type="radio" /><input id="__tabbed_45_6" name="__tabbed_45" type="radio" /><input id="__tabbed_45_7" name="__tabbed_45" type="radio" /><div class="tabbed-labels"><label for="__tabbed_45_1">HTTPie</label><label for="__tabbed_45_2">Python</label><label for="__tabbed_45_3">TypeScript</label><label for="__tabbed_45_4">Path Parameters</label><label for="__tabbed_45_5">Request Body (required)</label><label for="__tabbed_45_6">Responses</label><label for="__tabbed_45_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31459,7 +31869,7 @@
 <hr />
 <h3 id="set-resource-state-to-ok_1">Set resource state to OK</h3>
 <p>Allows a service provider to manually set the resource state to OK. This is useful for recovering from Erred state.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="44:6"><input checked="checked" id="__tabbed_44_1" name="__tabbed_44" type="radio" /><input id="__tabbed_44_2" name="__tabbed_44" type="radio" /><input id="__tabbed_44_3" name="__tabbed_44" type="radio" /><input id="__tabbed_44_4" name="__tabbed_44" type="radio" /><input id="__tabbed_44_5" name="__tabbed_44" type="radio" /><input id="__tabbed_44_6" name="__tabbed_44" type="radio" /><div class="tabbed-labels"><label for="__tabbed_44_1">HTTPie</label><label for="__tabbed_44_2">Python</label><label for="__tabbed_44_3">TypeScript</label><label for="__tabbed_44_4">Path Parameters</label><label for="__tabbed_44_5">Responses</label><label for="__tabbed_44_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="46:6"><input checked="checked" id="__tabbed_46_1" name="__tabbed_46" type="radio" /><input id="__tabbed_46_2" name="__tabbed_46" type="radio" /><input id="__tabbed_46_3" name="__tabbed_46" type="radio" /><input id="__tabbed_46_4" name="__tabbed_46" type="radio" /><input id="__tabbed_46_5" name="__tabbed_46" type="radio" /><input id="__tabbed_46_6" name="__tabbed_46" type="radio" /><div class="tabbed-labels"><label for="__tabbed_46_1">HTTPie</label><label for="__tabbed_46_2">Python</label><label for="__tabbed_46_3">TypeScript</label><label for="__tabbed_46_4">Path Parameters</label><label for="__tabbed_46_5">Responses</label><label for="__tabbed_46_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31572,7 +31982,7 @@
 <hr />
 <h3 id="submit-a-report-for-a-resource">Submit a report for a resource</h3>
 <p>Allows a service provider to submit a report (e.g., usage or status report) for a resource.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="45:7"><input checked="checked" id="__tabbed_45_1" name="__tabbed_45" type="radio" /><input id="__tabbed_45_2" name="__tabbed_45" type="radio" /><input id="__tabbed_45_3" name="__tabbed_45" type="radio" /><input id="__tabbed_45_4" name="__tabbed_45" type="radio" /><input id="__tabbed_45_5" name="__tabbed_45" type="radio" /><input id="__tabbed_45_6" name="__tabbed_45" type="radio" /><input id="__tabbed_45_7" name="__tabbed_45" type="radio" /><div class="tabbed-labels"><label for="__tabbed_45_1">HTTPie</label><label for="__tabbed_45_2">Python</label><label for="__tabbed_45_3">TypeScript</label><label for="__tabbed_45_4">Path Parameters</label><label for="__tabbed_45_5">Request Body (required)</label><label for="__tabbed_45_6">Responses</label><label for="__tabbed_45_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="47:7"><input checked="checked" id="__tabbed_47_1" name="__tabbed_47" type="radio" /><input id="__tabbed_47_2" name="__tabbed_47" type="radio" /><input id="__tabbed_47_3" name="__tabbed_47" type="radio" /><input id="__tabbed_47_4" name="__tabbed_47" type="radio" /><input id="__tabbed_47_5" name="__tabbed_47" type="radio" /><input id="__tabbed_47_6" name="__tabbed_47" type="radio" /><input id="__tabbed_47_7" name="__tabbed_47" type="radio" /><div class="tabbed-labels"><label for="__tabbed_47_1">HTTPie</label><label for="__tabbed_47_2">Python</label><label for="__tabbed_47_3">TypeScript</label><label for="__tabbed_47_4">Path Parameters</label><label for="__tabbed_47_5">Request Body (required)</label><label for="__tabbed_47_6">Responses</label><label for="__tabbed_47_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31738,7 +32148,7 @@
 <hr />
 <h3 id="sync-user-roles">Sync user roles</h3>
 <p>Trigger user role sync for this resource. Sends a notification to RabbitMQ that this resource needs user role synchronization; agents without event subscriptions apply the change on their next polling cycle.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="46:6"><input checked="checked" id="__tabbed_46_1" name="__tabbed_46" type="radio" /><input id="__tabbed_46_2" name="__tabbed_46" type="radio" /><input id="__tabbed_46_3" name="__tabbed_46" type="radio" /><input id="__tabbed_46_4" name="__tabbed_46" type="radio" /><input id="__tabbed_46_5" name="__tabbed_46" type="radio" /><input id="__tabbed_46_6" name="__tabbed_46" type="radio" /><div class="tabbed-labels"><label for="__tabbed_46_1">HTTPie</label><label for="__tabbed_46_2">Python</label><label for="__tabbed_46_3">TypeScript</label><label for="__tabbed_46_4">Path Parameters</label><label for="__tabbed_46_5">Responses</label><label for="__tabbed_46_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="48:6"><input checked="checked" id="__tabbed_48_1" name="__tabbed_48" type="radio" /><input id="__tabbed_48_2" name="__tabbed_48" type="radio" /><input id="__tabbed_48_3" name="__tabbed_48" type="radio" /><input id="__tabbed_48_4" name="__tabbed_48" type="radio" /><input id="__tabbed_48_5" name="__tabbed_48" type="radio" /><input id="__tabbed_48_6" name="__tabbed_48" type="radio" /><div class="tabbed-labels"><label for="__tabbed_48_1">HTTPie</label><label for="__tabbed_48_2">Python</label><label for="__tabbed_48_3">TypeScript</label><label for="__tabbed_48_4">Path Parameters</label><label for="__tabbed_48_5">Responses</label><label for="__tabbed_48_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -31868,7 +32278,7 @@
 <hr />
 <h3 id="terminate-a-resource">Terminate a resource</h3>
 <p>Creates a marketplace order to terminate the resource. This action is asynchronous and may require approval.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="47:7"><input checked="checked" id="__tabbed_47_1" name="__tabbed_47" type="radio" /><input id="__tabbed_47_2" name="__tabbed_47" type="radio" /><input id="__tabbed_47_3" name="__tabbed_47" type="radio" /><input id="__tabbed_47_4" name="__tabbed_47" type="radio" /><input id="__tabbed_47_5" name="__tabbed_47" type="radio" /><input id="__tabbed_47_6" name="__tabbed_47" type="radio" /><input id="__tabbed_47_7" name="__tabbed_47" type="radio" /><div class="tabbed-labels"><label for="__tabbed_47_1">HTTPie</label><label for="__tabbed_47_2">Python</label><label for="__tabbed_47_3">TypeScript</label><label for="__tabbed_47_4">Path Parameters</label><label for="__tabbed_47_5">Request Body</label><label for="__tabbed_47_6">Responses</label><label for="__tabbed_47_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="49:7"><input checked="checked" id="__tabbed_49_1" name="__tabbed_49" type="radio" /><input id="__tabbed_49_2" name="__tabbed_49" type="radio" /><input id="__tabbed_49_3" name="__tabbed_49" type="radio" /><input id="__tabbed_49_4" name="__tabbed_49" type="radio" /><input id="__tabbed_49_5" name="__tabbed_49" type="radio" /><input id="__tabbed_49_6" name="__tabbed_49" type="radio" /><input id="__tabbed_49_7" name="__tabbed_49" type="radio" /><div class="tabbed-labels"><label for="__tabbed_49_1">HTTPie</label><label for="__tabbed_49_2">Python</label><label for="__tabbed_49_3">TypeScript</label><label for="__tabbed_49_4">Path Parameters</label><label for="__tabbed_49_5">Request Body</label><label for="__tabbed_49_6">Responses</label><label for="__tabbed_49_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
