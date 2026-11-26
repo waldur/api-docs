@@ -24989,7 +24989,7 @@
 <td><code>limits</code></td>
 <td>object (free-form)</td>
 <td></td>
-<td>Optional new limits for the resource. Supports upgrades only.</td>
+<td>Optional new limits for the resource; components left out keep their current limits. A raised prepaid limit is also charged for the rest of the current term. A renewal that only lowers limits gets no credit; if the offering's renewal_limit_decrease_policy is stretch_paid_term, the value already paid for the rest of the term is spread over the lower limits and the extension starts when it runs out.</td>
 </tr>
 <tr>
 <td><code>request_comment</code></td>
@@ -30293,72 +30293,114 @@
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>components</code></td>
 <td>array of objects</td>
+<td></td>
 </tr>
 <tr>
 <td><code>components.component_type</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>components.component_name</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>components.billing_type</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>components.billing_period</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.term</code></td>
+<td>any</td>
+<td>For a prepaid line, the term it covers: the rest of the current term, charged for a raised limit, or the extension.</td>
 </tr>
 <tr>
 <td><code>components.current_limit</code></td>
-<td>integer</td>
+<td>number (double)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>components.new_limit</code></td>
-<td>integer</td>
+<td>number (double)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>components.unit_price</code></td>
 <td>string (decimal)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>components.measured_unit</code></td>
 <td>string</td>
+<td></td>
 </tr>
 <tr>
 <td><code>components.period_description</code></td>
 <td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.period_start</code></td>
+<td>string (date)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.period_end</code></td>
+<td>string (date)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components.quantity</code></td>
+<td>string (decimal)</td>
+<td>For a prepaid line, the units charged: limit x months.</td>
 </tr>
 <tr>
 <td><code>components.total</code></td>
 <td>string (decimal)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>subscription_total</code></td>
 <td>string (decimal)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>limit_change_total</code></td>
 <td>string (decimal)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>total</code></td>
 <td>string (decimal)</td>
+<td></td>
 </tr>
 <tr>
 <td><code>remaining_days</code></td>
 <td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>paid_up_end_date</code></td>
+<td>string (date)</td>
+<td>Where the extension starts: the current end date, or later when the renewal only lowers limits and the offering's renewal_limit_decrease_policy spreads the value already paid for the rest of the current term over the lower limits.</td>
 </tr>
 <tr>
 <td><code>new_end_date</code></td>
 <td>string (date)</td>
+<td></td>
 </tr>
 </tbody>
 </table>
