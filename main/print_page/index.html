@@ -155837,7 +155837,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -156655,7 +156655,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -192096,7 +192096,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Every grant to staff and support, the list only active ones unless show_inactive=true. Anyone else sees their own active grants, except those on an organization, or a project of one, that limits portal access to networks the caller's address is outside.</p>
+<p>Every grant to staff and support, the list only active ones unless show_inactive=true. Anyone else sees their own active grants, except those on an organization, or a project of one, that limits portal access to networks the caller's address is outside, or whose address cannot be determined.</p>
 </div>
 </div>
 </div>
@@ -192313,7 +192313,7 @@ On successful completion the task will synchronize quotas with the backend.</p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Every grant to staff and support, the list only active ones unless show_inactive=true. Anyone else sees their own active grants, except those on an organization, or a project of one, that limits portal access to networks the caller's address is outside.</p>
+<p>Every grant to staff and support, the list only active ones unless show_inactive=true. Anyone else sees their own active grants, except those on an organization, or a project of one, that limits portal access to networks the caller's address is outside, or whose address cannot be determined.</p>
 </div>
 </div>
 </div>
@@ -495989,7 +495989,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <p><strong><code>200</code></strong> - </p>
 </div>
 <div class="tabbed-block">
-<p>Any signed-in user. It counts the resources the caller may see as a consumer: Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them.</p>
+<p>Any signed-in user. It counts the resources the caller may see as a consumer: Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined.</p>
 </div>
 </div>
 </div>
@@ -610566,7 +610566,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -611651,7 +611651,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -614841,7 +614841,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -614964,7 +614964,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -616323,7 +616323,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -616516,7 +616516,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -616692,7 +616692,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Staff and support. Otherwise a caller with an active role on the resource itself; with a role granting CUSTOMER.VIEW_TEAM on the resource's organization; with a role granting PROJECT.VIEW_TEAM on any project of that organization; or with OFFERING.UPDATE on the resource's offering, on the offering's organization or on its service provider. A role on one of the resource's resource projects is not enough.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -617732,7 +617732,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
@@ -618431,7 +618431,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <div class="tabbed-block">
 <p>Any signed-in user.</p>
-<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff, support and requests without a client address, an organization that limits portal access to some networks hides its resources from callers outside them. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, except staff, support and requests without a client address.</p>
+<p>Resources of projects where the caller holds RESOURCE.LIST on the project or its organization, and resources they hold a role on, directly or on one of their resource projects. Staff, support and holders of RESOURCE.LIST site-wide see all. Except to staff and support, an organization that limits portal access to some networks hides its resources from callers outside them, and from callers whose address cannot be determined. An offering set to conceal subnet-restricted resources hides a resource from callers outside its access subnets, and from callers whose address cannot be determined, except staff and support.</p>
 </div>
 </div>
 </div>
