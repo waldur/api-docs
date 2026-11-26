@@ -456790,9 +456790,19 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td style="text-align: left;"><a href="#marketplace-accounts-offering-users-get-profile-field-warnings">Get profile field warnings</a></td>
 </tr>
 <tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/marketplace-offering-users/{uuid}/reveal_initial_password/</code></td>
+<td style="text-align: left;"><a href="#marketplace-accounts-offering-users-reveal-the-users-initial-password">Reveal the user's initial password</a></td>
+</tr>
+<tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/marketplace-offering-users/{uuid}/begin_creating/</code></td>
 <td style="text-align: left;"><a href="#marketplace-accounts-offering-users-begin-creation-process">Begin creation process</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-offering-users/{uuid}/clear_initial_password/</code></td>
+<td style="text-align: left;"><a href="#marketplace-accounts-offering-users-clear-the-users-initial-password">Clear the user's initial password</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -456818,6 +456828,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
 <td style="text-align: left;"><code>/api/marketplace-offering-users/{uuid}/set_error_deleting/</code></td>
 <td style="text-align: left;"><a href="#marketplace-accounts-offering-users-set-state-to-error-deleting">Set state to Error Deleting</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
+<td style="text-align: left;"><code>/api/marketplace-offering-users/{uuid}/set_initial_password/</code></td>
+<td style="text-align: left;"><a href="#marketplace-accounts-offering-users-set-the-users-initial-password">Set the user's initial password</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-post">POST</span></td>
@@ -456960,6 +456975,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>has_consent</code></td>
 <td>boolean</td>
 <td>User Has Consent</td>
+</tr>
+<tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Has an initial password stored</td>
 </tr>
 <tr>
 <td><code>is_provider_backed</code></td>
@@ -457335,6 +457355,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>has_compliance_checklist</code></td>
 <td>boolean</td>
 <td>Check if the offering user has a connected compliance checklist completion.</td>
+</tr>
+<tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Whether the site agent stored an initial password the user can reveal.</td>
 </tr>
 <tr>
 <td><code>consent_data</code></td>
@@ -457761,6 +457786,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td>Check if the offering user has a connected compliance checklist completion.</td>
 </tr>
 <tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Whether the site agent stored an initial password the user can reveal.</td>
+</tr>
+<tr>
 <td><code>consent_data</code></td>
 <td>object (free-form)</td>
 <td>User consent data including uuid, version, and agreement_date</td>
@@ -458185,6 +458215,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>has_compliance_checklist</code></td>
 <td>boolean</td>
 <td>Check if the offering user has a connected compliance checklist completion.</td>
+</tr>
+<tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Whether the site agent stored an initial password the user can reveal.</td>
 </tr>
 <tr>
 <td><code>consent_data</code></td>
@@ -458930,6 +458965,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td>Check if the offering user has a connected compliance checklist completion.</td>
 </tr>
 <tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Whether the site agent stored an initial password the user can reveal.</td>
+</tr>
+<tr>
 <td><code>consent_data</code></td>
 <td>object (free-form)</td>
 <td>User consent data including uuid, version, and agreement_date</td>
@@ -459379,6 +459419,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>has_compliance_checklist</code></td>
 <td>boolean</td>
 <td>Check if the offering user has a connected compliance checklist completion.</td>
+</tr>
+<tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Whether the site agent stored an initial password the user can reveal.</td>
 </tr>
 <tr>
 <td><code>consent_data</code></td>
@@ -460742,6 +460787,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td>User Has Consent</td>
 </tr>
 <tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Has an initial password stored</td>
+</tr>
+<tr>
 <td><code>is_provider_backed</code></td>
 <td>boolean</td>
 <td>Backed by a service provider account</td>
@@ -461015,6 +461065,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>has_consent</code></td>
 <td>boolean</td>
 <td>User Has Consent</td>
+</tr>
+<tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Has an initial password stored</td>
 </tr>
 <tr>
 <td><code>is_provider_backed</code></td>
@@ -461300,6 +461355,11 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td><code>has_consent</code></td>
 <td>boolean</td>
 <td>User Has Consent</td>
+</tr>
+<tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td>Has an initial password stored</td>
 </tr>
 <tr>
 <td><code>is_provider_backed</code></td>
@@ -461593,6 +461653,12 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td>User Has Consent</td>
 </tr>
 <tr>
+<td><code>has_initial_password</code></td>
+<td>boolean</td>
+<td></td>
+<td>Has an initial password stored</td>
+</tr>
+<tr>
 <td><code>is_provider_backed</code></td>
 <td>boolean</td>
 <td></td>
@@ -461855,9 +461921,123 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 </div>
 <hr />
+<h3 id="marketplace-accounts-offering-users-reveal-the-users-initial-password">Reveal the user's initial password</h3>
+<p>Returns the password the site agent created the user's account with at the backend. Revealed only to the user it belongs to, signed in as themselves: refused with 403 to anyone else, to staff impersonating the user, and to a personal access token. Audit-logged. It is the initial password: once the user changes it at the backend, it no longer works.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_19_1" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_2" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_3" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_4" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_5" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_6" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_19_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_19_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_19_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_19_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_19_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_19_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-offering-users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/reveal_initial_password/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_offering_users</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_offering_users_reveal_initial_password_retrieve</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_offering_users_reveal_initial_password_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_reveal_initial_password_retrieve.py"><code>marketplace_offering_users_reveal_initial_password_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceOfferingUsersRevealInitialPasswordRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceOfferingUsersRevealInitialPasswordRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>password</code></td>
+<td>string</td>
+<td>The initial password of the user's account at the backend. It stops working once the user changes it there.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>The offering user's own user alone, signed in as themselves. Staff, support and service providers are no exception, nor is staff impersonating the user. A personal access token never reveals it, whatever its scopes.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="marketplace-accounts-offering-users-begin-creation-process">Begin creation process</h3>
 <p>Transitions the offering user state from 'Requested' or 'Error Creating' to 'Creating'. This is typically used by an agent to signal that the creation process has started.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_19_1" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_2" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_3" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_4" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_5" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_19_6" name="marketplace-accounts-offering-users-__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_19_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_19_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_19_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_19_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_19_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_19_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_20_1" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_2" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_3" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_4" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_5" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_6" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_20_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_20_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_20_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_20_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_20_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_20_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -461954,9 +462134,108 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 </div>
 <hr />
+<h3 id="marketplace-accounts-offering-users-clear-the-users-initial-password">Clear the user's initial password</h3>
+<p>Removes the stored initial password, e.g. a wrong value or one for an account that was replaced. Succeeds when none is stored. The site agent stores the password again on its next pass if it still holds the account it created.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_21_1" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_2" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_3" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_4" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_5" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_6" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_21_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_21_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_21_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_21_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_21_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_21_6">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-offering-users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/clear_initial_password/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_offering_users</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_offering_users_clear_initial_password</span> <span class="c1"># (1)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_offering_users_clear_initial_password</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_clear_initial_password.py"><code>marketplace_offering_users_clear_initial_password</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceOfferingUsersClearInitialPassword</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceOfferingUsersClearInitialPassword</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - No response body</p>
+</div>
+<div class="tabbed-block">
+<p>Requires <code>OFFERING.UPDATE_USER</code> on the offering's customer or the offering.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="marketplace-accounts-offering-users-request-deletion-of-an-offering-user">Request deletion of an offering user</h3>
 <p>Initiates the deletion process for an offering user account by transitioning it to the 'Deletion Requested' state.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_20_1" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_2" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_3" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_4" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_5" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_20_6" name="marketplace-accounts-offering-users-__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_20_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_20_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_20_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_20_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_20_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_20_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_22_1" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_2" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_3" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_4" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_5" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_6" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_22_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_22_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_22_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_22_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_22_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_22_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462055,7 +462334,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-accounts-offering-users-set-state-to-deleted">Set state to Deleted</h3>
 <p>Transitions the offering user to the 'Deleted' state, marking the successful completion of the deletion process.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_21_1" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_2" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_3" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_4" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_5" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_21_6" name="marketplace-accounts-offering-users-__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_21_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_21_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_21_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_21_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_21_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_21_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_23_1" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_2" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_3" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_4" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_5" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_6" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_23_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_23_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_23_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_23_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_23_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_23_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462154,7 +462433,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-accounts-offering-users-begin-deletion-process">Begin deletion process</h3>
 <p>Transitions the offering user to the 'Deleting' state. This is typically used by an agent to signal that the deletion process has started.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_22_1" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_2" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_3" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_4" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_5" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_22_6" name="marketplace-accounts-offering-users-__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_22_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_22_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_22_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_22_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_22_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_22_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_24_1" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_2" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_3" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_4" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_5" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_6" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_24_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_24_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_24_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_24_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_24_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_24_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462253,7 +462532,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-accounts-offering-users-set-state-to-error-creating">Set state to Error Creating</h3>
 <p>Manually moves the offering user into the 'Error Creating' state. This is typically used by an agent to report a failure during the creation process.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="23:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_23_1" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_2" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_3" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_4" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_5" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_23_6" name="marketplace-accounts-offering-users-__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_23_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_23_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_23_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_23_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_23_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_23_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_25_1" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_2" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_3" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_4" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_5" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_6" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_25_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_25_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_25_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_25_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_25_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_25_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462352,7 +462631,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-accounts-offering-users-set-state-to-error-deleting">Set state to Error Deleting</h3>
 <p>Manually moves the offering user into the 'Error Deleting' state. This is typically used by an agent to report a failure during the deletion process.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="24:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_24_1" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_2" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_3" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_4" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_5" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_24_6" name="marketplace-accounts-offering-users-__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_24_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_24_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_24_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_24_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_24_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_24_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_26_1" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_2" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_3" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_4" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_5" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_6" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_26_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_26_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_26_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_26_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_26_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_26_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462449,9 +462728,155 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 </div>
 <hr />
+<h3 id="marketplace-accounts-offering-users-set-the-users-initial-password">Set the user's initial password</h3>
+<p>Stores the password the site agent created the user's account with at the backend (e.g. an Open WebUI chat account), so the user can reveal it in Waldur instead of being sent it. Stored encrypted; replaces any value stored before. Only the user reveals it. It is the initial password: a change the user makes at the backend never reaches Waldur. Wiped when the offering user is deleted or its username changes. Refused with 409 for a deleted offering user, and when <code>username</code> is given and the offering user no longer has it.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="27:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_27_1" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_2" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_3" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_4" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_5" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_6" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_7" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_27_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_27_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_27_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_27_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_27_5">Request Body (required)</label><label for="marketplace-accounts-offering-users-__tabbed_27_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_27_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>POST<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-offering-users/a1b2c3d4-e5f6-7890-abcd-ef1234567890/set_initial_password/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">password</span><span class="o">=</span><span class="s2">&quot;********&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.offering_user_set_initial_password_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">OfferingUserSetInitialPasswordRequest</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_offering_users</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_offering_users_set_initial_password</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+
+<span class="n">body_data</span> <span class="o">=</span> <span class="n">OfferingUserSetInitialPasswordRequest</span><span class="p">(</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;********&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_offering_users_set_initial_password</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">body_data</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/offering_user_set_initial_password_request.py"><code>OfferingUserSetInitialPasswordRequest</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_offering_users/marketplace_offering_users_set_initial_password.py"><code>marketplace_offering_users_set_initial_password</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplaceOfferingUsersSetInitialPassword</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplaceOfferingUsersSetInitialPassword</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;password&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;********&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>password</code></td>
+<td>string</td>
+<td>✓</td>
+<td>The initial password of the user's account at the backend. It stops working once the user changes it there.</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>string</td>
+<td></td>
+<td>The offering user's username the password was created for. When given, the password is refused if the offering user no longer has it, so a password for a replaced account is never stored.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - No response body</p>
+</div>
+<div class="tabbed-block">
+<p>Requires <code>OFFERING.UPDATE_USER</code> on the offering's customer or the offering.</p>
+<p>A request acting as staff always meets the permission and role requirements.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="marketplace-accounts-offering-users-set-state-to-ok">Set state to OK</h3>
 <p>Manually sets the offering user state to 'OK'. This can be used to recover from an error state or to complete a manual creation process. This clears any service provider comments.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="25:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_25_1" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_2" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_3" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_4" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_5" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_25_6" name="marketplace-accounts-offering-users-__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_25_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_25_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_25_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_25_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_25_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_25_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="28:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_28_1" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_2" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_3" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_4" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_5" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_6" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_28_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_28_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_28_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_28_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_28_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_28_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462550,7 +462975,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-accounts-offering-users-set-state-to-pending-account-linking">Set state to Pending Account Linking</h3>
 <p>Transitions the state to 'Pending Account Linking' and allows a service provider to add a comment and a URL to guide the user.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="26:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_26_1" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_2" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_3" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_4" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_5" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_6" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_26_7" name="marketplace-accounts-offering-users-__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_26_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_26_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_26_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_26_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_26_5">Request Body</label><label for="marketplace-accounts-offering-users-__tabbed_26_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_26_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="29:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_29_1" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_2" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_3" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_4" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_5" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_6" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_7" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_29_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_29_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_29_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_29_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_29_5">Request Body</label><label for="marketplace-accounts-offering-users-__tabbed_29_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_29_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462684,7 +463109,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-accounts-offering-users-set-state-to-pending-additional-validation">Set state to Pending Additional Validation</h3>
 <p>Transitions the state to 'Pending Additional Validation' and allows a service provider to add a comment and a URL for the user to follow.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="27:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_27_1" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_2" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_3" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_4" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_5" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_6" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_27_7" name="marketplace-accounts-offering-users-__tabbed_27" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_27_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_27_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_27_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_27_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_27_5">Request Body</label><label for="marketplace-accounts-offering-users-__tabbed_27_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_27_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="30:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_30_1" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_2" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_3" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_4" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_5" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_6" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_7" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_30_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_30_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_30_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_30_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_30_5">Request Body</label><label for="marketplace-accounts-offering-users-__tabbed_30_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_30_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462821,7 +463246,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <p>A UID or primary GID re-points the allocation ledger and must fall within the POSIX ID pool resolved for the offering: a value outside that pool's range is rejected with 400, as is a value already held by another active identity (another account, a robot account or a group) and any override on an offering for which no pool resolves. The action is all-or-nothing - a conflict on the second identifier rolls back the change made for the first.</p>
 <p>A UID or primary GID belongs to the user within the pool, not to this single account, so the pin applies across every offering of the provider that resolves to the same pool. An offering with its own pool is unaffected.</p>
 <p>The response 'warnings' list carries only non-fatal advisories about values that were accepted: the reserved POSIX ids 65534 and 65535, and values of 2^31 or above, which may break software using signed 32-bit ids.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="28:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_28_1" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_2" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_3" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_4" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_5" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_6" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_28_7" name="marketplace-accounts-offering-users-__tabbed_28" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_28_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_28_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_28_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_28_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_28_5">Request Body</label><label for="marketplace-accounts-offering-users-__tabbed_28_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_28_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="31:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_31_1" name="marketplace-accounts-offering-users-__tabbed_31" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_31_2" name="marketplace-accounts-offering-users-__tabbed_31" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_31_3" name="marketplace-accounts-offering-users-__tabbed_31" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_31_4" name="marketplace-accounts-offering-users-__tabbed_31" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_31_5" name="marketplace-accounts-offering-users-__tabbed_31" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_31_6" name="marketplace-accounts-offering-users-__tabbed_31" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_31_7" name="marketplace-accounts-offering-users-__tabbed_31" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_31_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_31_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_31_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_31_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_31_5">Request Body</label><label for="marketplace-accounts-offering-users-__tabbed_31_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_31_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -462993,7 +463418,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-accounts-offering-users-set-state-to-validation-complete">Set state to Validation Complete</h3>
 <p>Transitions the state from a pending validation state to 'OK', indicating that the user has completed the required steps. This clears any service provider comments.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="29:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_29_1" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_2" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_3" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_4" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_5" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_29_6" name="marketplace-accounts-offering-users-__tabbed_29" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_29_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_29_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_29_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_29_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_29_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_29_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="32:6"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_32_1" name="marketplace-accounts-offering-users-__tabbed_32" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_32_2" name="marketplace-accounts-offering-users-__tabbed_32" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_32_3" name="marketplace-accounts-offering-users-__tabbed_32" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_32_4" name="marketplace-accounts-offering-users-__tabbed_32" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_32_5" name="marketplace-accounts-offering-users-__tabbed_32" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_32_6" name="marketplace-accounts-offering-users-__tabbed_32" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_32_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_32_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_32_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_32_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_32_5">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_32_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -463092,7 +463517,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <hr />
 <h3 id="marketplace-accounts-offering-users-submit-checklist-answers">Submit checklist answers</h3>
 <p>Submit checklist answers.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="30:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_30_1" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_2" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_3" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_4" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_5" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_6" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_30_7" name="marketplace-accounts-offering-users-__tabbed_30" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_30_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_30_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_30_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_30_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_30_5">Request Body (required)</label><label for="marketplace-accounts-offering-users-__tabbed_30_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_30_7">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="33:7"><input checked="checked" id="marketplace-accounts-offering-users-__tabbed_33_1" name="marketplace-accounts-offering-users-__tabbed_33" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_33_2" name="marketplace-accounts-offering-users-__tabbed_33" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_33_3" name="marketplace-accounts-offering-users-__tabbed_33" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_33_4" name="marketplace-accounts-offering-users-__tabbed_33" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_33_5" name="marketplace-accounts-offering-users-__tabbed_33" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_33_6" name="marketplace-accounts-offering-users-__tabbed_33" type="radio" /><input id="marketplace-accounts-offering-users-__tabbed_33_7" name="marketplace-accounts-offering-users-__tabbed_33" type="radio" /><div class="tabbed-labels"><label for="marketplace-accounts-offering-users-__tabbed_33_1">HTTPie</label><label for="marketplace-accounts-offering-users-__tabbed_33_2">Python</label><label for="marketplace-accounts-offering-users-__tabbed_33_3">TypeScript</label><label for="marketplace-accounts-offering-users-__tabbed_33_4">Path Parameters</label><label for="marketplace-accounts-offering-users-__tabbed_33_5">Request Body (required)</label><label for="marketplace-accounts-offering-users-__tabbed_33_6">Responses</label><label for="marketplace-accounts-offering-users-__tabbed_33_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -485930,21 +486355,6 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
 <td><code>user_has_consent</code></td>
 <td>boolean</td>
 <td></td>
@@ -487240,21 +487650,6 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -524053,21 +524448,6 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
 <td><code>user_has_consent</code></td>
 <td>boolean</td>
 <td></td>
@@ -525424,21 +525804,6 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -564535,21 +564900,6 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
 <td><code>user_has_consent</code></td>
 <td>boolean</td>
 <td></td>
@@ -575091,7 +575441,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 </div>
 <hr />
 <h3 id="marketplace-provider-api-provider-offerings-compare-the-offering-with-its-offering-template">Compare the offering with its offering template</h3>
-<p>Where the offering differs from the offering template it was created from: from the version it was created from, and from the template's latest version, both filled in with the parameter values the offering was created with (a parameter added since takes its default). Only what the template sets is compared, and the offering's name is not. The agent configuration is compared only for who may see the integration settings. Refused for an offering not created from a template, or whose template was deleted.</p>
+<p>Where the offering differs from the offering template it was created from: from the version it was created from, and from the template's latest version, both filled in with the parameter values the offering was created with (a parameter added since takes its default). The latest version is left out, as null, for who may not see the template: it is unpublished. Only what the template sets is compared, and the offering's name is not. The agent configuration is compared only for who may see the integration settings. Refused for an offering not created from a template, or whose template was deleted.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="78:6"><input checked="checked" id="marketplace-provider-api-provider-offerings-__tabbed_78_1" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_2" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_3" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_4" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_5" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><input id="marketplace-provider-api-provider-offerings-__tabbed_78_6" name="marketplace-provider-api-provider-offerings-__tabbed_78" type="radio" /><div class="tabbed-labels"><label for="marketplace-provider-api-provider-offerings-__tabbed_78_1">HTTPie</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_2">Python</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_3">TypeScript</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_4">Path Parameters</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_5">Responses</label><label for="marketplace-provider-api-provider-offerings-__tabbed_78_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -575208,7 +575558,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>latest_version</code></td>
 <td>integer</td>
-<td></td>
+<td>The template's latest version; null for who may not see the template, as it is unpublished.</td>
 </tr>
 <tr>
 <td><code>created_version_differences</code></td>
@@ -575233,7 +575583,7 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>latest_version_differences</code></td>
 <td>array of objects</td>
-<td></td>
+<td>Differences from the latest version; null with latest_version.</td>
 </tr>
 <tr>
 <td><code>latest_version_differences.path</code></td>
@@ -585988,21 +586338,6 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -606745,21 +607080,6 @@ PUT /api/user-invitations/{uuid}/  </p>
 <td></td>
 </tr>
 <tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
 <td><code>user_has_consent</code></td>
 <td>boolean</td>
 <td></td>
@@ -615916,21 +616236,6 @@ PUT /api/user-invitations/{uuid}/  </p>
 <tr>
 <td><code>offering_group_title</code></td>
 <td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
 <td></td>
 </tr>
 <tr>
@@ -823094,7 +823399,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <tr>
 <td><code>document</code></td>
 <td>object (free-form)</td>
-<td>The template's document with the parameters filled in: what the offering is created from, in the import_offering format.</td>
+<td>The template's document with the parameters filled in: what the offering is created from, in the import_offering format. Its agent_configuration is left out for who may not see the organization's integration settings.</td>
 </tr>
 <tr>
 <td><code>warnings</code></td>
@@ -823167,7 +823472,7 @@ refused, the answer is 400 with the blockers and nothing is queued.</p>
 <tr>
 <td><code>document</code></td>
 <td>object (free-form)</td>
-<td>The template's document with the parameters filled in: what the offering is created from, in the import_offering format.</td>
+<td>The template's document with the parameters filled in: what the offering is created from, in the import_offering format. Its agent_configuration is left out for who may not see the organization's integration settings.</td>
 </tr>
 <tr>
 <td><code>warnings</code></td>

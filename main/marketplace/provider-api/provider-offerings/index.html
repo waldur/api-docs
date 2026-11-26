@@ -37763,21 +37763,6 @@
 <td></td>
 </tr>
 <tr>
-<td><code>template_uuid</code></td>
-<td>string (uuid)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_name</code></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><code>template_version</code></td>
-<td>integer</td>
-<td></td>
-</tr>
-<tr>
 <td><code>user_has_consent</code></td>
 <td>boolean</td>
 <td></td>
@@ -48319,7 +48304,7 @@
 </div>
 <hr />
 <h3 id="compare-the-offering-with-its-offering-template">Compare the offering with its offering template</h3>
-<p>Where the offering differs from the offering template it was created from: from the version it was created from, and from the template's latest version, both filled in with the parameter values the offering was created with (a parameter added since takes its default). Only what the template sets is compared, and the offering's name is not. The agent configuration is compared only for who may see the integration settings. Refused for an offering not created from a template, or whose template was deleted.</p>
+<p>Where the offering differs from the offering template it was created from: from the version it was created from, and from the template's latest version, both filled in with the parameter values the offering was created with (a parameter added since takes its default). The latest version is left out, as null, for who may not see the template: it is unpublished. Only what the template sets is compared, and the offering's name is not. The agent configuration is compared only for who may see the integration settings. Refused for an offering not created from a template, or whose template was deleted.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="78:6"><input checked="checked" id="__tabbed_78_1" name="__tabbed_78" type="radio" /><input id="__tabbed_78_2" name="__tabbed_78" type="radio" /><input id="__tabbed_78_3" name="__tabbed_78" type="radio" /><input id="__tabbed_78_4" name="__tabbed_78" type="radio" /><input id="__tabbed_78_5" name="__tabbed_78" type="radio" /><input id="__tabbed_78_6" name="__tabbed_78" type="radio" /><div class="tabbed-labels"><label for="__tabbed_78_1">HTTPie</label><label for="__tabbed_78_2">Python</label><label for="__tabbed_78_3">TypeScript</label><label for="__tabbed_78_4">Path Parameters</label><label for="__tabbed_78_5">Responses</label><label for="__tabbed_78_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -48436,7 +48421,7 @@
 <tr>
 <td><code>latest_version</code></td>
 <td>integer</td>
-<td></td>
+<td>The template's latest version; null for who may not see the template, as it is unpublished.</td>
 </tr>
 <tr>
 <td><code>created_version_differences</code></td>
@@ -48461,7 +48446,7 @@
 <tr>
 <td><code>latest_version_differences</code></td>
 <td>array of objects</td>
-<td></td>
+<td>Differences from the latest version; null with latest_version.</td>
 </tr>
 <tr>
 <td><code>latest_version_differences.path</code></td>
