@@ -19971,6 +19971,11 @@
 <td>A regular expression a string value must match in full.</td>
 </tr>
 <tr>
+<td><code>agent_roles</code></td>
+<td>any</td>
+<td>The site agent's role backends and custom backends the document names: what an offering created from the template starts with. Shown to everyone who sees the template, unlike the rest of its agent configuration.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -20213,6 +20218,11 @@
 <td><code>parameters.pattern</code></td>
 <td>string</td>
 <td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
+<td><code>agent_roles</code></td>
+<td>any</td>
+<td>The site agent's role backends and custom backends the document names: what an offering created from the template starts with. Shown to everyone who sees the template, unlike the rest of its agent configuration.</td>
 </tr>
 <tr>
 <td><code>configuration_findings</code></td>
@@ -20510,6 +20520,11 @@
 <td>A regular expression a string value must match in full.</td>
 </tr>
 <tr>
+<td><code>agent_roles</code></td>
+<td>any</td>
+<td>The site agent's role backends and custom backends the document names: what an offering created from the template starts with. Shown to everyone who sees the template, unlike the rest of its agent configuration.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -20574,7 +20589,7 @@
 </div>
 <hr />
 <h3 id="create-an-offering-from-the-template">Create an offering from the template</h3>
-<p>Create a draft offering for an organization from the template's current version: its document with the parameters filled in, imported as import_offering imports. Each parameter takes the value given or its default; a missing required value or a value that does not fit its declaration is refused, under parameters.<key>. The offering records the template, its version and the parameter values, and keeps no link to the template: a later edit of the template changes nothing in it. With dry_run, everything is checked and the filled-in document returned, and nothing is created. The site-agent consistency rules check the filled-in document: an error finding refuses the create, under findings; a dry run returns every finding.</p>
+<p>Create a draft offering for an organization from the template's current version: its document with the parameters filled in, imported as import_offering imports. Each parameter takes the value given or its default; a missing required value or a value that does not fit its declaration is refused, under parameters.<key>. The offering records the template, its version and the parameter values, and keeps no link to the template: a later edit of the template changes nothing in it. With dry_run, everything is checked and the filled-in document returned, and nothing is created. The site-agent consistency rules check the filled-in document: an error finding refuses the create, under findings; a dry run returns every finding. agent_roles replaces the template's role backends before the checks, and backend_settings is merged over the template's backend settings after them; a secret in it is refused, under backend_settings.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><input id="__tabbed_4_7" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Request Body (required)</label><label for="__tabbed_4_6">Responses</label><label for="__tabbed_4_7">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -20729,6 +20744,18 @@
 <td>object (free-form)</td>
 <td></td>
 <td>A value for each of the template's parameters, by key. A parameter left out takes its default.</td>
+</tr>
+<tr>
+<td><code>agent_roles</code></td>
+<td>any</td>
+<td></td>
+<td>Backends for the site agent's roles, replacing the template's. A role left out keeps the template's backend; a blank one names none.</td>
+</tr>
+<tr>
+<td><code>backend_settings</code></td>
+<td>object (free-form)</td>
+<td></td>
+<td>Backend settings of the site agent, by name, over the template's: what the chosen role backends need that the template does not set. A nested mapping is merged key by key. Checked as the agent configuration's backend_settings; secrets are refused, they stay in the agent configuration file on the agent host. Site agent templates only.</td>
 </tr>
 <tr>
 <td><code>dry_run</code></td>
@@ -21149,6 +21176,11 @@
 <td>A regular expression a string value must match in full.</td>
 </tr>
 <tr>
+<td><code>agent_roles</code></td>
+<td>any</td>
+<td>The site agent's role backends and custom backends the document names: what an offering created from the template starts with. Shown to everyone who sees the template, unlike the rest of its agent configuration.</td>
+</tr>
+<tr>
 <td><code>configuration_findings</code></td>
 <td>array of objects</td>
 <td>What the site-agent consistency rules find in the document. Paths a parameter fills are skipped. Staff only.</td>
@@ -21443,6 +21475,11 @@
 <td><code>parameters.pattern</code></td>
 <td>string</td>
 <td>A regular expression a string value must match in full.</td>
+</tr>
+<tr>
+<td><code>agent_roles</code></td>
+<td>any</td>
+<td>The site agent's role backends and custom backends the document names: what an offering created from the template starts with. Shown to everyone who sees the template, unlike the rest of its agent configuration.</td>
 </tr>
 <tr>
 <td><code>configuration_findings</code></td>
