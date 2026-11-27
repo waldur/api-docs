@@ -20887,6 +20887,11 @@
 <td>Filter by attached state</td>
 </tr>
 <tr>
+<td><code>is_in_grace_period</code></td>
+<td>boolean</td>
+<td>In the offering-resolved grace period</td>
+</tr>
+<tr>
 <td><code>lexis_links_supported</code></td>
 <td>boolean</td>
 <td>LEXIS links supported</td>
@@ -21294,12 +21299,22 @@
 <tr>
 <td><code>resource_effective_end_date</code></td>
 <td>string (date)</td>
-<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date).</td>
+<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project end date, each plus the grace length the offering resolves. Unset offering grace keeps a resource end date as a hard stop and inherits the project grace. grace_period_days 0, and disable_grace_period, use the raw project end date.</td>
 </tr>
 <tr>
 <td><code>project_is_in_grace_period</code></td>
 <td>boolean</td>
-<td>True if the project is past its end date but still within the grace period.</td>
+<td>True if the project is past its end date but still within the organization and project grace period. This is the project clock. is_in_grace_period is the clock this resource's offering resolves.</td>
+</tr>
+<tr>
+<td><code>is_in_grace_period</code></td>
+<td>boolean</td>
+<td>True when this resource is past a raw end date and still within the grace period its offering resolves. Independent of whether the resource is paused.</td>
+</tr>
+<tr>
+<td><code>grace_period_end_date</code></td>
+<td>string (date)</td>
+<td>The last day of this resource's grace window. Empty when the offering gives it no grace period.</td>
 </tr>
 <tr>
 <td><code>project_end_date_requested_by</code></td>
@@ -22379,12 +22394,22 @@
 <tr>
 <td><code>resource_effective_end_date</code></td>
 <td>string (date)</td>
-<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date).</td>
+<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project end date, each plus the grace length the offering resolves. Unset offering grace keeps a resource end date as a hard stop and inherits the project grace. grace_period_days 0, and disable_grace_period, use the raw project end date.</td>
 </tr>
 <tr>
 <td><code>project_is_in_grace_period</code></td>
 <td>boolean</td>
-<td>True if the project is past its end date but still within the grace period.</td>
+<td>True if the project is past its end date but still within the organization and project grace period. This is the project clock. is_in_grace_period is the clock this resource's offering resolves.</td>
+</tr>
+<tr>
+<td><code>is_in_grace_period</code></td>
+<td>boolean</td>
+<td>True when this resource is past a raw end date and still within the grace period its offering resolves. Independent of whether the resource is paused.</td>
+</tr>
+<tr>
+<td><code>grace_period_end_date</code></td>
+<td>string (date)</td>
+<td>The last day of this resource's grace window. Empty when the offering gives it no grace period.</td>
 </tr>
 <tr>
 <td><code>project_end_date_requested_by</code></td>
@@ -24372,12 +24397,22 @@
 <tr>
 <td><code>resource_effective_end_date</code></td>
 <td>string (date)</td>
-<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date).</td>
+<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project end date, each plus the grace length the offering resolves. Unset offering grace keeps a resource end date as a hard stop and inherits the project grace. grace_period_days 0, and disable_grace_period, use the raw project end date.</td>
 </tr>
 <tr>
 <td><code>project_is_in_grace_period</code></td>
 <td>boolean</td>
-<td>True if the project is past its end date but still within the grace period.</td>
+<td>True if the project is past its end date but still within the organization and project grace period. This is the project clock. is_in_grace_period is the clock this resource's offering resolves.</td>
+</tr>
+<tr>
+<td><code>is_in_grace_period</code></td>
+<td>boolean</td>
+<td>True when this resource is past a raw end date and still within the grace period its offering resolves. Independent of whether the resource is paused.</td>
+</tr>
+<tr>
+<td><code>grace_period_end_date</code></td>
+<td>string (date)</td>
+<td>The last day of this resource's grace window. Empty when the offering gives it no grace period.</td>
 </tr>
 <tr>
 <td><code>project_end_date_requested_by</code></td>
@@ -28086,6 +28121,11 @@
 <td>Filter by attached state</td>
 </tr>
 <tr>
+<td><code>is_in_grace_period</code></td>
+<td>boolean</td>
+<td>In the offering-resolved grace period</td>
+</tr>
+<tr>
 <td><code>lexis_links_supported</code></td>
 <td>boolean</td>
 <td>LEXIS links supported</td>
@@ -28723,6 +28763,11 @@
 <td>Filter by attached state</td>
 </tr>
 <tr>
+<td><code>is_in_grace_period</code></td>
+<td>boolean</td>
+<td>In the offering-resolved grace period</td>
+</tr>
+<tr>
 <td><code>lexis_links_supported</code></td>
 <td>boolean</td>
 <td>LEXIS links supported</td>
@@ -29289,6 +29334,11 @@
 <td><code>is_attached</code></td>
 <td>boolean</td>
 <td>Filter by attached state</td>
+</tr>
+<tr>
+<td><code>is_in_grace_period</code></td>
+<td>boolean</td>
+<td>In the offering-resolved grace period</td>
 </tr>
 <tr>
 <td><code>lexis_links_supported</code></td>
@@ -30355,7 +30405,22 @@
 <tr>
 <td><code>components.total</code></td>
 <td>string (decimal)</td>
-<td></td>
+<td>The line's price before any volume discount.</td>
+</tr>
+<tr>
+<td><code>components.discount_percent</code></td>
+<td>string (decimal)</td>
+<td>The volume discount the invoice will give this line, in percent. 0 when there is none, or when it is deferred.</td>
+</tr>
+<tr>
+<td><code>components.discount_total</code></td>
+<td>string (decimal)</td>
+<td>The volume discount on this line, as a positive amount.</td>
+</tr>
+<tr>
+<td><code>components.discount_deferred</code></td>
+<td>boolean</td>
+<td>A volume discount may apply on the invoice that cannot be priced now, because it is aggregated over the organization's resources.</td>
 </tr>
 <tr>
 <td><code>subscription_total</code></td>
@@ -30368,9 +30433,19 @@
 <td></td>
 </tr>
 <tr>
+<td><code>discount_total</code></td>
+<td>string (decimal)</td>
+<td>The volume discounts known now, as a positive amount.</td>
+</tr>
+<tr>
+<td><code>discount_deferred</code></td>
+<td>boolean</td>
+<td>A volume discount aggregated over the organization's resources may still lower the invoice.</td>
+</tr>
+<tr>
 <td><code>total</code></td>
 <td>string (decimal)</td>
-<td></td>
+<td>What the renewal is charged: the totals less discount_total.</td>
 </tr>
 <tr>
 <td><code>remaining_days</code></td>

@@ -25914,7 +25914,13 @@
 <td><code>plugin_options.disable_grace_period</code></td>
 <td>boolean</td>
 <td></td>
-<td>If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option.</td>
+<td>Deprecated. If set to True, and grace_period_days is unset, this offering's resources ignore the project grace period and are terminated on the project end date. Prefer grace_period_days: 0. Only staff can change this option.</td>
+</tr>
+<tr>
+<td><code>plugin_options.grace_period_days</code></td>
+<td>integer</td>
+<td></td>
+<td>Days after a project or resource end date before this offering's resources are terminated. Unset inherits the organization and project grace period for the project end date, and keeps a resource's own end date a hard stop. 0 terminates on the raw end date. A value above 0 is that many days past either end date and overrides the organization and project length. Null clears the setting so the offering inherits again. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>plugin_options.action_on_usage_limit</code></td>
@@ -26185,6 +26191,12 @@
 <td>any</td>
 <td></td>
 <td>Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes).</td>
+</tr>
+<tr>
+<td><code>plugin_options.bill_inactive_instances</code></td>
+<td>boolean</td>
+<td></td>
+<td>Bill the cores, RAM and other compute of instances that are not running (SHUTOFF, SUSPENDED, SHELVED, SHELVED_OFFLOADED) under usage-based billing (default: true). Storage is billed either way.</td>
 </tr>
 <tr>
 <td><code>plugin_options.heappe_cluster_id</code></td>
@@ -38865,7 +38877,13 @@
 <td><code>plugin_options.disable_grace_period</code></td>
 <td>boolean</td>
 <td></td>
-<td>If set to True, this offering's resources ignore the project grace period and are terminated on the project end date. Only staff can change this option.</td>
+<td>Deprecated. If set to True, and grace_period_days is unset, this offering's resources ignore the project grace period and are terminated on the project end date. Prefer grace_period_days: 0. Only staff can change this option.</td>
+</tr>
+<tr>
+<td><code>plugin_options.grace_period_days</code></td>
+<td>integer</td>
+<td></td>
+<td>Days after a project or resource end date before this offering's resources are terminated. Unset inherits the organization and project grace period for the project end date, and keeps a resource's own end date a hard stop. 0 terminates on the raw end date. A value above 0 is that many days past either end date and overrides the organization and project length. Null clears the setting so the offering inherits again. Only staff can change it.</td>
 </tr>
 <tr>
 <td><code>plugin_options.action_on_usage_limit</code></td>
@@ -39136,6 +39154,12 @@
 <td>any</td>
 <td></td>
 <td>Source for OpenStack instance compute ComponentUsage: 'quota' (flavor-derived Nova quota, default) or 'placement' (Placement allocations; also bills VGPU/PCI/custom resource classes).</td>
+</tr>
+<tr>
+<td><code>plugin_options.bill_inactive_instances</code></td>
+<td>boolean</td>
+<td></td>
+<td>Bill the cores, RAM and other compute of instances that are not running (SHUTOFF, SUSPENDED, SHELVED, SHELVED_OFFLOADED) under usage-based billing (default: true). Storage is billed either way.</td>
 </tr>
 <tr>
 <td><code>plugin_options.heappe_cluster_id</code></td>
@@ -44473,12 +44497,22 @@
 <tr>
 <td><code>resource_effective_end_date</code></td>
 <td>string (date)</td>
-<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project-driven termination date (the raw project end date if the offering disables the grace period, otherwise the effective with-grace end date).</td>
+<td>The date this resource is scheduled to terminate: the earliest of its own end date and the project end date, each plus the grace length the offering resolves. Unset offering grace keeps a resource end date as a hard stop and inherits the project grace. grace_period_days 0, and disable_grace_period, use the raw project end date.</td>
 </tr>
 <tr>
 <td><code>project_is_in_grace_period</code></td>
 <td>boolean</td>
-<td>True if the project is past its end date but still within the grace period.</td>
+<td>True if the project is past its end date but still within the organization and project grace period. This is the project clock. is_in_grace_period is the clock this resource's offering resolves.</td>
+</tr>
+<tr>
+<td><code>is_in_grace_period</code></td>
+<td>boolean</td>
+<td>True when this resource is past a raw end date and still within the grace period its offering resolves. Independent of whether the resource is paused.</td>
+</tr>
+<tr>
+<td><code>grace_period_end_date</code></td>
+<td>string (date)</td>
+<td>The last day of this resource's grace window. Empty when the offering gives it no grace period.</td>
 </tr>
 <tr>
 <td><code>project_end_date_requested_by</code></td>
