@@ -8403,6 +8403,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#list-the-sites-and-common-flavors-of-a-kubernetes-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List the sites and common flavors of a Kubernetes option
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-plans-for-an-offering" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -19630,6 +19641,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#list-the-sites-and-common-flavors-of-a-kubernetes-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List the sites and common flavors of a Kubernetes option
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#list-plans-for-an-offering" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -19708,6 +19730,11 @@
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
 <td style="text-align: left;"><code>/api/marketplace-public-offerings/facets/</code></td>
 <td style="text-align: left;"><a href="#count-the-values-each-filter-can-still-take">Count the values each filter can still take</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
+<td style="text-align: left;"><code>/api/marketplace-public-offerings/{uuid}/k8s_sites/</code></td>
+<td style="text-align: left;"><a href="#list-the-sites-and-common-flavors-of-a-kubernetes-option">List the sites and common flavors of a Kubernetes option</a></td>
 </tr>
 <tr>
 <td style="text-align: left;"><span class="http-badge http-get">GET</span></td>
@@ -23010,9 +23037,219 @@
 </div>
 </div>
 <hr />
+<h3 id="list-the-sites-and-common-flavors-of-a-kubernetes-option">List the sites and common flavors of a Kubernetes option</h3>
+<p>For a k8s_cluster_config order option whose provider fixed the OpenStack sites (infrastructure_mode provider_fixed): the sites of a topology, in order, and the flavors every site has under one name with the same vCPUs and RAM. Each flavor lists every site's own flavor UUID. Works for any caller who can see the offering, whether or not they can see the OpenStack offerings.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:7"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><input id="__tabbed_4_7" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Query Parameters</label><label for="__tabbed_4_6">Responses</label><label for="__tabbed_4_7">Authorization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>http<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.example.com/api/marketplace-public-offerings/a1b2c3d4-e5f6-7890-abcd-ef1234567890/k8s_sites/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Authorization:<span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">option</span><span class="o">==</span><span class="s2">&quot;string-value&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">topology</span><span class="o">==</span><span class="s2">&quot;1-datacenter&quot;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticatedClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.models.k8s_sites_topology_enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">K8sSitesTopologyEnum</span> <span class="c1"># (1)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waldur_api_client.api.marketplace_public_offerings</span><span class="w"> </span><span class="kn">import</span> <span class="n">marketplace_public_offerings_k8s_sites_retrieve</span> <span class="c1"># (2)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AuthenticatedClient</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s2">&quot;YOUR_API_TOKEN&quot;</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">marketplace_public_offerings_k8s_sites_retrieve</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="o">=</span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+    <span class="n">option</span><span class="o">=</span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
+    <span class="n">topology</span><span class="o">=</span><span class="n">K8sSitesTopologyEnum</span><span class="mf">.1</span><span class="n">_DATACENTER</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><strong>Model Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/models/k8s_sites_topology_enum.py"><code>K8sSitesTopologyEnum</code></a></li>
+<li><strong>API Source:</strong> <a href="https://github.com/waldur/py-client/blob/main/waldur_api_client/api/marketplace_public_offerings/marketplace_public_offerings_k8s_sites_retrieve.py"><code>marketplace_public_offerings_k8s_sites_retrieve</code></a></li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">marketplacePublicOfferingsK8sSitesRetrieve</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;waldur-js-client&#39;</span><span class="p">;</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">marketplacePublicOfferingsK8sSitesRetrieve</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Token YOUR_API_TOKEN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;option&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string-value&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;topology&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1-datacenter&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uuid</code></td>
+<td>string (uuid)</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>option</code></td>
+<td>string</td>
+<td>✓</td>
+<td>Name of the offering's k8s_cluster_config order option.</td>
+</tr>
+<tr>
+<td><code>topology</code></td>
+<td>string</td>
+<td>✓</td>
+<td>The cluster topology whose sites to list.<br><em>Enum: <code>1-datacenter</code>, <code>3-datacenter</code></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p><strong><code>200</code></strong> - </p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sites</code></td>
+<td>array of objects</td>
+<td>The sites, in order.</td>
+</tr>
+<tr>
+<td><code>sites.uuid</code></td>
+<td>string</td>
+<td>UUID of the OpenStack tenant offering.</td>
+</tr>
+<tr>
+<td><code>sites.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>flavors</code></td>
+<td>array of objects</td>
+<td>Flavors every site has under one name with the same vCPUs and RAM, smallest first.</td>
+</tr>
+<tr>
+<td><code>flavors.name</code></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><code>flavors.cores</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>flavors.ram</code></td>
+<td>integer</td>
+<td>RAM in MiB.</td>
+</tr>
+<tr>
+<td><code>flavors.disk</code></td>
+<td>integer</td>
+<td>Root disk in MiB; the smallest among the sites.</td>
+</tr>
+<tr>
+<td><code>flavors.sites</code></td>
+<td>array of objects</td>
+<td>The flavor of every site, in site order.</td>
+</tr>
+<tr>
+<td><code>flavors.sites.offering_uuid</code></td>
+<td>string</td>
+<td>UUID of the site's OpenStack tenant offering.</td>
+</tr>
+<tr>
+<td><code>flavors.sites.flavor_uuid</code></td>
+<td>string</td>
+<td>UUID of the flavor on that site.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>Anyone, including anonymous callers.</p>
+<p>Active and paused offerings: shared ones, and those of organizations, projects and offerings where the caller holds a role that have an unarchived plan with no organization groups or one of the caller's. In the hide_inaccessible and require_membership modes of RESTRICTED_OFFERING_VISIBILITY_MODE a shared offering also needs such a plan and no organization groups or one of the caller's, and require_membership shows nothing to a caller without a role. An offering restricted to some roles is hidden from a caller holding none of them, unless they already have a resource of it in a project where they hold a role. Anonymous callers see the shared offerings, while ANONYMOUS_USER_CAN_VIEW_OFFERINGS is on; staff and support see the shared offerings and every offering with an unarchived plan.</p>
+</div>
+</div>
+</div>
+<hr />
 <h3 id="list-plans-for-an-offering">List plans for an offering</h3>
 <p>Returns a list of plans available for a specific offering. The plans are filtered based on the current user's permissions and organization group memberships.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">HTTPie</label><label for="__tabbed_4_2">Python</label><label for="__tabbed_4_3">TypeScript</label><label for="__tabbed_4_4">Path Parameters</label><label for="__tabbed_4_5">Responses</label><label for="__tabbed_4_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:6"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Responses</label><label for="__tabbed_5_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -23330,7 +23567,7 @@
 <hr />
 <h3 id="retrieve-a-specific-plan-for-an-offering">Retrieve a specific plan for an offering</h3>
 <p>Returns the details of a specific plan if it is available to the current user for the given offering.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:6"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">HTTPie</label><label for="__tabbed_5_2">Python</label><label for="__tabbed_5_3">TypeScript</label><label for="__tabbed_5_4">Path Parameters</label><label for="__tabbed_5_5">Responses</label><label for="__tabbed_5_6">Authorization</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:6"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">HTTPie</label><label for="__tabbed_6_2">Python</label><label for="__tabbed_6_3">TypeScript</label><label for="__tabbed_6_4">Path Parameters</label><label for="__tabbed_6_5">Responses</label><label for="__tabbed_6_6">Authorization</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
